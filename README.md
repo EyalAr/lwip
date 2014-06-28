@@ -3,9 +3,7 @@
 ## Overview
 
 This is a native NodeJS module which allows minimal, fast, image processing.
-Without any runtime dependencies.
-
-**No external dependencies are required.**
+**Without any external runtime dependencies**.
 
 ### Image operations
 
@@ -45,7 +43,7 @@ lwip.open('path/to/image', function(err, image){
 
 ### Image operations
 
-**Note**: All the following operations:
+**Note**: All the following (non-getter) operations
 
 0. Modify the image object on which they are called.
 0. Return the image object; thus they are chainable.

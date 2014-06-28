@@ -1,3 +1,5 @@
+#define BUILDING_NODE_EXTENSION
+
 #include <string>
 #include <cstring>
 #include <node.h>
@@ -10,6 +12,8 @@ struct ImageOpenBaton {
     uv_work_t request;
     Persistent<Function> cb;
     char * imgData;
+    unsigned int width;
+    unsigned int height;
     std::string imgPath;
     bool err;
     std::string errMsg;
@@ -19,10 +23,16 @@ void openImageAsync(uv_work_t * request){
     // here is where we actually open the image file and retrieve the binary
     // data.
     ImageOpenBaton * iob = static_cast<ImageOpenBaton *>(request->data);
-    // TODO: open image, store data in iob->imgData
-    // say there was an error...
-    iob->err = true;
-    iob->errMsg = "Not an image";
+    // TODO: open image, store data in iob->imgData, set width, height
+    char * data = (char *) malloc(1000); //some fake data for now (TODO)
+    if (data == NULL){
+        iob->err = true;
+        iob->errMsg = "Not enought memory to load image";
+        return;
+    }
+    iob->imgData = data;
+    iob->width = 1000;
+    iob->height = 1000;
 }
 
 void openImageAsyncDone(uv_work_t * request, int status){
@@ -38,11 +48,17 @@ void openImageAsyncDone(uv_work_t * request, int status){
         // run the callback
         iob->cb->Call(Context::GetCurrent()->Global(), argc, argv);
     } else {
+        // build image object
+        Handle<Value> imgObj = LwipImage::NewInstance();
+        LwipImage * lio = node::ObjectWrap::Unwrap<LwipImage>(Handle<Object>::Cast(imgObj));
+        lio->setData(iob->imgData);
+        lio->setWidth(iob->width);
+        lio->setHeight(iob->height);
         // define the arguments for the callback
         const unsigned int argc = 2;
         Local<Value> argv[argc] = {
             Local<Value>::New(Null()),
-            Local<Value>::New(String::New(iob->imgPath.c_str()))
+            Local<Value>::New(imgObj)
         };
         // run the callback
         iob->cb->Call(Context::GetCurrent()->Global(), argc, argv);
@@ -90,9 +106,8 @@ Handle<Value> open(const Arguments &args){
 }
 
 // create an init function for our node module
-// this function is equivalent to initializing the 'exports' object
-// in a node javascript module.
 void init(Handle<Object> exports, Handle<Object> module){
+    LwipImage::Init();
     NODE_SET_METHOD(exports, "open", open);
 }
 
