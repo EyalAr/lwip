@@ -1,0 +1,165 @@
+<xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+    <title>The CImg Library - C++ Template Image Processing Toolkit</title>
+    <meta content="David Tschumperle" name="author"></meta>
+    <link rel="shortcut icon" type="image/x-icon" href="http://cimg.sourceforge.net/favicon.ico"></link>
+    <link rel="icon" type="image/png" href="favicon.png"></link>
+    <link href="doxygen.css" rel="stylesheet" type="text/css">
+    <link href="tabs.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      <!--
+          body {background-color:#C0C0C0; font-family:sans-serif; }
+          a { font-weight:bold; color:#636363; }
+          a:active{text-decoration:none; color:#000000}
+          a:link{text-decoration:none; color:#000000}
+          a:visited{text-decoration:none; color:#000000}
+          a:hover{text-decoration:underline; color:#4E9F71}
+        -->
+    </style>
+    <script language="JavaScript" type="text/javascript">
+      <!-- Original:  Eric King (eric_andrew_king@hotmail.com) is used to display images in popup windows -->
+      <!-- Web Site:  http://redrival.com/eak/ -->
+      <!-- This script and many more are available free online at -->
+      <!-- The JavaScript Source!! http://javascript.internet.com -->
+      <!-- Begin
+           function NewWindow(mypage, myname, w, h, scroll) {
+           var winl = (screen.width - w) / 2;
+           var wint = (screen.height - h) / 2;
+           winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
+           win = window.open(mypage, myname, winprops)
+           if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+           }
+           //  End -->
+    </script>
+    <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $('#cssmenu > ul').prepend('<li class="mobile"><a href="#"><span>Menu <i>&#9776;</i></span></a></li>');
+      $('#cssmenu > ul > li > a').click(function(e) {
+      $('#cssmenu li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      var checkElement = $(this).next();
+      if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+      $(this).closest('li').removeClass('active');
+      checkElement.slideUp('normal');
+      }
+      if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+      $('#cssmenu ul ul:visible').slideUp('normal');
+      checkElement.slideDown('normal');
+      }
+      if( $(this).parent().hasClass('mobile') ) {
+      e.preventDefault();
+      $('#cssmenu').toggleClass('expand');
+      }
+      if($(this).closest('li').find('ul').children().length == 0) {
+      return true;
+      } else {
+      return false;
+      }
+      });
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="../header.css" />
+  </head>
+  <body>
+    <table align="center" cellpadding="12" cellspacing="0" width="1024" style="border-style:solid; border-width:0px; border-color:black" bgcolor="#FFFFFF">
+      <tr><td>
+          <center>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <br/>
+            <a href="http://cimg.sourceforge.net"><img src="http://cimg.sourceforge.net/img/CImgLogo2.jpg" alt="" border="0"></img></a><br/>
+            <br/>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <table width="90%" align="center">
+              <td width="18%">&nbsp;</td>
+              <td width="65%">
+                <div id='cssmenu'>
+                  <ul>
+                    <li class='first'><a href='http://cimg.sourceforge.net/index.shtml'><span>Home</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/download.shtml'><span>Download</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/screenshots.shtml'><span>Screenshots</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__faq.html'><span>FAQ</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__tutorial.html'><span>Tutorial</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/index.html'><span>Documentation</span></a></li>
+                    <li><a href='http://sourceforge.net/projects/cimg/forums/forum/334630'><span>Forum</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/links.shtml'><span>Links</span></a></li>
+                  </ul>
+                </div>
+              </td>
+              <td align="right">
+                <script type="text/javascript">
+	          var flattr_url = 'http://cimg.sourceforge.net';
+	          var flattr_btn='compact';
+                </script>
+                <script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
+              </td>
+      </tr></table>
+      </center>
+</td></tr>
+<tr><td>
+<!-- Generated by Doxygen 1.8.6 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespacecimg__library.html">cimg_library</a></li><li class="navelem"><a class="el" href="structcimg__library_1_1CImgException.html">CImgException</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">CImgException Member List</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>This is the complete list of members for <a class="el" href="structcimg__library_1_1CImgException.html">CImgException</a>, including all inherited members.</p>
+<table class="directory">
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgException.html#a586eee248fedb7de1b50219e14b99c7b">what</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgException.html">CImgException</a></td><td class="entry"></td></tr>
+</table></div><!-- contents -->
+</td></tr></table>
+<center>
+<p>
+<a href="http://sourceforge.net">
+  <img src="http://sourceforge.net/sflogo.php?group_id=96492&amp;type=3" border="0" height="37" width="125"></img>
+</a>
+<a href="http://sourceforge.net/donate/index.php?group_id=96492"><img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a>
+</p>
+</center>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+  <!--
+      var sc_project=895001;
+      var sc_invisible=1;
+      var sc_partition=7;
+      var sc_security="5ea85181";
+      //-->
+</script>
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c8.statcounter.com/counter.php?sc_project=895001&amp;java=0&amp;security=5ea85181&amp;invisible=1" alt="counter stats" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16976814-2']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End Google Analytics -->
+</body>
+</html>

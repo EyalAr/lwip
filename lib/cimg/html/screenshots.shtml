@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--#include file="header.html" -->
+<link href="style.css" rel="stylesheet" type="text/css">
+
+<div id="bloc_option"><div id="top_vert"><div id="text_top">Screenshots</div></div>
+<div id="center"><div id="text_centre_intro">
+<p>
+  The screenshots below have been taken from the different sample programs distributed within the <tt><i>CImg</i></tt> package.
+  Click on an image to enlarge it and on the source filename to display it. A link to a streaming video of the
+  corresponding effect is sometimes proposed.
+  If you are interested by a live demo, go to the <a href="download.shtml"><b>download page</b></a>
+  and get the pre-compiled binaries for your system.
+</p>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#f0f1f5" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center>
+        <table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td>
+              <a href="img/ss_demomenu.jpg" onclick="NewWindow(this.href,'name','400','450','yes');return false;">
+                <img src="img/ss_mini_000001.jpg" border="0" width="100"></img></a>
+        </td></tr></table>
+    </center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>The main demo sample of the CImg package</b> (1433 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i><br/><br/>
+        Contains 26 different real-time animations, as well as a nice selection menu. Look at the video to
+        see all the different effects running.<br/><br/>
+	<a href="img/video_cimgdemo.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center>
+        <table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td>
+              <a href="img/ss_bump.jpg" onclick="NewWindow(this.href,'name','500','300','yes');return false;">
+                <img src="img/ss_mini_000000.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A 2d bump-mapping effect</b> (30 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i><br/><br/>
+        You can move the light source using the mouse.
+        This sample shows how to handle mouse motion and create an animation in a window.
+        It demonstrates also that the <tt><i>CImg library</i></tt> is quite fast !
+        Everything is computed from scratch here, including the logo, the background and the light.<br/><br/>
+	<a href="img/video_bump.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#f0f1f5" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center>
+        <table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td>
+              <a href="img/ss_hough.jpg" onclick="NewWindow(this.href,'name','1030','540','yes');return false;">
+                <img src="img/ss_mini_000002.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>Computation of the Hough Transform</b> (95 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/hough_transform2d.cpp">hough_transform.cpp</a></i> <br/><br/>
+        Illustrate the computation of the Hough transform to detect lines in 2D images. Provide also simple user
+        interface to select and display lines.
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_imgfade.jpg" onclick="NewWindow(this.href,'name','280','280','yes');return false;">
+                <img src="img/ss_mini_000003.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>Do a fading between two images</b> (35 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/fade_images.cpp">fade_images.cpp</a></i> <br/><br/>
+        Very small code to perform a funny effect. Also demonstrate how to easily deal with command line arguments.
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#f0f1f5" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_mandelbrot.jpg" onclick="NewWindow(this.href,'name','660','520','yes');return false;">
+                <img src="img/ss_mini_000004.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A functional Mandelbrot fractal explorer</b> (51 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+        Show how to use the predefined feature selection function present in the CImg library.<br/><br/>
+	<a href="img/video_mandelbrot.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_odykill.jpg" onclick="NewWindow(this.href,'name','660','520','yes');return false;">
+                <img src="img/ss_mini_000005.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A simple shoot-em-up game, featuring the people of the Robotvis/Odyssee Lab</b> (180 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/odykill.cpp">odykill.cpp</a></i> <br/><br/>
+        Another demonstration of handling mouse and creating animation for pedagogic purposes.
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#f0f1f5" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_optflow.jpg" onclick="NewWindow(this.href,'name','980','470','yes');return false;">
+                <img src="img/ss_mini_000006.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>An implementation of an image registration algorithm, with
+          multiscale capability</b> (201 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/image_registration.cpp">image_registration.cpp</a></i> <br/><br/>
+        Compute a motion map between two images, and warp one into the another through a smooth animation.
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_paint.jpg" onclick="NewWindow(this.href,'name','280','370','yes');return false;">
+                <img src="img/ss_mini_000007.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A mini-painting program</b> (30 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+        This is not a replacement to Photoshop, but it already includes a filling algorithm
+        as well as a color selection tool.<br/><br/>
+	<a href="img/video_minipaint.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#f0f1f5" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_rotozoom.jpg" onclick="NewWindow(this.href,'name','350','250','yes');return false;">
+                <img src="img/ss_mini_000008.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A classical demomaking-effect, called 'rotozoom'</b> (20 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+        Smell the old school parfume of the atari/amiga demos.
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_triangle.jpg" onclick="NewWindow(this.href,'name','670','530','yes');return false;">
+                <img src="img/ss_mini_000009.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>An animation featuring triangles that are rotating</b> (50 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+        Could be a replacement to your classical screen saver.
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#f0f1f5" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_fourier.jpg" onclick="NewWindow(this.href,'name','550','300','yes');return false;">
+                <img src="img/ss_mini_000026.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A demo of image filtering in the Fourier Domain</b> (30 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+	<a href="img/video_fourier.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_render3d.jpg" onclick="NewWindow(this.href,'name','350','300','yes');return false;">
+                <img src="img/ss_mini_000011.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>An example of real-time 3D rendering</b>.<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+        No use of OpenGL or VTK in this example, only pure CImg software functions are used ! <br/><br/>
+	<a href="img/video_doubletorus.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#f0f1f5" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_bubble.jpg" onclick="NewWindow(this.href,'name','350','300','yes');return false;">
+                <img src="img/ss_mini_000012.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>An example of the ellipse drawing function, used to bounce an elastic bubble</b> (25 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+	<a href="img/video_bubble.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_landscape.jpg" onclick="NewWindow(this.href,'name','430','350','yes');return false;">
+                <img src="img/ss_mini_000013.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A real-time 3D virtual landscape</b> (40 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+        The altitude map is based on a 'fractal plasma' generator.<br/><br/>
+	<a href="img/video_landscape.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#f0f1f5" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_plasma.jpg" onclick="NewWindow(this.href,'name','430','350','yes');return false;">
+                <img src="img/ss_mini_000014.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A nice plasma effect with a sinus scroller</b> (70 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+	<a href="img/video_plasma.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_tetris.jpg" onclick="NewWindow(this.href,'name','220','370','yes');return false;">
+                <img src="img/ss_mini_000015.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>An implementation of the well known Tetris game</b> (130 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/tetris.cpp">tetris.cpp</a></i> <br/><br/>
+        Very small code for a complete version of the Tetris game.
+	<br/><br/><a href="img/video_tetris.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#f0f1f5" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_restoration.jpg" onclick="NewWindow(this.href,'name','570','450','yes');return false;">
+                <img src="img/ss_mini_000016.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>The implementation of the Tschumperlé-Deriche algorithm for image restoration and inpainting</b> (170 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/pde_TschumperleDeriche2d.cpp">pde_TschumperleDeriche2d.cpp</a></i> <br/><br/>
+        See <a href="ftp://ftp-sop.inria.fr/odyssee/Publications/2003/tschumperle-deriche:03.pdf">the corresponding publication</a>
+        for more detail on the algorithm.
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_shadebobs.jpg" onclick="NewWindow(this.href,'name','500','450','yes');return false;">
+                <img src="img/ss_mini_000017.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A very smart and classical demo effect called 'Shade bobs'</b> (60 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+	<a href="img/video_shadebobs.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#f0f1f5" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_blobs.jpg" onclick="NewWindow(this.href,'name','350','350','yes');return false;">
+                <img src="img/ss_mini_000018.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A nice Blob Editor in only few lines</b> (90 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+	<a href="img/video_blobs.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_metaballs.jpg" onclick="NewWindow(this.href,'name','520','330','yes');return false;">
+                <img src="img/ss_mini_000019.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>3d Metaballs animation</b> (23 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+	<a href="img/video_metaballs.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#f0f1f5" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_surface.jpg" onclick="NewWindow(this.href,'name','800','500','yes');return false;">
+                <img src="img/ss_mini_000020.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A tool to visualize images as surfaces in 3d</b> (100 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/image_surface.cpp">image_surface.cpp</a></i> <br/><br/>
+	<a href="img/video_imagesurface.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_dtmri.jpg" onclick="NewWindow(this.href,'name','750','500','yes');return false;">
+                <img src="img/ss_mini_000021.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A 3d viewer for Diffusion tensor imaging datasets</b> (526 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/dtmri_view.cpp">dtmri_view.cpp</a></i> <br/><br/>
+	<a href="img/video_dtmri.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#f0f1f5" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_waves.jpg" onclick="NewWindow(this.href,'name','450','350','yes');return false;">
+                <img src="img/ss_mini_000022.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>Applying the wave equation on an 3d image-mapped surface</b> (55 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+	<a href="img/video_waves.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/curve_editor.jpg" onclick="NewWindow(this.href,'name','550','550','yes');return false;">
+                <img src="img/ss_mini_000023.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A simple 2d curve editor using spline interpolation</b> (300 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/curve_editor.cpp">curve_editor.cpp</a></i> <br/><br/>
+	<a href="img/video_curveeditor.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#f0f1f5" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_jawbreaker.jpg" onclick="NewWindow(this.href,'name','450','500','yes');return false;">
+                <img src="img/ss_mini_000024.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A complete and funny game featuring colored balls</b> (121 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/jawbreaker.cpp">jawbreaker.cpp</a></i> <br/><br/>
+	<a href="img/video_jawbreaker.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_reflection.jpg" onclick="NewWindow(this.href,'name','450','450','yes');return false;">
+                <img src="img/ss_mini_000025.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A cool 3d reflection effect, using some CImg 3d object rendering tricks</b> (130 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+	<a href="img/video_reflection.html" onclick="NewWindow(this.href,'name','700','450','yes');return false;">
+          <img src="img/item_clickvideo.jpg" border="0" alt="Click here to see the video" onmouseover="this.src='img/item_clickvideo2.jpg';" onmouseout="this.src='img/item_clickvideo.jpg';" /></img></a>
+</font></td></tr></table>
+
+<hr noshade="noshade" size="1" width="90%"></hr>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="16" cellspacing="0" width="90%"><tr>
+    <td width="100" bgcolor="#ffffff"><center><table bgcolor="#ffffff" border="1" cellpadding="0"><tr><td><a href="img/ss_puzzle.jpg" onclick="NewWindow(this.href,'name','550','450','yes');return false;">
+                <img src="img/ss_mini_000027.jpg" border="0" width="100"></img></a></td></tr></table></center></td>
+    <td><font size="-1">
+        <img src="img/item_description.jpg"></img> : <b>A simple word puzzle game</b> (100 lines of code).<br/>
+        <img src="img/item_file.jpg"></img> :
+        <i><a href="https://sourceforge.net/p/cimg/source/ci/master/tree/examples/CImg_demo.cpp">CImg_demo.cpp</a></i> <br/><br/>
+</font></td></tr></table>
+
+</div></div><div id="footer"><img src="images/footer.jpg" /></div></div>
+
+<!--#include file="footer.html" -->

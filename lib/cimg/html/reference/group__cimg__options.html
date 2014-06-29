@@ -1,0 +1,211 @@
+<xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+    <title>The CImg Library - C++ Template Image Processing Toolkit</title>
+    <meta content="David Tschumperle" name="author"></meta>
+    <link rel="shortcut icon" type="image/x-icon" href="http://cimg.sourceforge.net/favicon.ico"></link>
+    <link rel="icon" type="image/png" href="favicon.png"></link>
+    <link href="doxygen.css" rel="stylesheet" type="text/css">
+    <link href="tabs.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      <!--
+          body {background-color:#C0C0C0; font-family:sans-serif; }
+          a { font-weight:bold; color:#636363; }
+          a:active{text-decoration:none; color:#000000}
+          a:link{text-decoration:none; color:#000000}
+          a:visited{text-decoration:none; color:#000000}
+          a:hover{text-decoration:underline; color:#4E9F71}
+        -->
+    </style>
+    <script language="JavaScript" type="text/javascript">
+      <!-- Original:  Eric King (eric_andrew_king@hotmail.com) is used to display images in popup windows -->
+      <!-- Web Site:  http://redrival.com/eak/ -->
+      <!-- This script and many more are available free online at -->
+      <!-- The JavaScript Source!! http://javascript.internet.com -->
+      <!-- Begin
+           function NewWindow(mypage, myname, w, h, scroll) {
+           var winl = (screen.width - w) / 2;
+           var wint = (screen.height - h) / 2;
+           winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
+           win = window.open(mypage, myname, winprops)
+           if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+           }
+           //  End -->
+    </script>
+    <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $('#cssmenu > ul').prepend('<li class="mobile"><a href="#"><span>Menu <i>&#9776;</i></span></a></li>');
+      $('#cssmenu > ul > li > a').click(function(e) {
+      $('#cssmenu li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      var checkElement = $(this).next();
+      if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+      $(this).closest('li').removeClass('active');
+      checkElement.slideUp('normal');
+      }
+      if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+      $('#cssmenu ul ul:visible').slideUp('normal');
+      checkElement.slideDown('normal');
+      }
+      if( $(this).parent().hasClass('mobile') ) {
+      e.preventDefault();
+      $('#cssmenu').toggleClass('expand');
+      }
+      if($(this).closest('li').find('ul').children().length == 0) {
+      return true;
+      } else {
+      return false;
+      }
+      });
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="../header.css" />
+  </head>
+  <body>
+    <table align="center" cellpadding="12" cellspacing="0" width="1024" style="border-style:solid; border-width:0px; border-color:black" bgcolor="#FFFFFF">
+      <tr><td>
+          <center>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <br/>
+            <a href="http://cimg.sourceforge.net"><img src="http://cimg.sourceforge.net/img/CImgLogo2.jpg" alt="" border="0"></img></a><br/>
+            <br/>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <table width="90%" align="center">
+              <td width="18%">&nbsp;</td>
+              <td width="65%">
+                <div id='cssmenu'>
+                  <ul>
+                    <li class='first'><a href='http://cimg.sourceforge.net/index.shtml'><span>Home</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/download.shtml'><span>Download</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/screenshots.shtml'><span>Screenshots</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__faq.html'><span>FAQ</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__tutorial.html'><span>Tutorial</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/index.html'><span>Documentation</span></a></li>
+                    <li><a href='http://sourceforge.net/projects/cimg/forums/forum/334630'><span>Forum</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/links.shtml'><span>Links</span></a></li>
+                  </ul>
+                </div>
+              </td>
+              <td align="right">
+                <script type="text/javascript">
+	          var flattr_url = 'http://cimg.sourceforge.net';
+	          var flattr_btn='compact';
+                </script>
+                <script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
+              </td>
+      </tr></table>
+      </center>
+</td></tr>
+<tr><td>
+<!-- Generated by Doxygen 1.8.6 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Retrieving Command Line Arguments.</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock">The CImg library offers facilities to retrieve command line arguments in a console-based program, as it is a commonly needed operation. Three macros <code>cimg_usage()</code>, <code>cimg_help()</code> and <code>cimg_option()</code> are defined for this purpose. Using these macros allows to easily retrieve options values from the command line. Invoking the compiled executable with the option <code>-h</code> or <code>&ndash;help</code> will automatically display the program usage, followed by the list of requested options.<h1><a class="anchor" id="so1"></a>
+The cimg_usage() macro</h1>
+<p>The macro <code>cimg_usage(usage)</code> may be used to describe the program goal and usage. It is generally inserted one time after the <code>int main(int argc,char **argv)</code> definition.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">usage</td><td>: A string describing the program goal and usage. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The function where <code>cimg_usage()</code> is used must have correctly defined <code>argc</code> and <code>argv</code> variables.</dd></dl>
+<h1><a class="anchor" id="so1_5"></a>
+The cimg_help() macro</h1>
+<p>The macro <code>cimg_help(str)</code> will display the string <code>str</code> only if the <code>-help</code> or <code>&ndash;help</code> option are invoked when running the programm.</p>
+<h1><a class="anchor" id="so2"></a>
+The cimg_option() macro</h1>
+<p>The macro <code>cimg_option(name,default,usage)</code> may be used to retrieve an option value from the command line.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>: The name of the option to be retrieved from the command line. </td></tr>
+    <tr><td class="paramname">default</td><td>: The default value returned by the macro if no options <code>name</code> has been specified when running the program. </td></tr>
+    <tr><td class="paramname">usage</td><td>: A brief explanation of the option. If <code>usage==0</code>, the option won't appear on the option list when invoking the executable with options <code>-h</code> or <code>&ndash;help</code> (hidden option).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>cimg_option()</code> returns an object that has the <em>same</em> <em>type</em> than the default value <code>default</code>. The return value is equal to the one specified on the command line. If no such option have been specified, the return value is equal to the default value <code>default</code>. Warning, this can be confusing in some situations (look at the end of the next section). </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The function where <code>cimg_option()</code> is used must have correctly defined <code>argc</code> and <code>argv</code> variables.</dd></dl>
+<h1><a class="anchor" id="so3"></a>
+Example of use</h1>
+<p>The code below uses the macros <code>cimg_usage()</code> and <code>cimg_option()</code>. It loads an image, smoothes it an quantifies it with a specified number of values. </p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;CImg.h&quot;</span></div>
+<div class="line"><span class="keyword">using namespace </span>cimg_library;</div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc,<span class="keywordtype">char</span> **argv) {</div>
+<div class="line">  cimg_usage(<span class="stringliteral">&quot;Retrieve command line arguments&quot;</span>);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">char</span>* filename = cimg_option(<span class="stringliteral">&quot;-i&quot;</span>,<span class="stringliteral">&quot;image.gif&quot;</span>,<span class="stringliteral">&quot;Input image file&quot;</span>);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="namespacecimg__library_1_1cimg.html#a4947bf6e604e2f8e4a58b3ad19247443">output</a>   = cimg_option(<span class="stringliteral">&quot;-o&quot;</span>,(<span class="keywordtype">char</span>*)0,<span class="stringliteral">&quot;Output image file&quot;</span>);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> sigma   = cimg_option(<span class="stringliteral">&quot;-s&quot;</span>,1.0,<span class="stringliteral">&quot;Standard variation of the gaussian smoothing&quot;</span>);</div>
+<div class="line">  <span class="keyword">const</span>  <span class="keywordtype">int</span> nblevels  = cimg_option(<span class="stringliteral">&quot;-n&quot;</span>,16,<span class="stringliteral">&quot;Number of quantification levels&quot;</span>);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">bool</span> hidden    = cimg_option(<span class="stringliteral">&quot;-hidden&quot;</span>,<span class="keyword">false</span>,0);      <span class="comment">// This is a hidden option</span></div>
+<div class="line"></div>
+<div class="line">  <a class="code" href="structcimg__library_1_1CImg.html">CImg&lt;unsigned char&gt;</a> img(filename);</div>
+<div class="line">  img.blur(sigma).quantize(nblevels);</div>
+<div class="line">  <span class="keywordflow">if</span> (output) img.save(output); <span class="keywordflow">else</span> img.display(<span class="stringliteral">&quot;Output image&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (hidden) std::fprintf(stderr,<span class="stringliteral">&quot;You found me !\n&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Invoking the corresponding executable with <code>test -h -hidden -n 20 -i foo.jpg</code> will display : </p>
+<pre class="fragment">   ./test -h -hidden -n 20 -i foo.jpg
+
+ test : Retrieve command line arguments (Oct 16 2004, 12:34:26)
+
+    -i       = foo.jpg      : Input image file
+    -o       = 0            : Output image file
+    -s       = 1            : Standard variation of the gaussian smoothing
+    -n       = 20           : Number of quantification levels
+
+   You found me !
+</pre><dl class="section warning"><dt>Warning</dt><dd>As the type of object returned by the macro <code>cimg_option(option,default,usage)</code> is defined by the type of <code>default</code>, undesired casts may appear when writting code such as : <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">double</span> sigma = cimg_option(<span class="stringliteral">&quot;-val&quot;</span>,0,<span class="stringliteral">&quot;A floating point value&quot;</span>);</div>
+</div><!-- fragment --> In this case, <code>sigma</code> will always be equal to an integer (since the default value <code>0</code> is an integer). When passing a float value on the command line, a <em>float</em> <em>to</em> <em>integer</em> cast is then done, truncating the given parameter to an integer value (this is surely not a desired behavior). You must specify <code>0.0</code> as the default value in this case.</dd></dl>
+<h1><a class="anchor" id="so4"></a>
+How to learn more about command line options ?</h1>
+<p>You should take a look at the examples <code>examples/gmic.cpp</code> provided in the CImg Library package. This is a command line based image converter which intensively uses the <code>cimg_option()</code> and <code>cimg_usage()</code> macros to retrieve command line parameters. </p>
+</div></div><!-- contents -->
+</td></tr></table>
+<center>
+<p>
+<a href="http://sourceforge.net">
+  <img src="http://sourceforge.net/sflogo.php?group_id=96492&amp;type=3" border="0" height="37" width="125"></img>
+</a>
+<a href="http://sourceforge.net/donate/index.php?group_id=96492"><img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a>
+</p>
+</center>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+  <!--
+      var sc_project=895001;
+      var sc_invisible=1;
+      var sc_partition=7;
+      var sc_security="5ea85181";
+      //-->
+</script>
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c8.statcounter.com/counter.php?sc_project=895001&amp;java=0&amp;security=5ea85181&amp;invisible=1" alt="counter stats" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16976814-2']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End Google Analytics -->
+</body>
+</html>

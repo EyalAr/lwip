@@ -1,0 +1,248 @@
+<xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+    <title>The CImg Library - C++ Template Image Processing Toolkit</title>
+    <meta content="David Tschumperle" name="author"></meta>
+    <link rel="shortcut icon" type="image/x-icon" href="http://cimg.sourceforge.net/favicon.ico"></link>
+    <link rel="icon" type="image/png" href="favicon.png"></link>
+    <link href="doxygen.css" rel="stylesheet" type="text/css">
+    <link href="tabs.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      <!--
+          body {background-color:#C0C0C0; font-family:sans-serif; }
+          a { font-weight:bold; color:#636363; }
+          a:active{text-decoration:none; color:#000000}
+          a:link{text-decoration:none; color:#000000}
+          a:visited{text-decoration:none; color:#000000}
+          a:hover{text-decoration:underline; color:#4E9F71}
+        -->
+    </style>
+    <script language="JavaScript" type="text/javascript">
+      <!-- Original:  Eric King (eric_andrew_king@hotmail.com) is used to display images in popup windows -->
+      <!-- Web Site:  http://redrival.com/eak/ -->
+      <!-- This script and many more are available free online at -->
+      <!-- The JavaScript Source!! http://javascript.internet.com -->
+      <!-- Begin
+           function NewWindow(mypage, myname, w, h, scroll) {
+           var winl = (screen.width - w) / 2;
+           var wint = (screen.height - h) / 2;
+           winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
+           win = window.open(mypage, myname, winprops)
+           if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+           }
+           //  End -->
+    </script>
+    <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $('#cssmenu > ul').prepend('<li class="mobile"><a href="#"><span>Menu <i>&#9776;</i></span></a></li>');
+      $('#cssmenu > ul > li > a').click(function(e) {
+      $('#cssmenu li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      var checkElement = $(this).next();
+      if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+      $(this).closest('li').removeClass('active');
+      checkElement.slideUp('normal');
+      }
+      if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+      $('#cssmenu ul ul:visible').slideUp('normal');
+      checkElement.slideDown('normal');
+      }
+      if( $(this).parent().hasClass('mobile') ) {
+      e.preventDefault();
+      $('#cssmenu').toggleClass('expand');
+      }
+      if($(this).closest('li').find('ul').children().length == 0) {
+      return true;
+      } else {
+      return false;
+      }
+      });
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="../header.css" />
+  </head>
+  <body>
+    <table align="center" cellpadding="12" cellspacing="0" width="1024" style="border-style:solid; border-width:0px; border-color:black" bgcolor="#FFFFFF">
+      <tr><td>
+          <center>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <br/>
+            <a href="http://cimg.sourceforge.net"><img src="http://cimg.sourceforge.net/img/CImgLogo2.jpg" alt="" border="0"></img></a><br/>
+            <br/>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <table width="90%" align="center">
+              <td width="18%">&nbsp;</td>
+              <td width="65%">
+                <div id='cssmenu'>
+                  <ul>
+                    <li class='first'><a href='http://cimg.sourceforge.net/index.shtml'><span>Home</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/download.shtml'><span>Download</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/screenshots.shtml'><span>Screenshots</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__faq.html'><span>FAQ</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__tutorial.html'><span>Tutorial</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/index.html'><span>Documentation</span></a></li>
+                    <li><a href='http://sourceforge.net/projects/cimg/forums/forum/334630'><span>Forum</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/links.shtml'><span>Links</span></a></li>
+                  </ul>
+                </div>
+              </td>
+              <td align="right">
+                <script type="text/javascript">
+	          var flattr_url = 'http://cimg.sourceforge.net';
+	          var flattr_btn='compact';
+                </script>
+                <script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
+              </td>
+      </tr></table>
+      </center>
+</td></tr>
+<tr><td>
+<!-- Generated by Doxygen 1.8.6 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespacecimg__library.html">cimg_library</a></li><li class="navelem"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">CImgDisplay Member List</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>This is the complete list of members for <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>, including all inherited members.</p>
+<table class="directory">
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a816d8c873ae3d27854bd0620646224b9">assign</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#aa78d227523af633336bcf25ec00e0384">assign</a>(const unsigned int width, const unsigned int height, const char *const title=0, const unsigned int normalization=3, const bool is_fullscreen=false, const bool is_closed=false)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a26e97a31a1fba29f0534c90655a59c22">assign</a>(const CImg&lt; T &gt; &amp;img, const char *const title=0, const unsigned int normalization=3, const bool is_fullscreen=false, const bool is_closed=false)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a862455f2708c107412d9b0a15471f561">assign</a>(const CImgList&lt; T &gt; &amp;list, const char *const title=0, const unsigned int normalization=3, const bool is_fullscreen=false, const bool is_closed=false)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ac103e68816e12f5fd67c8f293fe18acd">assign</a>(const CImgDisplay &amp;disp)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#adff5e3fda26574b001a038360b188479">button</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a54e3407c3b858f5f40283264e39b4f38">CImgDisplay</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#abb46df06ee84d2be48cf5c57a9ed2f6d">CImgDisplay</a>(const unsigned int width, const unsigned int height, const char *const title=0, const unsigned int normalization=3, const bool is_fullscreen=false, const bool is_closed=false)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a7239126d823db5e9eaa9ee1affefa1db">CImgDisplay</a>(const CImg&lt; T &gt; &amp;img, const char *const title=0, const unsigned int normalization=3, const bool is_fullscreen=false, const bool is_closed=false)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#aab2a72159873ac50cf03c44965059a6b">CImgDisplay</a>(const CImgList&lt; T &gt; &amp;list, const char *const title=0, const unsigned int normalization=3, const bool is_fullscreen=false, const bool is_closed=false)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a6765c355fa3ae998b9729b358f198a61">CImgDisplay</a>(const CImgDisplay &amp;disp)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a7e35c3363f8859c8a952a60dd4aa3fca">close</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#afde33f75da6e714eb378407da029f11d">display</a>(const CImg&lt; T &gt; &amp;img)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a616d2352d40e76ee7bdfb77e01e1cd87">display</a>(const CImgList&lt; T &gt; &amp;list, const char axis='x', const float align=0)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a03d4a8009b65ae368a939a5ecec2a2cf">empty</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a4bf168837be505b1301604b151280f6e">flush</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a3ade6e852b67fea14093915c5dca7862">frames_per_second</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ae26bcfe2f33f5873dbdfb6948cf1f59f">height</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a3fb8cda1473f326934c286e6e5d825e2">hide_mouse</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a2de15bd974a282882cbb02718501f954">is_closed</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#acef8e33cfd36a5d7d2fad939efcf02e3">is_empty</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ab2c397e92b059010f69b6e999f3c25eb">is_event</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ab1d732fb0aae68bac3a95c1629c52beb">is_fullscreen</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a5df1371379d5b85e44bed3f7e42a0c7c">is_key</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ae889377636d1e013a29f278d4d57dca2">is_key</a>(const unsigned int keycode) const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a581e9c53cafd808ac50d2eb72cb230b7">is_key</a>(const char *const keycode) const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a79c0d5400f1620fe69dfb15695248a56">is_key_sequence</a>(const unsigned int *const keycodes_sequence, const unsigned int length, const bool remove_sequence=false)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ac1bf84a095a6df08b34f5fd386367419">is_keyESC</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a540466e47b7c1f71e3b35bc002335f5b">is_moved</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#af5b6c08e077751fe6dd6ad76bfd30885">is_resized</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a5e321648f3701b0ea6d9f7049cd6da38">key</a>(const unsigned int pos=0) const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a7626b926cfb3c3c3e3a720bde2845a4b">keycode</a>(const char *const keycode)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ae60918cd2b0b4c6588b2d10aea46a22c">mouse_x</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a628a43671de755c52d67ad01a019292b">mouse_y</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a21da6f48a7ed419e7605f02925be4718">move</a>(const int pos_x, const int pos_y)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a67719cb05110ca9e5725bc59f8350b68">normalization</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#aa385aa18f5e42db5a415c25a90f4193d">operator bool</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a00b22a049bc63bbbb31ce3b7a152cf9b">operator=</a>(const CImg&lt; t &gt; &amp;img)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#abb1361aa3d793f6d22cc84baf5d671ee">operator=</a>(const CImgList&lt; t &gt; &amp;list)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a81d1882a4d7d0579298fe6fc706fca40">operator=</a>(const CImgDisplay &amp;disp)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a4e67d156351dd7dfdfd2f04e563c4f2a">paint</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a885a46a61297c842fe2a7a37bbee2a54">released_key</a>(const unsigned int pos=0) const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#abdf42eacfe538a28d8d3dca2dbe26f08">render</a>(const CImg&lt; T &gt; &amp;img)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a6613d8faf95a1dbce486f4aab0557bff">resize</a>(const bool force_redraw=true)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#acd8f7316eb83b1059bebfe7d271c1398">resize</a>(const int width, const int height, const bool force_redraw=true)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ad27b62edeea8b0964d424bdc9d113586">resize</a>(const CImg&lt; T &gt; &amp;img, const bool force_redraw=true)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a3657fa648f24413342b92f02ad38b5ae">resize</a>(const CImgDisplay &amp;disp, const bool force_redraw=true)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a8c14a95f72679922995641b29d860da1">screen_height</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a4219f41cd905bbaabaab92b2ed1a70aa">screen_width</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a6e9eb0990daa50aa51ce6202bcf774ae">set_button</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#aa8fc0d8a39b2063d9f1f6cea8fcc2cfb">set_button</a>(const unsigned int button, const bool is_pressed=true)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a9f0ddf65b149de930a3f68ededec61cd">set_fullscreen</a>(const bool is_fullscreen, const bool force_redraw=true)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a199046786d132551afa204c8b80eddc1">set_key</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a30455ebb640fe7f0d08dc9b6897565f4">set_key</a>(const unsigned int keycode, const bool is_pressed=true)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#af089ae3b38f20ac0f5a450dc5ad215f1">set_mouse</a>(const int pos_x, const int pos_y)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a3d9938cea4cb848c62fc7052d8bdfe23">set_normalization</a>(const unsigned int normalization)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#afde9a27e1bb7d0ef822a0f0613f99d32">set_title</a>(const char *const format,...)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a1a255a5404da7ba5b511c23cefa91879">set_wheel</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a90e0d424e65ccc6dba2a0df2e5886759">set_wheel</a>(const int amplitude)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a1b27a2a375509146444ab06b2f7b8851">show</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a9fc997c0451ce75666f1bdfe45eb0343">show_mouse</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a771eb60fd9a3ae74b0daf95d3c05cae3">snapshot</a>(CImg&lt; T &gt; &amp;img) const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a01f58dd237a70f1b83f0fe9ec560ae2d">title</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a288eb7bafd8b2b51603207e87c415ad7">toggle_fullscreen</a>(const bool force_redraw=true)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ab16d9d312efaecc3630dc6539269bab9">wait</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a79669a0b7bdc65aff8313c590c7faab0">wait</a>(const unsigned int milliseconds)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a903bbc0d3fe2b9179790f7baea035916">wait</a>(CImgDisplay &amp;disp1)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ad33d8e77ac9fab757e6f9e9afc067765">wait</a>(CImgDisplay &amp;disp1, CImgDisplay &amp;disp2)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ace751dd163a5ea476947bcad5554035e">wait</a>(CImgDisplay &amp;disp1, CImgDisplay &amp;disp2, CImgDisplay &amp;disp3)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a78ac24c082d4eb13d127374a4bf64987">wait</a>(CImgDisplay &amp;disp1, CImgDisplay &amp;disp2, CImgDisplay &amp;disp3, CImgDisplay &amp;disp4)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a205f86fcf436778bf3219c8163d33425">wait</a>(CImgDisplay &amp;disp1, CImgDisplay &amp;disp2, CImgDisplay &amp;disp3, CImgDisplay &amp;disp4, CImgDisplay &amp;disp5)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a2ca2604a502f006134bd159285c24d84">wait</a>(CImgDisplay &amp;disp1, CImgDisplay &amp;disp2, CImgDisplay &amp;disp3, CImgDisplay &amp;disp4, CImgDisplay &amp;disp5, CImgDisplay &amp;disp6)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a4e44eab5ce34cfa5872122decb31115e">wait</a>(CImgDisplay &amp;disp1, CImgDisplay &amp;disp2, CImgDisplay &amp;disp3, CImgDisplay &amp;disp4, CImgDisplay &amp;disp5, CImgDisplay &amp;disp6, CImgDisplay &amp;disp7)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a6bf0e4fd59de6a0e60d787da8cb55b40">wait</a>(CImgDisplay &amp;disp1, CImgDisplay &amp;disp2, CImgDisplay &amp;disp3, CImgDisplay &amp;disp4, CImgDisplay &amp;disp5, CImgDisplay &amp;disp6, CImgDisplay &amp;disp7, CImgDisplay &amp;disp8)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a8af9b2ad0b81d8e22d3e09fd4e8dcf12">wait</a>(CImgDisplay &amp;disp1, CImgDisplay &amp;disp2, CImgDisplay &amp;disp3, CImgDisplay &amp;disp4, CImgDisplay &amp;disp5, CImgDisplay &amp;disp6, CImgDisplay &amp;disp7, CImgDisplay &amp;disp8, CImgDisplay &amp;disp9)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#aa2fb3e192c2ba6a39a7965357c36a4ad">wait</a>(CImgDisplay &amp;disp1, CImgDisplay &amp;disp2, CImgDisplay &amp;disp3, CImgDisplay &amp;disp4, CImgDisplay &amp;disp5, CImgDisplay &amp;disp6, CImgDisplay &amp;disp7, CImgDisplay &amp;disp8, CImgDisplay &amp;disp9, CImgDisplay &amp;disp10)</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a530c68e321d3adcb30fcefa06a25ca5b">wait_all</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a3a455e002ed5dcc1fc2c23df07781522">wheel</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a369399896761e31ae71db57fdd0ba431">width</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a706b9cb3b2bcdb372db6fe33693a8ae4">window_height</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a0daf640f96f8a620a34de6cbea1f79f1">window_width</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ae1226fc43587896b59edd1cf57c77056">window_x</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ad978bf4dc9acf4129159e0edd55e1111">window_y</a>() const </td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ae4b8135f23d41f2077ff1d63deb452ea">~CImgDisplay</a>()</td><td class="entry"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></td><td class="entry"></td></tr>
+</table></div><!-- contents -->
+</td></tr></table>
+<center>
+<p>
+<a href="http://sourceforge.net">
+  <img src="http://sourceforge.net/sflogo.php?group_id=96492&amp;type=3" border="0" height="37" width="125"></img>
+</a>
+<a href="http://sourceforge.net/donate/index.php?group_id=96492"><img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a>
+</p>
+</center>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+  <!--
+      var sc_project=895001;
+      var sc_invisible=1;
+      var sc_partition=7;
+      var sc_security="5ea85181";
+      //-->
+</script>
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c8.statcounter.com/counter.php?sc_project=895001&amp;java=0&amp;security=5ea85181&amp;invisible=1" alt="counter stats" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16976814-2']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End Google Analytics -->
+</body>
+</html>

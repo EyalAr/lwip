@@ -1,0 +1,164 @@
+<xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+    <title>The CImg Library - C++ Template Image Processing Toolkit</title>
+    <meta content="David Tschumperle" name="author"></meta>
+    <link rel="shortcut icon" type="image/x-icon" href="http://cimg.sourceforge.net/favicon.ico"></link>
+    <link rel="icon" type="image/png" href="favicon.png"></link>
+    <link href="doxygen.css" rel="stylesheet" type="text/css">
+    <link href="tabs.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      <!--
+          body {background-color:#C0C0C0; font-family:sans-serif; }
+          a { font-weight:bold; color:#636363; }
+          a:active{text-decoration:none; color:#000000}
+          a:link{text-decoration:none; color:#000000}
+          a:visited{text-decoration:none; color:#000000}
+          a:hover{text-decoration:underline; color:#4E9F71}
+        -->
+    </style>
+    <script language="JavaScript" type="text/javascript">
+      <!-- Original:  Eric King (eric_andrew_king@hotmail.com) is used to display images in popup windows -->
+      <!-- Web Site:  http://redrival.com/eak/ -->
+      <!-- This script and many more are available free online at -->
+      <!-- The JavaScript Source!! http://javascript.internet.com -->
+      <!-- Begin
+           function NewWindow(mypage, myname, w, h, scroll) {
+           var winl = (screen.width - w) / 2;
+           var wint = (screen.height - h) / 2;
+           winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
+           win = window.open(mypage, myname, winprops)
+           if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+           }
+           //  End -->
+    </script>
+    <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $('#cssmenu > ul').prepend('<li class="mobile"><a href="#"><span>Menu <i>&#9776;</i></span></a></li>');
+      $('#cssmenu > ul > li > a').click(function(e) {
+      $('#cssmenu li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      var checkElement = $(this).next();
+      if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+      $(this).closest('li').removeClass('active');
+      checkElement.slideUp('normal');
+      }
+      if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+      $('#cssmenu ul ul:visible').slideUp('normal');
+      checkElement.slideDown('normal');
+      }
+      if( $(this).parent().hasClass('mobile') ) {
+      e.preventDefault();
+      $('#cssmenu').toggleClass('expand');
+      }
+      if($(this).closest('li').find('ul').children().length == 0) {
+      return true;
+      } else {
+      return false;
+      }
+      });
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="../header.css" />
+  </head>
+  <body>
+    <table align="center" cellpadding="12" cellspacing="0" width="1024" style="border-style:solid; border-width:0px; border-color:black" bgcolor="#FFFFFF">
+      <tr><td>
+          <center>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <br/>
+            <a href="http://cimg.sourceforge.net"><img src="http://cimg.sourceforge.net/img/CImgLogo2.jpg" alt="" border="0"></img></a><br/>
+            <br/>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <table width="90%" align="center">
+              <td width="18%">&nbsp;</td>
+              <td width="65%">
+                <div id='cssmenu'>
+                  <ul>
+                    <li class='first'><a href='http://cimg.sourceforge.net/index.shtml'><span>Home</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/download.shtml'><span>Download</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/screenshots.shtml'><span>Screenshots</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__faq.html'><span>FAQ</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__tutorial.html'><span>Tutorial</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/index.html'><span>Documentation</span></a></li>
+                    <li><a href='http://sourceforge.net/projects/cimg/forums/forum/334630'><span>Forum</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/links.shtml'><span>Links</span></a></li>
+                  </ul>
+                </div>
+              </td>
+              <td align="right">
+                <script type="text/javascript">
+	          var flattr_url = 'http://cimg.sourceforge.net';
+	          var flattr_btn='compact';
+                </script>
+                <script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
+              </td>
+      </tr></table>
+      </center>
+</td></tr>
+<tr><td>
+<!-- Generated by Doxygen 1.8.6 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Setting Environment Variables</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock">The CImg library is a multiplatform library, working on a wide variety of systems. This implies the existence of some <em>environment</em> <em>variables</em> that must be correctly defined depending on your current system. Most of the time, the CImg Library defines these variables automatically (for popular systems). Anyway, if your system is not recognized, you will have to set the environment variables by hand. Here is a quick explanations of environment variables.<br/>
+ Setting the environment variables is done with the <code>#define</code> keyword. This setting must be done <em>before including the file <code>CImg.h</code></em> in your source code. For instance, defining the environment variable <code>cimg_display</code> would be done like this : </p>
+<div class="fragment"><div class="line"><span class="preprocessor">#define cimg_display 0</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#include &quot;CImg.h&quot;</span></div>
+<div class="line">...</div>
+</div><!-- fragment -->Here are the different environment variables used by the CImg Library :<ul>
+<li><b><code>cimg_OS</code> </b>: This variable defines the type of your Operating System. It can be set to <b>1</b> (<em>Unix</em>), <b>2</b> (<em>Windows</em>), or <b>0</b> (<em>Other</em> <em>configuration</em>). It should be actually auto-detected by the CImg library. If this is not the case (<code>cimg_OS=0</code>), you will probably have to tune the environment variables described below.</li>
+<li><b><code>cimg_display</code> </b>: This variable defines the type of graphical library used to display images in windows. It can be set to 0 (no display library available), <b>1</b> (X11-based display) or <b>2</b> (Windows-GDI display). If you are running on a system without X11 or Windows-GDI ability, please set this variable to <code>0</code>. This will disable the display support, since the CImg Library doesn't contain the necessary code to display images on systems other than X11 or Windows GDI.</li>
+<li><b><code>cimg_use_vt100</code> </b>: This variable tells the library if the system terminal has VT100 color capabilities. It can be <em>defined</em> or <em>not</em> <em>defined</em>. Define this variable to get colored output on your terminal, when using the CImg Library.</li>
+<li><b><code>cimg_verbosity</code> </b>: This variable defines the level of run-time debug messages that will be displayed by the CImg Library. It can be set to 0 (no debug messages), 1 (normal debug messages displayed on standard error), 2 (normal debug messages displayed in modal windows, which is the default value), or 3 (high debug messages). Note that setting this value to 3 may slow down your program since more debug tests are made by the library (particularly to check if pixel access is made outside image boundaries). See also CImgException to better understand how debug messages are working.</li>
+<li><b><code>cimg_plugin</code> </b>: This variable tells the library to use a plugin file to add features to the CImg&lt;T&gt; class. Define it with the path of your plugin file, if you want to add member functions to the CImg&lt;T&gt; class, without having to modify directly the <code>"&lt;tt&gt;CImg.h&lt;/tt&gt;"</code> file. An include of the plugin file is performed in the CImg&lt;T&gt; class. If <code>cimg_plugin</code> if not specified (default), no include is done.</li>
+<li><b><code>cimglist_plugin</code> </b>: Same as <code>cimg_plugin</code>, but to add features to the CImgList&lt;T&gt; class.</li>
+<li><b><code>cimgdisplay_plugin</code> </b>: Same as <code>cimg_plugin</code>, but to add features to the CImgDisplay&lt;T&gt; class.</li>
+</ul>
+All these compilation variables can be checked, using the function <a class="el" href="namespacecimg__library_1_1cimg.html#ac1b66fe77173de9e5e8542b2823d6071" title="Print informations about CImg environement variables. ">cimg_library::cimg::info()</a>, which displays a list of the different configuration variables and their values on the standard error output. </div></div><!-- contents -->
+</td></tr></table>
+<center>
+<p>
+<a href="http://sourceforge.net">
+  <img src="http://sourceforge.net/sflogo.php?group_id=96492&amp;type=3" border="0" height="37" width="125"></img>
+</a>
+<a href="http://sourceforge.net/donate/index.php?group_id=96492"><img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a>
+</p>
+</center>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+  <!--
+      var sc_project=895001;
+      var sc_invisible=1;
+      var sc_partition=7;
+      var sc_security="5ea85181";
+      //-->
+</script>
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c8.statcounter.com/counter.php?sc_project=895001&amp;java=0&amp;security=5ea85181&amp;invisible=1" alt="counter stats" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16976814-2']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End Google Analytics -->
+</body>
+</html>

@@ -1,0 +1,34 @@
+\form#0:$I_{(x,y,z,c)}$
+\form#1:$I_{(x,y,z,c)}^2$
+\form#2:$\sqrt{I_{(x,y,z,c)}}$
+\form#3:$e^{I_{(x,y,z,c)}}$
+\form#4:$\mathrm{log}_{e}(I_{(x,y,z,c)})$
+\form#5:$\mathrm{log}_{2}(I_{(x,y,z,c)})$
+\form#6:$\mathrm{log}_{10}(I_{(x,y,z,c)})$
+\form#7:$|I_{(x,y,z,c)}|$
+\form#8:$\mathrm{sign}(I_{(x,y,z,c)})$
+\form#9:$\cos(I_{(x,y,z,c)})$
+\form#10:$\sin(I_{(x,y,z,c)})$
+\form#11:$\mathrm{sinc}(I_{(x,y,z,c)})$
+\form#12:$\tan(I_{(x,y,z,c)})$
+\form#13:$\mathrm{cosh}(I_{(x,y,z,c)})$
+\form#14:$\mathrm{sinh}(I_{(x,y,z,c)})$
+\form#15:$\mathrm{tanh}(I_{(x,y,z,c)})$
+\form#16:$\mathrm{acos}(I_{(x,y,z,c)})$
+\form#17:$\mathrm{asin}(I_{(x,y,z,c)})$
+\form#18:$\mathrm{atan}(I_{(x,y,z,c)})$
+\form#19:$\mathrm{atan2}(I_{(x,y,z,c)})$
+\form#20:$I_{(x,y,z,c)}^p$
+\form#21:$\mathrm{min}(I_{(x,y,z,c)},\mathrm{val})$
+\form#22:$\mathrm{min}(I_{(x,y,z,c)},\mathrm{img}_{(x,y,z,c)})$
+\form#23:$\mathrm{min}(I_{(x,y,z,c)},\mathrm{expr}_{(x,y,z,c)})$
+\form#24:$\mathrm{max}(I_{(x,y,z,c)},\mathrm{val})$
+\form#25:$\mathrm{max}(I_{(x,y,z,c)},\mathrm{img}_{(x,y,z,c)})$
+\form#26:$\mathrm{max}(I_{(x,y,z,c)},\mathrm{expr}_{(x,y,z,c)})$
+\form#27:$1/N \sum\limits_{k=1}^{N} (x_k - \bar x)^2 = 1/N \left( \sum\limits_{k=1}^N x_k^2 - \left( \sum\limits_{k=1}^N x_k \right)^2 / N \right)$
+\form#28:$ \bar x = 1/N \sum\limits_{k=1}^N x_k $
+\form#29:$\frac{1}{N-1} \sum\limits_{k=1}^{N} (x_k - \bar x)^2 $
+\form#30:$(\Delta I)^2 $
+\form#31:$c$
+\form#32:$ c E[(\Delta I)^2]= \sigma^2$
+\form#33:$\sigma$

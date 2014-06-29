@@ -1,0 +1,218 @@
+<xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+    <title>The CImg Library - C++ Template Image Processing Toolkit</title>
+    <meta content="David Tschumperle" name="author"></meta>
+    <link rel="shortcut icon" type="image/x-icon" href="http://cimg.sourceforge.net/favicon.ico"></link>
+    <link rel="icon" type="image/png" href="favicon.png"></link>
+    <link href="doxygen.css" rel="stylesheet" type="text/css">
+    <link href="tabs.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      <!--
+          body {background-color:#C0C0C0; font-family:sans-serif; }
+          a { font-weight:bold; color:#636363; }
+          a:active{text-decoration:none; color:#000000}
+          a:link{text-decoration:none; color:#000000}
+          a:visited{text-decoration:none; color:#000000}
+          a:hover{text-decoration:underline; color:#4E9F71}
+        -->
+    </style>
+    <script language="JavaScript" type="text/javascript">
+      <!-- Original:  Eric King (eric_andrew_king@hotmail.com) is used to display images in popup windows -->
+      <!-- Web Site:  http://redrival.com/eak/ -->
+      <!-- This script and many more are available free online at -->
+      <!-- The JavaScript Source!! http://javascript.internet.com -->
+      <!-- Begin
+           function NewWindow(mypage, myname, w, h, scroll) {
+           var winl = (screen.width - w) / 2;
+           var wint = (screen.height - h) / 2;
+           winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
+           win = window.open(mypage, myname, winprops)
+           if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+           }
+           //  End -->
+    </script>
+    <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $('#cssmenu > ul').prepend('<li class="mobile"><a href="#"><span>Menu <i>&#9776;</i></span></a></li>');
+      $('#cssmenu > ul > li > a').click(function(e) {
+      $('#cssmenu li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      var checkElement = $(this).next();
+      if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+      $(this).closest('li').removeClass('active');
+      checkElement.slideUp('normal');
+      }
+      if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+      $('#cssmenu ul ul:visible').slideUp('normal');
+      checkElement.slideDown('normal');
+      }
+      if( $(this).parent().hasClass('mobile') ) {
+      e.preventDefault();
+      $('#cssmenu').toggleClass('expand');
+      }
+      if($(this).closest('li').find('ul').children().length == 0) {
+      return true;
+      } else {
+      return false;
+      }
+      });
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="../header.css" />
+  </head>
+  <body>
+    <table align="center" cellpadding="12" cellspacing="0" width="1024" style="border-style:solid; border-width:0px; border-color:black" bgcolor="#FFFFFF">
+      <tr><td>
+          <center>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <br/>
+            <a href="http://cimg.sourceforge.net"><img src="http://cimg.sourceforge.net/img/CImgLogo2.jpg" alt="" border="0"></img></a><br/>
+            <br/>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <table width="90%" align="center">
+              <td width="18%">&nbsp;</td>
+              <td width="65%">
+                <div id='cssmenu'>
+                  <ul>
+                    <li class='first'><a href='http://cimg.sourceforge.net/index.shtml'><span>Home</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/download.shtml'><span>Download</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/screenshots.shtml'><span>Screenshots</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__faq.html'><span>FAQ</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__tutorial.html'><span>Tutorial</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/index.html'><span>Documentation</span></a></li>
+                    <li><a href='http://sourceforge.net/projects/cimg/forums/forum/334630'><span>Forum</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/links.shtml'><span>Links</span></a></li>
+                  </ul>
+                </div>
+              </td>
+              <td align="right">
+                <script type="text/javascript">
+	          var flattr_url = 'http://cimg.sourceforge.net';
+	          var flattr_btn='compact';
+                </script>
+                <script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
+              </td>
+      </tr></table>
+      </center>
+</td></tr>
+<tr><td>
+<!-- Generated by Doxygen 1.8.6 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">CImg Library Overview</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock">The <b>CImg Library</b> is an image processing library, designed for C++ programmers. It provides useful classes and functions to load/save, display and process various types of images.<h1><a class="anchor" id="s1"></a>
+Library structure</h1>
+<p>The CImg Library consists in a single header file <code>CImg.h</code> providing a set of C++ template classes that can be used in your own sources, to load/save, process and display images or list of images. Very portable (Unix/X11,Windows, MacOS X, FreeBSD,..), efficient, simple to use, it's a pleasant toolkit for coding image processing stuffs in C++.</p>
+<p>The header file <code>CImg.h</code> contains all the classes and functions that compose the library itself. This is one originality of the CImg Library. This particularly means that :</p>
+<ul>
+<li>No pre-compilation of the library is needed, since the compilation of the CImg functions is done at the same time as the compilation of your own C++ code.</li>
+<li>No complex dependencies have to be handled : Just include the <code>CImg.h</code> file, and you get a working C++ image processing toolkit.</li>
+<li>The compilation is done on the fly : only CImg functionalities really used by your program are compiled and appear in the compiled executable program. This leads to very compact code, without any unused stuffs.</li>
+<li>Class members and functions are inlined, leading to better performance during the program execution.</li>
+</ul>
+<p>The CImg Library is structured as follows :</p>
+<ul>
+<li>All library classes and functions are defined in the namespace <a class="el" href="namespacecimg__library.html">cimg_library</a>. This namespace encapsulates the library functionalities and avoid any class name collision that could happen with other includes. Generally, one uses this namespace as a default namespace : <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;CImg.h&quot;</span></div>
+<div class="line"><span class="keyword">using namespace </span>cimg_library;</div>
+<div class="line">...</div>
+</div><!-- fragment --></li>
+<li>The namespace <a class="el" href="namespacecimg__library_1_1cimg.html">cimg_library::cimg</a> defines a set of <em>low-level</em> functions and variables used by the library. Documented functions in this namespace can be safely used in your own program. But, <b>never</b> use the <a class="el" href="namespacecimg__library_1_1cimg.html">cimg_library::cimg</a> namespace as a default namespace, since it contains functions whose names are already defined in the standard C/C++ library.</li>
+<li>The class <a class="el" href="structcimg__library_1_1CImg.html">cimg_library::CImg</a> represents images up to 4-dimensions wide, containing pixels of type <code>T</code> (template parameter). This is actually the main class of the library.</li>
+<li>The class <a class="el" href="structcimg__library_1_1CImgList.html">cimg_library::CImgList</a> represents lists of cimg_library::CImg&lt;T&gt; images. It can be used for instance to store different frames of an image sequence.</li>
+<li>The class <a class="el" href="structcimg__library_1_1CImgDisplay.html">cimg_library::CImgDisplay</a> is able to display images or image lists into graphical display windows. As you may guess, the code of this class is highly system-dependent but this is transparent for the programmer, as environment variables are automatically set by the CImg library (see also <a class="el" href="group__cimg__environment.html">Setting Environment Variables</a>).</li>
+<li>The class <a class="el" href="structcimg__library_1_1CImgException.html">cimg_library::CImgException</a> (and its subclasses) are used by the library to throw exceptions when errors occur. Those exceptions can be catched with a bloc <code>try { ..} catch (CImgException) { .. }</code>. Subclasses define precisely the type of encountered errors.</li>
+</ul>
+<p>Knowing these four classes is <b>enough</b> to get benefit of the CImg Library functionalities.</p>
+<h1><a class="anchor" id="s2"></a>
+CImg version of "Hello world".</h1>
+<p>Below is a very simple code that creates a "Hello World" image. This shows you basically how a CImg program looks like.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;CImg.h&quot;</span></div>
+<div class="line"><span class="keyword">using namespace </span>cimg_library;</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> main() {</div>
+<div class="line">  <a class="code" href="structcimg__library_1_1CImg.html">CImg&lt;unsigned char&gt;</a> img(640,400,1,3);        <span class="comment">// Define a 640x400 color image with 8 bits per color component.</span></div>
+<div class="line">  img.fill(0);                                 <span class="comment">// Set pixel values to 0 (color : black)</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> purple[] = { 255,0,255 };      <span class="comment">// Define a purple color</span></div>
+<div class="line">  img.draw_text(100,100,<span class="stringliteral">&quot;Hello World&quot;</span>,purple); <span class="comment">// Draw a purple &quot;Hello world&quot; at coordinates (100,100).</span></div>
+<div class="line">  img.display(<span class="stringliteral">&quot;My first CImg code&quot;</span>);           <span class="comment">// Display the image in a display window.</span></div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Which can be also written in a more compact way as :</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;CImg.h&quot;</span></div>
+<div class="line"><span class="keyword">using namespace </span>cimg_library;</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> main() {</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> purple[] = { 255,0,255 };</div>
+<div class="line">  <a class="code" href="structcimg__library_1_1CImg.html">CImg&lt;unsigned char&gt;</a>(640,400,1,3,0).draw_text(100,100,<span class="stringliteral">&quot;Hello World&quot;</span>,purple).<a class="code" href="structcimg__library_1_1CImg.html#aea0592215c6068e617a975a1fe5b7b7b">display</a>(<span class="stringliteral">&quot;My first CImg code&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Generally, you can write very small code that performs complex image processing tasks. The CImg Library is very simple to use and provide a lot of interesting algorithms for image manipulation.</p>
+<h1><a class="anchor" id="s3"></a>
+How to compile ?</h1>
+<p>The CImg library is a very light and user-friendly library : only standard system libraries are used. It avoid to handle complex dependancies and problems with library compatibility. The only thing you need is a (quite modern) C++ compiler :</p>
+<ul>
+<li><b>Microsoft Visual C++ 6.0, Visual Studio.NET and Visual Express Edition</b> : Use project files and solution files provided in the CImg Library package (directory 'compilation/') to see how it works.</li>
+<li><b>Intel ICL compiler</b> : Use the following command to compile a CImg-based program with ICL : <div class="fragment"><div class="line">icl /Ox hello_world.cpp user32.lib gdi32.lib</div>
+</div><!-- fragment --></li>
+<li><b>g++ (MingW windows version)</b> : Use the following command to compile a CImg-based program with g++, on Windows : <div class="fragment"><div class="line">g++ -o hello_word.exe hello_word.cpp -O2 -lgdi32</div>
+</div><!-- fragment --></li>
+<li><b>g++ (Linux version)</b> : Use the following command to compile a CImg-based program with g++, on Linux : <div class="fragment"><div class="line">g++ -o hello_word.exe hello_world.cpp -O2 -L/usr/X11R6/lib -lm -lpthread -lX11</div>
+</div><!-- fragment --></li>
+<li><b>g++ (Solaris version)</b> : Use the following command to compile a CImg-based program with g++, on Solaris : <div class="fragment"><div class="line">g++ -o hello_word.exe hello_world.cpp -O2 -lm -lpthread -R/usr/X11R6/lib -lrt -lnsl -lsocket</div>
+</div><!-- fragment --></li>
+<li><b>g++ (Mac OS X version)</b> : Use the following command to compile a CImg-based program with g++, on Mac OS X : <div class="fragment"><div class="line">g++ -o hello_word.exe hello_world.cpp -O2 -lm -lpthread -I/usr/X11R6/include -L/usr/X11R6/lib -lm -lpthread -lX11</div>
+</div><!-- fragment --></li>
+<li><b>Dev-Cpp</b> : Use the project file provided in the CImg library package to see how it works.</li>
+</ul>
+<p>If you are using another compilers and encounter problems, please <a href="http://www.greyc.ensicaen.fr/~dtschump">write me</a> since maintaining compatibility is one of the priority of the CImg Library. Nevertheless, old compilers that does not respect the C++ norm will not support the CImg Library.</p>
+<h1><a class="anchor" id="s4"></a>
+What's next ?</h1>
+<p>If you are ready to get more, and to start writing more serious programs with CImg, you are invited to go to the <a class="el" href="group__cimg__tutorial.html">Tutorial : Getting Started.</a> section. </p>
+</div></div><!-- contents -->
+</td></tr></table>
+<center>
+<p>
+<a href="http://sourceforge.net">
+  <img src="http://sourceforge.net/sflogo.php?group_id=96492&amp;type=3" border="0" height="37" width="125"></img>
+</a>
+<a href="http://sourceforge.net/donate/index.php?group_id=96492"><img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a>
+</p>
+</center>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+  <!--
+      var sc_project=895001;
+      var sc_invisible=1;
+      var sc_partition=7;
+      var sc_security="5ea85181";
+      //-->
+</script>
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c8.statcounter.com/counter.php?sc_project=895001&amp;java=0&amp;security=5ea85181&amp;invisible=1" alt="counter stats" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16976814-2']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End Google Analytics -->
+</body>
+</html>

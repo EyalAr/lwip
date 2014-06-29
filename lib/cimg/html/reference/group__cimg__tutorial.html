@@ -1,0 +1,201 @@
+<xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+    <title>The CImg Library - C++ Template Image Processing Toolkit</title>
+    <meta content="David Tschumperle" name="author"></meta>
+    <link rel="shortcut icon" type="image/x-icon" href="http://cimg.sourceforge.net/favicon.ico"></link>
+    <link rel="icon" type="image/png" href="favicon.png"></link>
+    <link href="doxygen.css" rel="stylesheet" type="text/css">
+    <link href="tabs.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      <!--
+          body {background-color:#C0C0C0; font-family:sans-serif; }
+          a { font-weight:bold; color:#636363; }
+          a:active{text-decoration:none; color:#000000}
+          a:link{text-decoration:none; color:#000000}
+          a:visited{text-decoration:none; color:#000000}
+          a:hover{text-decoration:underline; color:#4E9F71}
+        -->
+    </style>
+    <script language="JavaScript" type="text/javascript">
+      <!-- Original:  Eric King (eric_andrew_king@hotmail.com) is used to display images in popup windows -->
+      <!-- Web Site:  http://redrival.com/eak/ -->
+      <!-- This script and many more are available free online at -->
+      <!-- The JavaScript Source!! http://javascript.internet.com -->
+      <!-- Begin
+           function NewWindow(mypage, myname, w, h, scroll) {
+           var winl = (screen.width - w) / 2;
+           var wint = (screen.height - h) / 2;
+           winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
+           win = window.open(mypage, myname, winprops)
+           if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+           }
+           //  End -->
+    </script>
+    <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $('#cssmenu > ul').prepend('<li class="mobile"><a href="#"><span>Menu <i>&#9776;</i></span></a></li>');
+      $('#cssmenu > ul > li > a').click(function(e) {
+      $('#cssmenu li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      var checkElement = $(this).next();
+      if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+      $(this).closest('li').removeClass('active');
+      checkElement.slideUp('normal');
+      }
+      if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+      $('#cssmenu ul ul:visible').slideUp('normal');
+      checkElement.slideDown('normal');
+      }
+      if( $(this).parent().hasClass('mobile') ) {
+      e.preventDefault();
+      $('#cssmenu').toggleClass('expand');
+      }
+      if($(this).closest('li').find('ul').children().length == 0) {
+      return true;
+      } else {
+      return false;
+      }
+      });
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="../header.css" />
+  </head>
+  <body>
+    <table align="center" cellpadding="12" cellspacing="0" width="1024" style="border-style:solid; border-width:0px; border-color:black" bgcolor="#FFFFFF">
+      <tr><td>
+          <center>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <br/>
+            <a href="http://cimg.sourceforge.net"><img src="http://cimg.sourceforge.net/img/CImgLogo2.jpg" alt="" border="0"></img></a><br/>
+            <br/>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <table width="90%" align="center">
+              <td width="18%">&nbsp;</td>
+              <td width="65%">
+                <div id='cssmenu'>
+                  <ul>
+                    <li class='first'><a href='http://cimg.sourceforge.net/index.shtml'><span>Home</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/download.shtml'><span>Download</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/screenshots.shtml'><span>Screenshots</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__faq.html'><span>FAQ</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__tutorial.html'><span>Tutorial</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/index.html'><span>Documentation</span></a></li>
+                    <li><a href='http://sourceforge.net/projects/cimg/forums/forum/334630'><span>Forum</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/links.shtml'><span>Links</span></a></li>
+                  </ul>
+                </div>
+              </td>
+              <td align="right">
+                <script type="text/javascript">
+	          var flattr_url = 'http://cimg.sourceforge.net';
+	          var flattr_btn='compact';
+                </script>
+                <script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
+              </td>
+      </tr></table>
+      </center>
+</td></tr>
+<tr><td>
+<!-- Generated by Doxygen 1.8.6 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Tutorial : Getting Started.</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock">Let's start to write our first program to get the idea. This will demonstrate how to load and create images, as well as handle image display and mouse events. Assume we want to load a color image <code>lena.jpg</code>, smooth it, display it in a windows, and enter an event loop so that clicking a point in the image will draw the (R,G,B) intensity profiles of the corresponding image line (in another window). Yes, that sounds quite complex for a first code, but don't worry, it will be very simple using the CImg library ! Well, just look at the code below, it does the task :<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;CImg.h&quot;</span></div>
+<div class="line"><span class="keyword">using namespace </span>cimg_library;</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> main() {</div>
+<div class="line">  <a class="code" href="structcimg__library_1_1CImg.html">CImg&lt;unsigned char&gt;</a> image(<span class="stringliteral">&quot;lena.jpg&quot;</span>), visu(500,400,1,3,0);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> red[] = { 255,0,0 }, green[] = { 0,255,0 }, blue[] = { 0,0,255 };</div>
+<div class="line">  image.blur(2.5);</div>
+<div class="line">  <a class="code" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> main_disp(image,<span class="stringliteral">&quot;Click a point&quot;</span>), draw_disp(visu,<span class="stringliteral">&quot;Intensity profile&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">while</span> (!main_disp.is_closed() &amp;&amp; !draw_disp.is_closed()) {</div>
+<div class="line">    main_disp.wait();</div>
+<div class="line">    <span class="keywordflow">if</span> (main_disp.button() &amp;&amp; main_disp.mouse_y()&gt;=0) {</div>
+<div class="line">      <span class="keyword">const</span> <span class="keywordtype">int</span> y = main_disp.mouse_y();</div>
+<div class="line">      visu.fill(0).draw_graph(image.get_crop(0,y,0,0,image.width()-1,y,0,0),red,1,1,0,255,0);</div>
+<div class="line">      visu.draw_graph(image.get_crop(0,y,0,1,image.width()-1,y,0,1),green,1,1,0,255,0);</div>
+<div class="line">      visu.draw_graph(image.get_crop(0,y,0,2,image.width()-1,y,0,2),blue,1,1,0,255,0).display(draw_disp);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment -->Here is a screenshot of the resulting program :<div class="image">
+<img src="../img/tutorial.jpg" />
+</div>
+And here is the detailled explanation of the source, line by line :<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;CImg.h&quot;</span> </div>
+</div><!-- fragment --><p> Include the main and only header file of the CImg library. </p>
+<div class="fragment"><div class="line"><span class="keyword">using namespace </span>cimg_library; </div>
+</div><!-- fragment --><p> Use the library namespace to ease the declarations afterward. </p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> main() { </div>
+</div><!-- fragment --><p> Definition of the main function. </p>
+<div class="fragment"><div class="line">CImg&lt;unsigned char&gt; image(<span class="stringliteral">&quot;lena.jpg&quot;</span>), visu(500,400,1,3,0); </div>
+</div><!-- fragment --><p> Creation of two instances of images of <code>unsigned</code> <code>char</code> pixels. The first image <code>image</code> is initialized by reading an image file from the disk. Here, <code>lena.jpg</code> must be in the same directory than the current program. Note that you must also have installed the <em>ImageMagick</em> package in order to be able to read JPG images. The second image <code>visu</code> is initialized as a black color image with dimension <code>dx=500</code>, <code>dy=400</code>, <code>dz=1</code> (here, it is a 2D image, not a 3D one), and <code>dv=3</code> (each pixel has 3 'vector' channels R,G,B). The last argument in the constructor defines the default value of the pixel values (here <code>0</code>, which means that <code>visu</code> will be initially black). </p>
+<div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> red[] = { 255,0,0 }, green[] = { 0,255,0 }, blue[] = { 0,0,255 }; </div>
+</div><!-- fragment --><p> Definition of three different colors as array of unsigned char. This will be used to draw plots with different colors. </p>
+<div class="fragment"><div class="line">image.blur(2.5); </div>
+</div><!-- fragment --><p> Blur the image, with a gaussian blur and a standard variation of 2.5. Note that most of the CImg functions have two versions : one that acts in-place (which is the case of blur), and one that returns the result as a new image (the name of the function begins then with <code>get_</code>&#160;). In this case, one could have also written <code>image = image.get_blur(2.5);</code> (more expensive, since it needs an additional copy operation). </p>
+<div class="fragment"><div class="line">CImgDisplay main_disp(image,<span class="stringliteral">&quot;Click a point&quot;</span>), draw_disp(visu,<span class="stringliteral">&quot;Intensity profile&quot;</span>); </div>
+</div><!-- fragment --><p> Creation of two display windows, one for the input image image, and one for the image visu which will be display intensity profiles. By default, CImg displays handles events (mouse,keyboard,..). On Windows, there is a way to create fullscreen displays. </p>
+<div class="fragment"><div class="line"><span class="keywordflow">while</span> (!main_disp.is_closed() &amp;&amp; !draw_disp.is_closed()) { </div>
+</div><!-- fragment --><p> Enter the event loop, the code will exit when one of the two display windows is closed. </p>
+<div class="fragment"><div class="line">main_disp.wait(); </div>
+</div><!-- fragment --><p> Wait for an event (mouse, keyboard,..) in the display window <code>main_disp</code>. </p>
+<div class="fragment"><div class="line"><span class="keywordflow">if</span> (main_disp.button() &amp;&amp; main_disp.mouse_y()&gt;=0) { </div>
+</div><!-- fragment --><p> Test if the mouse button has been clicked on the image area. One may distinguish between the 3 different mouse buttons, but in this case it is not necessary </p>
+<div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> y = main_disp.mouse_y(); </div>
+</div><!-- fragment --><p> Get the image line y-coordinate that has been clicked. </p>
+<div class="fragment"><div class="line">visu.fill(0).draw_graph(image.get_crop(0,y,0,0,image.width()-1,y,0,0),red,1,0,256,0); </div>
+</div><!-- fragment --><p> This line illustrates the pipeline property of most of the CImg class functions. The first function <code>fill(0)</code> simply sets all pixel values with 0 (i.e. clear the image <code>visu</code>). The interesting thing is that it returns a reference to <code>visu</code> and then, can be pipelined with the function <code>draw_graph()</code> which draws a plot in the image <code>visu</code>. The plot data are given by another image (the first argument of <code>draw_graph()</code>). In this case, the given image is the red-component of the line y of the original image, retrieved by the function <code>get_crop()</code> which returns a sub-image of the image <code>image</code>. Remember that images coordinates are 4D (x,y,z,v) and for color images, the R,G,B channels are respectively given by <code>v=0, v=1</code> and <code>v=2</code>. </p>
+<div class="fragment"><div class="line">visu.draw_graph(image.get_crop(0,y,0,1,image.width()-1,y,0,1),green,1,0,256,0); </div>
+</div><!-- fragment --><p> Plot the intensity profile for the green channel of the clicked line. </p>
+<div class="fragment"><div class="line">visu.draw_graph(image.get_crop(0,y,0,2,image.width()-1,y,0,2),blue,1,0,256,0).display(draw_disp); </div>
+</div><!-- fragment --><p> Same thing for the blue channel. Note how the function (which return a reference to <code>visu</code>) is pipelined with the function <code>display()</code> that just paints the image visu in the corresponding display window. </p>
+<div class="fragment"><div class="line">...till the end </div>
+</div><!-- fragment --><p> I don't think you need more explanations !As you have noticed, the CImg library allows to write very small and intuitive code. Note also that this source will perfectly work on Unix and Windows systems. Take also a look to the examples provided in the CImg package ( directory <code>examples/</code> ). It will show you how CImg-based code can be surprisingly small. Moreover, there is surely one example close to what you want to do. A good start will be to look at the file <code>CImg_demo.cpp</code> which contains small and various examples of what you can do with the CImg Library. All CImg classes are used in this source, and the code can be easily modified to see what happens. </div></div><!-- contents -->
+</td></tr></table>
+<center>
+<p>
+<a href="http://sourceforge.net">
+  <img src="http://sourceforge.net/sflogo.php?group_id=96492&amp;type=3" border="0" height="37" width="125"></img>
+</a>
+<a href="http://sourceforge.net/donate/index.php?group_id=96492"><img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a>
+</p>
+</center>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+  <!--
+      var sc_project=895001;
+      var sc_invisible=1;
+      var sc_partition=7;
+      var sc_security="5ea85181";
+      //-->
+</script>
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c8.statcounter.com/counter.php?sc_project=895001&amp;java=0&amp;security=5ea85181&amp;invisible=1" alt="counter stats" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16976814-2']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End Google Analytics -->
+</body>
+</html>

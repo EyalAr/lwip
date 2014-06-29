@@ -1,0 +1,803 @@
+<xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+    <title>The CImg Library - C++ Template Image Processing Toolkit</title>
+    <meta content="David Tschumperle" name="author"></meta>
+    <link rel="shortcut icon" type="image/x-icon" href="http://cimg.sourceforge.net/favicon.ico"></link>
+    <link rel="icon" type="image/png" href="favicon.png"></link>
+    <link href="doxygen.css" rel="stylesheet" type="text/css">
+    <link href="tabs.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      <!--
+          body {background-color:#C0C0C0; font-family:sans-serif; }
+          a { font-weight:bold; color:#636363; }
+          a:active{text-decoration:none; color:#000000}
+          a:link{text-decoration:none; color:#000000}
+          a:visited{text-decoration:none; color:#000000}
+          a:hover{text-decoration:underline; color:#4E9F71}
+        -->
+    </style>
+    <script language="JavaScript" type="text/javascript">
+      <!-- Original:  Eric King (eric_andrew_king@hotmail.com) is used to display images in popup windows -->
+      <!-- Web Site:  http://redrival.com/eak/ -->
+      <!-- This script and many more are available free online at -->
+      <!-- The JavaScript Source!! http://javascript.internet.com -->
+      <!-- Begin
+           function NewWindow(mypage, myname, w, h, scroll) {
+           var winl = (screen.width - w) / 2;
+           var wint = (screen.height - h) / 2;
+           winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
+           win = window.open(mypage, myname, winprops)
+           if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+           }
+           //  End -->
+    </script>
+    <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $('#cssmenu > ul').prepend('<li class="mobile"><a href="#"><span>Menu <i>&#9776;</i></span></a></li>');
+      $('#cssmenu > ul > li > a').click(function(e) {
+      $('#cssmenu li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      var checkElement = $(this).next();
+      if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+      $(this).closest('li').removeClass('active');
+      checkElement.slideUp('normal');
+      }
+      if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+      $('#cssmenu ul ul:visible').slideUp('normal');
+      checkElement.slideDown('normal');
+      }
+      if( $(this).parent().hasClass('mobile') ) {
+      e.preventDefault();
+      $('#cssmenu').toggleClass('expand');
+      }
+      if($(this).closest('li').find('ul').children().length == 0) {
+      return true;
+      } else {
+      return false;
+      }
+      });
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="../header.css" />
+  </head>
+  <body>
+    <table align="center" cellpadding="12" cellspacing="0" width="1024" style="border-style:solid; border-width:0px; border-color:black" bgcolor="#FFFFFF">
+      <tr><td>
+          <center>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <br/>
+            <a href="http://cimg.sourceforge.net"><img src="http://cimg.sourceforge.net/img/CImgLogo2.jpg" alt="" border="0"></img></a><br/>
+            <br/>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <table width="90%" align="center">
+              <td width="18%">&nbsp;</td>
+              <td width="65%">
+                <div id='cssmenu'>
+                  <ul>
+                    <li class='first'><a href='http://cimg.sourceforge.net/index.shtml'><span>Home</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/download.shtml'><span>Download</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/screenshots.shtml'><span>Screenshots</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__faq.html'><span>FAQ</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__tutorial.html'><span>Tutorial</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/index.html'><span>Documentation</span></a></li>
+                    <li><a href='http://sourceforge.net/projects/cimg/forums/forum/334630'><span>Forum</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/links.shtml'><span>Links</span></a></li>
+                  </ul>
+                </div>
+              </td>
+              <td align="right">
+                <script type="text/javascript">
+	          var flattr_url = 'http://cimg.sourceforge.net';
+	          var flattr_btn='compact';
+                </script>
+                <script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
+              </td>
+      </tr></table>
+      </center>
+</td></tr>
+<tr><td>
+<!-- Generated by Doxygen 1.8.6 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li class="current"><a href="functions.html"><span>Class&#160;Members</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow3" class="tabs2">
+    <ul class="tablist">
+      <li class="current"><a href="functions.html"><span>All</span></a></li>
+      <li><a href="functions_func.html"><span>Functions</span></a></li>
+      <li><a href="functions_type.html"><span>Typedefs</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow4" class="tabs3">
+    <ul class="tablist">
+      <li><a href="functions.html#index_a"><span>a</span></a></li>
+      <li><a href="functions_b.html#index_b"><span>b</span></a></li>
+      <li><a href="functions_c.html#index_c"><span>c</span></a></li>
+      <li><a href="functions_d.html#index_d"><span>d</span></a></li>
+      <li><a href="functions_e.html#index_e"><span>e</span></a></li>
+      <li><a href="functions_f.html#index_f"><span>f</span></a></li>
+      <li class="current"><a href="functions_g.html#index_g"><span>g</span></a></li>
+      <li><a href="functions_h.html#index_h"><span>h</span></a></li>
+      <li><a href="functions_i.html#index_i"><span>i</span></a></li>
+      <li><a href="functions_j.html#index_j"><span>j</span></a></li>
+      <li><a href="functions_k.html#index_k"><span>k</span></a></li>
+      <li><a href="functions_l.html#index_l"><span>l</span></a></li>
+      <li><a href="functions_m.html#index_m"><span>m</span></a></li>
+      <li><a href="functions_n.html#index_n"><span>n</span></a></li>
+      <li><a href="functions_o.html#index_o"><span>o</span></a></li>
+      <li><a href="functions_p.html#index_p"><span>p</span></a></li>
+      <li><a href="functions_q.html#index_q"><span>q</span></a></li>
+      <li><a href="functions_r.html#index_r"><span>r</span></a></li>
+      <li><a href="functions_s.html#index_s"><span>s</span></a></li>
+      <li><a href="functions_t.html#index_t"><span>t</span></a></li>
+      <li><a href="functions_u.html#index_u"><span>u</span></a></li>
+      <li><a href="functions_v.html#index_v"><span>v</span></a></li>
+      <li><a href="functions_w.html#index_w"><span>w</span></a></li>
+      <li><a href="functions_x.html#index_x"><span>x</span></a></li>
+      <li><a href="functions_y.html#index_y"><span>y</span></a></li>
+      <li><a href="functions_~.html#index_~"><span>~</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div>
+
+<h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
+<li>get_abs()
+: <a class="el" href="structcimg__library_1_1CImg.html#a42309833a3b65cbef9bd1f7e97de4ab0">CImg&lt; T &gt;</a>
+</li>
+<li>get_acos()
+: <a class="el" href="structcimg__library_1_1CImg.html#a80972e1b6fd55bf970cbb07d56c39335">CImg&lt; T &gt;</a>
+</li>
+<li>get_append()
+: <a class="el" href="structcimg__library_1_1CImg.html#a2e859bdf9230c8ac35bf3c605b523ac8">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#a17cc212f73326c769af6ce95bf7c8c3e">CImgList&lt; T &gt;</a>
+</li>
+<li>get_asin()
+: <a class="el" href="structcimg__library_1_1CImg.html#a4ff91920cd29bdfe6c8a04c9fb9a5f45">CImg&lt; T &gt;</a>
+</li>
+<li>get_atan()
+: <a class="el" href="structcimg__library_1_1CImg.html#ae34fafc7bd6868ac7dcfbe2d8e9bf3b4">CImg&lt; T &gt;</a>
+</li>
+<li>get_atan2()
+: <a class="el" href="structcimg__library_1_1CImg.html#aa8ce98bdee62b897a46d3deeb13f17e2">CImg&lt; T &gt;</a>
+</li>
+<li>get_autocrop()
+: <a class="el" href="structcimg__library_1_1CImg.html#a1038c4cba1b2ac0c463344f14fc34498">CImg&lt; T &gt;</a>
+</li>
+<li>get_BayertoRGB()
+: <a class="el" href="structcimg__library_1_1CImg.html#a7ef875be068aedc9d1486959caf1155c">CImg&lt; T &gt;</a>
+</li>
+<li>get_blur()
+: <a class="el" href="structcimg__library_1_1CImg.html#a9b756a8d9e4ceafda3b9e7b51a1f614a">CImg&lt; T &gt;</a>
+</li>
+<li>get_blur_anisotropic()
+: <a class="el" href="structcimg__library_1_1CImg.html#a4b94d56b170b9b6d732e6a1c7d075d05">CImg&lt; T &gt;</a>
+</li>
+<li>get_blur_bilateral()
+: <a class="el" href="structcimg__library_1_1CImg.html#ab222d26dae3bfecd9c68e83982bddd1b">CImg&lt; T &gt;</a>
+</li>
+<li>get_blur_median()
+: <a class="el" href="structcimg__library_1_1CImg.html#a4fddfa0c54a058a49bbbb23d99d00da0">CImg&lt; T &gt;</a>
+</li>
+<li>get_blur_patch()
+: <a class="el" href="structcimg__library_1_1CImg.html#a4439e1248a7930161d43c4eea32cc251">CImg&lt; T &gt;</a>
+</li>
+<li>get_channel()
+: <a class="el" href="structcimg__library_1_1CImg.html#a76b17174440ad35a5c50d4549b4ba16b">CImg&lt; T &gt;</a>
+</li>
+<li>get_channels()
+: <a class="el" href="structcimg__library_1_1CImg.html#af1f8c9706ac4266a7152b10f24cf1fa5">CImg&lt; T &gt;</a>
+</li>
+<li>get_CImg3dtoobject3d()
+: <a class="el" href="structcimg__library_1_1CImg.html#a18b3d61ab7723521292f49b729261643">CImg&lt; T &gt;</a>
+</li>
+<li>get_CMYKtoCMY()
+: <a class="el" href="structcimg__library_1_1CImg.html#ae25db14c1b893a9e7c0536b71840ee87">CImg&lt; T &gt;</a>
+</li>
+<li>get_CMYKtoRGB()
+: <a class="el" href="structcimg__library_1_1CImg.html#adae9720758275e51ae1cd8d4e21ef5ca">CImg&lt; T &gt;</a>
+</li>
+<li>get_CMYtoCMYK()
+: <a class="el" href="structcimg__library_1_1CImg.html#a79739beb080a26a96436c79671030685">CImg&lt; T &gt;</a>
+</li>
+<li>get_CMYtoRGB()
+: <a class="el" href="structcimg__library_1_1CImg.html#aad54233cf16a565436463a601c8b9bfb">CImg&lt; T &gt;</a>
+</li>
+<li>get_column()
+: <a class="el" href="structcimg__library_1_1CImg.html#a86d874db37b639b6647cf741ba801ad0">CImg&lt; T &gt;</a>
+</li>
+<li>get_columns()
+: <a class="el" href="structcimg__library_1_1CImg.html#a257856e28d6d78f91fb72c3508829724">CImg&lt; T &gt;</a>
+</li>
+<li>get_convolve()
+: <a class="el" href="structcimg__library_1_1CImg.html#aae4eee869108a1777d95243384035b26">CImg&lt; T &gt;</a>
+</li>
+<li>get_correlate()
+: <a class="el" href="structcimg__library_1_1CImg.html#a41dc37f713d47a634f6ec7656fc5a62e">CImg&lt; T &gt;</a>
+</li>
+<li>get_cos()
+: <a class="el" href="structcimg__library_1_1CImg.html#ab42d865499ba41609ea43d53a062cd2f">CImg&lt; T &gt;</a>
+</li>
+<li>get_cosh()
+: <a class="el" href="structcimg__library_1_1CImg.html#a6c228835c1b900ba36f484c0113eccad">CImg&lt; T &gt;</a>
+</li>
+<li>get_crop()
+: <a class="el" href="structcimg__library_1_1CImg.html#a8548c925b55278e6bb6749ba9874b3c5">CImg&lt; T &gt;</a>
+</li>
+<li>get_crop_font()
+: <a class="el" href="structcimg__library_1_1CImgList.html#aa240a3e4e9713b62189f8df7fa47a988">CImgList&lt; T &gt;</a>
+</li>
+<li>get_cross()
+: <a class="el" href="structcimg__library_1_1CImg.html#a7f004a6e88dbae5d23be20fb7f8e01ff">CImg&lt; T &gt;</a>
+</li>
+<li>get_cut()
+: <a class="el" href="structcimg__library_1_1CImg.html#afd4fc05ca94d227ea6801051386e3e50">CImg&lt; T &gt;</a>
+</li>
+<li>get_deriche()
+: <a class="el" href="structcimg__library_1_1CImg.html#a65cff24a5890e074ab91f6dcfb0131b2">CImg&lt; T &gt;</a>
+</li>
+<li>get_diagonal()
+: <a class="el" href="structcimg__library_1_1CImg.html#a5556dfbb562455d3d196295c1ca6e0e0">CImg&lt; T &gt;</a>
+</li>
+<li>get_diffusion_tensors()
+: <a class="el" href="structcimg__library_1_1CImg.html#acf380544356d7a8f03aa3c3c8149f860">CImg&lt; T &gt;</a>
+</li>
+<li>get_dijkstra()
+: <a class="el" href="structcimg__library_1_1CImg.html#ab29c0821f2b9b72237319cdc9ca65236">CImg&lt; T &gt;</a>
+</li>
+<li>get_dilate()
+: <a class="el" href="structcimg__library_1_1CImg.html#a5cbef7a141e63149adf8d6797f89098b">CImg&lt; T &gt;</a>
+</li>
+<li>get_discard()
+: <a class="el" href="structcimg__library_1_1CImg.html#a0cc14a05a23d78cf1d4ab6e09abd319a">CImg&lt; T &gt;</a>
+</li>
+<li>get_displacement()
+: <a class="el" href="structcimg__library_1_1CImg.html#ac5c221cc995ba543755d8a0493dd88ad">CImg&lt; T &gt;</a>
+</li>
+<li>get_distance()
+: <a class="el" href="structcimg__library_1_1CImg.html#ab7dfce109e843898472f72edf7825af2">CImg&lt; T &gt;</a>
+</li>
+<li>get_distance_dijkstra()
+: <a class="el" href="structcimg__library_1_1CImg.html#ae775bbd6b2378e67167d495026acdd29">CImg&lt; T &gt;</a>
+</li>
+<li>get_distance_eikonal()
+: <a class="el" href="structcimg__library_1_1CImg.html#af7817d5761d56dbff975266360f8e91f">CImg&lt; T &gt;</a>
+</li>
+<li>get_div()
+: <a class="el" href="structcimg__library_1_1CImg.html#ac15819574e63554561bd9f0504d6464d">CImg&lt; T &gt;</a>
+</li>
+<li>get_eigen()
+: <a class="el" href="structcimg__library_1_1CImg.html#a4594e576d73d47bd3557c2db395c44df">CImg&lt; T &gt;</a>
+</li>
+<li>get_elevation3d()
+: <a class="el" href="structcimg__library_1_1CImg.html#a26d868df92542026e0ab60df4c7f286a">CImg&lt; T &gt;</a>
+</li>
+<li>get_equalize()
+: <a class="el" href="structcimg__library_1_1CImg.html#a3483ca08e8d753933dffc5ff4d7099f2">CImg&lt; T &gt;</a>
+</li>
+<li>get_erode()
+: <a class="el" href="structcimg__library_1_1CImg.html#ad75ea7ef26e1c54eeaccdaec4f19bd73">CImg&lt; T &gt;</a>
+</li>
+<li>get_exp()
+: <a class="el" href="structcimg__library_1_1CImg.html#ae129c419df5ecb2d37803c41e87b8b27">CImg&lt; T &gt;</a>
+</li>
+<li>get_FFT()
+: <a class="el" href="structcimg__library_1_1CImg.html#a3ac77cc4825a55bc3a0130152e4b9b95">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#ae9e7074da9c9955e37e9eebbd5bd9c22">CImgList&lt; T &gt;</a>
+</li>
+<li>get_fill()
+: <a class="el" href="structcimg__library_1_1CImg.html#a07b87161f045a75bb879ce59883f545d">CImg&lt; T &gt;</a>
+</li>
+<li>get_gradient()
+: <a class="el" href="structcimg__library_1_1CImg.html#a3e5b54c0b862cbf6e9f14e832984c4d7">CImg&lt; T &gt;</a>
+</li>
+<li>get_haar()
+: <a class="el" href="structcimg__library_1_1CImg.html#aadcc510c6d5bd17092150e6024d52383">CImg&lt; T &gt;</a>
+</li>
+<li>get_hessian()
+: <a class="el" href="structcimg__library_1_1CImg.html#a96e3e0c617e70a833492043d08a7905a">CImg&lt; T &gt;</a>
+</li>
+<li>get_histogram()
+: <a class="el" href="structcimg__library_1_1CImg.html#a1b691aab88755bd88eaddebfeed3a7e5">CImg&lt; T &gt;</a>
+</li>
+<li>get_HSItoRGB()
+: <a class="el" href="structcimg__library_1_1CImg.html#afa1f3bbdd3482181416bee34a3cf5a3b">CImg&lt; T &gt;</a>
+</li>
+<li>get_HSLtoRGB()
+: <a class="el" href="structcimg__library_1_1CImg.html#a99e0396f5b174adfc0c4c2aa3906c930">CImg&lt; T &gt;</a>
+</li>
+<li>get_HSVtoRGB()
+: <a class="el" href="structcimg__library_1_1CImg.html#a672ef1aa9a08fed8fdcecfc4b309e2ca">CImg&lt; T &gt;</a>
+</li>
+<li>get_identity_matrix()
+: <a class="el" href="structcimg__library_1_1CImg.html#a511692deba5af28d058753c4daed1bc1">CImg&lt; T &gt;</a>
+</li>
+<li>get_images()
+: <a class="el" href="structcimg__library_1_1CImgList.html#a83f6e8ca3f562f3039ee7ab6543d17e1">CImgList&lt; T &gt;</a>
+</li>
+<li>get_index()
+: <a class="el" href="structcimg__library_1_1CImg.html#a679a601d93ae99d273944f9fc7db3038">CImg&lt; T &gt;</a>
+</li>
+<li>get_insert()
+: <a class="el" href="structcimg__library_1_1CImgList.html#abcb1527b6788f7d9412527e984dba083">CImgList&lt; T &gt;</a>
+</li>
+<li>get_invert()
+: <a class="el" href="structcimg__library_1_1CImg.html#a16fe55a07fa0f2e43ae7377a915b03d3">CImg&lt; T &gt;</a>
+</li>
+<li>get_invert_endianness()
+: <a class="el" href="structcimg__library_1_1CImg.html#af19eb9300a3c12c36c80da939062162b">CImg&lt; T &gt;</a>
+</li>
+<li>get_isoline3d()
+: <a class="el" href="structcimg__library_1_1CImg.html#aea6465db01b6f6fcb9ffc3699432040e">CImg&lt; T &gt;</a>
+</li>
+<li>get_isosurface3d()
+: <a class="el" href="structcimg__library_1_1CImg.html#a898b5f9a3612526e76a2f009c246a73e">CImg&lt; T &gt;</a>
+</li>
+<li>get_label()
+: <a class="el" href="structcimg__library_1_1CImg.html#a7c44bcd5b61f1201e261213f2e0a1f17">CImg&lt; T &gt;</a>
+</li>
+<li>get_LabtoRGB()
+: <a class="el" href="structcimg__library_1_1CImg.html#a91ac40e606effa38c3d4178f41a5e478">CImg&lt; T &gt;</a>
+</li>
+<li>get_LabtoXYZ()
+: <a class="el" href="structcimg__library_1_1CImg.html#a12f61116848bc071b961f0e301d8c820">CImg&lt; T &gt;</a>
+</li>
+<li>get_laplacian()
+: <a class="el" href="structcimg__library_1_1CImg.html#a0ba6d1886b2df0cc4c321d9618a0094f">CImg&lt; T &gt;</a>
+</li>
+<li>get_load()
+: <a class="el" href="structcimg__library_1_1CImg.html#a149e94256155d10130a088f8219edd04">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#abf9c8328ad47ecb7e15e716cecc3fd3b">CImgList&lt; T &gt;</a>
+</li>
+<li>get_load_analyze()
+: <a class="el" href="structcimg__library_1_1CImg.html#ad2a8f010c828eac5a82a244bd872b1d7">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_ascii()
+: <a class="el" href="structcimg__library_1_1CImg.html#afcae43f9eea505f08646f97851f59c64">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_bmp()
+: <a class="el" href="structcimg__library_1_1CImg.html#a4f7b2075e2aaa64ebbf67e87291606f4">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_camera()
+: <a class="el" href="structcimg__library_1_1CImg.html#a210295eaf3bec78369e6a8eff81d795e">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_cimg()
+: <a class="el" href="structcimg__library_1_1CImg.html#abc42c1026ec824f3ae26a05266947159">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#a5d903f8df0741cf00e6c9e2f1dc8d835">CImgList&lt; T &gt;</a>
+</li>
+<li>get_load_dcraw_external()
+: <a class="el" href="structcimg__library_1_1CImg.html#a0537809dca1c2f2f5e35965d45f5b52c">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_dlm()
+: <a class="el" href="structcimg__library_1_1CImg.html#a834668164d25f97f373b1fd6059d2a4b">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_exr()
+: <a class="el" href="structcimg__library_1_1CImg.html#a2fcc56406715b63dce2a8a1b77e17ce4">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_ffmpeg()
+: <a class="el" href="structcimg__library_1_1CImg.html#a2648cdcde4453b71692a26f5da879e64">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#aec6188817de989c6355f9dcf81788f37">CImgList&lt; T &gt;</a>
+</li>
+<li>get_load_ffmpeg_external()
+: <a class="el" href="structcimg__library_1_1CImg.html#a52a24a9f87c90dbb6bb586d7c9849364">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#ae59117119fcf4c35eb85890c1699b037">CImgList&lt; T &gt;</a>
+</li>
+<li>get_load_gif_external()
+: <a class="el" href="structcimg__library_1_1CImg.html#aeeed9985d02d7e3e1d6fb15fcd89483c">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#a876013f6248e0953e21f5c09e046e244">CImgList&lt; T &gt;</a>
+</li>
+<li>get_load_graphicsmagick_external()
+: <a class="el" href="structcimg__library_1_1CImg.html#a5cd75e6518130915e0c5f006b5bec758">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_gzip_external()
+: <a class="el" href="structcimg__library_1_1CImg.html#a3f62a13e6dcbbdc8c7bdd6608017602b">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#a2afcc959c5c4408d4c1fa87f5506e472">CImgList&lt; T &gt;</a>
+</li>
+<li>get_load_imagemagick_external()
+: <a class="el" href="structcimg__library_1_1CImg.html#a614be4016c404396a28121dd2d9ee477">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_inr()
+: <a class="el" href="structcimg__library_1_1CImg.html#a2f0b270d79a950122d1eba18ef74c0bb">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_jpeg()
+: <a class="el" href="structcimg__library_1_1CImg.html#a5fb25ae4e078d63d73430a5f87876287">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_magick()
+: <a class="el" href="structcimg__library_1_1CImg.html#af7100b79cd6e054a37a4930fe334f288">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_medcon_external()
+: <a class="el" href="structcimg__library_1_1CImg.html#a99ef8bf8fc4f76517d93c831fdfca562">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_minc2()
+: <a class="el" href="structcimg__library_1_1CImg.html#a21a21d4de5af5332c4fbbfa35c3b1111">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_off()
+: <a class="el" href="structcimg__library_1_1CImg.html#abdb9494741f83e02b15135a826e1fa7e">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#a91ac635ff4dacaa8cc9bede33d6404b5">CImgList&lt; T &gt;</a>
+</li>
+<li>get_load_other()
+: <a class="el" href="structcimg__library_1_1CImg.html#aa4fba9dc33b1edf2eacb59acebba962d">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_pandore()
+: <a class="el" href="structcimg__library_1_1CImg.html#a142e63e1c36c29a05205030511a6aad6">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_parrec()
+: <a class="el" href="structcimg__library_1_1CImg.html#aa736e6e553e97a880dfa3e1cd60885b1">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#aca5a8ad3bb0c44264af7c25cf82536b0">CImgList&lt; T &gt;</a>
+</li>
+<li>get_load_pfm()
+: <a class="el" href="structcimg__library_1_1CImg.html#a559d93cb3f586196fa3625d43aae4884">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_png()
+: <a class="el" href="structcimg__library_1_1CImg.html#af3eb559d3dea149210424da8a987402b">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_pnm()
+: <a class="el" href="structcimg__library_1_1CImg.html#a0bbe1d291276726fd9aada63d2455e06">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_raw()
+: <a class="el" href="structcimg__library_1_1CImg.html#abb3de45a4ed6ec6f928252ba37e7443b">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_rgb()
+: <a class="el" href="structcimg__library_1_1CImg.html#a5f3132e636ec0182840e78eceb336316">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_rgba()
+: <a class="el" href="structcimg__library_1_1CImg.html#a0f30b8c2f375ee0838bb9352d928e9b9">CImg&lt; T &gt;</a>
+</li>
+<li>get_load_tiff()
+: <a class="el" href="structcimg__library_1_1CImg.html#a7d33b41658d4adde6c99a41a036909a6">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#af43113248d9f9940a0306a0f3c17a772">CImgList&lt; T &gt;</a>
+</li>
+<li>get_load_yuv()
+: <a class="el" href="structcimg__library_1_1CImg.html#a04f8320b174df557b9dd2e7095ab3d5c">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#a1e81f54f44cd1ab36f12e027f4210a5a">CImgList&lt; T &gt;</a>
+</li>
+<li>get_log()
+: <a class="el" href="structcimg__library_1_1CImg.html#a3d2943c90d7b5faaa71c758a0d153560">CImg&lt; T &gt;</a>
+</li>
+<li>get_log10()
+: <a class="el" href="structcimg__library_1_1CImg.html#a3ddd3de58ea5fc9185f216e6e8c59010">CImg&lt; T &gt;</a>
+</li>
+<li>get_log2()
+: <a class="el" href="structcimg__library_1_1CImg.html#a9bf34874e6ea6858b6d6a42f87413d14">CImg&lt; T &gt;</a>
+</li>
+<li>get_map()
+: <a class="el" href="structcimg__library_1_1CImg.html#accc428456eb93b204d58aadaefdb387d">CImg&lt; T &gt;</a>
+</li>
+<li>get_matrix()
+: <a class="el" href="structcimg__library_1_1CImg.html#a20cece29b099a16e575f36ce597f2a5c">CImg&lt; T &gt;</a>
+</li>
+<li>get_matrix_at()
+: <a class="el" href="structcimg__library_1_1CImg.html#a0df72293d6377a36cce47d73a4b6bbfc">CImg&lt; T &gt;</a>
+</li>
+<li>get_max()
+: <a class="el" href="structcimg__library_1_1CImg.html#a860bf7a329b81b1e40818f1ddde77bbd">CImg&lt; T &gt;</a>
+</li>
+<li>get_min()
+: <a class="el" href="structcimg__library_1_1CImg.html#a73bba3d7f4cce95bdfe3988a53951444">CImg&lt; T &gt;</a>
+</li>
+<li>get_mirror()
+: <a class="el" href="structcimg__library_1_1CImg.html#aa7e35cf53e3084ee8faa33cef63a36b8">CImg&lt; T &gt;</a>
+</li>
+<li>get_mul()
+: <a class="el" href="structcimg__library_1_1CImg.html#a3d9099cd72be89e30ebfb170bd2d7421">CImg&lt; T &gt;</a>
+</li>
+<li>get_noise()
+: <a class="el" href="structcimg__library_1_1CImg.html#a06964cb644890dcc424cc2ec18057780">CImg&lt; T &gt;</a>
+</li>
+<li>get_norm()
+: <a class="el" href="structcimg__library_1_1CImg.html#a943b3c828ec363b6b57d451723842f59">CImg&lt; T &gt;</a>
+</li>
+<li>get_normalize()
+: <a class="el" href="structcimg__library_1_1CImg.html#aecda68ec3860efff9f0f125117503e77">CImg&lt; T &gt;</a>
+</li>
+<li>get_object3dtoCImg3d()
+: <a class="el" href="structcimg__library_1_1CImg.html#a4891e83f963660d73e4005e47473768b">CImg&lt; T &gt;</a>
+</li>
+<li>get_permute_axes()
+: <a class="el" href="structcimg__library_1_1CImg.html#a52f1bffa4d4d1d356d077c86126194bb">CImg&lt; T &gt;</a>
+</li>
+<li>get_pow()
+: <a class="el" href="structcimg__library_1_1CImg.html#a2aef419803fd9725aeed72e5abadc610">CImg&lt; T &gt;</a>
+</li>
+<li>get_projections2d()
+: <a class="el" href="structcimg__library_1_1CImg.html#a90cecb0e4c93540c4ae26aba54a1aa34">CImg&lt; T &gt;</a>
+</li>
+<li>get_projections3d()
+: <a class="el" href="structcimg__library_1_1CImg.html#a7c80766958254bcb13e9f18fc6e4980c">CImg&lt; T &gt;</a>
+</li>
+<li>get_pseudoinvert()
+: <a class="el" href="structcimg__library_1_1CImg.html#aeab392972e99fa46fb49c09c5d35dbcf">CImg&lt; T &gt;</a>
+</li>
+<li>get_quantize()
+: <a class="el" href="structcimg__library_1_1CImg.html#a17d6434494e46cae475d5d4ced9d7dca">CImg&lt; T &gt;</a>
+</li>
+<li>get_rand()
+: <a class="el" href="structcimg__library_1_1CImg.html#aa495c3b165a377b91f0da3483d19177f">CImg&lt; T &gt;</a>
+</li>
+<li>get_remove()
+: <a class="el" href="structcimg__library_1_1CImgList.html#a28a162856972959e34bc5ae6b8235cf6">CImgList&lt; T &gt;</a>
+</li>
+<li>get_resize()
+: <a class="el" href="structcimg__library_1_1CImg.html#a068cfafce5a8a054790489d3cbd70fad">CImg&lt; T &gt;</a>
+</li>
+<li>get_resize_doubleXY()
+: <a class="el" href="structcimg__library_1_1CImg.html#aacadd9bab09792a3b28db2ee23408d5e">CImg&lt; T &gt;</a>
+</li>
+<li>get_resize_halfXY()
+: <a class="el" href="structcimg__library_1_1CImg.html#a6c5cd0477fd621ffce59489c28690a2a">CImg&lt; T &gt;</a>
+</li>
+<li>get_resize_object3d()
+: <a class="el" href="structcimg__library_1_1CImg.html#ad2c8f5b3925f96818b6be80e671a8a61">CImg&lt; T &gt;</a>
+</li>
+<li>get_resize_tripleXY()
+: <a class="el" href="structcimg__library_1_1CImg.html#a83cf33bb78a93d22c12a8ee98b87eff6">CImg&lt; T &gt;</a>
+</li>
+<li>get_reverse()
+: <a class="el" href="structcimg__library_1_1CImgList.html#a08e5fffa109ffcbc5c5501caaac31419">CImgList&lt; T &gt;</a>
+</li>
+<li>get_reverse_object3d()
+: <a class="el" href="structcimg__library_1_1CImgList.html#a70dfc1cdeccae505ac5c7077f46e39c2">CImgList&lt; T &gt;</a>
+</li>
+<li>get_RGBtoBayer()
+: <a class="el" href="structcimg__library_1_1CImg.html#a4810d1052d01825b7c08625690297bfa">CImg&lt; T &gt;</a>
+</li>
+<li>get_RGBtoCMY()
+: <a class="el" href="structcimg__library_1_1CImg.html#acd42723e61532e2c05e7de72841461b4">CImg&lt; T &gt;</a>
+</li>
+<li>get_RGBtoCMYK()
+: <a class="el" href="structcimg__library_1_1CImg.html#a0bcf57518fe0c6440d141e8de4352319">CImg&lt; T &gt;</a>
+</li>
+<li>get_RGBtoHSI()
+: <a class="el" href="structcimg__library_1_1CImg.html#a0c559231596d2ef30686dd9ca73c35b8">CImg&lt; T &gt;</a>
+</li>
+<li>get_RGBtoHSL()
+: <a class="el" href="structcimg__library_1_1CImg.html#aa1f7ee6b049451a53aabc0b7e70d08b7">CImg&lt; T &gt;</a>
+</li>
+<li>get_RGBtoHSV()
+: <a class="el" href="structcimg__library_1_1CImg.html#aef4e92555cb579b1480de042bfb9dcf0">CImg&lt; T &gt;</a>
+</li>
+<li>get_RGBtoLab()
+: <a class="el" href="structcimg__library_1_1CImg.html#a29a2963650982ba4bf8c7fc0c451f7f0">CImg&lt; T &gt;</a>
+</li>
+<li>get_RGBtosRGB()
+: <a class="el" href="structcimg__library_1_1CImg.html#a4a2ce0d1374716509bd8d0af9b5bcda0">CImg&lt; T &gt;</a>
+</li>
+<li>get_RGBtoxyY()
+: <a class="el" href="structcimg__library_1_1CImg.html#af19388f9983c15e114e927bc87cb61d9">CImg&lt; T &gt;</a>
+</li>
+<li>get_RGBtoXYZ()
+: <a class="el" href="structcimg__library_1_1CImg.html#ad2c17aaaeae97c1ef498f3668ce5d177">CImg&lt; T &gt;</a>
+</li>
+<li>get_RGBtoYCbCr()
+: <a class="el" href="structcimg__library_1_1CImg.html#aa2eaa2a2424f51de318ababa3c076eec">CImg&lt; T &gt;</a>
+</li>
+<li>get_RGBtoYUV()
+: <a class="el" href="structcimg__library_1_1CImg.html#a9c4fac27c39194ecf7fa5fe4ed6267b4">CImg&lt; T &gt;</a>
+</li>
+<li>get_rol()
+: <a class="el" href="structcimg__library_1_1CImg.html#ac24825f896224aab6292cb4b4d41c26d">CImg&lt; T &gt;</a>
+</li>
+<li>get_ror()
+: <a class="el" href="structcimg__library_1_1CImg.html#ae9046bb16eda17aa678f63311a6971d9">CImg&lt; T &gt;</a>
+</li>
+<li>get_rotate()
+: <a class="el" href="structcimg__library_1_1CImg.html#a97d41d009f1d2887d5e55b7ced14690a">CImg&lt; T &gt;</a>
+</li>
+<li>get_round()
+: <a class="el" href="structcimg__library_1_1CImg.html#aee720135c19d110387b09638dd51bf90">CImg&lt; T &gt;</a>
+</li>
+<li>get_row()
+: <a class="el" href="structcimg__library_1_1CImg.html#a59936ee7e9a682669605c1ddf2caf222">CImg&lt; T &gt;</a>
+</li>
+<li>get_rows()
+: <a class="el" href="structcimg__library_1_1CImg.html#ad128b5382bb166656391f1b9241d4979">CImg&lt; T &gt;</a>
+</li>
+<li>get_select()
+: <a class="el" href="structcimg__library_1_1CImg.html#a8c98aab380622f75c8d5954d7258e79e">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#aa50eced0de9635e0a0688e2019f13ad7">CImgList&lt; T &gt;</a>
+</li>
+<li>get_select_graph()
+: <a class="el" href="structcimg__library_1_1CImg.html#a2b77e436a48fd24c423e924c2dae4072">CImg&lt; T &gt;</a>
+</li>
+<li>get_sequence()
+: <a class="el" href="structcimg__library_1_1CImg.html#a2b0951189bd17a05ace85720d379537e">CImg&lt; T &gt;</a>
+</li>
+<li>get_shared()
+: <a class="el" href="structcimg__library_1_1CImg.html#ac9676ed1fd154d30c8a2f6f6ee17499c">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#a84bd68353b8a12155b71d2f275e84dc6">CImgList&lt; T &gt;</a>
+</li>
+<li>get_shared_channel()
+: <a class="el" href="structcimg__library_1_1CImg.html#ad8f66c349cf568f9b264b65d97da4953">CImg&lt; T &gt;</a>
+</li>
+<li>get_shared_channels()
+: <a class="el" href="structcimg__library_1_1CImg.html#ac4ed10f7dc82b10db0d0f4c249e73bf7">CImg&lt; T &gt;</a>
+</li>
+<li>get_shared_images()
+: <a class="el" href="structcimg__library_1_1CImgList.html#aca62699f6c9b2353241a0c5855b5abcd">CImgList&lt; T &gt;</a>
+</li>
+<li>get_shared_points()
+: <a class="el" href="structcimg__library_1_1CImg.html#afd3af93474a59c32eab9ac55dabc64a4">CImg&lt; T &gt;</a>
+</li>
+<li>get_shared_row()
+: <a class="el" href="structcimg__library_1_1CImg.html#a340983d843b23f3fe8cb77e027824740">CImg&lt; T &gt;</a>
+</li>
+<li>get_shared_rows()
+: <a class="el" href="structcimg__library_1_1CImg.html#ab8da9843579b8538b18a7a690ff2e3c6">CImg&lt; T &gt;</a>
+</li>
+<li>get_shared_slice()
+: <a class="el" href="structcimg__library_1_1CImg.html#aaa19c276cb076a91c07e4e48019f02e5">CImg&lt; T &gt;</a>
+</li>
+<li>get_shared_slices()
+: <a class="el" href="structcimg__library_1_1CImg.html#ace75f2856356e536c05f28137d4b9033">CImg&lt; T &gt;</a>
+</li>
+<li>get_sharpen()
+: <a class="el" href="structcimg__library_1_1CImg.html#ac81c77a021a6b97096bc46dbd5b7861a">CImg&lt; T &gt;</a>
+</li>
+<li>get_shift()
+: <a class="el" href="structcimg__library_1_1CImg.html#ad2f8409623be665182432a332f5bb429">CImg&lt; T &gt;</a>
+</li>
+<li>get_shift_object3d()
+: <a class="el" href="structcimg__library_1_1CImg.html#aaa447213ae37158aebdc8490c8430456">CImg&lt; T &gt;</a>
+</li>
+<li>get_sign()
+: <a class="el" href="structcimg__library_1_1CImg.html#ae9460e2cc748862617baa818e1f713e1">CImg&lt; T &gt;</a>
+</li>
+<li>get_sin()
+: <a class="el" href="structcimg__library_1_1CImg.html#a7c5c1b92e02d4286b19fd6ea054ba0e8">CImg&lt; T &gt;</a>
+</li>
+<li>get_sinc()
+: <a class="el" href="structcimg__library_1_1CImg.html#a89021ebace48b15c2c89860ed4bc7cbe">CImg&lt; T &gt;</a>
+</li>
+<li>get_sinh()
+: <a class="el" href="structcimg__library_1_1CImg.html#a97d3744c3281fb1732726503fe82fb2f">CImg&lt; T &gt;</a>
+</li>
+<li>get_slice()
+: <a class="el" href="structcimg__library_1_1CImg.html#aa01fa872cec5f96c818c456033adcd6e">CImg&lt; T &gt;</a>
+</li>
+<li>get_slices()
+: <a class="el" href="structcimg__library_1_1CImg.html#a8c9327c4dc161a70552709b1df82ad3a">CImg&lt; T &gt;</a>
+</li>
+<li>get_solve()
+: <a class="el" href="structcimg__library_1_1CImg.html#ad5720448e45dbf2b74f048df1d10d488">CImg&lt; T &gt;</a>
+</li>
+<li>get_solve_tridiagonal()
+: <a class="el" href="structcimg__library_1_1CImg.html#a6ac2cbe802449a10d78919693568b354">CImg&lt; T &gt;</a>
+</li>
+<li>get_sort()
+: <a class="el" href="structcimg__library_1_1CImg.html#abf487d9cac506b43485ca123b4001ebe">CImg&lt; T &gt;</a>
+</li>
+<li>get_split()
+: <a class="el" href="structcimg__library_1_1CImg.html#a8d16df36f45b035e7aeb700094c103d4">CImg&lt; T &gt;</a>
+, <a class="el" href="structcimg__library_1_1CImgList.html#adc2e5a953d030fca9af7af17119262a9">CImgList&lt; T &gt;</a>
+</li>
+<li>get_sqr()
+: <a class="el" href="structcimg__library_1_1CImg.html#ae89b55c8ad61aafa8e43dadbeccd1cea">CImg&lt; T &gt;</a>
+</li>
+<li>get_sqrt()
+: <a class="el" href="structcimg__library_1_1CImg.html#add59f6d3b8557b7025bb778505d9028f">CImg&lt; T &gt;</a>
+</li>
+<li>get_sRGBtoRGB()
+: <a class="el" href="structcimg__library_1_1CImg.html#a9b724089593cf9f071913d7b5ecf1ce4">CImg&lt; T &gt;</a>
+</li>
+<li>get_stats()
+: <a class="el" href="structcimg__library_1_1CImg.html#a0c5808ba8149cd89f983410f9434cfb9">CImg&lt; T &gt;</a>
+</li>
+<li>get_streamline()
+: <a class="el" href="structcimg__library_1_1CImg.html#a79487241e72e2dbef05c89d5f416a296">CImg&lt; T &gt;</a>
+</li>
+<li>get_structure_tensors()
+: <a class="el" href="structcimg__library_1_1CImg.html#a3858e2a47d526cf54c5b5a0a4eebac2e">CImg&lt; T &gt;</a>
+</li>
+<li>get_SVD()
+: <a class="el" href="structcimg__library_1_1CImg.html#aece4173d4d83dc68454beb4480535670">CImg&lt; T &gt;</a>
+</li>
+<li>get_symmetric_eigen()
+: <a class="el" href="structcimg__library_1_1CImg.html#af970d1443e880c4d5668e2b752c5fbae">CImg&lt; T &gt;</a>
+</li>
+<li>get_tan()
+: <a class="el" href="structcimg__library_1_1CImg.html#a26a45d43dc184a55aaa3ee2978fc1f7f">CImg&lt; T &gt;</a>
+</li>
+<li>get_tanh()
+: <a class="el" href="structcimg__library_1_1CImg.html#a4d9221edbb585105165103ec1a6439c2">CImg&lt; T &gt;</a>
+</li>
+<li>get_tensor()
+: <a class="el" href="structcimg__library_1_1CImg.html#a2c935f6e89c8a860559029a74fcac80a">CImg&lt; T &gt;</a>
+</li>
+<li>get_tensor_at()
+: <a class="el" href="structcimg__library_1_1CImg.html#a82cfb268b952aeeb1b55e6072a83d093">CImg&lt; T &gt;</a>
+</li>
+<li>get_threshold()
+: <a class="el" href="structcimg__library_1_1CImg.html#af55a75599c248ae7b9e066df1fca018b">CImg&lt; T &gt;</a>
+</li>
+<li>get_transpose()
+: <a class="el" href="structcimg__library_1_1CImg.html#aed804862b61096d9aa58ebb809deeb26">CImg&lt; T &gt;</a>
+</li>
+<li>get_unroll()
+: <a class="el" href="structcimg__library_1_1CImg.html#a0d9c7fb0da448c7615d82755b9a17f9b">CImg&lt; T &gt;</a>
+</li>
+<li>get_vanvliet()
+: <a class="el" href="structcimg__library_1_1CImg.html#a5872b9cac379741fe68b757bdb960167">CImg&lt; T &gt;</a>
+</li>
+<li>get_vector()
+: <a class="el" href="structcimg__library_1_1CImg.html#aae2388b58974ab43913f13c2df391c94">CImg&lt; T &gt;</a>
+</li>
+<li>get_vector_at()
+: <a class="el" href="structcimg__library_1_1CImg.html#aac10e7f03cdf50782511200bbcaeaa70">CImg&lt; T &gt;</a>
+</li>
+<li>get_warp()
+: <a class="el" href="structcimg__library_1_1CImg.html#a678b24cd8ec0a869b85bee3bf5f4f115">CImg&lt; T &gt;</a>
+</li>
+<li>get_watershed()
+: <a class="el" href="structcimg__library_1_1CImg.html#a9d78c098b39665e1b309ca84f07e6697">CImg&lt; T &gt;</a>
+</li>
+<li>get_xyYtoRGB()
+: <a class="el" href="structcimg__library_1_1CImg.html#a10cb9ece3b5387405a8c1af48a8be764">CImg&lt; T &gt;</a>
+</li>
+<li>get_xyYtoXYZ()
+: <a class="el" href="structcimg__library_1_1CImg.html#a92e6fb003aef1e34e3f09a9a86002a1c">CImg&lt; T &gt;</a>
+</li>
+<li>get_XYZtoLab()
+: <a class="el" href="structcimg__library_1_1CImg.html#afedef7c2fb7a2d5fad9599909d9f8544">CImg&lt; T &gt;</a>
+</li>
+<li>get_XYZtoRGB()
+: <a class="el" href="structcimg__library_1_1CImg.html#a6ce72ccd76ed2feccfefcc11f49feace">CImg&lt; T &gt;</a>
+</li>
+<li>get_XYZtoxyY()
+: <a class="el" href="structcimg__library_1_1CImg.html#ae719be7d6b6d5b5771f64adc2e95970a">CImg&lt; T &gt;</a>
+</li>
+<li>get_YCbCrtoRGB()
+: <a class="el" href="structcimg__library_1_1CImg.html#ad4e78b28b3fdb65fdd2889e2cfaa148a">CImg&lt; T &gt;</a>
+</li>
+<li>get_YUVtoRGB()
+: <a class="el" href="structcimg__library_1_1CImg.html#a1982bc581b64ea9e3e583e2ec77b2e8b">CImg&lt; T &gt;</a>
+</li>
+</ul>
+</div><!-- contents -->
+</td></tr></table>
+<center>
+<p>
+<a href="http://sourceforge.net">
+  <img src="http://sourceforge.net/sflogo.php?group_id=96492&amp;type=3" border="0" height="37" width="125"></img>
+</a>
+<a href="http://sourceforge.net/donate/index.php?group_id=96492"><img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a>
+</p>
+</center>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+  <!--
+      var sc_project=895001;
+      var sc_invisible=1;
+      var sc_partition=7;
+      var sc_security="5ea85181";
+      //-->
+</script>
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c8.statcounter.com/counter.php?sc_project=895001&amp;java=0&amp;security=5ea85181&amp;invisible=1" alt="counter stats" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16976814-2']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End Google Analytics -->
+</body>
+</html>

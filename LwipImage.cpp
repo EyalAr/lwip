@@ -1,5 +1,3 @@
-#define BUILDING_NODE_EXTENSION
-
 #include "LwipImage.h"
 #include <node.h>
 #include <v8.h>
@@ -9,8 +7,8 @@ using namespace v8;
 Persistent<Function> LwipImage::constructor;
 
 LwipImage::~LwipImage(){
-    // free the binary data in memory
-    if (_data != NULL) free(_data);
+    // free the CImg object in memory
+    if (_data != NULL) delete _data;
 }
 
 void LwipImage::Init() {
@@ -37,26 +35,18 @@ Handle<Value> LwipImage::New(const Arguments& args) {
     return args.This();
 }
 
-void LwipImage::setData(JSAMPARRAY data) {
+void LwipImage::setData(lwip_data_t data) {
     _data = data;
-}
-
-void LwipImage::setWidth(const unsigned int width) {
-    _width = (unsigned int) width;
-}
-
-void LwipImage::setHeight(const unsigned int height) {
-    _height = (unsigned int) height;
 }
 
 Handle<Value> LwipImage::width(const Arguments& args) {
     HandleScope scope;
     LwipImage* obj = ObjectWrap::Unwrap<LwipImage>(args.This());
-    return scope.Close(Number::New(obj->_width));
+    return scope.Close(Number::New(obj->_data->width()));
 }
 
 Handle<Value> LwipImage::height(const Arguments& args) {
     HandleScope scope;
     LwipImage* obj = ObjectWrap::Unwrap<LwipImage>(args.This());
-    return scope.Close(Number::New(obj->_height));
+    return scope.Close(Number::New(obj->_data->height()));
 }

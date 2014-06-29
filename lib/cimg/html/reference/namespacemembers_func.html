@@ -1,0 +1,444 @@
+<xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+    <title>The CImg Library - C++ Template Image Processing Toolkit</title>
+    <meta content="David Tschumperle" name="author"></meta>
+    <link rel="shortcut icon" type="image/x-icon" href="http://cimg.sourceforge.net/favicon.ico"></link>
+    <link rel="icon" type="image/png" href="favicon.png"></link>
+    <link href="doxygen.css" rel="stylesheet" type="text/css">
+    <link href="tabs.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      <!--
+          body {background-color:#C0C0C0; font-family:sans-serif; }
+          a { font-weight:bold; color:#636363; }
+          a:active{text-decoration:none; color:#000000}
+          a:link{text-decoration:none; color:#000000}
+          a:visited{text-decoration:none; color:#000000}
+          a:hover{text-decoration:underline; color:#4E9F71}
+        -->
+    </style>
+    <script language="JavaScript" type="text/javascript">
+      <!-- Original:  Eric King (eric_andrew_king@hotmail.com) is used to display images in popup windows -->
+      <!-- Web Site:  http://redrival.com/eak/ -->
+      <!-- This script and many more are available free online at -->
+      <!-- The JavaScript Source!! http://javascript.internet.com -->
+      <!-- Begin
+           function NewWindow(mypage, myname, w, h, scroll) {
+           var winl = (screen.width - w) / 2;
+           var wint = (screen.height - h) / 2;
+           winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
+           win = window.open(mypage, myname, winprops)
+           if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+           }
+           //  End -->
+    </script>
+    <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $('#cssmenu > ul').prepend('<li class="mobile"><a href="#"><span>Menu <i>&#9776;</i></span></a></li>');
+      $('#cssmenu > ul > li > a').click(function(e) {
+      $('#cssmenu li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      var checkElement = $(this).next();
+      if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+      $(this).closest('li').removeClass('active');
+      checkElement.slideUp('normal');
+      }
+      if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+      $('#cssmenu ul ul:visible').slideUp('normal');
+      checkElement.slideDown('normal');
+      }
+      if( $(this).parent().hasClass('mobile') ) {
+      e.preventDefault();
+      $('#cssmenu').toggleClass('expand');
+      }
+      if($(this).closest('li').find('ul').children().length == 0) {
+      return true;
+      } else {
+      return false;
+      }
+      });
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="../header.css" />
+  </head>
+  <body>
+    <table align="center" cellpadding="12" cellspacing="0" width="1024" style="border-style:solid; border-width:0px; border-color:black" bgcolor="#FFFFFF">
+      <tr><td>
+          <center>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <br/>
+            <a href="http://cimg.sourceforge.net"><img src="http://cimg.sourceforge.net/img/CImgLogo2.jpg" alt="" border="0"></img></a><br/>
+            <br/>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <table width="90%" align="center">
+              <td width="18%">&nbsp;</td>
+              <td width="65%">
+                <div id='cssmenu'>
+                  <ul>
+                    <li class='first'><a href='http://cimg.sourceforge.net/index.shtml'><span>Home</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/download.shtml'><span>Download</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/screenshots.shtml'><span>Screenshots</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__faq.html'><span>FAQ</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__tutorial.html'><span>Tutorial</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/index.html'><span>Documentation</span></a></li>
+                    <li><a href='http://sourceforge.net/projects/cimg/forums/forum/334630'><span>Forum</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/links.shtml'><span>Links</span></a></li>
+                  </ul>
+                </div>
+              </td>
+              <td align="right">
+                <script type="text/javascript">
+	          var flattr_url = 'http://cimg.sourceforge.net';
+	          var flattr_btn='compact';
+                </script>
+                <script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
+              </td>
+      </tr></table>
+      </center>
+</td></tr>
+<tr><td>
+<!-- Generated by Doxygen 1.8.6 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
+      <li class="current"><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="namespaces.html"><span>Namespace&#160;List</span></a></li>
+      <li class="current"><a href="namespacemembers.html"><span>Namespace&#160;Members</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow3" class="tabs2">
+    <ul class="tablist">
+      <li><a href="namespacemembers.html"><span>All</span></a></li>
+      <li class="current"><a href="namespacemembers_func.html"><span>Functions</span></a></li>
+      <li><a href="namespacemembers_vars.html"><span>Variables</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow4" class="tabs3">
+    <ul class="tablist">
+      <li><a href="#index_a"><span>a</span></a></li>
+      <li><a href="#index_b"><span>b</span></a></li>
+      <li><a href="#index_c"><span>c</span></a></li>
+      <li><a href="#index_d"><span>d</span></a></li>
+      <li><a href="#index_e"><span>e</span></a></li>
+      <li><a href="#index_f"><span>f</span></a></li>
+      <li><a href="#index_g"><span>g</span></a></li>
+      <li><a href="#index_i"><span>i</span></a></li>
+      <li><a href="#index_l"><span>l</span></a></li>
+      <li><a href="#index_m"><span>m</span></a></li>
+      <li><a href="#index_n"><span>n</span></a></li>
+      <li><a href="#index_o"><span>o</span></a></li>
+      <li><a href="#index_p"><span>p</span></a></li>
+      <li><a href="#index_r"><span>r</span></a></li>
+      <li><a href="#index_s"><span>s</span></a></li>
+      <li><a href="#index_t"><span>t</span></a></li>
+      <li><a href="#index_u"><span>u</span></a></li>
+      <li><a href="#index_w"><span>w</span></a></li>
+      <li class="current"><a href="#index_x"><span>x</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div class="contents">
+&#160;
+
+<h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
+<li>abs()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a4406bed7768b8014ee1857b6afefd9e9">cimg_library::cimg</a>
+</li>
+<li>atof()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#ac5a608a78a32b5c95a2dfad8657300de">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
+<li>basename()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#ac1c68d7c2b00325e77a6020df3680c44">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
+<li>crand()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#aae82972570fdc0904d4f03df7b5d3023">cimg_library::cimg</a>
+</li>
+<li>curl_path()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a57f805f036ac626cb0693e74e7b06ffe">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>dcraw_path()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#ae36d7a689692ac5663afe1bbdab5d9fa">cimg_library::cimg</a>
+</li>
+<li>dialog()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#aa11c5d563db3cf0a03e6ce6335aac835">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
+<li>endianness()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a0d2a283a3aa2572e9d343f040c8c4c6b">cimg_library::cimg</a>
+</li>
+<li>eval()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#ad01251d5ee34c67b978e251a4d6d6cb4">cimg_library::cimg</a>
+</li>
+<li>exception_mode()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a933d23f5cc8c7bd672541c5e758328ba">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
+<li>fclose()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#ae54f76e8c2bcff93277e9cae1906a3d6">cimg_library::cimg</a>
+</li>
+<li>fempty()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#aa10f5b3f7f7cebfb2e7887909ff99597">cimg_library::cimg</a>
+</li>
+<li>ffmpeg_path()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#abf1666b982cb372129f2ae2fdc748ef2">cimg_library::cimg</a>
+</li>
+<li>file_type()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#aa7b1171b457d627d0d2796c89e083d8b">cimg_library::cimg</a>
+</li>
+<li>fopen()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a19ad60edf05bad32e75b7077509ef566">cimg_library::cimg</a>
+</li>
+<li>fread()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a8ea2e9b23409cf2d8774f9d2c3ac686a">cimg_library::cimg</a>
+</li>
+<li>fwrite()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#ade3b3532d897aa9483dffc5fdc9b4964">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
+<li>grand()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a0341a323738439349625b2de5f35bb4c">cimg_library::cimg</a>
+</li>
+<li>graphicsmagick_path()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#aa9f7e166f51b43facc8ecc9f05e4ceba">cimg_library::cimg</a>
+</li>
+<li>gunzip_path()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a08f71c29acfe85d5b8718900e995b779">cimg_library::cimg</a>
+</li>
+<li>gzip_path()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a75f3391e7a393c1c1fe43537004537e2">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>imagemagick_path()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#ad0db1003e37cc111d9eddd282c1ab27b">cimg_library::cimg</a>
+</li>
+<li>info()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#ac1b66fe77173de9e5e8542b2823d6071">cimg_library::cimg</a>
+</li>
+<li>invert_endianness()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#ab730460d88c353f1f6af751b64703a4f">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_l"></a>- l -</h3><ul>
+<li>load_network_external()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#abccecc68ce8db512b5f719fc08dca19d">cimg_library::cimg</a>
+</li>
+<li>log2()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#abfe95168165afe6b78f16743fd505fc8">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_m"></a>- m -</h3><ul>
+<li>max()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a3283b6107f321f7a5780b1555745ba4d">cimg_library::cimg</a>
+</li>
+<li>medcon_path()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#aaedba1291890f50edb5be58ef662e516">cimg_library::cimg</a>
+</li>
+<li>min()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a582d8fe5cf695eed9bbb5c1777dee870">cimg_library::cimg</a>
+</li>
+<li>minmod()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#ab59d987c884c0ab828ef1d844a49e714">cimg_library::cimg</a>
+</li>
+<li>mod()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#af6508b733d0d7887da1cf583b703f3a1">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_n"></a>- n -</h3><ul>
+<li>nearest_pow2()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a7219cfa20ee674ec08548792cf5202a1">cimg_library::cimg</a>
+</li>
+<li>number_filename()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a6a5063a24f1b15596c3ccae2ec156f7c">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
+<li>option()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a5ed59dfcc03479996ad4d961e7811d85">cimg_library::cimg</a>
+</li>
+<li>output()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a4947bf6e604e2f8e4a58b3ad19247443">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
+<li>prand()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a7f927973e2bc17b851bb61cdfbfef061">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
+<li>rand()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#af31db729637ea4dad61e49e5729839c4">cimg_library::cimg</a>
+</li>
+<li>rol()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a7aea27b1f3a0c7de52f98b0f1c66c275">cimg_library::cimg</a>
+</li>
+<li>ror()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a9695a7b07bacbaff0996fd82ebdab082">cimg_library::cimg</a>
+</li>
+<li>round()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a63afc0f88ea734f889d5b8036ddd783d">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
+<li>sign()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#af8351fe4c597caea05fc99803fd95d59">cimg_library::cimg</a>
+</li>
+<li>sinc()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#ac63d9541ded9f3976b33abf91359cc96">cimg_library::cimg</a>
+</li>
+<li>sleep()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a3ac7655e49556a90715f3532af221334">cimg_library::cimg</a>
+</li>
+<li>split_filename()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a9f7068ec0354e0b34a69a9dc829598aa">cimg_library::cimg</a>
+</li>
+<li>sqr()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a807cab58c01628e0c351f79bacf28762">cimg_library::cimg</a>
+</li>
+<li>strcasecmp()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#ae4f7682c6a4307016da1f0b583e36466">cimg_library::cimg</a>
+</li>
+<li>strncasecmp()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a80bf14df0be392080a0d60bc561f980e">cimg_library::cimg</a>
+</li>
+<li>strpare()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a01b63e43c032521506f3d9f9ca1e320f">cimg_library::cimg</a>
+</li>
+<li>strunescape()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#acbe47fc5ac986f7b64a542538af9f396">cimg_library::cimg</a>
+</li>
+<li>swap()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a709ae26dc7ea3e6a63d211a762541181">cimg_library::cimg</a>
+</li>
+<li>system()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a09e80f4d7a95f3d5c2282202d8526520">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
+<li>temporary()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a45305b6bafac8c928652a2a039839704">cimg_library::cimg</a>
+</li>
+<li>temporary_path()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a797797a309ca40aa28cdfbb92f4d1621">cimg_library::cimg</a>
+</li>
+<li>tic()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#aaf7be28cd77dfe2ef303ee62b377475f">cimg_library::cimg</a>
+</li>
+<li>time()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#af883131bbc64e996d212114cc2b2b21a">cimg_library::cimg</a>
+</li>
+<li>toc()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#ab161c9ebe4cc751ae18be3944c3ad1f1">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
+<li>uncase()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a5a028d4d4de4e1894263a29a6de8e2ee">cimg_library::cimg</a>
+</li>
+<li>unused()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a9177da3d0921e8ac11d0335a959e70d0">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_w"></a>- w -</h3><ul>
+<li>wait()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a3c8917c0f12139bff6de6e3e45fc5b77">cimg_library::cimg</a>
+</li>
+<li>warn()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a5ee7f021ed42b0ac32e1254414c3faab">cimg_library::cimg</a>
+</li>
+<li>wget_path()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a7c229de3e60b27f23497f8bc863cdfb1">cimg_library::cimg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_x"></a>- x -</h3><ul>
+<li>xln()
+: <a class="el" href="namespacecimg__library_1_1cimg.html#a8dde183be46c1821a3901b63825a4cf4">cimg_library::cimg</a>
+</li>
+</ul>
+</div><!-- contents -->
+</td></tr></table>
+<center>
+<p>
+<a href="http://sourceforge.net">
+  <img src="http://sourceforge.net/sflogo.php?group_id=96492&amp;type=3" border="0" height="37" width="125"></img>
+</a>
+<a href="http://sourceforge.net/donate/index.php?group_id=96492"><img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a>
+</p>
+</center>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+  <!--
+      var sc_project=895001;
+      var sc_invisible=1;
+      var sc_partition=7;
+      var sc_security="5ea85181";
+      //-->
+</script>
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c8.statcounter.com/counter.php?sc_project=895001&amp;java=0&amp;security=5ea85181&amp;invisible=1" alt="counter stats" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16976814-2']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End Google Analytics -->
+</body>
+</html>

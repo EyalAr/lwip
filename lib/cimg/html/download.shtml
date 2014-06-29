@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--#include file="header.html" -->
+<link href="style.css" rel="stylesheet" type="text/css">
+
+<div id="bloc_option"><div id="top_vert"><div id="text_top">Download</div></div>
+<div id="center"><div id="text_centre_intro">
+<p>
+  You have different ways to get the <tt><i>CImg library</i></tt> :
+</p>
+
+<table align="left" border="0" width="100%" cellspacing="20">
+  <tr><td><a href="http://sourceforge.net/projects/cimg/files/">
+        <img src="img/item_standard_package.jpg" border="0" alt="Standard Package"
+             onmouseover="this.src='img/item_standard_package2.jpg';"
+             onmouseout="this.src='img/item_standard_package.jpg';" /></img></a></td>
+    <td><hr noshade="noshade" size="1" width="100%"></hr>
+      The <tt><i>CImg library</i></tt> is mainly provided as
+      <a href="http://sourceforge.net/projects/cimg/files/">
+        <i>.zip</i> package</i></a>
+    which is <b>plateform-independent</b>.
+    It contains all the required files, as well as various examples (which must be compiled),
+    illustrating the use of the library functions and classes.<br/>
+</td></tr>
+<tr><td><img src="img/item_sources.jpg" border="0" alt="Sources Repository"
+           onmouseover="this.src='img/item_sources2.jpg';"
+           onmouseout="this.src='img/item_sources.jpg';" /></img></td>
+<td><hr noshade="noshade" size="1" width="100%"></hr>
+  You may be also more adventurous and try the current development version with <a href="http://git-scm.com/"><b>git</b></a>.
+  This ensures you will get the latest code available, and will ease the
+  updates as well. To do this, just
+  type the commands : <br><br>
+      <table cellpadding="10" cellspacing="0" border="0" bgcolor="#E0E0E0"><tr><td>
+            <font size="-1"><i>
+                git clone http://git.code.sf.net/p/cimg/source CImg
+            </i></font>
+      </td></tr></table>
+      <br>in your favorite console. Nevertheless, you have to know that some code in the source repository
+        is under development and may be experimental, so always test the latest stable archive before complaining !
+        <p>If you just want to look at the source code, you may also be interested by <a href="https://sourceforge.net/p/cimg/source/ci/master/tree/">the online source viewer</a>.
+        </p>
+    </td></tr>
+  </table>
+</p>
+
+</div></div><div id="footer"><img src="images/footer.jpg" /></div></div>
+
+<!--#include file="footer.html" -->
+

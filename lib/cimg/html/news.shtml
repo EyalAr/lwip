@@ -1,0 +1,1362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--#include file="header.html" -->
+
+<img src="img/item_news.gif" alt="Latest News"></img>
+  <p>
+    Here are the latest news about the CImg Library project.
+  </p>
+</font>
+
+<!-- ###################### -->
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+  <tbody><tr bgcolor="#ccccee"><td>
+<b>Simplification of CImg releases</b>
+<font size="-2">(2010/07/07)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+  As the CImg Library is now quite stable, I've decided to simplify the release system. I probably release new versions
+  of the CImg package more frequently, but with few changes between successive versions. I guess a new version of CImg
+  will be released when a somewhat 'critical' bug will be found in one function.
+  This will ensure that the user can get the latest and cleaner version easily, directly from the web page.
+  The download page at Sourceforge has been simplified to deal with this new organization.
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+  <tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.3.6 Released</b>
+<font size="-2">(2010/06/15)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+  The CImg 1.3.6 package has been released. This is mainly a released based on bug-corrections, to get something stable before the
+ summer holidays.
+  <br/><br/>
+  <font color="#D00000">
+<u>Optimizations / Modifications :</u><br/>
+<br/>
+  - Improved the 'gmic' tool a lot (a kind of command line version of CImg, see
+    http://gmic.sourceforge.net).<br/>
+<br/>
+<u>Bug corrections :</u><br/>
+<br/>
+  - Corrected priority operator bug in math parser (operator-).<br/>
+  - Corrected drawing bug in 'CImg<T>::draw_spline()' functions.<br/>
+<br/>
+</font>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+  <tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.3.5 Released</b>
+<font size="-2">(2010/06/15)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+  The CImg 1.3.5 package has been released.
+  <br/><br/>
+  <font color="#D00000">
+<u>New features :</u><br/>
+<br/>
+  - 2010/04/22 : The 'gmic' program has now a new embedded 'shell' mode.<br/>
+<br/>
+<u>Optimizations / Modifications :</u><br/>
+<br/>
+  - 2010/04/19 : 'CImg<T>::sort()' can now sort 'along an axis', which means only the first line of the specified axis is sorted, and
+    the other lines are permuted the same way. It may be used to avoid managing an image of permutations.<br/>
+  - 2010/04/19 : It is now possible to specify a z-buffer of any datatype when drawing 3d objects. The 'CImg<T>::display_object3d()' function
+    now uses double-valued z-buffers to get more precision when drawing 3d objects, if the specified input 3d vertices are double-valued.<br/>
+  - 2010/04/19 : 'CImg<T>::display_object3d()' : better management of the zoom in/out when focale is not set to default value.
+    Optimized memory ressources required by this function. Improved the way the pose matrix is handled.<br/>
+  - 2010/04/22 : The traits 'cimg::type<T>' have now a 'id()' method which returns an unique integer that identifies the datatype.<br/>
+<br/>
+<u>Bug corrections :</u><br/>
+<br/>
+  - 2010/05/19 : Replaced unsecure string functions by their secure versions, to avoid memory buffer overflow.<br/>
+  - 2010/05/14 : 'CImg<T>::draw_line()' : Corrected clipping bug when passing very big integers.<br/>
+  - 2010/04/09 : 'CImg<T>::{load,save}_graphicsmagick()' : Added explicit calls to the GraphicsMagick initialization/destroy function
+     for better memory management.<br/>
+  - 2010/04/09 : 'CImg<T>::load_jpeg()' : Better handling of jpeg library errors (patch submitted by Martin Petricek).<br/>
+  - 2010/04/23 : 'CImg<T>::display_object3d()' : Corrected bug when light texture were switched on/off in multiple calls.<br/>
+<br/>
+</font>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+  <tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.3.4 Released</b>
+<font size="-2">(2010/04/08)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+  The CImg 1.3.4 package has been released.
+  Main changes are concerned with bug corrections or improvements. I really feel the library code is now in a
+  consolidation phase, with only minor changes and improvements. This is actually good news !
+  <br/><br/>
+  <font color="#D00000">
+<u>New features :</u><br/>
+<br/>
+  - Added functions 'CImg<T>::object3dtoCImg3d()' and 'CImg<T>::object3dtoCImg3d()'. They can transform a 3d object<br/>
+    into a single column vector. It supports all 3d features of CImg, including textures and opacities. So, now,
+    3d objects can be saved as regular images, or even gathered into lists of 3d objects.<br/>
+  - Added function 'CImg<T>::watershed()' able to compute the watershed transform from an image of labels and a priority map.<br/>
+<br/>
+<u>Optimizations / Modifications :</u><br/>
+<br/>
+  - 'CImg[List]<T>::{save,load}()' can now save and load empty images in .cimg[z] format.<br/>
+  - 'CImg<T>::load_bmp()' and 'CImg<T>::{save,load}_jpeg()' have been modified to reduce memory usage.<br/>
+  - Added variants of 'CImg<T>::cubic_at*()' that can cut the interpolated value between specified bounds.<br/>
+  - Modified the way colored sphere primitives are considered in 3d objects. Now, a sphere primitive takes two vertex
+    indices defining the sphere diameter.<br/>
+  - Remove the support of the Carbon library for MacOSX. The code used were old and not fully functional. Use the
+    X11 implementation of the CImgDisplay class instead on MacOSX (without the XShm extension, which is not fully supported yet).<br/>
+  - Modified the way the light texture is specified for phong-based 3d rendering. Now, the light must have as much channels as
+    the spectrum of the image on which the object is drawn. Then, we can do now custom colored lights in phong-shaded 3d mode.<br/>
+  - Modified functions 'CImg<T>::{load,save}_ffmpeg()' so it can compile with different API versions of the ffmpeg library.<br/>
+<br/>
+<u>Bug corrections :</u><br/>
+<br/>
+  - 'CImg<T>::get_streamline()' : Corrected problem occuring when streamline went out of the image range.<br/>
+  - 'CImg<T>::save_off()' : 3d objects with incomplete color data may result in wrong memory access.<br/>
+  - 'CImg<T>::save_off()' : 3d objects with sphere primitives were incorrectly saved.<br/>
+  - 'CImgList<T>::insert()' : Shared insertion of an image already present in the instance list was incorrectly done.<br/>
+  - Corrected small bug in math parser concerning the use of the '~' and '!' operators.<br/>
+  - and many other small bug corrections...<br/>
+<br/>
+</font>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.3.3 Released</b>
+<font size="-2">(2010/02/05)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.3.3 package has been released. I'm really happy with this release, because it is clearly a stabilized
+version since no major API changes have been done regarding the previous 1.3.2 release.
+My opinion is that we have converged into something stable and coherent to use, and there will be probably
+not big changes in the existing stuffs. I consider this release will last for several (>2) months.<br/>
+So, don't be afraid to update this time if you were using the 1.3.2, since your code will probably remain
+compatible with this 1.3.3. update.
+<br/><br/>
+<font color="#D00000">
+* New features :<br/><br/>
+     - Added arithmetic functions 'CImg<T>::[get_]sign()' to compute the sign of image values.<br/>
+     - Added arithmetic functions 'CImg<T>::[get_]sinc()' to compute the sinc() function of image values.<br/>
+     - Added functions 'sinc(),rol(),ror(),isval(),isint(),isnan(),isinf() and isbool()' inside the mathematical parser.<br/>
+     - Added function 'CImg<T>::cubic_atXYZ()' to access 3D voxel with a bicubic interpolator.<br/>
+     - Added functions 'CImg<T>::load_pfm()' and 'CImg<T>::save_pfm()' to add native support of PFM files.<br/>
+<br/>
+* Optimizations / Modifications :<br/><br/>
+     - Updated G'MIC core and plug-in with various improvements.<br/>
+     - Slight optimizations and corrections of the internal math parser.<br/>
+     - Recoded most of the 'CImg<T>::resize()' function, with faster interpolations,
+       better bicubic, and new Lanczos5 interpolation.<br/>
+     - Update 'CImg<T>::load_png()' to fit with libpng14 API.<br/>
+     - Modified 'CImg<T>::get_projections2d()' to get the minimal value instead of 0 as the intensity of
+       the bottom right area.<br/>
+     - Modified 'CImg<T>::draw_text()' to get more flexibility in the font size. Fonts are interpolated
+       when custom size is requested.<br/>
+     - Removed useless font data. 4 fonts with different sizes remains now in CImg. Other sizes
+       are interpolated from these basis fonts. This reduces the header file size a lot.<br/>
+     - CImg exception classes know derives from std::exception, and the 'message()' method has been
+       renamed to the more standard 'what()'.<br/>
+     - Exception messages have been improved in all CImg functions and methods.<br/>
+<br/>
+* Bug corrections :<br/><br/>
+     - Key repetition bug corrected in 'CImg<T>::display_plot()'.<br/>
+     - Small bug corrected in arithmetic operators using math expression strings with references to current image.<br/>
+     - Improved robustness of preview window in 'gmic_gimp' plug-in for GIMP.<br/>
+     - Corrected bugs in 'CImg<T>::draw_polygon()', corresponding to singular cases.<br/>
+     - And as always, a lot of various bugs corrections and improvements in library and example files.<br/>
+<br/>
+</font>
+</font></blockquote></td></tr></table></font><br/>
+
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>17th -> 25th postcards received !</b>
+<font size="-2">(2010/02/05, 10:48am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+I received a lot of postcards these last months and I really want to thanks all the senders for this nice thought.
+Looking at all these different places gives me more energy to continue the work on CImg !
+<br/><br/>
+<img src="img/postcard17.jpg"></img>
+<img src="img/postcard18.jpg"></img>
+<img src="img/postcard19.jpg"></img>
+<img src="img/postcard20.jpg"></img>
+<img src="img/postcard21.jpg"></img>
+<img src="img/postcard22.jpg"></img>
+<img src="img/postcard23.jpg"></img>
+<img src="img/postcard24.jpg"></img>
+<img src="img/postcard25.jpg"></img>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.3.2 Released</b>
+<font size="-2">(2009/10/15)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.3.2 package has been released. There are major changes and ameliorations, resulting in
+some compatibility breaks with the previous API. The CImg becomes a mature library, with a real
+coherence in the API calls.<br/><br/>
+<font color="#D00000">
+* New features :<br/>
+<br/>
+     - Added functions 'CImg<T>::load_exr()' and 'CImg<T>::save_exr()' that handle input/ouput<br/>
+       of .exr files, using the OpenEXR library (http://www.openexr.com). Many thanks to<br/>
+       Michael Holroyd (http://www.cs.virginia.edu/~mjh7v) for his inspiring piece of code !<br/>
+       The OpenEXR library is used when macro 'cimg_use_openexr' is defined.<br/>
+      - Added functions 'CImg<T>::streamline()' and 'CImg<T>::get_streamline()' that return<br/>
+        streamlines of vector fields, using various integration techniques.<br/>
+      - Added new code example 'examples/spherical_function3d.cpp' that shows how to create<br/>
+        custom 3D objects in CImg.<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+<br/>
+     - Ended support for Visual C++ 6.0. This compiler was a pure shit and gave me a lot of headaches<br/>
+       to ensure the compatibility of CImg. I tried to support it anyway until the end, but I reached<br/>
+       a state where each file compilation gives me an 'Internal Compiler Error', so I really guess this<br/>
+       is time to abandon this compiler now (CImg 1 - VC++ 0 )<br/>
+     - Added 'explicit' keyword for constructor 'CImg(const char *)'<br/>
+       so that implicit conversions from char* to CImg<T> is not done anymore.<br/>
+     - Added variants of arithmetic and assignement operators that takes a string as an input.<br/>
+       The string is auto-detected to be one of these three types : formula, values list or filename.<br/>
+     - Re-organized and modified operators of all classes for easier use and better coherence.<br/>
+     - Removed most of the arithmetic operators in 'CImgList<T>'. The preferred way to apply<br/>
+       operators on list should be via 'cimglist_apply()'.<br/>
+     - Reduced the number of function prototypes for displaying 3D objects. Now, 3D vertices must<br/>
+       be defined as 'CImg<T>' only.<br/>
+     - Some important API changes for 'CImgList<T>'. Particularly, the 'size' member is renamed 'width',<br/>
+       and the 'size()' function appears. It eases the coding of template functions that can take 'CImg<T>'<br/>
+       or 'CImgList<T>' as parameters.<br/>
+     - Improved documentation.<br/>
+     - 3D object display function now activates the Z-buffer by default (you can deactivate it with CTRL+Z).<br/>
+       New keyboard shortcuts have been added : CTRL+A (show/hide 3D axes), and CTRL+F1-F7 (change rendering mode).<br/>
+     - Updated code for using the Board library. Works now with the latest available version (0.8.6b).<br/>
+     - Renamed functions 'CImg[List]<T>::transfer_to()' to 'CImg[List]<T>::move_to()'.<br/>
+     - Allow .cimg file to have commentaries, before the header starts. Comment lines start with '#'.<br/>
+     - Added type parameter to macros 'cimg_forNxN()' and 'cimg_getNxN()' to allow working with neighborhood<br/>
+       that have a type different from the image they are read from.<br/>
+     - 'CImg<T>::blur_anisotropic()' has been optimized. Gives same results but slightly more quickly.<br/>
+     - Removed plugin 'plugins/integral_line.h', because streamline computation is now integrated into CImg library core.<br/>
+     - Removed plugin 'plugins/noise_analysis.h', since function 'CImg<T>::variance_noise()' has been recoded in<br/>
+       the library core.<br/>
+     - Added optimized versions of 'CImg<T>::erode()' and 'dilate()' for rectangular masks. Thanks a lot to<br/>
+       Antonio Albiol for his inspiring piece of code !<br/>
+     - Changed the range of CMY and CMYK colorbases to [0,255] instead of [0,1].<br/>
+     - Added variable assignment operator in the CImg math parser.<br/>
+     - Added parameters to set light position in 'CImg<T>::display_object3d()'.<br/>
+     - Updated code requiring FFMPEG libraries. Compiles now with the latest API from the FFMPEG SVN. Thanks to<br/>
+       Guillaume Nee who made it possible !<br/>
+<br/>
+* Bug corrections :<br/>
+<br/>
+     - Corrected function 'CImg<T>::save_magick()' to fit with the latest Magick++ API.<br/>
+     - Corrected function 'CImg<T>::load_dlm()' to avoid infinite loops with invalid files.<br/>
+     - Several bugs corrections and improvements in various files.<br/>
+<br/>
+</font>
+</font></blockquote></td></tr></table></font><br/>
+
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>13th, 14th, 15th and 16th postcards received !</b>
+<font size="-2">(2009/06/16, 11:21am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+I received four postcards in a single month, so thanks all the senders for this nice thought.
+Thank you Sebastien (2 postcards, double shot !), Jaime and Jean-Michel !
+<br/><br/>
+<img src="img/postcard13.jpg"></img>
+<img src="img/postcard14.jpg"></img>
+<img src="img/postcard15.jpg"></img>
+<img src="img/postcard16.jpg"></img>
+</font></blockquote></td></tr></table></font><br/>
+
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.3.1 Released</b>
+<font size="-2">(2009/05/27)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.3.1 package has been released. There are minor changes and ameliorations.<br/><br/>
+<font color="#D00000">
+* New features :<br/>
+      - Added configuration macro 'cimg_file_separator' that takes value "/" or "\"
+      	depending on which OS is running. This macro is used in load/save functions
+      	for better portability.<br/>
+      - New example file 'examples/gaussian_fit.cpp' which demonstrates how to apply the
+        Levenberg-Marquardt algorithm to fit a 3-parameter gaussian on a set of sample points.<br/>
+      - Added function 'CImg[{Display,List}]::empty()' that returns a reference to an empty object
+        (can be used to pass empty images as default values of function parameters).<br/>
+      - Added variant of the function 'CImg<T>::draw_triangle()' to draw triangle with linearly
+        interpolated colors defined at each triangle vertex.<br/>
+      - Added a formula parser in CImg<T>, so that many arithmetic operators can use it to
+        evaluate expressions (given as a C-string).<br/>
+      - Added example file 'examples/plotter.cpp' that plots a mathematical function on an interactive window.<br/>
+      - Added functions 'CImg<T>::index()' and 'CImg<T>::map()' that can index an image with a multi-spectral
+        palette, or map a multi-spectral palette on an image.<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+       - Added parameter 'bytes_per_pixel' to force the use of 8 or 16 bits modes in functions
+        'CImg<T>::save_magick()', 'CImg<T>::save_pnm()' and 'CImg<T>::save_png()'. Thanks to Julien Morat
+        for pointing this out to me.<br/>
+       - Added parameter 'backward' to 'CImg<T>::displacement_field()', allowing to select between
+         forward of backward estimation procedure.<br/>
+       - Parameters 'ru,rv' in 'CImg<T>::draw_ellipses()' have been replaced by parameter 'angle'.<br/>
+       - Function 'CImg[List<T>]::get_split()' is now able to split an image into bloc of given pixel size.<br/>
+       - Changed 'zbuffer' parameter type to 'CImg<float>' in 'CImg<T>::draw_*' functions.<br/>
+       - Remove 'GREYCstoration' specific code. The GREYCstoration algorithm is now a part of the G'MIC framework.
+         Note that the two functions 'CImg<T>::blur_anisotropic()' and 'CImg<T>::blur_patch()' are still here to
+         smooth an image anisotropically (are the core algorithm of the former GREYCstoration).<br/>
+<br/>
+* Bug corrections :<br/>
+      - Corrected 'CImg<T>::translate()' : function parameters were the opposite of the real translation done.<br/>
+      - Modifications on CImg.h to be more compatible with the old VC++6 compiler.<br/>
+      - Corrected 'CImg<T>::get_histogram()'.<br/>
+      - Corrected 'CImg<T>::load_ascii()'.<br/>
+      - And lot of small bugs corrections.<br/>
+<br/>
+</font>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>11th and 12th postcards received !</b>
+<font size="-2">(2009/02/25, 11:21am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+I am a bit late, since I received these postcards months ago, one from Florida/USA and one from Saint Etienne/France !
+Thank you Joel and Yann !
+<br/><br/>
+<img src="img/postcard11.jpg"></img>
+<img src="img/postcard12.jpg"></img>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.3.0 Released</b>
+<font size="-2">(2009/02)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.3.0 package has been released. There are several changes and ameliorations.<br/><br/>
+<font color="#D00000">
+The 1.3.0 version of the CImg Library is a major release, and will probably break the
+compatibility with your existing code. Anyway, the overall philosophy is the same so
+converting your code should not require lot of work fortunately.<br/>
+<br/>
+* New features :<br/>
+      - Added function 'CImg<T>::[get_]distance()' that compute the Euler unsigned distance map
+        from a shape of specified isovalue in an image, using a fast linear algorithm.<br/>
+      - Added functions 'CImg<>::set_linear_at{X,Y,Z}()' allowing to set pixel values using
+        float-valued coordinates, with linear interpolation.<br/>
+      - Added z-buffering capabilities in some drawing functions, so that displaying a
+        3D object with 'CImg<T>::draw_object3d()' now takes care of eventual crossing primitives.
+        (added shortcut CTRL+Z to enable/disable zbuffering in 'CImg<T>::display_object3d()'.<br/>
+      - Added functions 'CImgList<T>::is_same*()' to check dimensions of image lists.<br/>
+      - Added plugin 'plugins/skeleton.h', as well as example of use 'examples/skeletonize.cpp' that
+        computes the skeleton of a shape (binary image). Thanks to F-X Dupé for this nice contrib !<br/>
+      - Added function 'CImg<T>::get_elevation3d()' that constructs a 3D object by 'elevating'
+        an instance image.<br/>
+      - In function 'CImg<T>::sharpen()', two sharpening methods are now implemented : shock filters
+        and inverse diffusion.<br/>
+      - Added function 'CImg[List]<T>::save_ffmpeg()', allowing to save an image sequence, directly
+        as a movie file, using the FFMPEG library. Thanks to David. G. Starweather for this very nice
+        contribution !<br/>
+      - Added function 'CImg<T>::[get_]warp()' that can warp an image using a deformation field.<br/>
+      - Added function 'CImg<T>::[get_]solve_tridiagonal()' that can quickly solve a tridiagonal linear
+        system of equations (use the Thomas Algorithm).<br/>
+      - Added function 'CImg<T>::[get_]load_dcraw_external()' that allows to read RAW digital camera files,
+        using the open-source external tool 'dcraw'.<br/>
+      - Added file 'examples/CMakeLists.txt' to generate makefile using the 'cmake' tool (thanks to
+        Baptiste Mougel for this nice contribution).<br/>
+      - Added functions 'CImg<T>::display_graph()' and 'CImg<T>::select_graph()' that can be used
+        to display a graph plot or crop a sub-graph.<br/>
+      - Added function 'CImg<T>::[get_]autocrop()' that can autocrop an image regarding to a background
+        value or color.<br/>
+      - Added new demo 'Word Puzzle' in file 'examples/CImg_demo.cpp'.<br/>
+      - Added new plugin 'plugins/cimgIPL.h', as well as example file 'examples/use_cimgIPL.h' that shows
+        how to convert between CImg and IplImage structures (used in OpenCV). Thanks to  Haibo Zheng for
+        this nice contribution !<br/>
+      - Function 'CImg<T>::load_ffmpeg()' is now able to return information on the main video stream, without
+        having to load frames.<br/>
+      - New function 'CImg[List]<T>::valuestring()' returns a C-string containing values of the image pixels.<br/>
+      - Added file 'examples/gmic4gimp.cpp' which implements a G'MIC plug-in for GIMP.<br/>
+      - Added file 'resources/cimg_buildpackage' which is a bash script that generates package files for CImg.<br/>
+      - Added function 'cimg::prand()' which returns a random variable following a Poisson distribution.<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+      - The API of the library has been quite largely modified. It means that the 1.3.0 release is
+        not meant to be fully compatible with previous versions. This is the beginning of a new
+        important branch.<br/>
+      - Functions 'CImg[List]<T>::load()' can now check for magick numbers for determining file format
+        (instead of using only their filename extension).<br/>
+      - Cleaned lot of code in 'CImg<T>::draw_*()' functions. Few of them have now different signatures,
+        particularly 'CImg<T>::draw_text()', 'CImg<T>::draw_spline()' and 'CImg<T>::draw_image()'.<br/>
+      - Improved warning removal when compiling on Microsoft Visual C++ compiler. It is now very rare
+        to get warnings when compiling CImg-based files !<br/>
+      - Plugin 'plugins/distance_saito.h' has been removed, since a new and clean implementation of
+        the distance function is now available in the 'CImg.h' file.<br/>
+      - Function 'CImg<T>::equalize_histogram()' has been renamed to 'CImg<T>::equalize()'.<br/>
+      - Functions 'CImg<T>::get_gradient()', 'CImg<T>::get_structure_tensor()' and 'CImg<T>::get_hessian()'
+        now replaces the old versions.<br/>
+      - Provided example file 'examples/inrcast.cpp' has been renamed and recoded as 'examples/gmic.cpp'.
+        G'MIC is now an independant project, having its own web page : http://gmic.sourceforge.net/.<br/>
+      - Plugin 'plugins/cimgmatlab.h' has been updated.<br/>
+      - Added pipe support (for POSIX systems) in load/save functions using external tools, so that
+        a temporary file is not necessary to read/write.<br/>
+      - Function 'CImg<T>::load_analyze()' can now read niftii files directly using a FILE* argument.<br/>
+      - Improved global structure of the CImg package.<br/>
+      - Silent output for 'CImg<T>::{load_save}_ffmpeg_external()' on Windows.<br/>
+      - Better zoom-in procedure in 'CImg<T>::display()'.<br/>
+      - Function 'CImg<T>::get_hessian()' now allows to specify the set of desired axes.<br/>
+      - Macros 'cimg_*_path' do not exist anymore. Instead, the user can dynamically change these paths used
+        by CImg, by using functions' cimg::*_path()'.<br/>
+      - Code corrections in order to compile without warnings on g++ 4.3 version.<br/>
+      - Added 'windows' targets in the 'examples/Makefile', so compiling examples under MinGW is straightforward.<br/>
+      - Added soft thresholding capability to 'CImg<T>::threshold()'.<br/>
+<br/>
+* Bug corrections :<br/>
+      - Corrected bug related to X11 events on some Windows Managers, thanks to Rainer Steffens
+        for his nice patch !<br/>
+      - Corrected normalization bug that occured when doing inverse FFT of images, using libfftw3.<br/>
+      - Corrected endianness problem when reading 16 bits PNM files.<br/>
+      - Corrected small bug in 'CImg<T>::display()' : drawn coordinates were wrong when
+        user had selected a region to zoom in.<br/>
+      - Extension 'tiff' is now recognized in 'CImg<T>::load()'.<br/>
+      - Corrected computation of variance (=0) when image has only one element.<br/>
+      - Corrected y-range bug in 'CImg<T>::draw_ellipse()'.<br/>
+      - Corrected bug in 'CImg<T>::save_pandore()' when saving int images on 64bits systems.
+      - And many small bug corrections...<br/>
+</font>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>10th postcard received !</b>
+<font size="-2">(2007/08/17, 02:15pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+Today, I received another postcard from Palermo/Italia ! Thank you for this one. Unfortunately, the senders did not give
+a e-mail, and thus I cannot thank them directly. But if you read me, thanks a lot !
+My postcard wall is growing slowly...
+<br/><br/>
+<img src="img/postcard10.jpg"></img>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.2.9 Released</b>
+<font size="-2">(2008/06/26, 13:00)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.2.9 package has been released. There are several changes and ameliorations.<br/><br/>
+<font color="#D00000">
+*-----------------------------<br/>
+*-----------------------------<br/>
+* Changes from 1.2.8 to 1.2.9<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+<br/>
+* New features :<br/>
+      - Added new example file 'examples/captcha.cpp', which can be used to draw captcha images. This is a very
+        short and simple code, so it can be interesting for a first approach of CImg.<br/>
+      - Added functions 'CImg<T>::scale_2x()' and 'CImg<T>::scale_3x()' allowing to upscale an image
+        with a edge-directed algorithm (see 'http://scale2x.sourceforge.net/')/<br/>
+      - Added function 'CImg<T>::save_cpp()' allowing to save an image directly as a
+        C/C++ source code.<br/>
+      - Added function 'CImg<T>::draw_mandelbrot()' allowing to draw quadratic mandelbrot fractal set on images.<br/>
+      - Added a new demo effect 'Fish-Eye Magnification' in file 'examples/CImg_demo.cpp'.<br/>
+      - Added new fields in CImgDisplay for an easy test of keys pressing. Very useful for testing complicated combinations.<br/>
+      - Added functions to read/save gzipped files.<br/>
+      - Added compression option for .cimg files (requires the use of the 'zlib' library).<br/>
+      - Added color conversions for CMY and CMYK color bases.<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+      - Big code cleaning and re-organization in file 'CImg.h', making the things more clear.<br/>
+      - Function 'CImg<T>::load_ascii()' has been modified to allow comments before specifying image
+        dimensions.<br/>
+      - Functions 'CImg[List]::print()' have been slightly modified to be more precise and clear. Also used
+        in functions 'CImg[List]::display()'.<br/>
+      - Improved functionalities of the image processing tool 'inrcast.cpp'.<br/>
+      - Improved 'CImg[List]<T>::display()' function allowing easy navigation and zooming in images.<br/>
+      - Add native use of ffmpeg libraries to load video sequences (Thanks to David Starkweather for his nice contribution !)<br/>
+      - Optimized function 'CImg<T>::permute_axes' for common used cases (planar to interleaved RGB and RGBA).<br/>
+      - Added parameter 'step_frame' in functions that can load video sequences,
+        i.e. CImg[List]<T>::load_yuv(), CImg[List]<T>::load_tiff(), CImg[List]<T>::load_ffmpeg(), so that frames
+        can be skipped when loading the video files.<br/>
+      - Removed parameter 'events_type' in CImgDisplay functions. By default, a display is always catching all user
+        events. Having different choices made slight problems between different architectures (and was not really
+	useful).<br/>
+      - Removed plugin 'plugins/toolbox3d.h'. Functions of the plug-ins are now natively integrated into the CImg.h file,
+        as well as the LibBoard library support.<br/>
+      - Renamed functions 'CImg<>::*pix?d()' to 'CImg<>::*at?()'.<br/>
+<br/>
+* Bug corrections :<br/>
+      - Small bug in functions 'CImg[List]::contains()' were corrected.<br/>
+      - Bug correction in function 'CImg<T>::[get_]stats()' : offset of min and max values were sometimes incorrect.<br/>
+      - Bug correction in CImgDisplay events for Windows-based OS. When mouse leaved a window, coordinates
+        didn't reset to -1 sometimes.<br/>
+      - Small non-computational bug correction in 'CImg<T>::symmetric_eigen()'.<br/>
+      - Removed g++ warning that occured when using 'libpng' ('warning: argument 'xxx' might be clobbered by 'longjmp' or 'vfork').<br/>
+      - Corrected small illumination bug with double sided 3D objects in CImg<T>::draw_object3d().<br/>
+      - And a lot of other small improvements and bug corrections...<br/>
+<br/>
+</font>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.2.8 Released</b>
+<font size="-2">(2008/04/18, 13:00)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.2.8 package has been released. There are several changes and ameliorations.<br/><br/>
+<font color="#D00000">
+*-----------------------------<br/>
+*-----------------------------<br/>
+* Changes from 1.2.7 to 1.2.8<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+<br/>
+* New features :<br/>
+      - Added native Carbon support in CImgDisplay. Allows to run CImg on MacOSX without installing X11.
+        This is a beta support, so not activated by default. Define 'cimg_use_carbon' to enable it.
+        Many Thanks to Adrien Reboisson, Romain Blei and Jean-Marie Favreau for this nice contribution.
+        Any comments and contributions are welcome.<br/>
+      - Added variant of 'CImgList<T>::remove()' that can remove several images from a CImgList<T> list
+        at the same time.<br/>
+      - Added new numbered macros 'cimg_plugin1...8', for easy inclusion of multiple CImg plug-ins.<br/>
+      - Added plugin 'plugins/distance_saito.h' that implements the Saito's distance transform.<br/>
+      - Added function 'CImg<T>::blur_patch()' that performs a patch-based Tikhonov flow on the image.
+        Allows to denoise and regularize image quite well (is time-consuming anyway).<br/>
+      - Functions 'CImg<T>::load_tiff()', 'CImgList<T>::load_tiff()', 'CImg<T>::save_tiff()' and
+        'CImgList<T>::save_tiff()' has been (re)-coded. It is now possible to read/save multi-pages tif
+        image files worriless.<br/>
+      - Native support for 'icc' compiler (Intel C++ compiler) added in the Makefile.
+        Just type 'make CC=icc olinux' to compile using icc (offers nice performances in code optimization).<br/>
+      - Started support of OpenMP directives, to allow parallelization of CImg functions in order to
+        improve performances. Not few used, by this could change in the future.<br/>
+      - Added functions to load/save video sequences using the external tool FFMPEG (http://http://ffmpeg.mplayerhq.hu/).
+        'inrcast' is now able to read video sequences using FFMPEG.<br/>
+      - Added new color basis conversions : RGBtoHSI(), HSItoRGB(), HSLtoRGB() (Thanks to Cesar Martinez for his
+        contribution).<br/>
+      - Added example file 'examples/radon_transform.cpp', provided by David G. Starkweather (Thanks guy!).<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+      - The main library file 'CImg.h' is now distributed under dual license CeCILL or CeCILL-C.<br/>
+      - Patched function 'CImg<T>::load_tiff()' for a better support of float-valued tiff images.<br/>
+      - Renamed 'CImg<T>::inverse()' as 'CImg<T>::invert()' and 'CImg<>::pseudoinverse()' as 'CImg<T>::pseudoinvert()'.<br/>
+      - Function 'CImg<T>::displacement_field()' has been modified to consider a multi-valued geometry
+        for motion detection (so color images are naturally taken into account now).<br/>
+      - Optimized functions 'CImg<T>::dilate()' and 'CImg<T>::erode()'
+      - Slightly optimized pixel access and display rendering functions.<br/>
+      - Used native mutex mechanism of X11 instead of the pthread library.<br/>
+      - Removed deprecated example file 'examples/pslider.cpp'.<br/>
+      - Renamed 'cimg::PI' to 'cimg::valuePI' to avoid compilation problems with some C++ compilers that define
+        the PI macro.<br/>
+      - Added specular type lightning in routines that draw 3D objects. Parameters 'specular_light' and
+        'specular_shine' replace the old 'ambient_light' parameter.<br/>
+<br/>
+* Bug corrections :<br/>
+     - Bug corrected in 'CImg<T>::draw_polygon()' : wrong scanlines were drawn with some complex polygons.<br/>
+     - Bug corrected in 'CImg<T>::convolve()' and 'CImg<T>::correlate()'. Happened when dealing with non square
+       masks with even dimensions.<br/>
+     - Bug corrected in 'CImg<T>::save_png()' and 'CImg<T>::load_png()' when dealing with 16 bits
+       images in little-endian proc.<br/>
+     - Bug corrected in 'CImg<T>::get_coordinates()' when dealing with 2-channels images.<br/>
+     - Bug corrected, 2-channels images were not correctly displayed (blue channel was used instead of being 0).<br/>
+     - And a lot of other small bug corrections...<br/>
+</font>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>Contribution call : CImg survey</b>
+<font size="-2">(2008/01/04, 11:11)</font></td></tr><tr><td><blockquote><font size="-1">
+I've added a CImg Library survey, in order to better know profiles of CImg users and visitors.
+If you have 20 seconds of free time, you are welcome to fill it in !<br/><br/>
+<b><font size="4">
+<script language="javascript" type="text/javascript">
+ var PDF_surveyID = 'BE413A91D86E8CEF';
+ var PDF_openText = 'Fill CImg Library survey';
+</script>
+<script type="text/javascript" language="javascript" src="http://www.polldaddy.com/s.js"></script>
+<noscript><a href="http://www.polldaddy.com/s/BE413A91D86E8CEF/">Fill CImg Library survey</a></noscript></font></b>.
+</blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.2.6 Released</b>
+<font size="-2">(2008/01/04, 11:11)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.2.6 package has been released. This is a small improvement but has nice small new things in it.<br/><br/>
+<font color="#D00000">
+*-----------------------------<br/>
+*-----------------------------<br/>
+* Changes from 1.2.5 to 1.2.6<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+<br/>
+* New features :<br/>
+     - Added functions 'CImg<T>::fillV(), CImg<T>::fillZV() and CImg<T>::fillYZV()' allowing to set image values
+     at a specified pixel and along specified axes.<br/>
+     - Added variant of 'CImg<T>::get_dijkstra()' allowing to use any function/class for definition of weights.<br/>
+     - Added new interpolation technique (moving average) in 'CImg<T>::resize()' allows very precise image resizing
+       (Thanks to François Lauze who provided me with some of its code).<br/>
+     - Added lot of new and useful neighborhood loop macros.
+       A new executable 'examples/generate_loop_macros.cpp' allows to generate
+       2D loops for arbitrary neighborhood size. A new plugin 'plugins/loop_macros.h' has been created, containing
+       all loops NxN (until N=32) and NxNxN (until N=8).<br/>
+     - Added separate component and YCbCr color base processing in options of 'examples/greycstoration.cpp'<br/>
+     - Added macros 'cimg_argument?()' allowing to retrieve command lines that are not options (not beginning with a '-').<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+     - Macros with neighborhood loops have been extended and simplified. Some of the previous ones have been deleted,
+       others have appeared. Basically, no functionnalities have been removed.<br/>
+     - Macro 'cimg_version' is now 126 instead of 1.26, allowing easy comparison with integer values.<br/>
+     - Changed traits name in cimg:: for more coherence.<br/>
+<br/>
+* Bug corrections :<br/>
+     - Corrected function 'CImg<T>::cubic_pix[1,2]d()'.<br/>
+     - Corrected bug in 'CImg<T>::blur_median()'.<br/>
+     - Corrected bug with temporary random filenames when using multi-threading.<br/>
+     - Corrected small bug in 'CImg<T>::draw_point()'.<br/>
+     - Corrected name 'CImg<T>::dijkstra()' instead of 'CImg<T>::djikstra()'.<br/>
+     - Corrected compilation bug in some plug-ins.<br/>
+     - And other small bug corrections...<br/>
+</font>
+
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.2.5 Released</b>
+<font size="-2">(2007/11/26, 15:08)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.2.5 package has been released. <br/><br/>
+<font color="#D00000">
+*-----------------------------<br/>
+*-----------------------------<br/>
+* Changes from 1.2.4 to 1.2.5<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+<br/>
+* New features :<br/>
+     - Added function 'CImg<T>::label_regions()' that can label deconnected regions.<br/>
+     - Added overload of function 'CImg<T>::draw_point()' that is able to draw point clouds.<br/>
+     - Added function 'CImg<T>::get_blur_bilateral()' that implements bilateral filtering.<br/>
+     - Added functions 'CImg<T>::get_RGBtoBayer()' and 'CImg<T>::get_BayertoRGB()' that converts between
+       RGB and Bayer-coded representation of an image.<br/>
+     - Added functions CImg[List]<T>::min(), max(), mean(), variance(), get_stats(), and contains()
+       to deal easily with image statistics (class CImgStats is now obsolete and has been moved to
+       plugin 'plugins/deprecated.h').<br/>
+     - Added versions of 'CImg[List]<T>::get_*()' as external functions,
+       so writting 'res=cos(img)*5;' is valid.<br/>
+     - Added postfix versions 'CImg[List]<T>::operator++(int)' and 'CImg[List]<T>::operator--(int)'.<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+     - Recoded 'CImg<T>::save_magick()' to improve performances when saving images using Magick++ API.<br/>
+     - Recoded 'CImg<T>::draw_fill()' to avoid crashes on large (volumetric) images due to stack overflow.<br/>
+       Also added parameters to choose between 4 or 8 connexity for 2D images.<br/>
+     - Added simple point representation in 'CImg<T>::draw_graph()'.<br/>
+      -> Note that the gtype variable values have been redefined as well !!! <-<br/>
+     - Added parameter 'CImg<T>::quantize()' that allows possible value renormalization.<br/>
+     - Improved documentation.<br/>
+     - Drawing functions accept now templated color pointer, as well as templated image containing color data.<br/>
+     - Recoded Deriche filter. More fast and precise, some cases were buggy.<br/>
+     - Removed class CImgStats (moved to plugin 'plugins/deprecated.h').<br/>
+     - Removed unuseful image copies in some functions.<br/>
+     - Cleaning the code.<br/>
+<br/>
+* Bug corrections :<br/>
+     - Corrected bug in 'CImg<T>::pseudoinverse()' concerning pseudo-inversion of non-inversible matrices.<br/>
+     - Corrected return value in 'CImg<T>::get_RGBtoHSV()'.<br/>
+     - Corrected value range bug in 'CImg<T>::quantize()'.<br/>
+     - And other small bug corrections...<br/>
+</font>
+
+</font></blockquote></td></tr></table></font><br/>
+
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.2.4 Released</b>
+<font size="-2">(2007/09/26, 12:00am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.2.4 package has been released. This is a minor release but with interesting stuffs anyway.<br/><br/>
+<font color="#D00000">
+*-----------------------------<br/>
+*-----------------------------<br/>
+* Changes from 1.2.3 to 1.2.4<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+<br/>
+* New features :<br/>
+     - Added macro 'cimg_for_lineXY(x,y,x0,y0,x1,y1)' that loops over an image segment (x0,y0)-(x1,y1).<br/>
+     - Added function 'CImg<T>::draw_polygon()' that draws a filled polygon of any shape in the instance image.<br/>
+     - Added macros 'cimg_load_plugin', 'cimg_save_plugin', 'cimglist_load_plugin' and 'cimglist_save_plugin'
+       allowing to easily add file support for your own data format.<br/>
+     - Added plugin 'plugins/add_fileformat.h' to show how to use these new macros to register a new
+       image format in CImg.<br/>
+     - Added version of 'CImg[List]<T>::{load,save}_cimg()' that is able to read/write only sub-images of
+       data stored in a (big) .cimg file.<br/>
+     - Added an online chat on the CImg website, so that users can interact freely.<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+     - Added functions 'CImg[List]<T>::save_empty_cimg()' that can be used to work with very large images.<br/>
+       You can now create first an empty (big) image, then load/save sub-images into this big .cimg file,
+       without needing much memory.<br/>
+     - Slightly modified the header of .cimg files, so little/big endian info is stored.<br/>
+     - Reorganized some 'CImg[List]<T>::load_*()' functions, trying to avoid unnecessary memory usage.<br/>
+     - Recoded versions of CImg<T>::draw_triangle() that now use the Bresenham's algorithm for interpolation
+      (more precise, while using only integer calculus).<br/>
+     - Added versions of 'CImg<T>::draw_triangle()' and 'CImg<T>::draw_line()' that are able to map textures
+      while correctly handling the perspective correction, so that 3D mapped triangles look correct now.<br/>
+<br/>
+* Bug corrections :<br/>
+     - Corrected a small bug in get_coordinates() : channels of hyperspectral images with (dim>3) where
+       subsampled instead of cropped for image visualization.<br/>
+     - And many small bug corrections...<br/>
+</font>
+
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>Online CImg Library Chat !</b>
+<font size="-2">(2007/09/26, 11:12am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+I've installed a pretty cool php-based online chat room dedicated to CImg users.
+This is a convenient way to ask for quick informations if needed, or discuss about the features
+you would like to see in future versions of CImg.
+There are not many people right now, but wait and see...
+You can click on the 'Online chat' section of the menu above to access the chat.
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.2.3 Released</b>
+<font size="-2">(2007/08/24, 03:00pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.2.3 package has been released. This is a quite important release, with some library modifications.
+I guess upgrading to this version won't be a big problem, but this will be perhaps not as direct as latest releases.
+The CHANGELOG is quite bigger than usual. A lot of work has been done during summer holidays, and I'm quite happy with
+the modifications.<br/><br/>
+<font color="#D00000">
+*-----------------------------<br/>
+*-----------------------------<br/>
+* Changes from 1.2.2 to 1.2.3<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+<br/>
+* New features :<br/>
+     - Added file 'example/tron.cpp', implementing a very simple version of the
+     famous 'Tron' game (2 players).<br/>
+     - Added constructor that create a CImg<T> from the content of a CImgDisplay window.<br/>
+     - Added support of the 'Board' library in plugin 'plugins/toolbox3d.h', allowing
+     the saving of 3D objects snapshots in SVG, EPS or FIG vector-graphics formats.<br/>
+     - Added function 'CImgList<T>::[get]_split()' that can split all image of an
+     an image list into a specified axis.<br/>
+     - Added sphere primitive in 'CImg<T>::draw_object3d()'.<br/>
+     - Added function 'CImg<T>::ellipsoid()' in 'plugins/toolbox3d.h'.<br/>
+     - Added useful new constructors 'CImg<T>()' and 'CImgList<T>()' with variable
+     numbers of parameters that can define images or image lists initialized with
+     user-specified values. Example :<br/>
+     CImg<float> img(3,2,1,1, 1,2,3, 4,5,6); defines image [ 1,2,3; 4,5,6 ].<br/>
+     CImgList<unsigned char> list(3,1,3,1,1, 1,0,0, 0,1,0, 0,0,1); defines
+     list of three vectors { [1;0;0], [0;1;0], [0;0;1] }.<br/>
+     - Added poly-bezier curve drawing, with 'CImg<T>::draw_spline()' overload.<br/>
+     - Added file 'examples/jawbreaker.cpp', implementing a very funny games featuring
+     small colored balls.<br/>
+     - Added demo '3D Reflection' in 'examples/CImg_test.cpp' showing some tricky uses
+     with the 3D capabilities of CImg.<br/>
+     - Added 'CImg<T>::draw_spline()' for drawing 2D cubic Bezier curves.<br/>
+     - Added plugin 'plugins/jpeg_buffer.h', allowing to read/write directly image data
+     from/to jpeg-coded memory buffers (Many thanks to Paolo Prete who made it possible !).<br/>
+     - Added optional support of the LAPACK library for matrix computation.<br/>
+     Define macro 'cimg_use_lapack' and link your code with LAPACK to enable it
+     (LAPACK routines are slightly faster routines than native CImg ones).<br/>
+     - Added function 'CImg<T>::get_constrast_LUT8()' function which returns a 256 colors
+     palette that has nice properties of being well contrasted when color indices are
+     close to eachothers.<br/>
+     - Added function 'CImg<T>::get_rainbow_LUT8()' that returns a rainbow-type palette.<br/>
+     - Added shortcuts CTRL+PAGE[UP,DOWN] in 'CImg<T>::display_object3d()' to brighten or
+     darken the 3D object.<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+     - In 'CImg<T>::HSVtoRGB()' and 'CImg<T>::RGBtoHSV()', the H components is now expressed in degree.<br/>
+     - Improved multi-key testing with CImgDisplay.<br/>
+     - Added and modified some 'operator<<()' and 'operator>>()' in 'CImg<T>' and 'CImgList<T>'.<br/>
+     - Renamed 'plugins/primitives3d.h' to 'plugins/toolbox3d.h', and added a new example
+     'examples/toolbox3d.cpp' that shows how to use it.<br/>
+     - Renamed 'plugins/alias.h' to 'plugins/deprecated.h'.<br/>
+     - Moved function 'CImg<T>::resize_object3d()' to 'plugins/toolbox3d.h'.<br/>
+     - Simplified 'CImgList<T>::insert()' procedures, and removed functions 'CImgList<T>::insert_shared()'.<br/>
+     - Added functions parameters for almost all drawing functions, allowing the correct use of
+     patterns in line drawing (beware, some functions signatures have been slightly modified).<br/>
+     - Renamed 'CImg<T>::feature_selection()' as 'CImg<T>::get_coordinates()'
+     (for better coherence with overall function names). Include 'plugins/deprecated.h' for backward
+     compatibility.<br/>
+     - Optimized function 'CImg<T>::draw_line()'.<br/>
+     - Recoded function 'CImg<T>::draw_circle()', uses now the more precise Bresenham's circle
+     algorithm.<br/>
+     - Improved function 'CImg<T>::sphere()', in plugin 'toolbox3d.h', reducing drastically
+     the number of created points in the 3D mesh.<br/>
+<br/>
+* Bug corrections :<br/>
+     - Corrected some small bugs in CImg.h to allow the compilation with the Intel C++ Compiler (icc & icl).<br/>
+     - Corrected bug in copy constructor of CImgList<> that didn't make shared copy of images.<br/>
+     - Fixed bug in 'CImg<T>::symmetric_eigen()' : some negative eigenvalues where miscalculated when
+     their absolute values was also an eigenvalue of the considered matrix.<br/>
+     - And many small bug corrections...<br/>
+</font>
+
+</font></blockquote></td></tr></table></font><br/>
+
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>Sixth postcard received !</b>
+<font size="-2">(2007/08/17, 02:15pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+Today, I received another postcard from Taiwan ! That is a great pleasure to see that CImg is used
+by some people in Asia. So, thanks to Pr. Kuo-Feng Hwang for your postcard, I added it to the 'growing' postcard list
+in the main CImg web page :)
+<br/><br/>
+<img src="img/postcard6.jpg"></img>
+</font></blockquote></td></tr></table></font><br/>
+
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>New demo '3D Reflection' in CImg 1.2.3</b>
+<font size="-2">(2007/07/24, 10:25pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+During hollidays, I always take time to perform some funny code experiments. This time,
+I tried to create a real-time 3D reflection effect. Of course, it uses some tricks to succed in an acceptable speed,
+but I like the result, and I've added this example to the 'CImg_demo.cpp' source code.
+Here is a screenshot of the resulting effect.
+Click on the image to see the video.<br/><br/>
+<a href="img/video_reflection.html" onclick="NewWindow(this.href,'name','450','400','yes');return false;">
+
+<img border="0" src="img/ss_reflection.jpg"></img>
+
+</a>
+</font></blockquote></td></tr></table></font><br/>
+
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>New game 'Jawbreaker' in CImg 1.2.3</b>
+<font size="-2">(2007/07/24, 10:25pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+Last night, while playing on the so-called <i>Jawbreaker</i> game in my Pocket PC, I wonder how hard it would be to
+do a CImg-based version of this game. That was a good excuse to start programming !
+I think the result is quite cool so I decided to put it in the <i>CImg/examples</i> directory for the
+next CImg 1.2.3 release. The source is surprisingly small (about 150 lines of code) and the game is complete.
+Here is a screenshot of the result below.
+Click on the image to see the video.<br/><br/>
+<a href="img/video_jawbreaker.html" onclick="NewWindow(this.href,'name','450','400','yes');return false;">
+
+<img border="0" src="img/ss_jawbreaker.jpg"></img>
+
+</a>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>Some CImg 1.2.3 envisaged features</b>
+<font size="-2">(2007/07/20, 02:32pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+- I decided to (re)enable LAPACK interfacing when doing matrix computations (such as SVD, eigenvalues, system solving).
+LAPACK routines are well optimized and this could save time for applications that need it.
+Of course, you are not forced to use LAPACK, since native matrix algorithms already exist in CImg, but this
+may increase performances in some cases.<br/>
+- Also, Thanks to Paolo Prete, a new plugin <i>plugins/jpeg_array.h</i> has been added. This adds useful functions in the CImg class to read and write jpeg-compressed image data directly in memory buffer. Very useful when dealing with jpeg images coming from the network for instance (ip webcam).<br/><br/>
+These features are already implemented in the CVS version, so do not hesitate to test them and tell me if everything's going right.
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.2.2 Released</b>
+<font size="-2">(2007/07/04, 13:27pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.2.2 package has been released. This is a minor release, with a very small CHANGELOG.
+Basically, I want to put a updated version before the
+<a href="http://www.rmll.info/">RMLL'07</a>
+where I will present the CImg Library.<br/><br/>
+<font color="#D00000">
+*-----------------------------<br/>
+*-----------------------------<br/>
+* Changes from 1.2.1 to 1.2.2<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+<br/>
+* New features :<br/>
+     - Added 'CImg<T>::distance_function()' that can compute distance function to the 0-isophote.<br/>
+     - Added curve editor example in 'examples/curve_editor.cpp'.<br/>
+<br/>
+* Bug corrections :<br/>
+     - Corrected small bug when trying to found pathname under Windows.<br/>
+     - Corrected bug when using XSHM extension on Mac OS X.<br/>
+     - Corrected/Improved platforms detection by testing the right predefined BSD macros + extra architectures
+      (Thanks to Marc Espie).<br/>
+     - And many small bug corrections...<br/>
+</font>
+
+</font></blockquote></td></tr></table></font><br/>
+
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.2.2 on the way</b>
+<font size="-2">(2007/07/02, 19:34pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+CImg 1.2.2 has been started few days ago. I'm happy to say I've corrected lot of examples such that they perfectly compile now on Visual C++ 6.0. I've also tested it on the new 4.2.0 release of g++, and everything's fine.
+I find CImg is becoming quite stable and I've less and less debugging from releases to releases, that's good news.
+I've posted a version CImg-1.2.2beta of the archive in the sourceforge repository, you can already
+<a href="http://sourceforge.net/project/showfiles.php?group_id=96492">download it (package "in progress")</a>
+and test it if you want. Any feedback is appreciated.
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>New example file : curve_editor.cpp</b>
+<font size="-2">(2007/06/27, 11:11am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+I worked on a small 2D curve editor for a collegue and his PhD student at the lab, and I found it interesting enough to share it with CImg users, so here is a new file <i>examples/curve_editor.cpp</i> in the CImg tree (still in CVS for the moment, but will be available in the next stable release).
+Basically, you can add/move/remove control points and a piecewise-polynomial curve passing through these points is computed. It's a quite small source (300 code lines with header and comments).
+You can save control points, curve points or even the corresponding distance map. Maybe useful, I hope.
+Here's a screenshot below. <a href="img/video_curveeditor.html" onclick="NewWindow(this.href,'name','450','400','yes');return false;">Click here to see the video</a>
+<br/><br/>
+<img src="img/curve_editor.jpg"></img>
+</font></blockquote></td></tr></table></font><br/>
+
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>Fifth postcard received !</b>
+<font size="-2">(2007/06/24, 10:00am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+I received a postcard today from Cambridge/UK, as well as a donation for CImg, by the same person.
+Thank you so much Alexandre !
+This is very nice to see that some people are enjoying using CImg around the world,
+and do not write only for bug reports.
+All these postcards are displayed on the wall just behind my desk. Do not hesitate to write me, there are
+still a lot of free space :)
+<br/><br/>
+<img src="img/postcard5.jpg"></img>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.2.1 Released</b>
+<font size="-2">(2007/06/12, 15:03pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.2.1 package has been released. Here is the CHANGELOG :<br/><br/>
+<font color="#D00000">
+*-----------------------------<br/>
+*-----------------------------<br/>
+* Changes from 1.2.0 to 1.2.1<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+<br/>
+* New features :<br/>
+     - Added macro 'cimg_for_spiralXY', allowing to loop over an image using a spiral-shaped trajectory.<br/>
+     - Added shortcut 'CTRL+O' to save object as .off file in 'CImg<T>::display_object3d()'.<br/>
+     - Added operator bool() in CImg, CImgList, CImgStats, CImgDisplay to get
+     more concise code when testing if an object is empty or not.<br/>
+     - Added empty state for CImgDisplay, can be tested with 'CImgDisplay::is_empty()'.<br/>
+     - Added '.off' file support in 'inrcast'.<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+     - Removed all the obsolete #define to ensure compatibility with really older versions of CImg.
+       You can now include the file 'plugins/alias.h' to get these #define back.<br/>
+     - Added functionalities and debugged 'CImg<T>::save_off()' and 'CImg<T>::load_off()'.<br/>
+<br/>
+* Bug corrections :<br/>
+     - Corrected illumination bug in 'CImg<T>::draw_object3d()'.<br/>
+     - Corrected bug in 'CImg<T>::crop()' family functions.<br/>
+     - Corrected small bugs in 'CImgList<T>' (insertion functions).<br/>
+     - Corrected 'CImg<T>::load_tiff()' function.<br/>
+     - And many small bug corrections...<br/>
+</font>
+
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>Fourth postcard received !</b>
+<font size="-2">(2007/06/01, 10:00am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+I received a postcard today from Brighton/UK. Thank you Hugo for your postcard !
+<br/><br/>
+<img src="img/postcard4.jpg"></img>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.2.0 Released</b>
+<font size="-2">(2007/04/18, 15:36pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.2.0 package has been released. Here is the CHANGELOG :<br/><br/>
+<font color="#D00000">
+*-----------------------------<br/>
+*-----------------------------<br/>
+* Changes from 1.1.9 to 1.2.0<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+<br/>
+* New features :<br/>
+     - Added function 'CImg<T>::draw_grid()' that draws a grid on the instance image<br/>
+     (useful when combined with CImg<T>::draw_axis and CImg<T>::draw_graph).<br/>
+     - Added multi-threading support in GREYCstoration plugin and command line version.<br/>
+     - Added support for GraphicsMagick conversion tools (http://www.graphicsmagick.org).<br/>
+     - Added plugin 'integral_line.h' that define functions to track integral lines in images.<br/>
+     - Added CTRL+key combinations in 'CImg<T>::display_object3d' and 'CImg<T>::feature_selection()' :<br/>
+        - CTRL+S : Save snapshot.<br/>
+        - CTRL+D : Double window resolution.<br/>
+        - CTRL+C : Divide window resolution.<br/>
+        - CTRL+F : Fullscreen mode.<br/>
+     - Added new normalization mode=3, now set by default when using CImgDisplay. Try to adapt<br/>
+     the display normalization to the image type.<br/>
+     - Added new example 'edge_explorer.cpp' (thanks to Orges Leka).<br/>
+     - Added new example 'greycstoration4gimp.cpp' (which is a GREYCstoration plugin for the Gimp, thanks<br/>
+     to Grzegorz Szwoch)<br/>
+     - Added functions 'CImg<T>::[get]_round()' that round values of an image.<br/>
+     - Added function 'CImg<T>::draw_line()' able to draw joined set of segments.<br/>
+     - Added interpolation_type=-1 for 'CImg<T>::resize()' corresponding to raw memory resizing, without
+     interpolation.<br/>
+     - Added function 'CImg<T>::permute_axes()' that can be used to swap order of image axes
+     (useful for converting ...RRRRRRGGGGGBBBBB... to ...RGBRGBRGBRGB....)<br/>
+     - Added support for NIFTI files (extension '.nii') added in 'CImg<T>::load_analyze()'.<br/>
+     - Added function 'CImg<T>::[get_]displacement_field()' that can estimate displacement field between two images.<br/>
+     - Added default constructor for the 'CImgDisplay' class, which creates a window initially in the 'closed' state.<br/>
+     - Added directory 'compilation/unix_debian_package' for easy construction of .deb package for CImg.<br/>
+     - Added new search parth to find 'medcon' on Windows.<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+     - Renamed all '*_convert' functions to '*_imagemagick'.<br/>
+     - Fonction CImg<T>::draw_object3d() has been slightly optimized (light computation for
+     outside primitives is not done anymore).<br/>
+     - Small changes in cimg:: traits.<br/>
+     - Removed 'precision' arguments in 'CImg<T>::draw_axis()'.<br/>
+     - The use of non in-place arithmetical operators is now possible in plug-ins.<br/>
+<br/>
+* Bug corrections :<br/>
+     - Versions of 'CImg<T>::load_tiff()' and 'CImg<T>::save_tiff()' that use libtiff has been
+     debugged and improved.<br/>
+     - fread() and fwrite() has been recoded to handle the Windows file size limit of 64Mb over network
+     (this is a Windows bug !).<br/>
+     - GREYCstoration plugin has been modified to better deal with 16 and 32bits images.<br/>
+     - And many other small bug corrections....<br/>
+</font>
+
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>New way of installing CImg for Debian-based Unix distributions</b>
+<font size="-2">(2007/03/26, 10:00am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+Many thanks to François-Xavier Dupé, PhD candidate in the IMAGE team of the GREYC lab : he provided a simple script that can be used to generate a .deb package file from the CImg package.
+CImg is now very simple to install on such systems thanks to its .deb package. Very nice !
+<br/>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>Third postcard received !</b>
+<font size="-2">(2007/03/26, 10:00am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+I received a postcard today from Honolulu, telling me that someone is using <i>CImg and GREYCstoration in paradise</i>.
+Very nice for starting a Monday morning ! Thank you Mike for your postcard, I really appreciate !
+Surprisingly, the three postcards I received so far all come from sunny places...<br/><br/>
+Thank again !<br/>
+David.<br/><br/>
+<img src="img/postcard3.jpg"></img>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.1.9 Released</b>
+<font size="-2">(2007/03/05, 19:12pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.1.9 package has been released. This is a minor release that should be transparent for the CImg users.
+You can go to the <a href="http://sourceforge.net/project/showfiles.php?group_id=96492">Download page</a> to get the latest 1.1.9 package.<br/><br/>
+Here is the CHANGELOG :<br/>
+<font color="#D00000">
+*-----------------------------<br/>
+*-----------------------------<br/>
+* Changes from 1.1.8 to 1.1.9<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+<br/>
+* New features :<br/>
+     - Added functions 'CImg<T>::sharpen()' and 'CImg<T>::get_sharpen()' that can enhance contrast in images,
+     using nonlinear 2D/3D multi-valued shock filters.<br/>
+     - Added function 'CImg<T>::contains()' and 'CImgList<T>::contains()' that can test if a pixel is
+     present in an image.<br/>
+     - Added new demo 'CImg-breakout' in 'examples/CImg_demo.cpp' (Arkanoid-style game in 64 lines of code!).<br/>
+     - Functions 'CImgDisplay::hide_mouse()' and 'CImgDisplay::show_mouse()' have been added, allowing to
+       hide/show the cursor when it is over a display window.<br/>
+     - Functions 'CImg<T>::[get_]structure_tensorXY[Z]()' has been added, allowing to compute the 2D or
+     3D structure tensor field from an image.<br/>
+     - Function 'CImgDisplay::set_mouse()' is now working on Windows.<br/>
+     - Added load/save functions to deal directly with std::FILE structures.<br/>
+     - Added members 'CImgDisplay::keys[256]' and 'CImgDisplay::buttons[256]' allowing to get the latest 256 keys
+     or mouse buttons modifications done on the display window.<br/>
+     - Added function 'CImgDisplay::is_typed()' to test if a certain combination of key has been typed
+     on the display window.<br/>
+     - Added keyboard shortcut 'CTRL+S' in 'CImg<T>::display_object3d()' to be able to save snapshot of current 3d view.<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+     - Recoded the greycstoration plug-in as the file 'plugins/greycstoration.h'. The command line version
+     'examples/greycstoration.cpp' has been greatly improved, including tiled-mode and less memory consumption.<br/>
+      The use of GREYCstoration is now more easy, the code is more factorized.<br/>
+<br/>
+* Bug corrections :<br/>
+     - Plugin 'plugins/cimgmatlab.h' has been corrected.<br/>
+</font>
+
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.1.8 Released</b>
+<font size="-2">(2007/01/26, 11:06am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.1.8 package has been released. I guess this is a more bug-free version than the 1.1.7.
+You can go to the <a href="http://sourceforge.net/project/showfiles.php?group_id=96492">Download page</a> to get the latest 1.1.8 package.<br/><br/>
+Here is the CHANGELOG :<br/>
+<font color="#D00000">
+*-----------------------------<br/>
+*-----------------------------<br/>
+* Changes from 1.1.7 to 1.1.8<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+<br/>
+* New features :<br/>
+    - Added conditional use of the FFTW3 library (http://www.fftw.org) allowing more flexibility and speed
+      on DFT computation, when used.<br/>
+    - Added new macro 'cimg_help()', displays arbitrary user-defined messages when program is invoked
+    with the option '-h' or '--help'.<br/>
+    - Added new macro 'cimglist_apply()' allowing to apply a single function to all members of a list :
+    Ex: cimglist_apply(list,blur)(3.0f);<br/>
+    - Added functions 'CImg<T>::resize_object3d()', 'CImgList<T>::resize_object3d()',
+    'CImg<T>::get_resize_object3d()' and 'CImgList<T>::get_resize_object3d()' to ease resizing and
+    centering 3d objects.<br/>
+    - Added function 'CImgDisplay::set_mouse()' to set the mouse pointer coordinates (X11 only).<br/>
+    - Added functions 'CImg<T>::atan()', 'CImg<T>::acos()', 'CImg<T>::asin()' and their get_* counterparts.<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+    - 'cimg_debug' has new value signification. Can now choose between displaying error message on the console
+    or on modal windows, even when 'cimg_display_type' is not 0.<br/>
+    - Updated CImg presentation slides in 'documentation/slides_cimg.pdf', more complete now.<br/>
+    - Added new directories in path search for 'convert' and 'medcon' and 'temporary path'.
+    'convert' or 'medcon' found in the current directory './' now override the default ones.<br/>
+    - Added safer support for Windows 64bits.<br/>
+    - Improved version of 'cimg::info()' for debugging facilities. Now displays almost every
+    important library variables and parameters.<br/>
+    - Static version of CImg<T>::sequence() now return a column vector instead of a line.<br/>
+    - Slightly changed the tracking algorithm and few other things in 'examples/dtmri_view.cpp',
+      allowing more precision in the fiber computation.<br/>
+    - Modified the 'CImg<T>::feature_selection()' function : replaced the moving hatch by a static
+    one, less fun but also less time consuming. One small selection bug for 3D volumes has been
+    also corrected.<br/>
+    - Corrected line routine for 64bits architectures.<br/>
+    - Replaced 'CImg<T>::scroll()' by 'CImg<T>::translate()'.<br/>
+    - Replaced all 'cimg_map' by more coherent names based on 'cimg_for_*'. Same for 'cimglist_map'.<br/>
+      Compatibility with previous versions of CImg is ensured if 'cimg_strict' is not defined.<br/>
+    - Recoded functions to retrieve parts of the images : get_channel(), get_slice(), ...<br/>
+    - Improved the cimg::system() function.<br/>
+    - Added some tests and display extra warnings when saving images with wrong formats.<br/>
+<br/>
+* Bug corrections :<br/>
+    - Corrected small bug in 'CImg<>::blur_anisotropic()', 'examples/greycstoration.cpp' and 'plugins/greycstoration4integration.h'.<br/>
+    - And lot of minor bug corrections and optimizations .....<br/>
+<br/>
+</font>
+
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>First donator !</b>
+<font size="-2">(2007/01/22, 04:37pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+I really would like to thank the anonymous user that donated some money to the CImg Library.
+I don't know who you are, but you have to know that your are the very first one ! I appreciate
+this attention.<br/><br/>
+Of course, I also thank all other people participating to CImg by reporting bugs, sending postcards
+(2 received so far !) and helping developing new piece of code.<br/>
+I hope the CImg Library will be alive for a long long time. Next step : the 1.1.8 release,
+integrating cool new features and improving stability.<br/><br/>
+
+Cheers !<br/<br/>
+David.<br/>
+</font></blockquote></td></tr></table></font><br/>
+
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.1.7 Released</b>
+<font size="-2">(2006/11/06, 03:15pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The CImg 1.1.7 package has been released. It adds cool new features and bug corrections, and proposes more elaborated
+use of template objects.
+You can go to the <a href="http://sourceforge.net/project/showfiles.php?group_id=96492">Download page</a> to get the latest 1.1.7 package.<br/><br/>
+Here is the CHANGELOG :<br/>
+<font color="#D00000">
+*-----------------------------<br/>
+*-----------------------------<br/>
+* Changes from 1.1.6 to 1.1.7<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+<br/>
+* New features :<br/>
+    - Added 'operator<<()' and 'operator>>()' for bit shift operations on all images pixels.<br/>
+    - Added most of mathematical operators in the 'CImgList' class.<br/>
+    - Added new demo 'Image Waves' in 'examples/CImg_demo.cpp'.<br/>
+    - Added mouse wheel support on Windows.<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+    - Renamed class 'CImgl' into 'CImgList', also renamed macro 'cimgl_map' to 'cimglist_map'.<br/>
+      Backward compatibility is assured in 1.1.7 version, but think about replacing the old names<br/>
+      by the new ones for future CImg versions.<br/>
+    - Removed 'operator<<()' which appended an image to another one<br/>
+    - Recoded lot of non in-place mathematical operators to avoid numerical truncations.<br/>
+    It may have a great influence on your code. For instance writting '0.5+img' will result in a CImg<double>
+    image, even if 'img' was a CImg<float>.<br/>
+    - Recoded most of 'CImg<T>::get_resize()' function : linear interpolation performs now really faster, and
+    an additional parameter allows to select between different conditions for border values.<br/>
+    - Recoded 'CImg<T>::draw_line()' so that it now uses a classical Bresenham algorithm, avoiding rounding errors.<br/>
+<br/>
+* Bug corrections :<br/>
+    - Corrected some functions that did not performed correctly on shared images.<br/>
+    - Corrected small bug in 'plugins/primitives3d.h' in function 'CImg<T>::sphere()'.<br/>
+    - Corrected 'CImg<T>::feature_selection()' when displaying 'CImg<bool>' images.<br/>
+    - Corrected 'CImg<T>::load_cimg()' : is now able to load bool images.<br/>
+    - And lot of minor bug corrections and optimizations .....<br/>
+</font>
+
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.1.7 in progress...</b>
+<font size="-2">(2006/10/24, 10:21am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+Preparing the next CImg release 1.1.7, I've added a new small and cool effect in the example file <i>examples/CImg_demo.cpp</i>.
+It roughly applies the wave equation on a height map on which a color image is mapped.
+This height map is deforming itself according to falling particles, and all is displayed as a 3D gouraud rotating object.<br/>
+But the best of all, is that all fits in about 60 lines of code !<br/><br/>
+Here's a screenshot below, click on the image to see
+<a href="img/video_waves.html" onclick="NewWindow(this.href,'name','450','400','yes');return false;">the video</a> :<br/><br/>
+
+<a href="img/video_waves.html" onclick="NewWindow(this.href,'name','450','400','yes');return false;">
+<img src="img/ss_waves.jpg"></a>
+
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>Call for links</b>
+<font size="-2">(2006/10/05, 10:32am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+I'm planning to create a '<a href="links.shtml">Links</a>' page on the CImg web site, that will propose a list of links to projects that use the CImg Library in their source code.
+If you are concerned and interested to appear in this page, please send me an e-mail, or post a message in the CImg forum.
+Thanks for your participation.
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.1.6 released</b>
+<font size="-2">(2006/09/21, 04:32pm)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+Minor release, but fixes some bugs.
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>CImg 1.1.5 released</b>
+<font size="-2">(2006/07/19, 09:53am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+Following a traditional two-month release period, I'm happy to announce the release of the CImg 1.1.5 package.<br/>
+There are some important changes in the API, basically, it converges to something clear and coherent.<br/>
+The changelog is :<br/>
+<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+* Changes from 1.1.4 to 1.1.5<br/>
+*-----------------------------<br/>
+*-----------------------------<br/>
+<br/>
+* New features :<br/>
+    - Added Poisson noise capability in CImg<T>::noise() (This patch has been proposed by Jerome Boulanger)<br/>
+    - Added wheel mouse support in 'CImgDisplay', now used in 'CImg<>::feature_selection()' to go through slices of
+      3D volumes (unfortunately for X11 systems only).<br/>
+    - Added function 'CImgDisplay::toggle_fullscreen()' to allow easy and dynamic fullscreen switching of a display.<br/>
+    - Added screen resolution switching capabilities when using the Xrandr extension, under X11 (#define cimg_use_xrandr).<br/>
+    - Added support for ImageMagick++ built-in library (parts of the patch proposed by Christoph Hormann).<br/>
+    - And lot of small functions to ease the life...<br/>
+<br/>
+* Optimizations / Modifications :<br/>
+    - CeCiLL-C license now applies for the file 'CImg.h'. This license (close to the LGPL one) is more adapted
+      for library components as CImg. The examples stay in previous CeCiLL license (close to the GPL one).<br/>
+    - Recoded 'CImg<T>::draw_axe?()' (where ? can be 'X','Y' or 'XY') so that it can now be used to draw non-linear values along axes
+      (for instance logarithmic-varying labels).<br/>
+    - Attribute 'force' has been removed in 'CImgDisplay::resize()'.<br/>
+    - Recoded most constructors and assign functions in CImg<T> and CImgl<T>.<br/>
+    - Recoded most of the CImgDisplay class to allow more flexibility and refreshing speed.<br/>
+    - Renamed 'CImgDisplay::title()' to 'CImgDisplay::set_title()'. 'CImgDisplay::title' is now a class variable
+      that stores the current title of the display window.<br/>
+    - 'CImgDisplay::closed', 'CImgDisplay::resized', 'CImgDisplay::fullscreen' and 'CImgDisplay::moved' have been
+      renamed to 'CImgDisplay::is_closed', 'CImgDisplay::is_resized', 'CImgDisplay::is_fullscreen' and
+      'CImgDisplay::is_moved', for more coherent variable names.<br/>
+    - 'CImg<T>::display_object3d()' : can now specify an input pose matrix, as well as get the output pose matrix,
+      after the user rotated the object. Also, this function has been optimized.<br/>
+<br/>
+* Bug corrections :<br/>
+    - Corrected sorting bug in 'CImg<T>::symmetric_eigen()' and 'CImg<T>::SVD()'<br/>
+    - When using shared memory images, some 'CImg<T>::get_*()' methods returned a shared memory image too.<br/>
+    - And lot of minor bug corrections and optimizations .....<br/>
+</font></blockquote></td></tr></table></font><br/>
+
+<!-- ###################### -->
+<font face="Arial,Helvetica"><font size="-1">
+<table align="center" bgcolor="#eeeeff" border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody><tr bgcolor="#ccccee"><td>
+<b>Previous News</b>
+<font size="-2">(2006/07/19, 09:53am)</font></td></tr><tr><td><blockquote><font face="Arial,Helvetica"><font size="-1">
+The system for posting news has changed, and you can see old news by <a href="http://www.livejournal.com/users/cimg/">going there</a>.
+</font></blockquote></td></tr></table></font><br/>
+
+<!--#include file="footer.html" -->

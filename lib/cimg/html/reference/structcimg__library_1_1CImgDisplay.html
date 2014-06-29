@@ -1,0 +1,2425 @@
+<xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+    <title>The CImg Library - C++ Template Image Processing Toolkit</title>
+    <meta content="David Tschumperle" name="author"></meta>
+    <link rel="shortcut icon" type="image/x-icon" href="http://cimg.sourceforge.net/favicon.ico"></link>
+    <link rel="icon" type="image/png" href="favicon.png"></link>
+    <link href="doxygen.css" rel="stylesheet" type="text/css">
+    <link href="tabs.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      <!--
+          body {background-color:#C0C0C0; font-family:sans-serif; }
+          a { font-weight:bold; color:#636363; }
+          a:active{text-decoration:none; color:#000000}
+          a:link{text-decoration:none; color:#000000}
+          a:visited{text-decoration:none; color:#000000}
+          a:hover{text-decoration:underline; color:#4E9F71}
+        -->
+    </style>
+    <script language="JavaScript" type="text/javascript">
+      <!-- Original:  Eric King (eric_andrew_king@hotmail.com) is used to display images in popup windows -->
+      <!-- Web Site:  http://redrival.com/eak/ -->
+      <!-- This script and many more are available free online at -->
+      <!-- The JavaScript Source!! http://javascript.internet.com -->
+      <!-- Begin
+           function NewWindow(mypage, myname, w, h, scroll) {
+           var winl = (screen.width - w) / 2;
+           var wint = (screen.height - h) / 2;
+           winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
+           win = window.open(mypage, myname, winprops)
+           if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+           }
+           //  End -->
+    </script>
+    <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $('#cssmenu > ul').prepend('<li class="mobile"><a href="#"><span>Menu <i>&#9776;</i></span></a></li>');
+      $('#cssmenu > ul > li > a').click(function(e) {
+      $('#cssmenu li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      var checkElement = $(this).next();
+      if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+      $(this).closest('li').removeClass('active');
+      checkElement.slideUp('normal');
+      }
+      if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+      $('#cssmenu ul ul:visible').slideUp('normal');
+      checkElement.slideDown('normal');
+      }
+      if( $(this).parent().hasClass('mobile') ) {
+      e.preventDefault();
+      $('#cssmenu').toggleClass('expand');
+      }
+      if($(this).closest('li').find('ul').children().length == 0) {
+      return true;
+      } else {
+      return false;
+      }
+      });
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="../header.css" />
+  </head>
+  <body>
+    <table align="center" cellpadding="12" cellspacing="0" width="1024" style="border-style:solid; border-width:0px; border-color:black" bgcolor="#FFFFFF">
+      <tr><td>
+          <center>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <br/>
+            <a href="http://cimg.sourceforge.net"><img src="http://cimg.sourceforge.net/img/CImgLogo2.jpg" alt="" border="0"></img></a><br/>
+            <br/>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <table width="90%" align="center">
+              <td width="18%">&nbsp;</td>
+              <td width="65%">
+                <div id='cssmenu'>
+                  <ul>
+                    <li class='first'><a href='http://cimg.sourceforge.net/index.shtml'><span>Home</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/download.shtml'><span>Download</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/screenshots.shtml'><span>Screenshots</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__faq.html'><span>FAQ</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__tutorial.html'><span>Tutorial</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/index.html'><span>Documentation</span></a></li>
+                    <li><a href='http://sourceforge.net/projects/cimg/forums/forum/334630'><span>Forum</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/links.shtml'><span>Links</span></a></li>
+                  </ul>
+                </div>
+              </td>
+              <td align="right">
+                <script type="text/javascript">
+	          var flattr_url = 'http://cimg.sourceforge.net';
+	          var flattr_btn='compact';
+                </script>
+                <script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
+              </td>
+      </tr></table>
+      </center>
+</td></tr>
+<tr><td>
+<!-- Generated by Doxygen 1.8.6 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespacecimg__library.html">cimg_library</a></li><li class="navelem"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="structcimg__library_1_1CImgDisplay-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">CImgDisplay Struct Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Allow to create windows, display images on them and manage user events (keyboard, mouse and windows events).  
+ <a href="structcimg__library_1_1CImgDisplay.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Constructors / Destructor / Instance Management</h2></td></tr>
+<tr class="memitem:ae4b8135f23d41f2077ff1d63deb452ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ae4b8135f23d41f2077ff1d63deb452ea">~CImgDisplay</a> ()</td></tr>
+<tr class="memdesc:ae4b8135f23d41f2077ff1d63deb452ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="#ae4b8135f23d41f2077ff1d63deb452ea">More...</a><br/></td></tr>
+<tr class="separator:ae4b8135f23d41f2077ff1d63deb452ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54e3407c3b858f5f40283264e39b4f38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a54e3407c3b858f5f40283264e39b4f38">CImgDisplay</a> ()</td></tr>
+<tr class="memdesc:a54e3407c3b858f5f40283264e39b4f38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an empty display.  <a href="#a54e3407c3b858f5f40283264e39b4f38">More...</a><br/></td></tr>
+<tr class="separator:a54e3407c3b858f5f40283264e39b4f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb46df06ee84d2be48cf5c57a9ed2f6d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#abb46df06ee84d2be48cf5c57a9ed2f6d">CImgDisplay</a> (const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#a369399896761e31ae71db57fdd0ba431">width</a>, const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#ae26bcfe2f33f5873dbdfb6948cf1f59f">height</a>, const char *const <a class="el" href="structcimg__library_1_1CImgDisplay.html#a01f58dd237a70f1b83f0fe9ec560ae2d">title</a>=0, const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#a67719cb05110ca9e5725bc59f8350b68">normalization</a>=3, const bool <a class="el" href="structcimg__library_1_1CImgDisplay.html#ab1d732fb0aae68bac3a95c1629c52beb">is_fullscreen</a>=false, const bool <a class="el" href="structcimg__library_1_1CImgDisplay.html#a2de15bd974a282882cbb02718501f954">is_closed</a>=false)</td></tr>
+<tr class="memdesc:abb46df06ee84d2be48cf5c57a9ed2f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a display with specified dimensions.  <a href="#abb46df06ee84d2be48cf5c57a9ed2f6d">More...</a><br/></td></tr>
+<tr class="separator:abb46df06ee84d2be48cf5c57a9ed2f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7239126d823db5e9eaa9ee1affefa1db"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a7239126d823db5e9eaa9ee1affefa1db"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a7239126d823db5e9eaa9ee1affefa1db">CImgDisplay</a> (const <a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; T &gt; &amp;img, const char *const <a class="el" href="structcimg__library_1_1CImgDisplay.html#a01f58dd237a70f1b83f0fe9ec560ae2d">title</a>=0, const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#a67719cb05110ca9e5725bc59f8350b68">normalization</a>=3, const bool <a class="el" href="structcimg__library_1_1CImgDisplay.html#ab1d732fb0aae68bac3a95c1629c52beb">is_fullscreen</a>=false, const bool <a class="el" href="structcimg__library_1_1CImgDisplay.html#a2de15bd974a282882cbb02718501f954">is_closed</a>=false)</td></tr>
+<tr class="memdesc:a7239126d823db5e9eaa9ee1affefa1db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a display from an image.  <a href="#a7239126d823db5e9eaa9ee1affefa1db">More...</a><br/></td></tr>
+<tr class="separator:a7239126d823db5e9eaa9ee1affefa1db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab2a72159873ac50cf03c44965059a6b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aab2a72159873ac50cf03c44965059a6b"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#aab2a72159873ac50cf03c44965059a6b">CImgDisplay</a> (const <a class="el" href="structcimg__library_1_1CImgList.html">CImgList</a>&lt; T &gt; &amp;list, const char *const <a class="el" href="structcimg__library_1_1CImgDisplay.html#a01f58dd237a70f1b83f0fe9ec560ae2d">title</a>=0, const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#a67719cb05110ca9e5725bc59f8350b68">normalization</a>=3, const bool <a class="el" href="structcimg__library_1_1CImgDisplay.html#ab1d732fb0aae68bac3a95c1629c52beb">is_fullscreen</a>=false, const bool <a class="el" href="structcimg__library_1_1CImgDisplay.html#a2de15bd974a282882cbb02718501f954">is_closed</a>=false)</td></tr>
+<tr class="memdesc:aab2a72159873ac50cf03c44965059a6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a display from an image list.  <a href="#aab2a72159873ac50cf03c44965059a6b">More...</a><br/></td></tr>
+<tr class="separator:aab2a72159873ac50cf03c44965059a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6765c355fa3ae998b9729b358f198a61"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a6765c355fa3ae998b9729b358f198a61">CImgDisplay</a> (const <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp)</td></tr>
+<tr class="memdesc:a6765c355fa3ae998b9729b358f198a61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a display as a copy of an existing one.  <a href="#a6765c355fa3ae998b9729b358f198a61">More...</a><br/></td></tr>
+<tr class="separator:a6765c355fa3ae998b9729b358f198a61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a816d8c873ae3d27854bd0620646224b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a816d8c873ae3d27854bd0620646224b9">assign</a> ()</td></tr>
+<tr class="memdesc:a816d8c873ae3d27854bd0620646224b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor - Empty constructor <b>[in-place version]</b>.  <a href="#a816d8c873ae3d27854bd0620646224b9">More...</a><br/></td></tr>
+<tr class="separator:a816d8c873ae3d27854bd0620646224b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa78d227523af633336bcf25ec00e0384"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa78d227523af633336bcf25ec00e0384"></a>
+<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#aa78d227523af633336bcf25ec00e0384">assign</a> (const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#a369399896761e31ae71db57fdd0ba431">width</a>, const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#ae26bcfe2f33f5873dbdfb6948cf1f59f">height</a>, const char *const <a class="el" href="structcimg__library_1_1CImgDisplay.html#a01f58dd237a70f1b83f0fe9ec560ae2d">title</a>=0, const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#a67719cb05110ca9e5725bc59f8350b68">normalization</a>=3, const bool <a class="el" href="structcimg__library_1_1CImgDisplay.html#ab1d732fb0aae68bac3a95c1629c52beb">is_fullscreen</a>=false, const bool <a class="el" href="structcimg__library_1_1CImgDisplay.html#a2de15bd974a282882cbb02718501f954">is_closed</a>=false)</td></tr>
+<tr class="memdesc:aa78d227523af633336bcf25ec00e0384"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a display with specified dimensions <b>[in-place version]</b>. <br/></td></tr>
+<tr class="separator:aa78d227523af633336bcf25ec00e0384"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26e97a31a1fba29f0534c90655a59c22"><td class="memTemplParams" colspan="2"><a class="anchor" id="a26e97a31a1fba29f0534c90655a59c22"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a26e97a31a1fba29f0534c90655a59c22"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a26e97a31a1fba29f0534c90655a59c22">assign</a> (const <a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; T &gt; &amp;img, const char *const <a class="el" href="structcimg__library_1_1CImgDisplay.html#a01f58dd237a70f1b83f0fe9ec560ae2d">title</a>=0, const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#a67719cb05110ca9e5725bc59f8350b68">normalization</a>=3, const bool <a class="el" href="structcimg__library_1_1CImgDisplay.html#ab1d732fb0aae68bac3a95c1629c52beb">is_fullscreen</a>=false, const bool <a class="el" href="structcimg__library_1_1CImgDisplay.html#a2de15bd974a282882cbb02718501f954">is_closed</a>=false)</td></tr>
+<tr class="memdesc:a26e97a31a1fba29f0534c90655a59c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a display from an image <b>[in-place version]</b>. <br/></td></tr>
+<tr class="separator:a26e97a31a1fba29f0534c90655a59c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a862455f2708c107412d9b0a15471f561"><td class="memTemplParams" colspan="2"><a class="anchor" id="a862455f2708c107412d9b0a15471f561"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a862455f2708c107412d9b0a15471f561"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a862455f2708c107412d9b0a15471f561">assign</a> (const <a class="el" href="structcimg__library_1_1CImgList.html">CImgList</a>&lt; T &gt; &amp;list, const char *const <a class="el" href="structcimg__library_1_1CImgDisplay.html#a01f58dd237a70f1b83f0fe9ec560ae2d">title</a>=0, const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#a67719cb05110ca9e5725bc59f8350b68">normalization</a>=3, const bool <a class="el" href="structcimg__library_1_1CImgDisplay.html#ab1d732fb0aae68bac3a95c1629c52beb">is_fullscreen</a>=false, const bool <a class="el" href="structcimg__library_1_1CImgDisplay.html#a2de15bd974a282882cbb02718501f954">is_closed</a>=false)</td></tr>
+<tr class="memdesc:a862455f2708c107412d9b0a15471f561"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a display from an image list <b>[in-place version]</b>. <br/></td></tr>
+<tr class="separator:a862455f2708c107412d9b0a15471f561"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac103e68816e12f5fd67c8f293fe18acd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac103e68816e12f5fd67c8f293fe18acd"></a>
+<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ac103e68816e12f5fd67c8f293fe18acd">assign</a> (const <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp)</td></tr>
+<tr class="memdesc:ac103e68816e12f5fd67c8f293fe18acd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a display as a copy of another one <b>[in-place version]</b>. <br/></td></tr>
+<tr class="separator:ac103e68816e12f5fd67c8f293fe18acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03d4a8009b65ae368a939a5ecec2a2cf"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a03d4a8009b65ae368a939a5ecec2a2cf">empty</a> ()</td></tr>
+<tr class="memdesc:a03d4a8009b65ae368a939a5ecec2a2cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a reference to an empty display.  <a href="#a03d4a8009b65ae368a939a5ecec2a2cf">More...</a><br/></td></tr>
+<tr class="separator:a03d4a8009b65ae368a939a5ecec2a2cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Overloaded Operators</h2></td></tr>
+<tr class="memitem:a00b22a049bc63bbbb31ce3b7a152cf9b"><td class="memTemplParams" colspan="2">template&lt;typename t &gt; </td></tr>
+<tr class="memitem:a00b22a049bc63bbbb31ce3b7a152cf9b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a00b22a049bc63bbbb31ce3b7a152cf9b">operator=</a> (const <a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; t &gt; &amp;img)</td></tr>
+<tr class="memdesc:a00b22a049bc63bbbb31ce3b7a152cf9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display image on associated window.  <a href="#a00b22a049bc63bbbb31ce3b7a152cf9b">More...</a><br/></td></tr>
+<tr class="separator:a00b22a049bc63bbbb31ce3b7a152cf9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb1361aa3d793f6d22cc84baf5d671ee"><td class="memTemplParams" colspan="2">template&lt;typename t &gt; </td></tr>
+<tr class="memitem:abb1361aa3d793f6d22cc84baf5d671ee"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#abb1361aa3d793f6d22cc84baf5d671ee">operator=</a> (const <a class="el" href="structcimg__library_1_1CImgList.html">CImgList</a>&lt; t &gt; &amp;list)</td></tr>
+<tr class="memdesc:abb1361aa3d793f6d22cc84baf5d671ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display list of images on associated window.  <a href="#abb1361aa3d793f6d22cc84baf5d671ee">More...</a><br/></td></tr>
+<tr class="separator:abb1361aa3d793f6d22cc84baf5d671ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81d1882a4d7d0579298fe6fc706fca40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a81d1882a4d7d0579298fe6fc706fca40">operator=</a> (const <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp)</td></tr>
+<tr class="memdesc:a81d1882a4d7d0579298fe6fc706fca40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a display as a copy of another one <b>[in-place version]</b>.  <a href="#a81d1882a4d7d0579298fe6fc706fca40">More...</a><br/></td></tr>
+<tr class="separator:a81d1882a4d7d0579298fe6fc706fca40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa385aa18f5e42db5a415c25a90f4193d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#aa385aa18f5e42db5a415c25a90f4193d">operator bool</a> () const </td></tr>
+<tr class="memdesc:aa385aa18f5e42db5a415c25a90f4193d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <code>false</code> if display is empty, <code>true</code> otherwise.  <a href="#aa385aa18f5e42db5a415c25a90f4193d">More...</a><br/></td></tr>
+<tr class="separator:aa385aa18f5e42db5a415c25a90f4193d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Instance Checking</h2></td></tr>
+<tr class="memitem:acef8e33cfd36a5d7d2fad939efcf02e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acef8e33cfd36a5d7d2fad939efcf02e3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#acef8e33cfd36a5d7d2fad939efcf02e3">is_empty</a> () const </td></tr>
+<tr class="memdesc:acef8e33cfd36a5d7d2fad939efcf02e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <code>true</code> if display is empty, <code>false</code> otherwise. <br/></td></tr>
+<tr class="separator:acef8e33cfd36a5d7d2fad939efcf02e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2de15bd974a282882cbb02718501f954"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a2de15bd974a282882cbb02718501f954">is_closed</a> () const </td></tr>
+<tr class="memdesc:a2de15bd974a282882cbb02718501f954"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <code>true</code> if display is closed (i.e. not visible on the screen), <code>false</code> otherwise.  <a href="#a2de15bd974a282882cbb02718501f954">More...</a><br/></td></tr>
+<tr class="separator:a2de15bd974a282882cbb02718501f954"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5b6c08e077751fe6dd6ad76bfd30885"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af5b6c08e077751fe6dd6ad76bfd30885"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#af5b6c08e077751fe6dd6ad76bfd30885">is_resized</a> () const </td></tr>
+<tr class="memdesc:af5b6c08e077751fe6dd6ad76bfd30885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <code>true</code> if associated window has been resized on the screen, <code>false</code> otherwise. <br/></td></tr>
+<tr class="separator:af5b6c08e077751fe6dd6ad76bfd30885"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a540466e47b7c1f71e3b35bc002335f5b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a540466e47b7c1f71e3b35bc002335f5b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a540466e47b7c1f71e3b35bc002335f5b">is_moved</a> () const </td></tr>
+<tr class="memdesc:a540466e47b7c1f71e3b35bc002335f5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <code>true</code> if associated window has been moved on the screen, <code>false</code> otherwise. <br/></td></tr>
+<tr class="separator:a540466e47b7c1f71e3b35bc002335f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2c397e92b059010f69b6e999f3c25eb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2c397e92b059010f69b6e999f3c25eb"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ab2c397e92b059010f69b6e999f3c25eb">is_event</a> () const </td></tr>
+<tr class="memdesc:ab2c397e92b059010f69b6e999f3c25eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <code>true</code> if any event has occured on the associated window, <code>false</code> otherwise. <br/></td></tr>
+<tr class="separator:ab2c397e92b059010f69b6e999f3c25eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1d732fb0aae68bac3a95c1629c52beb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1d732fb0aae68bac3a95c1629c52beb"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ab1d732fb0aae68bac3a95c1629c52beb">is_fullscreen</a> () const </td></tr>
+<tr class="memdesc:ab1d732fb0aae68bac3a95c1629c52beb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <code>true</code> if current display is in fullscreen mode, <code>false</code> otherwise. <br/></td></tr>
+<tr class="separator:ab1d732fb0aae68bac3a95c1629c52beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5df1371379d5b85e44bed3f7e42a0c7c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a5df1371379d5b85e44bed3f7e42a0c7c">is_key</a> () const </td></tr>
+<tr class="memdesc:a5df1371379d5b85e44bed3f7e42a0c7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <code>true</code> if any key is being pressed on the associated window, <code>false</code> otherwise.  <a href="#a5df1371379d5b85e44bed3f7e42a0c7c">More...</a><br/></td></tr>
+<tr class="separator:a5df1371379d5b85e44bed3f7e42a0c7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae889377636d1e013a29f278d4d57dca2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ae889377636d1e013a29f278d4d57dca2">is_key</a> (const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#a7626b926cfb3c3c3e3a720bde2845a4b">keycode</a>) const </td></tr>
+<tr class="memdesc:ae889377636d1e013a29f278d4d57dca2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <code>true</code> if key specified by given keycode is being pressed on the associated window, <code>false</code> otherwise.  <a href="#ae889377636d1e013a29f278d4d57dca2">More...</a><br/></td></tr>
+<tr class="separator:ae889377636d1e013a29f278d4d57dca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a581e9c53cafd808ac50d2eb72cb230b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a581e9c53cafd808ac50d2eb72cb230b7">is_key</a> (const char *const <a class="el" href="structcimg__library_1_1CImgDisplay.html#a7626b926cfb3c3c3e3a720bde2845a4b">keycode</a>) const </td></tr>
+<tr class="memdesc:a581e9c53cafd808ac50d2eb72cb230b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <code>true</code> if key specified by given keycode is being pressed on the associated window, <code>false</code> otherwise.  <a href="#a581e9c53cafd808ac50d2eb72cb230b7">More...</a><br/></td></tr>
+<tr class="separator:a581e9c53cafd808ac50d2eb72cb230b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79c0d5400f1620fe69dfb15695248a56"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a79c0d5400f1620fe69dfb15695248a56">is_key_sequence</a> (const unsigned int *const keycodes_sequence, const unsigned int length, const bool remove_sequence=false)</td></tr>
+<tr class="memdesc:a79c0d5400f1620fe69dfb15695248a56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <code>true</code> if specified key sequence has been typed on the associated window, <code>false</code> otherwise.  <a href="#a79c0d5400f1620fe69dfb15695248a56">More...</a><br/></td></tr>
+<tr class="separator:a79c0d5400f1620fe69dfb15695248a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1bf84a095a6df08b34f5fd386367419"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ac1bf84a095a6df08b34f5fd386367419">is_keyESC</a> () const </td></tr>
+<tr class="memdesc:ac1bf84a095a6df08b34f5fd386367419"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <code>true</code> if the <code>ESC</code> key is being pressed on the associated window, <code>false</code> otherwise.  <a href="#ac1bf84a095a6df08b34f5fd386367419">More...</a><br/></td></tr>
+<tr class="separator:ac1bf84a095a6df08b34f5fd386367419"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80ca34e2a465fc7a097497576106aedc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a80ca34e2a465fc7a097497576106aedc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyF1</b> () const </td></tr>
+<tr class="separator:a80ca34e2a465fc7a097497576106aedc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87be20ad15eab71dde4319720df5b55a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a87be20ad15eab71dde4319720df5b55a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyF2</b> () const </td></tr>
+<tr class="separator:a87be20ad15eab71dde4319720df5b55a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a916d7239e9db0a575ade25fc795e409d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a916d7239e9db0a575ade25fc795e409d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyF3</b> () const </td></tr>
+<tr class="separator:a916d7239e9db0a575ade25fc795e409d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5eb0f10ccff9612eb631de4b3fc05aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad5eb0f10ccff9612eb631de4b3fc05aa"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyF4</b> () const </td></tr>
+<tr class="separator:ad5eb0f10ccff9612eb631de4b3fc05aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb19317ec7ff477a751f5f04a34ed5df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb19317ec7ff477a751f5f04a34ed5df"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyF5</b> () const </td></tr>
+<tr class="separator:aeb19317ec7ff477a751f5f04a34ed5df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b1e52958448ce43c6d5eaf47be24178"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b1e52958448ce43c6d5eaf47be24178"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyF6</b> () const </td></tr>
+<tr class="separator:a0b1e52958448ce43c6d5eaf47be24178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3859408be7c2b0894b256d2310fd4f5e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3859408be7c2b0894b256d2310fd4f5e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyF7</b> () const </td></tr>
+<tr class="separator:a3859408be7c2b0894b256d2310fd4f5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fa0f0ecb6d40dceb02e6d069f307974"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3fa0f0ecb6d40dceb02e6d069f307974"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyF8</b> () const </td></tr>
+<tr class="separator:a3fa0f0ecb6d40dceb02e6d069f307974"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e785f47ffe35d5af48ee069de8cb519"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6e785f47ffe35d5af48ee069de8cb519"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyF9</b> () const </td></tr>
+<tr class="separator:a6e785f47ffe35d5af48ee069de8cb519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa086d9eb1f131d1e889434f9ed5de2f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa086d9eb1f131d1e889434f9ed5de2f3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyF10</b> () const </td></tr>
+<tr class="separator:aa086d9eb1f131d1e889434f9ed5de2f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02b10485568bd5958ab8fabad9b57585"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02b10485568bd5958ab8fabad9b57585"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyF11</b> () const </td></tr>
+<tr class="separator:a02b10485568bd5958ab8fabad9b57585"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7daac93ebffdc0eacd16d50cf21df6c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad7daac93ebffdc0eacd16d50cf21df6c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyF12</b> () const </td></tr>
+<tr class="separator:ad7daac93ebffdc0eacd16d50cf21df6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3faf31fcc2b0633b6faced1a1cb6975"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3faf31fcc2b0633b6faced1a1cb6975"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPAUSE</b> () const </td></tr>
+<tr class="separator:ac3faf31fcc2b0633b6faced1a1cb6975"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af86bc69e13d70b3f602b8f0a9e61b048"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af86bc69e13d70b3f602b8f0a9e61b048"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_key1</b> () const </td></tr>
+<tr class="separator:af86bc69e13d70b3f602b8f0a9e61b048"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafdf3c2618283e1023f31d1e41598af6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aafdf3c2618283e1023f31d1e41598af6"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_key2</b> () const </td></tr>
+<tr class="separator:aafdf3c2618283e1023f31d1e41598af6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8b630bbad43e24153b3c47e95b9fbb0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8b630bbad43e24153b3c47e95b9fbb0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_key3</b> () const </td></tr>
+<tr class="separator:ac8b630bbad43e24153b3c47e95b9fbb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ef2f569b6b1079c3a2763905e68d9ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9ef2f569b6b1079c3a2763905e68d9ad"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_key4</b> () const </td></tr>
+<tr class="separator:a9ef2f569b6b1079c3a2763905e68d9ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c94e6ee6b390e369279d46c6ac55e9c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c94e6ee6b390e369279d46c6ac55e9c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_key5</b> () const </td></tr>
+<tr class="separator:a6c94e6ee6b390e369279d46c6ac55e9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66ced90f18904fb804e85fcb0a56455e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a66ced90f18904fb804e85fcb0a56455e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_key6</b> () const </td></tr>
+<tr class="separator:a66ced90f18904fb804e85fcb0a56455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2b93787a4c6dd7d948675d36d4765a1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2b93787a4c6dd7d948675d36d4765a1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_key7</b> () const </td></tr>
+<tr class="separator:ab2b93787a4c6dd7d948675d36d4765a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a720fb331297f2db3c6e11dadfbdca811"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a720fb331297f2db3c6e11dadfbdca811"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_key8</b> () const </td></tr>
+<tr class="separator:a720fb331297f2db3c6e11dadfbdca811"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73e570c943affee5de8a4e028ba37685"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73e570c943affee5de8a4e028ba37685"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_key9</b> () const </td></tr>
+<tr class="separator:a73e570c943affee5de8a4e028ba37685"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a073ccf31fcd242f8627b7377194a8406"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a073ccf31fcd242f8627b7377194a8406"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_key0</b> () const </td></tr>
+<tr class="separator:a073ccf31fcd242f8627b7377194a8406"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace21f3df2eca630dd5417f96abca3269"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace21f3df2eca630dd5417f96abca3269"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyBACKSPACE</b> () const </td></tr>
+<tr class="separator:ace21f3df2eca630dd5417f96abca3269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f5bdfa139f9fa9e728015fb99c2a411"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f5bdfa139f9fa9e728015fb99c2a411"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyINSERT</b> () const </td></tr>
+<tr class="separator:a6f5bdfa139f9fa9e728015fb99c2a411"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf73c71eb0cdd9c441292edebb248f97"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf73c71eb0cdd9c441292edebb248f97"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyHOME</b> () const </td></tr>
+<tr class="separator:aaf73c71eb0cdd9c441292edebb248f97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c97493b45b1f6e7928414b549d0ca23"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2c97493b45b1f6e7928414b549d0ca23"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPAGEUP</b> () const </td></tr>
+<tr class="separator:a2c97493b45b1f6e7928414b549d0ca23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7449ca430075faf820be2e82ca33f760"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7449ca430075faf820be2e82ca33f760"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyTAB</b> () const </td></tr>
+<tr class="separator:a7449ca430075faf820be2e82ca33f760"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbee36d38b54f5812e6e5afc16e814a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afbee36d38b54f5812e6e5afc16e814a9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyQ</b> () const </td></tr>
+<tr class="separator:afbee36d38b54f5812e6e5afc16e814a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dc0c09698b8b547dffc59b3f177d2ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9dc0c09698b8b547dffc59b3f177d2ad"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyW</b> () const </td></tr>
+<tr class="separator:a9dc0c09698b8b547dffc59b3f177d2ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f84fb1aa0a41645cc17f35fee7809b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f84fb1aa0a41645cc17f35fee7809b8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyE</b> () const </td></tr>
+<tr class="separator:a0f84fb1aa0a41645cc17f35fee7809b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aec102bcc4b78b3a6a3e3c0049c34e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2aec102bcc4b78b3a6a3e3c0049c34e8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyR</b> () const </td></tr>
+<tr class="separator:a2aec102bcc4b78b3a6a3e3c0049c34e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a532daaaba99d7b6880546038d08e8a7d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a532daaaba99d7b6880546038d08e8a7d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyT</b> () const </td></tr>
+<tr class="separator:a532daaaba99d7b6880546038d08e8a7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dc137c0d8a9ed87f94518cd5cb13770"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1dc137c0d8a9ed87f94518cd5cb13770"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyY</b> () const </td></tr>
+<tr class="separator:a1dc137c0d8a9ed87f94518cd5cb13770"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a286f4e3ba6448d661f2f530d1d2a19b4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a286f4e3ba6448d661f2f530d1d2a19b4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyU</b> () const </td></tr>
+<tr class="separator:a286f4e3ba6448d661f2f530d1d2a19b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9196a78c99cea5d37531f5372b971ef9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9196a78c99cea5d37531f5372b971ef9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyI</b> () const </td></tr>
+<tr class="separator:a9196a78c99cea5d37531f5372b971ef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e0107ea5a63c56d91bcc61dbf6143f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e0107ea5a63c56d91bcc61dbf6143f9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyO</b> () const </td></tr>
+<tr class="separator:a3e0107ea5a63c56d91bcc61dbf6143f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dcb6ac03e7fe466e3a0201c3c282e46"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6dcb6ac03e7fe466e3a0201c3c282e46"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyP</b> () const </td></tr>
+<tr class="separator:a6dcb6ac03e7fe466e3a0201c3c282e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56ae02535a1ef0897b8a4100d8ecad31"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56ae02535a1ef0897b8a4100d8ecad31"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyDELETE</b> () const </td></tr>
+<tr class="separator:a56ae02535a1ef0897b8a4100d8ecad31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed9b4d7bb79304ce03160ddbd11a1349"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aed9b4d7bb79304ce03160ddbd11a1349"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyEND</b> () const </td></tr>
+<tr class="separator:aed9b4d7bb79304ce03160ddbd11a1349"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45b512bf7726500295d013bc1cc7b49a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a45b512bf7726500295d013bc1cc7b49a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPAGEDOWN</b> () const </td></tr>
+<tr class="separator:a45b512bf7726500295d013bc1cc7b49a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e0a4107e7ec23dfa6d372e8fe9af3db"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4e0a4107e7ec23dfa6d372e8fe9af3db"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyCAPSLOCK</b> () const </td></tr>
+<tr class="separator:a4e0a4107e7ec23dfa6d372e8fe9af3db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c7c1e1b7fcf5469c7d6183da0f1ac58"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c7c1e1b7fcf5469c7d6183da0f1ac58"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyA</b> () const </td></tr>
+<tr class="separator:a3c7c1e1b7fcf5469c7d6183da0f1ac58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96752c1d6f3733e3e7e0e70e60c71e5c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a96752c1d6f3733e3e7e0e70e60c71e5c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyS</b> () const </td></tr>
+<tr class="separator:a96752c1d6f3733e3e7e0e70e60c71e5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e1b2c94f2daeb8ae29320b2d95ad48f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e1b2c94f2daeb8ae29320b2d95ad48f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyD</b> () const </td></tr>
+<tr class="separator:a2e1b2c94f2daeb8ae29320b2d95ad48f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc0763393d1936badd249bdf784a6ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6dc0763393d1936badd249bdf784a6ec"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyF</b> () const </td></tr>
+<tr class="separator:a6dc0763393d1936badd249bdf784a6ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f50de1f8928605a69e7695e0b0d1fae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9f50de1f8928605a69e7695e0b0d1fae"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyG</b> () const </td></tr>
+<tr class="separator:a9f50de1f8928605a69e7695e0b0d1fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75ae1a3042f334e1d2207959a7e6c901"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a75ae1a3042f334e1d2207959a7e6c901"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyH</b> () const </td></tr>
+<tr class="separator:a75ae1a3042f334e1d2207959a7e6c901"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9addfded9882248f93f947d3c231227e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9addfded9882248f93f947d3c231227e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyJ</b> () const </td></tr>
+<tr class="separator:a9addfded9882248f93f947d3c231227e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84c90ddb6720299ee2488f462a158a8b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a84c90ddb6720299ee2488f462a158a8b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyK</b> () const </td></tr>
+<tr class="separator:a84c90ddb6720299ee2488f462a158a8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af273c90975f0cc2d13c4e2bbdd286f53"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af273c90975f0cc2d13c4e2bbdd286f53"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyL</b> () const </td></tr>
+<tr class="separator:af273c90975f0cc2d13c4e2bbdd286f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8400d29c2ba07d8c8a40c08381da1757"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8400d29c2ba07d8c8a40c08381da1757"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyENTER</b> () const </td></tr>
+<tr class="separator:a8400d29c2ba07d8c8a40c08381da1757"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa0db255ec632ff99a3e461593590213"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaa0db255ec632ff99a3e461593590213"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keySHIFTLEFT</b> () const </td></tr>
+<tr class="separator:aaa0db255ec632ff99a3e461593590213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a219b61b87687aad46f9899f89d08721f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a219b61b87687aad46f9899f89d08721f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyZ</b> () const </td></tr>
+<tr class="separator:a219b61b87687aad46f9899f89d08721f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0166d6847dfa001a33cba4e3a183fb7c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0166d6847dfa001a33cba4e3a183fb7c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyX</b> () const </td></tr>
+<tr class="separator:a0166d6847dfa001a33cba4e3a183fb7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98990370527345a18c055d9374be764b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a98990370527345a18c055d9374be764b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyC</b> () const </td></tr>
+<tr class="separator:a98990370527345a18c055d9374be764b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3cafe1e54d45027b16a900b6b0dc46a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3cafe1e54d45027b16a900b6b0dc46a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyV</b> () const </td></tr>
+<tr class="separator:ac3cafe1e54d45027b16a900b6b0dc46a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5099c5b7eb9b7398afb2a9dd53a65598"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5099c5b7eb9b7398afb2a9dd53a65598"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyB</b> () const </td></tr>
+<tr class="separator:a5099c5b7eb9b7398afb2a9dd53a65598"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c5d97124da3e8975f09eb3a7fec83c3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c5d97124da3e8975f09eb3a7fec83c3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyN</b> () const </td></tr>
+<tr class="separator:a6c5d97124da3e8975f09eb3a7fec83c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeeaa887e397aa8a84c9ed0edc119e9d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeeaa887e397aa8a84c9ed0edc119e9d4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyM</b> () const </td></tr>
+<tr class="separator:aeeaa887e397aa8a84c9ed0edc119e9d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3d21c324f5cb96a3557d8a757600fc0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af3d21c324f5cb96a3557d8a757600fc0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keySHIFTRIGHT</b> () const </td></tr>
+<tr class="separator:af3d21c324f5cb96a3557d8a757600fc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0967b98bec724066243bd22569632662"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0967b98bec724066243bd22569632662"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyARROWUP</b> () const </td></tr>
+<tr class="separator:a0967b98bec724066243bd22569632662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dbde98794a65a5aa6ab92269044313d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8dbde98794a65a5aa6ab92269044313d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyCTRLLEFT</b> () const </td></tr>
+<tr class="separator:a8dbde98794a65a5aa6ab92269044313d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada0ad4672cb6dbe244bcf20d58c99ad5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada0ad4672cb6dbe244bcf20d58c99ad5"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyAPPLEFT</b> () const </td></tr>
+<tr class="separator:ada0ad4672cb6dbe244bcf20d58c99ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66905ac14763719a95832b77801bc0f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a66905ac14763719a95832b77801bc0f1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyALT</b> () const </td></tr>
+<tr class="separator:a66905ac14763719a95832b77801bc0f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6ba7d0468525c2f4c5a8520242e52a3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab6ba7d0468525c2f4c5a8520242e52a3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keySPACE</b> () const </td></tr>
+<tr class="separator:ab6ba7d0468525c2f4c5a8520242e52a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a0207a3a4f43297ad8db70d1f65545b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a0207a3a4f43297ad8db70d1f65545b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyALTGR</b> () const </td></tr>
+<tr class="separator:a5a0207a3a4f43297ad8db70d1f65545b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3865fde8898f7099207524509af2f009"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3865fde8898f7099207524509af2f009"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyAPPRIGHT</b> () const </td></tr>
+<tr class="separator:a3865fde8898f7099207524509af2f009"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a651b42afbe1d84f46ed5a47b56483e23"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a651b42afbe1d84f46ed5a47b56483e23"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyMENU</b> () const </td></tr>
+<tr class="separator:a651b42afbe1d84f46ed5a47b56483e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab417929a8c4461d72c3d943fed9bdf8b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab417929a8c4461d72c3d943fed9bdf8b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyCTRLRIGHT</b> () const </td></tr>
+<tr class="separator:ab417929a8c4461d72c3d943fed9bdf8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6aae13b4e955179135dff3b6a47a9d0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af6aae13b4e955179135dff3b6a47a9d0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyARROWLEFT</b> () const </td></tr>
+<tr class="separator:af6aae13b4e955179135dff3b6a47a9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b94c3a8b777d8140fd3c03797433ad1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b94c3a8b777d8140fd3c03797433ad1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyARROWDOWN</b> () const </td></tr>
+<tr class="separator:a8b94c3a8b777d8140fd3c03797433ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa04c0765c3a30f4df06df3bb8501267"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaa04c0765c3a30f4df06df3bb8501267"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyARROWRIGHT</b> () const </td></tr>
+<tr class="separator:aaa04c0765c3a30f4df06df3bb8501267"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a843474450b0824ccdd3d93e1b2328522"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a843474450b0824ccdd3d93e1b2328522"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPAD0</b> () const </td></tr>
+<tr class="separator:a843474450b0824ccdd3d93e1b2328522"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79a2c6ac50e2d46fd77d4b976963f83a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a79a2c6ac50e2d46fd77d4b976963f83a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPAD1</b> () const </td></tr>
+<tr class="separator:a79a2c6ac50e2d46fd77d4b976963f83a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add147597d5bbafc230a9710db4fa65ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add147597d5bbafc230a9710db4fa65ec"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPAD2</b> () const </td></tr>
+<tr class="separator:add147597d5bbafc230a9710db4fa65ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2d7a851533414c435a4f634c72f3695"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2d7a851533414c435a4f634c72f3695"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPAD3</b> () const </td></tr>
+<tr class="separator:ab2d7a851533414c435a4f634c72f3695"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20aeeb0c1065e133d2e35a782eceddc8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a20aeeb0c1065e133d2e35a782eceddc8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPAD4</b> () const </td></tr>
+<tr class="separator:a20aeeb0c1065e133d2e35a782eceddc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1522a35fb0e16c788d76989f12de2a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa1522a35fb0e16c788d76989f12de2a6"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPAD5</b> () const </td></tr>
+<tr class="separator:aa1522a35fb0e16c788d76989f12de2a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b9ee1f94227f0c2a8179a0c091db343"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b9ee1f94227f0c2a8179a0c091db343"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPAD6</b> () const </td></tr>
+<tr class="separator:a9b9ee1f94227f0c2a8179a0c091db343"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ccc4aa67a5d9ceb6352d38eb5e65e8a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ccc4aa67a5d9ceb6352d38eb5e65e8a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPAD7</b> () const </td></tr>
+<tr class="separator:a6ccc4aa67a5d9ceb6352d38eb5e65e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a796b4083380ef3d5a2e5d91497ef15e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a796b4083380ef3d5a2e5d91497ef15e3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPAD8</b> () const </td></tr>
+<tr class="separator:a796b4083380ef3d5a2e5d91497ef15e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abadbf1825a77489ee15d25710fec7974"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abadbf1825a77489ee15d25710fec7974"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPAD9</b> () const </td></tr>
+<tr class="separator:abadbf1825a77489ee15d25710fec7974"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07065df68fd795956e07dc3c1f60d963"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a07065df68fd795956e07dc3c1f60d963"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPADADD</b> () const </td></tr>
+<tr class="separator:a07065df68fd795956e07dc3c1f60d963"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f598d8794d2a29c10735d27dc3a4a53"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9f598d8794d2a29c10735d27dc3a4a53"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPADSUB</b> () const </td></tr>
+<tr class="separator:a9f598d8794d2a29c10735d27dc3a4a53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e06d61afb37b8f1ab0854be9549507"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad9e06d61afb37b8f1ab0854be9549507"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPADMUL</b> () const </td></tr>
+<tr class="separator:ad9e06d61afb37b8f1ab0854be9549507"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc7b98fea247d00464f539b6e9268d17"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afc7b98fea247d00464f539b6e9268d17"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_keyPADDIV</b> () const </td></tr>
+<tr class="separator:afc7b98fea247d00464f539b6e9268d17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Instance Characteristics</h2></td></tr>
+<tr class="memitem:a369399896761e31ae71db57fdd0ba431"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a369399896761e31ae71db57fdd0ba431">width</a> () const </td></tr>
+<tr class="memdesc:a369399896761e31ae71db57fdd0ba431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return display width.  <a href="#a369399896761e31ae71db57fdd0ba431">More...</a><br/></td></tr>
+<tr class="separator:a369399896761e31ae71db57fdd0ba431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae26bcfe2f33f5873dbdfb6948cf1f59f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ae26bcfe2f33f5873dbdfb6948cf1f59f">height</a> () const </td></tr>
+<tr class="memdesc:ae26bcfe2f33f5873dbdfb6948cf1f59f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return display height.  <a href="#ae26bcfe2f33f5873dbdfb6948cf1f59f">More...</a><br/></td></tr>
+<tr class="separator:ae26bcfe2f33f5873dbdfb6948cf1f59f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67719cb05110ca9e5725bc59f8350b68"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a67719cb05110ca9e5725bc59f8350b68">normalization</a> () const </td></tr>
+<tr class="memdesc:a67719cb05110ca9e5725bc59f8350b68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return normalization type of the display.  <a href="#a67719cb05110ca9e5725bc59f8350b68">More...</a><br/></td></tr>
+<tr class="separator:a67719cb05110ca9e5725bc59f8350b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01f58dd237a70f1b83f0fe9ec560ae2d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a01f58dd237a70f1b83f0fe9ec560ae2d">title</a> () const </td></tr>
+<tr class="memdesc:a01f58dd237a70f1b83f0fe9ec560ae2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return title of the associated window as a C-string.  <a href="#a01f58dd237a70f1b83f0fe9ec560ae2d">More...</a><br/></td></tr>
+<tr class="separator:a01f58dd237a70f1b83f0fe9ec560ae2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0daf640f96f8a620a34de6cbea1f79f1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a0daf640f96f8a620a34de6cbea1f79f1">window_width</a> () const </td></tr>
+<tr class="memdesc:a0daf640f96f8a620a34de6cbea1f79f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return width of the associated window.  <a href="#a0daf640f96f8a620a34de6cbea1f79f1">More...</a><br/></td></tr>
+<tr class="separator:a0daf640f96f8a620a34de6cbea1f79f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a706b9cb3b2bcdb372db6fe33693a8ae4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a706b9cb3b2bcdb372db6fe33693a8ae4">window_height</a> () const </td></tr>
+<tr class="memdesc:a706b9cb3b2bcdb372db6fe33693a8ae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return height of the associated window.  <a href="#a706b9cb3b2bcdb372db6fe33693a8ae4">More...</a><br/></td></tr>
+<tr class="separator:a706b9cb3b2bcdb372db6fe33693a8ae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1226fc43587896b59edd1cf57c77056"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ae1226fc43587896b59edd1cf57c77056">window_x</a> () const </td></tr>
+<tr class="memdesc:ae1226fc43587896b59edd1cf57c77056"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return X-coordinate of the associated window.  <a href="#ae1226fc43587896b59edd1cf57c77056">More...</a><br/></td></tr>
+<tr class="separator:ae1226fc43587896b59edd1cf57c77056"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad978bf4dc9acf4129159e0edd55e1111"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ad978bf4dc9acf4129159e0edd55e1111">window_y</a> () const </td></tr>
+<tr class="memdesc:ad978bf4dc9acf4129159e0edd55e1111"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return Y-coordinate of the associated window.  <a href="#ad978bf4dc9acf4129159e0edd55e1111">More...</a><br/></td></tr>
+<tr class="separator:ad978bf4dc9acf4129159e0edd55e1111"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae60918cd2b0b4c6588b2d10aea46a22c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ae60918cd2b0b4c6588b2d10aea46a22c">mouse_x</a> () const </td></tr>
+<tr class="memdesc:ae60918cd2b0b4c6588b2d10aea46a22c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return X-coordinate of the mouse pointer.  <a href="#ae60918cd2b0b4c6588b2d10aea46a22c">More...</a><br/></td></tr>
+<tr class="separator:ae60918cd2b0b4c6588b2d10aea46a22c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a628a43671de755c52d67ad01a019292b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a628a43671de755c52d67ad01a019292b">mouse_y</a> () const </td></tr>
+<tr class="memdesc:a628a43671de755c52d67ad01a019292b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return Y-coordinate of the mouse pointer.  <a href="#a628a43671de755c52d67ad01a019292b">More...</a><br/></td></tr>
+<tr class="separator:a628a43671de755c52d67ad01a019292b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adff5e3fda26574b001a038360b188479"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#adff5e3fda26574b001a038360b188479">button</a> () const </td></tr>
+<tr class="memdesc:adff5e3fda26574b001a038360b188479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return current state of the mouse buttons.  <a href="#adff5e3fda26574b001a038360b188479">More...</a><br/></td></tr>
+<tr class="separator:adff5e3fda26574b001a038360b188479"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a455e002ed5dcc1fc2c23df07781522"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a3a455e002ed5dcc1fc2c23df07781522">wheel</a> () const </td></tr>
+<tr class="memdesc:a3a455e002ed5dcc1fc2c23df07781522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return current state of the mouse wheel.  <a href="#a3a455e002ed5dcc1fc2c23df07781522">More...</a><br/></td></tr>
+<tr class="separator:a3a455e002ed5dcc1fc2c23df07781522"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e321648f3701b0ea6d9f7049cd6da38"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a5e321648f3701b0ea6d9f7049cd6da38">key</a> (const unsigned int pos=0) const </td></tr>
+<tr class="memdesc:a5e321648f3701b0ea6d9f7049cd6da38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return one entry from the pressed keys history.  <a href="#a5e321648f3701b0ea6d9f7049cd6da38">More...</a><br/></td></tr>
+<tr class="separator:a5e321648f3701b0ea6d9f7049cd6da38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a885a46a61297c842fe2a7a37bbee2a54"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a885a46a61297c842fe2a7a37bbee2a54">released_key</a> (const unsigned int pos=0) const </td></tr>
+<tr class="memdesc:a885a46a61297c842fe2a7a37bbee2a54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return one entry from the released keys history.  <a href="#a885a46a61297c842fe2a7a37bbee2a54">More...</a><br/></td></tr>
+<tr class="separator:a885a46a61297c842fe2a7a37bbee2a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ade6e852b67fea14093915c5dca7862"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a3ade6e852b67fea14093915c5dca7862">frames_per_second</a> ()</td></tr>
+<tr class="memdesc:a3ade6e852b67fea14093915c5dca7862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current refresh rate, in frames per second.  <a href="#a3ade6e852b67fea14093915c5dca7862">More...</a><br/></td></tr>
+<tr class="separator:a3ade6e852b67fea14093915c5dca7862"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4219f41cd905bbaabaab92b2ed1a70aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4219f41cd905bbaabaab92b2ed1a70aa"></a>
+static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a4219f41cd905bbaabaab92b2ed1a70aa">screen_width</a> ()</td></tr>
+<tr class="memdesc:a4219f41cd905bbaabaab92b2ed1a70aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return width of the screen (current resolution along the X-axis). <br/></td></tr>
+<tr class="separator:a4219f41cd905bbaabaab92b2ed1a70aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c14a95f72679922995641b29d860da1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8c14a95f72679922995641b29d860da1"></a>
+static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a8c14a95f72679922995641b29d860da1">screen_height</a> ()</td></tr>
+<tr class="memdesc:a8c14a95f72679922995641b29d860da1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return height of the screen (current resolution along the Y-axis). <br/></td></tr>
+<tr class="separator:a8c14a95f72679922995641b29d860da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7626b926cfb3c3c3e3a720bde2845a4b"><td class="memItemLeft" align="right" valign="top">static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a7626b926cfb3c3c3e3a720bde2845a4b">keycode</a> (const char *const keycode)</td></tr>
+<tr class="memdesc:a7626b926cfb3c3c3e3a720bde2845a4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return keycode corresponding to the specified string.  <a href="#a7626b926cfb3c3c3e3a720bde2845a4b">More...</a><br/></td></tr>
+<tr class="separator:a7626b926cfb3c3c3e3a720bde2845a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Window Manipulation</h2></td></tr>
+<tr class="memitem:afde33f75da6e714eb378407da029f11d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:afde33f75da6e714eb378407da029f11d"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#afde33f75da6e714eb378407da029f11d">display</a> (const <a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; T &gt; &amp;img)</td></tr>
+<tr class="memdesc:afde33f75da6e714eb378407da029f11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display image on associated window.  <a href="#afde33f75da6e714eb378407da029f11d">More...</a><br/></td></tr>
+<tr class="separator:afde33f75da6e714eb378407da029f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a616d2352d40e76ee7bdfb77e01e1cd87"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a616d2352d40e76ee7bdfb77e01e1cd87"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a616d2352d40e76ee7bdfb77e01e1cd87">display</a> (const <a class="el" href="structcimg__library_1_1CImgList.html">CImgList</a>&lt; T &gt; &amp;list, const char axis='x', const float align=0)</td></tr>
+<tr class="memdesc:a616d2352d40e76ee7bdfb77e01e1cd87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display list of images on associated window.  <a href="#a616d2352d40e76ee7bdfb77e01e1cd87">More...</a><br/></td></tr>
+<tr class="separator:a616d2352d40e76ee7bdfb77e01e1cd87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b27a2a375509146444ab06b2f7b8851"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a1b27a2a375509146444ab06b2f7b8851">show</a> ()</td></tr>
+<tr class="memdesc:a1b27a2a375509146444ab06b2f7b8851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show (closed) associated window on the screen.  <a href="#a1b27a2a375509146444ab06b2f7b8851">More...</a><br/></td></tr>
+<tr class="separator:a1b27a2a375509146444ab06b2f7b8851"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e35c3363f8859c8a952a60dd4aa3fca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a7e35c3363f8859c8a952a60dd4aa3fca">close</a> ()</td></tr>
+<tr class="memdesc:a7e35c3363f8859c8a952a60dd4aa3fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close (visible) associated window and make it disappear from the screen.  <a href="#a7e35c3363f8859c8a952a60dd4aa3fca">More...</a><br/></td></tr>
+<tr class="separator:a7e35c3363f8859c8a952a60dd4aa3fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21da6f48a7ed419e7605f02925be4718"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a21da6f48a7ed419e7605f02925be4718">move</a> (const int pos_x, const int pos_y)</td></tr>
+<tr class="memdesc:a21da6f48a7ed419e7605f02925be4718"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move associated window to a new location.  <a href="#a21da6f48a7ed419e7605f02925be4718">More...</a><br/></td></tr>
+<tr class="separator:a21da6f48a7ed419e7605f02925be4718"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6613d8faf95a1dbce486f4aab0557bff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a6613d8faf95a1dbce486f4aab0557bff">resize</a> (const bool force_redraw=true)</td></tr>
+<tr class="memdesc:a6613d8faf95a1dbce486f4aab0557bff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize display to the size of the associated window.  <a href="#a6613d8faf95a1dbce486f4aab0557bff">More...</a><br/></td></tr>
+<tr class="separator:a6613d8faf95a1dbce486f4aab0557bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd8f7316eb83b1059bebfe7d271c1398"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#acd8f7316eb83b1059bebfe7d271c1398">resize</a> (const int <a class="el" href="structcimg__library_1_1CImgDisplay.html#a369399896761e31ae71db57fdd0ba431">width</a>, const int <a class="el" href="structcimg__library_1_1CImgDisplay.html#ae26bcfe2f33f5873dbdfb6948cf1f59f">height</a>, const bool force_redraw=true)</td></tr>
+<tr class="memdesc:acd8f7316eb83b1059bebfe7d271c1398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize display to the specified size.  <a href="#acd8f7316eb83b1059bebfe7d271c1398">More...</a><br/></td></tr>
+<tr class="separator:acd8f7316eb83b1059bebfe7d271c1398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad27b62edeea8b0964d424bdc9d113586"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ad27b62edeea8b0964d424bdc9d113586"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ad27b62edeea8b0964d424bdc9d113586">resize</a> (const <a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; T &gt; &amp;img, const bool force_redraw=true)</td></tr>
+<tr class="memdesc:ad27b62edeea8b0964d424bdc9d113586"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize display to the size of an input image.  <a href="#ad27b62edeea8b0964d424bdc9d113586">More...</a><br/></td></tr>
+<tr class="separator:ad27b62edeea8b0964d424bdc9d113586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3657fa648f24413342b92f02ad38b5ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a3657fa648f24413342b92f02ad38b5ae">resize</a> (const <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp, const bool force_redraw=true)</td></tr>
+<tr class="memdesc:a3657fa648f24413342b92f02ad38b5ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize display to the size of another <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> instance.  <a href="#a3657fa648f24413342b92f02ad38b5ae">More...</a><br/></td></tr>
+<tr class="separator:a3657fa648f24413342b92f02ad38b5ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d9938cea4cb848c62fc7052d8bdfe23"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a3d9938cea4cb848c62fc7052d8bdfe23">set_normalization</a> (const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#a67719cb05110ca9e5725bc59f8350b68">normalization</a>)</td></tr>
+<tr class="memdesc:a3d9938cea4cb848c62fc7052d8bdfe23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set normalization type.  <a href="#a3d9938cea4cb848c62fc7052d8bdfe23">More...</a><br/></td></tr>
+<tr class="separator:a3d9938cea4cb848c62fc7052d8bdfe23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afde9a27e1bb7d0ef822a0f0613f99d32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#afde9a27e1bb7d0ef822a0f0613f99d32">set_title</a> (const char *const format,...)</td></tr>
+<tr class="memdesc:afde9a27e1bb7d0ef822a0f0613f99d32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set title of the associated window.  <a href="#afde9a27e1bb7d0ef822a0f0613f99d32">More...</a><br/></td></tr>
+<tr class="separator:afde9a27e1bb7d0ef822a0f0613f99d32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f0ddf65b149de930a3f68ededec61cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a9f0ddf65b149de930a3f68ededec61cd">set_fullscreen</a> (const bool <a class="el" href="structcimg__library_1_1CImgDisplay.html#ab1d732fb0aae68bac3a95c1629c52beb">is_fullscreen</a>, const bool force_redraw=true)</td></tr>
+<tr class="memdesc:a9f0ddf65b149de930a3f68ededec61cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable fullscreen mode.  <a href="#a9f0ddf65b149de930a3f68ededec61cd">More...</a><br/></td></tr>
+<tr class="separator:a9f0ddf65b149de930a3f68ededec61cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a288eb7bafd8b2b51603207e87c415ad7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a288eb7bafd8b2b51603207e87c415ad7">toggle_fullscreen</a> (const bool force_redraw=true)</td></tr>
+<tr class="memdesc:a288eb7bafd8b2b51603207e87c415ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggle fullscreen mode.  <a href="#a288eb7bafd8b2b51603207e87c415ad7">More...</a><br/></td></tr>
+<tr class="separator:a288eb7bafd8b2b51603207e87c415ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fc997c0451ce75666f1bdfe45eb0343"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a9fc997c0451ce75666f1bdfe45eb0343">show_mouse</a> ()</td></tr>
+<tr class="memdesc:a9fc997c0451ce75666f1bdfe45eb0343"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show mouse pointer.  <a href="#a9fc997c0451ce75666f1bdfe45eb0343">More...</a><br/></td></tr>
+<tr class="separator:a9fc997c0451ce75666f1bdfe45eb0343"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fb8cda1473f326934c286e6e5d825e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a3fb8cda1473f326934c286e6e5d825e2">hide_mouse</a> ()</td></tr>
+<tr class="memdesc:a3fb8cda1473f326934c286e6e5d825e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hide mouse pointer.  <a href="#a3fb8cda1473f326934c286e6e5d825e2">More...</a><br/></td></tr>
+<tr class="separator:a3fb8cda1473f326934c286e6e5d825e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af089ae3b38f20ac0f5a450dc5ad215f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#af089ae3b38f20ac0f5a450dc5ad215f1">set_mouse</a> (const int pos_x, const int pos_y)</td></tr>
+<tr class="memdesc:af089ae3b38f20ac0f5a450dc5ad215f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move mouse pointer to a specified location.  <a href="#af089ae3b38f20ac0f5a450dc5ad215f1">More...</a><br/></td></tr>
+<tr class="separator:af089ae3b38f20ac0f5a450dc5ad215f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e9eb0990daa50aa51ce6202bcf774ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a6e9eb0990daa50aa51ce6202bcf774ae">set_button</a> ()</td></tr>
+<tr class="memdesc:a6e9eb0990daa50aa51ce6202bcf774ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate a mouse button release event.  <a href="#a6e9eb0990daa50aa51ce6202bcf774ae">More...</a><br/></td></tr>
+<tr class="separator:a6e9eb0990daa50aa51ce6202bcf774ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8fc0d8a39b2063d9f1f6cea8fcc2cfb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#aa8fc0d8a39b2063d9f1f6cea8fcc2cfb">set_button</a> (const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#adff5e3fda26574b001a038360b188479">button</a>, const bool is_pressed=true)</td></tr>
+<tr class="memdesc:aa8fc0d8a39b2063d9f1f6cea8fcc2cfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate a mouse button press or release event.  <a href="#aa8fc0d8a39b2063d9f1f6cea8fcc2cfb">More...</a><br/></td></tr>
+<tr class="separator:aa8fc0d8a39b2063d9f1f6cea8fcc2cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a255a5404da7ba5b511c23cefa91879"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a1a255a5404da7ba5b511c23cefa91879">set_wheel</a> ()</td></tr>
+<tr class="memdesc:a1a255a5404da7ba5b511c23cefa91879"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush all mouse wheel events.  <a href="#a1a255a5404da7ba5b511c23cefa91879">More...</a><br/></td></tr>
+<tr class="separator:a1a255a5404da7ba5b511c23cefa91879"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90e0d424e65ccc6dba2a0df2e5886759"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a90e0d424e65ccc6dba2a0df2e5886759">set_wheel</a> (const int amplitude)</td></tr>
+<tr class="memdesc:a90e0d424e65ccc6dba2a0df2e5886759"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate a wheel event.  <a href="#a90e0d424e65ccc6dba2a0df2e5886759">More...</a><br/></td></tr>
+<tr class="separator:a90e0d424e65ccc6dba2a0df2e5886759"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a199046786d132551afa204c8b80eddc1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a199046786d132551afa204c8b80eddc1">set_key</a> ()</td></tr>
+<tr class="memdesc:a199046786d132551afa204c8b80eddc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush all key events.  <a href="#a199046786d132551afa204c8b80eddc1">More...</a><br/></td></tr>
+<tr class="separator:a199046786d132551afa204c8b80eddc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30455ebb640fe7f0d08dc9b6897565f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a30455ebb640fe7f0d08dc9b6897565f4">set_key</a> (const unsigned int <a class="el" href="structcimg__library_1_1CImgDisplay.html#a7626b926cfb3c3c3e3a720bde2845a4b">keycode</a>, const bool is_pressed=true)</td></tr>
+<tr class="memdesc:a30455ebb640fe7f0d08dc9b6897565f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate a keyboard press/release event.  <a href="#a30455ebb640fe7f0d08dc9b6897565f4">More...</a><br/></td></tr>
+<tr class="separator:a30455ebb640fe7f0d08dc9b6897565f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bf168837be505b1301604b151280f6e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a4bf168837be505b1301604b151280f6e">flush</a> ()</td></tr>
+<tr class="memdesc:a4bf168837be505b1301604b151280f6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush all display events.  <a href="#a4bf168837be505b1301604b151280f6e">More...</a><br/></td></tr>
+<tr class="separator:a4bf168837be505b1301604b151280f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab16d9d312efaecc3630dc6539269bab9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab16d9d312efaecc3630dc6539269bab9"></a>
+<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ab16d9d312efaecc3630dc6539269bab9">wait</a> ()</td></tr>
+<tr class="memdesc:ab16d9d312efaecc3630dc6539269bab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for any user event occuring on the current display. <br/></td></tr>
+<tr class="separator:ab16d9d312efaecc3630dc6539269bab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79669a0b7bdc65aff8313c590c7faab0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a79669a0b7bdc65aff8313c590c7faab0">wait</a> (const unsigned int milliseconds)</td></tr>
+<tr class="memdesc:a79669a0b7bdc65aff8313c590c7faab0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for a given number of milliseconds since the last call to <a class="el" href="structcimg__library_1_1CImgDisplay.html#ab16d9d312efaecc3630dc6539269bab9" title="Wait for any user event occuring on the current display. ">wait()</a>.  <a href="#a79669a0b7bdc65aff8313c590c7faab0">More...</a><br/></td></tr>
+<tr class="separator:a79669a0b7bdc65aff8313c590c7faab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdf42eacfe538a28d8d3dca2dbe26f08"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:abdf42eacfe538a28d8d3dca2dbe26f08"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#abdf42eacfe538a28d8d3dca2dbe26f08">render</a> (const <a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; T &gt; &amp;img)</td></tr>
+<tr class="memdesc:abdf42eacfe538a28d8d3dca2dbe26f08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render image into internal display buffer.  <a href="#abdf42eacfe538a28d8d3dca2dbe26f08">More...</a><br/></td></tr>
+<tr class="separator:abdf42eacfe538a28d8d3dca2dbe26f08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e67d156351dd7dfdfd2f04e563c4f2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a4e67d156351dd7dfdfd2f04e563c4f2a">paint</a> ()</td></tr>
+<tr class="memdesc:a4e67d156351dd7dfdfd2f04e563c4f2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Paint internal display buffer on associated window.  <a href="#a4e67d156351dd7dfdfd2f04e563c4f2a">More...</a><br/></td></tr>
+<tr class="separator:a4e67d156351dd7dfdfd2f04e563c4f2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a771eb60fd9a3ae74b0daf95d3c05cae3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a771eb60fd9a3ae74b0daf95d3c05cae3"><td class="memTemplItemLeft" align="right" valign="top">const <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a771eb60fd9a3ae74b0daf95d3c05cae3">snapshot</a> (<a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; T &gt; &amp;img) const </td></tr>
+<tr class="memdesc:a771eb60fd9a3ae74b0daf95d3c05cae3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Take a snapshot of the associated window content.  <a href="#a771eb60fd9a3ae74b0daf95d3c05cae3">More...</a><br/></td></tr>
+<tr class="separator:a771eb60fd9a3ae74b0daf95d3c05cae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a903bbc0d3fe2b9179790f7baea035916"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a903bbc0d3fe2b9179790f7baea035916"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a903bbc0d3fe2b9179790f7baea035916">wait</a> (<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp1)</td></tr>
+<tr class="memdesc:a903bbc0d3fe2b9179790f7baea035916"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for any event occuring on the display <code>disp1</code>. <br/></td></tr>
+<tr class="separator:a903bbc0d3fe2b9179790f7baea035916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad33d8e77ac9fab757e6f9e9afc067765"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad33d8e77ac9fab757e6f9e9afc067765"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ad33d8e77ac9fab757e6f9e9afc067765">wait</a> (<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp1, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp2)</td></tr>
+<tr class="memdesc:ad33d8e77ac9fab757e6f9e9afc067765"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for any event occuring either on the display <code>disp1</code> or <code>disp2</code>. <br/></td></tr>
+<tr class="separator:ad33d8e77ac9fab757e6f9e9afc067765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace751dd163a5ea476947bcad5554035e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace751dd163a5ea476947bcad5554035e"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#ace751dd163a5ea476947bcad5554035e">wait</a> (<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp1, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp2, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp3)</td></tr>
+<tr class="memdesc:ace751dd163a5ea476947bcad5554035e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for any event occuring either on the display <code>disp1</code>, <code>disp2</code> or <code>disp3</code>. <br/></td></tr>
+<tr class="separator:ace751dd163a5ea476947bcad5554035e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78ac24c082d4eb13d127374a4bf64987"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78ac24c082d4eb13d127374a4bf64987"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a78ac24c082d4eb13d127374a4bf64987">wait</a> (<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp1, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp2, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp3, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp4)</td></tr>
+<tr class="memdesc:a78ac24c082d4eb13d127374a4bf64987"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for any event occuring either on the display <code>disp1</code>, <code>disp2</code>, <code>disp3</code> or <code>disp4</code>. <br/></td></tr>
+<tr class="separator:a78ac24c082d4eb13d127374a4bf64987"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a205f86fcf436778bf3219c8163d33425"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a205f86fcf436778bf3219c8163d33425"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a205f86fcf436778bf3219c8163d33425">wait</a> (<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp1, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp2, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp3, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp4, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp5)</td></tr>
+<tr class="memdesc:a205f86fcf436778bf3219c8163d33425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for any event occuring either on the display <code>disp1</code>, <code>disp2</code>, <code>disp3</code>, <code>disp4</code> or <code>disp5</code>. <br/></td></tr>
+<tr class="separator:a205f86fcf436778bf3219c8163d33425"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ca2604a502f006134bd159285c24d84"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2ca2604a502f006134bd159285c24d84"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a2ca2604a502f006134bd159285c24d84">wait</a> (<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp1, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp2, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp3, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp4, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp5, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp6)</td></tr>
+<tr class="memdesc:a2ca2604a502f006134bd159285c24d84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for any event occuring either on the display <code>disp1</code>, <code>disp2</code>, <code>disp3</code>, <code>disp4</code>, ... <code>disp6</code>. <br/></td></tr>
+<tr class="separator:a2ca2604a502f006134bd159285c24d84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e44eab5ce34cfa5872122decb31115e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4e44eab5ce34cfa5872122decb31115e"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a4e44eab5ce34cfa5872122decb31115e">wait</a> (<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp1, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp2, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp3, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp4, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp5, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp6, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp7)</td></tr>
+<tr class="memdesc:a4e44eab5ce34cfa5872122decb31115e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for any event occuring either on the display <code>disp1</code>, <code>disp2</code>, <code>disp3</code>, <code>disp4</code>, ... <code>disp7</code>. <br/></td></tr>
+<tr class="separator:a4e44eab5ce34cfa5872122decb31115e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bf0e4fd59de6a0e60d787da8cb55b40"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6bf0e4fd59de6a0e60d787da8cb55b40"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a6bf0e4fd59de6a0e60d787da8cb55b40">wait</a> (<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp1, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp2, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp3, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp4, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp5, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp6, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp7, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp8)</td></tr>
+<tr class="memdesc:a6bf0e4fd59de6a0e60d787da8cb55b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for any event occuring either on the display <code>disp1</code>, <code>disp2</code>, <code>disp3</code>, <code>disp4</code>, ... <code>disp8</code>. <br/></td></tr>
+<tr class="separator:a6bf0e4fd59de6a0e60d787da8cb55b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8af9b2ad0b81d8e22d3e09fd4e8dcf12"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8af9b2ad0b81d8e22d3e09fd4e8dcf12"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a8af9b2ad0b81d8e22d3e09fd4e8dcf12">wait</a> (<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp1, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp2, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp3, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp4, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp5, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp6, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp7, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp8, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp9)</td></tr>
+<tr class="memdesc:a8af9b2ad0b81d8e22d3e09fd4e8dcf12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for any event occuring either on the display <code>disp1</code>, <code>disp2</code>, <code>disp3</code>, <code>disp4</code>, ... <code>disp9</code>. <br/></td></tr>
+<tr class="separator:a8af9b2ad0b81d8e22d3e09fd4e8dcf12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2fb3e192c2ba6a39a7965357c36a4ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2fb3e192c2ba6a39a7965357c36a4ad"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#aa2fb3e192c2ba6a39a7965357c36a4ad">wait</a> (<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp1, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp2, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp3, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp4, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp5, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp6, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp7, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp8, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp9, <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;disp10)</td></tr>
+<tr class="memdesc:aa2fb3e192c2ba6a39a7965357c36a4ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for any event occuring either on the display <code>disp1</code>, <code>disp2</code>, <code>disp3</code>, <code>disp4</code>, ... <code>disp10</code>. <br/></td></tr>
+<tr class="separator:aa2fb3e192c2ba6a39a7965357c36a4ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a530c68e321d3adcb30fcefa06a25ca5b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a530c68e321d3adcb30fcefa06a25ca5b"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcimg__library_1_1CImgDisplay.html#a530c68e321d3adcb30fcefa06a25ca5b">wait_all</a> ()</td></tr>
+<tr class="memdesc:a530c68e321d3adcb30fcefa06a25ca5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for any window event occuring in any opened <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a>. <br/></td></tr>
+<tr class="separator:a530c68e321d3adcb30fcefa06a25ca5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Allow to create windows, display images on them and manage user events (keyboard, mouse and windows events). </p>
+<p><a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> methods rely on a low-level graphic library to perform: it can be either <b>X-Window</b> (X11, for Unix-based systems) or <b>GDI32</b> (for Windows-based systems). If both libraries are missing, <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> will not be able to display images on screen, and will enter a minimal mode where warning messages will be outputed each time the program is trying to call one of the <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> method.</p>
+<p>The configuration variable <code>cimg_display</code> tells about the graphic library used. It is set automatically by <code>CImg</code> when one of these graphic libraries has been detected. But, you can override its value if necessary. Valid choices are:</p>
+<ul>
+<li>0: Disable display capabilities.</li>
+<li>1: Use <b>X-Window</b> (X11) library.</li>
+<li>2: Use <b>GDI32</b> library.</li>
+</ul>
+<p>Remember to link your program against <b>X11</b> or <b>GDI32</b> libraries if you use <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a>. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ae4b8135f23d41f2077ff1d63deb452ea"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">~<a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+<dl class="section note"><dt>Note</dt><dd>If the associated window is visible on the screen, it is closed by the call to the destructor. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a54e3407c3b858f5f40283264e39b4f38"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct an empty display. </p>
+<dl class="section note"><dt>Note</dt><dd>Constructing an empty <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> instance does not make a window appearing on the screen, until display of valid data is performed. </dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><a class="code" href="structcimg__library_1_1CImgDisplay.html#a54e3407c3b858f5f40283264e39b4f38">CImgDisplay</a> disp;  <span class="comment">// Does actually nothing.</span></div>
+<div class="line">...</div>
+<div class="line">disp.display(img); <span class="comment">// Construct new window and display image in it.</span></div>
+</div><!-- fragment --> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abb46df06ee84d2be48cf5c57a9ed2f6d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>title</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>normalization</em> = <code>3</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>is_fullscreen</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>is_closed</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a display with specified dimensions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">width</td><td>Window width. </td></tr>
+    <tr><td class="paramname">height</td><td>Window height. </td></tr>
+    <tr><td class="paramname">title</td><td>Window title. </td></tr>
+    <tr><td class="paramname">normalization</td><td>Normalization type (<code>0</code>=none, <code>1</code>=always, <code>2</code>=once, <code>3</code>=pixel type-dependent, see <a class="el" href="structcimg__library_1_1CImgDisplay.html#a67719cb05110ca9e5725bc59f8350b68" title="Return normalization type of the display. ">normalization()</a>). </td></tr>
+    <tr><td class="paramname">is_fullscreen</td><td>Tells if fullscreen mode is enabled. </td></tr>
+    <tr><td class="paramname">is_closed</td><td>Tells if associated window is initially visible or not. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>A black background is initially displayed on the associated window. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7239126d823db5e9eaa9ee1affefa1db"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>title</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>normalization</em> = <code>3</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>is_fullscreen</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>is_closed</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a display from an image. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">img</td><td>Image used as a model to create the window. </td></tr>
+    <tr><td class="paramname">title</td><td>Window title. </td></tr>
+    <tr><td class="paramname">normalization</td><td>Normalization type (<code>0</code>=none, <code>1</code>=always, <code>2</code>=once, <code>3</code>=pixel type-dependent, see <a class="el" href="structcimg__library_1_1CImgDisplay.html#a67719cb05110ca9e5725bc59f8350b68" title="Return normalization type of the display. ">normalization()</a>). </td></tr>
+    <tr><td class="paramname">is_fullscreen</td><td>Tells if fullscreen mode is enabled. </td></tr>
+    <tr><td class="paramname">is_closed</td><td>Tells if associated window is initially visible or not. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The pixels of the input image are initially displayed on the associated window. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aab2a72159873ac50cf03c44965059a6b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcimg__library_1_1CImgList.html">CImgList</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>title</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>normalization</em> = <code>3</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>is_fullscreen</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>is_closed</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a display from an image list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>The images list to display. </td></tr>
+    <tr><td class="paramname">title</td><td>Window title. </td></tr>
+    <tr><td class="paramname">normalization</td><td>Normalization type (<code>0</code>=none, <code>1</code>=always, <code>2</code>=once, <code>3</code>=pixel type-dependent, see <a class="el" href="structcimg__library_1_1CImgDisplay.html#a67719cb05110ca9e5725bc59f8350b68" title="Return normalization type of the display. ">normalization()</a>). </td></tr>
+    <tr><td class="paramname">is_fullscreen</td><td>Tells if fullscreen mode is enabled. </td></tr>
+    <tr><td class="paramname">is_closed</td><td>Tells if associated window is initially visible or not. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>All images of the list, appended along the X-axis, are initially displayed on the associated window. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6765c355fa3ae998b9729b358f198a61"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td>
+          <td class="paramname"><em>disp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a display as a copy of an existing one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">disp</td><td>Display instance to copy. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The pixel buffer of the input window is initially displayed on the associated window. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a816d8c873ae3d27854bd0620646224b9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; assign </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destructor - Empty constructor <b>[in-place version]</b>. </p>
+<dl class="section note"><dt>Note</dt><dd>Replace the current instance by an empty display. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a03d4a8009b65ae368a939a5ecec2a2cf"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a reference to an empty display. </p>
+<dl class="section note"><dt>Note</dt><dd>Can be useful for writing function prototypes where one of the argument (of type <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a>&amp;) must have a default value. </dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><span class="keywordtype">void</span> foo(<a class="code" href="structcimg__library_1_1CImgDisplay.html#a54e3407c3b858f5f40283264e39b4f38">CImgDisplay</a>&amp; disp=<a class="code" href="structcimg__library_1_1CImgDisplay.html#a03d4a8009b65ae368a939a5ecec2a2cf">CImgDisplay::empty</a>());</div>
+</div><!-- fragment --> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a00b22a049bc63bbbb31ce3b7a152cf9b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>img</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Display image on associated window. </p>
+<dl class="section note"><dt>Note</dt><dd><code>disp = img</code> is equivalent to <code>disp.display(img)</code>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abb1361aa3d793f6d22cc84baf5d671ee"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcimg__library_1_1CImgList.html">CImgList</a>&lt; t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Display list of images on associated window. </p>
+<dl class="section note"><dt>Note</dt><dd><code>disp = list</code> is equivalent to <code>disp.display(list)</code>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a81d1882a4d7d0579298fe6fc706fca40"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td>
+          <td class="paramname"><em>disp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a display as a copy of another one <b>[in-place version]</b>. </p>
+<dl class="section note"><dt>Note</dt><dd>Equivalent to <a class="el" href="structcimg__library_1_1CImgDisplay.html#ac103e68816e12f5fd67c8f293fe18acd" title="Construct a display as a copy of another one [in-place version]. ">assign(const CImgDisplay&amp;)</a>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa385aa18f5e42db5a415c25a90f4193d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">operator bool </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return <code>false</code> if display is empty, <code>true</code> otherwise. </p>
+<dl class="section note"><dt>Note</dt><dd><code>if (disp) { ... }</code> is equivalent to <code>if (!disp.<a class="el" href="structcimg__library_1_1CImgDisplay.html#acef8e33cfd36a5d7d2fad939efcf02e3" title="Return true if display is empty, false otherwise. ">is_empty()</a>) { ... }</code>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2de15bd974a282882cbb02718501f954"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_closed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return <code>true</code> if display is closed (i.e. not visible on the screen), <code>false</code> otherwise. </p>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>When a user physically closes the associated window, the display is set to closed.</li>
+<li>A closed display is not destroyed. Its associated window can be show again on the screen using <a class="el" href="structcimg__library_1_1CImgDisplay.html#a1b27a2a375509146444ab06b2f7b8851" title="Show (closed) associated window on the screen. ">show()</a>. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5df1371379d5b85e44bed3f7e42a0c7c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_key </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return <code>true</code> if any key is being pressed on the associated window, <code>false</code> otherwise. </p>
+<dl class="section note"><dt>Note</dt><dd>The methods below do the same only for specific keys. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae889377636d1e013a29f278d4d57dca2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_key </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>keycode</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return <code>true</code> if key specified by given keycode is being pressed on the associated window, <code>false</code> otherwise. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">keycode</td><td>Keycode to test. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Keycode constants are defined in the cimg namespace and are architecture-dependent. Use them to ensure your code stay portable (see <a class="el" href="namespacecimg__library_1_1cimg.html#ac9dd25f9bbd738fb2a5c4a53abfc131a" title="Keycode for the ESC key (architecture-dependent). ">cimg::keyESC</a>). </dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><a class="code" href="structcimg__library_1_1CImgDisplay.html#a54e3407c3b858f5f40283264e39b4f38">CImgDisplay</a> disp(400,400);</div>
+<div class="line"><span class="keywordflow">while</span> (!disp.is_closed()) {</div>
+<div class="line">  <span class="keywordflow">if</span> (disp.key(<a class="code" href="namespacecimg__library_1_1cimg.html#ac87fb27911487105898da7218a374942">cimg::keyTAB</a>)) { ... }  <span class="comment">// Equivalent to &#39;if (disp.is_keyTAB())&#39;.</span></div>
+<div class="line">  disp.wait();</div>
+<div class="line">}</div>
+</div><!-- fragment --> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a581e9c53cafd808ac50d2eb72cb230b7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_key </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>keycode</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return <code>true</code> if key specified by given keycode is being pressed on the associated window, <code>false</code> otherwise. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">keycode</td><td>C-string containing the keycode label of the key to test. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Use it when the key you want to test can be dynamically set by the user. </dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><a class="code" href="structcimg__library_1_1CImgDisplay.html#a54e3407c3b858f5f40283264e39b4f38">CImgDisplay</a> disp(400,400);</div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span> *<span class="keyword">const</span> <a class="code" href="structcimg__library_1_1CImgDisplay.html#a7626b926cfb3c3c3e3a720bde2845a4b">keycode</a> = <span class="stringliteral">&quot;TAB&quot;</span>;</div>
+<div class="line"><span class="keywordflow">while</span> (!disp.is_closed()) {</div>
+<div class="line">  <span class="keywordflow">if</span> (disp.is_key(keycode)) { ... }  <span class="comment">// Equivalent to &#39;if (disp.is_keyTAB())&#39;.</span></div>
+<div class="line">  disp.wait();</div>
+<div class="line">}</div>
+</div><!-- fragment --> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a79c0d5400f1620fe69dfb15695248a56"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_key_sequence </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int *const&#160;</td>
+          <td class="paramname"><em>keycodes_sequence</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>remove_sequence</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return <code>true</code> if specified key sequence has been typed on the associated window, <code>false</code> otherwise. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">keycodes_sequence</td><td>Buffer of keycodes to test. </td></tr>
+    <tr><td class="paramname">length</td><td>Number of keys in the <code>keycodes_sequence</code> buffer. </td></tr>
+    <tr><td class="paramname">remove_sequence</td><td>Tells if the key sequence must be removed from the key history, if found. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Keycode constants are defined in the cimg namespace and are architecture-dependent. Use them to ensure your code stay portable (see <a class="el" href="namespacecimg__library_1_1cimg.html#ac9dd25f9bbd738fb2a5c4a53abfc131a" title="Keycode for the ESC key (architecture-dependent). ">cimg::keyESC</a>). </dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><a class="code" href="structcimg__library_1_1CImgDisplay.html#a54e3407c3b858f5f40283264e39b4f38">CImgDisplay</a> disp(400,400);</div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> key_seq[] = { <a class="code" href="namespacecimg__library_1_1cimg.html#afe6f3b04760bc1dfc2c1a8ff9ffd6e9b">cimg::keyCTRLLEFT</a>, <a class="code" href="namespacecimg__library_1_1cimg.html#a9ec16830a9bd06a33518ffc15cc0775d">cimg::keyD</a> };</div>
+<div class="line"><span class="keywordflow">while</span> (!disp.is_closed()) {</div>
+<div class="line">  <span class="keywordflow">if</span> (disp.is_key_sequence(key_seq,2)) { ... }  <span class="comment">// Test for the &#39;CTRL+D&#39; keyboard event.</span></div>
+<div class="line">  disp.wait();</div>
+<div class="line">}</div>
+</div><!-- fragment --> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac1bf84a095a6df08b34f5fd386367419"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_keyESC </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return <code>true</code> if the <code>ESC</code> key is being pressed on the associated window, <code>false</code> otherwise. </p>
+<dl class="section note"><dt>Note</dt><dd>Similar methods exist for all keys managed by <code>CImg</code> (see <a class="el" href="namespacecimg__library_1_1cimg.html#ac9dd25f9bbd738fb2a5c4a53abfc131a" title="Keycode for the ESC key (architecture-dependent). ">cimg::keyESC</a>). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a369399896761e31ae71db57fdd0ba431"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int width </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return display width. </p>
+<dl class="section note"><dt>Note</dt><dd>The width of the display (i.e. the width of the pixel data buffer associated to the <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> instance) may be different from the actual width of the associated window. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae26bcfe2f33f5873dbdfb6948cf1f59f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int height </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return display height. </p>
+<dl class="section note"><dt>Note</dt><dd>The height of the display (i.e. the height of the pixel data buffer associated to the <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> instance) may be different from the actual height of the associated window. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a67719cb05110ca9e5725bc59f8350b68"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int normalization </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return normalization type of the display. </p>
+<p>The normalization type tells about how the values of an input image are normalized by the <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> to be correctly displayed. The range of values for pixels displayed on screen is <code>[0,255]</code>. If the range of values of the data to display is different, a normalization may be required for displaying the data in a correct way. The normalization type can be one of:</p>
+<ul>
+<li><code>0</code>: Value normalization is disabled. It is then assumed that all input data to be displayed by the <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> instance have values in range <code>[0,255]</code>.</li>
+<li><code>1</code>: Value normalization is always performed (this is the default behavior). Before displaying an input image, its values will be (virtually) stretched in range <code>[0,255]</code>, so that the contrast of the displayed pixels will be maximum. Use this mode for images whose minimum and maximum values are not prescribed to known values (e.g. float-valued images). Note that when normalized versions of images are computed for display purposes, the actual values of these images are not modified.</li>
+<li><code>2</code>: Value normalization is performed once (on the first image display), then the same normalization coefficients are kept for next displayed frames.</li>
+<li><code>3</code>: Value normalization depends on the pixel type of the data to display. For integer pixel types, the normalization is done regarding the minimum/maximum values of the type (no normalization occurs then for <code>unsigned char</code>). For float-valued pixel types, the normalization is done regarding the minimum/maximum value of the image data instead. </li>
+</ul>
+
+</div>
+</div>
+<a class="anchor" id="a01f58dd237a70f1b83f0fe9ec560ae2d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* title </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return title of the associated window as a C-string. </p>
+<dl class="section note"><dt>Note</dt><dd>Window title may be not visible, depending on the used window manager or if the current display is in fullscreen mode. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0daf640f96f8a620a34de6cbea1f79f1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int window_width </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return width of the associated window. </p>
+<dl class="section note"><dt>Note</dt><dd>The width of the display (i.e. the width of the pixel data buffer associated to the <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> instance) may be different from the actual width of the associated window. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a706b9cb3b2bcdb372db6fe33693a8ae4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int window_height </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return height of the associated window. </p>
+<dl class="section note"><dt>Note</dt><dd>The height of the display (i.e. the height of the pixel data buffer associated to the <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> instance) may be different from the actual height of the associated window. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae1226fc43587896b59edd1cf57c77056"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int window_x </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return X-coordinate of the associated window. </p>
+<dl class="section note"><dt>Note</dt><dd>The returned coordinate corresponds to the location of the upper-left corner of the associated window. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad978bf4dc9acf4129159e0edd55e1111"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int window_y </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return Y-coordinate of the associated window. </p>
+<dl class="section note"><dt>Note</dt><dd>The returned coordinate corresponds to the location of the upper-left corner of the associated window. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae60918cd2b0b4c6588b2d10aea46a22c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int mouse_x </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return X-coordinate of the mouse pointer. </p>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>If the mouse pointer is outside window area, <code>-1</code> is returned.</li>
+<li>Otherwise, the returned value is in the range [0,<a class="el" href="structcimg__library_1_1CImgDisplay.html#a369399896761e31ae71db57fdd0ba431" title="Return display width. ">width()</a>-1]. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a628a43671de755c52d67ad01a019292b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int mouse_y </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return Y-coordinate of the mouse pointer. </p>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>If the mouse pointer is outside window area, <code>-1</code> is returned.</li>
+<li>Otherwise, the returned value is in the range [0,<a class="el" href="structcimg__library_1_1CImgDisplay.html#ae26bcfe2f33f5873dbdfb6948cf1f59f" title="Return display height. ">height()</a>-1]. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="adff5e3fda26574b001a038360b188479"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int button </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return current state of the mouse buttons. </p>
+<dl class="section note"><dt>Note</dt><dd>Three mouse buttons can be managed. If one button is pressed, its corresponding bit in the returned value is set:<ul>
+<li>bit <code>0</code> (value <code>0x1</code>): State of the left mouse button.</li>
+<li>bit <code>1</code> (value <code>0x2</code>): State of the right mouse button.</li>
+<li>bit <code>2</code> (value <code>0x4</code>): State of the middle mouse button.</li>
+</ul>
+</dd></dl>
+<p>Several bits can be activated if more than one button are pressed at the same time. </p>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><a class="code" href="structcimg__library_1_1CImgDisplay.html#a54e3407c3b858f5f40283264e39b4f38">CImgDisplay</a> disp(400,400);</div>
+<div class="line"><span class="keywordflow">while</span> (!disp.is_closed()) {</div>
+<div class="line">  <span class="keywordflow">if</span> (disp.button()&amp;1) { <span class="comment">// Left button clicked.</span></div>
+<div class="line">    ...</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">if</span> (disp.button()&amp;2) { <span class="comment">// Right button clicked.</span></div>
+<div class="line">    ...</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">if</span> (disp.button()&amp;4) { <span class="comment">// Middle button clicked.</span></div>
+<div class="line">    ...</div>
+<div class="line">  }</div>
+<div class="line">  disp.wait();</div>
+<div class="line">}</div>
+</div><!-- fragment --> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3a455e002ed5dcc1fc2c23df07781522"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int wheel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return current state of the mouse wheel. </p>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>The returned value can be positive or negative depending on whether the mouse wheel has been scrolled forward or backward.</li>
+<li>Scrolling the wheel forward add <code>1</code> to the wheel value.</li>
+<li>Scrolling the wheel backward substract <code>1</code> to the wheel value.</li>
+<li>The returned value cumulates the number of forward of backward scrolls since the creation of the display, or since the last reset of the wheel value (using <a class="el" href="structcimg__library_1_1CImgDisplay.html#a1a255a5404da7ba5b511c23cefa91879" title="Flush all mouse wheel events. ">set_wheel()</a>). It is strongly recommended to quickly reset the wheel counter when an action has been performed regarding the current wheel value. Otherwise, the returned wheel value may be for instance <code>0</code> despite the fact that many scrolls have been done (as many in forward as in backward directions). </li>
+</ul>
+</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><a class="code" href="structcimg__library_1_1CImgDisplay.html#a54e3407c3b858f5f40283264e39b4f38">CImgDisplay</a> disp(400,400);</div>
+<div class="line"><span class="keywordflow">while</span> (!disp.is_closed()) {</div>
+<div class="line">  <span class="keywordflow">if</span> (disp.wheel()) {</div>
+<div class="line">    <span class="keywordtype">int</span> counter = disp.wheel();  <span class="comment">// Read the state of the mouse wheel.</span></div>
+<div class="line">    ...                          <span class="comment">// Do what you want with &#39;counter&#39;.</span></div>
+<div class="line">    disp.set_wheel();            <span class="comment">// Reset the wheel value to 0.</span></div>
+<div class="line">  }</div>
+<div class="line">  disp.wait();</div>
+<div class="line">}</div>
+</div><!-- fragment --> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5e321648f3701b0ea6d9f7049cd6da38"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int key </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>pos</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return one entry from the pressed keys history. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>Indice to read from the pressed keys history (indice <code>0</code> corresponds to latest entry). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Keycode of a pressed key or <code>0</code> for a released key. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>Each <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> stores a history of the pressed keys in a buffer of size <code>128</code>. When a new key is pressed, its keycode is stored in the pressed keys history. When a key is released, <code>0</code> is put instead. This means that up to the 64 last pressed keys may be read from the pressed keys history. When a new value is stored, the pressed keys history is shifted so that the latest entry is always stored at position <code>0</code>.</li>
+<li>Keycode constants are defined in the cimg namespace and are architecture-dependent. Use them to ensure your code stay portable (see <a class="el" href="namespacecimg__library_1_1cimg.html#ac9dd25f9bbd738fb2a5c4a53abfc131a" title="Keycode for the ESC key (architecture-dependent). ">cimg::keyESC</a>). </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a885a46a61297c842fe2a7a37bbee2a54"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int released_key </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>pos</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return one entry from the released keys history. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>Indice to read from the released keys history (indice <code>0</code> corresponds to latest entry). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Keycode of a released key or <code>0</code> for a pressed key. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>Each <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> stores a history of the released keys in a buffer of size <code>128</code>. When a new key is released, its keycode is stored in the pressed keys history. When a key is pressed, <code>0</code> is put instead. This means that up to the 64 last released keys may be read from the released keys history. When a new value is stored, the released keys history is shifted so that the latest entry is always stored at position <code>0</code>.</li>
+<li>Keycode constants are defined in the cimg namespace and are architecture-dependent. Use them to ensure your code stay portable (see <a class="el" href="namespacecimg__library_1_1cimg.html#ac9dd25f9bbd738fb2a5c4a53abfc131a" title="Keycode for the ESC key (architecture-dependent). ">cimg::keyESC</a>). </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7626b926cfb3c3c3e3a720bde2845a4b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static unsigned int keycode </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>keycode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return keycode corresponding to the specified string. </p>
+<dl class="section note"><dt>Note</dt><dd>Keycode constants are defined in the cimg namespace and are architecture-dependent. Use them to ensure your code stay portable (see <a class="el" href="namespacecimg__library_1_1cimg.html#ac9dd25f9bbd738fb2a5c4a53abfc131a" title="Keycode for the ESC key (architecture-dependent). ">cimg::keyESC</a>). </dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespacecimg__library_1_1cimg.html#ac87fb27911487105898da7218a374942">keyTAB</a> = <a class="code" href="structcimg__library_1_1CImgDisplay.html#a7626b926cfb3c3c3e3a720bde2845a4b">CImgDisplay::keycode</a>(<span class="stringliteral">&quot;TAB&quot;</span>);  <span class="comment">// Return cimg::keyTAB.</span></div>
+</div><!-- fragment --> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3ade6e852b67fea14093915c5dca7862"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float frames_per_second </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the current refresh rate, in frames per second. </p>
+<dl class="section note"><dt>Note</dt><dd>Returns a significant value when the current instance is used to display successive frames. It measures the delay between successive calls to <a class="el" href="structcimg__library_1_1CImgDisplay.html#a3ade6e852b67fea14093915c5dca7862" title="Return the current refresh rate, in frames per second. ">frames_per_second()</a>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="afde33f75da6e714eb378407da029f11d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; display </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>img</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Display image on associated window. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">img</td><td>Input image to display. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This method returns immediately. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a616d2352d40e76ee7bdfb77e01e1cd87"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; display </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcimg__library_1_1CImgList.html">CImgList</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char&#160;</td>
+          <td class="paramname"><em>axis</em> = <code>'x'</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>align</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Display list of images on associated window. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>List of images to display. </td></tr>
+    <tr><td class="paramname">axis</td><td>Axis used to append the images along, for the visualization (can be <code>x</code>, <code>y</code>, <code>z</code> or <code>c</code>). </td></tr>
+    <tr><td class="paramname">align</td><td>Relative position of aligned images when displaying lists with images of different sizes (<code>0</code> for upper-left, <code>0.5</code> for centering and <code>1</code> for lower-right). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This method returns immediately. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1b27a2a375509146444ab06b2f7b8851"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; show </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Show (closed) associated window on the screen. </p>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>Force the associated window of a display to be visible on the screen, even if it has been closed before.</li>
+<li>Using <a class="el" href="structcimg__library_1_1CImgDisplay.html#a1b27a2a375509146444ab06b2f7b8851" title="Show (closed) associated window on the screen. ">show()</a> on a visible display does nothing. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7e35c3363f8859c8a952a60dd4aa3fca"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; close </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Close (visible) associated window and make it disappear from the screen. </p>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>A closed display only means the associated window is not visible anymore. This does not mean the display has been destroyed. Use <a class="el" href="structcimg__library_1_1CImgDisplay.html#a1b27a2a375509146444ab06b2f7b8851" title="Show (closed) associated window on the screen. ">show()</a> to make the associated window reappear.</li>
+<li>Using <a class="el" href="structcimg__library_1_1CImgDisplay.html#a7e35c3363f8859c8a952a60dd4aa3fca" title="Close (visible) associated window and make it disappear from the screen. ">close()</a> on a closed display does nothing. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a21da6f48a7ed419e7605f02925be4718"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; move </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>pos_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>pos_y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Move associated window to a new location. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos_x</td><td>X-coordinate of the new window location. </td></tr>
+    <tr><td class="paramname">pos_y</td><td>Y-coordinate of the new window location. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Depending on the window manager behavior, this method may not succeed (no exceptions are thrown nevertheless). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6613d8faf95a1dbce486f4aab0557bff"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; resize </td>
+          <td>(</td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>force_redraw</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resize display to the size of the associated window. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">force_redraw</td><td>Tells if the previous window content must be updated and refreshed as well. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>Calling this method ensures that <a class="el" href="structcimg__library_1_1CImgDisplay.html#a369399896761e31ae71db57fdd0ba431" title="Return display width. ">width()</a> and <a class="el" href="structcimg__library_1_1CImgDisplay.html#a0daf640f96f8a620a34de6cbea1f79f1" title="Return width of the associated window. ">window_width()</a> become equal, as well as <a class="el" href="structcimg__library_1_1CImgDisplay.html#ae26bcfe2f33f5873dbdfb6948cf1f59f" title="Return display height. ">height()</a> and <a class="el" href="structcimg__library_1_1CImgDisplay.html#a706b9cb3b2bcdb372db6fe33693a8ae4" title="Return height of the associated window. ">window_height()</a>.</li>
+<li>The associated window is also resized to specified dimensions. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acd8f7316eb83b1059bebfe7d271c1398"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; resize </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>force_redraw</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resize display to the specified size. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">width</td><td>Requested display width. </td></tr>
+    <tr><td class="paramname">height</td><td>Requested display height. </td></tr>
+    <tr><td class="paramname">force_redraw</td><td>Tells if the previous window content must be updated and refreshed as well. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The associated window is also resized to specified dimensions. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad27b62edeea8b0964d424bdc9d113586"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; resize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>force_redraw</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resize display to the size of an input image. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">img</td><td>Input image to take size from. </td></tr>
+    <tr><td class="paramname">force_redraw</td><td>Tells if the previous window content must be resized and updated as well. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>Calling this method ensures that <a class="el" href="structcimg__library_1_1CImgDisplay.html#a369399896761e31ae71db57fdd0ba431" title="Return display width. ">width()</a> and <code>img.width()</code> become equal, as well as <a class="el" href="structcimg__library_1_1CImgDisplay.html#ae26bcfe2f33f5873dbdfb6948cf1f59f" title="Return display height. ">height()</a> and <code>img.height()</code>.</li>
+<li>The associated window is also resized to specified dimensions. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3657fa648f24413342b92f02ad38b5ae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; resize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a> &amp;&#160;</td>
+          <td class="paramname"><em>disp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>force_redraw</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resize display to the size of another <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">disp</td><td>Input display to take size from. </td></tr>
+    <tr><td class="paramname">force_redraw</td><td>Tells if the previous window content must be resized and updated as well. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>Calling this method ensures that <a class="el" href="structcimg__library_1_1CImgDisplay.html#a369399896761e31ae71db57fdd0ba431" title="Return display width. ">width()</a> and <code>disp.width()</code> become equal, as well as <a class="el" href="structcimg__library_1_1CImgDisplay.html#ae26bcfe2f33f5873dbdfb6948cf1f59f" title="Return display height. ">height()</a> and <code>disp.height()</code>.</li>
+<li>The associated window is also resized to specified dimensions. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3d9938cea4cb848c62fc7052d8bdfe23"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; set_normalization </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>normalization</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set normalization type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">normalization</td><td>New normalization mode. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="afde9a27e1bb7d0ef822a0f0613f99d32"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; set_title </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set title of the associated window. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">format</td><td>C-string containing the format of the title, as with <code>std::printf()</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>As the first argument is a format string, it is highly recommended to write <div class="fragment"><div class="line">disp.set_title(<span class="stringliteral">&quot;%s&quot;</span>,window_title);</div>
+</div><!-- fragment --> instead of <div class="fragment"><div class="line">disp.set_title(window_title);</div>
+</div><!-- fragment --> if <code>window_title</code> can be arbitrary, to prevent nasty memory access. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a9f0ddf65b149de930a3f68ededec61cd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; set_fullscreen </td>
+          <td>(</td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>is_fullscreen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>force_redraw</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable fullscreen mode. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">is_fullscreen</td><td>Tells is the fullscreen mode must be activated or not. </td></tr>
+    <tr><td class="paramname">force_redraw</td><td>Tells if the previous window content must be displayed as well. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>When the fullscreen mode is enabled, the associated window fills the entire screen but the size of the current display is not modified.</li>
+<li>The screen resolution may be switched to fit the associated window size and ensure it appears the largest as possible. For X-Window (X11) users, the configuration flag <code>cimg_use_xrandr</code> has to be set to allow the screen resolution change (requires the X11 extensions to be enabled). </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a288eb7bafd8b2b51603207e87c415ad7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; toggle_fullscreen </td>
+          <td>(</td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>force_redraw</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Toggle fullscreen mode. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">force_redraw</td><td>Tells if the previous window content must be displayed as well. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Enable fullscreen mode if it was not enabled, and disable it otherwise. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a9fc997c0451ce75666f1bdfe45eb0343"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; show_mouse </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Show mouse pointer. </p>
+<dl class="section note"><dt>Note</dt><dd>Depending on the window manager behavior, this method may not succeed (no exceptions are thrown nevertheless). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3fb8cda1473f326934c286e6e5d825e2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; hide_mouse </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Hide mouse pointer. </p>
+<dl class="section note"><dt>Note</dt><dd>Depending on the window manager behavior, this method may not succeed (no exceptions are thrown nevertheless). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af089ae3b38f20ac0f5a450dc5ad215f1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; set_mouse </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>pos_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>pos_y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Move mouse pointer to a specified location. </p>
+<dl class="section note"><dt>Note</dt><dd>Depending on the window manager behavior, this method may not succeed (no exceptions are thrown nevertheless). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6e9eb0990daa50aa51ce6202bcf774ae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; set_button </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Simulate a mouse button release event. </p>
+<dl class="section note"><dt>Note</dt><dd>All mouse buttons are considered released at the same time. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa8fc0d8a39b2063d9f1f6cea8fcc2cfb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; set_button </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>button</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>is_pressed</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Simulate a mouse button press or release event. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">button</td><td>Buttons event code, where each button is associated to a single bit. </td></tr>
+    <tr><td class="paramname">is_pressed</td><td>Tells if the mouse button is considered as pressed or released. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a1a255a5404da7ba5b511c23cefa91879"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; set_wheel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flush all mouse wheel events. </p>
+<dl class="section note"><dt>Note</dt><dd>Make <a class="el" href="structcimg__library_1_1CImgDisplay.html#a3a455e002ed5dcc1fc2c23df07781522" title="Return current state of the mouse wheel. ">wheel()</a> to return <code>0</code>, if called afterwards. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a90e0d424e65ccc6dba2a0df2e5886759"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; set_wheel </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>amplitude</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Simulate a wheel event. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">amplitude</td><td>Amplitude of the wheel scrolling to simulate. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Make <a class="el" href="structcimg__library_1_1CImgDisplay.html#a3a455e002ed5dcc1fc2c23df07781522" title="Return current state of the mouse wheel. ">wheel()</a> to return <code>amplitude</code>, if called afterwards. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a199046786d132551afa204c8b80eddc1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; set_key </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flush all key events. </p>
+<dl class="section note"><dt>Note</dt><dd>Make <a class="el" href="structcimg__library_1_1CImgDisplay.html#a5e321648f3701b0ea6d9f7049cd6da38" title="Return one entry from the pressed keys history. ">key()</a> to return <code>0</code>, if called afterwards. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a30455ebb640fe7f0d08dc9b6897565f4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; set_key </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>keycode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>is_pressed</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Simulate a keyboard press/release event. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">keycode</td><td>Keycode of the associated key. </td></tr>
+    <tr><td class="paramname">is_pressed</td><td>Tells if the key is considered as pressed or released. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Keycode constants are defined in the cimg namespace and are architecture-dependent. Use them to ensure your code stay portable (see <a class="el" href="namespacecimg__library_1_1cimg.html#ac9dd25f9bbd738fb2a5c4a53abfc131a" title="Keycode for the ESC key (architecture-dependent). ">cimg::keyESC</a>). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4bf168837be505b1301604b151280f6e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flush all display events. </p>
+<dl class="section note"><dt>Note</dt><dd>Remove all passed events from the current display. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a79669a0b7bdc65aff8313c590c7faab0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; wait </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>milliseconds</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wait for a given number of milliseconds since the last call to <a class="el" href="structcimg__library_1_1CImgDisplay.html#ab16d9d312efaecc3630dc6539269bab9" title="Wait for any user event occuring on the current display. ">wait()</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">milliseconds</td><td>Number of milliseconds to wait for. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Similar to <a class="el" href="namespacecimg__library_1_1cimg.html#a3c8917c0f12139bff6de6e3e45fc5b77" title="Wait for a given number of milliseconds since the last call to wait(). ">cimg::wait()</a>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abdf42eacfe538a28d8d3dca2dbe26f08"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; render </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>img</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Render image into internal display buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">img</td><td>Input image data to render. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>Convert image data representation into the internal display buffer (architecture-dependent structure).</li>
+<li>The content of the associated window is not modified, until <a class="el" href="structcimg__library_1_1CImgDisplay.html#a4e67d156351dd7dfdfd2f04e563c4f2a" title="Paint internal display buffer on associated window. ">paint()</a> is called.</li>
+<li>Should not be used for common <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> uses, since <a class="el" href="structcimg__library_1_1CImgDisplay.html#afde33f75da6e714eb378407da029f11d" title="Display image on associated window. ">display()</a> is more useful. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4e67d156351dd7dfdfd2f04e563c4f2a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; paint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Paint internal display buffer on associated window. </p>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>Update the content of the associated window with the internal display buffer, e.g. after a <a class="el" href="structcimg__library_1_1CImgDisplay.html#abdf42eacfe538a28d8d3dca2dbe26f08" title="Render image into internal display buffer. ">render()</a> call.</li>
+<li>Should not be used for common <a class="el" href="structcimg__library_1_1CImgDisplay.html" title="Allow to create windows, display images on them and manage user events (keyboard, mouse and windows e...">CImgDisplay</a> uses, since <a class="el" href="structcimg__library_1_1CImgDisplay.html#afde33f75da6e714eb378407da029f11d" title="Display image on associated window. ">display()</a> is more useful. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a771eb60fd9a3ae74b0daf95d3c05cae3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structcimg__library_1_1CImgDisplay.html">CImgDisplay</a>&amp; snapshot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>img</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Take a snapshot of the associated window content. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">img</td><td>Output snapshot. Can be empty on input. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</td></tr></table>
+<center>
+<p>
+<a href="http://sourceforge.net">
+  <img src="http://sourceforge.net/sflogo.php?group_id=96492&amp;type=3" border="0" height="37" width="125"></img>
+</a>
+<a href="http://sourceforge.net/donate/index.php?group_id=96492"><img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a>
+</p>
+</center>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+  <!--
+      var sc_project=895001;
+      var sc_invisible=1;
+      var sc_partition=7;
+      var sc_security="5ea85181";
+      //-->
+</script>
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c8.statcounter.com/counter.php?sc_project=895001&amp;java=0&amp;security=5ea85181&amp;invisible=1" alt="counter stats" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16976814-2']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End Google Analytics -->
+</body>
+</html>

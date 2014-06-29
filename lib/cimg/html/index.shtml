@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--#include file="header.html" -->
+<link href="style.css" rel="stylesheet" type="text/css">
+
+<div id="bloc_option"><div id="top_vert"><div id="text_top">Summary</div></div>
+<div id="center"><div id="text_centre_intro">
+
+<p>
+  The <tt><i>CImg Library</i></tt> is a <b>small</b>, <b>open source</b>, <b>C++ toolkit</b> for <b>image processing</b>,
+  designed with these properties in mind :
+
+  <table border="0" width="100%" cellspacing="16">
+    <tr><td><img src="img/item_usefulness.jpg" alt="Usefulness"></img></td>
+      <td><hr noshade="noshade" size="1" width="100%"></hr>
+        <tt><i>CImg</i></tt> defines <i>classes</i> and <i>methods</i>
+        to manage images in your own C++ code. You can use it to load/save various file formats, access pixel values,
+        display/transform/filter images, draw primitives (text, faces, curves, 3d objects, ...), compute statistics,
+        manage user interactions on images, and so on...
+    </td></tr>
+    <tr><td><img src="img/item_genericity.jpg" alt="Genericity"></img></td>
+      <td><hr noshade="noshade" size="1" width="100%"></hr>
+        <tt><i>CImg</i></tt> defines a single image class which can represent datasets having up to
+        <i>4-dimensions</i> (from 1d scalar signals to 3d hyperspectral volumetric images),
+        with <i>template pixel types</i> (<tt>bool,char,int,float,...</tt>).<br/>
+        It also handles image <i>collections</i> and <i>sequences</i>.
+    </td></tr>
+    <tr><td><img src="img/item_portability.jpg" alt="Portability"></img></td>
+      <td><hr noshade="noshade" size="1" width="100%"></hr>
+        <tt><i>CImg</i></tt> is <i>self-contained</i>, <i>thread-safe</i> and thus <i>highly portable</i>. It fully works on
+        <i>different operating systems</i> (<tt>Unix,Windows,MacOS X,*BSD,...</tt>) and is compatible
+        with <i>various C++ compilers</i> (<tt>Visual C++,g++,clang++,icc,...</tt>).
+    </td></tr>
+    <tr><td><img src="img/item_simplicity.jpg" alt="Simplicity"></img></td>
+      <td><hr noshade="noshade" size="1" width="100%"></hr>
+        <tt><i>CImg</i></tt> is <i>lightweight</i>. It is made of a single header file
+        <a href="http://cimg.cvs.sourceforge.net/cimg/CImg/CImg.h?view=markup"><tt>CImg.h</tt></a>
+        that must be included in your C++ source. It defines only <i>four</i> different classes, encapsulated
+        in a namespace.
+        It can be compiled using a minimal set of standard C++ and system libraries.<br/>
+        <i>No need for exotic or complex dependencies</i>.
+    </td></tr>
+    <tr><td><img src="img/item_extensibility.jpg" alt="Extensibility"></img></td>
+      <td><hr noshade="noshade" size="1" width="100%"></hr>
+        Although not mandatory, <tt><i>CImg</i></tt> can use functionalities of external tools/libraries such as
+        <a href="http://libboard.sourceforge.net/">Board</a>,
+        <a href="http://ffmpeg.mplayerhq.hu/">FFMPEG</a>,
+        <a href="http://www.fftw.org/">FFTW3</a>.
+        <a href="http://www.graphicsmagick.org/">GraphicsMagick</a>,
+        <a href="http://www.imagemagick.org/">ImageMagick</a>,
+        <a href="http://www.netlib.org/lapack/">Lapack</a>,
+        <a href="http://www.ijg.org/">libjpeg</a>,
+        <a href="http://www.libpng.org/pub/png/libpng.html">libpng</a>,
+        <a href="http://www.libtiff.org/">libtiff</a>,
+        <a href="http://www.imagemagick.org/Magick++/">Magick++</a>,
+        <a href="http://www.openexr.com/">OpenEXR</a>
+        <a href="http://http://opencv.willowgarage.com/wiki/">OpenCV</a>
+        <a href="http://www.openmp.org/">OpenMP</a>
+        or
+        <a href="http://xmedcon.sourceforge.net/">XMedCon</a>.
+        Moreover, a simple <i>plug-in</i> mechanism allows any user to directly enhance the library
+        capabilities according to his needs.
+    </td></tr>
+    <tr><td><img src="img/item_freedom.jpg" alt="Freedom"></img></td>
+      <td><hr noshade="noshade" size="1" width="100%"></hr>
+        <tt><i>CImg</i></tt> is a <i>free, open-source library</i> distributed under the
+        <a href="http://www.cecill.info/licences/Licence_CeCILL-C_V1-en.txt"><i>CeCILL-C</i></a> (close to the GNU LGPL)
+        or
+        <a href="http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt"><i>CeCILL</i></a> (compatible with the GNU GPL)
+        licenses</i></a>. It can be used in commercial applications.
+</td></tr>
+</table>
+</p>
+
+<blockquote>
+  <b>CImg</b> stands for <b><i>Cool Image</i></b> : It is <i>easy to use</i>, <i>efficient</i> and is intended to be
+  a very pleasant toolbox to design image processing algorithms in C++. Due to its generic conception, it can cover a wide range
+  of image processing applications.
+</blockquote>
+
+</div></div><div id="footer"><img src="images/footer.jpg" /></div></div>
+
+<div id="bloc_option"><div id="top_vert"><div id="text_top">Authors</div></div>
+<div id="center"><div id="text_centre_intro">
+
+<blockquote>
+  <a href="http://tschumperle.users.greyc.fr/">David Tschumperl&eacute;</a> (project leader)<br/><br/>
+  with the help of many contributors around the world :<br/><br/>
+  <i>
+    Maksim Aizenshtein,
+    Antonio Albiol,
+    Haz-Edine Assemlal,
+    Vincent Barra,
+    Wolf Blecher,
+    Romain Blei,
+    Yohan Bentolila,
+    Jerome Boulanger,
+    Pierre Buyssens,
+    Sebastien Coudert,
+    Frederic Devernay,
+    Olivier D'Hondt,
+    Fran&ccedil;ois-Xavier Dup&eacute;,
+    Gerd von Egidy
+    Eric Fausett,
+    Jean-Marie Favreau,
+    Sebastien Fourey,
+    Alexandre Fournier,
+    Vincent Garcia,
+    David Grimbichler,
+    Jinwei Gu,
+    Jean-Daniel Guyot,
+    Matt Hanson,
+    Sebastien Hanel,
+    Michael Holroyd,
+    Christoph Hormann,
+    Hon-Kwok Fung,
+    Werner Jainek,
+    Daniel Kondermann,
+    Pierre Kornprobst,
+    Orges Leka,
+    Francois Lauze,
+    Xie Long,
+    Thomas Martin,
+    Cesar Martinez,
+    Jean Martinot,
+    Arnold Meijster (Center for High Performance Computing and Visualization, University of Groningen/The Netherlands)
+    Nikita Melnichenko,
+    Baptiste Mougel,
+    Julien Morat,
+    Jovana Milutinovich,
+    Guillaume Nee,
+    Adam Newgas,
+    Francisco Oliveira,
+    Andrea Onofri,
+    Renaud Peteri,
+    Martin Petricek,
+    Paolo Prete,
+    Adrien Reboisson,
+    Klaus Schneider,
+    Jakob Schluttig,
+    Veronique Souchaud,
+    Konstantin Spirin,
+    Rainer Steffens,
+    David G. Starkweather,
+    Grzegorz Szwoch,
+    Thierry Thomas,
+    Yu-En-Yun,
+    Vo Duc Khanh,
+    Phillip Wood,
+    Bug Zhao,
+    Haibo Zheng.
+  </i>
+</blockquote>
+
+</div></div><div id="footer"><img src="images/footer.jpg" /></div></div>
+
+<div id="bloc_option"><div id="top_vert"><div id="text_top">Licenses</div></div>
+<div id="center"><div id="text_centre_intro">
+
+<blockquote>
+  The <tt><i>CImg Library</i></tt> is an open-source product distributed under <b>two distinct licenses</b> :
+  the library core itself is dual-licensed and
+  can be governed either by the
+  <a href="http://www.cecill.info/licences/Licence_CeCILL-C_V1-en.txt"><b>CeCILL-C</b> License</a> (LGPL-like),
+  or the
+  <a href="http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt"><b>CeCILL</b> License</a> (GPL-compatible).
+  Most of the other package files are distributed under the
+  <a href="http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt"><b>CeCILL</b> License</a>.
+  Both are <b>open source licenses</b>, the CeCILL-C being less restrictive than the CeCILL.<br/><br/>
+  The <tt><i>CImg Library</i></tt> source code has been registered to the <a href="http://app.legalis.net/paris/">APP</a>
+  (French Agency for the Protection of Programs) by the <a href="http://www.inria.fr/index.en.html">INRIA</a>,
+  under registration number <i>IDDN.FR.001.040004.000.S.P.2004.000.21000.</i>
+</blockquote>
+
+</div></div><div id="footer"><img src="images/footer.jpg" /></div></div>
+
+<div id="bloc_option"><div id="top_vert"><div id="text_top">Learn more</div></div>
+<div id="center"><div id="text_centre_intro">
+
+<ul>
+  <li>The <a href="screenshots.shtml">Screenshots</a> section illustrates some of the different source code examples provided in
+    the <tt><i>CImg</i></tt> package.</li>
+  <li>The <a href="reference/group__cimg__tutorial.html">Tutorial</a> section shows the basic use of <tt><i>CImg</i></tt> classes
+    and functions with a small first code.</li>
+  <li>You can look at the quite complete <a href="CImg_slides.pdf">CImg Library presentation slides</a> (.pdf format) which gives
+    more insights on the different library concepts.</li>
+  <li>Online web statistics on the <tt><i>CImg</i></tt> website activity are available
+    <a href="http://my.statcounter.com/project/standard/stats.php?project_id=895001&guest=1">here</a>,
+    <a href="http://sourceforge.net/project/stats/?group_id=96492&ugn=cimg">here</a> and below :</li>
+</ul>
+<table align="center" border="0" cellpadding="10" cellspacing="0" width="500">
+  <tbody><tr>
+      <td><script type="text/javascript" src="http://www.ohloh.net/p/8841/widgets/project_basic_stats.js"></script></td>
+      <td><script type="text/javascript" src="http://www.ohloh.net/p/8841/widgets/project_cocomo.js"></script></td>
+  </tr></tbody>
+</table>
+
+</div></div><div id="footer"><img src="images/footer.jpg" /></div></div>
+
+<div id="bloc_option"><div id="top_vert"><div id="text_top">Quick history</div></div>
+<div id="center"><div id="text_centre_intro">
+
+<blockquote>
+  The development of the <tt><i>CImg Library</i></tt> began at the end of 1999, when I started my PhD thesis
+  in the <a href="http://www-sop.inria.fr/odyssee"><img border="0" height="16" alt="" src="img/logoODYSSEE.jpg"></img> Lab</a>
+  at the <a href="http://www-sop.inria.fr/"><img border="0" height="16" alt="" src="img/logoINRIA.gif"></img> Sophia Antipolis</a>.
+  It was designed to help me and my colleagues developing various image processing algorithms,
+  for datasets as simple as 2D scalar images, or as complex as 3D volumes of diffusion tensors. I also used it for
+  courses on image processing I teached at the university. As a result, the <tt><i>CImg library</i></tt>
+  has been always intended to be <i>compact</i>, <i>easy to install and to use</i>, <i>multi-platform</i> and <i>generic</i>.
+  It provides a lot of basic functions that any human would like to find in a C++ image processing framework.<br/><br/>
+  I am now a permanent researcher of the  <a href="http://www.cnrs.fr"><img border="0" alt="" height="32" src="img/logoCNRS.gif"></img>
+    institution</a>,
+  working in the <a href="http://www.greyc.ensicaen.fr/EquipeImage"><img border="0" alt="" height="32" src="img/logoIMAGE.gif"></img>
+    group</a> at the <a href="http://www.greyc.ensicaen.fr"><img border="0" alt="" height="32" src="img/logoGREYC.gif"></img>
+    GREYC lab</a> in Caen/France.
+  I am still using, maintaining and updating the <tt><i>CImg Library</i></tt>, and will probably do it for the next couple of years.
+</blockquote>
+
+</div></div><div id="footer"><img src="images/footer.jpg" /></div></div>
+
+<div id="bloc_option"><div id="top_vert"><div id="text_top">How to help ?</div></div>
+<div id="center"><div id="text_centre_intro">
+
+<blockquote>
+  The <tt><i>CImg Library</i></tt> is an open source C++ library which is mainly developped during
+  free time. If you enjoy using <tt><i>CImg</i></tt>, you may contribute to the project
+  in different ways. This will motivate me to continue the work.
+  <ul>
+    <li>You can help <tt><i>CImg</i></tt> to be more widely known, by displaying a
+      <a href="CImg_flyer.pdf">CImg Flyer</a> at work, in your lab or school
+      (available in <a href="CImg_flyer.pdf">.PDF</a> or <a href="img/CImg_flyer.jpg">.JPEG</a> formats).
+    <li>You can report bugs, propose patches or new functionalities, using the <tt><i>CImg</i></tt>
+      <a href="http://sourceforge.net/forum/?group_id=96492">forums</a> or
+      <a href="http://sourceforge.net/tracker/?group_id=96492">trackers</a>.</li>
+    <li>You can write
+      <a href="reference/group__cimg__tutorial.html">tutorials</a>
+      or parts of the <a href="reference/index.html">documentation</a>.</li>
+    <li>If you just want to say you've been happy with the library, you can send me a postcard from your place, to the following address : <br/>
+      <i>David Tschumperl&eacute;, GREYC (UMR CNRS 6072), Equipe IMAGE, 6 Bd du Mar&eacute;chal Juin, 14050 Caen Cedex, FRANCE.</i><br/><br/>
+      47 postcards received yet (I still have empty space on my wall ! :) ), from :<br/><br/>
+      <ul>
+        <li><a href="img/postcard1.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Comissao Nacional de Energia Nuclear, Rio de Janeiro, Brazil.</a></li>
+        <li><a href="img/postcard2.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Universidad Nacional del Litoral, Santa Fe, Argentina.</a></li>
+        <li><a href="img/postcard3.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Waikiki's only true resort, Honolulu/Hawaii.</a></li>
+        <li><a href="img/postcard4.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Royal Pavilion, Brighton/UK.</a></li>
+        <li><a href="img/postcard5.jpg" onclick="NewWindow(this.href,'name','320','420','yes');return false;">
+            Cambridge, UK.</a></li>
+        <li><a href="img/postcard6.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            National Tai-Chung Institute of Technology, Taiwan.</a></li>
+        <li><a href="img/postcard7.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Fuzzy Logic Laboratorium Linz-Hagenberg, Linz, Austria.</a></li>
+        <li><a href="img/postcard8.jpg" onclick="NewWindow(this.href,'name','500','450','yes');return false;">
+            Corte/Corsica.</a></li>
+        <li><a href="img/postcard9.jpg" onclick="NewWindow(this.href,'name','400','600','yes');return false;">
+            Microsoft Research, Beijing/China.</a></li>
+        <li><a href="img/postcard10.jpg" onclick="NewWindow(this.href,'name','700','500','yes');return false;">
+            Palermo/Italia.</a></li>
+        <li><a href="img/postcard11.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Florida Atlantic University/USA.</a></li>
+        <li><a href="img/postcard12.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Ecole Nationale Supérieure des Mines de Saint-Etienne/France.</a></li>
+        <li><a href="img/postcard13.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Venice/Italy, from Sebastien/GREYC (Caen/France).</a></li>
+        <li><a href="img/postcard14.jpg" onclick="NewWindow(this.href,'name','320','420','yes');return false;">
+            Barcelone/Spain, from Jaime.</a></li>
+        <li><a href="img/postcard15.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Guadeloupe/France, from Jean-Michel.</a></li>
+        <li><a href="img/postcard17.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            London/England, from Sebastien/GREYC (Caen/France).</a></li>
+        <li><a href="img/postcard18.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Valencia/Spain, from the Research Institute ITEAM of the Unversidad Politecnica.</a></li>
+        <li><a href="img/postcard19.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Vienna/Austria, from Sebastien/GREYC (Caen/France).</a></li>
+        <li><a href="img/postcard20.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Neuherberg/Germany, from the Institut for Biomathematick und Biometrie.</a></li>
+        <li><a href="img/postcard21.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Cabestany/France, from Guy Poizat.</a></li>
+        <li><a href="img/postcard22.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Frascati/Italy, from PhotoComiX.</a></li>
+        <li><a href="img/postcard23.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Jaca/Spain, from F. Albior.</a></li>
+        <li><a href="img/postcard24.jpg" onclick="NewWindow(this.href,'name','450','320','yes');return false;">
+            Munich/Germany, from M???? (didn't succeed in reading the name, sorry !).</a></li>
+        <li><a href="img/postcard25.jpg" onclick="NewWindow(this.href,'name','450','320','yes');return false;">
+            Playa del Carmen/Mexico, from Sebastien/GREYC (Caen/France).</a></li>
+        <li><a href="img/postcard26.jpg" onclick="NewWindow(this.href,'name','450','320','yes');return false;">
+            Holland, from Vincent/GREYC (Caen/France).</a></li>
+        <li><a href="img/postcard27.jpg" onclick="NewWindow(this.href,'name','500','700','yes');return false;">
+            Portland/Oregon/USA, from Mahvin.</a></li>
+        <li><a href="img/postcard28.jpg" onclick="NewWindow(this.href,'name','450','320','yes');return false;">
+            Gibraltar, from Terry Hendicott.</a></li>
+        <li><a href="img/postcard29.jpg" onclick="NewWindow(this.href,'name','450','320','yes');return false;">
+            Neuchatel/Switzerland, from Corinne Masimann.</a></li>
+        <li><a href="img/postcard30.jpg" onclick="NewWindow(this.href,'name','450','320','yes');return false;">
+            Foster City/California, from Arkadi Gelfond.</a></li>
+        <li><a href="img/postcard31.jpg" onclick="NewWindow(this.href,'name','350','450','yes');return false;">
+            Huntsville/Alabama, from Gordon M. Neeley.</a></li>
+        <li><a href="img/postcard32.jpg" onclick="NewWindow(this.href,'name','450','300','yes');return false;">
+            Biscarosse/France, from Sebastien/GREYC (Caen/France).</a></li>
+        <li><a href="img/postcard33.jpg" onclick="NewWindow(this.href,'name','600','450','yes');return false;">
+            California/USA, from Benoit Gauzere/GREYC (Caen/France).</a></li>
+        <li><a href="img/postcard34.jpg" onclick="NewWindow(this.href,'name','600','450','yes');return false;">
+            Puy-de-Dome/France, from Sebastien/GREYC (Caen/France).</a></li>
+        <li><a href="img/postcard35.jpg" onclick="NewWindow(this.href,'name','600','450','yes');return false;">
+            Portsmouth/United Kingdom, from Sebastien Clediere/Snell Ltd.</a></li>
+        <li><a href="img/postcard36.jpg" onclick="NewWindow(this.href,'name','600','450','yes');return false;">
+            Helsinki/Finland, from Arto Huotari.</a></li>
+        <li><a href="img/postcard37.jpg" onclick="NewWindow(this.href,'name','340','500','yes');return false;">
+            Mettlach/Germany, from Werner Meier.</a></li>
+        <li><a href="img/postcard38.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Boston/USA, from Dan Cullen.</a></li>
+        <li><a href="img/postcard39.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Mantova/Italy, from Mauro Mitrino.</a></li>
+        <li><a href="img/postcard40.jpg" onclick="NewWindow(this.href,'name','320','420','yes');return false;">
+            Seligenstadt/Germany, from Dr. Rainer Teubner.</a></li>
+        <li><a href="img/postcard41.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Hokusai/Japan, from Benoit Gauzere and Francois Lozes.</a></li>
+        <li><a href="img/postcard42.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Munchen/Germany, from Alexandru Dulin.</a></li>
+        <li><a href="img/postcard43.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Trier/Germany, from Family Hamacher.</a></li>
+        <li><a href="img/postcard44.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Ile de Batz/France, from Pierre-Yves.</a></li>
+        <li><a href="img/postcard45.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Germany, from Michel Thomas.</a></li>
+        <li><a href="img/postcard46.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Vienna/Austria, from Benoit Gauzere.</a></li>
+        <li><a href="img/postcard47.jpg" onclick="NewWindow(this.href,'name','420','320','yes');return false;">
+            Torquay/Australia, from Pauline van Buren.</a></li>
+      </ul><br/>
+    <li>If you have too much money, you can also <a href="http://sourceforge.net/donate/index.php?group_id=96492">
+        <img src="img/project-support.jpg" alt=""></img></a></li>
+    </ul>
+    </blockquote>
+
+</div></div><div id="footer"><img src="images/footer.jpg" /></div></div>
+
+<div id="bloc_option"><div id="top_vert"><div id="text_top">Copyrights</div></div>
+<div id="center"><div id="text_centre_intro">
+
+    <blockquote>
+      <font size="-2">
+        Copyrights (C) From october 2004, David Tschumperlé - GREYC UMR CNRS 6072, Image team.<br/>
+        Copyrights (C) January->September 2004, David Tschumperlé.<br/>
+        Copyrights (C) 2000->2003, David Tschumperlé - INRIA Sophia-Antipolis. Odyssée group.<br/>
+      </font>
+    </blockquote>
+
+</div></div><div id="footer"><img src="images/footer.jpg" /></div></div>
+
+    <!--#include file="footer.html" -->

@@ -1,33 +1,35 @@
-#define BUILDING_NODE_EXTENSION
-
 #ifndef LWIP_IMAGE_H
 #define LWIP_IMAGE_H
 
+#define cimg_display 0
+
 #include <node.h>
 #include <v8.h>
-#include "lib/jpeg/jpeglib.h"
+#include "lib/cimg/CImg.h"
+
+using namespace cimg_library;
+using namespace v8;
+
+typedef CImg<unsigned char> * lwip_data_t;
 
 class LwipImage : public node::ObjectWrap {
 public:
     static void Init();
-    static v8::Handle<v8::Value> NewInstance();
-    explicit LwipImage(): _data(NULL), _width(0), _height(0){};
+    static Handle<Value> NewInstance();
+    explicit LwipImage(): _data(NULL){};
     ~LwipImage();
-    void setData(JSAMPARRAY data);
-    void setWidth(const unsigned int width);
-    void setHeight(const unsigned int height);
+    void setData(lwip_data_t data);
 
 private:
-    static v8::Handle<v8::Value> New(const v8::Arguments& args);
-    // static v8::Handle<v8::Value> resize(const v8::Arguments& args);
-    // static v8::Handle<v8::Value> rotate(const v8::Arguments& args);
-    // static v8::Handle<v8::Value> crop(const v8::Arguments& args);
-    static v8::Handle<v8::Value> width(const v8::Arguments& args);
-    static v8::Handle<v8::Value> height(const v8::Arguments& args);
-    // static v8::Handle<v8::Value> toBuffer(const v8::Arguments& args);
-    static v8::Persistent<v8::Function> constructor;
-    JSAMPARRAY _data;
-    unsigned int _width, _height;
+    static Handle<Value> New(const Arguments& args);
+    // static Handle<Value> resize(const Arguments& args);
+    // static Handle<Value> rotate(const Arguments& args);
+    // static Handle<Value> crop(const Arguments& args);
+    static Handle<Value> width(const Arguments& args);
+    static Handle<Value> height(const Arguments& args);
+    // static Handle<Value> toBuffer(const Arguments& args);
+    static Persistent<Function> constructor;
+    lwip_data_t _data;
 };
 
 #endif

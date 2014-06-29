@@ -1,0 +1,310 @@
+<xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+    <title>The CImg Library - C++ Template Image Processing Toolkit</title>
+    <meta content="David Tschumperle" name="author"></meta>
+    <link rel="shortcut icon" type="image/x-icon" href="http://cimg.sourceforge.net/favicon.ico"></link>
+    <link rel="icon" type="image/png" href="favicon.png"></link>
+    <link href="doxygen.css" rel="stylesheet" type="text/css">
+    <link href="tabs.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      <!--
+          body {background-color:#C0C0C0; font-family:sans-serif; }
+          a { font-weight:bold; color:#636363; }
+          a:active{text-decoration:none; color:#000000}
+          a:link{text-decoration:none; color:#000000}
+          a:visited{text-decoration:none; color:#000000}
+          a:hover{text-decoration:underline; color:#4E9F71}
+        -->
+    </style>
+    <script language="JavaScript" type="text/javascript">
+      <!-- Original:  Eric King (eric_andrew_king@hotmail.com) is used to display images in popup windows -->
+      <!-- Web Site:  http://redrival.com/eak/ -->
+      <!-- This script and many more are available free online at -->
+      <!-- The JavaScript Source!! http://javascript.internet.com -->
+      <!-- Begin
+           function NewWindow(mypage, myname, w, h, scroll) {
+           var winl = (screen.width - w) / 2;
+           var wint = (screen.height - h) / 2;
+           winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
+           win = window.open(mypage, myname, winprops)
+           if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+           }
+           //  End -->
+    </script>
+    <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $('#cssmenu > ul').prepend('<li class="mobile"><a href="#"><span>Menu <i>&#9776;</i></span></a></li>');
+      $('#cssmenu > ul > li > a').click(function(e) {
+      $('#cssmenu li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      var checkElement = $(this).next();
+      if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+      $(this).closest('li').removeClass('active');
+      checkElement.slideUp('normal');
+      }
+      if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+      $('#cssmenu ul ul:visible').slideUp('normal');
+      checkElement.slideDown('normal');
+      }
+      if( $(this).parent().hasClass('mobile') ) {
+      e.preventDefault();
+      $('#cssmenu').toggleClass('expand');
+      }
+      if($(this).closest('li').find('ul').children().length == 0) {
+      return true;
+      } else {
+      return false;
+      }
+      });
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="../header.css" />
+  </head>
+  <body>
+    <table align="center" cellpadding="12" cellspacing="0" width="1024" style="border-style:solid; border-width:0px; border-color:black" bgcolor="#FFFFFF">
+      <tr><td>
+          <center>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <br/>
+            <a href="http://cimg.sourceforge.net"><img src="http://cimg.sourceforge.net/img/CImgLogo2.jpg" alt="" border="0"></img></a><br/>
+            <br/>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <table width="90%" align="center">
+              <td width="18%">&nbsp;</td>
+              <td width="65%">
+                <div id='cssmenu'>
+                  <ul>
+                    <li class='first'><a href='http://cimg.sourceforge.net/index.shtml'><span>Home</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/download.shtml'><span>Download</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/screenshots.shtml'><span>Screenshots</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__faq.html'><span>FAQ</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__tutorial.html'><span>Tutorial</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/index.html'><span>Documentation</span></a></li>
+                    <li><a href='http://sourceforge.net/projects/cimg/forums/forum/334630'><span>Forum</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/links.shtml'><span>Links</span></a></li>
+                  </ul>
+                </div>
+              </td>
+              <td align="right">
+                <script type="text/javascript">
+	          var flattr_url = 'http://cimg.sourceforge.net';
+	          var flattr_btn='compact';
+                </script>
+                <script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
+              </td>
+      </tr></table>
+      </center>
+</td></tr>
+<tr><td>
+<!-- Generated by Doxygen 1.8.6 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Using Image Loops.</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock">The CImg Library provides different macros that define useful iterative loops over an image. Basically, it can be used to replace one or several <code>for(..)</code> instructions, but it also proposes interesting extensions to classical loops. Below is a list of all existing loop macros, classified in four different categories :</p>
+<ul>
+<li><a class="el" href="group__cimg__loops.html#lo1">Loops over the pixel buffer</a></li>
+<li><a class="el" href="group__cimg__loops.html#lo4">Loops over image dimensions</a></li>
+<li><a class="el" href="group__cimg__loops.html#lo5">Loops over interior regions and borders.</a></li>
+<li><a class="el" href="group__cimg__loops.html#lo6">Loops using neighborhoods.</a></li>
+</ul>
+<h1><a class="anchor" id="lo1"></a>
+Loops over the pixel buffer</h1>
+<p>Loops over the pixel buffer are really basic loops that iterate a pointer on the pixel data buffer of a <code><a class="el" href="structcimg__library_1_1CImg.html" title="Class representing an image (up to 4 dimensions wide), each pixel being of type T. ">cimg_library::CImg</a></code> image. Two macros are defined for this purpose :</p>
+<ul>
+<li><b>cimg_for(img,ptr,T)</b> : This macro loops over the pixel data buffer of the image <code>img</code>, using a pointer <code>T* ptr</code>, starting from the beginning of the buffer (first pixel) till the end of the buffer (first pixel).<ul>
+<li><code>img</code> must be a (non empty) <code><a class="el" href="structcimg__library_1_1CImg.html" title="Class representing an image (up to 4 dimensions wide), each pixel being of type T. ">cimg_library::CImg</a></code> image of pixels <code>T</code>.</li>
+<li><code>ptr</code> is a pointer of type <code>T*</code>. This kind of loop should not appear a lot in your own source code, since this is a low-level loop and many functions of the CImg class may be used instead. Here is an example of use : <div class="fragment"><div class="line">CImg&lt;float&gt; img(320,200);</div>
+<div class="line">cimg_for(img,ptr,<span class="keywordtype">float</span>) { *ptr=0; }      <span class="comment">// Equivalent to &#39;img.fill(0);&#39;</span></div>
+</div><!-- fragment --></li>
+</ul>
+</li>
+<li><b>cimg_rof(img,ptr,T)</b> : This macro does the same as <code>cimg_for()</code> but from the end to the beginning of the pixel buffer.</li>
+<li><b>cimg_foroff(img,off)</b> : This macro loops over the pixel data buffer of the image <code>img</code>, using an offset <code></code>, starting from the beginning of the buffer (first pixel, <code>off=0</code>) till the end of the buffer (last pixel value, <code>off = img.size()-1</code>).<ul>
+<li><code>img</code> must be a (non empty) cimg_library::CImg&lt;T&gt; image of pixels <code>T</code>.</li>
+<li><code>off</code> is an inner-loop variable, only defined inside the scope of the loop.</li>
+</ul>
+</li>
+</ul>
+<p>Here is an example of use : </p>
+<div class="fragment"><div class="line">CImg&lt;float&gt; img(320,200);</div>
+<div class="line">cimg_foroff(img,off) { img[off]=0; }  <span class="comment">// Equivalent to &#39;img.fill(0);&#39;</span></div>
+</div><!-- fragment --><h1><a class="anchor" id="lo4"></a>
+Loops over image dimensions</h1>
+<p>The following loops are probably the most used loops in image processing programs. They allow to loop over the image along one or several dimensions, along a raster scan course. Here is the list of such loop macros for a single dimension :</p>
+<ul>
+<li><b>cimg_forX(img,x)</b> : equivalent to : <code>for (int x = 0; x&lt;img.width(); x++)</code>.</li>
+<li><b>cimg_forY(img,y)</b> : equivalent to : <code>for (int y = 0; y&lt;img.height(); y++)</code>.</li>
+<li><b>cimg_forZ(img,z)</b> : equivalent to : <code>for (int z = 0; z&lt;img.depth(); z++)</code>.</li>
+<li><b>cimg_forC(img,v)</b> : equivalent to : <code>for (int v = 0; v&lt;img.spectrum(); v++)</code>.</li>
+</ul>
+<p>Combinations of these macros are also defined as other loop macros, allowing to loop directly over 2D, 3D or 4D images :</p>
+<ul>
+<li><b>cimg_forXY(img,x,y)</b> : equivalent to : <code>cimg_forY(img,y)</code> <code>cimg_forX(img,x)</code>.</li>
+<li><b>cimg_forXZ(img,x,z)</b> : equivalent to : <code>cimg_forZ(img,z)</code> <code>cimg_forX(img,x)</code>.</li>
+<li><b>cimg_forYZ(img,y,z)</b> : equivalent to : <code>cimg_forZ(img,z)</code> <code>cimg_forY(img,y)</code>.</li>
+<li><b>cimg_forXC(img,x,v)</b> : equivalent to : <code>cimg_forC(img,v)</code> <code>cimg_forX(img,x)</code>.</li>
+<li><b>cimg_forYC(img,y,v)</b> : equivalent to : <code>cimg_forC(img,v)</code> <code>cimg_forY(img,y)</code>.</li>
+<li><b>cimg_forZC(img,z,v)</b> : equivalent to : <code>cimg_forC(img,v)</code> <code>cimg_forZ(img,z)</code>.</li>
+<li><b>cimg_forXYZ(img,x,y,z)</b> : equivalent to : <code>cimg_forZ(img,z)</code> <code>cimg_forXY(img,x,y)</code>.</li>
+<li><b>cimg_forXYC(img,x,y,v)</b> : equivalent to : <code>cimg_forC(img,v)</code> <code>cimg_forXY(img,x,y)</code>.</li>
+<li><b>cimg_forXZC(img,x,z,v)</b> : equivalent to : <code>cimg_forC(img,v)</code> <code>cimg_forXZ(img,x,z)</code>.</li>
+<li><b>cimg_forYZC(img,y,z,v)</b> : equivalent to : <code>cimg_forC(img,v)</code> <code>cimg_forYZ(img,y,z)</code>.</li>
+<li><b>cimg_forXYZC(img,x,y,z,v)</b> : equivalent to : <code>cimg_forC(img,v)</code> <code>cimg_forXYZ(img,x,y,z)</code>.</li>
+<li>For all these loops, <code>x</code>,<code>y</code>,<code>z</code> and <code>v</code> are inner-defined variables only visible inside the scope of the loop. They don't have to be defined before the call of the macro.</li>
+<li><code>img</code> must be a (non empty) <a class="el" href="structcimg__library_1_1CImg.html" title="Class representing an image (up to 4 dimensions wide), each pixel being of type T. ">cimg_library::CImg</a> image.</li>
+</ul>
+<p>Here is an example of use that creates an image with a smooth color gradient : </p>
+<div class="fragment"><div class="line">CImg&lt;unsigned char&gt; img(256,256,1,3);       <span class="comment">// Define a 256x256 color image</span></div>
+<div class="line">cimg_forXYC(img,x,y,v) { img(x,y,v) = (x+y)*(v+1)/6; }</div>
+<div class="line">img.display(<span class="stringliteral">&quot;Color gradient&quot;</span>);</div>
+</div><!-- fragment --><h1><a class="anchor" id="lo5"></a>
+Loops over interior regions and borders.</h1>
+<p>Similar macros are also defined to loop only on the border of an image, or inside the image (excluding the border). The border may be several pixel wide :</p>
+<ul>
+<li><b>cimg_for_insideX(img,x,n)</b> : Loop along the x-axis, except for pixels inside a border of <code>n</code> pixels wide.</li>
+<li><b>cimg_for_insideY(img,y,n)</b> : Loop along the y-axis, except for pixels inside a border of <code>n</code> pixels wide.</li>
+<li><b>cimg_for_insideZ(img,z,n)</b> : Loop along the z-axis, except for pixels inside a border of <code>n</code> pixels wide.</li>
+<li><b>cimg_for_insideC(img,v,n)</b> : Loop along the v-axis, except for pixels inside a border of <code>n</code> pixels wide.</li>
+<li><b>cimg_for_insideXY(img,x,y,n)</b> : Loop along the (x,y)-axes, excepted for pixels inside a border of <code>n</code> pixels wide.</li>
+<li><b>cimg_for_insideXYZ(img,x,y,z,n)</b> : Loop along the (x,y,z)-axes, excepted for pixels inside a border of <code>n</code> pixels wide.</li>
+</ul>
+<p>And also :</p>
+<ul>
+<li><b>cimg_for_borderX(img,x,n)</b> : Loop along the x-axis, only for pixels inside a border of <code>n</code> pixels wide.</li>
+<li><b>cimg_for_borderY(img,y,n)</b> : Loop along the y-axis, only for pixels inside a border of <code>n</code> pixels wide.</li>
+<li><b>cimg_for_borderZ(img,z,n)</b> : Loop along the z-axis, only for pixels inside a border of <code>n</code> pixels wide.</li>
+<li><b>cimg_for_borderC(img,v,n)</b> : Loop along the z-axis, only for pixels inside a border of <code>n</code> pixels wide.</li>
+<li><b>cimg_for_borderXY(img,x,y,n)</b> : Loop along the (x,y)-axes, only for pixels inside a border of <code>n</code> pixels wide.</li>
+<li><b>cimg_for_borderXYZ(img,x,y,z,n)</b> : Loop along the (x,y,z)-axes, only for pixels inside a border of <code>n</code> pixels wide.</li>
+<li>For all these loops, <code>x</code>,<code>y</code>,<code>z</code> and <code>v</code> are inner-defined variables only visible inside the scope of the loop. They don't have to be defined before the call of the macro.</li>
+<li><code>img</code> must be a (non empty) <a class="el" href="structcimg__library_1_1CImg.html" title="Class representing an image (up to 4 dimensions wide), each pixel being of type T. ">cimg_library::CImg</a> image.</li>
+<li>The constant <code>n</code> stands for the size of the border.</li>
+</ul>
+<p>Here is an example of use, to create a 2d grayscale image with two different intensity gradients : </p>
+<div class="fragment"><div class="line">CImg&lt;&gt; img(256,256);</div>
+<div class="line">cimg_for_insideXY(img,x,y,50) img(x,y) = x+y;</div>
+<div class="line">cimg_for_borderXY(img,x,y,50) img(x,y) = x-y;</div>
+<div class="line">img.display();</div>
+</div><!-- fragment --><h1><a class="anchor" id="lo6"></a>
+Loops using neighborhoods.</h1>
+<p>Inside an image loop, it is often useful to get values of neighborhood pixels of the current pixel at the loop location. The CImg Library provides a very smart and fast mechanism for this purpose, with the definition of several loop macros that remember the neighborhood values of the pixels. The use of these macros can highly optimize your code, and also simplify your program.</p>
+<h2><a class="anchor" id="lo7"></a>
+Neighborhood-based loops for 2D images</h2>
+<p>For 2D images, the neighborhood-based loop macros are :</p>
+<ul>
+<li><b>cimg_for2x2(img,x,y,z,v,I,T)</b> : Loop along the (x,y)-axes using a centered 2x2 neighborhood.</li>
+<li><b>cimg_for3x3(img,x,y,z,v,I,T)</b> : Loop along the (x,y)-axes using a centered 3x3 neighborhood.</li>
+<li><b>cimg_for4x4(img,x,y,z,v,I,T)</b> : Loop along the (x,y)-axes using a centered 4x4 neighborhood.</li>
+<li><b>cimg_for5x5(img,x,y,z,v,I,T)</b> : Loop along the (x,y)-axes using a centered 5x5 neighborhood.</li>
+</ul>
+<p>For all these loops, <code>x</code> and <code>y</code> are inner-defined variables only visible inside the scope of the loop. They don't have to be defined before the call of the macro. <code>img</code> is a non empty CImg&lt;T&gt; image. <code>z</code> and <code>v</code> are constants that define on which image slice and vector channel the loop must apply (usually both 0 for grayscale 2D images). Finally, <code>I</code> is the 2x2, 3x3, 4x4 or 5x5 neighborhood of type <code>T</code> that will be updated with the correct pixel values during the loop (see <a class="el" href="group__cimg__loops.html#lo9">Defining neighborhoods</a>).</p>
+<h2><a class="anchor" id="lo8"></a>
+Neighborhood-based loops for 3D images</h2>
+<p>For 3D images, the neighborhood-based loop macros are :</p>
+<ul>
+<li><b>cimg_for2x2x2(img,x,y,z,v,I,T)</b> : Loop along the (x,y,z)-axes using a centered 2x2x2 neighborhood.</li>
+<li><b>cimg_for3x3x3(img,x,y,z,v,I,T)</b> : Loop along the (x,y,z)-axes using a centered 3x3x3 neighborhood.</li>
+</ul>
+<p>For all these loops, <code>x</code>, <code>y</code> and <code>z</code> are inner-defined variables only visible inside the scope of the loop. They don't have to be defined before the call of the macro. <code>img</code> is a non empty CImg&lt;T&gt; image. <code>v</code> is a constant that defines on which image channel the loop must apply (usually 0 for grayscale 3D images). Finally, <code>I</code> is the 2x2x2 or 3x3x3 neighborhood of type <code>T</code> that will be updated with the correct pixel values during the loop (see <a class="el" href="group__cimg__loops.html#lo9">Defining neighborhoods</a>).</p>
+<h2><a class="anchor" id="lo9"></a>
+Defining neighborhoods</h2>
+<p>A neighborhood is defined as an instance of a class having operator[] defined. This particularly includes classical C-array, as well as CImg&lt;T&gt; objects.</p>
+<p>For instance, a 3x3 neighborhood can be defined either as a 'float[9]' or a 'CImg&lt;float&gt;(3,3)' variable.</p>
+<h2><a class="anchor" id="lo10"></a>
+Using alternate variable names</h2>
+<p>There are also some useful macros that can be used to define variables that reference the neighborhood elements. There are :</p>
+<ul>
+<li><b>CImg_2x2(I,type)</b> : Define a 2x2 neighborhood named <code>I</code>, of type <code>type</code>.</li>
+<li><b>CImg_3x3(I,type)</b> : Define a 3x3 neighborhood named <code>I</code>, of type <code>type</code>.</li>
+<li><b>CImg_4x4(I,type)</b> : Define a 4x4 neighborhood named <code>I</code>, of type <code>type</code>.</li>
+<li><b>CImg_5x5(I,type)</b> : Define a 5x5 neighborhood named <code>I</code>, of type <code>type</code>.</li>
+<li><b>CImg_2x2x2(I,type)</b> : Define a 2x2x2 neighborhood named <code>I</code>, of type <code>type</code>.</li>
+<li><b>CImg_3x3x3(I,type)</b> : Define a 3x3x3 neighborhood named <code>I</code>, of type <code>type</code>.</li>
+</ul>
+<p>Actually, <code>I</code> is a <em>generic</em> <em>name</em> for the neighborhood. In fact, these macros declare a <em>set</em> of new variables. For instance, defining a 3x3 neighborhood <code>CImg_3x3(I,float)</code> declares 9 different float variables <code>Ipp</code>,<code>Icp</code>,<code>Inp</code>,<code>Ipc</code>,<code>Icc</code>,<code>Inc</code>,<code>Ipn</code>,<code>Icn</code>,<code>Inn</code> which correspond to each pixel value of a 3x3 neighborhood. Variable indices are <code>p</code>,<code>c</code> or <code>n</code>, and stand respectively for <em>'previous'</em>, <em>'current'</em> and <em>'next'</em>. First indice denotes the <code>x-axis</code>, second indice denotes the <code>y-axis</code>. Then, the names of the variables are directly related to the position of the corresponding pixels in the neighborhood. For 3D neighborhoods, a third indice denotes the <code>z-axis</code>. Then, inside a neighborhood loop, you will have the following equivalence :</p>
+<ul>
+<li><code>Ipp = img(x-1,y-1)</code></li>
+<li><code>Icn = img(x,y+1)</code></li>
+<li><code>Inp = img(x+1,y-1)</code></li>
+<li><code>Inpc = img(x+1,y-1,z)</code></li>
+<li><code>Ippn = img(x-1,y-1,z+1)</code></li>
+<li>and so on...</li>
+</ul>
+<p>For bigger neighborhoods, such as 4x4 or 5x5 neighborhoods, two additionnal indices are introduced : <code>a</code> (stands for <em>'after'</em>) and <code>b</code> (stands for <em>'before'</em>), so that :</p>
+<ul>
+<li><code>Ibb = img(x-2,y-2)</code></li>
+<li><code>Ina = img(x+1,y+2)</code></li>
+<li>and so on...</li>
+</ul>
+<p>The value of a neighborhood pixel outside the image range (image border problem) is automatically set to the same values than the nearest valid pixel in the image (this is also called the <em>Neumann</em> <em>border</em> <em>condition</em>).</p>
+<h2><a class="anchor" id="lo11"></a>
+Example codes</h2>
+<p>More than a long discussion, the above example will demonstrate how to compute the gradient norm of a 3D volume using the <code>cimg_for3x3x3()</code> loop macro :</p>
+<div class="fragment"><div class="line">CImg&lt;float&gt; volume(<span class="stringliteral">&quot;IRM.hdr&quot;</span>);          <span class="comment">// Load an IRM volume from an Analyze7.5 file</span></div>
+<div class="line">CImg_3x3x3(I,<span class="keywordtype">float</span>);                    <span class="comment">// Define a 3x3x3 neighborhood</span></div>
+<div class="line">CImg&lt;float&gt; gradnorm(volume);           <span class="comment">// Create an image with same size as &#39;volume&#39;</span></div>
+<div class="line">cimg_for3x3x3(volume,x,y,z,0,I,<span class="keywordtype">float</span>) { <span class="comment">// Loop over the volume, using the neighborhood I</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">float</span> ix = 0.5f*(Incc-Ipcc);    <span class="comment">// Compute the derivative along the x-axis.</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">float</span> iy = 0.5f*(Icnc-Icpc);    <span class="comment">// Compute the derivative along the y-axis.</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">float</span> iz = 0.5f*(Iccn-Iccp);    <span class="comment">// Compute the derivative along the z-axis.</span></div>
+<div class="line">  gradnorm(x,y,z) = std::sqrt(ix*ix+iy*iy+iz*iz);  <span class="comment">// Set the gradient norm in the destination image</span></div>
+<div class="line">}</div>
+<div class="line">gradnorm.display(<span class="stringliteral">&quot;Gradient norm&quot;</span>);</div>
+</div><!-- fragment --><p>And the following example shows how to deal with neighborhood references to blur a color image by averaging pixel values on a 5x5 neighborhood.</p>
+<div class="fragment"><div class="line">CImg&lt;unsigned char&gt; src(<span class="stringliteral">&quot;image_color.jpg&quot;</span>), dest(src,<span class="keyword">false</span>), neighbor(5,5);  <span class="comment">// Image definitions.</span></div>
+<div class="line"><span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> uchar;             <span class="comment">// Avoid space in the second parameter of the macro CImg_5x5x1 below.</span></div>
+<div class="line">CImg&lt;&gt; N(5,5);                           <span class="comment">// Define a 5x5 neighborhood as a 5x5 image.</span></div>
+<div class="line">cimg_forC(src,k)                         <span class="comment">// Standard loop on color channels</span></div>
+<div class="line">   cimg_for5x5(src,x,y,0,k,N,<span class="keywordtype">float</span>)      <span class="comment">// 5x5 neighborhood loop.</span></div>
+<div class="line">     dest(x,y,k) = N.sum()/(5*5);        <span class="comment">// Averaging pixels to filter the color image.</span></div>
+<div class="line">CImgList&lt;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>&gt; visu(src,dest);</div>
+<div class="line">visu.display(&quot;Original + Filtered&quot;);     <span class="comment">// Display both original and filtered image.</span></div>
+</div><!-- fragment --><p>As you can see, explaining the use of the CImg neighborhood macros is actually more difficult than using them ! </p>
+</div></div><!-- contents -->
+</td></tr></table>
+<center>
+<p>
+<a href="http://sourceforge.net">
+  <img src="http://sourceforge.net/sflogo.php?group_id=96492&amp;type=3" border="0" height="37" width="125"></img>
+</a>
+<a href="http://sourceforge.net/donate/index.php?group_id=96492"><img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a>
+</p>
+</center>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+  <!--
+      var sc_project=895001;
+      var sc_invisible=1;
+      var sc_partition=7;
+      var sc_security="5ea85181";
+      //-->
+</script>
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c8.statcounter.com/counter.php?sc_project=895001&amp;java=0&amp;security=5ea85181&amp;invisible=1" alt="counter stats" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16976814-2']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End Google Analytics -->
+</body>
+</html>

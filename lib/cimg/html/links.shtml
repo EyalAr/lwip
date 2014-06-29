@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--#include file="header.html" -->
+<link href="style.css" rel="stylesheet" type="text/css">
+
+<div id="bloc_option"><div id="top_vert"><div id="text_top">Links</div></div>
+<div id="center"><div id="text_centre_intro">
+<p>
+  The <tt><i>CImg Library</i></tt> is known to be used by the following projects.
+  If you are using <tt><i>CImg</i></tt> and want your project to appear on this page,
+  please post a message in the forum, or contact us by e-mail.
+</p>
+<ul>
+  <li><b><a href="http://www.sofa-framework.org/">Sofa</a></b> is an open source framework primarily targeted at real-time simulation, with an emphasis on medical simulation.</li>
+  <li><b><a href="http://photivo.org/">Photivo</a></b> is an open source photo processor. It handles your RAW files as well as bitmap files in a non-destructive 16 bit processing pipe with gimp workflow integration and batch mode.</li>
+  <li><b><a href="http://www.morphographx.org/">MorphoGraphX</a></b> is a cross-platform, open-source application for the visualization and processing of 3D biological datasets.</li>
+  <li><b><a href="http://zoomfx.sourceforge.net/">ZoomFX</a></b> is a free tool to help in image batch process thanks to an helpful visual interface and powerful filters.</li>
+  <li><b><a href="http://xraysim.sourceforge.net/">XRaySim</a></b> is an open source simulation package for use in Industrial Non-Destructive testing and medical imaging applications.</li>
+  <li><b><a href="http://www.phash.org/">pHash</a></b> is an open source software library that implements several perceptual hashing algorithms,
+    and provides a C-like API to use those functions in your own programs.</li>
+  <li><b><a href="http://wxcam.sourceforge.net/">wxCam</a></b> is a webcam application for Linux.</li>
+  <li><b><a href="http://enas.gforge.inria.fr/">Event Neural Assembly Simulation</a></b> is an
+    open-source C++ library to simulate so called event neural unit. Done by the INRIA lab, in France.</li>
+  <li><b><a href="http://www.vips.ecs.soton.ac.uk/index.php?title=GREYCstoration">The VIPS Library</a></b> integrates a GREYCstoration plugin.</li>
+  <li><b><a href="http://www.digikam.org/">Digikam</a></b>, an advanced digital photo management application.</li>
+  <li><b><a href="http://ometah.berlios.de/index.php/Main_Page">oMetah</a></b>, a library aimed at the conception of metaheuristics.</li>
+  <li><b><a href="http://www.itm.uni-stuttgart.de/research/pasimodo/pasimodo_de.php">PASIMODO</a></b>, a program package for particle-based
+    simulation methods, developed at the Institute of Engineering and Computational Mechanics (University of Stuttgart, Germany).</li>
+  <li><b><a href="http://cimg.sourceforge.net/greycstoration/index.shtml">GREYCstoration</a></b> is an open source algorithms for image
+    denoising and interpolation. Command-line and GIMP plug-in versions are available.</li>
+  <li><b><a href="http://www.eng.cam.ac.uk/~ajk61/IDIL/">IDIL</a></b> (Integrated Data & Image Library), a cross-platform library for
+    computing, plotting and image analysis.</li>
+  <li><b><a href="http://gmic.sourceforge.net/">G'MIC</a></b> is a scripting language around CImg functionalities.
+    It provides a command-line image manipulation tool able to deal with sequences of 1d/2d/3d multi-spectral images, as well as an interactive
+    plug-in for the <a href="http://www.gimp.org">GIMP</a> software.</li>
+  <li><b><a href="http://koti.kapsi.fi/thirsima/gocam/">GoCam</a></b>, an open source project for developing a computer vision system that analyses
+    video capture of a go game.</li>
+  <li><b><a href="http://www.imagico.de/ascos/index.html">ASCOS</a></b>, a correction tool for satellite images.</li>
+  <li><b><a href="http://code.ohloh.net/search?s=cimg_library">Other pieces of code using CImg</a></b> can be
+    found with Ohloh code search.</li>
+</ul>
+
+</div></div><div id="footer"><img src="images/footer.jpg" /></div></div>
+
+<!--#include file="footer.html" -->
+

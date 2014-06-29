@@ -1,0 +1,2261 @@
+<xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+    <title>The CImg Library - C++ Template Image Processing Toolkit</title>
+    <meta content="David Tschumperle" name="author"></meta>
+    <link rel="shortcut icon" type="image/x-icon" href="http://cimg.sourceforge.net/favicon.ico"></link>
+    <link rel="icon" type="image/png" href="favicon.png"></link>
+    <link href="doxygen.css" rel="stylesheet" type="text/css">
+    <link href="tabs.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      <!--
+          body {background-color:#C0C0C0; font-family:sans-serif; }
+          a { font-weight:bold; color:#636363; }
+          a:active{text-decoration:none; color:#000000}
+          a:link{text-decoration:none; color:#000000}
+          a:visited{text-decoration:none; color:#000000}
+          a:hover{text-decoration:underline; color:#4E9F71}
+        -->
+    </style>
+    <script language="JavaScript" type="text/javascript">
+      <!-- Original:  Eric King (eric_andrew_king@hotmail.com) is used to display images in popup windows -->
+      <!-- Web Site:  http://redrival.com/eak/ -->
+      <!-- This script and many more are available free online at -->
+      <!-- The JavaScript Source!! http://javascript.internet.com -->
+      <!-- Begin
+           function NewWindow(mypage, myname, w, h, scroll) {
+           var winl = (screen.width - w) / 2;
+           var wint = (screen.height - h) / 2;
+           winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
+           win = window.open(mypage, myname, winprops)
+           if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+           }
+           //  End -->
+    </script>
+    <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $('#cssmenu > ul').prepend('<li class="mobile"><a href="#"><span>Menu <i>&#9776;</i></span></a></li>');
+      $('#cssmenu > ul > li > a').click(function(e) {
+      $('#cssmenu li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      var checkElement = $(this).next();
+      if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+      $(this).closest('li').removeClass('active');
+      checkElement.slideUp('normal');
+      }
+      if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+      $('#cssmenu ul ul:visible').slideUp('normal');
+      checkElement.slideDown('normal');
+      }
+      if( $(this).parent().hasClass('mobile') ) {
+      e.preventDefault();
+      $('#cssmenu').toggleClass('expand');
+      }
+      if($(this).closest('li').find('ul').children().length == 0) {
+      return true;
+      } else {
+      return false;
+      }
+      });
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="../header.css" />
+  </head>
+  <body>
+    <table align="center" cellpadding="12" cellspacing="0" width="1024" style="border-style:solid; border-width:0px; border-color:black" bgcolor="#FFFFFF">
+      <tr><td>
+          <center>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <br/>
+            <a href="http://cimg.sourceforge.net"><img src="http://cimg.sourceforge.net/img/CImgLogo2.jpg" alt="" border="0"></img></a><br/>
+            <br/>
+            <hr noshade="noshade" size="1" width="90%"></hr>
+            <table width="90%" align="center">
+              <td width="18%">&nbsp;</td>
+              <td width="65%">
+                <div id='cssmenu'>
+                  <ul>
+                    <li class='first'><a href='http://cimg.sourceforge.net/index.shtml'><span>Home</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/download.shtml'><span>Download</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/screenshots.shtml'><span>Screenshots</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__faq.html'><span>FAQ</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/group__cimg__tutorial.html'><span>Tutorial</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/reference/index.html'><span>Documentation</span></a></li>
+                    <li><a href='http://sourceforge.net/projects/cimg/forums/forum/334630'><span>Forum</span></a></li>
+                    <li><a href='http://cimg.sourceforge.net/links.shtml'><span>Links</span></a></li>
+                  </ul>
+                </div>
+              </td>
+              <td align="right">
+                <script type="text/javascript">
+	          var flattr_url = 'http://cimg.sourceforge.net';
+	          var flattr_btn='compact';
+                </script>
+                <script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
+              </td>
+      </tr></table>
+      </center>
+</td></tr>
+<tr><td>
+<!-- Generated by Doxygen 1.8.6 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
+      <li class="current"><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="namespaces.html"><span>Namespace&#160;List</span></a></li>
+      <li><a href="namespacemembers.html"><span>Namespace&#160;Members</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespacecimg__library.html">cimg_library</a></li><li class="navelem"><a class="el" href="namespacecimg__library_1_1cimg.html">cimg</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">cimg_library::cimg Namespace Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Contains <em>low-level</em> functions and variables of the <code>CImg</code> Library.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a4947bf6e604e2f8e4a58b3ad19247443"><td class="memItemLeft" align="right" valign="top">std::FILE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a4947bf6e604e2f8e4a58b3ad19247443">output</a> (std::FILE *file)</td></tr>
+<tr class="memdesc:a4947bf6e604e2f8e4a58b3ad19247443"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get/set default output stream for the <code>CImg</code> library messages.  <a href="#a4947bf6e604e2f8e4a58b3ad19247443">More...</a><br/></td></tr>
+<tr class="separator:a4947bf6e604e2f8e4a58b3ad19247443"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1b66fe77173de9e5e8542b2823d6071"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ac1b66fe77173de9e5e8542b2823d6071">info</a> ()</td></tr>
+<tr class="memdesc:ac1b66fe77173de9e5e8542b2823d6071"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print informations about <code>CImg</code> environement variables.  <a href="#ac1b66fe77173de9e5e8542b2823d6071">More...</a><br/></td></tr>
+<tr class="separator:ac1b66fe77173de9e5e8542b2823d6071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9177da3d0921e8ac11d0335a959e70d0"><td class="memTemplParams" colspan="2"><a class="anchor" id="a9177da3d0921e8ac11d0335a959e70d0"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9177da3d0921e8ac11d0335a959e70d0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a9177da3d0921e8ac11d0335a959e70d0">unused</a> (const T &amp;,...)</td></tr>
+<tr class="memdesc:a9177da3d0921e8ac11d0335a959e70d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Avoid warning messages due to unused parameters. Do nothing actually. <br/></td></tr>
+<tr class="separator:a9177da3d0921e8ac11d0335a959e70d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a933d23f5cc8c7bd672541c5e758328ba"><td class="memItemLeft" align="right" valign="top">unsigned int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a933d23f5cc8c7bd672541c5e758328ba">exception_mode</a> (const unsigned int mode)</td></tr>
+<tr class="memdesc:a933d23f5cc8c7bd672541c5e758328ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set current <code>CImg</code> exception mode.  <a href="#a933d23f5cc8c7bd672541c5e758328ba">More...</a><br/></td></tr>
+<tr class="separator:a933d23f5cc8c7bd672541c5e758328ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacf66918a1173b3f72fe6f088d94f26b"><td class="memItemLeft" align="right" valign="top">unsigned int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aacf66918a1173b3f72fe6f088d94f26b">exception_mode</a> ()</td></tr>
+<tr class="memdesc:aacf66918a1173b3f72fe6f088d94f26b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return current <code>CImg</code> exception mode.  <a href="#aacf66918a1173b3f72fe6f088d94f26b">More...</a><br/></td></tr>
+<tr class="separator:aacf66918a1173b3f72fe6f088d94f26b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73c99365911f9a0a004dbb13f2359fb1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73c99365911f9a0a004dbb13f2359fb1"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a73c99365911f9a0a004dbb13f2359fb1">dialog</a> (const char *const title, const char *const msg, const char *const button1_label, const char *const button2_label, const char *const button3_label, const char *const button4_label, const char *const button5_label, const char *const button6_label, const bool is_centered)</td></tr>
+<tr class="memdesc:a73c99365911f9a0a004dbb13f2359fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display a simple dialog box, and wait for the user's response <b>[specialization]</b>. <br/></td></tr>
+<tr class="separator:a73c99365911f9a0a004dbb13f2359fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad01251d5ee34c67b978e251a4d6d6cb4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ad01251d5ee34c67b978e251a4d6d6cb4">eval</a> (const char *const expression, const double x, const double y, const double z, const double c)</td></tr>
+<tr class="memdesc:ad01251d5ee34c67b978e251a4d6d6cb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate math expression.  <a href="#ad01251d5ee34c67b978e251a4d6d6cb4">More...</a><br/></td></tr>
+<tr class="separator:ad01251d5ee34c67b978e251a4d6d6cb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ee7f021ed42b0ac32e1254414c3faab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a5ee7f021ed42b0ac32e1254414c3faab">warn</a> (const char *const format,...)</td></tr>
+<tr class="memdesc:a5ee7f021ed42b0ac32e1254414c3faab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display a warning message on the default output stream.  <a href="#a5ee7f021ed42b0ac32e1254414c3faab">More...</a><br/></td></tr>
+<tr class="separator:a5ee7f021ed42b0ac32e1254414c3faab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09e80f4d7a95f3d5c2282202d8526520"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a09e80f4d7a95f3d5c2282202d8526520">system</a> (const char *const command, const char *const module_name=0)</td></tr>
+<tr class="separator:a09e80f4d7a95f3d5c2282202d8526520"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45305b6bafac8c928652a2a039839704"><td class="memTemplParams" colspan="2"><a class="anchor" id="a45305b6bafac8c928652a2a039839704"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a45305b6bafac8c928652a2a039839704"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a45305b6bafac8c928652a2a039839704">temporary</a> (const T &amp;)</td></tr>
+<tr class="memdesc:a45305b6bafac8c928652a2a039839704"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a reference to a temporary variable of type T. <br/></td></tr>
+<tr class="separator:a45305b6bafac8c928652a2a039839704"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fd51e3f76da1f8123c19b69160accfb"><td class="memTemplParams" colspan="2"><a class="anchor" id="a4fd51e3f76da1f8123c19b69160accfb"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a4fd51e3f76da1f8123c19b69160accfb"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a4fd51e3f76da1f8123c19b69160accfb">swap</a> (T &amp;a, T &amp;b)</td></tr>
+<tr class="memdesc:a4fd51e3f76da1f8123c19b69160accfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exchange values of variables <code>a</code> and <code>b</code>. <br/></td></tr>
+<tr class="separator:a4fd51e3f76da1f8123c19b69160accfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a709ae26dc7ea3e6a63d211a762541181"><td class="memTemplParams" colspan="2"><a class="anchor" id="a709ae26dc7ea3e6a63d211a762541181"></a>
+template&lt;typename T1 , typename T2 &gt; </td></tr>
+<tr class="memitem:a709ae26dc7ea3e6a63d211a762541181"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a709ae26dc7ea3e6a63d211a762541181">swap</a> (T1 &amp;a1, T1 &amp;b1, T2 &amp;a2, T2 &amp;b2)</td></tr>
+<tr class="memdesc:a709ae26dc7ea3e6a63d211a762541181"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exchange values of variables (<code>a1</code>,<code>a2</code>) and (<code>b1</code>,<code>b2</code>). <br/></td></tr>
+<tr class="separator:a709ae26dc7ea3e6a63d211a762541181"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b1a168d5c9f32b811a11da56f2692c9"><td class="memTemplParams" colspan="2"><a class="anchor" id="a9b1a168d5c9f32b811a11da56f2692c9"></a>
+template&lt;typename T1 , typename T2 , typename T3 &gt; </td></tr>
+<tr class="memitem:a9b1a168d5c9f32b811a11da56f2692c9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a9b1a168d5c9f32b811a11da56f2692c9">swap</a> (T1 &amp;a1, T1 &amp;b1, T2 &amp;a2, T2 &amp;b2, T3 &amp;a3, T3 &amp;b3)</td></tr>
+<tr class="memdesc:a9b1a168d5c9f32b811a11da56f2692c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exchange values of variables (<code>a1</code>,<code>a2</code>,<code>a3</code>) and (<code>b1</code>,<code>b2</code>,<code>b3</code>). <br/></td></tr>
+<tr class="separator:a9b1a168d5c9f32b811a11da56f2692c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ae9ba4b242f8266ef10c276c82724c7"><td class="memTemplParams" colspan="2"><a class="anchor" id="a0ae9ba4b242f8266ef10c276c82724c7"></a>
+template&lt;typename T1 , typename T2 , typename T3 , typename T4 &gt; </td></tr>
+<tr class="memitem:a0ae9ba4b242f8266ef10c276c82724c7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a0ae9ba4b242f8266ef10c276c82724c7">swap</a> (T1 &amp;a1, T1 &amp;b1, T2 &amp;a2, T2 &amp;b2, T3 &amp;a3, T3 &amp;b3, T4 &amp;a4, T4 &amp;b4)</td></tr>
+<tr class="memdesc:a0ae9ba4b242f8266ef10c276c82724c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exchange values of variables (<code>a1</code>,<code>a2</code>,...,<code>a4</code>) and (<code>b1</code>,<code>b2</code>,...,<code>b4</code>). <br/></td></tr>
+<tr class="separator:a0ae9ba4b242f8266ef10c276c82724c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1d6d8928a14fc0dc489aef047adc5af"><td class="memTemplParams" colspan="2"><a class="anchor" id="ad1d6d8928a14fc0dc489aef047adc5af"></a>
+template&lt;typename T1 , typename T2 , typename T3 , typename T4 , typename T5 &gt; </td></tr>
+<tr class="memitem:ad1d6d8928a14fc0dc489aef047adc5af"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ad1d6d8928a14fc0dc489aef047adc5af">swap</a> (T1 &amp;a1, T1 &amp;b1, T2 &amp;a2, T2 &amp;b2, T3 &amp;a3, T3 &amp;b3, T4 &amp;a4, T4 &amp;b4, T5 &amp;a5, T5 &amp;b5)</td></tr>
+<tr class="memdesc:ad1d6d8928a14fc0dc489aef047adc5af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exchange values of variables (<code>a1</code>,<code>a2</code>,...,<code>a5</code>) and (<code>b1</code>,<code>b2</code>,...,<code>b5</code>). <br/></td></tr>
+<tr class="separator:ad1d6d8928a14fc0dc489aef047adc5af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05a82f0bb81383dbce8cddccb1c959e3"><td class="memTemplParams" colspan="2"><a class="anchor" id="a05a82f0bb81383dbce8cddccb1c959e3"></a>
+template&lt;typename T1 , typename T2 , typename T3 , typename T4 , typename T5 , typename T6 &gt; </td></tr>
+<tr class="memitem:a05a82f0bb81383dbce8cddccb1c959e3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a05a82f0bb81383dbce8cddccb1c959e3">swap</a> (T1 &amp;a1, T1 &amp;b1, T2 &amp;a2, T2 &amp;b2, T3 &amp;a3, T3 &amp;b3, T4 &amp;a4, T4 &amp;b4, T5 &amp;a5, T5 &amp;b5, T6 &amp;a6, T6 &amp;b6)</td></tr>
+<tr class="memdesc:a05a82f0bb81383dbce8cddccb1c959e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exchange values of variables (<code>a1</code>,<code>a2</code>,...,<code>a6</code>) and (<code>b1</code>,<code>b2</code>,...,<code>b6</code>). <br/></td></tr>
+<tr class="separator:a05a82f0bb81383dbce8cddccb1c959e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb2c61f17e4772c62b60e9ea12250264"><td class="memTemplParams" colspan="2"><a class="anchor" id="aeb2c61f17e4772c62b60e9ea12250264"></a>
+template&lt;typename T1 , typename T2 , typename T3 , typename T4 , typename T5 , typename T6 , typename T7 &gt; </td></tr>
+<tr class="memitem:aeb2c61f17e4772c62b60e9ea12250264"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aeb2c61f17e4772c62b60e9ea12250264">swap</a> (T1 &amp;a1, T1 &amp;b1, T2 &amp;a2, T2 &amp;b2, T3 &amp;a3, T3 &amp;b3, T4 &amp;a4, T4 &amp;b4, T5 &amp;a5, T5 &amp;b5, T6 &amp;a6, T6 &amp;b6, T7 &amp;a7, T7 &amp;b7)</td></tr>
+<tr class="memdesc:aeb2c61f17e4772c62b60e9ea12250264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exchange values of variables (<code>a1</code>,<code>a2</code>,...,<code>a7</code>) and (<code>b1</code>,<code>b2</code>,...,<code>b7</code>). <br/></td></tr>
+<tr class="separator:aeb2c61f17e4772c62b60e9ea12250264"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03d37d0ba72903c15b1cd3dc8f1d5c62"><td class="memTemplParams" colspan="2"><a class="anchor" id="a03d37d0ba72903c15b1cd3dc8f1d5c62"></a>
+template&lt;typename T1 , typename T2 , typename T3 , typename T4 , typename T5 , typename T6 , typename T7 , typename T8 &gt; </td></tr>
+<tr class="memitem:a03d37d0ba72903c15b1cd3dc8f1d5c62"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a03d37d0ba72903c15b1cd3dc8f1d5c62">swap</a> (T1 &amp;a1, T1 &amp;b1, T2 &amp;a2, T2 &amp;b2, T3 &amp;a3, T3 &amp;b3, T4 &amp;a4, T4 &amp;b4, T5 &amp;a5, T5 &amp;b5, T6 &amp;a6, T6 &amp;b6, T7 &amp;a7, T7 &amp;b7, T8 &amp;a8, T8 &amp;b8)</td></tr>
+<tr class="memdesc:a03d37d0ba72903c15b1cd3dc8f1d5c62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exchange values of variables (<code>a1</code>,<code>a2</code>,...,<code>a8</code>) and (<code>b1</code>,<code>b2</code>,...,<code>b8</code>). <br/></td></tr>
+<tr class="separator:a03d37d0ba72903c15b1cd3dc8f1d5c62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d2a283a3aa2572e9d343f040c8c4c6b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a0d2a283a3aa2572e9d343f040c8c4c6b">endianness</a> ()</td></tr>
+<tr class="memdesc:a0d2a283a3aa2572e9d343f040c8c4c6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the endianness of the current architecture.  <a href="#a0d2a283a3aa2572e9d343f040c8c4c6b">More...</a><br/></td></tr>
+<tr class="separator:a0d2a283a3aa2572e9d343f040c8c4c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab730460d88c353f1f6af751b64703a4f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ab730460d88c353f1f6af751b64703a4f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ab730460d88c353f1f6af751b64703a4f">invert_endianness</a> (T *const buffer, const unsigned long size)</td></tr>
+<tr class="memdesc:ab730460d88c353f1f6af751b64703a4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverse endianness of all elements in a memory buffer.  <a href="#ab730460d88c353f1f6af751b64703a4f">More...</a><br/></td></tr>
+<tr class="separator:ab730460d88c353f1f6af751b64703a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae450f8024668ff9f7959ed63b6ed3545"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ae450f8024668ff9f7959ed63b6ed3545"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ae450f8024668ff9f7959ed63b6ed3545">invert_endianness</a> (T &amp;a)</td></tr>
+<tr class="memdesc:ae450f8024668ff9f7959ed63b6ed3545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverse endianness of a single variable.  <a href="#ae450f8024668ff9f7959ed63b6ed3545">More...</a><br/></td></tr>
+<tr class="separator:ae450f8024668ff9f7959ed63b6ed3545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af883131bbc64e996d212114cc2b2b21a"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#af883131bbc64e996d212114cc2b2b21a">time</a> ()</td></tr>
+<tr class="memdesc:af883131bbc64e996d212114cc2b2b21a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of a system timer, with a millisecond precision.  <a href="#af883131bbc64e996d212114cc2b2b21a">More...</a><br/></td></tr>
+<tr class="separator:af883131bbc64e996d212114cc2b2b21a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf7be28cd77dfe2ef303ee62b377475f"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aaf7be28cd77dfe2ef303ee62b377475f">tic</a> ()</td></tr>
+<tr class="memdesc:aaf7be28cd77dfe2ef303ee62b377475f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start tic/toc timer for time measurement between code instructions.  <a href="#aaf7be28cd77dfe2ef303ee62b377475f">More...</a><br/></td></tr>
+<tr class="separator:aaf7be28cd77dfe2ef303ee62b377475f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab161c9ebe4cc751ae18be3944c3ad1f1"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ab161c9ebe4cc751ae18be3944c3ad1f1">toc</a> ()</td></tr>
+<tr class="memdesc:ab161c9ebe4cc751ae18be3944c3ad1f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">End tic/toc timer and displays elapsed time from last call to <a class="el" href="namespacecimg__library_1_1cimg.html#aaf7be28cd77dfe2ef303ee62b377475f" title="Start tic/toc timer for time measurement between code instructions. ">tic()</a>.  <a href="#ab161c9ebe4cc751ae18be3944c3ad1f1">More...</a><br/></td></tr>
+<tr class="separator:ab161c9ebe4cc751ae18be3944c3ad1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ac7655e49556a90715f3532af221334"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a3ac7655e49556a90715f3532af221334">sleep</a> (const unsigned int milliseconds)</td></tr>
+<tr class="memdesc:a3ac7655e49556a90715f3532af221334"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleep for a given numbers of milliseconds.  <a href="#a3ac7655e49556a90715f3532af221334">More...</a><br/></td></tr>
+<tr class="separator:a3ac7655e49556a90715f3532af221334"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c8917c0f12139bff6de6e3e45fc5b77"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a3c8917c0f12139bff6de6e3e45fc5b77">wait</a> (const unsigned int milliseconds)</td></tr>
+<tr class="memdesc:a3c8917c0f12139bff6de6e3e45fc5b77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for a given number of milliseconds since the last call to <a class="el" href="namespacecimg__library_1_1cimg.html#a3c8917c0f12139bff6de6e3e45fc5b77" title="Wait for a given number of milliseconds since the last call to wait(). ">wait()</a>.  <a href="#a3c8917c0f12139bff6de6e3e45fc5b77">More...</a><br/></td></tr>
+<tr class="separator:a3c8917c0f12139bff6de6e3e45fc5b77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af31db729637ea4dad61e49e5729839c4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af31db729637ea4dad61e49e5729839c4"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#af31db729637ea4dad61e49e5729839c4">rand</a> ()</td></tr>
+<tr class="memdesc:af31db729637ea4dad61e49e5729839c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a random variable between [0,1] with respect to an uniform distribution. <br/></td></tr>
+<tr class="separator:af31db729637ea4dad61e49e5729839c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae82972570fdc0904d4f03df7b5d3023"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aae82972570fdc0904d4f03df7b5d3023"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aae82972570fdc0904d4f03df7b5d3023">crand</a> ()</td></tr>
+<tr class="memdesc:aae82972570fdc0904d4f03df7b5d3023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a random variable between [-1,1] with respect to an uniform distribution. <br/></td></tr>
+<tr class="separator:aae82972570fdc0904d4f03df7b5d3023"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0341a323738439349625b2de5f35bb4c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0341a323738439349625b2de5f35bb4c"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a0341a323738439349625b2de5f35bb4c">grand</a> ()</td></tr>
+<tr class="memdesc:a0341a323738439349625b2de5f35bb4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a random variable following a gaussian distribution and a standard deviation of 1. <br/></td></tr>
+<tr class="separator:a0341a323738439349625b2de5f35bb4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f927973e2bc17b851bb61cdfbfef061"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7f927973e2bc17b851bb61cdfbfef061"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a7f927973e2bc17b851bb61cdfbfef061">prand</a> (const double z)</td></tr>
+<tr class="memdesc:a7f927973e2bc17b851bb61cdfbfef061"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a random variable following a Poisson distribution of parameter z. <br/></td></tr>
+<tr class="separator:a7f927973e2bc17b851bb61cdfbfef061"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aea27b1f3a0c7de52f98b0f1c66c275"><td class="memTemplParams" colspan="2"><a class="anchor" id="a7aea27b1f3a0c7de52f98b0f1c66c275"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a7aea27b1f3a0c7de52f98b0f1c66c275"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a7aea27b1f3a0c7de52f98b0f1c66c275">rol</a> (const T a, const unsigned int n=1)</td></tr>
+<tr class="memdesc:a7aea27b1f3a0c7de52f98b0f1c66c275"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bitwise-rotate value on the left. <br/></td></tr>
+<tr class="separator:a7aea27b1f3a0c7de52f98b0f1c66c275"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9695a7b07bacbaff0996fd82ebdab082"><td class="memTemplParams" colspan="2"><a class="anchor" id="a9695a7b07bacbaff0996fd82ebdab082"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9695a7b07bacbaff0996fd82ebdab082"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a9695a7b07bacbaff0996fd82ebdab082">ror</a> (const T a, const unsigned int n=1)</td></tr>
+<tr class="memdesc:a9695a7b07bacbaff0996fd82ebdab082"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bitwise-rotate value on the right. <br/></td></tr>
+<tr class="separator:a9695a7b07bacbaff0996fd82ebdab082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4406bed7768b8014ee1857b6afefd9e9"><td class="memTemplParams" colspan="2"><a class="anchor" id="a4406bed7768b8014ee1857b6afefd9e9"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a4406bed7768b8014ee1857b6afefd9e9"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a4406bed7768b8014ee1857b6afefd9e9">abs</a> (const T a)</td></tr>
+<tr class="memdesc:a4406bed7768b8014ee1857b6afefd9e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return absolute value of a value. <br/></td></tr>
+<tr class="separator:a4406bed7768b8014ee1857b6afefd9e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a807cab58c01628e0c351f79bacf28762"><td class="memTemplParams" colspan="2"><a class="anchor" id="a807cab58c01628e0c351f79bacf28762"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a807cab58c01628e0c351f79bacf28762"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a807cab58c01628e0c351f79bacf28762">sqr</a> (const T val)</td></tr>
+<tr class="memdesc:a807cab58c01628e0c351f79bacf28762"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return square of a value. <br/></td></tr>
+<tr class="separator:a807cab58c01628e0c351f79bacf28762"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dde183be46c1821a3901b63825a4cf4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8dde183be46c1821a3901b63825a4cf4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a8dde183be46c1821a3901b63825a4cf4">xln</a> (const int x)</td></tr>
+<tr class="memdesc:a8dde183be46c1821a3901b63825a4cf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <code>1 + log_10(x)</code> of a value <code>x</code>. <br/></td></tr>
+<tr class="separator:a8dde183be46c1821a3901b63825a4cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab66ac5c949b05e614f21b1f185e3bd68"><td class="memTemplParams" colspan="2"><a class="anchor" id="ab66ac5c949b05e614f21b1f185e3bd68"></a>
+template&lt;typename t1 , typename t2 &gt; </td></tr>
+<tr class="memitem:ab66ac5c949b05e614f21b1f185e3bd68"><td class="memTemplItemLeft" align="right" valign="top">cimg::superset&lt; t1, t2 &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ab66ac5c949b05e614f21b1f185e3bd68">min</a> (const t1 &amp;a, const t2 &amp;b)</td></tr>
+<tr class="memdesc:ab66ac5c949b05e614f21b1f185e3bd68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the minimum between two values. <br/></td></tr>
+<tr class="separator:ab66ac5c949b05e614f21b1f185e3bd68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cc0a1aa3a5e3670faba78945c3bbaa9"><td class="memTemplParams" colspan="2"><a class="anchor" id="a9cc0a1aa3a5e3670faba78945c3bbaa9"></a>
+template&lt;typename t1 , typename t2 , typename t3 &gt; </td></tr>
+<tr class="memitem:a9cc0a1aa3a5e3670faba78945c3bbaa9"><td class="memTemplItemLeft" align="right" valign="top">cimg::superset2&lt; t1, t2, t3 &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a9cc0a1aa3a5e3670faba78945c3bbaa9">min</a> (const t1 &amp;a, const t2 &amp;b, const t3 &amp;c)</td></tr>
+<tr class="memdesc:a9cc0a1aa3a5e3670faba78945c3bbaa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the minimum between three values. <br/></td></tr>
+<tr class="separator:a9cc0a1aa3a5e3670faba78945c3bbaa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a582d8fe5cf695eed9bbb5c1777dee870"><td class="memTemplParams" colspan="2"><a class="anchor" id="a582d8fe5cf695eed9bbb5c1777dee870"></a>
+template&lt;typename t1 , typename t2 , typename t3 , typename t4 &gt; </td></tr>
+<tr class="memitem:a582d8fe5cf695eed9bbb5c1777dee870"><td class="memTemplItemLeft" align="right" valign="top">cimg::superset3&lt; t1, t2, t3, <br class="typebreak"/>
+t4 &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a582d8fe5cf695eed9bbb5c1777dee870">min</a> (const t1 &amp;a, const t2 &amp;b, const t3 &amp;c, const t4 &amp;d)</td></tr>
+<tr class="memdesc:a582d8fe5cf695eed9bbb5c1777dee870"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the minimum between four values. <br/></td></tr>
+<tr class="separator:a582d8fe5cf695eed9bbb5c1777dee870"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3283b6107f321f7a5780b1555745ba4d"><td class="memTemplParams" colspan="2"><a class="anchor" id="a3283b6107f321f7a5780b1555745ba4d"></a>
+template&lt;typename t1 , typename t2 &gt; </td></tr>
+<tr class="memitem:a3283b6107f321f7a5780b1555745ba4d"><td class="memTemplItemLeft" align="right" valign="top">cimg::superset&lt; t1, t2 &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a3283b6107f321f7a5780b1555745ba4d">max</a> (const t1 &amp;a, const t2 &amp;b)</td></tr>
+<tr class="memdesc:a3283b6107f321f7a5780b1555745ba4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the maximum between two values. <br/></td></tr>
+<tr class="separator:a3283b6107f321f7a5780b1555745ba4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33c9e11706369e7e3e4509804798c07f"><td class="memTemplParams" colspan="2"><a class="anchor" id="a33c9e11706369e7e3e4509804798c07f"></a>
+template&lt;typename t1 , typename t2 , typename t3 &gt; </td></tr>
+<tr class="memitem:a33c9e11706369e7e3e4509804798c07f"><td class="memTemplItemLeft" align="right" valign="top">cimg::superset2&lt; t1, t2, t3 &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a33c9e11706369e7e3e4509804798c07f">max</a> (const t1 &amp;a, const t2 &amp;b, const t3 &amp;c)</td></tr>
+<tr class="memdesc:a33c9e11706369e7e3e4509804798c07f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the maximum between three values. <br/></td></tr>
+<tr class="separator:a33c9e11706369e7e3e4509804798c07f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03ebc80a3ead498cffd3481d9a55a7de"><td class="memTemplParams" colspan="2"><a class="anchor" id="a03ebc80a3ead498cffd3481d9a55a7de"></a>
+template&lt;typename t1 , typename t2 , typename t3 , typename t4 &gt; </td></tr>
+<tr class="memitem:a03ebc80a3ead498cffd3481d9a55a7de"><td class="memTemplItemLeft" align="right" valign="top">cimg::superset3&lt; t1, t2, t3, <br class="typebreak"/>
+t4 &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a03ebc80a3ead498cffd3481d9a55a7de">max</a> (const t1 &amp;a, const t2 &amp;b, const t3 &amp;c, const t4 &amp;d)</td></tr>
+<tr class="memdesc:a03ebc80a3ead498cffd3481d9a55a7de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the maximum between four values. <br/></td></tr>
+<tr class="separator:a03ebc80a3ead498cffd3481d9a55a7de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8351fe4c597caea05fc99803fd95d59"><td class="memTemplParams" colspan="2"><a class="anchor" id="af8351fe4c597caea05fc99803fd95d59"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af8351fe4c597caea05fc99803fd95d59"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#af8351fe4c597caea05fc99803fd95d59">sign</a> (const T x)</td></tr>
+<tr class="memdesc:af8351fe4c597caea05fc99803fd95d59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the sign of a value. <br/></td></tr>
+<tr class="separator:af8351fe4c597caea05fc99803fd95d59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7219cfa20ee674ec08548792cf5202a1"><td class="memTemplParams" colspan="2"><a class="anchor" id="a7219cfa20ee674ec08548792cf5202a1"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a7219cfa20ee674ec08548792cf5202a1"><td class="memTemplItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a7219cfa20ee674ec08548792cf5202a1">nearest_pow2</a> (const T x)</td></tr>
+<tr class="memdesc:a7219cfa20ee674ec08548792cf5202a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the nearest power of 2 higher than given value. <br/></td></tr>
+<tr class="separator:a7219cfa20ee674ec08548792cf5202a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac63d9541ded9f3976b33abf91359cc96"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac63d9541ded9f3976b33abf91359cc96"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ac63d9541ded9f3976b33abf91359cc96">sinc</a> (const double x)</td></tr>
+<tr class="memdesc:ac63d9541ded9f3976b33abf91359cc96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the sinc of a given value. <br/></td></tr>
+<tr class="separator:ac63d9541ded9f3976b33abf91359cc96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6508b733d0d7887da1cf583b703f3a1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af6508b733d0d7887da1cf583b703f3a1"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#af6508b733d0d7887da1cf583b703f3a1">mod</a> (const T &amp;x, const T &amp;m)</td></tr>
+<tr class="memdesc:af6508b733d0d7887da1cf583b703f3a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the modulo of a value.  <a href="#af6508b733d0d7887da1cf583b703f3a1">More...</a><br/></td></tr>
+<tr class="separator:af6508b733d0d7887da1cf583b703f3a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab59d987c884c0ab828ef1d844a49e714"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ab59d987c884c0ab828ef1d844a49e714"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ab59d987c884c0ab828ef1d844a49e714">minmod</a> (const T a, const T b)</td></tr>
+<tr class="memdesc:ab59d987c884c0ab828ef1d844a49e714"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the min-mod of two values.  <a href="#ab59d987c884c0ab828ef1d844a49e714">More...</a><br/></td></tr>
+<tr class="separator:ab59d987c884c0ab828ef1d844a49e714"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfe95168165afe6b78f16743fd505fc8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abfe95168165afe6b78f16743fd505fc8"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#abfe95168165afe6b78f16743fd505fc8">log2</a> (const double x)</td></tr>
+<tr class="memdesc:abfe95168165afe6b78f16743fd505fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return base-2 logarithm of a value. <br/></td></tr>
+<tr class="separator:abfe95168165afe6b78f16743fd505fc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63afc0f88ea734f889d5b8036ddd783d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a63afc0f88ea734f889d5b8036ddd783d"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a63afc0f88ea734f889d5b8036ddd783d">round</a> (const T x, const double y=1, const int rounding_type=0)</td></tr>
+<tr class="memdesc:a63afc0f88ea734f889d5b8036ddd783d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return rounded value.  <a href="#a63afc0f88ea734f889d5b8036ddd783d">More...</a><br/></td></tr>
+<tr class="separator:a63afc0f88ea734f889d5b8036ddd783d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a028d4d4de4e1894263a29a6de8e2ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a028d4d4de4e1894263a29a6de8e2ee"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a5a028d4d4de4e1894263a29a6de8e2ee">uncase</a> (const char x)</td></tr>
+<tr class="memdesc:a5a028d4d4de4e1894263a29a6de8e2ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert ascii character to lower case. <br/></td></tr>
+<tr class="separator:a5a028d4d4de4e1894263a29a6de8e2ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2be6e59c2c160206ec5bde74d9e8d446"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2be6e59c2c160206ec5bde74d9e8d446"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a2be6e59c2c160206ec5bde74d9e8d446">uncase</a> (char *const str)</td></tr>
+<tr class="memdesc:a2be6e59c2c160206ec5bde74d9e8d446"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert C-string to lower case. <br/></td></tr>
+<tr class="separator:a2be6e59c2c160206ec5bde74d9e8d446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5a608a78a32b5c95a2dfad8657300de"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ac5a608a78a32b5c95a2dfad8657300de">atof</a> (const char *const str)</td></tr>
+<tr class="memdesc:ac5a608a78a32b5c95a2dfad8657300de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read value in a C-string.  <a href="#ac5a608a78a32b5c95a2dfad8657300de">More...</a><br/></td></tr>
+<tr class="separator:ac5a608a78a32b5c95a2dfad8657300de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80bf14df0be392080a0d60bc561f980e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a80bf14df0be392080a0d60bc561f980e">strncasecmp</a> (const char *const str1, const char *const str2, const int l)</td></tr>
+<tr class="memdesc:a80bf14df0be392080a0d60bc561f980e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare the first <code>l</code> characters of two C-strings, ignoring the case.  <a href="#a80bf14df0be392080a0d60bc561f980e">More...</a><br/></td></tr>
+<tr class="separator:a80bf14df0be392080a0d60bc561f980e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4f7682c6a4307016da1f0b583e36466"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ae4f7682c6a4307016da1f0b583e36466">strcasecmp</a> (const char *const str1, const char *const str2)</td></tr>
+<tr class="memdesc:ae4f7682c6a4307016da1f0b583e36466"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two C-strings, ignoring the case.  <a href="#ae4f7682c6a4307016da1f0b583e36466">More...</a><br/></td></tr>
+<tr class="separator:ae4f7682c6a4307016da1f0b583e36466"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01b63e43c032521506f3d9f9ca1e320f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a01b63e43c032521506f3d9f9ca1e320f">strpare</a> (char *const str, const char delimiter=' ', const bool is_symmetric=false, const bool is_iterative=false)</td></tr>
+<tr class="memdesc:a01b63e43c032521506f3d9f9ca1e320f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove delimiters on the start and/or end of a C-string.  <a href="#a01b63e43c032521506f3d9f9ca1e320f">More...</a><br/></td></tr>
+<tr class="separator:a01b63e43c032521506f3d9f9ca1e320f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbe47fc5ac986f7b64a542538af9f396"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#acbe47fc5ac986f7b64a542538af9f396">strunescape</a> (char *const str)</td></tr>
+<tr class="memdesc:acbe47fc5ac986f7b64a542538af9f396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace escape sequences in C-strings by their binary ascii values.  <a href="#acbe47fc5ac986f7b64a542538af9f396">More...</a><br/></td></tr>
+<tr class="separator:acbe47fc5ac986f7b64a542538af9f396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1c68d7c2b00325e77a6020df3680c44"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac1c68d7c2b00325e77a6020df3680c44"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ac1c68d7c2b00325e77a6020df3680c44">basename</a> (const char *const str)</td></tr>
+<tr class="memdesc:ac1c68d7c2b00325e77a6020df3680c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the basename of a filename. <br/></td></tr>
+<tr class="separator:ac1c68d7c2b00325e77a6020df3680c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19ad60edf05bad32e75b7077509ef566"><td class="memItemLeft" align="right" valign="top">std::FILE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a19ad60edf05bad32e75b7077509ef566">fopen</a> (const char *const path, const char *const mode)</td></tr>
+<tr class="memdesc:a19ad60edf05bad32e75b7077509ef566"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open a file.  <a href="#a19ad60edf05bad32e75b7077509ef566">More...</a><br/></td></tr>
+<tr class="separator:a19ad60edf05bad32e75b7077509ef566"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae54f76e8c2bcff93277e9cae1906a3d6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ae54f76e8c2bcff93277e9cae1906a3d6">fclose</a> (std::FILE *file)</td></tr>
+<tr class="memdesc:ae54f76e8c2bcff93277e9cae1906a3d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close a file.  <a href="#ae54f76e8c2bcff93277e9cae1906a3d6">More...</a><br/></td></tr>
+<tr class="separator:ae54f76e8c2bcff93277e9cae1906a3d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a797797a309ca40aa28cdfbb92f4d1621"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a797797a309ca40aa28cdfbb92f4d1621">temporary_path</a> (const char *const user_path=0, const bool reinit_path=false)</td></tr>
+<tr class="memdesc:a797797a309ca40aa28cdfbb92f4d1621"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get/set path to store temporary files.  <a href="#a797797a309ca40aa28cdfbb92f4d1621">More...</a><br/></td></tr>
+<tr class="separator:a797797a309ca40aa28cdfbb92f4d1621"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0db1003e37cc111d9eddd282c1ab27b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ad0db1003e37cc111d9eddd282c1ab27b">imagemagick_path</a> (const char *const user_path=0, const bool reinit_path=false)</td></tr>
+<tr class="memdesc:ad0db1003e37cc111d9eddd282c1ab27b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get/set path to the <em>Program Files/</em> directory (Windows only).  <a href="#ad0db1003e37cc111d9eddd282c1ab27b">More...</a><br/></td></tr>
+<tr class="separator:ad0db1003e37cc111d9eddd282c1ab27b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9f7e166f51b43facc8ecc9f05e4ceba"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aa9f7e166f51b43facc8ecc9f05e4ceba">graphicsmagick_path</a> (const char *const user_path=0, const bool reinit_path=false)</td></tr>
+<tr class="memdesc:aa9f7e166f51b43facc8ecc9f05e4ceba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get/set path to the GraphicsMagick's <code>gm</code> binary.  <a href="#aa9f7e166f51b43facc8ecc9f05e4ceba">More...</a><br/></td></tr>
+<tr class="separator:aa9f7e166f51b43facc8ecc9f05e4ceba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaedba1291890f50edb5be58ef662e516"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aaedba1291890f50edb5be58ef662e516">medcon_path</a> (const char *const user_path=0, const bool reinit_path=false)</td></tr>
+<tr class="memdesc:aaedba1291890f50edb5be58ef662e516"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get/set path to the XMedcon's <code>medcon</code> binary.  <a href="#aaedba1291890f50edb5be58ef662e516">More...</a><br/></td></tr>
+<tr class="separator:aaedba1291890f50edb5be58ef662e516"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf1666b982cb372129f2ae2fdc748ef2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#abf1666b982cb372129f2ae2fdc748ef2">ffmpeg_path</a> (const char *const user_path=0, const bool reinit_path=false)</td></tr>
+<tr class="memdesc:abf1666b982cb372129f2ae2fdc748ef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get/set path to the FFMPEG's <code>ffmpeg</code> binary.  <a href="#abf1666b982cb372129f2ae2fdc748ef2">More...</a><br/></td></tr>
+<tr class="separator:abf1666b982cb372129f2ae2fdc748ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75f3391e7a393c1c1fe43537004537e2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a75f3391e7a393c1c1fe43537004537e2">gzip_path</a> (const char *const user_path=0, const bool reinit_path=false)</td></tr>
+<tr class="memdesc:a75f3391e7a393c1c1fe43537004537e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get/set path to the <code>gzip</code> binary.  <a href="#a75f3391e7a393c1c1fe43537004537e2">More...</a><br/></td></tr>
+<tr class="separator:a75f3391e7a393c1c1fe43537004537e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08f71c29acfe85d5b8718900e995b779"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a08f71c29acfe85d5b8718900e995b779">gunzip_path</a> (const char *const user_path=0, const bool reinit_path=false)</td></tr>
+<tr class="memdesc:a08f71c29acfe85d5b8718900e995b779"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get/set path to the <code>gzip</code> binary.  <a href="#a08f71c29acfe85d5b8718900e995b779">More...</a><br/></td></tr>
+<tr class="separator:a08f71c29acfe85d5b8718900e995b779"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae36d7a689692ac5663afe1bbdab5d9fa"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ae36d7a689692ac5663afe1bbdab5d9fa">dcraw_path</a> (const char *const user_path=0, const bool reinit_path=false)</td></tr>
+<tr class="memdesc:ae36d7a689692ac5663afe1bbdab5d9fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get/set path to the <code>dcraw</code> binary.  <a href="#ae36d7a689692ac5663afe1bbdab5d9fa">More...</a><br/></td></tr>
+<tr class="separator:ae36d7a689692ac5663afe1bbdab5d9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c229de3e60b27f23497f8bc863cdfb1"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a7c229de3e60b27f23497f8bc863cdfb1">wget_path</a> (const char *const user_path=0, const bool reinit_path=false)</td></tr>
+<tr class="memdesc:a7c229de3e60b27f23497f8bc863cdfb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get/set path to the <code>wget</code> binary.  <a href="#a7c229de3e60b27f23497f8bc863cdfb1">More...</a><br/></td></tr>
+<tr class="separator:a7c229de3e60b27f23497f8bc863cdfb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57f805f036ac626cb0693e74e7b06ffe"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a57f805f036ac626cb0693e74e7b06ffe">curl_path</a> (const char *const user_path=0, const bool reinit_path=false)</td></tr>
+<tr class="memdesc:a57f805f036ac626cb0693e74e7b06ffe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get/set path to the <code>curl</code> binary.  <a href="#a57f805f036ac626cb0693e74e7b06ffe">More...</a><br/></td></tr>
+<tr class="separator:a57f805f036ac626cb0693e74e7b06ffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f7068ec0354e0b34a69a9dc829598aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9f7068ec0354e0b34a69a9dc829598aa"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a9f7068ec0354e0b34a69a9dc829598aa">split_filename</a> (const char *const filename, char *const body=0)</td></tr>
+<tr class="memdesc:a9f7068ec0354e0b34a69a9dc829598aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Split filename into two C-strings <code>body</code> and <code>extension</code>. <br/></td></tr>
+<tr class="separator:a9f7068ec0354e0b34a69a9dc829598aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a5063a24f1b15596c3ccae2ec156f7c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6a5063a24f1b15596c3ccae2ec156f7c"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a6a5063a24f1b15596c3ccae2ec156f7c">number_filename</a> (const char *const filename, const int number, const unsigned int digits, char *const str)</td></tr>
+<tr class="memdesc:a6a5063a24f1b15596c3ccae2ec156f7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a numbered version of a filename. <br/></td></tr>
+<tr class="separator:a6a5063a24f1b15596c3ccae2ec156f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7b1171b457d627d0d2796c89e083d8b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aa7b1171b457d627d0d2796c89e083d8b">file_type</a> (std::FILE *const file, const char *const filename)</td></tr>
+<tr class="memdesc:aa7b1171b457d627d0d2796c89e083d8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to guess format from an image file.  <a href="#aa7b1171b457d627d0d2796c89e083d8b">More...</a><br/></td></tr>
+<tr class="separator:aa7b1171b457d627d0d2796c89e083d8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ea2e9b23409cf2d8774f9d2c3ac686a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a8ea2e9b23409cf2d8774f9d2c3ac686a"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a8ea2e9b23409cf2d8774f9d2c3ac686a">fread</a> (T *const ptr, const unsigned long nmemb, std::FILE *stream)</td></tr>
+<tr class="memdesc:a8ea2e9b23409cf2d8774f9d2c3ac686a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data from file.  <a href="#a8ea2e9b23409cf2d8774f9d2c3ac686a">More...</a><br/></td></tr>
+<tr class="separator:a8ea2e9b23409cf2d8774f9d2c3ac686a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade3b3532d897aa9483dffc5fdc9b4964"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ade3b3532d897aa9483dffc5fdc9b4964"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ade3b3532d897aa9483dffc5fdc9b4964">fwrite</a> (const T *ptr, const unsigned long nmemb, std::FILE *stream)</td></tr>
+<tr class="memdesc:ade3b3532d897aa9483dffc5fdc9b4964"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write data to file.  <a href="#ade3b3532d897aa9483dffc5fdc9b4964">More...</a><br/></td></tr>
+<tr class="separator:ade3b3532d897aa9483dffc5fdc9b4964"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa10f5b3f7f7cebfb2e7887909ff99597"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aa10f5b3f7f7cebfb2e7887909ff99597">fempty</a> (std::FILE *const file, const char *const filename)</td></tr>
+<tr class="memdesc:aa10f5b3f7f7cebfb2e7887909ff99597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an empty file.  <a href="#aa10f5b3f7f7cebfb2e7887909ff99597">More...</a><br/></td></tr>
+<tr class="separator:aa10f5b3f7f7cebfb2e7887909ff99597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abccecc68ce8db512b5f719fc08dca19d"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#abccecc68ce8db512b5f719fc08dca19d">load_network_external</a> (const char *const filename, char *const filename_local)</td></tr>
+<tr class="memdesc:abccecc68ce8db512b5f719fc08dca19d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load file from network as a local temporary file.  <a href="#abccecc68ce8db512b5f719fc08dca19d">More...</a><br/></td></tr>
+<tr class="separator:abccecc68ce8db512b5f719fc08dca19d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ed59dfcc03479996ad4d961e7811d85"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ed59dfcc03479996ad4d961e7811d85"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a5ed59dfcc03479996ad4d961e7811d85">option</a> (const char *const name, const int argc, const char *const *const argv, const char *const defaut, const char *const usage, const bool reset_static)</td></tr>
+<tr class="memdesc:a5ed59dfcc03479996ad4d961e7811d85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return options specified on the command line. <br/></td></tr>
+<tr class="separator:a5ed59dfcc03479996ad4d961e7811d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa11c5d563db3cf0a03e6ce6335aac835"><td class="memTemplParams" colspan="2">template&lt;typename t &gt; </td></tr>
+<tr class="memitem:aa11c5d563db3cf0a03e6ce6335aac835"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aa11c5d563db3cf0a03e6ce6335aac835">dialog</a> (const char *const title, const char *const msg, const char *const button1_label, const char *const button2_label, const char *const button3_label, const char *const button4_label, const char *const button5_label, const char *const button6_label, const <a class="el" href="structcimg__library_1_1CImg.html">CImg</a>&lt; t &gt; &amp;logo, const bool is_centered=false)</td></tr>
+<tr class="memdesc:aa11c5d563db3cf0a03e6ce6335aac835"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display a simple dialog box, and wait for the user's response.  <a href="#aa11c5d563db3cf0a03e6ce6335aac835">More...</a><br/></td></tr>
+<tr class="separator:aa11c5d563db3cf0a03e6ce6335aac835"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ac9dd25f9bbd738fb2a5c4a53abfc131a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac9dd25f9bbd738fb2a5c4a53abfc131a"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ac9dd25f9bbd738fb2a5c4a53abfc131a">keyESC</a> = 1U</td></tr>
+<tr class="memdesc:ac9dd25f9bbd738fb2a5c4a53abfc131a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>ESC</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ac9dd25f9bbd738fb2a5c4a53abfc131a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2bb9296e3c8825c3577061d78a2756f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2bb9296e3c8825c3577061d78a2756f"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ab2bb9296e3c8825c3577061d78a2756f">keyF1</a> = 2U</td></tr>
+<tr class="memdesc:ab2bb9296e3c8825c3577061d78a2756f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>F1</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ab2bb9296e3c8825c3577061d78a2756f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca241827992f8f2c3d5f1dc00da01a4c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca241827992f8f2c3d5f1dc00da01a4c"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aca241827992f8f2c3d5f1dc00da01a4c">keyF2</a> = 3U</td></tr>
+<tr class="memdesc:aca241827992f8f2c3d5f1dc00da01a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>F2</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:aca241827992f8f2c3d5f1dc00da01a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad472e2b44686ef7d7db322cf231029f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad472e2b44686ef7d7db322cf231029f4"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ad472e2b44686ef7d7db322cf231029f4">keyF3</a> = 4U</td></tr>
+<tr class="memdesc:ad472e2b44686ef7d7db322cf231029f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>F3</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ad472e2b44686ef7d7db322cf231029f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accc67fbf80357869a05ce61792f7c106"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="accc67fbf80357869a05ce61792f7c106"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#accc67fbf80357869a05ce61792f7c106">keyF4</a> = 5U</td></tr>
+<tr class="memdesc:accc67fbf80357869a05ce61792f7c106"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>F4</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:accc67fbf80357869a05ce61792f7c106"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79a17a25416df1b1bac9f1bc14dc9eef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a79a17a25416df1b1bac9f1bc14dc9eef"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a79a17a25416df1b1bac9f1bc14dc9eef">keyF5</a> = 6U</td></tr>
+<tr class="memdesc:a79a17a25416df1b1bac9f1bc14dc9eef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>F5</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a79a17a25416df1b1bac9f1bc14dc9eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b89aaa731ebbf468c868455c4a5751d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b89aaa731ebbf468c868455c4a5751d"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a5b89aaa731ebbf468c868455c4a5751d">keyF6</a> = 7U</td></tr>
+<tr class="memdesc:a5b89aaa731ebbf468c868455c4a5751d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>F6</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a5b89aaa731ebbf468c868455c4a5751d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a143f5abe5ab1e38387bb28d5f0b7574b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a143f5abe5ab1e38387bb28d5f0b7574b"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a143f5abe5ab1e38387bb28d5f0b7574b">keyF7</a> = 8U</td></tr>
+<tr class="memdesc:a143f5abe5ab1e38387bb28d5f0b7574b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>F7</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a143f5abe5ab1e38387bb28d5f0b7574b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9efa9eb270d2466a094ffe1cd3fe47ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9efa9eb270d2466a094ffe1cd3fe47ef"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a9efa9eb270d2466a094ffe1cd3fe47ef">keyF8</a> = 9U</td></tr>
+<tr class="memdesc:a9efa9eb270d2466a094ffe1cd3fe47ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>F8</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a9efa9eb270d2466a094ffe1cd3fe47ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1885df5fdbe6cb16ef9b928383c8fd2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad1885df5fdbe6cb16ef9b928383c8fd2"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ad1885df5fdbe6cb16ef9b928383c8fd2">keyF9</a> = 10U</td></tr>
+<tr class="memdesc:ad1885df5fdbe6cb16ef9b928383c8fd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>F9</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ad1885df5fdbe6cb16ef9b928383c8fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a108c55cc43cb413b2525366e5f5b7de0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a108c55cc43cb413b2525366e5f5b7de0"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a108c55cc43cb413b2525366e5f5b7de0">keyF10</a> = 11U</td></tr>
+<tr class="memdesc:a108c55cc43cb413b2525366e5f5b7de0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>F10</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a108c55cc43cb413b2525366e5f5b7de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74326d30cb7d70c70ce552e51c619193"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a74326d30cb7d70c70ce552e51c619193"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a74326d30cb7d70c70ce552e51c619193">keyF11</a> = 12U</td></tr>
+<tr class="memdesc:a74326d30cb7d70c70ce552e51c619193"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>F11</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a74326d30cb7d70c70ce552e51c619193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af97fb45c9bd75362bbb2e6df079d1b39"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af97fb45c9bd75362bbb2e6df079d1b39"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#af97fb45c9bd75362bbb2e6df079d1b39">keyF12</a> = 13U</td></tr>
+<tr class="memdesc:af97fb45c9bd75362bbb2e6df079d1b39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>F12</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:af97fb45c9bd75362bbb2e6df079d1b39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a913d322ebef21d974319c1798546e1ea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a913d322ebef21d974319c1798546e1ea"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a913d322ebef21d974319c1798546e1ea">keyPAUSE</a> = 14U</td></tr>
+<tr class="memdesc:a913d322ebef21d974319c1798546e1ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PAUSE</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a913d322ebef21d974319c1798546e1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b8cc6f47f8835908ee6fdbee676dfe7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b8cc6f47f8835908ee6fdbee676dfe7"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a8b8cc6f47f8835908ee6fdbee676dfe7">key1</a> = 15U</td></tr>
+<tr class="memdesc:a8b8cc6f47f8835908ee6fdbee676dfe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>1</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a8b8cc6f47f8835908ee6fdbee676dfe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ea91b5ed8e273cedfc8692d87203fc5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1ea91b5ed8e273cedfc8692d87203fc5"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a1ea91b5ed8e273cedfc8692d87203fc5">key2</a> = 16U</td></tr>
+<tr class="memdesc:a1ea91b5ed8e273cedfc8692d87203fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>2</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a1ea91b5ed8e273cedfc8692d87203fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96941bf25f1a6adda4b54542d5943d13"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a96941bf25f1a6adda4b54542d5943d13"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a96941bf25f1a6adda4b54542d5943d13">key3</a> = 17U</td></tr>
+<tr class="memdesc:a96941bf25f1a6adda4b54542d5943d13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>3</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a96941bf25f1a6adda4b54542d5943d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bb03c8f8345887fa7397fb4027ab5b1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5bb03c8f8345887fa7397fb4027ab5b1"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a5bb03c8f8345887fa7397fb4027ab5b1">key4</a> = 18U</td></tr>
+<tr class="memdesc:a5bb03c8f8345887fa7397fb4027ab5b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>4</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a5bb03c8f8345887fa7397fb4027ab5b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c68e8e1bcd6972c864a8e34ca44175e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7c68e8e1bcd6972c864a8e34ca44175e"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a7c68e8e1bcd6972c864a8e34ca44175e">key5</a> = 19U</td></tr>
+<tr class="memdesc:a7c68e8e1bcd6972c864a8e34ca44175e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>5</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a7c68e8e1bcd6972c864a8e34ca44175e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83bacca6bd17749b9c0a329ad60b041a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a83bacca6bd17749b9c0a329ad60b041a"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a83bacca6bd17749b9c0a329ad60b041a">key6</a> = 20U</td></tr>
+<tr class="memdesc:a83bacca6bd17749b9c0a329ad60b041a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>6</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a83bacca6bd17749b9c0a329ad60b041a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b0f96a3ad23a2b77b58201877452639"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b0f96a3ad23a2b77b58201877452639"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a0b0f96a3ad23a2b77b58201877452639">key7</a> = 21U</td></tr>
+<tr class="memdesc:a0b0f96a3ad23a2b77b58201877452639"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>7</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a0b0f96a3ad23a2b77b58201877452639"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06f0892dc0ec68acc31eec0fe295bdbc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a06f0892dc0ec68acc31eec0fe295bdbc"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a06f0892dc0ec68acc31eec0fe295bdbc">key8</a> = 22U</td></tr>
+<tr class="memdesc:a06f0892dc0ec68acc31eec0fe295bdbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>8</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a06f0892dc0ec68acc31eec0fe295bdbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c1791f4175f2a26ead74f6ebca5d418"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c1791f4175f2a26ead74f6ebca5d418"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a3c1791f4175f2a26ead74f6ebca5d418">key9</a> = 23U</td></tr>
+<tr class="memdesc:a3c1791f4175f2a26ead74f6ebca5d418"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>9</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a3c1791f4175f2a26ead74f6ebca5d418"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a943062277c90053f77ede0fc023dd9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a943062277c90053f77ede0fc023dd9"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a2a943062277c90053f77ede0fc023dd9">key0</a> = 24U</td></tr>
+<tr class="memdesc:a2a943062277c90053f77ede0fc023dd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>0</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a2a943062277c90053f77ede0fc023dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27825fd9c5d55747e8ce7d25d6a5d62b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27825fd9c5d55747e8ce7d25d6a5d62b"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a27825fd9c5d55747e8ce7d25d6a5d62b">keyBACKSPACE</a> = 25U</td></tr>
+<tr class="memdesc:a27825fd9c5d55747e8ce7d25d6a5d62b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>BACKSPACE</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a27825fd9c5d55747e8ce7d25d6a5d62b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a996918d1e8e26dcb6bbe7221c29f0394"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a996918d1e8e26dcb6bbe7221c29f0394"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a996918d1e8e26dcb6bbe7221c29f0394">keyINSERT</a> = 26U</td></tr>
+<tr class="memdesc:a996918d1e8e26dcb6bbe7221c29f0394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>INSERT</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a996918d1e8e26dcb6bbe7221c29f0394"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3033a5ad3d127eb40e4bd5ec26407606"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3033a5ad3d127eb40e4bd5ec26407606"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a3033a5ad3d127eb40e4bd5ec26407606">keyHOME</a> = 27U</td></tr>
+<tr class="memdesc:a3033a5ad3d127eb40e4bd5ec26407606"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>HOME</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a3033a5ad3d127eb40e4bd5ec26407606"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a043d521f7c8a3982eadc370f86256f03"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a043d521f7c8a3982eadc370f86256f03"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a043d521f7c8a3982eadc370f86256f03">keyPAGEUP</a> = 28U</td></tr>
+<tr class="memdesc:a043d521f7c8a3982eadc370f86256f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PAGEUP</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a043d521f7c8a3982eadc370f86256f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac87fb27911487105898da7218a374942"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac87fb27911487105898da7218a374942"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ac87fb27911487105898da7218a374942">keyTAB</a> = 29U</td></tr>
+<tr class="memdesc:ac87fb27911487105898da7218a374942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>TAB</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ac87fb27911487105898da7218a374942"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dd5ebaec39dd5ec7eb40cbebd7f5596"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3dd5ebaec39dd5ec7eb40cbebd7f5596"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a3dd5ebaec39dd5ec7eb40cbebd7f5596">keyQ</a> = 30U</td></tr>
+<tr class="memdesc:a3dd5ebaec39dd5ec7eb40cbebd7f5596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>Q</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a3dd5ebaec39dd5ec7eb40cbebd7f5596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a45823c2bc6f4d26119f8fad037564e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0a45823c2bc6f4d26119f8fad037564e"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a0a45823c2bc6f4d26119f8fad037564e">keyW</a> = 31U</td></tr>
+<tr class="memdesc:a0a45823c2bc6f4d26119f8fad037564e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>W</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a0a45823c2bc6f4d26119f8fad037564e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2de3f210608c40a2306ceec8f241a8a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad2de3f210608c40a2306ceec8f241a8a"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ad2de3f210608c40a2306ceec8f241a8a">keyE</a> = 32U</td></tr>
+<tr class="memdesc:ad2de3f210608c40a2306ceec8f241a8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>E</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ad2de3f210608c40a2306ceec8f241a8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a398d75c4baa347eefbda7997e9c7df5f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a398d75c4baa347eefbda7997e9c7df5f"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a398d75c4baa347eefbda7997e9c7df5f">keyR</a> = 33U</td></tr>
+<tr class="memdesc:a398d75c4baa347eefbda7997e9c7df5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>R</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a398d75c4baa347eefbda7997e9c7df5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b9aefb6f14e74e7a191b3057c0c46bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b9aefb6f14e74e7a191b3057c0c46bc"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a8b9aefb6f14e74e7a191b3057c0c46bc">keyT</a> = 34U</td></tr>
+<tr class="memdesc:a8b9aefb6f14e74e7a191b3057c0c46bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>T</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a8b9aefb6f14e74e7a191b3057c0c46bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac19e1e93d2495608a0c1b100698299d5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac19e1e93d2495608a0c1b100698299d5"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ac19e1e93d2495608a0c1b100698299d5">keyY</a> = 35U</td></tr>
+<tr class="memdesc:ac19e1e93d2495608a0c1b100698299d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>Y</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ac19e1e93d2495608a0c1b100698299d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a787433670267e5d08559b6495f6a13bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a787433670267e5d08559b6495f6a13bc"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a787433670267e5d08559b6495f6a13bc">keyU</a> = 36U</td></tr>
+<tr class="memdesc:a787433670267e5d08559b6495f6a13bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>U</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a787433670267e5d08559b6495f6a13bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73780975c2f90e590c55c5d23a457510"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73780975c2f90e590c55c5d23a457510"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a73780975c2f90e590c55c5d23a457510">keyI</a> = 37U</td></tr>
+<tr class="memdesc:a73780975c2f90e590c55c5d23a457510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>I</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a73780975c2f90e590c55c5d23a457510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3f196218b16a430ceed32c992421852"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3f196218b16a430ceed32c992421852"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aa3f196218b16a430ceed32c992421852">keyO</a> = 38U</td></tr>
+<tr class="memdesc:aa3f196218b16a430ceed32c992421852"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>O</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:aa3f196218b16a430ceed32c992421852"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae386376db4a2e281bc9bb960ee9701bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae386376db4a2e281bc9bb960ee9701bc"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ae386376db4a2e281bc9bb960ee9701bc">keyP</a> = 39U</td></tr>
+<tr class="memdesc:ae386376db4a2e281bc9bb960ee9701bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>P</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ae386376db4a2e281bc9bb960ee9701bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80a053213ccc5b4ca394880234228faa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a80a053213ccc5b4ca394880234228faa"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a80a053213ccc5b4ca394880234228faa">keyDELETE</a> = 40U</td></tr>
+<tr class="memdesc:a80a053213ccc5b4ca394880234228faa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>DELETE</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a80a053213ccc5b4ca394880234228faa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add4cc027e45d98bbe6fb6e528cb9c784"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add4cc027e45d98bbe6fb6e528cb9c784"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#add4cc027e45d98bbe6fb6e528cb9c784">keyEND</a> = 41U</td></tr>
+<tr class="memdesc:add4cc027e45d98bbe6fb6e528cb9c784"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>END</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:add4cc027e45d98bbe6fb6e528cb9c784"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaaffbb30cbf6052f772e8b11e16a031"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acaaffbb30cbf6052f772e8b11e16a031"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#acaaffbb30cbf6052f772e8b11e16a031">keyPAGEDOWN</a> = 42U</td></tr>
+<tr class="memdesc:acaaffbb30cbf6052f772e8b11e16a031"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PAGEDOWN</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:acaaffbb30cbf6052f772e8b11e16a031"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf3eb3f267692c68d78c0d06be3811c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adf3eb3f267692c68d78c0d06be3811c9"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#adf3eb3f267692c68d78c0d06be3811c9">keyCAPSLOCK</a> = 43U</td></tr>
+<tr class="memdesc:adf3eb3f267692c68d78c0d06be3811c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>CAPSLOCK</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:adf3eb3f267692c68d78c0d06be3811c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c4e036b20b9e6c971505ffc3b757a59"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9c4e036b20b9e6c971505ffc3b757a59"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a9c4e036b20b9e6c971505ffc3b757a59">keyA</a> = 44U</td></tr>
+<tr class="memdesc:a9c4e036b20b9e6c971505ffc3b757a59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>A</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a9c4e036b20b9e6c971505ffc3b757a59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73ffbf380f7977fe65d303c4de015284"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73ffbf380f7977fe65d303c4de015284"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a73ffbf380f7977fe65d303c4de015284">keyS</a> = 45U</td></tr>
+<tr class="memdesc:a73ffbf380f7977fe65d303c4de015284"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>S</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a73ffbf380f7977fe65d303c4de015284"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ec16830a9bd06a33518ffc15cc0775d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9ec16830a9bd06a33518ffc15cc0775d"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a9ec16830a9bd06a33518ffc15cc0775d">keyD</a> = 46U</td></tr>
+<tr class="memdesc:a9ec16830a9bd06a33518ffc15cc0775d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>D</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a9ec16830a9bd06a33518ffc15cc0775d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cf8dfdb520cda605fa8df3b7f2c503f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6cf8dfdb520cda605fa8df3b7f2c503f"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a6cf8dfdb520cda605fa8df3b7f2c503f">keyF</a> = 47U</td></tr>
+<tr class="memdesc:a6cf8dfdb520cda605fa8df3b7f2c503f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>F</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a6cf8dfdb520cda605fa8df3b7f2c503f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60c0ce35f69f77881072fa51a71b072f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a60c0ce35f69f77881072fa51a71b072f"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a60c0ce35f69f77881072fa51a71b072f">keyG</a> = 48U</td></tr>
+<tr class="memdesc:a60c0ce35f69f77881072fa51a71b072f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>G</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a60c0ce35f69f77881072fa51a71b072f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c0209cbde936fd84017eb04608b4db7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5c0209cbde936fd84017eb04608b4db7"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a5c0209cbde936fd84017eb04608b4db7">keyH</a> = 49U</td></tr>
+<tr class="memdesc:a5c0209cbde936fd84017eb04608b4db7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>H</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a5c0209cbde936fd84017eb04608b4db7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af98b9fcdaed675bd7ccfce18c9d08465"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af98b9fcdaed675bd7ccfce18c9d08465"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#af98b9fcdaed675bd7ccfce18c9d08465">keyJ</a> = 50U</td></tr>
+<tr class="memdesc:af98b9fcdaed675bd7ccfce18c9d08465"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>J</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:af98b9fcdaed675bd7ccfce18c9d08465"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9370977df0950d0ac0c9a747c59503ce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9370977df0950d0ac0c9a747c59503ce"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a9370977df0950d0ac0c9a747c59503ce">keyK</a> = 51U</td></tr>
+<tr class="memdesc:a9370977df0950d0ac0c9a747c59503ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>K</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a9370977df0950d0ac0c9a747c59503ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bc439ad60348049f8abbf354336f331"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3bc439ad60348049f8abbf354336f331"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a3bc439ad60348049f8abbf354336f331">keyL</a> = 52U</td></tr>
+<tr class="memdesc:a3bc439ad60348049f8abbf354336f331"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>L</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a3bc439ad60348049f8abbf354336f331"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef51b5cf0ba6e0305756928d3ee57c89"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef51b5cf0ba6e0305756928d3ee57c89"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aef51b5cf0ba6e0305756928d3ee57c89">keyENTER</a> = 53U</td></tr>
+<tr class="memdesc:aef51b5cf0ba6e0305756928d3ee57c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>ENTER</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:aef51b5cf0ba6e0305756928d3ee57c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a725bcf21ad7f6bdb507842aab06108a5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a725bcf21ad7f6bdb507842aab06108a5"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a725bcf21ad7f6bdb507842aab06108a5">keySHIFTLEFT</a> = 54U</td></tr>
+<tr class="memdesc:a725bcf21ad7f6bdb507842aab06108a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>SHIFTLEFT</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a725bcf21ad7f6bdb507842aab06108a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6caebf30905d2cad4e68393b375f4324"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6caebf30905d2cad4e68393b375f4324"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a6caebf30905d2cad4e68393b375f4324">keyZ</a> = 55U</td></tr>
+<tr class="memdesc:a6caebf30905d2cad4e68393b375f4324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>Z</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a6caebf30905d2cad4e68393b375f4324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae729e8fd0ee1da68faa9efe6650625b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aae729e8fd0ee1da68faa9efe6650625b"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aae729e8fd0ee1da68faa9efe6650625b">keyX</a> = 56U</td></tr>
+<tr class="memdesc:aae729e8fd0ee1da68faa9efe6650625b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>X</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:aae729e8fd0ee1da68faa9efe6650625b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9288895061029ae00d32bf381377f1f2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9288895061029ae00d32bf381377f1f2"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a9288895061029ae00d32bf381377f1f2">keyC</a> = 57U</td></tr>
+<tr class="memdesc:a9288895061029ae00d32bf381377f1f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>C</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a9288895061029ae00d32bf381377f1f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afee1f224f97c2f63acbf0858a3e923e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afee1f224f97c2f63acbf0858a3e923e3"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#afee1f224f97c2f63acbf0858a3e923e3">keyV</a> = 58U</td></tr>
+<tr class="memdesc:afee1f224f97c2f63acbf0858a3e923e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>V</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:afee1f224f97c2f63acbf0858a3e923e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ab63a7ec5c0a17e63e946fdfb3cf482"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1ab63a7ec5c0a17e63e946fdfb3cf482"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a1ab63a7ec5c0a17e63e946fdfb3cf482">keyB</a> = 59U</td></tr>
+<tr class="memdesc:a1ab63a7ec5c0a17e63e946fdfb3cf482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>B</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a1ab63a7ec5c0a17e63e946fdfb3cf482"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03717e224fa06e04ef864839ab34c014"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03717e224fa06e04ef864839ab34c014"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a03717e224fa06e04ef864839ab34c014">keyN</a> = 60U</td></tr>
+<tr class="memdesc:a03717e224fa06e04ef864839ab34c014"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>N</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a03717e224fa06e04ef864839ab34c014"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcec83e8421fa7c1c53e376c99171337"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adcec83e8421fa7c1c53e376c99171337"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#adcec83e8421fa7c1c53e376c99171337">keyM</a> = 61U</td></tr>
+<tr class="memdesc:adcec83e8421fa7c1c53e376c99171337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>M</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:adcec83e8421fa7c1c53e376c99171337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa92d9063720ce4e4a06792d2b626103a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa92d9063720ce4e4a06792d2b626103a"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aa92d9063720ce4e4a06792d2b626103a">keySHIFTRIGHT</a> = 62U</td></tr>
+<tr class="memdesc:aa92d9063720ce4e4a06792d2b626103a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>SHIFTRIGHT</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:aa92d9063720ce4e4a06792d2b626103a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5066ac57b72b3084a7d58da945b8960"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab5066ac57b72b3084a7d58da945b8960"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ab5066ac57b72b3084a7d58da945b8960">keyARROWUP</a> = 63U</td></tr>
+<tr class="memdesc:ab5066ac57b72b3084a7d58da945b8960"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>ARROWUP</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ab5066ac57b72b3084a7d58da945b8960"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe6f3b04760bc1dfc2c1a8ff9ffd6e9b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe6f3b04760bc1dfc2c1a8ff9ffd6e9b"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#afe6f3b04760bc1dfc2c1a8ff9ffd6e9b">keyCTRLLEFT</a> = 64U</td></tr>
+<tr class="memdesc:afe6f3b04760bc1dfc2c1a8ff9ffd6e9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>CTRLLEFT</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:afe6f3b04760bc1dfc2c1a8ff9ffd6e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4a6a66b01f4728ad339605e9951834e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae4a6a66b01f4728ad339605e9951834e"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ae4a6a66b01f4728ad339605e9951834e">keyAPPLEFT</a> = 65U</td></tr>
+<tr class="memdesc:ae4a6a66b01f4728ad339605e9951834e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>APPLEFT</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ae4a6a66b01f4728ad339605e9951834e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3346f64ce7f183d1668da972551bcc3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab3346f64ce7f183d1668da972551bcc3"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ab3346f64ce7f183d1668da972551bcc3">keyALT</a> = 66U</td></tr>
+<tr class="memdesc:ab3346f64ce7f183d1668da972551bcc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>ALT</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ab3346f64ce7f183d1668da972551bcc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a453901a69710477f724bff9a27374529"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a453901a69710477f724bff9a27374529"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a453901a69710477f724bff9a27374529">keySPACE</a> = 67U</td></tr>
+<tr class="memdesc:a453901a69710477f724bff9a27374529"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>SPACE</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a453901a69710477f724bff9a27374529"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95c120ac09a0b5c4a2a129ab6fb9215f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95c120ac09a0b5c4a2a129ab6fb9215f"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a95c120ac09a0b5c4a2a129ab6fb9215f">keyALTGR</a> = 68U</td></tr>
+<tr class="memdesc:a95c120ac09a0b5c4a2a129ab6fb9215f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>ALTGR</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a95c120ac09a0b5c4a2a129ab6fb9215f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ab0843d5c22bd7e9f57f79aed14f883"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ab0843d5c22bd7e9f57f79aed14f883"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a5ab0843d5c22bd7e9f57f79aed14f883">keyAPPRIGHT</a> = 69U</td></tr>
+<tr class="memdesc:a5ab0843d5c22bd7e9f57f79aed14f883"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>APPRIGHT</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a5ab0843d5c22bd7e9f57f79aed14f883"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b9deffa989b6e6bdd67b0d34f3eaa3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a96b9deffa989b6e6bdd67b0d34f3eaa3"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a96b9deffa989b6e6bdd67b0d34f3eaa3">keyMENU</a> = 70U</td></tr>
+<tr class="memdesc:a96b9deffa989b6e6bdd67b0d34f3eaa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>MENU</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a96b9deffa989b6e6bdd67b0d34f3eaa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22e2b5fe857b8f645200c55fe564fabb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22e2b5fe857b8f645200c55fe564fabb"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a22e2b5fe857b8f645200c55fe564fabb">keyCTRLRIGHT</a> = 71U</td></tr>
+<tr class="memdesc:a22e2b5fe857b8f645200c55fe564fabb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>CTRLRIGHT</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a22e2b5fe857b8f645200c55fe564fabb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3d6c18f6b557add5145a270f86fbab7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae3d6c18f6b557add5145a270f86fbab7"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ae3d6c18f6b557add5145a270f86fbab7">keyARROWLEFT</a> = 72U</td></tr>
+<tr class="memdesc:ae3d6c18f6b557add5145a270f86fbab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>ARROWLEFT</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ae3d6c18f6b557add5145a270f86fbab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace1511fb53a7814e20b96fe7833fdf18"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace1511fb53a7814e20b96fe7833fdf18"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ace1511fb53a7814e20b96fe7833fdf18">keyARROWDOWN</a> = 73U</td></tr>
+<tr class="memdesc:ace1511fb53a7814e20b96fe7833fdf18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>ARROWDOWN</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ace1511fb53a7814e20b96fe7833fdf18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa61455dd5038e5d61747ed1c65a11e1c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa61455dd5038e5d61747ed1c65a11e1c"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aa61455dd5038e5d61747ed1c65a11e1c">keyARROWRIGHT</a> = 74U</td></tr>
+<tr class="memdesc:aa61455dd5038e5d61747ed1c65a11e1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>ARROWRIGHT</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:aa61455dd5038e5d61747ed1c65a11e1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83495854bd63fb599343cf7cdf97aacc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a83495854bd63fb599343cf7cdf97aacc"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a83495854bd63fb599343cf7cdf97aacc">keyPAD0</a> = 75U</td></tr>
+<tr class="memdesc:a83495854bd63fb599343cf7cdf97aacc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PAD0</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a83495854bd63fb599343cf7cdf97aacc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07fe61691932ad8096d2406c3e09d71d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a07fe61691932ad8096d2406c3e09d71d"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a07fe61691932ad8096d2406c3e09d71d">keyPAD1</a> = 76U</td></tr>
+<tr class="memdesc:a07fe61691932ad8096d2406c3e09d71d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PAD1</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a07fe61691932ad8096d2406c3e09d71d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a457950b1fbb9100158c1c7d5f6717a9d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a457950b1fbb9100158c1c7d5f6717a9d"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a457950b1fbb9100158c1c7d5f6717a9d">keyPAD2</a> = 77U</td></tr>
+<tr class="memdesc:a457950b1fbb9100158c1c7d5f6717a9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PAD2</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a457950b1fbb9100158c1c7d5f6717a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacd2aa313826d4db46d65e10712a56f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aacd2aa313826d4db46d65e10712a56f1"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aacd2aa313826d4db46d65e10712a56f1">keyPAD3</a> = 78U</td></tr>
+<tr class="memdesc:aacd2aa313826d4db46d65e10712a56f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PAD3</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:aacd2aa313826d4db46d65e10712a56f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51a1c05392b452fc57e99dee53dd132e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a51a1c05392b452fc57e99dee53dd132e"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a51a1c05392b452fc57e99dee53dd132e">keyPAD4</a> = 79U</td></tr>
+<tr class="memdesc:a51a1c05392b452fc57e99dee53dd132e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PAD4</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a51a1c05392b452fc57e99dee53dd132e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a72f80d7cd098ca325343f7dcf94324"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6a72f80d7cd098ca325343f7dcf94324"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a6a72f80d7cd098ca325343f7dcf94324">keyPAD5</a> = 80U</td></tr>
+<tr class="memdesc:a6a72f80d7cd098ca325343f7dcf94324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PAD5</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a6a72f80d7cd098ca325343f7dcf94324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c26be713ce6b389e18244ab7f06dc70"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c26be713ce6b389e18244ab7f06dc70"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a0c26be713ce6b389e18244ab7f06dc70">keyPAD6</a> = 81U</td></tr>
+<tr class="memdesc:a0c26be713ce6b389e18244ab7f06dc70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PAD6</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a0c26be713ce6b389e18244ab7f06dc70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9b9fcfe94c504639766e4e5645fd3ab"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9b9fcfe94c504639766e4e5645fd3ab"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#ab9b9fcfe94c504639766e4e5645fd3ab">keyPAD7</a> = 82U</td></tr>
+<tr class="memdesc:ab9b9fcfe94c504639766e4e5645fd3ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PAD7</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:ab9b9fcfe94c504639766e4e5645fd3ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30e97c1f4a74f7a52597ef2fff68afb8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a30e97c1f4a74f7a52597ef2fff68afb8"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a30e97c1f4a74f7a52597ef2fff68afb8">keyPAD8</a> = 83U</td></tr>
+<tr class="memdesc:a30e97c1f4a74f7a52597ef2fff68afb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PAD8</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a30e97c1f4a74f7a52597ef2fff68afb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa41361cbc8d5c265386770e17924da76"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa41361cbc8d5c265386770e17924da76"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#aa41361cbc8d5c265386770e17924da76">keyPAD9</a> = 84U</td></tr>
+<tr class="memdesc:aa41361cbc8d5c265386770e17924da76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PAD9</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:aa41361cbc8d5c265386770e17924da76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e9f914f1262b4cc8c764d258c208523"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e9f914f1262b4cc8c764d258c208523"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a8e9f914f1262b4cc8c764d258c208523">keyPADADD</a> = 85U</td></tr>
+<tr class="memdesc:a8e9f914f1262b4cc8c764d258c208523"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PADADD</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a8e9f914f1262b4cc8c764d258c208523"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45004bb8fb443d169a9a89d07b49e53c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a45004bb8fb443d169a9a89d07b49e53c"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a45004bb8fb443d169a9a89d07b49e53c">keyPADSUB</a> = 86U</td></tr>
+<tr class="memdesc:a45004bb8fb443d169a9a89d07b49e53c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PADSUB</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a45004bb8fb443d169a9a89d07b49e53c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a099a2418f6873fca6b7223428b0d4a0f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a099a2418f6873fca6b7223428b0d4a0f"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a099a2418f6873fca6b7223428b0d4a0f">keyPADMUL</a> = 87U</td></tr>
+<tr class="memdesc:a099a2418f6873fca6b7223428b0d4a0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PADMUL</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a099a2418f6873fca6b7223428b0d4a0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a812ace467cdfc428fec44787522c0b95"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a812ace467cdfc428fec44787522c0b95"></a>
+const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a812ace467cdfc428fec44787522c0b95">keyPADDIV</a> = 88U</td></tr>
+<tr class="memdesc:a812ace467cdfc428fec44787522c0b95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keycode for the <code>PADDDIV</code> key (architecture-dependent). <br/></td></tr>
+<tr class="separator:a812ace467cdfc428fec44787522c0b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a952eac791b596a61bba0a133a3bb439f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a952eac791b596a61bba0a133a3bb439f"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecimg__library_1_1cimg.html#a952eac791b596a61bba0a133a3bb439f">PI</a> = 3.14159265358979323846</td></tr>
+<tr class="memdesc:a952eac791b596a61bba0a133a3bb439f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Value of the mathematical constant PI. <br/></td></tr>
+<tr class="separator:a952eac791b596a61bba0a133a3bb439f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Contains <em>low-level</em> functions and variables of the <code>CImg</code> Library. </p>
+<p>Most of the functions and variables within this namespace are used by the <code>CImg</code> library for low-level operations. You may use them to access specific const values or environment variables internally used by <code>CImg</code>. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Never write <code>using namespace <a class="el" href="namespacecimg__library_1_1cimg.html" title="Contains low-level functions and variables of the CImg Library. ">cimg_library::cimg</a>;</code> in your source code. Lot of functions in the <code>cimg:: namespace</code> have the same names as standard C functions that may be defined in the global namespace <code>::</code>. </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a4947bf6e604e2f8e4a58b3ad19247443"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::FILE * output </td>
+          <td>(</td>
+          <td class="paramtype">std::FILE *&#160;</td>
+          <td class="paramname"><em>file</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get/set default output stream for the <code>CImg</code> library messages. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td>Desired output stream. Set to <code>0</code> to get the currently used output stream only. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Currently used output stream. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac1b66fe77173de9e5e8542b2823d6071"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void info </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print informations about <code>CImg</code> environement variables. </p>
+<dl class="section note"><dt>Note</dt><dd>Output is done on the default output stream. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a933d23f5cc8c7bd672541c5e758328ba"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int&amp; cimg_library::cimg::exception_mode </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set current <code>CImg</code> exception mode. </p>
+<p>The way error messages are handled by <code>CImg</code> can be changed dynamically, using this function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode</td><td>Desired exception mode. Possible values are:<ul>
+<li><code>0</code>: Hide library messages (quiet mode).</li>
+<li><code>1</code>: Print library messages on the console.</li>
+<li><code>2</code>: Display library messages on a dialog window (default behavior).</li>
+<li><code>3</code>: Do as <code>1</code> + add extra debug warnings (slow down the code!).</li>
+<li><code>4</code>: Do as <code>2</code> + add extra debug warnings (slow down the code!). </li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aacf66918a1173b3f72fe6f088d94f26b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int&amp; cimg_library::cimg::exception_mode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return current <code>CImg</code> exception mode. </p>
+<dl class="section note"><dt>Note</dt><dd>By default, return the value of configuration macro <code>cimg_verbosity</code> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad01251d5ee34c67b978e251a4d6d6cb4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double eval </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>expression</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Evaluate math expression. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">expression</td><td>C-string describing the formula to evaluate. </td></tr>
+    <tr><td class="paramname">x</td><td>Value of the pre-defined variable <code>x</code>. </td></tr>
+    <tr><td class="paramname">y</td><td>Value of the pre-defined variable <code>y</code>. </td></tr>
+    <tr><td class="paramname">z</td><td>Value of the pre-defined variable <code>z</code>. </td></tr>
+    <tr><td class="paramname">c</td><td>Value of the pre-defined variable <code>c</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Result of the formula evaluation. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Set <code>expression</code> to <code>0</code> to keep evaluating the last specified <code>expression</code>. </dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">double</span></div>
+<div class="line">  res1 = <a class="code" href="namespacecimg__library_1_1cimg.html#ad01251d5ee34c67b978e251a4d6d6cb4">cimg::eval</a>(<span class="stringliteral">&quot;cos(x)^2+sin(y)^2&quot;</span>,2,2),  <span class="comment">// will return &#39;1&#39;.</span></div>
+<div class="line">  res2 = <a class="code" href="namespacecimg__library_1_1cimg.html#ad01251d5ee34c67b978e251a4d6d6cb4">cimg::eval</a>(0,1,1);                    <span class="comment">// will return &#39;1&#39; too.</span></div>
+</div><!-- fragment --> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5ee7f021ed42b0ac32e1254414c3faab"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cimg_library::cimg::warn </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Display a warning message on the default output stream. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">format</td><td>C-string containing the format of the message, as with <code>std::printf()</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>If configuration macro <code>cimg_strict_warnings</code> is set, this function throws a <code>CImgWarningException</code> instead. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>As the first argument is a format string, it is highly recommended to write <div class="fragment"><div class="line"><a class="code" href="namespacecimg__library_1_1cimg.html#a5ee7f021ed42b0ac32e1254414c3faab">cimg::warn</a>(<span class="stringliteral">&quot;%s&quot;</span>,warning_message);</div>
+</div><!-- fragment --> instead of <div class="fragment"><div class="line"><a class="code" href="namespacecimg__library_1_1cimg.html#a5ee7f021ed42b0ac32e1254414c3faab">cimg::warn</a>(warning_message);</div>
+</div><!-- fragment --> if <code>warning_message</code> can be arbitrary, to prevent nasty memory access. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a09e80f4d7a95f3d5c2282202d8526520"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int cimg_library::cimg::system </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>command</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>module_name</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td>C-string containing the command line to execute. </td></tr>
+    <tr><td class="paramname">module_name</td><td>Module name. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Status value of the executed command, whose meaning is OS-dependent. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function is similar to <code>std::system()</code> but it does not open an extra console windows on Windows-based systems. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0d2a283a3aa2572e9d343f040c8c4c6b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cimg_library::cimg::endianness </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the endianness of the current architecture. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>false</code> for <em>Little Endian</em> or <code>true</code> for <em>Big Endian</em>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab730460d88c353f1f6af751b64703a4f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cimg_library::cimg::invert_endianness </td>
+          <td>(</td>
+          <td class="paramtype">T *const&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reverse endianness of all elements in a memory buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">buffer</td><td>Memory buffer whose endianness must be reversed. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">size</td><td>Number of buffer elements to reverse. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae450f8024668ff9f7959ed63b6ed3545"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">T&amp; cimg_library::cimg::invert_endianness </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reverse endianness of a single variable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">a</td><td>Variable to reverse. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to reversed variable. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af883131bbc64e996d212114cc2b2b21a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long cimg_library::cimg::time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the value of a system timer, with a millisecond precision. </p>
+<dl class="section note"><dt>Note</dt><dd>The timer does not necessarily starts from <code>0</code>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aaf7be28cd77dfe2ef303ee62b377475f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long cimg_library::cimg::tic </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start tic/toc timer for time measurement between code instructions. </p>
+<dl class="section return"><dt>Returns</dt><dd>Current value of the timer (same value as <a class="el" href="namespacecimg__library_1_1cimg.html#af883131bbc64e996d212114cc2b2b21a" title="Return the value of a system timer, with a millisecond precision. ">time()</a>). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab161c9ebe4cc751ae18be3944c3ad1f1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long cimg_library::cimg::toc </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>End tic/toc timer and displays elapsed time from last call to <a class="el" href="namespacecimg__library_1_1cimg.html#aaf7be28cd77dfe2ef303ee62b377475f" title="Start tic/toc timer for time measurement between code instructions. ">tic()</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>Time elapsed (in ms) since last call to <a class="el" href="namespacecimg__library_1_1cimg.html#aaf7be28cd77dfe2ef303ee62b377475f" title="Start tic/toc timer for time measurement between code instructions. ">tic()</a>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3ac7655e49556a90715f3532af221334"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cimg_library::cimg::sleep </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>milliseconds</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sleep for a given numbers of milliseconds. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">milliseconds</td><td>Number of milliseconds to wait for. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function frees the CPU ressources during the sleeping time. It can be used to temporize your program properly, without wasting CPU time. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3c8917c0f12139bff6de6e3e45fc5b77"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int cimg_library::cimg::wait </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>milliseconds</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wait for a given number of milliseconds since the last call to <a class="el" href="namespacecimg__library_1_1cimg.html#a3c8917c0f12139bff6de6e3e45fc5b77" title="Wait for a given number of milliseconds since the last call to wait(). ">wait()</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">milliseconds</td><td>Number of milliseconds to wait for. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of milliseconds elapsed since the last call to <a class="el" href="namespacecimg__library_1_1cimg.html#a3c8917c0f12139bff6de6e3e45fc5b77" title="Wait for a given number of milliseconds since the last call to wait(). ">wait()</a>. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Same as <a class="el" href="namespacecimg__library_1_1cimg.html#a3ac7655e49556a90715f3532af221334" title="Sleep for a given numbers of milliseconds. ">sleep()</a> with a waiting time computed with regard to the last call of <a class="el" href="namespacecimg__library_1_1cimg.html#a3c8917c0f12139bff6de6e3e45fc5b77" title="Wait for a given number of milliseconds since the last call to wait(). ">wait()</a>. It may be used to temporize your program properly, without wasting CPU time. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af6508b733d0d7887da1cf583b703f3a1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">T cimg_library::cimg::mod </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the modulo of a value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Input value. </td></tr>
+    <tr><td class="paramname">m</td><td>Modulo value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This modulo function accepts negative and floating-points modulo numbers, as well as variables of any type. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab59d987c884c0ab828ef1d844a49e714"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">T cimg_library::cimg::minmod </td>
+          <td>(</td>
+          <td class="paramtype">const T&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the min-mod of two values. </p>
+<dl class="section note"><dt>Note</dt><dd><em>minmod(<code>a</code>,<code>b</code>)</em> is defined to be:<ul>
+<li><em>minmod(<code>a</code>,<code>b</code>) = min(<code>a</code>,<code>b</code>)</em>, if <code>a</code> and <code>b</code> have the same sign.</li>
+<li><em>minmod(<code>a</code>,<code>b</code>) = 0</em>, if <code>a</code> and <code>b</code> have different signs. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a63afc0f88ea734f889d5b8036ddd783d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">T cimg_library::cimg::round </td>
+          <td>(</td>
+          <td class="paramtype">const T&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>y</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>rounding_type</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return rounded value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Value to be rounded. </td></tr>
+    <tr><td class="paramname">y</td><td>Rounding precision. </td></tr>
+    <tr><td class="paramname">rounding_type</td><td>Type of rounding operation (<code>0</code> = nearest, <code>-1</code> = backward, <code>1</code> = forward). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Rounded value, having the same type as input value <code>x</code>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac5a608a78a32b5c95a2dfad8657300de"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double cimg_library::cimg::atof </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read value in a C-string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>C-string containing the float value to read. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Read value. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Same as <code>std::atof()</code> extended to manage the retrieval of fractions from C-strings, as in <em>"1/2"</em>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a80bf14df0be392080a0d60bc561f980e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int cimg_library::cimg::strncasecmp </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>str1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>str2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>l</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compare the first <code>l</code> characters of two C-strings, ignoring the case. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str1</td><td>C-string. </td></tr>
+    <tr><td class="paramname">str2</td><td>C-string. </td></tr>
+    <tr><td class="paramname">l</td><td>Number of characters to compare. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>0</code> if the two strings are equal, something else otherwise. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function has to be defined since it is not provided by all C++-compilers (not ANSI). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae4f7682c6a4307016da1f0b583e36466"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int cimg_library::cimg::strcasecmp </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>str1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>str2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compare two C-strings, ignoring the case. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str1</td><td>C-string. </td></tr>
+    <tr><td class="paramname">str2</td><td>C-string. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>0</code> if the two strings are equal, something else otherwise. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function has to be defined since it is not provided by all C++-compilers (not ANSI). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a01b63e43c032521506f3d9f9ca1e320f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cimg_library::cimg::strpare </td>
+          <td>(</td>
+          <td class="paramtype">char *const&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char&#160;</td>
+          <td class="paramname"><em>delimiter</em> = <code>'&#160;'</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>is_symmetric</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>is_iterative</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove delimiters on the start and/or end of a C-string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">str</td><td>C-string to work with (modified at output). </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">delimiter</td><td>Delimiter character code to remove. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">is_symmetric</td><td>Tells if the removal is done only if delimiters are symmetric (both at the beginning and the end of <code>s</code>). </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">is_iterative</td><td>Tells if the removal is done if several iterations are possible. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if delimiters have been removed, <code>false</code> otherwise. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acbe47fc5ac986f7b64a542538af9f396"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cimg_library::cimg::strunescape </td>
+          <td>(</td>
+          <td class="paramtype">char *const&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Replace escape sequences in C-strings by their binary ascii values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">str</td><td>C-string to work with (modified at output). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a19ad60edf05bad32e75b7077509ef566"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::FILE* cimg_library::cimg::fopen </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Open a file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Path of the filename to open. </td></tr>
+    <tr><td class="paramname">mode</td><td>C-string describing the opening mode. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Opened file. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Same as <code>std::fopen()</code> but throw a <code>CImgIOException</code> when the specified file cannot be opened, instead of returning <code>0</code>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae54f76e8c2bcff93277e9cae1906a3d6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int cimg_library::cimg::fclose </td>
+          <td>(</td>
+          <td class="paramtype">std::FILE *&#160;</td>
+          <td class="paramname"><em>file</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Close a file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td>File to close. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>0</code> if file has been closed properly, something else otherwise. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Same as <code>std::fclose()</code> but display a warning message if the file has not been closed properly. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a797797a309ca40aa28cdfbb92f4d1621"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* cimg_library::cimg::temporary_path </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>user_path</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>reinit_path</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get/set path to store temporary files. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_path</td><td>Specified path, or <code>0</code> to get the path currently used. </td></tr>
+    <tr><td class="paramname">reinit_path</td><td>Force path to be recalculated (may take some time). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Path where temporary files can be saved. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad0db1003e37cc111d9eddd282c1ab27b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* cimg_library::cimg::imagemagick_path </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>user_path</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>reinit_path</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get/set path to the <em>Program Files/</em> directory (Windows only). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_path</td><td>Specified path, or <code>0</code> to get the path currently used. </td></tr>
+    <tr><td class="paramname">reinit_path</td><td>Force path to be recalculated (may take some time). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Path containing the program files.Get/set path to the ImageMagick's <code>convert</code> binary. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_path</td><td>Specified path, or <code>0</code> to get the path currently used. </td></tr>
+    <tr><td class="paramname">reinit_path</td><td>Force path to be recalculated (may take some time). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Path containing the <code>convert</code> binary. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa9f7e166f51b43facc8ecc9f05e4ceba"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* cimg_library::cimg::graphicsmagick_path </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>user_path</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>reinit_path</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get/set path to the GraphicsMagick's <code>gm</code> binary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_path</td><td>Specified path, or <code>0</code> to get the path currently used. </td></tr>
+    <tr><td class="paramname">reinit_path</td><td>Force path to be recalculated (may take some time). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Path containing the <code>gm</code> binary. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aaedba1291890f50edb5be58ef662e516"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* cimg_library::cimg::medcon_path </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>user_path</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>reinit_path</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get/set path to the XMedcon's <code>medcon</code> binary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_path</td><td>Specified path, or <code>0</code> to get the path currently used. </td></tr>
+    <tr><td class="paramname">reinit_path</td><td>Force path to be recalculated (may take some time). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Path containing the <code>medcon</code> binary. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abf1666b982cb372129f2ae2fdc748ef2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* cimg_library::cimg::ffmpeg_path </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>user_path</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>reinit_path</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get/set path to the FFMPEG's <code>ffmpeg</code> binary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_path</td><td>Specified path, or <code>0</code> to get the path currently used. </td></tr>
+    <tr><td class="paramname">reinit_path</td><td>Force path to be recalculated (may take some time). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Path containing the <code>ffmpeg</code> binary. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a75f3391e7a393c1c1fe43537004537e2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* cimg_library::cimg::gzip_path </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>user_path</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>reinit_path</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get/set path to the <code>gzip</code> binary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_path</td><td>Specified path, or <code>0</code> to get the path currently used. </td></tr>
+    <tr><td class="paramname">reinit_path</td><td>Force path to be recalculated (may take some time). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Path containing the <code>gzip</code> binary. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a08f71c29acfe85d5b8718900e995b779"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* cimg_library::cimg::gunzip_path </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>user_path</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>reinit_path</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get/set path to the <code>gzip</code> binary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_path</td><td>Specified path, or <code>0</code> to get the path currently used. </td></tr>
+    <tr><td class="paramname">reinit_path</td><td>Force path to be recalculated (may take some time). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Path containing the <code>gunzip</code> binary. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae36d7a689692ac5663afe1bbdab5d9fa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* cimg_library::cimg::dcraw_path </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>user_path</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>reinit_path</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get/set path to the <code>dcraw</code> binary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_path</td><td>Specified path, or <code>0</code> to get the path currently used. </td></tr>
+    <tr><td class="paramname">reinit_path</td><td>Force path to be recalculated (may take some time). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Path containing the <code>dcraw</code> binary. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7c229de3e60b27f23497f8bc863cdfb1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* cimg_library::cimg::wget_path </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>user_path</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>reinit_path</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get/set path to the <code>wget</code> binary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_path</td><td>Specified path, or <code>0</code> to get the path currently used. </td></tr>
+    <tr><td class="paramname">reinit_path</td><td>Force path to be recalculated (may take some time). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Path containing the <code>wget</code> binary. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a57f805f036ac626cb0693e74e7b06ffe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* cimg_library::cimg::curl_path </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>user_path</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>reinit_path</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get/set path to the <code>curl</code> binary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_path</td><td>Specified path, or <code>0</code> to get the path currently used. </td></tr>
+    <tr><td class="paramname">reinit_path</td><td>Force path to be recalculated (may take some time). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Path containing the <code>curl</code> binary. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa7b1171b457d627d0d2796c89e083d8b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* cimg_library::cimg::file_type </td>
+          <td>(</td>
+          <td class="paramtype">std::FILE *const&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>filename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Try to guess format from an image file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td>Input file (can be <code>0</code> if <code>filename</code> is set). </td></tr>
+    <tr><td class="paramname">filename</td><td>Filename, as a C-string (can be <code>0</code> if <code>file</code> is set). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>C-string containing the guessed file format, or <code>0</code> if nothing has been guessed. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8ea2e9b23409cf2d8774f9d2c3ac686a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int cimg_library::cimg::fread </td>
+          <td>(</td>
+          <td class="paramtype">T *const&#160;</td>
+          <td class="paramname"><em>ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long&#160;</td>
+          <td class="paramname"><em>nmemb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::FILE *&#160;</td>
+          <td class="paramname"><em>stream</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read data from file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">ptr</td><td>Pointer to memory buffer that will contain the binary data read from file. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">nmemb</td><td>Number of elements to read. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">stream</td><td>File to read data from. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of read elements. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Same as <code>std::fread()</code> but may display warning message if all elements could not be read. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ade3b3532d897aa9483dffc5fdc9b4964"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int cimg_library::cimg::fwrite </td>
+          <td>(</td>
+          <td class="paramtype">const T *&#160;</td>
+          <td class="paramname"><em>ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long&#160;</td>
+          <td class="paramname"><em>nmemb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::FILE *&#160;</td>
+          <td class="paramname"><em>stream</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write data to file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">ptr</td><td>Pointer to memory buffer containing the binary data to write on file. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">nmemb</td><td>Number of elements to write. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">stream</td><td>File to write data on. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of written elements. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Similar to <code>std::fwrite</code> but may display warning messages if all elements could not be written. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa10f5b3f7f7cebfb2e7887909ff99597"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cimg_library::cimg::fempty </td>
+          <td>(</td>
+          <td class="paramtype">std::FILE *const&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>filename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create an empty file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td>Input file (can be <code>0</code> if <code>filename</code> is set). </td></tr>
+    <tr><td class="paramname">filename</td><td>Filename, as a C-string (can be <code>0</code> if <code>file</code> is set). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="abccecc68ce8db512b5f719fc08dca19d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* cimg_library::cimg::load_network_external </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *const&#160;</td>
+          <td class="paramname"><em>filename_local</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Load file from network as a local temporary file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">filename</td><td>Filename, as a C-string. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">filename_local</td><td>C-string containing the path to a local copy of <code>filename</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Value of <code>filename_local</code>. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Use external binaries <code>wget</code> or <code>curl</code> to perform. You must have one of these tools installed to be able to use this function. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa11c5d563db3cf0a03e6ce6335aac835"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int cimg_library::cimg::dialog </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>title</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>msg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>button1_label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>button2_label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>button3_label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>button4_label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>button5_label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>button6_label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const CImg&lt; t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>logo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>is_centered</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Display a simple dialog box, and wait for the user's response. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">title</td><td>Title of the dialog window. </td></tr>
+    <tr><td class="paramname">msg</td><td>Main message displayed inside the dialog window. </td></tr>
+    <tr><td class="paramname">button1_label</td><td>Label of the 1st button. </td></tr>
+    <tr><td class="paramname">button2_label</td><td>Label of the 2nd button (<code>0</code> to hide button). </td></tr>
+    <tr><td class="paramname">button3_label</td><td>Label of the 3rd button (<code>0</code> to hide button). </td></tr>
+    <tr><td class="paramname">button4_label</td><td>Label of the 4th button (<code>0</code> to hide button). </td></tr>
+    <tr><td class="paramname">button5_label</td><td>Label of the 5th button (<code>0</code> to hide button). </td></tr>
+    <tr><td class="paramname">button6_label</td><td>Label of the 6th button (<code>0</code> to hide button). </td></tr>
+    <tr><td class="paramname">logo</td><td>Image logo displayed at the left of the main message. </td></tr>
+    <tr><td class="paramname">is_centered</td><td>Tells if the dialog window must be centered on the screen. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Indice of clicked button (from <code>0</code> to <code>5</code>), or <code>-1</code> if the dialog window has been closed by the user. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>Up to 6 buttons can be defined in the dialog window.</li>
+<li>The function returns when a user clicked one of the button or closed the dialog window.</li>
+<li>If a button text is set to 0, the corresponding button (and the followings) will not appear in the dialog box. At least one button must be specified. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</td></tr></table>
+<center>
+<p>
+<a href="http://sourceforge.net">
+  <img src="http://sourceforge.net/sflogo.php?group_id=96492&amp;type=3" border="0" height="37" width="125"></img>
+</a>
+<a href="http://sourceforge.net/donate/index.php?group_id=96492"><img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a>
+</p>
+</center>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+  <!--
+      var sc_project=895001;
+      var sc_invisible=1;
+      var sc_partition=7;
+      var sc_security="5ea85181";
+      //-->
+</script>
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c8.statcounter.com/counter.php?sc_project=895001&amp;java=0&amp;security=5ea85181&amp;invisible=1" alt="counter stats" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16976814-2']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End Google Analytics -->
+</body>
+</html>
