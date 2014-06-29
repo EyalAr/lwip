@@ -37,8 +37,8 @@ Handle<Value> LwipImage::New(const Arguments& args) {
     return args.This();
 }
 
-void LwipImage::setData(const char * data) {
-    _data = (char *) data;
+void LwipImage::setData(JSAMPARRAY data) {
+    _data = data;
 }
 
 void LwipImage::setWidth(const unsigned int width) {

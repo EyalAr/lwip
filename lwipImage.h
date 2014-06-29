@@ -5,6 +5,7 @@
 
 #include <node.h>
 #include <v8.h>
+#include "lib/jpeg/jpeglib.h"
 
 class LwipImage : public node::ObjectWrap {
 public:
@@ -12,7 +13,7 @@ public:
     static v8::Handle<v8::Value> NewInstance();
     explicit LwipImage(): _data(NULL), _width(0), _height(0){};
     ~LwipImage();
-    void setData(const char * data);
+    void setData(JSAMPARRAY data);
     void setWidth(const unsigned int width);
     void setHeight(const unsigned int height);
 
@@ -25,7 +26,7 @@ private:
     static v8::Handle<v8::Value> height(const v8::Arguments& args);
     // static v8::Handle<v8::Value> toBuffer(const v8::Arguments& args);
     static v8::Persistent<v8::Function> constructor;
-    char * _data;
+    JSAMPARRAY _data;
     unsigned int _width, _height;
 };
 
