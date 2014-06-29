@@ -7,7 +7,7 @@
 #include <node.h>
 #include <node_buffer.h>
 #include <v8.h>
-#include "lib/jpeg-compressor/jpge.h"
+#include "lib/jpeg/jpeglib.h"
 #include "lib/cimg/CImg.h"
 
 using namespace cimg_library;
@@ -42,7 +42,7 @@ struct ToBufferBaton {
     v8::Persistent<Function> cb;
     LwipImage * img;
     unsigned char * buffer;
-    int bufferSize;
+    unsigned long bufferSize;
     std::string format;
     bool err;
     std::string errMsg;

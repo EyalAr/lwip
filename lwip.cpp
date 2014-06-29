@@ -8,22 +8,14 @@ void openImageAsync(uv_work_t * request){
     // data. open image, store data in iob->imgData.
     ImageOpenBaton * iob = static_cast<ImageOpenBaton *>(request->data);
     // TODO: choose decoder according to format. Currently only jpeg.
-    jpgd::jpeg_decoder_file_stream file_stream;
-    unsigned char * tmpData;
-    int width, height, comps; // image components: 1 or 3
-
-    if (!file_stream.open(iob->imgPath.c_str())){
+    try{
+        iob->imgData = new CImg<unsigned char>();
+        iob->imgData->load_jpeg(iob->imgPath.c_str());
+    } catch (CImgException e){
+        delete iob->imgData;
         iob->err = true;
-        iob->errMsg = "Unable to open file";
-        return;
+        iob->errMsg = "Unable to open file as JPEG";
     }
-    tmpData = decompress_jpeg_image_from_stream(
-        &file_stream, &width, &height, &comps, 3);
-    iob->imgData = new CImg<unsigned char>(tmpData, width, height, 1, comps, false);
-
-    free(tmpData);
-    file_stream.close();
-
     return;
 }
 

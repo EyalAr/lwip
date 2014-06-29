@@ -99,27 +99,58 @@ void toBufferAsync(uv_work_t * request){
     ToBufferBaton * tbb = static_cast<ToBufferBaton *>(request->data);
     // TODO: choose encoder according to format. Currently only jpeg.
 
-    tbb->bufferSize = 2048; // initially try to allocate this much memory
-    tbb->buffer = (unsigned char *) malloc(tbb->bufferSize);
-    if (!tbb->buffer){
-        tbb->err = true;
-        tbb->errMsg = "Out of memory";
-        return;
+    unsigned int
+        dimbuf = 0,
+        spectrum = tbb->img->_data->spectrum(),
+        width = tbb->img->_data->width(),
+        height = tbb->img->_data->height();
+    J_COLOR_SPACE colortype = JCS_RGB;
+    JSAMPROW row_pointer[1];
+    unsigned char * tmp;
+
+    switch(spectrum) {
+        case 1 : dimbuf = 1; colortype = JCS_GRAYSCALE; break;
+        case 2 : dimbuf = 3; colortype = JCS_RGB; break;
+        case 3 : dimbuf = 3; colortype = JCS_RGB; break;
+        default : dimbuf = 4; colortype = JCS_CMYK; break;
     }
 
-    if (!jpge::compress_image_to_jpeg_file_in_memory(
-            tbb->buffer,
-            tbb->bufferSize,
-            tbb->img->_data->width(),
-            tbb->img->_data->height(),
-            tbb->img->_data->spectrum(), 
-            tbb->img->_data->data()
-            // TODO: set compression params (currently uses defaults)
-        )){
-        tbb->err = true;
-        tbb->errMsg = "JPEG compression error";
-        return;
+    // TODO:
+    // 1. deal with the various cases of spetrum
+    // 2. handle jpeglib error
+    // 3. allow user to specify jpeg quality
+
+    struct jpeg_compress_struct cinfo;
+    struct jpeg_error_mgr jerr;
+    cinfo.err = jpeg_std_error(&jerr);
+    jpeg_create_compress(&cinfo);
+    jpeg_mem_dest(&cinfo, &tbb->buffer, &tbb->bufferSize);
+    cinfo.image_width = width;
+    cinfo.image_height = height;
+    cinfo.input_components = dimbuf;
+    cinfo.in_color_space = colortype;
+    jpeg_set_defaults(&cinfo);
+    jpeg_set_quality(&cinfo, 100, TRUE);
+    jpeg_start_compress(&cinfo, TRUE);
+
+    tmp = (unsigned char *) malloc(cinfo.image_width * dimbuf);
+    while (cinfo.next_scanline < cinfo.image_height) {
+        unsigned char * ptrd = tmp;
+        const unsigned char
+            * ptr_r = tbb->img->_data->data(0, cinfo.next_scanline, 0, 0),
+            * ptr_g = tbb->img->_data->data(0, cinfo.next_scanline, 0, 1),
+            * ptr_b = tbb->img->_data->data(0, cinfo.next_scanline, 0, 2);
+        for(unsigned int b = 0; b < cinfo.image_width; ++b) {
+            *(ptrd++) = (unsigned char)*(ptr_r++);
+            *(ptrd++) = (unsigned char)*(ptr_g++);
+            *(ptrd++) = (unsigned char)*(ptr_b++);
+        }
+        *row_pointer = tmp;
+        jpeg_write_scanlines(&cinfo, row_pointer, 1);
     }
+    free(tmp);
+    jpeg_finish_compress(&cinfo);
+    jpeg_destroy_compress(&cinfo);
 
     return;
 }

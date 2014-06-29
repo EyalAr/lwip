@@ -3,13 +3,14 @@
 
 #define BUILDING_NODE_EXTENSION
 #define cimg_display 0
+#define cimg_use_jpeg
+#define cimg_verbosity 0
 
 #include <string>
 #include <cstring>
 #include <node.h>
 #include <v8.h>
 #include "lib/cimg/CImg.h"
-#include "lib/jpeg-compressor/jpgd.h"
 #include "LwipImage.h"
 
 struct ImageOpenBaton {
