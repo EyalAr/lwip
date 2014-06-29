@@ -29,7 +29,6 @@ void openImageAsync(uv_work_t * request){
 
 void openImageAsyncDone(uv_work_t * request, int status){
     // reading image completed. now we call the callback.
-    // TODO: build LwipImage object from the data, pass it to cb.
     ImageOpenBaton * iob = static_cast<ImageOpenBaton *>(request->data);
     if (iob->err){
         // define the arguments for the callback
@@ -43,7 +42,7 @@ void openImageAsyncDone(uv_work_t * request, int status){
         // build image object
         Handle<Value> imgObj = LwipImage::NewInstance();
         LwipImage * lio = node::ObjectWrap::Unwrap<LwipImage>(Handle<Object>::Cast(imgObj));
-        lio->setData(iob->imgData);
+        lio->_data = iob->imgData;
         // define the arguments for the callback
         const unsigned int argc = 2;
         Local<Value> argv[argc] = {

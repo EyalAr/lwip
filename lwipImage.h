@@ -3,8 +3,11 @@
 
 #define cimg_display 0
 
+#include <string>
 #include <node.h>
+#include <node_buffer.h>
 #include <v8.h>
+#include "lib/jpeg-compressor/jpge.h"
 #include "lib/cimg/CImg.h"
 
 using namespace cimg_library;
@@ -18,7 +21,7 @@ public:
     static Handle<Value> NewInstance();
     explicit LwipImage(): _data(NULL){};
     ~LwipImage();
-    void setData(lwip_data_t data);
+    lwip_data_t _data;
 
 private:
     static Handle<Value> New(const Arguments& args);
@@ -27,9 +30,22 @@ private:
     // static Handle<Value> crop(const Arguments& args);
     static Handle<Value> width(const Arguments& args);
     static Handle<Value> height(const Arguments& args);
-    // static Handle<Value> toBuffer(const Arguments& args);
+    static Handle<Value> toBuffer(const Arguments& args);
     static Persistent<Function> constructor;
-    lwip_data_t _data;
+};
+
+void toBufferAsync(uv_work_t * request);
+void toBufferAsyncDone(uv_work_t * request, int status);
+
+struct ToBufferBaton {
+    uv_work_t request;
+    v8::Persistent<Function> cb;
+    LwipImage * img;
+    unsigned char * buffer;
+    int bufferSize;
+    std::string format;
+    bool err;
+    std::string errMsg;
 };
 
 #endif
