@@ -3,7 +3,7 @@
 using namespace cimg_library;
 using namespace v8;
 
-void openImageAsync(uv_work_t * request){
+void openJpegAsync(uv_work_t * request){
     // here is where we actually open the image file and retrieve the binary
     // data. open image, store data in iob->imgData.
     ImageOpenBaton * iob = static_cast<ImageOpenBaton *>(request->data);
@@ -19,7 +19,7 @@ void openImageAsync(uv_work_t * request){
     return;
 }
 
-void openImageAsyncDone(uv_work_t * request, int status){
+void openAsyncDone(uv_work_t * request, int status){
     // reading image completed. now we call the callback.
     ImageOpenBaton * iob = static_cast<ImageOpenBaton *>(request->data);
     if (iob->err){
@@ -50,24 +50,11 @@ void openImageAsyncDone(uv_work_t * request, int status){
     delete iob;
 }
 
-// create 'open' function template
-Handle<Value> open(const Arguments &args){
+Handle<Value> _open(const Arguments &args, void asyncOpener(uv_work_t *)){
     // this scope will discard all internal local objects for us.
     HandleScope scope;
 
-    // arguments validation:
-    if (args.Length() < 2){
-        ThrowException(Exception::TypeError(String::New("'open' takes 2 arguments: (String, Function)")));
-        return scope.Close(Undefined());
-    }
-    if (!args[0]->IsString()){
-        ThrowException(Exception::TypeError(String::New("First argument must be a path string")));
-        return scope.Close(Undefined());
-    }
-    if (!args[1]->IsFunction()){
-        ThrowException(Exception::TypeError(String::New("Second argument must be a callback function")));
-        return scope.Close(Undefined());
-    }
+    // arguments validation is done in JS land
 
     // open the file in 'path' asynchronously
     // the baton is on the heap because it lives in async calls outside the
@@ -80,16 +67,28 @@ Handle<Value> open(const Arguments &args){
     iob->request.data = iob;
     iob->cb = Persistent<Function>::New(Local<Function>::Cast(args[1]));
     iob->imgPath = std::string(*String::Utf8Value(args[0]->ToString()));
-    uv_queue_work(uv_default_loop(), &iob->request, openImageAsync, openImageAsyncDone);
+    uv_queue_work(uv_default_loop(), &iob->request, asyncOpener, openAsyncDone);
 
     // Close the scope and return 'undefined'
+    return scope.Close(Undefined());
+}
+
+Handle<Value> openJpeg(const Arguments &args){
+    return _open(args, openJpegAsync);
+}
+
+Handle<Value> openPng(const Arguments &args){
+    HandleScope scope;
+    ThrowException(Exception::TypeError(String::New(
+        "'open{type}': PNG is not yet supported")));
     return scope.Close(Undefined());
 }
 
 // create an init function for our node module
 void init(Handle<Object> exports, Handle<Object> module){
     LwipImage::Init();
-    NODE_SET_METHOD(exports, "open", open);
+    NODE_SET_METHOD(exports, "openJpeg", openJpeg);
+    NODE_SET_METHOD(exports, "openPng", openPng);
 }
 
 // use NODE_MODULE macro to register our module:

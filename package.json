@@ -1,5 +1,5 @@
 {
     "name": "lwip",
     "version": "0.0.0",
-    "main": "./build/Release/lwip"
+    "main": "index.js"
 }

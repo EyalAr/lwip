@@ -3,6 +3,7 @@
 #include <v8.h>
 
 using namespace v8;
+using namespace node;
 
 Persistent<Function> LwipImage::constructor;
 
@@ -16,9 +17,10 @@ void LwipImage::Init() {
     Local<FunctionTemplate> tpl = FunctionTemplate::New(New);
     tpl->SetClassName(String::NewSymbol("LwipImage"));
     tpl->InstanceTemplate()->SetInternalFieldCount(2);
-    node::SetPrototypeMethod(tpl, "width", width);
-    node::SetPrototypeMethod(tpl, "height", height);
-    node::SetPrototypeMethod(tpl, "toBuffer", toBuffer);
+    SetPrototypeMethod(tpl, "width", width);
+    SetPrototypeMethod(tpl, "height", height);
+    SetPrototypeMethod(tpl, "resize", resize);
+    SetPrototypeMethod(tpl, "toJpegBuffer", toJpegBuffer);
     constructor = Persistent<Function>::New(tpl->GetFunction());
 }
 
@@ -55,58 +57,105 @@ Handle<Value> LwipImage::height(const Arguments& args) {
     return scope.Close(Number::New(obj->_data->height()));
 }
 
-// image.toBuffer(format,callback):
-// --------------------------------
-Handle<Value> LwipImage::toBuffer(const Arguments& args) {
-    // this scope will discard all internal local objects for us.
+// image.resize(width, height, callback):
+// --------------------------------------
+
+// args[0] - width
+// args[1] - height
+// args[2] - inter(polation)
+// args[3] - callback
+Handle<Value> LwipImage::resize(const Arguments& args) {
     HandleScope scope;
-
-    // arguments validation:
-    if (args.Length() < 2){
-        ThrowException(Exception::TypeError(String::New("'open' takes 2 arguments: (String, Function)")));
-        return scope.Close(Undefined());
-    }
-    if (!args[0]->IsString()){
-        ThrowException(Exception::TypeError(String::New("First argument must be a format string")));
-        return scope.Close(Undefined());
-    }
-    if (!args[1]->IsFunction()){
-        ThrowException(Exception::TypeError(String::New("Second argument must be a callback function")));
-        return scope.Close(Undefined());
-    }
-
-    // open the file in 'path' asynchronously
-    // the baton is on the heap because it lives in async calls outside the
-    // scope of the current function
-    ToBufferBaton * tbb = new ToBufferBaton();
-    if (tbb == NULL){
+    // (arguments validation is done in JS land)
+    resizeBaton * rb = new resizeBaton();
+    if (rb == NULL){
         ThrowException(Exception::TypeError(String::New("Out of memory")));
         return scope.Close(Undefined());
     }
-    tbb->request.data = tbb;
-    tbb->cb = Persistent<Function>::New(Local<Function>::Cast(args[1]));
-    tbb->format = std::string(*String::Utf8Value(args[0]->ToString()));
-    tbb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
-    uv_queue_work(uv_default_loop(), &tbb->request, toBufferAsync, toBufferAsyncDone);
-
-    // Close the scope and return 'undefined'
+    rb->request.data = rb;
+    rb->cb = Persistent<Function>::New(Local<Function>::Cast(args[3]));
+    rb->width = (unsigned int) args[0]->NumberValue();
+    rb->height = (unsigned int) args[1]->NumberValue();
+    rb->inter = (unsigned int) args[2]->NumberValue();
+    rb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
+    uv_queue_work(uv_default_loop(), &rb->request, resizeAsync, resizeAsyncDone);
     return scope.Close(Undefined());
 }
 
-void toBufferAsync(uv_work_t * request){
-    // compress image according to specified format, create a Buffer object
-    // and pass it to the callback
-    ToBufferBaton * tbb = static_cast<ToBufferBaton *>(request->data);
-    // TODO: choose encoder according to format. Currently only jpeg.
+void resizeAsync(uv_work_t * request){
+    resizeBaton * rb = static_cast<resizeBaton *>(request->data);
+    try{
+        rb->img->_data->resize(rb->width, rb->height, -100, -100, rb->inter);
+    } catch (CImgException e){
+        rb->err = true;
+        rb->errMsg = "Unable to resize image";
+    }
+    return;
+}
 
+void resizeAsyncDone(uv_work_t * request, int status){
+    // resize completed. now we call the callback.
+    resizeBaton * rb = static_cast<resizeBaton *>(request->data);
+    if (rb->err){
+        const unsigned int argc = 1;
+        Local<Value> argv[argc] = {
+            Local<Value>::New(Exception::Error(String::New(rb->errMsg.c_str())))
+        };
+        rb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
+    } else {
+        const unsigned int argc = 1;
+        Handle<Value> argv[argc] = {
+            Local<Value>::New(Null())
+        };
+        rb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
+    }
+    // dispose of cb, because it's a persistent function
+    rb->cb.Dispose();
+    delete rb;
+}
+
+// image.to{type}Buffer(format,callback):
+// --------------------------------------
+
+bool initToBufferBaton(ToBufferBaton ** tbb, const Arguments& args){
+    *tbb = new ToBufferBaton();
+    if (*tbb == NULL){
+        ThrowException(Exception::TypeError(String::New("Out of memory")));
+        return false;
+    }
+    (*tbb)->request.data = *tbb;
+    // callback is always last argument
+    (*tbb)->cb = Persistent<Function>::New(Local<Function>::Cast(args[args.Length() - 1]));
+    (*tbb)->img = ObjectWrap::Unwrap<LwipImage>(args.This());
+    return true;
+}
+
+// args[0] - jpeg quality
+Handle<Value> LwipImage::toJpegBuffer(const Arguments& args) {
+    HandleScope scope;
+    // (arguments validation is done in JS land)
+    ToBufferBaton * tbb = NULL;
+    if (!initToBufferBaton(&tbb, args)){
+        return scope.Close(Undefined());
+    }
+    tbb->jpegQuality = (unsigned int) args[0]->NumberValue();
+    uv_queue_work(uv_default_loop(), &tbb->request, toJpegBufferAsync, toBufferAsyncDone);
+    return scope.Close(Undefined());
+}
+
+void toJpegBufferAsync(uv_work_t * request){
+    ToBufferBaton * tbb = static_cast<ToBufferBaton *>(request->data);
     unsigned int
         dimbuf = 0,
         spectrum = tbb->img->_data->spectrum(),
         width = tbb->img->_data->width(),
-        height = tbb->img->_data->height();
+        height = tbb->img->_data->height(),
+        quality = tbb->jpegQuality;
     J_COLOR_SPACE colortype = JCS_RGB;
     JSAMPROW row_pointer[1];
     unsigned char * tmp;
+    struct jpeg_compress_struct cinfo;
+    struct jpeg_error_mgr jerr;
 
     switch(spectrum) {
         case 1 : dimbuf = 1; colortype = JCS_GRAYSCALE; break;
@@ -118,10 +167,7 @@ void toBufferAsync(uv_work_t * request){
     // TODO:
     // 1. deal with the various cases of spetrum
     // 2. handle jpeglib error
-    // 3. allow user to specify jpeg quality
 
-    struct jpeg_compress_struct cinfo;
-    struct jpeg_error_mgr jerr;
     cinfo.err = jpeg_std_error(&jerr);
     jpeg_create_compress(&cinfo);
     jpeg_mem_dest(&cinfo, &tbb->buffer, &tbb->bufferSize);
@@ -130,7 +176,7 @@ void toBufferAsync(uv_work_t * request){
     cinfo.input_components = dimbuf;
     cinfo.in_color_space = colortype;
     jpeg_set_defaults(&cinfo);
-    jpeg_set_quality(&cinfo, 100, TRUE);
+    jpeg_set_quality(&cinfo, quality, TRUE);
     jpeg_start_compress(&cinfo, TRUE);
 
     tmp = (unsigned char *) malloc(cinfo.image_width * dimbuf);
@@ -159,23 +205,19 @@ void toBufferAsyncDone(uv_work_t * request, int status){
     // compression completed. now we call the callback.
     ToBufferBaton * tbb = static_cast<ToBufferBaton *>(request->data);
     if (tbb->err){
-        // define the arguments for the callback
         const unsigned int argc = 1;
         Local<Value> argv[argc] = {
             Local<Value>::New(Exception::Error(String::New(tbb->errMsg.c_str())))
         };
-        // run the callback
         tbb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
     } else {
         // build Buffer object
         Handle<Object> bufferObj = node::Buffer::New((const char *) tbb->buffer, tbb->bufferSize)->handle_;
-        // define the arguments for the callback
         const unsigned int argc = 2;
         Handle<Value> argv[argc] = {
             Local<Value>::New(Null()),
             bufferObj
         };
-        // run the callback
         tbb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
     }
     // dispose of cb, because it's a persistent function
