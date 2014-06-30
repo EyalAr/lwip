@@ -1,7 +1,8 @@
 (function(undefined) {
 
     var DEF_JPEG_QUALITY = 100,
-        DEF_INTERPOLATION = 'lanczos';
+        DEF_INTERPOLATION = 'lanczos',
+        DEF_ROTATE_COLOR = 'gray';
 
     var path = require('path'),
         lwip = require('./build/Release/lwip');
@@ -21,6 +22,54 @@
         'grid': 4,
         'cubic': 5,
         'lanczos': 6
+    };
+
+    var colors = {
+        'black': {
+            r: 0,
+            g: 0,
+            b: 0
+        },
+        'white': {
+            r: 255,
+            g: 255,
+            b: 255
+        },
+        'red': {
+            r: 255,
+            g: 0,
+            b: 0
+        },
+        'blue': {
+            r: 0,
+            g: 0,
+            b: 255
+        },
+        'green': {
+            r: 0,
+            g: 255,
+            b: 0
+        },
+        'cyan': {
+            r: 0,
+            g: 255,
+            b: 255
+        },
+        'yellow': {
+            r: 255,
+            g: 255,
+            b: 0
+        },
+        'gray': {
+            r: 128,
+            g: 128,
+            b: 128
+        },
+        'magenta': {
+            r: 255,
+            g: 0,
+            b: 255
+        }
     };
 
     function image(lwipImage) {
@@ -90,10 +139,34 @@
         });
     }
 
-    image.prototype.rotate = function(degs, callback) {
-        degs = +degs;
+    image.prototype.rotate = function(degs, color, callback) {
+        if ((!degs && degs != 0) || isNaN(degs))
+            throw new TypeError('\'degs\' argument must be a number');
+        callback = callback || color;
+        if (typeof callback !== 'function')
+            throw new TypeError('\'callback\' argument must be a function');
+        if (typeof color === 'function') color = DEF_ROTATE_COLOR;
+        if (typeof color === 'string') {
+            if (colors[color]) color = colors[color];
+            else throw new TypeError('\'color\' argument is invalid');
+        } else {
+            if (color instanceof Array) {
+                color = {
+                    r: color[0],
+                    g: color[1],
+                    b: color[2]
+                };
+            }
+            if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
+                throw new TypeError('\'red\' color component is invalid');
+            if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
+                throw new TypeError('\'green\' color component is invalid');
+            if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
+                throw new TypeError('\'blue\' color component is invalid');
+        }
+
         var that = this;
-        this.__lwip.rotate(degs, 255, 255, 255, function(err) {
+        this.__lwip.rotate(+degs, +color.r, +color.g, +color.b, function(err) {
             callback(err, that);
         });
     }

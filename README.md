@@ -6,6 +6,7 @@
   0. [Image operations](#image-operations)
     0. [Resize](#resize)
     0. [Scale](#scale)
+    0. [Rotate](#rotate)
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
@@ -92,9 +93,17 @@ lwip.open('path/to/image.jpg', function(err, image){
 
 #### Rotate
 
-`image.rotate(degs, callback)`
+`image.rotate(degs, color, callback)`
 
-**TODO**
+0. `degs {Float}`: Clockwise rotation degrees.
+0. `color {String / Array / Object}`: **Optional** Color of the canvas.
+  - As a string, possible values: `"black"`, `"white"`, `"gray"`, `"blue"`,
+    `"red"`, `"green"`, `"yellow"`, `"cyan"`, `"magenta"`.
+  - As an array `[R, G, B]` where `R`, `G` and `B` are integers between 0 and
+    255.
+  - As an object `{r: R, g: G, b: B}` where `R`, `G` and `B` are integers
+    between 0 and 255.
+0. `callback {Function(err, image)}`
 
 ### Getters
 

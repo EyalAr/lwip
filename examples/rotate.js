@@ -1,13 +1,14 @@
 /**
  * Example for using LWIP to rotate an image.
  * This example uses the 'async' module for control flow.
-*/
+ */
 
 var path = require('path'),
     fs = require('fs'),
     lwip = require('../'),
     async = require('async'),
-    scaleBy = 0.25,
+    rotateBy = -33,
+    bgColor = [90, 55, 40],
     infile = path.join(__dirname, 'lena.jpg'),
     outfile = path.join(__dirname, 'lena_rotated.jpg');
 
@@ -20,7 +21,7 @@ async.waterfall([
 
     // rotate image
     function(image, next) {
-        image.rotate(5, next);
+        image.rotate(rotateBy, bgColor, next);
     },
 
     // compress to jpeg and get image as buffer

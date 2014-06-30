@@ -147,15 +147,18 @@ void rotateAsync(uv_work_t * request){
     try{
         unsigned int oldwidth = rb->img->_data->width();
         unsigned int oldheight = rb->img->_data->height();
-        unsigned int xoff = oldwidth * sin(rb->degs * cimg::PI / 180);
-        unsigned int yoff = oldheight * sin(rb->degs * cimg::PI / 180);
         rb->img->_data->rotate(rb->degs, 0, 0);
-        unsigned int width = rb->img->_data->width();
-        unsigned int height = rb->img->_data->height();
-        rb->img->_data->draw_triangle(0, 0, xoff, 0, 0, height - yoff, rb->color);
-        rb->img->_data->draw_triangle(xoff, 0, width, 0, width, yoff, rb->color);
-        rb->img->_data->draw_triangle(0, height, 0, height - yoff, width - xoff, height, rb->color);
-        rb->img->_data->draw_triangle(width, height, width - xoff, height, width, yoff, rb->color);
+        if (cimg::mod(rb->degs, 90.0f) != 0){
+            float degs = cimg::mod(rb->degs, 90.0f);
+            unsigned int xoff = oldwidth * sin(degs * cimg::PI / 180);
+            unsigned int yoff = oldheight * sin(degs * cimg::PI / 180);
+            unsigned int width = rb->img->_data->width();
+            unsigned int height = rb->img->_data->height();
+            rb->img->_data->draw_triangle(0, 0, xoff, 0, 0, height - yoff, rb->color);
+            rb->img->_data->draw_triangle(xoff, 0, width, 0, width, yoff, rb->color);
+            rb->img->_data->draw_triangle(0, height, 0, height - yoff, width - xoff, height, rb->color);
+            rb->img->_data->draw_triangle(width, height, width - xoff, height, width, yoff, rb->color);
+        }
     } catch (CImgException e){
         rb->err = true;
         rb->errMsg = "Unable to rotate image";
