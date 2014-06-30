@@ -20,6 +20,7 @@ void LwipImage::Init() {
     SetPrototypeMethod(tpl, "width", width);
     SetPrototypeMethod(tpl, "height", height);
     SetPrototypeMethod(tpl, "resize", resize);
+    SetPrototypeMethod(tpl, "rotate", rotate);
     SetPrototypeMethod(tpl, "toJpegBuffer", toJpegBuffer);
     constructor = Persistent<Function>::New(tpl->GetFunction());
 }
@@ -57,8 +58,8 @@ Handle<Value> LwipImage::height(const Arguments& args) {
     return scope.Close(Number::New(obj->_data->height()));
 }
 
-// image.resize(width, height, callback):
-// --------------------------------------
+// image.resize(width, height, inter, callback):
+// ---------------------------------------------
 
 // args[0] - width
 // args[1] - height
@@ -96,6 +97,75 @@ void resizeAsync(uv_work_t * request){
 void resizeAsyncDone(uv_work_t * request, int status){
     // resize completed. now we call the callback.
     resizeBaton * rb = static_cast<resizeBaton *>(request->data);
+    if (rb->err){
+        const unsigned int argc = 1;
+        Local<Value> argv[argc] = {
+            Local<Value>::New(Exception::Error(String::New(rb->errMsg.c_str())))
+        };
+        rb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
+    } else {
+        const unsigned int argc = 1;
+        Handle<Value> argv[argc] = {
+            Local<Value>::New(Null())
+        };
+        rb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
+    }
+    // dispose of cb, because it's a persistent function
+    rb->cb.Dispose();
+    delete rb;
+}
+
+// image.rotate(degs, inter, callback):
+// ------------------------------------
+
+// args[0] - degs
+// args[1] - R
+// args[2] - G
+// args[3] - B
+// args[4] - callback
+Handle<Value> LwipImage::rotate(const Arguments& args) {
+    HandleScope scope;
+    // (arguments validation is done in JS land)
+    rotateBaton * rb = new rotateBaton();
+    if (rb == NULL){
+        ThrowException(Exception::TypeError(String::New("Out of memory")));
+        return scope.Close(Undefined());
+    }
+    rb->request.data = rb;
+    rb->cb = Persistent<Function>::New(Local<Function>::Cast(args[4]));
+    rb->degs = (float) args[0]->NumberValue();
+    rb->color[0] = (unsigned char) args[1]->NumberValue();
+    rb->color[1] = (unsigned char) args[2]->NumberValue();
+    rb->color[2] = (unsigned char) args[3]->NumberValue();
+    rb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
+    uv_queue_work(uv_default_loop(), &rb->request, rotateAsync, rotateAsyncDone);
+    return scope.Close(Undefined());
+}
+
+void rotateAsync(uv_work_t * request){
+    rotateBaton * rb = static_cast<rotateBaton *>(request->data);
+    try{
+        unsigned int oldwidth = rb->img->_data->width();
+        unsigned int oldheight = rb->img->_data->height();
+        unsigned int xoff = oldwidth * sin(rb->degs * cimg::PI / 180);
+        unsigned int yoff = oldheight * sin(rb->degs * cimg::PI / 180);
+        rb->img->_data->rotate(rb->degs, 0, 0);
+        unsigned int width = rb->img->_data->width();
+        unsigned int height = rb->img->_data->height();
+        rb->img->_data->draw_triangle(0, 0, xoff, 0, 0, height - yoff, rb->color);
+        rb->img->_data->draw_triangle(xoff, 0, width, 0, width, yoff, rb->color);
+        rb->img->_data->draw_triangle(0, height, 0, height - yoff, width - xoff, height, rb->color);
+        rb->img->_data->draw_triangle(width, height, width - xoff, height, width, yoff, rb->color);
+    } catch (CImgException e){
+        rb->err = true;
+        rb->errMsg = "Unable to rotate image";
+    }
+    return;
+}
+
+void rotateAsyncDone(uv_work_t * request, int status){
+    // rotate completed. now we call the callback.
+    rotateBaton * rb = static_cast<rotateBaton *>(request->data);
     if (rb->err){
         const unsigned int argc = 1;
         Local<Value> argv[argc] = {

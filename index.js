@@ -90,6 +90,14 @@
         });
     }
 
+    image.prototype.rotate = function(degs, callback) {
+        degs = +degs;
+        var that = this;
+        this.__lwip.rotate(degs, 255, 255, 255, function(err) {
+            callback(err, that);
+        });
+    }
+
     image.prototype.toBuffer = function(type, params, callback) {
         if (typeof type !== 'string')
             throw new TypeError('\'type\' argument must be a string');

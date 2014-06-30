@@ -11,7 +11,6 @@
     0. [Height](#height)
     0. [Get as a Buffer](#get-as-a-buffer)
       0. [JPEG](#jpeg)
-0. [Benchmarks](#benchmarks)
 0. [Copyrights](#copyrights)
 
 ## Overview
@@ -91,6 +90,12 @@ lwip.open('path/to/image.jpg', function(err, image){
    - `"lanczos"`
 0. `callback {Function(err, image)}`
 
+#### Rotate
+
+`image.rotate(degs, callback)`
+
+**TODO**
+
 ### Getters
 
 #### Width
@@ -114,7 +119,7 @@ encoded data as a NodeJS Buffer object.
 `image.toBuffer(format, params, callback)`
 
 0. `format {String}`: Encoding format. Possible values:
-  -. `"jpg"`
+  - `"jpg"`
 0. `params {Object}`: Format-specific parameters (See below).
 0. `callback {Function(err, buffer)}`
 
@@ -124,7 +129,7 @@ encoded data as a NodeJS Buffer object.
 
 The `params` object should have the following fields:
 
-- `quality {Integer}`
+- `quality {Integer}`: Defaults to `100`.
 
 ## Copyrights
 
