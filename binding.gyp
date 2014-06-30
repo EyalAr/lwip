@@ -2,8 +2,8 @@
     "targets": [{
         "target_name": "lwip",
         "sources": [
-            "lwip.cpp",
-            "LwipImage.cpp",
+            "src/lwip.cpp",
+            "src/LwipImage.cpp",
             "lib/jpeg/jmemansi.c",
             "lib/jpeg/jaricom.c",
             "lib/jpeg/jcapimin.c",
@@ -53,7 +53,7 @@
         ],
         'cflags!': ['-fno-exceptions'],
         'cflags_cc!': ['-fno-exceptions'],
-        'include_dirs': ['lib/jpeg'],
+        'include_dirs': ['lib/jpeg', 'lib/cimg'],
         'conditions': [
             ['OS=="mac"', {
                 'xcode_settings': {
