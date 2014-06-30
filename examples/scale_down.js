@@ -1,19 +1,26 @@
+/**
+ * Example for using LWIP to scale an image.
+ * This example uses the 'async' module for control flow.
+*/
+
 var path = require('path'),
     fs = require('fs'),
     lwip = require('../'),
     async = require('async'),
-    file = path.join(__dirname, 'lena.jpg');
+    scaleBy = 0.25,
+    infile = path.join(__dirname, 'lena.jpg'),
+    outfile = path.join(__dirname, 'lena_scaled_down.jpg');
 
 async.waterfall([
 
     // open image
     function(next) {
-        lwip.open(file, next);
+        lwip.open(infile, next);
     },
 
     // scale image
     function(image, next) {
-        image.resize(25, next);
+        image.scale(scaleBy, next);
     },
 
     // compress to jpeg and get image as buffer
@@ -24,7 +31,7 @@ async.waterfall([
     },
 
     function(buffer, next) {
-        fs.writeFile('lena_thumb.jpg', buffer, {
+        fs.writeFile(outfile, buffer, {
             encoding: 'binary',
             flag: 'w'
         }, next);

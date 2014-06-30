@@ -1,22 +1,35 @@
 # Light-weight image processor for NodeJS
 
+0. [Overview](#overview)
+0. [API](#api)
+  0. [Open an image](#open-an-image)
+  0. [Image operations](#image-operations)
+    0. [Resize](#resize)
+    0. [Scale](#scale)
+  0. [Getters](#getters)
+    0. [Width](#width)
+    0. [Height](#height)
+    0. [Get as a Buffer](#get-as-a-buffer)
+      0. [JPEG](#jpeg)
+0. [Benchmarks](#benchmarks)
+0. [Copyrights](#copyrights)
+
 ## Overview
 
-This is a native NodeJS module which allows minimal, fast, image processing.
-**Without any external runtime dependencies**.
+This module provides comprehensive, fast, and simple image processing and
+manipulation capabilities.
 
-### Image operations
+**There are no external runtime dependencies**, which means you don't have to
+install anything else on your system. Just ~~`npm install lwip`~~ (coming soon)
+and you're ready.
 
-0. Resize
-0. Rotate
-0. Crop
-0. Get binary image data as NodeJS Buffer object.
+**This module is in active development. New features are being added.**
 
 ### Typical workflow:
 
-0. Load an image
-0. Manipulate it
-0. Get Buffer object
+0. Open an image and get an image object.
+0. Manipulate it.
+0. Get Buffer object of the image encoded as some format (JPEG for example).
 0. Save to disk / Send over network / etc.
 
 ## API
@@ -26,15 +39,19 @@ the `open` method.
 
 ### Open an image
 
-`open(path, callback)`
+`open(path, type, callback)`
 
-0. `path`: The path to the image on disk.
-0. `callback`: A callback function with two arguments: `callback(err, image)`.
+0. `path {String}`: The path to the image on disk.
+0. `type {String}`: **Optional** type of the image. If omitted, the type will be
+   inferred from the file extension. Can usually be omitted. Useful to open
+   image files without extensions.
+0. `callback {Function(err, image)}`
 
 ```Javascript
 var lwip = require('lwip');
-lwip.open('path/to/image', function(err, image){
-    // use 'image'
+lwip.open('path/to/image.jpg', function(err, image){
+    // check 'err'. use 'image'.
+    // image.resize(...), etc.
 });
 ```
 
@@ -42,50 +59,36 @@ lwip.open('path/to/image', function(err, image){
 
 #### Resize
 
-`image.resize(width, height, callback)`
+`image.resize(width, height, inter, callback)`
 
-0. `width {unsigned int}`
-0. `height {unsigned int}`
+0. `width {Integer}`: Width in pixels.
+0. `height {Integer}`: **Optional** height in pixels. If omitted, `width` will
+   be used.
+0. `inter {String}`: **Optional** interpolation method. Defaults to `"lanczos"`.
+   Possible values:
+   - `"nearest-neighbor"`
+   - `"moving-average"`
+   - `"linear"`
+   - `"grid"`
+   - `"cubic"`
+   - `"lanczos"`
 0. `callback {Function(err, image)}`
 
-`width` and `height` are specified in pixels. If either one is not specified,
-the other one will be used to resize while keeping the existing aspect ratio.
-If both are not specified the image will not be changed.
+#### Scale
 
-Note that scaling down an image is not reversible. You can resize it again to
-a larger size, but it will result in quality degradation. To revert a
-scale-down you will need to re-open the image.
+`image.scale(wRatio, hRatio, inter, callback)`
 
-#### Rotate
-
-`image.rotate(degs, color, callback)`
-
-0. `degs {float}`: The amount of degrees to rotate by, relative to the
-   horizontal positive axis, counter-clockwise.
-0. `color {Array[int, int, int]}`: The RGB code (as an array of three integers)
-   to be used as the canvas color. If invalid or not specified, the canvas will
-   be white.
-0. `callback {Function(err, image)}`
-
-**Note:** Rotating the image will enlarge its dimensions to accommodate for the
-increase in width and height. Use `crop` with the old dimensions if you want to
-keep the original width and height.
-
-#### Crop / Pad
-
-`image.crop(x1 ,y1 ,x2 ,y2, color, callback)`  
-**Alias** `image.pad(...)`
-
-`x1`, `y1`, `x2`, `y2` define the crop / pad rectangle. `(x1,y1)` is the
-top-left corner and `(x2,y2)` is the bottom-right corner.
-
-If `x1` or `y1` are negative the canvas will be padded to the left and top of
-the image, respectively. If `x2` or `y2` are larger than the image's dimensions
-the canvas will be padded to the right and bottom of the image, respectively.
-
-0. `color {Array[int, int, int]}`: The RGB color code (as an array of three
-   integers) of the canvas when padding. If invalid or not specified, the canvas
-   will be white.
+0. `wRatio {Float}`: Width scale ratio.
+0. `hRatio {Float}`: **Optional** height scale ratio. If omitted, `wRatio` will
+   be used.
+0. `inter {String}`: **Optional** interpolation method. Defaults to `"lanczos"`.
+   Possible values:
+   - `"nearest-neighbor"`
+   - `"moving-average"`
+   - `"linear"`
+   - `"grid"`
+   - `"cubic"`
+   - `"lanczos"`
 0. `callback {Function(err, image)}`
 
 ### Getters
@@ -100,11 +103,36 @@ the canvas will be padded to the right and bottom of the image, respectively.
 
 #### Get as a Buffer
 
-Get binary image data as a NodeJS [Buffer](http://nodejs.org/api/buffer.html).
+Get encoded binary image data as a NodeJS
+[Buffer](http://nodejs.org/api/buffer.html).
 
-`image.toBuffer(format, callback)`
+When opening an image, it is decoded and stored in memory as an uncompressed
+image. All manipulations are done on the uncompressed data in memory. This
+method allows to encode the image to one of the specified formats and get the
+encoded data as a NodeJS Buffer object.
 
-0. `format{String}`: **Supported formats**:
-  0. `"raw"`: The uncompressed image's pixels data.
-  0. `"jpg"` / `"jpeg"`
+`image.toBuffer(format, params, callback)`
+
+0. `format {String}`: Encoding format. Possible values:
+  -. `"jpg"`
+0. `params {Object}`: Format-specific parameters (See below).
 0. `callback {Function(err, buffer)}`
+
+**Supported encoding formats:**
+
+##### JPEG
+
+The `params` object should have the following fields:
+
+- `quality {Integer}`
+
+## Copyrights
+
+The native part of this module is compiled from source which uses the following:
+
+- Independent JPEG Group's free JPEG software:
+  - [Website](http://www.ijg.org/)
+  - [Readme](https://github.com/EyalAr/lwip/blob/master/lib/jpeg/README)
+- The CImg Library
+  - [Website](http://cimg.sourceforge.net/)
+  - [Readme](https://github.com/EyalAr/lwip/blob/master/lib/cimg/README.txt)

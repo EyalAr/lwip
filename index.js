@@ -16,7 +16,7 @@
 
     var interpolations = {
         'nearest-neighbor': 1,
-        'moving average': 2,
+        'moving-average': 2,
         'linear': 3,
         'grid': 4,
         'cubic': 5,
