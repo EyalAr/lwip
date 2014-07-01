@@ -1,6 +1,8 @@
 # Light-weight image processor for NodeJS
 
 0. [Overview](#overview)
+  0. [Installation](#installation)
+  0. [Usage](#usage)
 0. [API](#api)
   0. [Open an image](#open-an-image)
   0. [Image operations](#image-operations)
@@ -25,7 +27,15 @@ and you're ready.
 
 **This module is in active development. New features are being added.**
 
-### Typical workflow:
+### Installation
+
+~~`npm install lwip`~~ (coming soon)
+
+Or, clone this repo and `node-gyp configure build`.
+
+### Usage
+
+**Typical workflow:**
 
 0. Open an image and get an image object.
 0. Manipulate it.
