@@ -124,7 +124,7 @@
         var args = normalizeToBufferArgs(type, params, callback);
         if (args.type === 'jpg' || args.type === 'jpeg') {
             args.params.quality = args.params.quality || DEF_JPEG_QUALITY;
-            if (args.params.quality < 0 || args.params.quality > 100)
+            if (args.params.quality != parseInt(args.params.quality) || args.params.quality < 0 || args.params.quality > 100)
                 return setImmediate(function() {
                     args.callback('Invalid JPEG quality');
                 });

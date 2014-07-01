@@ -5,6 +5,7 @@
 
 #include <string>
 #include <cmath>
+#include <setjmp.h>
 #include <node.h>
 #include <node_buffer.h>
 #include <v8.h>
@@ -34,6 +35,13 @@ private:
     static Handle<Value> toJpegBuffer(const Arguments& args);
     static Persistent<Function> constructor;
 };
+
+struct lwip_jpeg_error_mgr {
+  struct jpeg_error_mgr pub;
+  jmp_buf setjmp_buffer;
+};
+
+METHODDEF(void) lwip_jpeg_error_exit (j_common_ptr cinfo);
 
 void toJpegBufferAsync(uv_work_t * request);
 void toBufferAsyncDone(uv_work_t * request, int status);

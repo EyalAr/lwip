@@ -7,7 +7,6 @@ void openJpegAsync(uv_work_t * request){
     // here is where we actually open the image file and retrieve the binary
     // data. open image, store data in iob->imgData.
     ImageOpenBaton * iob = static_cast<ImageOpenBaton *>(request->data);
-    // TODO: choose decoder according to format. Currently only jpeg.
     try{
         iob->imgData = new CImg<unsigned char>();
         iob->imgData->load_jpeg(iob->imgPath.c_str());

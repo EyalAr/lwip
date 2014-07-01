@@ -226,9 +226,9 @@ void toJpegBufferAsync(uv_work_t * request){
         quality = tbb->jpegQuality;
     J_COLOR_SPACE colortype = JCS_RGB;
     JSAMPROW row_pointer[1];
-    unsigned char * tmp;
+    unsigned char * tmp = NULL;
     struct jpeg_compress_struct cinfo;
-    struct jpeg_error_mgr jerr;
+    struct lwip_jpeg_error_mgr jerr;
 
     switch(spectrum) {
         case 1 : dimbuf = 1; colortype = JCS_GRAYSCALE; break;
@@ -237,11 +237,15 @@ void toJpegBufferAsync(uv_work_t * request){
         default : dimbuf = 4; colortype = JCS_CMYK; break;
     }
 
-    // TODO:
-    // 1. deal with the various cases of spetrum
-    // 2. handle jpeglib error
-
-    cinfo.err = jpeg_std_error(&jerr);
+    cinfo.err = jpeg_std_error(&jerr.pub);
+    jerr.pub.error_exit = lwip_jpeg_error_exit;
+    if (setjmp(jerr.setjmp_buffer)) {
+        jpeg_destroy_compress(&cinfo);
+        if (tmp) free(tmp);
+        tbb->err = true;
+        tbb->errMsg = "JPEG compression error";
+        return;
+    }
     jpeg_create_compress(&cinfo);
     jpeg_mem_dest(&cinfo, &tbb->buffer, &tbb->bufferSize);
     cinfo.image_width = width;
@@ -253,19 +257,52 @@ void toJpegBufferAsync(uv_work_t * request){
     jpeg_start_compress(&cinfo, TRUE);
 
     tmp = (unsigned char *) malloc(cinfo.image_width * dimbuf);
-    while (cinfo.next_scanline < cinfo.image_height) {
-        unsigned char * ptrd = tmp;
-        const unsigned char
-            * ptr_r = tbb->img->_data->data(0, cinfo.next_scanline, 0, 0),
-            * ptr_g = tbb->img->_data->data(0, cinfo.next_scanline, 0, 1),
-            * ptr_b = tbb->img->_data->data(0, cinfo.next_scanline, 0, 2);
-        for(unsigned int b = 0; b < cinfo.image_width; ++b) {
-            *(ptrd++) = (unsigned char)*(ptr_r++);
-            *(ptrd++) = (unsigned char)*(ptr_g++);
-            *(ptrd++) = (unsigned char)*(ptr_b++);
-        }
-        *row_pointer = tmp;
-        jpeg_write_scanlines(&cinfo, row_pointer, 1);
+    switch (dimbuf){
+        case 1:
+            while (cinfo.next_scanline < cinfo.image_height) {
+                unsigned char * ptrd = tmp;
+                const unsigned char
+                    * ptr_l = tbb->img->_data->data(0, cinfo.next_scanline, 0, 0);
+                for(unsigned int b = 0; b < cinfo.image_width; ++b)
+                    *(ptrd++) = (unsigned char)*(ptr_l++);
+                *row_pointer = tmp;
+                jpeg_write_scanlines(&cinfo, row_pointer, 1);
+            }
+        break;
+        case 3:
+            while (cinfo.next_scanline < cinfo.image_height) {
+                unsigned char * ptrd = tmp;
+                const unsigned char
+                    * ptr_r = tbb->img->_data->data(0, cinfo.next_scanline, 0, 0),
+                    * ptr_g = tbb->img->_data->data(0, cinfo.next_scanline, 0, 1),
+                    * ptr_b = tbb->img->_data->data(0, cinfo.next_scanline, 0, 2);
+                for(unsigned int b = 0; b < cinfo.image_width; ++b) {
+                    *(ptrd++) = (unsigned char)*(ptr_r++);
+                    *(ptrd++) = (unsigned char)*(ptr_g++);
+                    *(ptrd++) = (unsigned char)*(ptr_b++);
+                }
+                *row_pointer = tmp;
+                jpeg_write_scanlines(&cinfo, row_pointer, 1);
+            }
+        break;
+        case 4:
+            while (cinfo.next_scanline < cinfo.image_height) {
+                unsigned char * ptrd = tmp;
+                const unsigned char
+                    * ptr_c = tbb->img->_data->data(0, cinfo.next_scanline, 0, 0),
+                    * ptr_m = tbb->img->_data->data(0, cinfo.next_scanline, 0, 1),
+                    * ptr_y = tbb->img->_data->data(0, cinfo.next_scanline, 0, 2),
+                    * ptr_k = tbb->img->_data->data(0, cinfo.next_scanline, 0, 3);
+                for(unsigned int b = 0; b < cinfo.image_width; ++b) {
+                    *(ptrd++) = (unsigned char)*(ptr_c++);
+                    *(ptrd++) = (unsigned char)*(ptr_m++);
+                    *(ptrd++) = (unsigned char)*(ptr_y++);
+                    *(ptrd++) = (unsigned char)*(ptr_k++);
+                }
+                *row_pointer = tmp;
+                jpeg_write_scanlines(&cinfo, row_pointer, 1);
+            }
+        break;
     }
     free(tmp);
     jpeg_finish_compress(&cinfo);
@@ -298,4 +335,11 @@ void toBufferAsyncDone(uv_work_t * request, int status){
     // free baton's memory
     free(tbb->buffer);
     delete tbb;
+}
+
+METHODDEF(void)
+lwip_jpeg_error_exit (j_common_ptr cinfo)
+{
+  lwip_jpeg_error_mgr * lwip_jpeg_err = (lwip_jpeg_error_mgr *) cinfo->err;
+  longjmp(lwip_jpeg_err->setjmp_buffer, 1);
 }

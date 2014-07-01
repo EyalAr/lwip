@@ -1,7 +1,6 @@
 #ifndef LWIP_H
 #define LWIP_H
 
-#define BUILDING_NODE_EXTENSION
 #define cimg_display 0
 #define cimg_use_jpeg
 #define cimg_verbosity 0

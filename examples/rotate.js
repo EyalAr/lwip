@@ -7,10 +7,10 @@ var path = require('path'),
     fs = require('fs'),
     lwip = require('../'),
     async = require('async'),
-    rotateBy = -33,
+    rotateBy = process.argv[2],
     bgColor = [90, 55, 40],
-    infile = path.join(__dirname, 'lena.jpg'),
-    outfile = path.join(__dirname, 'lena_rotated.jpg');
+    infile = process.argv[3],
+    outfile = process.argv[4];
 
 async.waterfall([
 
