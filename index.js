@@ -5,6 +5,7 @@
         DEF_ROTATE_COLOR = 'gray';
 
     var path = require('path'),
+        async = require('async'),
         lwip = require('./build/Release/lwip');
 
     var openers = [{
@@ -72,6 +73,8 @@
         }
     };
 
+    function noop() {}
+
     function image(lwipImage) {
         this.__lwip = lwipImage;
     }
@@ -92,6 +95,106 @@
     }
 
     image.prototype.scale = function(wRatio, hRatio, inter, callback) {
+        var args = normalizeScaleArgs(wRatio, hRatio, inter, callback),
+            width = +args.wRatio * this.width(),
+            height = +args.hRatio * this.height(),
+            that = this;
+        this.__lwip.resize(width, height, interpolations[args.inter], function(err) {
+            args.callback(err, that);
+        });
+    }
+
+    image.prototype.resize = function(width, height, inter, callback) {
+        var args = normalizeResizeArgs(width, height, inter, callback),
+            that = this;
+        this.__lwip.resize(+args.width, +args.height, interpolations[args.inter], function(err) {
+            args.callback(err, that);
+        });
+    }
+
+    image.prototype.rotate = function(degs, color, callback) {
+        var args = normalizeRotateArgs(degs, color, callback),
+            that = this;
+        this.__lwip.rotate(+args.degs, +args.color.r, +args.color.g, +args.color.b, function(err) {
+            args.callback(err, that);
+        });
+    }
+
+    image.prototype.toBuffer = function(type, params, callback) {
+        var args = normalizeToBufferArgs(type, params, callback);
+        if (args.type === 'jpg' || args.type === 'jpeg') {
+            args.params.quality = args.params.quality || DEF_JPEG_QUALITY;
+            if (args.params.quality < 0 || args.params.quality > 100)
+                return setImmediate(function() {
+                    args.callback('Invalid JPEG quality');
+                });
+            return this.__lwip.toJpegBuffer(args.params.quality, args.callback);
+        } else setImmediate(function() {
+            args.callback('Unknown type \'' + args.type + '\'');
+        });
+    }
+
+    image.prototype.batch = function() {
+        return new batch(this);
+    }
+
+    function batch(image) {
+        this.__image = image;
+        this.__queue = [];
+        this.__running = false;
+        this.__addOp = function(handle, args) {
+            this.__queue.push({
+                handle: handle,
+                args: args
+            });
+        };
+    }
+
+    batch.prototype.exec = function(callback) {
+        var that = this;
+        if (that.__running) throw Error("Batch is already running");
+        that.__running = true;
+        async.eachSeries(this.__queue, function(op, done) {
+            op.args.push(done);
+            op.handle.apply(that.__image, op.args);
+        }, function(err) {
+            that.__queue.length = 0; // queue is now empty
+            that.__running = false;
+            callback(err, that.__image);
+        });
+    }
+
+    batch.prototype.scale = function(wRatio, hRatio, inter) {
+        var args = normalizeScaleArgs(wRatio, hRatio, inter, noop);
+        args = [args.wRatio, args.hRatio, args.inter];
+        this.__addOp(this.__image.scale, args);
+        return this;
+    }
+
+    batch.prototype.resize = function(width, height, inter) {
+        var args = normalizeResizeArgs(width, height, inter, noop);
+        args = [args.width, args.height, args.inter];
+        this.__addOp(this.__image.resize, args);
+        return this;
+    }
+
+    batch.prototype.rotate = function(degs, color) {
+        var args = normalizeRotateArgs(degs, color, noop);
+        args = [args.degs, args.color];
+        this.__addOp(this.__image.rotate, args);
+        return this;
+    }
+
+    batch.prototype.toBuffer = function(type, params, callback) {
+        var args = normalizeToBufferArgs(type, params, callback),
+            that = this;
+        this.exec(function(err, image) {
+            if (err) return callback(err, image);
+            image.toBuffer(args.type, args.params, args.callback);
+        });
+    }
+
+    function normalizeScaleArgs(wRatio, hRatio, inter, callback) {
         if (!wRatio || isNaN(wRatio) || wRatio <= 0)
             throw new TypeError('\'wRatio\' argument must be a positive number');
         callback = callback || inter || hRatio;
@@ -105,18 +208,15 @@
             throw new TypeError('\'hRatio\' argument must be a positive number');
         if (!interpolations[inter])
             throw new TypeError('\'inter\' argument must be a valid interpolation string');
-
-        wRatio = +wRatio;
-        hRatio = +hRatio;
-        var width = wRatio * this.width(),
-            height = hRatio * this.height(),
-            that = this;
-        this.__lwip.resize(width, height, interpolations[inter], function(err) {
-            callback(err, that);
-        });
+        return {
+            wRatio: wRatio,
+            hRatio: hRatio,
+            inter: inter,
+            callback: callback
+        };
     }
 
-    image.prototype.resize = function(width, height, inter, callback) {
+    function normalizeResizeArgs(width, height, inter, callback) {
         if (!width || isNaN(width) || width <= 0)
             throw new TypeError('\'width\' argument must be a positive number');
         callback = callback || inter || height;
@@ -130,16 +230,15 @@
             throw new TypeError('\'height\' argument must be a positive number');
         if (!interpolations[inter])
             throw new TypeError('\'inter\' argument must be a valid interpolation string');
-
-        width = +width;
-        height = +height;
-        var that = this;
-        this.__lwip.resize(width, height, interpolations[inter], function(err) {
-            callback(err, that);
-        });
+        return {
+            width: width,
+            height: height,
+            inter: inter,
+            callback: callback
+        };
     }
 
-    image.prototype.rotate = function(degs, color, callback) {
+    function normalizeRotateArgs(degs, color, callback) {
         if ((!degs && degs != 0) || isNaN(degs))
             throw new TypeError('\'degs\' argument must be a number');
         callback = callback || color;
@@ -164,14 +263,14 @@
             if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
                 throw new TypeError('\'blue\' color component is invalid');
         }
-
-        var that = this;
-        this.__lwip.rotate(+degs, +color.r, +color.g, +color.b, function(err) {
-            callback(err, that);
-        });
+        return {
+            degs: degs,
+            color: color,
+            callback: callback
+        };
     }
 
-    image.prototype.toBuffer = function(type, params, callback) {
+    function normalizeToBufferArgs(type, params, callback) {
         if (typeof type !== 'string')
             throw new TypeError('\'type\' argument must be a string');
         type = type.toLowerCase();
@@ -181,17 +280,11 @@
             throw new TypeError('\'params\' argument must be an object');
         if (typeof callback !== 'function')
             throw new TypeError('\'callback\' argument must be a function');
-
-        if (type === 'jpg' || type === 'jpeg') {
-            params.quality = params.quality || DEF_JPEG_QUALITY;
-            if (params.quality < 0 || params.quality > 100)
-                return setImmediate(function() {
-                    callback('Invalid JPEG quality');
-                });
-            return this.__lwip.toJpegBuffer(params.quality, callback);
-        } else setImmediate(function() {
-            callback('Unknown type \'' + type + '\'');
-        });
+        return {
+            type: type,
+            params: params,
+            callback: callback
+        };
     }
 
     function open(impath, type, callback) {
