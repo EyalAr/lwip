@@ -233,23 +233,25 @@ var batch = image.batch();
 Use the batch object to queue [image operations](#image-operations). Each of the
 operations above has a batch equivalent. Operations can be chained.
 
+**Remember, the batch manipulation methods do not take a callback.**
+
 **Example:**
 
 ```Javascript
-batch.rotate(45,'white').scale(0.5);
+batch.rotate(45, 'white').scale(0.5);
 ```
 
 #### Executing a batch
 
 There are several methods which start the execution of a batch. Once a batch
-finished an execution, it becomes empty, and can be resued to queue additional
+finishes an execution, it becomes empty and can be resued to queue additional
 operations.
 
 ##### Execute batch and obtain the manipulated image object
 
 When all desired operations had been queued, execute the batch with the `exec()`
-mathod. `exec` takes a `callback` argument; where `callback` is a function which
-received an error object and the manipulated image object:
+method. `exec` takes a `callback` argument; `callback` is a function which
+receives an error object and the manipulated image object:
 
 `batch.exec(callback)`
 
