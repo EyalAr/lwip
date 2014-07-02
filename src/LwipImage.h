@@ -15,21 +15,18 @@
 using namespace cimg_library;
 using namespace v8;
 
-typedef CImg<unsigned char> * lwip_data_t;
-
 class LwipImage : public node::ObjectWrap {
 public:
     static void Init();
     static Handle<Value> NewInstance();
     explicit LwipImage(): _data(NULL){};
     ~LwipImage();
-    lwip_data_t _data;
+    CImg<unsigned char> * _data;
 
 private:
     static Handle<Value> New(const Arguments& args);
     static Handle<Value> resize(const Arguments& args);
     static Handle<Value> rotate(const Arguments& args);
-    // static Handle<Value> crop(const Arguments& args);
     static Handle<Value> width(const Arguments& args);
     static Handle<Value> height(const Arguments& args);
     static Handle<Value> toJpegBuffer(const Arguments& args);
@@ -41,7 +38,10 @@ struct lwip_jpeg_error_mgr {
   jmp_buf setjmp_buffer;
 };
 
-METHODDEF(void) lwip_jpeg_error_exit (j_common_ptr cinfo);
+inline void lwip_jpeg_error_exit (j_common_ptr cinfo) {
+  lwip_jpeg_error_mgr * lwip_jpeg_err = (lwip_jpeg_error_mgr *) cinfo->err;
+  longjmp(lwip_jpeg_err->setjmp_buffer, 1);
+}
 
 void toJpegBufferAsync(uv_work_t * request);
 void toBufferAsyncDone(uv_work_t * request, int status);

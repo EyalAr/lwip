@@ -2,6 +2,7 @@
 
 using namespace cimg_library;
 using namespace v8;
+using namespace node;
 
 void openJpegAsync(uv_work_t * request){
     // here is where we actually open the image file and retrieve the binary
@@ -32,7 +33,7 @@ void openAsyncDone(uv_work_t * request, int status){
     } else {
         // build image object
         Handle<Value> imgObj = LwipImage::NewInstance();
-        LwipImage * lio = node::ObjectWrap::Unwrap<LwipImage>(Handle<Object>::Cast(imgObj));
+        LwipImage * lio = ObjectWrap::Unwrap<LwipImage>(Handle<Object>::Cast(imgObj));
         lio->_data = iob->imgData;
         // define the arguments for the callback
         const unsigned int argc = 2;

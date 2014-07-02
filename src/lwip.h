@@ -15,7 +15,7 @@
 struct ImageOpenBaton {
     uv_work_t request;
     v8::Persistent<Function> cb;
-    lwip_data_t imgData;
+    CImg<unsigned char> * imgData;
     std::string imgPath;
     bool err;
     std::string errMsg;

@@ -218,24 +218,12 @@ Handle<Value> LwipImage::toJpegBuffer(const Arguments& args) {
 
 void toJpegBufferAsync(uv_work_t * request){
     ToBufferBaton * tbb = static_cast<ToBufferBaton *>(request->data);
-    unsigned int
-        dimbuf = 0,
-        spectrum = tbb->img->_data->spectrum(),
-        width = tbb->img->_data->width(),
-        height = tbb->img->_data->height(),
-        quality = tbb->jpegQuality;
-    J_COLOR_SPACE colortype = JCS_RGB;
+    unsigned int dimbuf, spectrum, width, height, quality;
+    J_COLOR_SPACE colortype;
     JSAMPROW row_pointer[1];
     unsigned char * tmp = NULL;
     struct jpeg_compress_struct cinfo;
     struct lwip_jpeg_error_mgr jerr;
-
-    switch(spectrum) {
-        case 1 : dimbuf = 1; colortype = JCS_GRAYSCALE; break;
-        case 2 : dimbuf = 3; colortype = JCS_RGB; break;
-        case 3 : dimbuf = 3; colortype = JCS_RGB; break;
-        default : dimbuf = 4; colortype = JCS_CMYK; break;
-    }
 
     cinfo.err = jpeg_std_error(&jerr.pub);
     jerr.pub.error_exit = lwip_jpeg_error_exit;
@@ -246,6 +234,27 @@ void toJpegBufferAsync(uv_work_t * request){
         tbb->errMsg = "JPEG compression error";
         return;
     }
+
+    spectrum = tbb->img->_data->spectrum();
+    width = tbb->img->_data->width();
+    height = tbb->img->_data->height();
+    quality = tbb->jpegQuality;
+    switch(spectrum) {
+        case 1:
+            dimbuf = 1;
+            colortype = JCS_GRAYSCALE;
+        break;
+        case 2:
+        case 3:
+            dimbuf = 3;
+            colortype = JCS_RGB;
+        break;
+        default:
+            dimbuf = 4;
+            colortype = JCS_CMYK;
+        break;
+    }
+
     jpeg_create_compress(&cinfo);
     jpeg_mem_dest(&cinfo, &tbb->buffer, &tbb->bufferSize);
     cinfo.image_width = width;
@@ -322,7 +331,7 @@ void toBufferAsyncDone(uv_work_t * request, int status){
         tbb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
     } else {
         // build Buffer object
-        Handle<Object> bufferObj = node::Buffer::New((const char *) tbb->buffer, tbb->bufferSize)->handle_;
+        Handle<Object> bufferObj = Buffer::New((const char *) tbb->buffer, tbb->bufferSize)->handle_;
         const unsigned int argc = 2;
         Handle<Value> argv[argc] = {
             Local<Value>::New(Null()),
@@ -335,11 +344,4 @@ void toBufferAsyncDone(uv_work_t * request, int status){
     // free baton's memory
     free(tbb->buffer);
     delete tbb;
-}
-
-METHODDEF(void)
-lwip_jpeg_error_exit (j_common_ptr cinfo)
-{
-  lwip_jpeg_error_mgr * lwip_jpeg_err = (lwip_jpeg_error_mgr *) cinfo->err;
-  longjmp(lwip_jpeg_err->setjmp_buffer, 1);
 }
