@@ -23,16 +23,15 @@ This module provides comprehensive, fast, and simple image processing and
 manipulation capabilities.
 
 **There are no external runtime dependencies**, which means you don't have to
-install anything else on your system. Just ~~`npm install lwip`~~ (coming soon)
-and you're ready.
+install anything else on your system.
 
-**This module is in active development. New features are being added.**
+**This module is in active development. [New features](https://github.com/EyalAr/lwip/issues?labels=feature+request&page=1&state=open) are being added.**
 
 ### Installation
 
 ~~`npm install lwip`~~ (coming soon)
 
-Or, clone this repo and `node-gyp configure build`.
+Or, clone this repo and `cd lwip && npm install`.
 
 ### Usage
 
