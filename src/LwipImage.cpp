@@ -16,7 +16,7 @@ void LwipImage::Init() {
     // Prepare constructor template
     Local<FunctionTemplate> tpl = FunctionTemplate::New(New);
     tpl->SetClassName(String::NewSymbol("LwipImage"));
-    tpl->InstanceTemplate()->SetInternalFieldCount(2);
+    tpl->InstanceTemplate()->SetInternalFieldCount(5);
     SetPrototypeMethod(tpl, "width", width);
     SetPrototypeMethod(tpl, "height", height);
     SetPrototypeMethod(tpl, "resize", resize);
@@ -144,21 +144,40 @@ Handle<Value> LwipImage::rotate(const Arguments& args) {
 
 void rotateAsync(uv_work_t * request){
     rotateBaton * rb = static_cast<rotateBaton *>(request->data);
-    try{
-        unsigned int oldwidth = rb->img->_data->width();
-        unsigned int oldheight = rb->img->_data->height();
-        rb->img->_data->rotate(rb->degs, 0, 0);
-        if (cimg::mod(rb->degs, 90.0f) != 0){
-            float degs = cimg::mod(rb->degs, 90.0f);
-            unsigned int xoff = oldwidth * sin(degs * cimg::PI / 180);
-            unsigned int yoff = oldheight * sin(degs * cimg::PI / 180);
-            unsigned int width = rb->img->_data->width();
-            unsigned int height = rb->img->_data->height();
-            rb->img->_data->draw_triangle(0, 0, xoff, 0, 0, height - yoff, rb->color);
-            rb->img->_data->draw_triangle(xoff, 0, width, 0, width, yoff, rb->color);
-            rb->img->_data->draw_triangle(0, height, 0, height - yoff, width - xoff, height, rb->color);
-            rb->img->_data->draw_triangle(width, height, width - xoff, height, width, yoff, rb->color);
+    const float nangle = cimg::mod(rb->degs, 360.0f);
+    if (cimg::mod(nangle, 90.0f) != 0){
+        CImg<unsigned char> * res;
+        unsigned int oldwidth = rb->img->_data->width(),
+                     oldheight = rb->img->_data->height();
+        try{
+            // 2 pixels wider and taller
+            res = new CImg<unsigned char>(oldwidth + 2, oldheight + 2, 1, 3);
+        } catch (CImgException e){
+            rb->err = true;
+            rb->errMsg = "Out of memory";
+            return;
         }
+        cimg_forX(*res,x){
+            res->fillC(x,0,0,rb->color[0],rb->color[1],rb->color[2]);
+            res->fillC(x,oldheight+1,0,rb->color[0],rb->color[1],rb->color[2]);
+        }
+        cimg_forY(*res,y){
+            res->fillC(0,y,0,rb->color[0],rb->color[1],rb->color[2]);
+            res->fillC(oldwidth+1,y,0,rb->color[0],rb->color[1],rb->color[2]);
+        }
+        cimg_forXY(*(rb->img->_data),x,y){
+            unsigned char r = (*(rb->img->_data))(x,y,0,0),
+                          g = (*(rb->img->_data))(x,y,0,1),
+                          b = (*(rb->img->_data))(x,y,0,2);
+            res->fillC(x+1,y+1,0,r,g,b);
+        }
+        delete rb->img->_data;
+        rb->img->_data = res;
+    }
+    try{
+        // linear interpolations = 1
+        // neumann boundary condition = 1
+        rb->img->_data->rotate(nangle, 1, 1);
     } catch (CImgException e){
         rb->err = true;
         rb->errMsg = "Unable to rotate image";
@@ -218,8 +237,8 @@ Handle<Value> LwipImage::toJpegBuffer(const Arguments& args) {
 
 void toJpegBufferAsync(uv_work_t * request){
     ToBufferBaton * tbb = static_cast<ToBufferBaton *>(request->data);
-    unsigned int dimbuf, spectrum, width, height, quality;
-    J_COLOR_SPACE colortype;
+    unsigned int dimbuf = 3, width, height, quality;
+    J_COLOR_SPACE colortype = JCS_RGB;
     JSAMPROW row_pointer[1];
     unsigned char * tmp = NULL;
     struct jpeg_compress_struct cinfo;
@@ -235,25 +254,9 @@ void toJpegBufferAsync(uv_work_t * request){
         return;
     }
 
-    spectrum = tbb->img->_data->spectrum();
     width = tbb->img->_data->width();
     height = tbb->img->_data->height();
     quality = tbb->jpegQuality;
-    switch(spectrum) {
-        case 1:
-            dimbuf = 1;
-            colortype = JCS_GRAYSCALE;
-        break;
-        case 2:
-        case 3:
-            dimbuf = 3;
-            colortype = JCS_RGB;
-        break;
-        default:
-            dimbuf = 4;
-            colortype = JCS_CMYK;
-        break;
-    }
 
     jpeg_create_compress(&cinfo);
     jpeg_mem_dest(&cinfo, &tbb->buffer, &tbb->bufferSize);
@@ -266,52 +269,19 @@ void toJpegBufferAsync(uv_work_t * request){
     jpeg_start_compress(&cinfo, TRUE);
 
     tmp = (unsigned char *) malloc(cinfo.image_width * dimbuf);
-    switch (dimbuf){
-        case 1:
-            while (cinfo.next_scanline < cinfo.image_height) {
-                unsigned char * ptrd = tmp;
-                const unsigned char
-                    * ptr_l = tbb->img->_data->data(0, cinfo.next_scanline, 0, 0);
-                for(unsigned int b = 0; b < cinfo.image_width; ++b)
-                    *(ptrd++) = (unsigned char)*(ptr_l++);
-                *row_pointer = tmp;
-                jpeg_write_scanlines(&cinfo, row_pointer, 1);
-            }
-        break;
-        case 3:
-            while (cinfo.next_scanline < cinfo.image_height) {
-                unsigned char * ptrd = tmp;
-                const unsigned char
-                    * ptr_r = tbb->img->_data->data(0, cinfo.next_scanline, 0, 0),
-                    * ptr_g = tbb->img->_data->data(0, cinfo.next_scanline, 0, 1),
-                    * ptr_b = tbb->img->_data->data(0, cinfo.next_scanline, 0, 2);
-                for(unsigned int b = 0; b < cinfo.image_width; ++b) {
-                    *(ptrd++) = (unsigned char)*(ptr_r++);
-                    *(ptrd++) = (unsigned char)*(ptr_g++);
-                    *(ptrd++) = (unsigned char)*(ptr_b++);
-                }
-                *row_pointer = tmp;
-                jpeg_write_scanlines(&cinfo, row_pointer, 1);
-            }
-        break;
-        case 4:
-            while (cinfo.next_scanline < cinfo.image_height) {
-                unsigned char * ptrd = tmp;
-                const unsigned char
-                    * ptr_c = tbb->img->_data->data(0, cinfo.next_scanline, 0, 0),
-                    * ptr_m = tbb->img->_data->data(0, cinfo.next_scanline, 0, 1),
-                    * ptr_y = tbb->img->_data->data(0, cinfo.next_scanline, 0, 2),
-                    * ptr_k = tbb->img->_data->data(0, cinfo.next_scanline, 0, 3);
-                for(unsigned int b = 0; b < cinfo.image_width; ++b) {
-                    *(ptrd++) = (unsigned char)*(ptr_c++);
-                    *(ptrd++) = (unsigned char)*(ptr_m++);
-                    *(ptrd++) = (unsigned char)*(ptr_y++);
-                    *(ptrd++) = (unsigned char)*(ptr_k++);
-                }
-                *row_pointer = tmp;
-                jpeg_write_scanlines(&cinfo, row_pointer, 1);
-            }
-        break;
+    while (cinfo.next_scanline < cinfo.image_height) {
+        unsigned char * ptrd = tmp;
+        const unsigned char
+            * ptr_r = tbb->img->_data->data(0, cinfo.next_scanline, 0, 0),
+            * ptr_g = tbb->img->_data->data(0, cinfo.next_scanline, 0, 1),
+            * ptr_b = tbb->img->_data->data(0, cinfo.next_scanline, 0, 2);
+        for(unsigned int b = 0; b < cinfo.image_width; ++b) {
+            *(ptrd++) = (unsigned char)*(ptr_r++);
+            *(ptrd++) = (unsigned char)*(ptr_g++);
+            *(ptrd++) = (unsigned char)*(ptr_b++);
+        }
+        *row_pointer = tmp;
+        jpeg_write_scanlines(&cinfo, row_pointer, 1);
     }
     free(tmp);
     jpeg_finish_compress(&cinfo);
