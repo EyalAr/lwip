@@ -14,6 +14,7 @@
     0. [Height](#height)
     0. [Get as a Buffer](#get-as-a-buffer)
       0. [JPEG](#jpeg)
+    0. [Write to file](#write-to-file)
   0. [Batch operations](#batch-operations)
 0. [Copyrights](#copyrights)
 
@@ -205,6 +206,19 @@ The `params` object should have the following fields:
 
 - `quality {Integer}`: Defaults to `100`.
 
+#### Write to file
+
+Write encoded binary image data directly to a file.
+
+`image.writeFile(path, format, params, callback)`
+
+0. `path {String}`: Path of file to write.
+0. `format {String}`: **Optional** Encoding format. If omitted, will be inferred
+   from `path` extension. Possible values are specified in
+   [Get as a Buffer](#get-as-a-buffer) section.
+0. `params {Object}`: Format-specific parameters.
+0. `callback {Function(err)}`
+
 ### Batch operations
 
 Each of the [image operations](#image-operations) above can be done as part of
@@ -271,6 +285,14 @@ Batch objects have a `toBuffer` convenience method.
 `batch.toBuffer(format, params, callback)`
 
 See parameters of [`image.toBuffer()`](#get-as-a-buffer).
+
+##### Execute batch and write to file
+
+Batch objects have a `writeFile` convenience method.
+
+`batch.writeFile(path, format, params, callback)`
+
+See parameters of [`image.writeFile()`](#write-to-file).
 
 #### Notes on batch operations
 

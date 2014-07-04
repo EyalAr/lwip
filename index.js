@@ -5,6 +5,7 @@
         DEF_ROTATE_COLOR = 'gray';
 
     var path = require('path'),
+        fs = require('fs'),
         async = require('async'),
         lwip = require('./build/Release/lwip');
 
@@ -134,6 +135,23 @@
         });
     }
 
+    image.prototype.writeFile = function(outpath, type, params, callback) {
+        if (typeof outpath !== 'string')
+            throw new TypeError('\'path\' argument must be a string');
+        if (typeof type !== 'string') {
+            callback = params;
+            params = type;
+            type = path.extname(outpath).slice(1).toLowerCase();
+        }
+        var tbArgs = normalizeToBufferArgs(type, params, callback);
+        this.toBuffer(tbArgs.type, tbArgs.params, function(err, buffer) {
+            if (err) return tbArgs.callback(err);
+            fs.writeFile(outpath, buffer, {
+                encoding: 'binary'
+            }, tbArgs.callback);
+        });
+    }
+
     image.prototype.batch = function() {
         return new batch(this);
     }
@@ -191,6 +209,23 @@
         this.exec(function(err, image) {
             if (err) return callback(err, image);
             image.toBuffer(args.type, args.params, args.callback);
+        });
+    }
+
+    batch.prototype.writeFile = function(outpath, type, params, callback) {
+        if (typeof outpath !== 'string')
+            throw new TypeError('\'path\' argument must be a string');
+        if (typeof type !== 'string') {
+            callback = params;
+            params = type;
+            type = path.extname(outpath).slice(1).toLowerCase();
+        }
+        var tbArgs = normalizeToBufferArgs(type, params, callback);
+        this.toBuffer(tbArgs.type, tbArgs.params, function(err, buffer) {
+            if (err) return tbArgs.callback(err);
+            fs.writeFile(outpath, buffer, {
+                encoding: 'binary'
+            }, tbArgs.callback);
         });
     }
 
