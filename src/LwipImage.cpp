@@ -22,6 +22,7 @@ void LwipImage::Init() {
     SetPrototypeMethod(tpl, "resize", resize);
     SetPrototypeMethod(tpl, "rotate", rotate);
     SetPrototypeMethod(tpl, "blur", blur);
+    SetPrototypeMethod(tpl, "crop", crop);
     SetPrototypeMethod(tpl, "toJpegBuffer", toJpegBuffer);
     constructor = Persistent<Function>::New(tpl->GetFunction());
 }
@@ -208,7 +209,7 @@ void rotateAsyncDone(uv_work_t * request, int status){
 }
 
 // image.blur(sigma, callback):
-// ------------------------------------
+// ----------------------------
 
 // args[0] - sigma
 // args[1] - callback
@@ -242,7 +243,7 @@ void blurAsync(uv_work_t * request){
 }
 
 void blurAsyncDone(uv_work_t * request, int status){
-    // rotate completed. now we call the callback.
+    // blur completed. now we call the callback.
     blurBaton * bb = static_cast<blurBaton *>(request->data);
     if (bb->err){
         const unsigned int argc = 1;
@@ -260,6 +261,65 @@ void blurAsyncDone(uv_work_t * request, int status){
     // dispose of cb, because it's a persistent function
     bb->cb.Dispose();
     delete bb;
+}
+
+// image.crop(left, top, right, bottom, callback):
+// -----------------------------------------------
+
+// args[0] - left
+// args[1] - top
+// args[2] - right
+// args[3] - bottom
+// args[4] - callback
+Handle<Value> LwipImage::crop(const Arguments& args) {
+    HandleScope scope;
+    // (arguments validation is done in JS land)
+    cropBaton * cb = new cropBaton();
+    if (cb == NULL){
+        ThrowException(Exception::TypeError(String::New("Out of memory")));
+        return scope.Close(Undefined());
+    }
+    cb->request.data = cb;
+    cb->cb = Persistent<Function>::New(Local<Function>::Cast(args[4]));
+    cb->left = (unsigned int) args[0]->NumberValue();
+    cb->top = (unsigned int) args[1]->NumberValue();
+    cb->right = (unsigned int) args[2]->NumberValue();
+    cb->bottom = (unsigned int) args[3]->NumberValue();
+    cb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
+    uv_queue_work(uv_default_loop(), &cb->request, cropAsync, cropAsyncDone);
+    return scope.Close(Undefined());
+}
+
+void cropAsync(uv_work_t * request){
+    cropBaton * cb = static_cast<cropBaton *>(request->data);
+    try{
+        cb->img->_data->crop(cb->left,cb->top,0,0,cb->right,cb->bottom,0,2);
+    } catch (CImgException e){
+        cb->err = true;
+        cb->errMsg = "Unable to crop image";
+    }
+    return;
+}
+
+void cropAsyncDone(uv_work_t * request, int status){
+    // crop completed. now we call the callback.
+    cropBaton * cb = static_cast<cropBaton *>(request->data);
+    if (cb->err){
+        const unsigned int argc = 1;
+        Local<Value> argv[argc] = {
+            Local<Value>::New(Exception::Error(String::New(cb->errMsg.c_str())))
+        };
+        cb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
+    } else {
+        const unsigned int argc = 1;
+        Handle<Value> argv[argc] = {
+            Local<Value>::New(Null())
+        };
+        cb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
+    }
+    // dispose of cb, because it's a persistent function
+    cb->cb.Dispose();
+    delete cb;
 }
 
 // image.to{type}Buffer(format,callback):

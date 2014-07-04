@@ -129,6 +129,26 @@
         });
     }
 
+    image.prototype.crop = function(left, top, right, bottom, callback) {
+        var args = normalizeCropArgs(left, top, right, bottom, callback),
+            that = this;
+        if (args.mode === 'center') {
+            var size = that.size();
+            left = 0 | (size.width - args.width) / 2;
+            top = 0 | (size.height - args.height) / 2;
+            right = left + args.width - 1;
+            bottom = top + args.height - 1;
+        } else {
+            left = +args.left;
+            right = +args.right;
+            top = +args.top;
+            bottom = +args.bottom;
+        }
+        this.__lwip.crop(left, top, right, bottom, function(err) {
+            args.callback(err, that);
+        });
+    }
+
     image.prototype.toBuffer = function(type, params, callback) {
         var args = normalizeToBufferArgs(type, params, callback);
         if (args.type === 'jpg' || args.type === 'jpeg') {
@@ -215,6 +235,13 @@
         var args = normalizeBlurArgs(sigma, noop);
         args = [args.sigma];
         this.__addOp(this.__image.blur, args);
+        return this;
+    }
+
+    batch.prototype.crop = function(left, top, right, bottom) {
+        normalizeCropArgs(left, top, right, bottom, noop); // just throw exception if something is wrong
+        args = [left, top, right, bottom];
+        this.__addOp(this.__image.crop, args);
         return this;
     }
 
@@ -329,6 +356,47 @@
             sigma: sigma,
             callback: callback
         };
+    }
+
+    function normalizeCropArgs(left, top, right, bottom, callback) {
+        callback = callback || bottom || right || top;
+        if (left != parseInt(left) || left < 0)
+            throw new TypeError('First argument must be a non-negative integer');
+        if (typeof callback !== 'function')
+            throw new TypeError('\'callback\' argument must be a function');
+        if (!(right || right === 0) && !(bottom || bottom === 0)) {
+            // both right and bottom don't exist, so top must be a number or not exist
+            if (top && top !== 0 && (top != parseInt(top) || top < 0))
+                throw new TypeError('Second argument must be a non-negative integer');
+        } else if ((right || right === 0) && (bottom || bottom === 0)) {
+            // both right and bottom exist
+            if (top != parseInt(top) || top < 0)
+                throw new TypeError('Second argument must be a non-negative integer');
+            if (right != parseInt(right) || right < 0)
+                throw new TypeError('Third argument must be a non-negative integer');
+            if (bottom != parseInt(bottom) || bottom < 0)
+                throw new TypeError('Fourth argument must be a non-negative integer');
+        } else {
+            throw new TypeError('Cannot take only three numeric arguments');
+        }
+        var args = {};
+        if (!top && !right && !bottom) {
+            args.width = left;
+            args.height = left;
+            args.mode = 'center';
+        } else if (!right && !bottom) {
+            args.width = left;
+            args.height = top;
+            args.mode = 'center';
+        } else {
+            args.left = left;
+            args.top = top;
+            args.right = right;
+            args.bottom = bottom;
+            args.mode = 'rect';
+        }
+        args.callback = callback;
+        return args;
     }
 
     function normalizeToBufferArgs(type, params, callback) {

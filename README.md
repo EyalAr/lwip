@@ -9,6 +9,7 @@
     0. [Resize](#resize)
     0. [Scale](#scale)
     0. [Rotate](#rotate)
+    0. [Crop](#crop)
     0. [Blur](#blur)
   0. [Getters](#getters)
     0. [Width](#width)
@@ -170,6 +171,31 @@ lwip.open('path/to/image.jpg', function(err, image){
     255.
   - As an object `{r: R, g: G, b: B}` where `R`, `G` and `B` are integers
     between 0 and 255.
+0. `callback {Function(err, image)}`
+
+#### Crop
+
+#### Crop with rectangle coordinates
+
+`image.crop(left, top, right, bottom, callback)`
+
+0. `left, top, right, bottom {Integer}`: Coordinates of the crop rectangle.
+0. `callback {Function(err, image)}`
+
+#### Crop a rectangle from center
+
+`image.crop(width, height, callback)`
+
+0. `width, height {Integer}`: Width and height of the rectangle to crop from the
+   center of the image.
+0. `callback {Function(err, image)}`
+
+#### Crop a square from center
+
+`image.crop(size, callback)`
+
+0. `size {Integer}`: Edge size of the square to crop from the center of the
+   image.
 0. `callback {Function(err, image)}`
 
 #### Blur
