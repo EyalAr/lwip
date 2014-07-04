@@ -2,6 +2,8 @@
 #define LWIP_IMAGE_H
 
 #define cimg_display 0
+#define cimg_use_jpeg
+#define cimg_verbosity 0
 
 #include <string>
 #include <cmath>
@@ -27,6 +29,7 @@ private:
     static Handle<Value> New(const Arguments& args);
     static Handle<Value> resize(const Arguments& args);
     static Handle<Value> rotate(const Arguments& args);
+    static Handle<Value> blur(const Arguments& args);
     static Handle<Value> width(const Arguments& args);
     static Handle<Value> height(const Arguments& args);
     static Handle<Value> toJpegBuffer(const Arguments& args);
@@ -49,6 +52,8 @@ void resizeAsync(uv_work_t * request);
 void resizeAsyncDone(uv_work_t * request, int status);
 void rotateAsync(uv_work_t * request);
 void rotateAsyncDone(uv_work_t * request, int status);
+void blurAsync(uv_work_t * request);
+void blurAsyncDone(uv_work_t * request, int status);
 
 struct ToBufferBaton {
     uv_work_t request;
@@ -78,6 +83,15 @@ struct rotateBaton {
     LwipImage * img;
     float degs;
     unsigned char color[3];
+    bool err;
+    std::string errMsg;
+};
+
+struct blurBaton {
+    uv_work_t request;
+    v8::Persistent<Function> cb;
+    LwipImage * img;
+    float sigma;
     bool err;
     std::string errMsg;
 };

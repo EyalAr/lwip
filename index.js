@@ -121,6 +121,14 @@
         });
     }
 
+    image.prototype.blur = function(sigma, callback) {
+        var args = normalizeBlurArgs(sigma, callback),
+            that = this;
+        this.__lwip.blur(+args.sigma, function(err) {
+            args.callback(err, that);
+        });
+    }
+
     image.prototype.toBuffer = function(type, params, callback) {
         var args = normalizeToBufferArgs(type, params, callback);
         if (args.type === 'jpg' || args.type === 'jpeg') {
@@ -200,6 +208,13 @@
         var args = normalizeRotateArgs(degs, color, noop);
         args = [args.degs, args.color];
         this.__addOp(this.__image.rotate, args);
+        return this;
+    }
+
+    batch.prototype.blur = function(sigma) {
+        var args = normalizeBlurArgs(sigma, noop);
+        args = [args.sigma];
+        this.__addOp(this.__image.blur, args);
         return this;
     }
 
@@ -301,6 +316,17 @@
         return {
             degs: degs,
             color: color,
+            callback: callback
+        };
+    }
+
+    function normalizeBlurArgs(sigma, callback) {
+        if ((!sigma && sigma != 0) || isNaN(sigma) || sigma < 0)
+            throw new TypeError('\'sigma\' argument must be a non-negative number');
+        if (typeof callback !== 'function')
+            throw new TypeError('\'callback\' argument must be a function');
+        return {
+            sigma: sigma,
             callback: callback
         };
     }

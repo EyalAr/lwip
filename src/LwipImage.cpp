@@ -21,6 +21,7 @@ void LwipImage::Init() {
     SetPrototypeMethod(tpl, "height", height);
     SetPrototypeMethod(tpl, "resize", resize);
     SetPrototypeMethod(tpl, "rotate", rotate);
+    SetPrototypeMethod(tpl, "blur", blur);
     SetPrototypeMethod(tpl, "toJpegBuffer", toJpegBuffer);
     constructor = Persistent<Function>::New(tpl->GetFunction());
 }
@@ -204,6 +205,61 @@ void rotateAsyncDone(uv_work_t * request, int status){
     // dispose of cb, because it's a persistent function
     rb->cb.Dispose();
     delete rb;
+}
+
+// image.blur(sigma, callback):
+// ------------------------------------
+
+// args[0] - sigma
+// args[1] - callback
+Handle<Value> LwipImage::blur(const Arguments& args) {
+    HandleScope scope;
+    // (arguments validation is done in JS land)
+    blurBaton * bb = new blurBaton();
+    if (bb == NULL){
+        ThrowException(Exception::TypeError(String::New("Out of memory")));
+        return scope.Close(Undefined());
+    }
+    bb->request.data = bb;
+    bb->cb = Persistent<Function>::New(Local<Function>::Cast(args[1]));
+    bb->sigma = (float) args[0]->NumberValue();
+    bb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
+    uv_queue_work(uv_default_loop(), &bb->request, blurAsync, blurAsyncDone);
+    return scope.Close(Undefined());
+}
+
+void blurAsync(uv_work_t * request){
+    blurBaton * bb = static_cast<blurBaton *>(request->data);
+    try{
+        // filter order = 0 (on the image itself, not derivatives)
+        bb->img->_data->vanvliet(bb->sigma, 0, 'x');
+        bb->img->_data->vanvliet(bb->sigma, 0, 'y');
+    } catch (CImgException e){
+        bb->err = true;
+        bb->errMsg = "Unable to blur image";
+    }
+    return;
+}
+
+void blurAsyncDone(uv_work_t * request, int status){
+    // rotate completed. now we call the callback.
+    blurBaton * bb = static_cast<blurBaton *>(request->data);
+    if (bb->err){
+        const unsigned int argc = 1;
+        Local<Value> argv[argc] = {
+            Local<Value>::New(Exception::Error(String::New(bb->errMsg.c_str())))
+        };
+        bb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
+    } else {
+        const unsigned int argc = 1;
+        Handle<Value> argv[argc] = {
+            Local<Value>::New(Null())
+        };
+        bb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
+    }
+    // dispose of cb, because it's a persistent function
+    bb->cb.Dispose();
+    delete bb;
 }
 
 // image.to{type}Buffer(format,callback):
