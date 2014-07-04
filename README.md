@@ -9,6 +9,7 @@
     0. [Resize](#resize)
     0. [Scale](#scale)
     0. [Rotate](#rotate)
+    0. [Blur](#blur)
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
@@ -171,6 +172,15 @@ lwip.open('path/to/image.jpg', function(err, image){
     between 0 and 255.
 0. `callback {Function(err, image)}`
 
+#### Blur
+
+Gaussian blur.
+
+`image.blur(sigma, callback)`
+
+0. `sigma {Float}`: Standard deviation of the Gaussian filter.
+0. `callback {Function(err, image)}`
+
 ### Getters
 
 #### Width
@@ -251,7 +261,7 @@ operations above has a batch equivalent. Operations can be chained.
 **Example:**
 
 ```Javascript
-batch.rotate(45, 'white').scale(0.5);
+batch.rotate(45, 'white').scale(0.5).blur(5);
 ```
 
 #### Executing a batch
