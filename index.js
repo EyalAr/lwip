@@ -421,10 +421,10 @@
             throw new TypeError('\'path\' argument must be a string');
         callback = callback || type;
         type = typeof type === 'string' ? type : typeof type === 'function' ? path.extname(impath).slice(1) : undefined;
-        if (typeof type !== 'string')
-            throw new TypeError('\'type\' argument must be a string');
         if (typeof callback !== 'function')
             throw new TypeError('\'callback\' argument must be a function');
+        if (typeof type !== 'string')
+            throw new TypeError('\'type\' argument must be a string');
 
         getOpener(type)(impath, function(err, lwipImage) {
             callback(err, err ? undefined : new image(lwipImage));
@@ -432,16 +432,13 @@
     }
 
     function getOpener(ext) {
+        ext = ext.toLowerCase();
         for (var i = 0; i < openers.length; i++) {
             var opener = openers[i].opener,
                 exts = openers[i].exts;
             if (exts.indexOf(ext) !== -1) return opener;
         }
-        return function(impath, callback) {
-            setImmediate(function() {
-                callback('Unknown type \'' + ext + '\'');
-            });
-        }
+        throw new TypeError('Unknown type \'' + ext + '\'');
     }
 
     // EXPORTS
