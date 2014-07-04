@@ -1,5 +1,5 @@
 /**
- * Example for using LWIP to blur an image.
+ * Example for using LWIP for several batch operations.
  */
 
 var path = require('path'),
@@ -8,8 +8,10 @@ var path = require('path'),
 lwip.open('lena.jpg', function(err, image) {
     if (err) return console.log(err);
     image.batch()
-        .blur(10)
-        .writeFile('lena_blur.jpg', function(err) {
+        .rotate(-33, 'white')
+        .scale(1.5)
+        .blur(5)
+        .writeFile('lena_rotate_scale_blur.jpg', function(err) {
             if (err) return console.log(err);
             console.log('done');
         });

@@ -42,16 +42,36 @@ Or, clone this repo and `cd lwip && npm install`.
 
 0. Open an image and get an image object.
 0. Manipulate it.
-0. Get Buffer object of the image encoded as some format (JPEG for example).
-0. Save to disk / Send over network / etc.
+0. Save to disk / Send image buffer over network / etc.
 
-**Example:**
+**Example (batch operations):**
+
+```Javascript
+// obtain an image object:
+require('lwip').open('image.jpg', function(err, image){
+  
+  // check err...
+  // define a batch of manipulations and save to disk as JPEG:
+  image.batch()
+    .scale(0.75)          // scale to 75%
+    .rotate(45, 'white')  // rotate 45degs clockwise (white fill)
+    .crop(200)            // crop a 200X200 square from center
+    .blur(5)              // Gaussian blur with SD=5
+    .writeFile('output.jpg', function(err){
+      // check err...
+      // done.
+    });
+
+});
+```
+
+**Example (non-batch):**
 
 ```Javascript
 var lwip = require('lwip');
 
 // obtain an image object:
-lwip.open('path/to/image.jpg', function(err, image){
+lwip.open('image.jpg', function(err, image){
   
   // check err...
   // manipulate image:
@@ -61,6 +81,7 @@ lwip.open('path/to/image.jpg', function(err, image){
     // manipulate some more:
     image.rotate(45, 'white', function(err, image){
 
+      // check err...
       // encode to jpeg and get a buffer object:
       image.toBuffer('jpg', function(err, buffer){
 
@@ -70,30 +91,6 @@ lwip.open('path/to/image.jpg', function(err, image){
       });
 
     });
-
-  });
-
-});
-```
-
-**Example (batch operations):**
-
-```Javascript
-var lwip = require('lwip');
-
-// obtain an image object:
-lwip.open('path/to/image.jpg', function(err, image){
-  
-  // check err...
-  // define a batch of manipulations:
-  var batch = image.batch().scale(0.5).rotate(45,'white');
-
-  // encode to jpeg and get a buffer object:
-  batch.toBuffer('jpg', function(err, buffer){
-
-    // check err...
-    // 'batch' is now empty.
-    // save buffer to disk / send over network / etc.
 
   });
 
@@ -231,7 +228,7 @@ encoded data as a NodeJS Buffer object.
 
 0. `format {String}`: Encoding format. Possible values:
   - `"jpg"`
-0. `params {Object}`: Format-specific parameters (See below).
+0. `params {Object}`: **Optional** Format-specific parameters (See below).
 0. `callback {Function(err, buffer)}`
 
 **Supported encoding formats:**
@@ -252,7 +249,7 @@ Write encoded binary image data directly to a file.
 0. `format {String}`: **Optional** Encoding format. If omitted, will be inferred
    from `path` extension. Possible values are specified in
    [Get as a Buffer](#get-as-a-buffer) section.
-0. `params {Object}`: Format-specific parameters.
+0. `params {Object}`: **Optional** Format-specific parameters.
 0. `callback {Function(err)}`
 
 ### Batch operations
@@ -337,10 +334,10 @@ same underlying image. This means the order of execution matters.
 
 ```Javascript
 var batch1 = image.batch().rotate('45', 'black');
-var batch2 = image.batch().padd(15, 'black');
+var batch2 = image.batch().border(15, 'black');
 ```
 
-This will rotate the image 45degs and then padd it with a black border:
+This will rotate the image 45degs and then add a black border:
 
 ```Javascript
 batch1.exec(function(err, image){
@@ -350,7 +347,7 @@ batch1.exec(function(err, image){
 });
 ```
 
-While this will padd the image with a black border and then rotate it 45degs:
+While this will add a black border and then rotate the image 45degs:
 
 ```Javascript
 batch2.exec(function(err, image){
