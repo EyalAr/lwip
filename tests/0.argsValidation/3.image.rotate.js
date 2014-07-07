@@ -14,32 +14,7 @@ describe('image.rotate arguments validation', function() {
         });
     });
 
-    describe('with no arguments', function() {
-        it('should throw an error', function() {
-            image.rotate.bind(image).should.throwError();
-        });
-    });
-    describe('with invalid arguments', function() {
-        it('should throw an error', function() {
-            image.rotate.bind(image, '10degs', ['a', 'b', 'c'], 'foo').should.throwError();
-        });
-    });
-    describe('with no callback', function() {
-        it('should throw an error', function() {
-            image.rotate.bind(image, 45, 'white').should.throwError();
-        });
-    });
-    describe('with no color and no callback', function() {
-        it('should throw an error', function() {
-            image.rotate.bind(image, 45).should.throwError();
-        });
-    });
-    describe('with invalid callback argument', function() {
-        it('should throw an error', function() {
-            image.rotate.bind(image, 5, 'white', 'foo').should.throwError();
-        });
-    });
-    describe('with invalid color object', function() {
+    describe('invalid color object', function() {
         it('should throw an error', function() {
             image.rotate.bind(image, 5, {
                 foo: 'bar',
@@ -47,24 +22,19 @@ describe('image.rotate arguments validation', function() {
             }, function() {}).should.throwError();
         });
     });
-    describe('with invalid color array', function() {
+    describe('invalid color array (1)', function() {
         it('should throw an error', function() {
             image.rotate.bind(image, 5, ['a', 'b'], function() {}).should.throwError();
         });
     });
-    describe('with invalid color array', function() {
+    describe('invalid color array (2)', function() {
         it('should throw an error', function() {
             image.rotate.bind(image, 5, ['a', 'b', 'c'], function() {}).should.throwError();
         });
     });
-    describe('with invalid color string', function() {
+    describe('invalid color string', function() {
         it('should throw an error', function() {
             image.rotate.bind(image, 5, 'foo', function() {}).should.throwError();
-        });
-    });
-    describe('with invalid color argument type', function() {
-        it('should throw an error', function() {
-            image.rotate.bind(image, 5, 99, function() {}).should.throwError();
         });
     });
 });

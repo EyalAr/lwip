@@ -67,7 +67,7 @@
         decree(defs.args.rotate)(arguments, function(degs, color, callback) {
             if (typeof color === 'string') {
                 if (defs.colors[color]) color = defs.colors[color];
-                else throw new TypeError('Unknown color ' + color);
+                else throw Error('Unknown color ' + color);
             } else {
                 if (color instanceof Array) {
                     color = {
@@ -77,11 +77,11 @@
                     };
                 }
                 if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
-                    throw new TypeError('\'red\' color component is invalid');
+                    throw Error('\'red\' color component is invalid');
                 if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
-                    throw new TypeError('\'green\' color component is invalid');
+                    throw Error('\'green\' color component is invalid');
                 if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
-                    throw new TypeError('\'blue\' color component is invalid');
+                    throw Error('\'blue\' color component is invalid');
             }
             that.__lwip.rotate(+degs, +color.r, +color.g, +color.b, function(err) {
                 callback(err, that);
@@ -111,7 +111,7 @@
                 bottom = top + height - 1;
             }
             that.__lwip.crop(left, top, right, bottom, function(err) {
-                args.callback(err, that);
+                callback(err, that);
             });
         });
     }
@@ -122,13 +122,9 @@
             if (type === 'jpg' || type === 'jpeg') {
                 params.quality = params.quality || defs.defaults.DEF_JPEG_QUALITY;
                 if (params.quality != parseInt(params.quality) || params.quality < 0 || params.quality > 100)
-                    return setImmediate(function() {
-                        args.callback('Invalid JPEG quality');
-                    });
+                    throw Error('Invalid JPEG quality');
                 return that.__lwip.toJpegBuffer(params.quality, callback);
-            } else setImmediate(function() {
-                args.callback('Unknown type \'' + type + '\'');
-            });
+            } else throw Error('Unknown type \'' + type + '\'');
         });
     }
 
@@ -179,6 +175,7 @@
         var that = this,
             decs = defs.args.scale.slice(0, -1); // cut callback declaration
         decree(decs)(arguments, function(wRatio, hRatio, inter) {
+            if (!defs.interpolations[inter]) throw Error("Unknown interpolation " + inter);
             that.__addOp(that.__image.scale, [wRatio, hRatio, inter].filter(undefinedFilter));
         });
         return this;
@@ -188,6 +185,7 @@
         var that = this,
             decs = defs.args.resize.slice(0, -1); // cut callback declaration
         decree(decs)(arguments, function(width, height, inter) {
+            if (!defs.interpolations[inter]) throw Error("Unknown interpolation " + inter);
             that.__addOp(that.__image.resize, [width, height, inter].filter(undefinedFilter));
         });
         return this;
@@ -197,6 +195,24 @@
         var that = this,
             decs = defs.args.rotate.slice(0, -1); // cut callback declaration
         decree(decs)(arguments, function(degs, color) {
+            if (typeof color === 'string') {
+                if (defs.colors[color]) color = defs.colors[color];
+                else throw Error('Unknown color ' + color);
+            } else {
+                if (color instanceof Array) {
+                    color = {
+                        r: color[0],
+                        g: color[1],
+                        b: color[2]
+                    };
+                }
+                if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
+                    throw Error('\'red\' color component is invalid');
+                if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
+                    throw Error('\'green\' color component is invalid');
+                if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
+                    throw Error('\'blue\' color component is invalid');
+            }
             that.__addOp(that.__image.rotate, [degs, color].filter(undefinedFilter));
         });
         return this;
@@ -223,6 +239,11 @@
     batch.prototype.toBuffer = function() {
         var that = this;
         decree(defs.args.toBuffer)(arguments, function(type, params, callback) {
+            if (type === 'jpg' || type === 'jpeg') {
+                params.quality = params.quality || defs.defaults.DEF_JPEG_QUALITY;
+                if (params.quality != parseInt(params.quality) || params.quality < 0 || params.quality > 100)
+                    throw Error('Invalid JPEG quality');
+            } else throw Error('Unknown type \'' + type + '\'');
             that.exec(function(err, image) {
                 if (err) return callback(err);
                 image.toBuffer(type, params, callback);
@@ -259,7 +280,7 @@
                 exts = openers[i].exts;
             if (exts.indexOf(ext) !== -1) return opener;
         }
-        throw new TypeError('Unknown type \'' + ext + '\'');
+        throw Error('Unknown type \'' + ext + '\'');
     }
 
     // EXPORTS
