@@ -187,14 +187,6 @@ lwip.open('path/to/image.jpg', function(err, image){
    center of the image.
 0. `callback {Function(err, image)}`
 
-#### Crop a square from center
-
-`image.crop(size, callback)`
-
-0. `size {Integer}`: Edge size of the square to crop from the center of the
-   image.
-0. `callback {Function(err, image)}`
-
 #### Blur
 
 Gaussian blur.

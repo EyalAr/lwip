@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "main": "index.js",
   "dependencies": {
-    "async": "^0.9.0"
+    "async": "^0.9.0",
+    "decree": "0.0.1"
   },
   "scripts": {
     "install": "node-gyp rebuild",
