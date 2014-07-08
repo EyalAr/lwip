@@ -1,5 +1,3 @@
-// methods should throw errors when arguments are invalid
-
 var should = require("should"),
     lwip = require('../../'),
     imgs = require('../imgs');
