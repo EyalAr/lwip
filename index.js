@@ -104,7 +104,7 @@
             if (!right && !bottom) {
                 var size = that.size(),
                     width = left,
-                    height = right;
+                    height = top;
                 left = 0 | (size.width - width) / 2;
                 top = 0 | (size.height - height) / 2;
                 right = left + width - 1;

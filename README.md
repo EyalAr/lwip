@@ -36,6 +36,8 @@ install anything else on your system.
 
 Or, clone this repo and `cd lwip && npm install`.
 
+You can test with `npm test`. Make sure the dev dependencies are installed.
+
 ### Usage
 
 **Typical workflow:**
