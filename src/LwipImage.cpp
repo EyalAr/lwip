@@ -15,8 +15,8 @@ LwipImage::~LwipImage(){
 void LwipImage::Init() {
     // Prepare constructor template
     Local<FunctionTemplate> tpl = FunctionTemplate::New(New);
+    tpl->InstanceTemplate()->SetInternalFieldCount(1);
     tpl->SetClassName(String::NewSymbol("LwipImage"));
-    tpl->InstanceTemplate()->SetInternalFieldCount(5);
     SetPrototypeMethod(tpl, "width", width);
     SetPrototypeMethod(tpl, "height", height);
     SetPrototypeMethod(tpl, "resize", resize);
@@ -29,8 +29,7 @@ void LwipImage::Init() {
 
 Handle<Value> LwipImage::NewInstance() {
     HandleScope scope;
-    Handle<Value> argv[0] = {};
-    Local<Object> instance = constructor->NewInstance(0, argv);
+    Local<Object> instance = constructor->NewInstance();
     return scope.Close(instance);
 }
 
@@ -81,6 +80,7 @@ Handle<Value> LwipImage::resize(const Arguments& args) {
     rb->height = (unsigned int) args[1]->NumberValue();
     rb->inter = (unsigned int) args[2]->NumberValue();
     rb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
+    rb->err = false;
     uv_queue_work(uv_default_loop(), &rb->request, resizeAsync, resizeAsyncDone);
     return scope.Close(Undefined());
 }
@@ -140,6 +140,7 @@ Handle<Value> LwipImage::rotate(const Arguments& args) {
     rb->color[1] = (unsigned char) args[2]->NumberValue();
     rb->color[2] = (unsigned char) args[3]->NumberValue();
     rb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
+    rb->err = false;
     uv_queue_work(uv_default_loop(), &rb->request, rotateAsync, rotateAsyncDone);
     return scope.Close(Undefined());
 }
@@ -225,6 +226,7 @@ Handle<Value> LwipImage::blur(const Arguments& args) {
     bb->cb = Persistent<Function>::New(Local<Function>::Cast(args[1]));
     bb->sigma = (float) args[0]->NumberValue();
     bb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
+    bb->err = false;
     uv_queue_work(uv_default_loop(), &bb->request, blurAsync, blurAsyncDone);
     return scope.Close(Undefined());
 }
@@ -286,6 +288,7 @@ Handle<Value> LwipImage::crop(const Arguments& args) {
     cb->right = (unsigned int) args[2]->NumberValue();
     cb->bottom = (unsigned int) args[3]->NumberValue();
     cb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
+    cb->err = false;
     uv_queue_work(uv_default_loop(), &cb->request, cropAsync, cropAsyncDone);
     return scope.Close(Undefined());
 }
@@ -335,6 +338,7 @@ bool initToBufferBaton(ToBufferBaton ** tbb, const Arguments& args){
     // callback is always last argument
     (*tbb)->cb = Persistent<Function>::New(Local<Function>::Cast(args[args.Length() - 1]));
     (*tbb)->img = ObjectWrap::Unwrap<LwipImage>(args.This());
+    (*tbb)->err = false;
     return true;
 }
 

@@ -93,6 +93,7 @@ Handle<Value> _open(const Arguments &args, void asyncOpener(uv_work_t *)){
     iob->request.data = iob;
     iob->cb = Persistent<Function>::New(Local<Function>::Cast(args[1]));
     iob->imgPath = std::string(*String::Utf8Value(args[0]->ToString()));
+    iob->err = false;
     uv_queue_work(uv_default_loop(), &iob->request, asyncOpener, openAsyncDone);
 
     // Close the scope and return 'undefined'

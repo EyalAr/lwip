@@ -41,17 +41,36 @@
             "lib/jpeg/jidctfst.c",
             "lib/jpeg/jidctint.c",
             "lib/jpeg/jutils.c",
-            "lib/jpeg/jmemmgr.c"
+            "lib/jpeg/jmemmgr.c",
+            "lib/jpeg/jcarith.c",
+            "lib/jpeg/jdarith.c",
+            "lib/jpeg/jquant1.c",
+            "lib/jpeg/jquant2.c",
+            "lib/jpeg/jdmerge.c",
+            "lib/jpeg/jaricom.c"
         ],
-        'cflags!': ['-fno-exceptions'],
-        'cflags_cc!': ['-fno-exceptions'],
         'include_dirs': ['lib/jpeg', 'lib/cimg'],
         'conditions': [
+            ['OS=="linux"', {
+                'cflags!': ['-fno-exceptions'],
+                'cflags_cc!': ['-fno-exceptions'],
+            }],
             ['OS=="mac"', {
                 'xcode_settings': {
                     'GCC_ENABLE_CPP_EXCEPTIONS': 'YES'
                 },
                 'include_dirs': ['/usr/include/malloc']
+            }],
+            ['OS=="win"', {
+                'configurations': {
+                    'Release': {
+                        'msvs_settings': {
+                            'VCCLCompilerTool': {
+                                'ExceptionHandling': 1
+                            }
+                        }
+                    }
+                }
             }]
         ]
     }]
