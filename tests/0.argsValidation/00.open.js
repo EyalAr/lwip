@@ -10,6 +10,11 @@ describe('lwip.open arguments validation', function() {
             lwip.open.bind(lwip, imgs.jpg.noex, function() {}).should.throwError();
         });
     });
+    describe('path with unknown extension and no type', function() {
+        it('should throw an error', function() {
+            lwip.open.bind(lwip, imgs.inv, function() {}).should.throwError();
+        });
+    });
     describe('invalid type', function() {
         it('should throw an error', function() {
             lwip.open.bind(lwip, imgs.jpg.rgb, 'jjpg', function() {}).should.throwError();
