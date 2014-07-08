@@ -11,7 +11,9 @@
 #include <node.h>
 #include <node_buffer.h>
 #include <v8.h>
-#include "jpeglib.h"
+extern "C"{
+    #include "jpeglib.h"
+}
 #include "CImg.h"
 
 using namespace cimg_library;

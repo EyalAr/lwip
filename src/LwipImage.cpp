@@ -339,6 +339,8 @@ bool initToBufferBaton(ToBufferBaton ** tbb, const Arguments& args){
     (*tbb)->cb = Persistent<Function>::New(Local<Function>::Cast(args[args.Length() - 1]));
     (*tbb)->img = ObjectWrap::Unwrap<LwipImage>(args.This());
     (*tbb)->err = false;
+    (*tbb)->bufferSize = 0;
+    (*tbb)->buffer = NULL;
     return true;
 }
 
@@ -378,6 +380,13 @@ void toJpegBufferAsync(uv_work_t * request){
     height = tbb->img->_data->height();
     quality = tbb->jpegQuality;
 
+    tmp = (unsigned char *) malloc(width * dimbuf);
+    if (tmp == NULL){
+        tbb->err = true;
+        tbb->errMsg = "Out of memory";
+        return;
+    }
+
     jpeg_create_compress(&cinfo);
     jpeg_mem_dest(&cinfo, &tbb->buffer, &tbb->bufferSize);
     cinfo.image_width = width;
@@ -388,7 +397,6 @@ void toJpegBufferAsync(uv_work_t * request){
     jpeg_set_quality(&cinfo, quality, TRUE);
     jpeg_start_compress(&cinfo, TRUE);
 
-    tmp = (unsigned char *) malloc(cinfo.image_width * dimbuf);
     while (cinfo.next_scanline < cinfo.image_height) {
         unsigned char * ptrd = tmp;
         const unsigned char
