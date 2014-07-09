@@ -8,7 +8,7 @@
   },
   "scripts": {
     "install": "node-gyp rebuild",
-    "test": "mocha --reporter spec --recursive tests/"
+    "test": "./node_modules/.bin/mocha --reporter spec --recursive tests/"
   },
   "gypfile": true,
   "description": "Comprehensive, fast, and simple image processing and manipulation",
