@@ -21,7 +21,17 @@
 
     function image(lwipImage) {
         this.__lwip = lwipImage;
+        this.__locked = false;
     }
+
+    image.prototype.__lock = function() {
+        if (!this.__locked) this.__locked = true;
+        else throw Error("Another image operation already in progress");
+    };
+
+    image.prototype.__release = function() {
+        this.__locked = false;
+    };
 
     image.prototype.width = function() {
         return this.__lwip.width();
@@ -39,93 +49,137 @@
     }
 
     image.prototype.scale = function() {
-        var that = this;
-        decree(defs.args.scale)(arguments, function(wRatio, hRatio, inter, callback) {
-            if (!defs.interpolations[inter]) throw Error("Unknown interpolation " + inter);
-            hRatio = hRatio || wRatio;
-            var width = +wRatio * that.width(),
-                height = +hRatio * that.height();
-            that.__lwip.resize(width, height, defs.interpolations[inter], function(err) {
-                callback(err, that);
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.scale)(arguments, function(wRatio, hRatio, inter, callback) {
+                if (!defs.interpolations[inter]) throw Error("Unknown interpolation " + inter);
+                hRatio = hRatio || wRatio;
+                var width = +wRatio * that.width(),
+                    height = +hRatio * that.height();
+                that.__lwip.resize(width, height, defs.interpolations[inter], function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
             });
-        });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
     }
 
     image.prototype.resize = function() {
-        var that = this;
-        decree(defs.args.resize)(arguments, function(width, height, inter, callback) {
-            if (!defs.interpolations[inter]) throw Error("Unknown interpolation " + inter);
-            height = height || width;
-            that.__lwip.resize(+width, +height, defs.interpolations[inter], function(err) {
-                callback(err, that);
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.resize)(arguments, function(width, height, inter, callback) {
+                if (!defs.interpolations[inter]) throw Error("Unknown interpolation " + inter);
+                height = height || width;
+                that.__lwip.resize(+width, +height, defs.interpolations[inter], function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
             });
-        });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
     }
 
     image.prototype.rotate = function() {
-        var that = this;
-        decree(defs.args.rotate)(arguments, function(degs, color, callback) {
-            if (typeof color === 'string') {
-                if (defs.colors[color]) color = defs.colors[color];
-                else throw Error('Unknown color ' + color);
-            } else {
-                if (color instanceof Array) {
-                    color = {
-                        r: color[0],
-                        g: color[1],
-                        b: color[2]
-                    };
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.rotate)(arguments, function(degs, color, callback) {
+                if (typeof color === 'string') {
+                    if (defs.colors[color]) color = defs.colors[color];
+                    else throw Error('Unknown color ' + color);
+                } else {
+                    if (color instanceof Array) {
+                        color = {
+                            r: color[0],
+                            g: color[1],
+                            b: color[2]
+                        };
+                    }
+                    if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
+                        throw Error('\'red\' color component is invalid');
+                    if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
+                        throw Error('\'green\' color component is invalid');
+                    if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
+                        throw Error('\'blue\' color component is invalid');
                 }
-                if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
-                    throw Error('\'red\' color component is invalid');
-                if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
-                    throw Error('\'green\' color component is invalid');
-                if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
-                    throw Error('\'blue\' color component is invalid');
-            }
-            that.__lwip.rotate(+degs, +color.r, +color.g, +color.b, function(err) {
-                callback(err, that);
+                that.__lwip.rotate(+degs, +color.r, +color.g, +color.b, function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
             });
-        });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
     }
 
     image.prototype.blur = function() {
-        var that = this;
-        decree(defs.args.blur)(arguments, function(sigma, callback) {
-            that.__lwip.blur(+sigma, function(err) {
-                callback(err, that);
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.blur)(arguments, function(sigma, callback) {
+                that.__lwip.blur(+sigma, function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
             });
-        })
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
     }
 
     image.prototype.crop = function() {
-        var that = this;
-        decree(defs.args.crop)(arguments, function(left, top, right, bottom, callback) {
-            if (!right && !bottom) {
-                var size = that.size(),
-                    width = left,
-                    height = top;
-                left = 0 | (size.width - width) / 2;
-                top = 0 | (size.height - height) / 2;
-                right = left + width - 1;
-                bottom = top + height - 1;
-            }
-            that.__lwip.crop(left, top, right, bottom, function(err) {
-                callback(err, that);
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.crop)(arguments, function(left, top, right, bottom, callback) {
+                if (!right && !bottom) {
+                    var size = that.size(),
+                        width = left,
+                        height = top;
+                    left = 0 | (size.width - width) / 2;
+                    top = 0 | (size.height - height) / 2;
+                    right = left + width - 1;
+                    bottom = top + height - 1;
+                }
+                that.__lwip.crop(left, top, right, bottom, function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
             });
-        });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
     }
 
     image.prototype.toBuffer = function() {
-        var that = this;
-        decree(defs.args.toBuffer)(arguments, function(type, params, callback) {
-            if (type === 'jpg' || type === 'jpeg') {
-                params.quality = params.quality || defs.defaults.DEF_JPEG_QUALITY;
-                if (params.quality != parseInt(params.quality) || params.quality < 0 || params.quality > 100)
-                    throw Error('Invalid JPEG quality');
-                return that.__lwip.toJpegBuffer(params.quality, callback);
-            } else throw Error('Unknown type \'' + type + '\'');
-        });
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.toBuffer)(arguments, function(type, params, callback) {
+                if (type === 'jpg' || type === 'jpeg') {
+                    params.quality = params.quality || defs.defaults.DEF_JPEG_QUALITY;
+                    if (params.quality != parseInt(params.quality) || params.quality < 0 || params.quality > 100)
+                        throw Error('Invalid JPEG quality');
+                    return that.__lwip.toJpegBuffer(params.quality, function(err, buffer) {
+                        that.__release();
+                        callback(err, buffer);
+                    });
+                } else throw Error('Unknown type \'' + type + '\'');
+            });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
     }
 
     image.prototype.writeFile = function() {

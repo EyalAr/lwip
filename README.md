@@ -32,11 +32,11 @@ install anything else on your system.
 
 ### Installation
 
-~~`npm install lwip`~~ (coming soon)
+`npm install lwip`
 
 Or, clone this repo and `cd lwip && npm install`.
 
-You can test with `npm test`. Make sure the dev dependencies are installed.
+You can run tests with `npm test`.
 
 ### Usage
 
