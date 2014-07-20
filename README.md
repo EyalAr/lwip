@@ -102,11 +102,17 @@ lwip.open('image.jpg', function(err, image){
 
 ### Supported formats
 
-Currently only JPEG is supported. I plan to add support for PNG soon (part of
-the [milestone for v0.0.2](https://github.com/EyalAr/lwip/issues?milestone=2&page=1&state=open)).
+**Decoding (reading):**
+
+- JPEG, 1 & 3 channels (grayscale & RGB).
+- PNG, 1 & 3 channels (grayscale & RGB). Alpha channel (transperancy) is not
+  currently supported.
+
+**Encoding (writing):**
+
+- JPEG, 3 channels (RGB).
 
 Other formats may also be supported in the future, but are probably less urgent.
-
 Check the issues to see [which formats are planned to be supported](https://github.com/EyalAr/lwip/issues?labels=format+request&page=1&state=open).
 Open an issue if you need support for a format which is not already listed.
 

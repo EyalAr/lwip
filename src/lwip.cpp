@@ -45,6 +45,47 @@ void openJpegAsync(uv_work_t * request){
     return;
 }
 
+void openPngAsync(uv_work_t * request){
+    // here is where we actually open the image file and retrieve the binary
+    // data. open image, store data in iob->imgData.
+    ImageOpenBaton * iob = static_cast<ImageOpenBaton *>(request->data);
+    CImg<unsigned char> * tmp;
+    try{
+        tmp = new CImg<unsigned char>();
+        tmp->load_png(iob->imgPath.c_str());
+    } catch (CImgException e){
+        if (tmp) delete tmp;
+        iob->err = true;
+        iob->errMsg = "Unable to open file as PNG";
+        return;
+    }
+    // need to convert image to 3 channels spectrum?
+    int spectrum = tmp->spectrum();
+    if (spectrum == 3){
+        iob->imgData = tmp;
+    } else if (spectrum == 1){
+        try{
+            iob->imgData = new CImg<unsigned char>(*tmp, "x,y,1,3");
+        } catch (CImgException e){
+            delete tmp;
+            if (iob->imgData) delete iob->imgData;
+            iob->err = true;
+            iob->errMsg = "Out of memory";
+            return;
+        }
+        cimg_forXYZ(*(iob->imgData),x,y,z){
+            unsigned char c = tmp->atXYZC(x,y,0,0);
+            iob->imgData->fillC(x,y,z,c,c,c);
+        }
+        delete tmp;
+    } else {
+        if (tmp) delete tmp;
+        iob->err = true;
+        iob->errMsg = "Unsupported number of spectrums";
+    }
+    return;
+}
+
 void openAsyncDone(uv_work_t * request, int status){
     // reading image completed. now we call the callback.
     ImageOpenBaton * iob = static_cast<ImageOpenBaton *>(request->data);
@@ -105,10 +146,7 @@ Handle<Value> openJpeg(const Arguments &args){
 }
 
 Handle<Value> openPng(const Arguments &args){
-    HandleScope scope;
-    ThrowException(Exception::TypeError(String::New(
-        "'open{type}': PNG is not yet supported")));
-    return scope.Close(Undefined());
+    return _open(args, openPngAsync);
 }
 
 // create an init function for our node module

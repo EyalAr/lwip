@@ -5,7 +5,7 @@
 var path = require('path'),
     lwip = require('../');
 
-lwip.open('lena.jpg', function(err, image) {
+lwip.open('lena.png', function(err, image) {
     if (err) return console.log(err);
     image.batch()
         .rotate(-33, 'white')
