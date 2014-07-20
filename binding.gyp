@@ -83,6 +83,26 @@
                 'include_dirs': ['/usr/include/malloc']
             }],
             ['OS=="win"', {
+                'include_dirs': ['lib/zlib'],
+                "sources":[
+                    # ZLIB:
+                    #######
+                    "lib/zlib/adler32.c",
+                    "lib/zlib/compress.c",
+                    "lib/zlib/crc32.c",
+                    "lib/zlib/deflate.c",
+                    "lib/zlib/gzclose.c",
+                    "lib/zlib/gzlib.c",
+                    "lib/zlib/gzread.c",
+                    "lib/zlib/gzwrite.c",
+                    "lib/zlib/infback.c",
+                    "lib/zlib/inflate.c",
+                    "lib/zlib/inftrees.c",
+                    "lib/zlib/inffast.c",
+                    "lib/zlib/trees.c",
+                    "lib/zlib/uncompr.c",
+                    "lib/zlib/zutil.c"
+                ],
                 'configurations': {
                     'Release': {
                         'msvs_settings': {
