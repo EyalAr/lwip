@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/eyalar/lwip.png?label=ready&title=Ready)](https://waffle.io/eyalar/lwip)
 # Light-weight image processor for NodeJS
 
 0. [Overview](#overview)
