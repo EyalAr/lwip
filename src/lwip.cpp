@@ -4,15 +4,15 @@ using namespace cimg_library;
 using namespace v8;
 using namespace node;
 
-void openJpegAsync(uv_work_t * request){
+void openJpegAsync(uv_work_t * request) {
     // here is where we actually open the image file and retrieve the binary
     // data. open image, store data in iob->imgData.
     ImageOpenBaton * iob = static_cast<ImageOpenBaton *>(request->data);
     CImg<unsigned char> * tmp;
-    try{
+    try {
         tmp = new CImg<unsigned char>();
         tmp->load_jpeg(iob->imgPath.c_str());
-    } catch (CImgException e){
+    } catch (CImgException e) {
         if (tmp) delete tmp;
         iob->err = true;
         iob->errMsg = "Unable to open file as JPEG";
@@ -20,21 +20,21 @@ void openJpegAsync(uv_work_t * request){
     }
     // need to convert image to 3 channels spectrum?
     int spectrum = tmp->spectrum();
-    if (spectrum == 3){
+    if (spectrum == 3) {
         iob->imgData = tmp;
-    } else if (spectrum == 1){
-        try{
+    } else if (spectrum == 1) {
+        try {
             iob->imgData = new CImg<unsigned char>(*tmp, "x,y,1,3");
-        } catch (CImgException e){
+        } catch (CImgException e) {
             delete tmp;
             if (iob->imgData) delete iob->imgData;
             iob->err = true;
             iob->errMsg = "Out of memory";
             return;
         }
-        cimg_forXYZ(*(iob->imgData),x,y,z){
-            unsigned char c = tmp->atXYZC(x,y,0,0);
-            iob->imgData->fillC(x,y,z,c,c,c);
+        cimg_forXYZ(*(iob->imgData), x, y, z) {
+            unsigned char c = tmp->atXYZC(x, y, 0, 0);
+            iob->imgData->fillC(x, y, z, c, c, c);
         }
         delete tmp;
     } else {
@@ -45,15 +45,15 @@ void openJpegAsync(uv_work_t * request){
     return;
 }
 
-void openPngAsync(uv_work_t * request){
+void openPngAsync(uv_work_t * request) {
     // here is where we actually open the image file and retrieve the binary
     // data. open image, store data in iob->imgData.
     ImageOpenBaton * iob = static_cast<ImageOpenBaton *>(request->data);
     CImg<unsigned char> * tmp;
-    try{
+    try {
         tmp = new CImg<unsigned char>();
         tmp->load_png(iob->imgPath.c_str());
-    } catch (CImgException e){
+    } catch (CImgException e) {
         if (tmp) delete tmp;
         iob->err = true;
         iob->errMsg = "Unable to open file as PNG";
@@ -61,21 +61,21 @@ void openPngAsync(uv_work_t * request){
     }
     // need to convert image to 3 channels spectrum?
     int spectrum = tmp->spectrum();
-    if (spectrum == 3){
+    if (spectrum == 3) {
         iob->imgData = tmp;
-    } else if (spectrum == 1){
-        try{
+    } else if (spectrum == 1) {
+        try {
             iob->imgData = new CImg<unsigned char>(*tmp, "x,y,1,3");
-        } catch (CImgException e){
+        } catch (CImgException e) {
             delete tmp;
             if (iob->imgData) delete iob->imgData;
             iob->err = true;
             iob->errMsg = "Out of memory";
             return;
         }
-        cimg_forXYZ(*(iob->imgData),x,y,z){
-            unsigned char c = tmp->atXYZC(x,y,0,0);
-            iob->imgData->fillC(x,y,z,c,c,c);
+        cimg_forXYZ(*(iob->imgData), x, y, z) {
+            unsigned char c = tmp->atXYZC(x, y, 0, 0);
+            iob->imgData->fillC(x, y, z, c, c, c);
         }
         delete tmp;
     } else {
@@ -86,10 +86,10 @@ void openPngAsync(uv_work_t * request){
     return;
 }
 
-void openAsyncDone(uv_work_t * request, int status){
+void openAsyncDone(uv_work_t * request, int status) {
     // reading image completed. now we call the callback.
     ImageOpenBaton * iob = static_cast<ImageOpenBaton *>(request->data);
-    if (iob->err){
+    if (iob->err) {
         // define the arguments for the callback
         const unsigned int argc = 1;
         Local<Value> argv[argc] = {
@@ -117,7 +117,7 @@ void openAsyncDone(uv_work_t * request, int status){
     delete iob;
 }
 
-Handle<Value> _open(const Arguments &args, void asyncOpener(uv_work_t *)){
+Handle<Value> _open(const Arguments & args, void asyncOpener(uv_work_t *)) {
     // this scope will discard all internal local objects for us.
     HandleScope scope;
 
@@ -127,7 +127,7 @@ Handle<Value> _open(const Arguments &args, void asyncOpener(uv_work_t *)){
     // the baton is on the heap because it lives in async calls outside the
     // scope of the current function
     ImageOpenBaton * iob = new ImageOpenBaton();
-    if (iob == NULL){
+    if (iob == NULL) {
         ThrowException(Exception::TypeError(String::New("Out of memory")));
         return scope.Close(Undefined());
     }
@@ -141,20 +141,20 @@ Handle<Value> _open(const Arguments &args, void asyncOpener(uv_work_t *)){
     return scope.Close(Undefined());
 }
 
-Handle<Value> openJpeg(const Arguments &args){
+Handle<Value> openJpeg(const Arguments & args) {
     return _open(args, openJpegAsync);
 }
 
-Handle<Value> openPng(const Arguments &args){
+Handle<Value> openPng(const Arguments & args) {
     return _open(args, openPngAsync);
 }
 
 // create an init function for our node module
-void init(Handle<Object> exports, Handle<Object> module){
+void init(Handle<Object> exports, Handle<Object> module) {
     LwipImage::Init();
     NODE_SET_METHOD(exports, "openJpeg", openJpeg);
     NODE_SET_METHOD(exports, "openPng", openPng);
 }
 
 // use NODE_MODULE macro to register our module:
-NODE_MODULE(lwip,init)
+NODE_MODULE(lwip, init)

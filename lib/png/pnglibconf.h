@@ -1,21 +1,9 @@
-/* libpng 1.6.12 STANDARD API DEFINITION */
-
-/* pnglibconf.h - library build configuration */
-
-/* Libpng version 1.6.12 - June 12, 2014 */
-
-/* Copyright (c) 1998-2014 Glenn Randers-Pehrson */
-
-/* This code is released under the libpng license. */
-/* For conditions of distribution and use, see the disclaimer */
-/* and license in png.h */
-
 /* pnglibconf.h */
-/* Machine generated file: DO NOT EDIT */
-/* Derived from: scripts/pnglibconf.dfa */
 #ifndef PNGLCONF_H
 #define PNGLCONF_H
+
 /* options */
+#define PNG_NO_CONSOLE_IO
 #define PNG_16BIT_SUPPORTED
 #define PNG_ALIGNED_MEMORY_SUPPORTED
 /*#undef PNG_ARM_NEON_API_SUPPORTED*/
@@ -123,7 +111,7 @@
 #define PNG_USER_MEM_SUPPORTED
 #define PNG_USER_TRANSFORM_INFO_SUPPORTED
 #define PNG_USER_TRANSFORM_PTR_SUPPORTED
-// #define PNG_WARNINGS_SUPPORTED
+#define PNG_WARNINGS_SUPPORTED
 #define PNG_WRITE_16BIT_SUPPORTED
 #define PNG_WRITE_ANCILLARY_CHUNKS_SUPPORTED
 #define PNG_WRITE_BGR_SUPPORTED
@@ -185,6 +173,7 @@
 #define PNG_tRNS_SUPPORTED
 #define PNG_zTXt_SUPPORTED
 /* end of options */
+
 /* settings */
 #define PNG_API_RULE 0
 #define PNG_COST_SHIFT 3
@@ -207,4 +196,5 @@
 #define PNG_sCAL_PRECISION 5
 #define PNG_sRGB_PROFILE_CHECKS 2
 /* end of settings */
+
 #endif /* PNGLCONF_H */

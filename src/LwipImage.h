@@ -11,8 +11,8 @@
 #include <node.h>
 #include <node_buffer.h>
 #include <v8.h>
-extern "C"{
-    #include "jpeglib.h"
+extern "C" {
+#include "jpeglib.h"
 }
 #include "CImg.h"
 
@@ -23,30 +23,30 @@ class LwipImage : public node::ObjectWrap {
 public:
     static void Init();
     static Handle<Value> NewInstance();
-    explicit LwipImage(): _data(NULL){};
+    explicit LwipImage(): _data(NULL) {};
     ~LwipImage();
     CImg<unsigned char> * _data;
 
 private:
-    static Handle<Value> New(const Arguments& args);
-    static Handle<Value> resize(const Arguments& args);
-    static Handle<Value> rotate(const Arguments& args);
-    static Handle<Value> blur(const Arguments& args);
-    static Handle<Value> crop(const Arguments& args);
-    static Handle<Value> width(const Arguments& args);
-    static Handle<Value> height(const Arguments& args);
-    static Handle<Value> toJpegBuffer(const Arguments& args);
+    static Handle<Value> New(const Arguments & args);
+    static Handle<Value> resize(const Arguments & args);
+    static Handle<Value> rotate(const Arguments & args);
+    static Handle<Value> blur(const Arguments & args);
+    static Handle<Value> crop(const Arguments & args);
+    static Handle<Value> width(const Arguments & args);
+    static Handle<Value> height(const Arguments & args);
+    static Handle<Value> toJpegBuffer(const Arguments & args);
     static Persistent<Function> constructor;
 };
 
 struct lwip_jpeg_error_mgr {
-  struct jpeg_error_mgr pub;
-  jmp_buf setjmp_buffer;
+    struct jpeg_error_mgr pub;
+    jmp_buf setjmp_buffer;
 };
 
 inline void lwip_jpeg_error_exit (j_common_ptr cinfo) {
-  lwip_jpeg_error_mgr * lwip_jpeg_err = (lwip_jpeg_error_mgr *) cinfo->err;
-  longjmp(lwip_jpeg_err->setjmp_buffer, 1);
+    lwip_jpeg_error_mgr * lwip_jpeg_err = (lwip_jpeg_error_mgr *) cinfo->err;
+    longjmp(lwip_jpeg_err->setjmp_buffer, 1);
 }
 
 void toJpegBufferAsync(uv_work_t * request);
@@ -59,6 +59,8 @@ void blurAsync(uv_work_t * request);
 void blurAsyncDone(uv_work_t * request, int status);
 void cropAsync(uv_work_t * request);
 void cropAsyncDone(uv_work_t * request, int status);
+
+inline void png_write_row_callback(png_structp png_ptr, png_uint_32 row, int pass) {}
 
 struct ToBufferBaton {
     uv_work_t request;
