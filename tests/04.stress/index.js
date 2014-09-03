@@ -6,7 +6,8 @@ var join = require('path').join,
     imgs = require('../imgs');
 
 var tmpDir = join(__dirname, '../results'),
-    outpath = join(tmpDir, 'stress.jpg');
+    outpathJpeg = join(tmpDir, 'stress.jpg'),
+    outpathPng = join(tmpDir, 'stress.png');
 
 describe('stress tests', function() {
 
@@ -16,13 +17,41 @@ describe('stress tests', function() {
         mkdirp(tmpDir, done);
     });
 
-    describe('open image 1000 times (in parallel) and save to disk', function() {
+    describe('open image 1000 times (in parallel) and save to disk as jpeg', function() {
+        it('should succeed', function(done) {
+            async.times(1000, function(i, done) {
+                lwip.open(imgs.png.rgb, 'png', function(err, image) {
+                    if (err) return done(err);
+                    image.writeFile(outpathJpeg, 'jpeg', {
+                        quality: 50
+                    }, done);
+                });
+            }, done);
+        });
+    });
+
+    describe('open image 1000 times (in parallel) and save to disk as png (high compression, interlaced)', function() {
         it('should succeed', function(done) {
             async.times(1000, function(i, done) {
                 lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
                     if (err) return done(err);
-                    image.writeFile(outpath, 'jpeg', {
-                        quality: 50
+                    image.writeFile(outpathPng, 'png', {
+                        compression: 'high',
+                        interlaced: true
+                    }, done);
+                });
+            }, done);
+        });
+    });
+
+    describe('open image 1000 times (in parallel) and save to disk as png (fast compression, not interlaced)', function() {
+        it('should succeed', function(done) {
+            async.times(1000, function(i, done) {
+                lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
+                    if (err) return done(err);
+                    image.writeFile(outpathPng, 'png', {
+                        compression: 'fast',
+                        interlaced: false
                     }, done);
                 });
             }, done);
@@ -55,7 +84,7 @@ describe('stress tests', function() {
                                 break;
                         }
                     }
-                    batch.writeFile(outpath, 'jpeg', {
+                    batch.writeFile(outpathJpeg, 'jpeg', {
                         quality: 50
                     }, done);
                 });
@@ -72,7 +101,7 @@ describe('stress tests', function() {
                     image.rotate(a, 'black', done);
                 }, function(err) {
                     if (err) return done(err);
-                    image.writeFile(outpath, 'jpeg', {
+                    image.writeFile(outpathJpeg, 'jpeg', {
                         quality: 90
                     }, done);
                 });

@@ -24,9 +24,29 @@ describe('batch.writeFile arguments validation', function() {
 
         describe('invalid quality', function() {
             it('should throw an error', function() {
-                batch.writeFile.bind(batch, 'jpeg', {
+                batch.writeFile.bind(batch, 'res.jpg', 'jpeg', {
                     quality: 'foo'
                 }).should.throwError();
+            });
+        });
+
+    });
+
+    describe('PNG params', function() {
+
+        describe('invalid compression', function() {
+            it('should throw an error', function() {
+                batch.writeFile.bind(batch, 'res.png', 'png', {
+                    compression: 'foo'
+                }, function() {}).should.throwError();
+            });
+        });
+
+        describe('invalid interlaced', function() {
+            it('should throw an error', function() {
+                batch.writeFile.bind(batch, 'res.png', 'png', {
+                    interlaced: 'foo'
+                }, function() {}).should.throwError();
             });
         });
 
