@@ -6,7 +6,9 @@ var join = require('path').join,
 
 var tmpDir = join(__dirname, '../results'),
     outJpeg = 'write_test.jpg',
-    outpath = join(tmpDir, outJpeg);
+    outPng = 'write_test.png',
+    outpathJpeg = join(tmpDir, outJpeg),
+    outpathPng = join(tmpDir, outPng);
 
 describe('lwip.writeFile', function() {
 
@@ -28,13 +30,13 @@ describe('lwip.writeFile', function() {
 
             describe('params unspecified', function() {
                 it('should succeed', function(done) {
-                    image.writeFile(outpath, done);
+                    image.writeFile(outpathJpeg, done);
                 });
             });
 
             describe('params specified', function() {
                 it('should succeed', function(done) {
-                    image.writeFile(outpath, {
+                    image.writeFile(outpathJpeg, {
                         quality: 20
                     }, done);
                 });
@@ -46,15 +48,93 @@ describe('lwip.writeFile', function() {
 
             describe('params unspecified', function() {
                 it('should succeed', function(done) {
-                    image.writeFile(outpath, 'jpeg', done);
+                    image.writeFile(outpathJpeg, 'jpeg', done);
                 });
             });
 
             describe('params specified', function() {
                 it('should succeed', function(done) {
-                    image.writeFile(outpath, 'jpeg', {
+                    image.writeFile(outpathJpeg, 'jpeg', {
                         quality: 20
                     }, done);
+                });
+            });
+
+        });
+
+    });
+
+    describe('png', function() {
+
+        describe('with type unspecified', function() {
+
+            describe('params unspecified', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathPng, done);
+                });
+            });
+
+            describe('params specified - no compression, not interlaced', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathPng, {
+                        compression: 'none',
+                        interlaced: false
+                    }, done);
+                });
+            });
+
+            describe('params specified - no compression, interlaced', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathPng, {
+                        compression: 'none',
+                        interlaced: true
+                    }, done);
+                });
+            });
+
+            describe('params specified - fast compression, not interlaced', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathPng, {
+                        compression: 'fast',
+                        interlaced: false
+                    }, done);
+                });
+            });
+
+            describe('params specified - fast compression, interlaced', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathPng, {
+                        compression: 'fast',
+                        interlaced: true
+                    }, done);
+                });
+            });
+
+            describe('params specified - high compression, not interlaced', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathPng, {
+                        compression: 'high',
+                        interlaced: false
+                    }, done);
+                });
+            });
+
+            describe('params specified - high compression, interlaced', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathPng, {
+                        compression: 'high',
+                        interlaced: true
+                    }, done);
+                });
+            });
+
+        });
+
+        describe('with type specified', function() {
+
+            describe('params unspecified', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathPng, 'png', done);
                 });
             });
 

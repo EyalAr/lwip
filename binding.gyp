@@ -2,8 +2,12 @@
     "targets": [{
         "target_name": "lwip",
         "sources": [
+            # LWIP: 
+            #######
             "src/lwip.cpp",
             "src/LwipImage.cpp",
+            # LIB JPEG:
+            ###########
             "lib/jpeg/jmemnobs.c",
             "lib/jpeg/jcapimin.c",
             "lib/jpeg/jcapistd.c",
@@ -47,9 +51,43 @@
             "lib/jpeg/jquant1.c",
             "lib/jpeg/jquant2.c",
             "lib/jpeg/jdmerge.c",
-            "lib/jpeg/jaricom.c"
+            "lib/jpeg/jaricom.c",
+            # LIB PNG:
+            ##########
+            "lib/png/png.c",
+            "lib/png/pngset.c",
+            "lib/png/pngget.c",
+            "lib/png/pngrutil.c",
+            "lib/png/pngtrans.c",
+            "lib/png/pngwutil.c",
+            "lib/png/pngread.c",
+            "lib/png/pngrio.c",
+            "lib/png/pngwio.c",
+            "lib/png/pngwrite.c",
+            "lib/png/pngrtran.c",
+            "lib/png/pngwtran.c",
+            "lib/png/pngmem.c",
+            "lib/png/pngerror.c",
+            "lib/png/pngpread.c",
+            # ZLIB:
+            #######
+            "lib/zlib/adler32.c",
+            "lib/zlib/compress.c",
+            "lib/zlib/crc32.c",
+            "lib/zlib/deflate.c",
+            "lib/zlib/gzclose.c",
+            "lib/zlib/gzlib.c",
+            "lib/zlib/gzread.c",
+            "lib/zlib/gzwrite.c",
+            "lib/zlib/infback.c",
+            "lib/zlib/inflate.c",
+            "lib/zlib/inftrees.c",
+            "lib/zlib/inffast.c",
+            "lib/zlib/trees.c",
+            "lib/zlib/uncompr.c",
+            "lib/zlib/zutil.c"
         ],
-        'include_dirs': ['lib/jpeg', 'lib/cimg'],
+        'include_dirs': ['lib/zlib', 'lib/jpeg', 'lib/cimg', 'lib/png'],
         'conditions': [
             ['OS=="linux"', {
                 'cflags!': ['-fno-exceptions'],

@@ -174,6 +174,18 @@
                         that.__release();
                         callback(err, buffer);
                     });
+                } else if (type === 'png') {
+                    params.compression = params.compression || defs.defaults.PNG_DEF_COMPRESSION;
+                    if (params.compression === 'none') params.compression = 0;
+                    else if (params.compression === 'fast') params.compression = 1;
+                    else if (params.compression === 'high') params.compression = 2;
+                    else throw Error('Invalid PNG compression');
+                    params.interlaced = params.interlaced || defs.defaults.PNG_DEF_INTERLACED;
+                    if (typeof params.interlaced !== 'boolean') throw Error('PNG \'interlaced\' must be boolean');
+                    return that.__lwip.toPngBuffer(params.compression, params.interlaced, function(err, buffer) {
+                        that.__release();
+                        callback(err, buffer);
+                    });
                 } else throw Error('Unknown type \'' + type + '\'');
             });
         } catch (e) {
@@ -297,6 +309,14 @@
                 params.quality = params.quality || defs.defaults.DEF_JPEG_QUALITY;
                 if (params.quality != parseInt(params.quality) || params.quality < 0 || params.quality > 100)
                     throw Error('Invalid JPEG quality');
+            } else if (type === 'png') {
+                params.compression = params.compression || defs.defaults.PNG_DEF_COMPRESSION;
+                if (params.compression === 'none') params.compression = 0;
+                else if (params.compression === 'fast') params.compression = 1;
+                else if (params.compression === 'high') params.compression = 2;
+                else throw Error('Invalid PNG compression');
+                params.interlaced = params.interlaced || defs.defaults.PNG_DEF_INTERLACED;
+                if (typeof params.interlaced !== 'boolean') throw Error('PNG \'interlaced\' must be boolean');
             } else throw Error('Unknown type \'' + type + '\'');
             that.exec(function(err, image) {
                 if (err) return callback(err);

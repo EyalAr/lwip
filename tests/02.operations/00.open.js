@@ -54,4 +54,47 @@ describe('lwip.open', function() {
         });
 
     });
+
+    describe('png', function() {
+
+        describe('rgb image (with png extension)', function() {
+            it('should succeed', function(done) {
+                lwip.open(imgs.png.rgb, function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+        describe('rgb image (no extension)', function() {
+            it('should succeed', function(done) {
+                lwip.open(imgs.png.noex, 'png', function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+        describe('grayscale image', function() {
+            it('should succeed', function(done) {
+                lwip.open(imgs.png.gs, function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+        describe('invalid image', function() {
+            it('should fail', function(done) {
+                lwip.open(imgs.png.inv, function(err, img) {
+                    should(err).be.Error;
+                    done();
+                });
+            });
+        });
+
+    });
 });

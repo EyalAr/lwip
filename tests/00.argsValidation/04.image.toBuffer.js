@@ -32,4 +32,24 @@ describe('image.toBuffer arguments validation', function() {
 
     });
 
+    describe('PNG params', function() {
+
+        describe('invalid compression', function() {
+            it('should throw an error', function() {
+                image.toBuffer.bind(image, 'png', {
+                    compression: 'foo'
+                }, function() {}).should.throwError();
+            });
+        });
+
+        describe('invalid interlaced', function() {
+            it('should throw an error', function() {
+                image.toBuffer.bind(image, 'png', {
+                    interlaced: 'foo'
+                }, function() {}).should.throwError();
+            });
+        });
+
+    });
+
 });

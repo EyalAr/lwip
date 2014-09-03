@@ -24,8 +24,8 @@ describe('lwip.rotate', function() {
     });
 
     afterEach(function(done) {
-        image.writeFile(join(tmpDir, current.join('_') + '.jpg'), 'jpeg', {
-            quality: 100
+        image.writeFile(join(tmpDir, current.join('_') + '.png'), 'png', {
+            compressions: 'fast'
         }, done);
     });
 

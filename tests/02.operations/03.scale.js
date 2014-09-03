@@ -18,15 +18,16 @@ describe('lwip.scale', function() {
     });
 
     beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+        lwip.open(imgs.png.rgb, function(err, img) {
             image = img;
             done(err);
         });
     });
 
     afterEach(function(done) {
-        image.writeFile(join(tmpDir, current.join('_') + '.jpg'), 'jpeg', {
-            quality: 100
+        image.writeFile(join(tmpDir, current.join('_') + '.png'), 'png', {
+            compression: 'high',
+            interlaced: true
         }, done);
     });
 

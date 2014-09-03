@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/EyalAr/lwip.svg?branch=master)](https://travis-ci.org/EyalAr/lwip)
+[![Stories in Ready](https://badge.waffle.io/eyalar/lwip.png?label=ready&title=Ready)](https://waffle.io/eyalar/lwip)
+[![Stories in Ready](https://badge.waffle.io/eyalar/lwip.png?label=in+progress&title=In+Progress)](https://waffle.io/eyalar/lwip)
+
 # Light-weight image processor for NodeJS
 
 0. [Overview](#overview)
@@ -17,6 +21,7 @@
     0. [Height](#height)
     0. [Get as a Buffer](#get-as-a-buffer)
       0. [JPEG](#jpeg)
+      0. [PNG](#png)
     0. [Write to file](#write-to-file)
   0. [Batch operations](#batch-operations)
 0. [Copyrights](#copyrights)
@@ -102,11 +107,18 @@ lwip.open('image.jpg', function(err, image){
 
 ### Supported formats
 
-Currently only JPEG is supported. I plan to add support for PNG soon (part of
-the [milestone for v0.0.2](https://github.com/EyalAr/lwip/issues?milestone=2&page=1&state=open)).
+**Decoding (reading):**
+
+- JPEG, 1 & 3 channels (grayscale & RGB).
+- PNG, 1 & 3 channels (grayscale & RGB). Alpha channel (transperancy) is not
+  currently supported.
+
+**Encoding (writing):**
+
+- JPEG, 3 channels (RGB).
+- PNG (lossless), 3 channels (RGB).
 
 Other formats may also be supported in the future, but are probably less urgent.
-
 Check the issues to see [which formats are planned to be supported](https://github.com/EyalAr/lwip/issues?labels=format+request&page=1&state=open).
 Open an issue if you need support for a format which is not already listed.
 
@@ -233,6 +245,7 @@ encoded data as a NodeJS Buffer object.
 
 0. `format {String}`: Encoding format. Possible values:
   - `"jpg"`
+  - `"png"`
 0. `params {Object}`: **Optional** Format-specific parameters (See below).
 0. `callback {Function(err, buffer)}`
 
@@ -243,6 +256,16 @@ encoded data as a NodeJS Buffer object.
 The `params` object should have the following fields:
 
 - `quality {Integer}`: Defaults to `100`.
+
+##### PNG
+
+The `params` object should have the following fields:
+
+- `compression {String}`: Defaults to `"fast"`. Possible values:
+  - `"none"` - No compression. Fastest.
+  - `"fast"` - Basic compression. Fast.
+  - `"high"` - High compression. Slowest.
+- `interlaced {Boolean}`: Defaults to `false`.
 
 #### Write to file
 
@@ -369,6 +392,12 @@ The native part of this module is compiled from source which uses the following:
 - Independent JPEG Group's free JPEG software:
   - [Website](http://www.ijg.org/)
   - [Readme](https://github.com/EyalAr/lwip/blob/master/lib/jpeg/README)
+- libpng:
+  - [Website](http://www.libpng.org/)
+  - [Readme](https://github.com/EyalAr/lwip/blob/master/lib/png/README)
+- zlib:
+  - [Website](http://www.zlib.net/)
+  - [Readme](https://github.com/EyalAr/lwip/blob/master/lib/zlib/README)
 - The CImg Library
   - [Website](http://cimg.sourceforge.net/)
   - [Readme](https://github.com/EyalAr/lwip/blob/master/lib/cimg/README.txt)
