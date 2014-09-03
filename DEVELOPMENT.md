@@ -48,3 +48,6 @@ when opening it, etc.
 
 In order to decode an image, we have to identify its format. Once we do that,
 we can use the appropriate library.
+
+Images are constructed as `CImg<unsigned char>`. Notice the type of a pixel
+channel is `unsigned char`, which makes our images 8bit.

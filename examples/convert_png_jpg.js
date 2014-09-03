@@ -1,5 +1,5 @@
 /**
- * Example for using LWIP to rotate an image.
+ * Example for using LWIP to convert an image from png to jpg.
  */
 
 var path = require('path'),

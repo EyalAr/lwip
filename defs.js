@@ -1,7 +1,9 @@
 var defaults = exports.defaults = {
     DEF_INTERPOLATION: 'lanczos',
     DEF_ROTATE_COLOR: 'gray',
-    DEF_JPEG_QUALITY: 100
+    DEF_JPEG_QUALITY: 100,
+    PNG_DEF_COMPRESSION: "fast",
+    PNG_DEF_INTERLACED: false
 };
 
 exports.interpolations = {

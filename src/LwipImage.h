@@ -14,6 +14,8 @@
 extern "C" {
 #include "jpeglib.h"
 }
+#include <png.h>
+#include <zlib.h>
 #include "CImg.h"
 
 using namespace cimg_library;
@@ -36,6 +38,7 @@ private:
     static Handle<Value> width(const Arguments & args);
     static Handle<Value> height(const Arguments & args);
     static Handle<Value> toJpegBuffer(const Arguments & args);
+    static Handle<Value> toPngBuffer(const Arguments & args);
     static Persistent<Function> constructor;
 };
 
@@ -50,6 +53,8 @@ inline void lwip_jpeg_error_exit (j_common_ptr cinfo) {
 }
 
 void toJpegBufferAsync(uv_work_t * request);
+void toPngBufferAsync(uv_work_t * request);
+void pngWriteCB(png_structp png_ptr, png_bytep data, png_size_t length);
 void toBufferAsyncDone(uv_work_t * request, int status);
 void resizeAsync(uv_work_t * request);
 void resizeAsyncDone(uv_work_t * request, int status);
@@ -60,8 +65,6 @@ void blurAsyncDone(uv_work_t * request, int status);
 void cropAsync(uv_work_t * request);
 void cropAsyncDone(uv_work_t * request, int status);
 
-inline void png_write_row_callback(png_structp png_ptr, png_uint_32 row, int pass) {}
-
 struct ToBufferBaton {
     uv_work_t request;
     v8::Persistent<Function> cb;
@@ -69,6 +72,8 @@ struct ToBufferBaton {
     unsigned char * buffer;
     unsigned long bufferSize;
     int jpegQuality;
+    int pngCompLevel;
+    bool pngInterlaced;
     bool err;
     std::string errMsg;
 };

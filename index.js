@@ -174,6 +174,18 @@
                         that.__release();
                         callback(err, buffer);
                     });
+                } else if (type === 'png') {
+                    params.compression = params.compression || defs.defaults.PNG_DEF_COMPRESSION;
+                    if (params.compression === 'none') params.compression = 0;
+                    else if (params.compression === 'fast') params.compression = 1;
+                    else if (params.compression === 'high') params.compression = 2;
+                    else throw Error('Invalid PNG compression');
+                    params.interlaced = params.interlaced || defs.defaults.PNG_DEF_INTERLACED;
+                    params.interlaced = !!params.interlaced;
+                    return that.__lwip.toPngBuffer(params.compression, params.interlaced, function(err, buffer) {
+                        that.__release();
+                        callback(err, buffer);
+                    });
                 } else throw Error('Unknown type \'' + type + '\'');
             });
         } catch (e) {

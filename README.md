@@ -111,6 +111,7 @@ lwip.open('image.jpg', function(err, image){
 **Encoding (writing):**
 
 - JPEG, 3 channels (RGB).
+- PNG (lossless), 3 channels (RGB).
 
 Other formats may also be supported in the future, but are probably less urgent.
 Check the issues to see [which formats are planned to be supported](https://github.com/EyalAr/lwip/issues?labels=format+request&page=1&state=open).
@@ -239,6 +240,7 @@ encoded data as a NodeJS Buffer object.
 
 0. `format {String}`: Encoding format. Possible values:
   - `"jpg"`
+  - `"png"`
 0. `params {Object}`: **Optional** Format-specific parameters (See below).
 0. `callback {Function(err, buffer)}`
 
@@ -249,6 +251,16 @@ encoded data as a NodeJS Buffer object.
 The `params` object should have the following fields:
 
 - `quality {Integer}`: Defaults to `100`.
+
+##### PNG
+
+The `params` object should have the following fields:
+
+- `compression {String}`: Defaults to `"fast"`. Possible values:
+  - `"none"` - No compression. Fastest.
+  - `"fast"` - Basic compression. Fast.
+  - `"high"` - High compression. Slowest.
+- `interlaced {Boolean}`: Defaults to `false`.
 
 #### Write to file
 

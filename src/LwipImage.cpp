@@ -358,18 +358,6 @@ Handle<Value> LwipImage::toJpegBuffer(const Arguments & args) {
     return scope.Close(Undefined());
 }
 
-Handle<Value> LwipImage::toPngBuffer(const Arguments & args) {
-    HandleScope scope;
-    // (arguments validation is done in JS land)
-    ToBufferBaton * tbb = NULL;
-    if (!initToBufferBaton(&tbb, args)) {
-        return scope.Close(Undefined());
-    }
-    // tbb->jpegQuality = (unsigned int) args[0]->NumberValue();
-    uv_queue_work(uv_default_loop(), &tbb->request, toPngBufferAsync, toBufferAsyncDone);
-    return scope.Close(Undefined());
-}
-
 void toJpegBufferAsync(uv_work_t * request) {
     ToBufferBaton * tbb = static_cast<ToBufferBaton *>(request->data);
     unsigned int dimbuf = 3, width, height, quality;
@@ -431,15 +419,50 @@ void toJpegBufferAsync(uv_work_t * request) {
     return;
 }
 
+// args[0] - compression level: 0 - none, 1 - fast, 2 - high
+// args[1] - interlaced? boolean
+Handle<Value> LwipImage::toPngBuffer(const Arguments & args) {
+    HandleScope scope;
+    // (arguments validation is done in JS land)
+    ToBufferBaton * tbb = NULL;
+    if (!initToBufferBaton(&tbb, args)) {
+        return scope.Close(Undefined());
+    }
+    tbb->pngCompLevel = (unsigned int) args[0]->NumberValue();
+    tbb->pngInterlaced = args[1]->BooleanValue();
+    uv_queue_work(uv_default_loop(), &tbb->request, toPngBufferAsync, toBufferAsyncDone);
+    return scope.Close(Undefined());
+}
+
 void toPngBufferAsync(uv_work_t * request) {
     ToBufferBaton * tbb = static_cast<ToBufferBaton *>(request->data);
     unsigned int width = tbb->img->_data->width();
     unsigned int height = tbb->img->_data->height();
+    unsigned int rowBytes = width * 3; // TODO: 3 channels per pixel is currently hard coded
+    int interlaceType;
+    int compLevel;
+    switch (tbb->pngCompLevel) {
+    case 0: // no compression
+        compLevel = Z_NO_COMPRESSION;
+        break;
+    case 1: // fast compression
+        compLevel = Z_BEST_SPEED;
+        break;
+    case 2: // high compression
+        compLevel = Z_BEST_COMPRESSION;
+        break;
+    default:
+        compLevel = Z_DEFAULT_COMPRESSION;
+        break;
+    }
+    if (tbb->pngInterlaced) {
+        interlaceType = PNG_INTERLACE_ADAM7;
+    } else {
+        interlaceType = PNG_INTERLACE_NONE;
+    }
 
     png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING,
-                          (png_voidp) user_error_ptr,
-                          user_error_fn,
-                          user_warning_fn);
+                          NULL, NULL, NULL);
 
     if (!png_ptr) {
         tbb->err = true;
@@ -452,6 +475,7 @@ void toPngBufferAsync(uv_work_t * request) {
         png_destroy_write_struct(&png_ptr, (png_infopp) NULL);
         tbb->err = true;
         tbb->errMsg = "Out of memory";
+        return;
     }
 
     if (setjmp(png_jmpbuf(png_ptr))) {
@@ -461,13 +485,67 @@ void toPngBufferAsync(uv_work_t * request) {
         return;
     }
 
-    png_set_write_status_fn(png_ptr, png_write_row_callback);
-    png_set_compression_level(png_ptr, Z_BEST_COMPRESSION);
+    unsigned char ** rowPnts = (unsigned char **)malloc(height * sizeof(unsigned char *));
+    if (!rowPnts) {
+        png_destroy_write_struct(&png_ptr, &info_ptr);
+        tbb->err = true;
+        tbb->errMsg = "Out of memory";
+        return;
+    }
+    for (unsigned int r = 0; r < height; r++) {
+        rowPnts[r] = (unsigned char *)malloc(rowBytes * sizeof(unsigned char));
+        if (!rowPnts[r]) {
+            // free previous allocations
+            for (unsigned int p = 0 ; p < r ; p++) free(rowPnts[p]);
+            free(rowPnts);
+            png_destroy_write_struct(&png_ptr, &info_ptr);
+            tbb->err = true;
+            tbb->errMsg = "Out of memory";
+            return;
+        }
+    }
 
     png_set_IHDR(png_ptr, info_ptr, width, height,
-                 bit_depth, color_type, interlace_type,
-                 compression_type, filter_method)
+                 8, PNG_COLOR_TYPE_RGB, interlaceType,
+                 PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+    png_set_compression_level(png_ptr, compLevel);
+    png_set_write_fn(png_ptr, (voidp) tbb, pngWriteCB, NULL);
+
+    cimg_forXY(*(tbb->img->_data), x, y) {
+        unsigned char r = tbb->img->_data->atXYZC(x, y, 0, 0),
+                      g = tbb->img->_data->atXYZC(x, y, 0, 1),
+                      b = tbb->img->_data->atXYZC(x, y, 0, 2);
+        rowPnts[y][3 * x] = r;
+        rowPnts[y][3 * x + 1] = g;
+        rowPnts[y][3 * x + 2] = b;
+    }
+    png_set_rows(png_ptr, info_ptr, rowPnts);
+
+    png_write_png(png_ptr, info_ptr, PNG_TRANSFORM_IDENTITY, NULL);
+
+    png_destroy_write_struct(&png_ptr, &info_ptr);
+    free(rowPnts);
+
     return;
+}
+
+void pngWriteCB(png_structp png_ptr, png_bytep data, png_size_t length) {
+    ToBufferBaton * tbb = (ToBufferBaton *) png_get_io_ptr(png_ptr);
+    size_t size = tbb->bufferSize + length;
+
+    if (tbb->buffer) {
+        tbb->buffer = (unsigned char *) realloc(tbb->buffer, size * sizeof(unsigned char));
+    } else {
+        tbb->buffer = (unsigned char *) malloc(size * sizeof(unsigned char));
+    }
+
+    if (!tbb->buffer) {
+        png_error(png_ptr, "Out of memory");
+        return;
+    }
+
+    memcpy(tbb->buffer + tbb->bufferSize, data, length);
+    tbb->bufferSize += length;
 }
 
 void toBufferAsyncDone(uv_work_t * request, int status) {
