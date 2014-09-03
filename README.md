@@ -21,6 +21,7 @@
     0. [Height](#height)
     0. [Get as a Buffer](#get-as-a-buffer)
       0. [JPEG](#jpeg)
+      0. [PNG](#png)
     0. [Write to file](#write-to-file)
   0. [Batch operations](#batch-operations)
 0. [Copyrights](#copyrights)
