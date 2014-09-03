@@ -1,12 +1,6 @@
 #include "lwip.h"
 
-using namespace cimg_library;
-using namespace v8;
-using namespace node;
-
 void openJpegAsync(uv_work_t * request) {
-    // here is where we actually open the image file and retrieve the binary
-    // data. open image, store data in iob->imgData.
     ImageOpenBaton * iob = static_cast<ImageOpenBaton *>(request->data);
     CImg<unsigned char> * tmp;
     try {
@@ -18,36 +12,11 @@ void openJpegAsync(uv_work_t * request) {
         iob->errMsg = "Unable to open file as JPEG";
         return;
     }
-    // need to convert image to 3 channels spectrum?
-    int spectrum = tmp->spectrum();
-    if (spectrum == 3) {
-        iob->imgData = tmp;
-    } else if (spectrum == 1) {
-        try {
-            iob->imgData = new CImg<unsigned char>(*tmp, "x,y,1,3");
-        } catch (CImgException e) {
-            delete tmp;
-            if (iob->imgData) delete iob->imgData;
-            iob->err = true;
-            iob->errMsg = "Out of memory";
-            return;
-        }
-        cimg_forXYZ(*(iob->imgData), x, y, z) {
-            unsigned char c = tmp->atXYZC(x, y, 0, 0);
-            iob->imgData->fillC(x, y, z, c, c, c);
-        }
-        delete tmp;
-    } else {
-        if (tmp) delete tmp;
-        iob->err = true;
-        iob->errMsg = "Unsupported number of spectrums";
-    }
+    to3Channels(tmp, iob);
     return;
 }
 
 void openPngAsync(uv_work_t * request) {
-    // here is where we actually open the image file and retrieve the binary
-    // data. open image, store data in iob->imgData.
     ImageOpenBaton * iob = static_cast<ImageOpenBaton *>(request->data);
     CImg<unsigned char> * tmp;
     try {
@@ -59,12 +28,18 @@ void openPngAsync(uv_work_t * request) {
         iob->errMsg = "Unable to open file as PNG";
         return;
     }
+    to3Channels(tmp, iob);
+    return;
+}
+
+void to3Channels(CImg<unsigned char> * tmp, ImageOpenBaton * iob) {
     // need to convert image to 3 channels spectrum?
     int spectrum = tmp->spectrum();
     if (spectrum == 3) {
         iob->imgData = tmp;
     } else if (spectrum == 1) {
         try {
+            // create a 3-channels image of the same dimensions.
             iob->imgData = new CImg<unsigned char>(*tmp, "x,y,1,3");
         } catch (CImgException e) {
             delete tmp;
@@ -73,12 +48,15 @@ void openPngAsync(uv_work_t * request) {
             iob->errMsg = "Out of memory";
             return;
         }
+        // copy the gray value of very pixel to each of R,G and B:
         cimg_forXYZ(*(iob->imgData), x, y, z) {
             unsigned char c = tmp->atXYZC(x, y, 0, 0);
             iob->imgData->fillC(x, y, z, c, c, c);
         }
         delete tmp;
     } else {
+        // TODO: support 4 channels (CMYK)
+        // need to find out if the 4th channel is alpha...
         if (tmp) delete tmp;
         iob->err = true;
         iob->errMsg = "Unsupported number of spectrums";
@@ -117,7 +95,7 @@ void openAsyncDone(uv_work_t * request, int status) {
     delete iob;
 }
 
-Handle<Value> _open(const Arguments & args, void asyncOpener(uv_work_t *)) {
+Handle<Value> open(const Arguments & args, void asyncOpener(uv_work_t *)) {
     // this scope will discard all internal local objects for us.
     HandleScope scope;
 
@@ -142,11 +120,11 @@ Handle<Value> _open(const Arguments & args, void asyncOpener(uv_work_t *)) {
 }
 
 Handle<Value> openJpeg(const Arguments & args) {
-    return _open(args, openJpegAsync);
+    return open(args, openJpegAsync);
 }
 
 Handle<Value> openPng(const Arguments & args) {
-    return _open(args, openPngAsync);
+    return open(args, openPngAsync);
 }
 
 // create an init function for our node module
