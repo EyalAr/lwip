@@ -32,4 +32,24 @@ describe('batch.toBuffer arguments validation', function() {
 
     });
 
+    describe('PNG params', function() {
+
+        describe('invalid compression', function() {
+            it('should throw an error', function() {
+                batch.toBuffer.bind(batch, 'png', {
+                    compression: 'foo'
+                }, function() {}).should.throwError();
+            });
+        });
+
+        describe('invalid interlaced', function() {
+            it('should throw an error', function() {
+                batch.toBuffer.bind(batch, 'png', {
+                    interlaced: 'foo'
+                }, function() {}).should.throwError();
+            });
+        });
+
+    });
+
 });

@@ -8,5 +8,11 @@ module.exports = {
         rgb: join(__dirname, imbase, 'rgb.jpg'),
         noex: join(__dirname, imbase, 'rgbjpg'),
         inv: join(__dirname, imbase, 'invalid.jpg')
+    },
+    png: {
+        gs: join(__dirname, imbase, 'gs.png'),
+        rgb: join(__dirname, imbase, 'rgb.png'),
+        noex: join(__dirname, imbase, 'rgbpng'),
+        inv: join(__dirname, imbase, 'invalid.png')
     }
 };
