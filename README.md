@@ -40,6 +40,8 @@ install anything else on your system.
 
 **This module is in active development. [New features](https://github.com/EyalAr/lwip/issues?labels=feature+request&page=1&state=open) are being added.**
 
+[Read the background for the development of this module.](http://eyalarubas.com/image-processing-nodejs.html)
+
 ### Installation
 
 `npm install lwip`
