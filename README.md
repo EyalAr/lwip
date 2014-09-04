@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.org/EyalAr/lwip.svg?branch=v0.0.2)](https://travis-ci.org/EyalAr/lwip)
+[![Build Status](https://api.travis-ci.org/EyalAr/lwip.svg?branch=master)](https://travis-ci.org/EyalAr/lwip)
 [![Stories in Ready](https://badge.waffle.io/eyalar/lwip.png?label=ready&title=Ready)](https://waffle.io/eyalar/lwip)
 [![Stories in Ready](https://badge.waffle.io/eyalar/lwip.png?label=in+progress&title=In+Progress)](https://waffle.io/eyalar/lwip)
 
@@ -240,6 +240,8 @@ Alias of [`mirror`](#mirror).
 
 #### Border
 
+Add a colored border to the image.
+
 `image.border(width, color, callback)`
 
 0. `width {Integer}`: Border width in pixels.
@@ -253,6 +255,8 @@ Alias of [`mirror`](#mirror).
 0. `callback {Function(err, image)}`
 
 #### Pad
+
+Pad image edges with colored pixels.
 
 `image.pad(left, top, right, bottom, color, callback)`
 

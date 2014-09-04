@@ -33,9 +33,14 @@
     "rotate",
     "jpeg",
     "jpg",
+    "png",
     "crop",
     "blur",
-    "batch"
+    "batch",
+    "flip",
+    "mirror",
+    "border",
+    "padding"
   ],
   "author": "Eyal Arubas <eyalarubas@gmail.com>",
   "license": "MIT",
