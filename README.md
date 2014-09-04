@@ -18,6 +18,8 @@
     0. [Blur](#blur)
     0. [Mirror](#mirror)
     0. [Flip](#flip)
+    0. [Border](#border)
+    0. [Pad](#pad)
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
@@ -235,6 +237,34 @@ Mirror an image along the 'x' axis, 'y' axis or both.
 #### Flip
 
 Alias of [`mirror`](#mirror).
+
+#### Border
+
+`image.border(width, color, callback)`
+
+0. `width {Integer}`: Border width in pixels.
+0. `color {String / Array / Object}`: **Optional** Color of the border.
+  - As a string, possible values: `"black"`, `"white"`, `"gray"`, `"blue"`,
+    `"red"`, `"green"`, `"yellow"`, `"cyan"`, `"magenta"`.
+  - As an array `[R, G, B]` where `R`, `G` and `B` are integers between 0 and
+    255.
+  - As an object `{r: R, g: G, b: B}` where `R`, `G` and `B` are integers
+    between 0 and 255.
+0. `callback {Function(err, image)}`
+
+#### Pad
+
+`image.pad(left, top, right, bottom, color, callback)`
+
+0. `left, top, right, bottom {Integer}`: Number of pixels to add to each edge.
+0. `color {String / Array / Object}`: **Optional** Color of the padding.
+  - As a string, possible values: `"black"`, `"white"`, `"gray"`, `"blue"`,
+    `"red"`, `"green"`, `"yellow"`, `"cyan"`, `"magenta"`.
+  - As an array `[R, G, B]` where `R`, `G` and `B` are integers between 0 and
+    255.
+  - As an object `{r: R, g: G, b: B}` where `R`, `G` and `B` are integers
+    between 0 and 255.
+0. `callback {Function(err, image)}`
 
 ### Getters
 

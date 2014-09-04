@@ -36,6 +36,7 @@ private:
     static Handle<Value> blur(const Arguments & args);
     static Handle<Value> crop(const Arguments & args);
     static Handle<Value> mirror(const Arguments & args);
+    static Handle<Value> pad(const Arguments & args);
     static Handle<Value> width(const Arguments & args);
     static Handle<Value> height(const Arguments & args);
     static Handle<Value> toJpegBuffer(const Arguments & args);
@@ -67,6 +68,8 @@ void cropAsync(uv_work_t * request);
 void cropAsyncDone(uv_work_t * request, int status);
 void mirrorAsync(uv_work_t * request);
 void mirrorAsyncDone(uv_work_t * request, int status);
+void padAsync(uv_work_t * request);
+void padAsyncDone(uv_work_t * request, int status);
 
 struct ToBufferBaton {
     uv_work_t request;
@@ -126,6 +129,19 @@ struct mirrorBaton {
     LwipImage * img;
     bool xaxis;
     bool yaxis;
+    bool err;
+    std::string errMsg;
+};
+
+struct padBaton {
+    uv_work_t request;
+    v8::Persistent<Function> cb;
+    LwipImage * img;
+    unsigned int left;
+    unsigned int top;
+    unsigned int right;
+    unsigned int bottom;
+    unsigned char color[3];
     bool err;
     std::string errMsg;
 };

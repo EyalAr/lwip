@@ -190,6 +190,75 @@
     // mirror alias:
     image.prototype.flip = image.prototype.mirror;
 
+    image.prototype.pad = function() {
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.pad)(arguments, function(left, top, right, bottom, color, callback) {
+                if (typeof color === 'string') {
+                    if (defs.colors[color]) color = defs.colors[color];
+                    else throw Error('Unknown color ' + color);
+                } else {
+                    if (color instanceof Array) {
+                        color = {
+                            r: color[0],
+                            g: color[1],
+                            b: color[2]
+                        };
+                    }
+                    if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
+                        throw Error('\'red\' color component is invalid');
+                    if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
+                        throw Error('\'green\' color component is invalid');
+                    if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
+                        throw Error('\'blue\' color component is invalid');
+                }
+                that.__lwip.pad(+left, +top, +right, +bottom, +color.r, +color.g, +color.b, function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
+            });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
+    }
+
+    image.prototype.border = function() {
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.border)(arguments, function(width, color, callback) {
+                if (typeof color === 'string') {
+                    if (defs.colors[color]) color = defs.colors[color];
+                    else throw Error('Unknown color ' + color);
+                } else {
+                    if (color instanceof Array) {
+                        color = {
+                            r: color[0],
+                            g: color[1],
+                            b: color[2]
+                        };
+                    }
+                    if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
+                        throw Error('\'red\' color component is invalid');
+                    if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
+                        throw Error('\'green\' color component is invalid');
+                    if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
+                        throw Error('\'blue\' color component is invalid');
+                }
+                // we can just use image.pad...
+                that.__lwip.pad(+width, +width, +width, +width, +color.r, +color.g, +color.b, function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
+            });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
+    }
+
     image.prototype.toBuffer = function() {
         this.__lock();
         try {
@@ -344,6 +413,60 @@
 
     // mirror alias:
     batch.prototype.flip = batch.prototype.mirror;
+
+    batch.prototype.pad = function() {
+        var that = this,
+            decs = defs.args.pad.slice(0, -1); // cut callback declaration
+        decree(decs)(arguments, function(left, top, right, bottom, color) {
+            if (typeof color === 'string') {
+                if (defs.colors[color]) color = defs.colors[color];
+                else throw Error('Unknown color ' + color);
+            } else {
+                if (color instanceof Array) {
+                    color = {
+                        r: color[0],
+                        g: color[1],
+                        b: color[2]
+                    };
+                }
+                if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
+                    throw Error('\'red\' color component is invalid');
+                if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
+                    throw Error('\'green\' color component is invalid');
+                if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
+                    throw Error('\'blue\' color component is invalid');
+            }
+            that.__addOp(that.__image.pad, [left, top, right, bottom, color].filter(undefinedFilter));
+        });
+        return this;
+    }
+
+    batch.prototype.border = function() {
+        var that = this,
+            decs = defs.args.border.slice(0, -1); // cut callback declaration
+        decree(decs)(arguments, function(width, color) {
+            if (typeof color === 'string') {
+                if (defs.colors[color]) color = defs.colors[color];
+                else throw Error('Unknown color ' + color);
+            } else {
+                if (color instanceof Array) {
+                    color = {
+                        r: color[0],
+                        g: color[1],
+                        b: color[2]
+                    };
+                }
+                if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
+                    throw Error('\'red\' color component is invalid');
+                if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
+                    throw Error('\'green\' color component is invalid');
+                if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
+                    throw Error('\'blue\' color component is invalid');
+            }
+            that.__addOp(that.__image.border, [width, color].filter(undefinedFilter));
+        });
+        return this;
+    }
 
     batch.prototype.toBuffer = function() {
         var that = this;

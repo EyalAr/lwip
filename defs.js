@@ -3,6 +3,8 @@
     var defaults = exports.defaults = {
         DEF_INTERPOLATION: 'lanczos',
         DEF_ROTATE_COLOR: 'gray',
+        DEF_BORDER_COLOR: 'gray',
+        DEF_PAD_COLOR: 'gray',
         DEF_JPEG_QUALITY: 100,
         PNG_DEF_COMPRESSION: 'fast',
         PNG_DEF_INTERLACED: false
@@ -161,6 +163,39 @@
             type: 'hash',
             optional: true,
             default: {}
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        border: [{
+            name: 'width',
+            type: 'nn-number'
+        }, {
+            name: 'color',
+            types: ['string', 'array', 'hash'],
+            optional: true,
+            default: defaults.DEF_BORDER_COLOR
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        pad: [{
+            name: 'left',
+            type: 'nn-number'
+        }, {
+            name: 'top',
+            type: 'nn-number'
+        }, {
+            name: 'right',
+            type: 'nn-number'
+        }, {
+            name: 'bottom',
+            type: 'nn-number'
+        }, {
+            name: 'color',
+            types: ['string', 'array', 'hash'],
+            optional: true,
+            default: defaults.DEF_PAD_COLOR
         }, {
             name: 'callback',
             type: 'function'
