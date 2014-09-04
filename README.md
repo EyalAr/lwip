@@ -1,3 +1,4 @@
+[![Version](http://img.shields.io/npm/v/lwip.svg)](https://www.npmjs.org/package/lwip)
 [![Build Status](https://api.travis-ci.org/EyalAr/lwip.svg?branch=master)](https://travis-ci.org/EyalAr/lwip)
 [![Stories in Ready](https://badge.waffle.io/eyalar/lwip.png?label=ready&title=Ready)](https://waffle.io/eyalar/lwip)
 [![Stories in Ready](https://badge.waffle.io/eyalar/lwip.png?label=in+progress&title=In+Progress)](https://waffle.io/eyalar/lwip)
