@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/EyalAr/lwip.svg?branch=master)](https://travis-ci.org/EyalAr/lwip)
+[![Build Status](https://api.travis-ci.org/EyalAr/lwip.svg?branch=v0.0.2)](https://travis-ci.org/EyalAr/lwip)
 [![Stories in Ready](https://badge.waffle.io/eyalar/lwip.png?label=ready&title=Ready)](https://waffle.io/eyalar/lwip)
 [![Stories in Ready](https://badge.waffle.io/eyalar/lwip.png?label=in+progress&title=In+Progress)](https://waffle.io/eyalar/lwip)
 
@@ -16,6 +16,8 @@
     0. [Rotate](#rotate)
     0. [Crop](#crop)
     0. [Blur](#blur)
+    0. [Mirror](#mirror)
+    0. [Flip](#flip)
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
@@ -220,6 +222,19 @@ Gaussian blur.
 
 0. `sigma {Float}`: Standard deviation of the Gaussian filter.
 0. `callback {Function(err, image)}`
+
+#### Mirror
+
+Mirror an image along the 'x' axis, 'y' axis or both.
+
+`image.mirror(axes, callback)`
+
+0. `axes {String}`: `'x'`, `'y'` or `'xy'`.
+0. `callback {Function(err, image)}`
+
+#### Flip
+
+Alias of [`mirror`](#mirror).
 
 ### Getters
 

@@ -17,9 +17,9 @@ describe('stress tests', function() {
         mkdirp(tmpDir, done);
     });
 
-    describe('open image 1000 times (in parallel) and save to disk as jpeg', function() {
+    describe('open image 500 times (in parallel) and save to disk as jpeg', function() {
         it('should succeed', function(done) {
-            async.times(1000, function(i, done) {
+            async.times(500, function(i, done) {
                 lwip.open(imgs.png.rgb, 'png', function(err, image) {
                     if (err) return done(err);
                     image.writeFile(outpathJpeg, 'jpeg', {
@@ -30,9 +30,9 @@ describe('stress tests', function() {
         });
     });
 
-    describe('open image 1000 times (in parallel) and save to disk as png (high compression, interlaced)', function() {
+    describe('open image 500 times (in parallel) and save to disk as png (high compression, interlaced)', function() {
         it('should succeed', function(done) {
-            async.times(1000, function(i, done) {
+            async.times(500, function(i, done) {
                 lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
                     if (err) return done(err);
                     image.writeFile(outpathPng, 'png', {
@@ -44,9 +44,9 @@ describe('stress tests', function() {
         });
     });
 
-    describe('open image 1000 times (in parallel) and save to disk as png (fast compression, not interlaced)', function() {
+    describe('open image 500 times (in parallel) and save to disk as png (fast compression, not interlaced)', function() {
         it('should succeed', function(done) {
-            async.times(1000, function(i, done) {
+            async.times(500, function(i, done) {
                 lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
                     if (err) return done(err);
                     image.writeFile(outpathPng, 'png', {

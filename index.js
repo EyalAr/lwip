@@ -161,6 +161,35 @@
         }
     }
 
+    image.prototype.mirror = function() {
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.mirror)(arguments, function(axes, callback) {
+                var xaxis = false,
+                    yaxis = false;
+                axes = axes.toLowerCase();
+                if ('x' === axes) xaxis = true;
+                if ('y' === axes) yaxis = true;
+                if ('xy' === axes || 'yx' === axes) {
+                    xaxis = true;
+                    yaxis = true;
+                }
+                if (!(xaxis || yaxis)) throw Error('Invalid axes');
+                that.__lwip.mirror(xaxis, yaxis, function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
+            });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
+    }
+
+    // mirror alias:
+    image.prototype.flip = image.prototype.mirror;
+
     image.prototype.toBuffer = function() {
         this.__lock();
         try {
@@ -301,6 +330,20 @@
         });
         return this;
     }
+
+    batch.prototype.mirror = function() {
+        var that = this,
+            decs = defs.args.mirror.slice(0, -1); // cut callback declaration
+        decree(decs)(arguments, function(axes) {
+            axes = axes.toLowerCase();
+            if (['x', 'y', 'xy', 'yx'].indexOf(axes) === -1) throw Error('Invalid axes');
+            that.__addOp(that.__image.mirror, [axes].filter(undefinedFilter));
+        });
+        return this;
+    }
+
+    // mirror alias:
+    batch.prototype.flip = batch.prototype.mirror;
 
     batch.prototype.toBuffer = function() {
         var that = this;

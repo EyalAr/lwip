@@ -146,6 +146,13 @@
             name: 'callback',
             type: 'function'
         }],
+        mirror: [{
+            name: 'axes',
+            type: 'string'
+        },{
+            name: 'callback',
+            type: 'function'
+        }],
         toBuffer: [{
             name: 'type',
             type: 'string'

@@ -23,6 +23,7 @@ void LwipImage::Init() {
     SetPrototypeMethod(tpl, "rotate", rotate);
     SetPrototypeMethod(tpl, "blur", blur);
     SetPrototypeMethod(tpl, "crop", crop);
+    SetPrototypeMethod(tpl, "mirror", mirror);
     SetPrototypeMethod(tpl, "toJpegBuffer", toJpegBuffer);
     SetPrototypeMethod(tpl, "toPngBuffer", toPngBuffer);
     constructor = Persistent<Function>::New(tpl->GetFunction());
@@ -324,6 +325,69 @@ void cropAsyncDone(uv_work_t * request, int status) {
     // dispose of cb, because it's a persistent function
     cb->cb.Dispose();
     delete cb;
+}
+
+// image.mirror(xaxis, yaxis, callback):
+// -----------------------------------------------
+
+// args[0] - xaxis (boolean)
+// args[1] - yaxis (boolean)
+// args[2] - callback
+Handle<Value> LwipImage::mirror(const Arguments & args) {
+    HandleScope scope;
+    // (arguments validation is done in JS land)
+    mirrorBaton * mb = new mirrorBaton();
+    if (mb == NULL) {
+        ThrowException(Exception::TypeError(String::New("Out of memory")));
+        return scope.Close(Undefined());
+    }
+    mb->request.data = mb;
+    mb->cb = Persistent<Function>::New(Local<Function>::Cast(args[2]));
+    mb->xaxis = args[0]->BooleanValue();
+    mb->yaxis = args[1]->BooleanValue();
+    mb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
+    mb->err = false;
+    uv_queue_work(uv_default_loop(), &mb->request, mirrorAsync, mirrorAsyncDone);
+    return scope.Close(Undefined());
+}
+
+void mirrorAsync(uv_work_t * request) {
+    mirrorBaton * mb = static_cast<mirrorBaton *>(request->data);
+    std::string axes = "";
+    if (mb->xaxis){
+        axes += "x";
+    }
+    if (mb->yaxis){
+        axes += "y";
+    }
+    try {
+        mb->img->_data->mirror(axes.c_str());
+    } catch (CImgException e) {
+        mb->err = true;
+        mb->errMsg = "Unable to mirror image";
+    }
+    return;
+}
+
+void mirrorAsyncDone(uv_work_t * request, int status) {
+    // mirror completed. now we call the callback.
+    mirrorBaton * mb = static_cast<mirrorBaton *>(request->data);
+    if (mb->err) {
+        const unsigned int argc = 1;
+        Local<Value> argv[argc] = {
+            Local<Value>::New(Exception::Error(String::New(mb->errMsg.c_str())))
+        };
+        mb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
+    } else {
+        const unsigned int argc = 1;
+        Handle<Value> argv[argc] = {
+            Local<Value>::New(Null())
+        };
+        mb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
+    }
+    // dispose of cb, because it's a persistent function
+    mb->cb.Dispose();
+    delete mb;
 }
 
 // image.to{type}Buffer(format,callback):
