@@ -696,6 +696,7 @@ void toPngBufferAsync(uv_work_t * request) {
     png_write_png(png_ptr, info_ptr, PNG_TRANSFORM_IDENTITY, NULL);
 
     png_destroy_write_struct(&png_ptr, &info_ptr);
+    for (unsigned int r = 0; r < height; r++) free(rowPnts[r]);
     free(rowPnts);
 
     return;
