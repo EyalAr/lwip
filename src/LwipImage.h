@@ -7,57 +7,43 @@
 
 #include <string>
 #include <cmath>
-#include <setjmp.h>
 #include <node.h>
 #include <node_buffer.h>
+#include <nan.h>
 #include <v8.h>
-extern "C" {
-#include "jpeglib.h"
-}
-#include <png.h>
-#include <zlib.h>
 #include "CImg.h"
 
 using namespace cimg_library;
 using namespace v8;
+using namespace node;
 
+/*
+ * LwipImage object is a wrapper for a CImg object.
+ * It is constructed from a memory biffer of RGB pixels.
+ * The memory buffer is of type 'unsigned char' such that for an image of size
+ * W * H the buffer has (W*H) R(ed) values, then (W*H) G(reen) values and then
+ * (W*H) B(lue) values.
+ */
 class LwipImage : public node::ObjectWrap {
 public:
     static void Init();
     static Handle<Value> NewInstance();
-    explicit LwipImage(): _data(NULL) {};
+    static NAN_METHOD(New);
+    static NAN_METHOD(resize);
+    static NAN_METHOD(rotate);
+    static NAN_METHOD(blur);
+    static NAN_METHOD(crop);
+    static NAN_METHOD(mirror);
+    static NAN_METHOD(pad);
+    static NAN_METHOD(width);
+    static NAN_METHOD(height);
+    LwipImage(unsigned char * data, size_t width, size_t height);
     ~LwipImage();
-    CImg<unsigned char> * _data;
-
 private:
-    static Handle<Value> New(const Arguments & args);
-    static Handle<Value> resize(const Arguments & args);
-    static Handle<Value> rotate(const Arguments & args);
-    static Handle<Value> blur(const Arguments & args);
-    static Handle<Value> crop(const Arguments & args);
-    static Handle<Value> mirror(const Arguments & args);
-    static Handle<Value> pad(const Arguments & args);
-    static Handle<Value> width(const Arguments & args);
-    static Handle<Value> height(const Arguments & args);
-    static Handle<Value> toJpegBuffer(const Arguments & args);
-    static Handle<Value> toPngBuffer(const Arguments & args);
-    static Persistent<Function> constructor;
+    CImg<unsigned char> * _cimg;
+    static Persistent<FunctionTemplate> constructor;
 };
 
-struct lwip_jpeg_error_mgr {
-    struct jpeg_error_mgr pub;
-    jmp_buf setjmp_buffer;
-};
-
-inline void lwip_jpeg_error_exit (j_common_ptr cinfo) {
-    lwip_jpeg_error_mgr * lwip_jpeg_err = (lwip_jpeg_error_mgr *) cinfo->err;
-    longjmp(lwip_jpeg_err->setjmp_buffer, 1);
-}
-
-void toJpegBufferAsync(uv_work_t * request);
-void toPngBufferAsync(uv_work_t * request);
-void pngWriteCB(png_structp png_ptr, png_bytep data, png_size_t length);
-void toBufferAsyncDone(uv_work_t * request, int status);
 void resizeAsync(uv_work_t * request);
 void resizeAsyncDone(uv_work_t * request, int status);
 void rotateAsync(uv_work_t * request);
@@ -70,19 +56,6 @@ void mirrorAsync(uv_work_t * request);
 void mirrorAsyncDone(uv_work_t * request, int status);
 void padAsync(uv_work_t * request);
 void padAsyncDone(uv_work_t * request, int status);
-
-struct ToBufferBaton {
-    uv_work_t request;
-    v8::Persistent<Function> cb;
-    LwipImage * img;
-    unsigned char * buffer;
-    unsigned long bufferSize;
-    int jpegQuality;
-    int pngCompLevel;
-    bool pngInterlaced;
-    bool err;
-    std::string errMsg;
-};
 
 struct resizeBaton {
     uv_work_t request;

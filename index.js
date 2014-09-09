@@ -5,7 +5,9 @@
         async = require('async'),
         decree = require('decree'),
         defs = require('./defs'),
-        lwip = require('./build/Release/lwip');
+        decoder = require('./build/Release/lwip_decoder'),
+        encoder = require('./build/Release/lwip_encoder'),
+        image = require('./build/Release/lwip_image');
 
     var openers = [{
         exts: ['jpg', 'jpeg'],
@@ -19,7 +21,7 @@
         return v !== undefined;
     }
 
-    function image(lwipImage) {
+    function image(pixelsBuf) {
         this.__lwip = lwipImage;
         this.__locked = false;
     }
@@ -507,8 +509,8 @@
     function open() {
         decree(defs.args.open)(arguments, function(impath, type, callback) {
             type = type || path.extname(impath).slice(1);
-            getOpener(type)(impath, function(err, lwipImage) {
-                callback(err, err ? undefined : new image(lwipImage));
+            getOpener(type)(impath, function(err, pixelsBuf) {
+                callback(err, err ? undefined : new image(pixelsBuf));
             });
         });
     }
