@@ -11,10 +11,10 @@
 
     var openers = [{
         exts: ['jpg', 'jpeg'],
-        opener: lwip.openJpeg
+        opener: decoder.jpegFile
     }, {
         exts: ['png'],
-        opener: lwip.openPng
+        opener: decoder.pngFile
     }];
 
     function undefinedFilter(v) {

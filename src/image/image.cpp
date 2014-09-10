@@ -1,10 +1,8 @@
-#include "LwipImage.h"
-#include <cstdio>
+#include "image.h"
 
 Persistent<FunctionTemplate> LwipImage::constructor;
 
 void LwipImage::Init() {
-    fprintf(stderr,"a\n");
     // Prepare constructor template
     Local<FunctionTemplate> tpl = NanNew<FunctionTemplate>(New);
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
@@ -17,8 +15,6 @@ void LwipImage::Init() {
     NODE_SET_PROTOTYPE_METHOD(tpl, "crop", crop);
     NODE_SET_PROTOTYPE_METHOD(tpl, "mirror", mirror);
     NODE_SET_PROTOTYPE_METHOD(tpl, "pad", pad);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "toJpegBuffer", toJpegBuffer);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "toPngBuffer", toPngBuffer);
     NanAssignPersistent(constructor, tpl);
 }
 

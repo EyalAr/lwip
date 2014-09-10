@@ -4,7 +4,10 @@
         "sources": [
             # LWIP: 
             #######
-            "src/LwipDecoder.cpp",
+            "src/decoder/init.cpp",
+            "src/decoder/util.cpp",
+            "src/decoder/file_worker.cpp",
+            "src/decoder/buffer_worker.cpp",
             # LIB JPEG:
             ###########
             "lib/jpeg/jmemnobs.c",
@@ -121,7 +124,9 @@
         "sources": [
             # LWIP: 
             #######
-            "src/LwipEncoder.cpp",
+            "src/encoder/init.cpp",
+            "src/encoder/jpeg_worker.cpp",
+            "src/encoder/png_worker.cpp",
             # LIB JPEG:
             ###########
             "lib/jpeg/jmemnobs.c",
@@ -234,11 +239,13 @@
             }]
         ]
     },{
-        "target_name": "lwip_image",
+        "target_name": "lwip_image_builder",
         "sources": [
             # LWIP: 
             #######
-            "src/LwipImage.cpp",
+            "src/image/init.cpp",
+            "src/image/build_worker.cpp",
+            "src/image/image.cpp",
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',

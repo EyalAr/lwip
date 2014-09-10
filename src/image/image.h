@@ -39,8 +39,8 @@ public:
     static NAN_METHOD(height);
     LwipImage(unsigned char * data, size_t width, size_t height);
     ~LwipImage();
-private:
     CImg<unsigned char> * _cimg;
+private:
     static Persistent<FunctionTemplate> constructor;
 };
 
