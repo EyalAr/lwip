@@ -11,6 +11,7 @@
             # LIB JPEG:
             ###########
             "lib/jpeg/jmemnobs.c",
+            "lib/jpeg/jcomapi.c",
             "lib/jpeg/jdapimin.c",
             "lib/jpeg/jdapistd.c",
             "lib/jpeg/jdatadst.c",
