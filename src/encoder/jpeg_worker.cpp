@@ -45,7 +45,7 @@ void EncodeToJpegBufferWorker::Execute () {
     }
 
     jpeg_create_compress(&cinfo);
-    jpeg_mem_dest(&cinfo, (unsigned char **) &_jpegbuf, &_jpegbufsize);
+    jpeg_mem_dest(&cinfo, (unsigned char **) &_jpegbuf, (unsigned long *) &_jpegbufsize);
     cinfo.image_width = _width;
     cinfo.image_height = _height;
     cinfo.input_components = dimbuf;
