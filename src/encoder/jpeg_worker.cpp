@@ -6,8 +6,18 @@ EncodeToJpegBufferWorker::EncodeToJpegBufferWorker(
     size_t height,
     int quality,
     NanCallback * callback
-): NanAsyncWorker(callback), _pixbuf(pixbuf), _width(width), _height(height),
-    _quality(quality), _jpegbuf(NULL), _jpegbufsize(0) {}
+): NanAsyncWorker(callback), _width(width), _height(height),
+    _quality(quality), _jpegbuf(NULL), _jpegbufsize(0) {
+    // pixbuf needs to be copied, because the buffer may be gc'ed by
+    // V8 at any time.
+    _pixbuf = (unsigned char *) malloc(width * height * 3 * sizeof(unsigned char));
+    if (_pixbuf == NULL) {
+        // TODO: check - can I use SetErrorMessage here?
+        SetErrorMessage("Out of memory");
+        return;
+    }
+    memcpy(_pixbuf, pixbuf, width * height * 3 * sizeof(unsigned char));
+}
 
 EncodeToJpegBufferWorker::~EncodeToJpegBufferWorker() {}
 
@@ -44,6 +54,7 @@ void EncodeToJpegBufferWorker::Execute () {
     jpeg_set_quality(&cinfo, _quality, TRUE);
     jpeg_start_compress(&cinfo, TRUE);
 
+    // shared memory cimg. no new memory is allocated.
     CImg<unsigned char> tmpimg(_pixbuf, _width, _height, 1, 3, true);
     while (cinfo.next_scanline < cinfo.image_height) {
         unsigned char * ptrd = tmp;

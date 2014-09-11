@@ -54,23 +54,3 @@ void DecodeFileWorker::HandleOKCallback () {
     };
     callback->Call(6, argv);
 }
-
-NAN_METHOD(decodeJpegFile) {
-    NanScope();
-
-    NanUtf8String path = NanUtf8String(args[0]);
-    NanCallback * callback = new NanCallback(args[1].As<Function>());
-
-    NanAsyncQueueWorker(new DecodeFileWorker(callback, string(*path), "jpeg"));
-    NanReturnUndefined();
-}
-
-NAN_METHOD(decodePngFile) {
-    NanScope();
-
-    NanUtf8String path = NanUtf8String(args[0]);
-    NanCallback * callback = new NanCallback(args[1].As<Function>());
-
-    NanAsyncQueueWorker(new DecodeFileWorker(callback, string(*path), "png"));
-    NanReturnUndefined();
-}

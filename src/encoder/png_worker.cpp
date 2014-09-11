@@ -7,9 +7,19 @@ EncodeToPngBufferWorker::EncodeToPngBufferWorker(
     int compression,
     bool interlaced,
     NanCallback * callback
-): NanAsyncWorker(callback), _pixbuf(pixbuf), _width(width), _height(height),
+): NanAsyncWorker(callback), _width(width), _height(height),
     _compression(compression), _interlaced(interlaced), _pngbuf(NULL),
-    _pngbufsize(0) {}
+    _pngbufsize(0) {
+    // pixbuf needs to be copied, because the buffer may be gc'ed by
+    // V8 at any time.
+    _pixbuf = (unsigned char *) malloc(width * height * 3 * sizeof(unsigned char));
+    if (_pixbuf == NULL) {
+        // TODO: check - can I use SetErrorMessage here?
+        SetErrorMessage("Out of memory");
+        return;
+    }
+    memcpy(_pixbuf, pixbuf, width * height * 3 * sizeof(unsigned char));
+}
 
 EncodeToPngBufferWorker::~EncodeToPngBufferWorker() {}
 

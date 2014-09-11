@@ -26,7 +26,7 @@ using namespace node;
  */
 class LwipImage : public node::ObjectWrap {
 public:
-    static void Init();
+    static void Init(Handle<Object> exports);
     static Handle<Value> NewInstance();
     static NAN_METHOD(New);
     static NAN_METHOD(resize);
@@ -37,6 +37,7 @@ public:
     static NAN_METHOD(pad);
     static NAN_METHOD(width);
     static NAN_METHOD(height);
+    static NAN_METHOD(buffer);
     LwipImage(unsigned char * data, size_t width, size_t height);
     ~LwipImage();
     CImg<unsigned char> * _cimg;

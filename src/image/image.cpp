@@ -2,13 +2,14 @@
 
 Persistent<FunctionTemplate> LwipImage::constructor;
 
-void LwipImage::Init() {
+void LwipImage::Init(Handle<Object> exports) {
     // Prepare constructor template
     Local<FunctionTemplate> tpl = NanNew<FunctionTemplate>(New);
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
     tpl->SetClassName(NanNew("LwipImage"));
     NODE_SET_PROTOTYPE_METHOD(tpl, "width", width);
     NODE_SET_PROTOTYPE_METHOD(tpl, "height", height);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "buffer", buffer);
     NODE_SET_PROTOTYPE_METHOD(tpl, "resize", resize);
     NODE_SET_PROTOTYPE_METHOD(tpl, "rotate", rotate);
     NODE_SET_PROTOTYPE_METHOD(tpl, "blur", blur);
@@ -16,9 +17,14 @@ void LwipImage::Init() {
     NODE_SET_PROTOTYPE_METHOD(tpl, "mirror", mirror);
     NODE_SET_PROTOTYPE_METHOD(tpl, "pad", pad);
     NanAssignPersistent(constructor, tpl);
+    exports->Set(
+        NanNew("LwipImage"),
+        NanNew<FunctionTemplate>(constructor)->GetFunction()
+    );
 }
 
 LwipImage::LwipImage(unsigned char * data, size_t width, size_t height) {
+    // TODO: CImg constructor may throw an exception. handle it in LwipImage::New.
     _cimg = new CImg<unsigned char>(data, width, height, 1, 3, false);
 }
 
@@ -41,6 +47,7 @@ NAN_METHOD(LwipImage::New) {
     size_t width = args[1]->NumberValue();
     size_t height = args[2]->NumberValue();
     unsigned char * pixels = (unsigned char *)Buffer::Data(pixBuff);
+    // TODO: handle CImg exception
     LwipImage * obj = new LwipImage(pixels, width, height);
     obj->Wrap(args.This());
     NanReturnValue(args.This());
@@ -63,6 +70,16 @@ Handle<Value> LwipImage::height(const Arguments & args) {
     NanScope();
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(args.Holder());
     NanReturnValue(NanNew<Number>(obj->_cimg->height()));
+}
+
+// image.buffer():
+// ---------------
+Handle<Value> LwipImage::buffer(const Arguments & args) {
+    NanScope();
+    LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(args.Holder());
+    // return a new buffer. don't use same memory an image. make a copy.
+    // image object may be gc'ed, but buffer needs to stay alive.
+    NanReturnValue(NanNewBufferHandle((char *)obj->_cimg->data(), obj->_cimg->size()));
 }
 
 // image.resize(width, height, inter, callback):
