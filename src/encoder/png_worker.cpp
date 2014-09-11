@@ -83,7 +83,7 @@ void EncodeToPngBufferWorker::Execute () {
                  PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
     png_set_compression_level(png_ptr, compLevel);
 
-    pngWriteCbData buffinf = {(unsigned char *) _pngbuf, 0};
+    pngWriteCbData buffinf = {NULL, 0};
     png_set_write_fn(png_ptr, (voidp) &buffinf, pngWriteCB, NULL);
 
     CImg<unsigned char> tmpimg(_pixbuf, _width, _height, 1, 3, true);
@@ -99,13 +99,26 @@ void EncodeToPngBufferWorker::Execute () {
 
     png_write_png(png_ptr, info_ptr, PNG_TRANSFORM_IDENTITY, NULL);
 
-    _pngbufsize = buffinf.buffsize;
-
     png_destroy_write_struct(&png_ptr, &info_ptr);
     for (unsigned int r = 0; r < _height; r++) free(rowPnts[r]);
     free(rowPnts);
 
+    _pngbuf = (char *) buffinf.buff;
+    _pngbufsize = buffinf.buffsize;
+
     return;
+}
+
+void EncodeToPngBufferWorker::HandleOKCallback () {
+    NanScope();
+    Local<Value> argv[] = {
+        NanNull(),
+        NanBufferUse(
+            _pngbuf,
+            _pngbufsize
+        )
+    };
+    callback->Call(2, argv);
 }
 
 void pngWriteCB(png_structp png_ptr, png_bytep data, png_size_t length) {
@@ -125,16 +138,4 @@ void pngWriteCB(png_structp png_ptr, png_bytep data, png_size_t length) {
 
     memcpy(buffinf->buff + buffinf->buffsize, data, length);
     buffinf->buffsize += length;
-}
-
-void EncodeToPngBufferWorker::HandleOKCallback () {
-    NanScope();
-    Local<Value> argv[] = {
-        NanNull(),
-        NanBufferUse(
-            _pngbuf,
-            _pngbufsize
-        )
-    };
-    callback->Call(2, argv);
 }
