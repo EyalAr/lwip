@@ -120,6 +120,7 @@
             "lib/jpeg/jcparam.c",
             "lib/jpeg/jcprepct.c",
             "lib/jpeg/jcsample.c",
+            "lib/jpeg/jdatadst.c",
             "lib/jpeg/jerror.c",
             "lib/jpeg/jfdctflt.c",
             "lib/jpeg/jfdctfst.c",
