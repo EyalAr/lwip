@@ -67,9 +67,9 @@ class RotateWorker : public NanAsyncWorker {
 public:
     RotateWorker(
         float degs,
-        int r,
-        int g,
-        int b,
+        unsigned char r,
+        unsigned char g,
+        unsigned char b,
         CImg<unsigned char> * cimg,
         NanCallback * callback
     );
@@ -78,9 +78,9 @@ public:
     void HandleOKCallback ();
 private:
     float _degs;
-    int _r;
-    int _g;
-    int _b;
+    unsigned char _r;
+    unsigned char _g;
+    unsigned char _b;
     CImg<unsigned char> * _cimg;
 };
 
@@ -137,20 +137,31 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-void padAsync(uv_work_t * request);
-void padAsyncDone(uv_work_t * request, int status);
-
-struct padBaton {
-    uv_work_t request;
-    v8::Persistent<Function> cb;
-    LwipImage * img;
-    unsigned int left;
-    unsigned int top;
-    unsigned int right;
-    unsigned int bottom;
-    unsigned char color[3];
-    bool err;
-    std::string errMsg;
+class PadWorker : public NanAsyncWorker {
+public:
+    PadWorker(
+        size_t left,
+        size_t top,
+        size_t right,
+        size_t bottom,
+        unsigned char r,
+        unsigned char g,
+        unsigned char b,
+        CImg<unsigned char> * cimg,
+        NanCallback * callback
+    );
+    ~PadWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
+    size_t _left;
+    size_t _top;
+    size_t _right;
+    size_t _bottom;
+    unsigned char _r;
+    unsigned char _g;
+    unsigned char _b;
+    CImg<unsigned char> * _cimg;
 };
 
 #endif

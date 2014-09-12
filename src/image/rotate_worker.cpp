@@ -2,9 +2,9 @@
 
 RotateWorker::RotateWorker(
     float degs,
-    int r,
-    int g,
-    int b,
+    unsigned char r,
+    unsigned char g,
+    unsigned char b,
     CImg<unsigned char> * cimg,
     NanCallback * callback
 ): NanAsyncWorker(callback), _degs(degs), _r(r), _g(g), _b(b), _cimg(cimg) {}
@@ -15,8 +15,8 @@ void RotateWorker::Execute () {
     const float nangle = cimg::mod(_degs, 360.0f);
     if (cimg::mod(nangle, 90.0f) != 0) {
         CImg<unsigned char> * res;
-        unsigned int oldwidth = _cimg->width(),
-                     oldheight = _cimg->height();
+        size_t oldwidth = _cimg->width(),
+               oldheight = _cimg->height();
         try {
             // 2 pixels wider and taller
             res = new CImg<unsigned char>(oldwidth + 2, oldheight + 2, 1, 3);

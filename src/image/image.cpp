@@ -123,9 +123,9 @@ Handle<Value> LwipImage::rotate(const Arguments & args) {
     NanScope();
 
     float degs = (float) args[0].As<Number>()->Value();
-    int r = args[1].As<Integer>()->Value();
-    int g = args[2].As<Integer>()->Value();
-    int b = args[3].As<Integer>()->Value();
+    unsigned char r = (unsigned char) args[1].As<Integer>()->Value();
+    unsigned char g = (unsigned char) args[2].As<Integer>()->Value();
+    unsigned char b = (unsigned char) args[3].As<Integer>()->Value();
     NanCallback * callback = new NanCallback(args[4].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
@@ -228,105 +228,39 @@ Handle<Value> LwipImage::mirror(const Arguments & args) {
 // -----------------------------------------------------
 
 // args[0] - left
-// args[1] - right
-// args[2] - top
+// args[1] - top
+// args[2] - right
 // args[3] - bottom
 // args[4] - red
 // args[5] - green
 // args[6] - blue
 // args[7] - callback
 Handle<Value> LwipImage::pad(const Arguments & args) {
-    HandleScope scope;
-    // (arguments validation is done in JS land)
-    padBaton * pb = new padBaton();
-    if (pb == NULL) {
-        ThrowException(Exception::TypeError(NanNew<String>("Out of memory")));
-        return scope.Close(Undefined());
-    }
-    pb->request.data = pb;
-    pb->cb = Persistent<Function>::New(Local<Function>::Cast(args[7]));
-    pb->left = (int) args[0]->NumberValue();
-    pb->top = (int) args[1]->NumberValue();
-    pb->right = (int) args[2]->NumberValue();
-    pb->bottom = (int) args[3]->NumberValue();
-    pb->color[0] = (unsigned char) args[4]->NumberValue();
-    pb->color[1] = (unsigned char) args[5]->NumberValue();
-    pb->color[2] = (unsigned char) args[6]->NumberValue();
-    pb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
-    pb->err = false;
-    uv_queue_work(uv_default_loop(), &pb->request, padAsync, padAsyncDone);
-    return scope.Close(Undefined());
-}
+    NanScope();
 
-void padAsync(uv_work_t * request) {
-    padBaton * pb = static_cast<padBaton *>(request->data);
-    CImg<unsigned char> * res;
-    unsigned int oldwidth = pb->img->_cimg->width(),
-                 oldheight = pb->img->_cimg->height(),
-                 newwidth = oldwidth + pb->left + pb->right,
-                 newheight = oldheight + pb->top + pb->bottom;
-    if (oldwidth != newwidth || oldheight != newheight) {
-        try {
-            res = new CImg<unsigned char>(newwidth, newheight, 1, 3);
-        } catch (CImgException e) {
-            pb->err = true;
-            pb->errMsg = "Out of memory";
-            return;
-        }
-        // fill left border:
-        for (unsigned int x = 0; x < pb->left; x++) {
-            for (unsigned int y = 0; y < newheight; y++) {
-                res->fillC(x, y, 0, pb->color[0], pb->color[1], pb->color[2]);
-            }
-        }
-        // fill right border:
-        for (unsigned int x = oldwidth + pb->left; x < newwidth; x++) {
-            for (unsigned int y = 0; y < newheight; y++) {
-                res->fillC(x, y, 0, pb->color[0], pb->color[1], pb->color[2]);
-            }
-        }
-        // fill top border:
-        for (unsigned int x = pb->left; x < oldwidth + pb->left; x++) {
-            for (unsigned int y = 0; y < pb->top; y++) {
-                res->fillC(x, y, 0, pb->color[0], pb->color[1], pb->color[2]);
-            }
-        }
-        // fill bottom border:
-        for (unsigned int x = pb->left; x < oldwidth + pb->left; x++) {
-            for (unsigned int y = pb->top + oldheight; y < newheight; y++) {
-                res->fillC(x, y, 0, pb->color[0], pb->color[1], pb->color[2]);
-            }
-        }
-        // paste original image:
-        cimg_forXY(*(pb->img->_cimg), x, y) {
-            unsigned char r = (*(pb->img->_cimg))(x, y, 0, 0),
-                          g = (*(pb->img->_cimg))(x, y, 0, 1),
-                          b = (*(pb->img->_cimg))(x, y, 0, 2);
-            res->fillC(x + pb->left, y + pb->top, 0, r, g, b);
-        }
-        delete pb->img->_cimg;
-        pb->img->_cimg = res;
-    }
-    return;
-}
+    size_t left = (size_t) args[0].As<Number>()->Value();
+    size_t top = (size_t) args[1].As<Number>()->Value();
+    size_t right = (size_t) args[2].As<Number>()->Value();
+    size_t bottom = (size_t) args[3].As<Number>()->Value();
+    unsigned char r = (unsigned char) args[4].As<Integer>()->Value();
+    unsigned char g = (unsigned char) args[5].As<Integer>()->Value();
+    unsigned char b = (unsigned char) args[6].As<Integer>()->Value();
+    NanCallback * callback = new NanCallback(args[7].As<Function>());
+    CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
-void padAsyncDone(uv_work_t * request, int status) {
-    // pad completed. now we call the callback.
-    padBaton * pb = static_cast<padBaton *>(request->data);
-    if (pb->err) {
-        const unsigned int argc = 1;
-        Local<Value> argv[argc] = {
-            Local<Value>::New(Exception::Error(NanNew<String>(pb->errMsg.c_str())))
-        };
-        pb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
-    } else {
-        const unsigned int argc = 1;
-        Handle<Value> argv[argc] = {
-            Local<Value>::New(Null())
-        };
-        pb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
-    }
-    // dispose of cb, because it's a persistent function
-    pb->cb.Dispose();
-    delete pb;
+    NanAsyncQueueWorker(
+        new PadWorker(
+            left,
+            top,
+            right,
+            bottom,
+            r,
+            g,
+            b,
+            cimg,
+            callback
+        )
+    );
+
+    NanReturnUndefined();
 }
