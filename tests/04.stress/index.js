@@ -30,9 +30,9 @@ describe('stress tests', function() {
         });
     });
 
-    describe('open image 500 times (in parallel) and save to disk as png (high compression, interlaced)', function() {
+    describe('open image 100 times (in parallel) and save to disk as png (high compression, interlaced)', function() {
         it('should succeed', function(done) {
-            async.times(500, function(i, done) {
+            async.times(100, function(i, done) {
                 lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
                     if (err) return done(err);
                     image.writeFile(outpathPng, 'png', {
@@ -58,14 +58,14 @@ describe('stress tests', function() {
         });
     });
 
-    describe('10 random manipulations for 100 images', function() {
+    describe('10 random manipulations for 50 images', function() {
         it('should succeed', function(done) {
-            async.times(100, function(i, done) {
+            async.times(50, function(i, done) {
                 lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
                     if (err) return done(err);
                     var batch = image.batch();
                     for (var i = 0; i < 10; i++) {
-                        var r = Math.floor(Math.random() * 5);
+                        var r = Math.floor(Math.random() * 7);
                         switch (r) {
                             case 0:
                                 batch = batch.blur(5);
@@ -79,8 +79,14 @@ describe('stress tests', function() {
                             case 3:
                                 batch = batch.crop(100, 150);
                                 break;
-                            case 0:
+                            case 4:
                                 batch = batch.scale(1.1, 0.66);
+                                break;
+                            case 5:
+                                batch = batch.mirror('xy');
+                                break;
+                            case 6:
+                                batch = batch.border(10);
                                 break;
                         }
                     }
@@ -92,12 +98,12 @@ describe('stress tests', function() {
         });
     });
 
-    describe('rotate an image 100 times (up to 90degs)', function() {
+    describe('rotate an image 50 times (up to 90degs)', function() {
         it('should succeed', function(done) {
-            var a = 0.9;
+            var a = 1.8;
             lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
                 if (err) return done(err);
-                async.timesSeries(100, function(i, done) {
+                async.timesSeries(50, function(i, done) {
                     image.rotate(a, 'black', done);
                 }, function(err) {
                     if (err) return done(err);

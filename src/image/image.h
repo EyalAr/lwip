@@ -39,9 +39,9 @@ public:
     static NAN_METHOD(buffer);
     LwipImage(unsigned char * data, size_t width, size_t height);
     ~LwipImage();
-    CImg<unsigned char> * _cimg;
 private:
     static Persistent<FunctionTemplate> constructor;
+    CImg<unsigned char> * _cimg;
 };
 
 class ResizeWorker : public NanAsyncWorker {
