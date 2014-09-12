@@ -175,55 +175,27 @@ Handle<Value> LwipImage::blur(const Arguments & args) {
 // args[3] - bottom
 // args[4] - callback
 Handle<Value> LwipImage::crop(const Arguments & args) {
-    HandleScope scope;
-    // (arguments validation is done in JS land)
-    cropBaton * cb = new cropBaton();
-    if (cb == NULL) {
-        ThrowException(Exception::TypeError(NanNew<String>("Out of memory")));
-        return scope.Close(Undefined());
-    }
-    cb->request.data = cb;
-    cb->cb = Persistent<Function>::New(Local<Function>::Cast(args[4]));
-    cb->left = (unsigned int) args[0]->NumberValue();
-    cb->top = (unsigned int) args[1]->NumberValue();
-    cb->right = (unsigned int) args[2]->NumberValue();
-    cb->bottom = (unsigned int) args[3]->NumberValue();
-    cb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
-    cb->err = false;
-    uv_queue_work(uv_default_loop(), &cb->request, cropAsync, cropAsyncDone);
-    return scope.Close(Undefined());
-}
+    NanScope();
 
-void cropAsync(uv_work_t * request) {
-    cropBaton * cb = static_cast<cropBaton *>(request->data);
-    try {
-        cb->img->_cimg->crop(cb->left, cb->top, 0, 0, cb->right, cb->bottom, 0, 2);
-    } catch (CImgException e) {
-        cb->err = true;
-        cb->errMsg = "Unable to crop image";
-    }
-    return;
-}
+    size_t left = (size_t) args[0].As<Number>()->Value();
+    size_t top = (size_t) args[1].As<Number>()->Value();
+    size_t right = (size_t) args[2].As<Number>()->Value();
+    size_t bottom = (size_t) args[3].As<Number>()->Value();
+    NanCallback * callback = new NanCallback(args[4].As<Function>());
+    CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
-void cropAsyncDone(uv_work_t * request, int status) {
-    // crop completed. now we call the callback.
-    cropBaton * cb = static_cast<cropBaton *>(request->data);
-    if (cb->err) {
-        const unsigned int argc = 1;
-        Local<Value> argv[argc] = {
-            Local<Value>::New(Exception::Error(NanNew<String>(cb->errMsg.c_str())))
-        };
-        cb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
-    } else {
-        const unsigned int argc = 1;
-        Handle<Value> argv[argc] = {
-            Local<Value>::New(Null())
-        };
-        cb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
-    }
-    // dispose of cb, because it's a persistent function
-    cb->cb.Dispose();
-    delete cb;
+    NanAsyncQueueWorker(
+        new CropWorker(
+            left,
+            top,
+            right,
+            bottom,
+            cimg,
+            callback
+        )
+    );
+
+    NanReturnUndefined();
 }
 
 // image.mirror(xaxis, yaxis, callback):

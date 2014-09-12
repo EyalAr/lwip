@@ -99,21 +99,31 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-void cropAsync(uv_work_t * request);
-void cropAsyncDone(uv_work_t * request, int status);
+class CropWorker : public NanAsyncWorker {
+public:
+    CropWorker(
+        size_t left,
+        size_t top,
+        size_t right,
+        size_t bottom,
+        CImg<unsigned char> * cimg,
+        NanCallback * callback
+    );
+    ~CropWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
+    size_t _left;
+    size_t _top;
+    size_t _right;
+    size_t _bottom;
+    CImg<unsigned char> * _cimg;
+};
+
 void mirrorAsync(uv_work_t * request);
 void mirrorAsyncDone(uv_work_t * request, int status);
 void padAsync(uv_work_t * request);
 void padAsyncDone(uv_work_t * request, int status);
-
-struct cropBaton {
-    uv_work_t request;
-    v8::Persistent<Function> cb;
-    LwipImage * img;
-    unsigned int left, top, right, bottom;
-    bool err;
-    std::string errMsg;
-};
 
 struct mirrorBaton {
     uv_work_t request;
