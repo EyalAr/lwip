@@ -21,12 +21,13 @@ using namespace std;
 
 class DecodeBufferWorker : public NanAsyncWorker {
 public:
-    DecodeBufferWorker(NanCallback * callback, char * buffer, string type);
+    DecodeBufferWorker(NanCallback * callback, char * buffer, size_t buffsize, string type);
     ~DecodeBufferWorker();
     void Execute ();
     void HandleOKCallback ();
 private:
     char * _buffer;
+    size_t _buffsize;
     string _type;
     unsigned char * _pixbuf;
     size_t _width;
@@ -35,21 +36,15 @@ private:
     bool _trans; // transparency
 };
 
-class DecodeFileWorker : public NanAsyncWorker {
-public:
-    DecodeFileWorker(NanCallback * callback, string path, string type);
-    ~DecodeFileWorker();
-    void Execute ();
-    void HandleOKCallback ();
-private:
-    string _path;
-    string _type;
-    unsigned char * _pixbuf;
-    size_t _width;
-    size_t _height;
-    int _channels;
-    bool _trans; // transparency
+struct lwip_jpeg_error_mgr {
+    struct jpeg_error_mgr pub;
+    jmp_buf setjmp_buffer;
 };
+
+inline void lwip_jpeg_error_exit (j_common_ptr cinfo) {
+    lwip_jpeg_error_mgr * lwip_jpeg_err = (lwip_jpeg_error_mgr *) cinfo->err;
+    longjmp(lwip_jpeg_err->setjmp_buffer, 1);
+}
 
 /**
  * Utility function to take a CIMG object (**tmp), and convert it to 3 channels
@@ -58,8 +53,9 @@ private:
  */
 string to3Channels(CImg<unsigned char> ** img);
 
-NAN_METHOD(decodeJpegFile);
-NAN_METHOD(decodePngFile);
+CImg<unsigned char> * decode_jpeg_buffer(char * buffer, size_t size);
+CImg<unsigned char> * decode_png_buffer(char * buffer, size_t size);
+
 NAN_METHOD(decodeJpegBuffer);
 NAN_METHOD(decodePngBuffer);
 void initAll(Handle<Object> exports);

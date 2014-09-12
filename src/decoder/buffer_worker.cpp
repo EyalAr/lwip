@@ -1,13 +1,40 @@
 #include "decoder.h"
 
-DecodeBufferWorker::DecodeBufferWorker(NanCallback * callback, char * buffer, string type)
-    : NanAsyncWorker(callback), _buffer(buffer), _type(type), _pixbuf(NULL),
-      _width(0), _height(0), _channels(0), _trans(false) {}
+DecodeBufferWorker::DecodeBufferWorker(
+    NanCallback * callback,
+    char * buffer,
+    size_t buffsize,
+    string type
+): NanAsyncWorker(callback), _buffer(buffer), _buffsize(buffsize),
+    _type(type), _pixbuf(NULL), _width(0), _height(0), _channels(0),
+    _trans(false) {}
 
 DecodeBufferWorker::~DecodeBufferWorker() {}
 
 void DecodeBufferWorker::Execute () {
-    SetErrorMessage("Decoding buffers is not yet supported");
+    CImg<unsigned char> * img = NULL;
+    if (_type == "jpeg") img = decode_jpeg_buffer(_buffer, _buffsize);
+    // else if (_type == "png") img = decode_png_buffer(_buffer, _buffsize);
+    // TODO: GIF support.
+    // no other types for now
+    if (img == NULL) {
+        SetErrorMessage("Unable to decode buffer");
+        return;
+    }
+    string err = to3Channels(&img);
+    if (err != "") {
+        if (img) delete img;
+        SetErrorMessage(err.c_str());
+        return;
+    }
+    img->_is_shared = true; // don't free image data. need it for callback.
+    _pixbuf = img->data();
+    _width = img->width();
+    _height = img->height();
+    // TODO: support transparency:
+    _channels = 3;
+    _trans = false;
+    delete img;
     return;
 }
 
@@ -15,29 +42,14 @@ void DecodeBufferWorker::HandleOKCallback () {
     NanScope();
     Local<Value> argv[] = {
         NanNull(),
-        NanNull()
+        NanBufferUse(
+            (char *) _pixbuf,
+            _width * _height * _channels
+        ),
+        NanNew<Number>(_width),
+        NanNew<Number>(_height),
+        NanNew<Number>(_channels),
+        NanNew<Boolean>(_trans)
     };
-    callback->Call(2, argv);
-}
-
-NAN_METHOD(decodeJpegBuffer) {
-    NanScope();
-
-    Local<Object> jpegBuff = args[0].As<Object>();
-    char * buffer = Buffer::Data(jpegBuff);
-    NanCallback * callback = new NanCallback(args[1].As<Function>());
-
-    NanAsyncQueueWorker(new DecodeBufferWorker(callback, buffer, "jpeg"));
-    NanReturnUndefined();
-}
-
-NAN_METHOD(decodePngBuffer) {
-    NanScope();
-
-    Local<Object> pngBuff = args[0].As<Object>();
-    char * buffer = Buffer::Data(pngBuff);
-    NanCallback * callback = new NanCallback(args[1].As<Function>());
-
-    NanAsyncQueueWorker(new DecodeBufferWorker(callback, buffer, "png"));
-    NanReturnUndefined();
+    callback->Call(6, argv);
 }
