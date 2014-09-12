@@ -32,11 +32,11 @@ LwipImage::~LwipImage() {
     delete _cimg;
 };
 
-Handle<Value> LwipImage::NewInstance() {
+NAN_METHOD(LwipImage::NewInstance) {
     NanEscapableScope();
     Local<FunctionTemplate> constructorHandle = NanNew<FunctionTemplate>(constructor);
     Local<Object> instance = constructorHandle->GetFunction()->NewInstance();
-    return NanEscapeScope(instance);
+    NanEscapeScope(instance);
 }
 
 NAN_METHOD(LwipImage::New) {
@@ -66,7 +66,7 @@ NAN_METHOD(LwipImage::width) {
 
 // image.height():
 // ---------------
-Handle<Value> LwipImage::height(const Arguments & args) {
+NAN_METHOD(LwipImage::height) {
     NanScope();
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(args.Holder());
     NanReturnValue(NanNew<Number>(obj->_cimg->height()));
@@ -74,7 +74,7 @@ Handle<Value> LwipImage::height(const Arguments & args) {
 
 // image.buffer():
 // ---------------
-Handle<Value> LwipImage::buffer(const Arguments & args) {
+NAN_METHOD(LwipImage::buffer) {
     NanScope();
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(args.Holder());
     // return a new buffer. don't use same memory an image. make a copy.
@@ -89,7 +89,7 @@ Handle<Value> LwipImage::buffer(const Arguments & args) {
 // args[1] - height
 // args[2] - inter(polation)
 // args[3] - callback
-Handle<Value> LwipImage::resize(const Arguments & args) {
+NAN_METHOD(LwipImage::resize) {
     NanScope();
 
     size_t width = args[0].As<Integer>()->Value();
@@ -119,7 +119,7 @@ Handle<Value> LwipImage::resize(const Arguments & args) {
 // args[2] - G
 // args[3] - B
 // args[4] - callback
-Handle<Value> LwipImage::rotate(const Arguments & args) {
+NAN_METHOD(LwipImage::rotate) {
     NanScope();
 
     float degs = (float) args[0].As<Number>()->Value();
@@ -148,7 +148,7 @@ Handle<Value> LwipImage::rotate(const Arguments & args) {
 
 // args[0] - sigma
 // args[1] - callback
-Handle<Value> LwipImage::blur(const Arguments & args) {
+NAN_METHOD(LwipImage::blur) {
     NanScope();
 
     float sigma = (float) args[0].As<Number>()->Value();
@@ -174,7 +174,7 @@ Handle<Value> LwipImage::blur(const Arguments & args) {
 // args[2] - right
 // args[3] - bottom
 // args[4] - callback
-Handle<Value> LwipImage::crop(const Arguments & args) {
+NAN_METHOD(LwipImage::crop) {
     NanScope();
 
     size_t left = (size_t) args[0].As<Number>()->Value();
@@ -204,7 +204,7 @@ Handle<Value> LwipImage::crop(const Arguments & args) {
 // args[0] - xaxis (boolean)
 // args[1] - yaxis (boolean)
 // args[2] - callback
-Handle<Value> LwipImage::mirror(const Arguments & args) {
+NAN_METHOD(LwipImage::mirror) {
     NanScope();
 
     bool xaxis = args[0]->BooleanValue();
@@ -235,7 +235,7 @@ Handle<Value> LwipImage::mirror(const Arguments & args) {
 // args[5] - green
 // args[6] - blue
 // args[7] - callback
-Handle<Value> LwipImage::pad(const Arguments & args) {
+NAN_METHOD(LwipImage::pad) {
     NanScope();
 
     size_t left = (size_t) args[0].As<Number>()->Value();
