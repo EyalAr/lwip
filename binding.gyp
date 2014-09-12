@@ -246,6 +246,7 @@
             "src/image/init.cpp",
             "src/image/image.cpp",
             "src/image/resize_worker.cpp",
+            "src/image/rotate_worker.cpp",
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',

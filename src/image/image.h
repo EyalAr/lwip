@@ -63,8 +63,27 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-void rotateAsync(uv_work_t * request);
-void rotateAsyncDone(uv_work_t * request, int status);
+class RotateWorker : public NanAsyncWorker {
+public:
+    RotateWorker(
+        float degs,
+        int r,
+        int g,
+        int b,
+        CImg<unsigned char> * cimg,
+        NanCallback * callback
+    );
+    ~RotateWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
+    float _degs;
+    int _r;
+    int _g;
+    int _b;
+    CImg<unsigned char> * _cimg;
+};
+
 void blurAsync(uv_work_t * request);
 void blurAsyncDone(uv_work_t * request, int status);
 void cropAsync(uv_work_t * request);
@@ -73,16 +92,6 @@ void mirrorAsync(uv_work_t * request);
 void mirrorAsyncDone(uv_work_t * request, int status);
 void padAsync(uv_work_t * request);
 void padAsyncDone(uv_work_t * request, int status);
-
-struct rotateBaton {
-    uv_work_t request;
-    v8::Persistent<Function> cb;
-    LwipImage * img;
-    float degs;
-    unsigned char color[3];
-    bool err;
-    std::string errMsg;
-};
 
 struct blurBaton {
     uv_work_t request;

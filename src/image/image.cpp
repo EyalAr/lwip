@@ -120,87 +120,27 @@ Handle<Value> LwipImage::resize(const Arguments & args) {
 // args[3] - B
 // args[4] - callback
 Handle<Value> LwipImage::rotate(const Arguments & args) {
-    HandleScope scope;
-    // (arguments validation is done in JS land)
-    rotateBaton * rb = new rotateBaton();
-    if (rb == NULL) {
-        ThrowException(Exception::TypeError(NanNew<String>("Out of memory")));
-        return scope.Close(Undefined());
-    }
-    rb->request.data = rb;
-    rb->cb = Persistent<Function>::New(Local<Function>::Cast(args[4]));
-    rb->degs = (float) args[0]->NumberValue();
-    rb->color[0] = (unsigned char) args[1]->NumberValue();
-    rb->color[1] = (unsigned char) args[2]->NumberValue();
-    rb->color[2] = (unsigned char) args[3]->NumberValue();
-    rb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
-    rb->err = false;
-    uv_queue_work(uv_default_loop(), &rb->request, rotateAsync, rotateAsyncDone);
-    return scope.Close(Undefined());
-}
+    NanScope();
 
-void rotateAsync(uv_work_t * request) {
-    rotateBaton * rb = static_cast<rotateBaton *>(request->data);
-    const float nangle = cimg::mod(rb->degs, 360.0f);
-    if (cimg::mod(nangle, 90.0f) != 0) {
-        CImg<unsigned char> * res;
-        unsigned int oldwidth = rb->img->_cimg->width(),
-                     oldheight = rb->img->_cimg->height();
-        try {
-            // 2 pixels wider and taller
-            res = new CImg<unsigned char>(oldwidth + 2, oldheight + 2, 1, 3);
-        } catch (CImgException e) {
-            rb->err = true;
-            rb->errMsg = "Out of memory";
-            return;
-        }
-        cimg_forX(*res, x) {
-            res->fillC(x, 0, 0, rb->color[0], rb->color[1], rb->color[2]);
-            res->fillC(x, oldheight + 1, 0, rb->color[0], rb->color[1], rb->color[2]);
-        }
-        cimg_forY(*res, y) {
-            res->fillC(0, y, 0, rb->color[0], rb->color[1], rb->color[2]);
-            res->fillC(oldwidth + 1, y, 0, rb->color[0], rb->color[1], rb->color[2]);
-        }
-        cimg_forXY(*(rb->img->_cimg), x, y) {
-            unsigned char r = (*(rb->img->_cimg))(x, y, 0, 0),
-                          g = (*(rb->img->_cimg))(x, y, 0, 1),
-                          b = (*(rb->img->_cimg))(x, y, 0, 2);
-            res->fillC(x + 1, y + 1, 0, r, g, b);
-        }
-        delete rb->img->_cimg;
-        rb->img->_cimg = res;
-    }
-    try {
-        // linear interpolations = 1
-        // neumann boundary condition = 1
-        rb->img->_cimg->rotate(nangle, 1, 1);
-    } catch (CImgException e) {
-        rb->err = true;
-        rb->errMsg = "Unable to rotate image";
-    }
-    return;
-}
+    float degs = (float) args[0].As<Number>()->Value();
+    int r = args[1].As<Integer>()->Value();
+    int g = args[2].As<Integer>()->Value();
+    int b = args[3].As<Integer>()->Value();
+    NanCallback * callback = new NanCallback(args[4].As<Function>());
+    CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
-void rotateAsyncDone(uv_work_t * request, int status) {
-    // rotate completed. now we call the callback.
-    rotateBaton * rb = static_cast<rotateBaton *>(request->data);
-    if (rb->err) {
-        const unsigned int argc = 1;
-        Local<Value> argv[argc] = {
-            Local<Value>::New(Exception::Error(NanNew<String>(rb->errMsg.c_str())))
-        };
-        rb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
-    } else {
-        const unsigned int argc = 1;
-        Handle<Value> argv[argc] = {
-            Local<Value>::New(Null())
-        };
-        rb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
-    }
-    // dispose of cb, because it's a persistent function
-    rb->cb.Dispose();
-    delete rb;
+    NanAsyncQueueWorker(
+        new RotateWorker(
+            degs,
+            r,
+            g,
+            b,
+            cimg,
+            callback
+        )
+    );
+
+    NanReturnUndefined();
 }
 
 // image.blur(sigma, callback):
