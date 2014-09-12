@@ -90,54 +90,25 @@ Handle<Value> LwipImage::buffer(const Arguments & args) {
 // args[2] - inter(polation)
 // args[3] - callback
 Handle<Value> LwipImage::resize(const Arguments & args) {
-    HandleScope scope;
-    // (arguments validation is done in JS land)
-    resizeBaton * rb = new resizeBaton();
-    if (rb == NULL) {
-        ThrowException(Exception::TypeError(NanNew<String>("Out of memory")));
-        return scope.Close(Undefined());
-    }
-    rb->request.data = rb;
-    rb->cb = Persistent<Function>::New(Local<Function>::Cast(args[3]));
-    rb->width = (unsigned int) args[0]->NumberValue();
-    rb->height = (unsigned int) args[1]->NumberValue();
-    rb->inter = (unsigned int) args[2]->NumberValue();
-    rb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
-    rb->err = false;
-    uv_queue_work(uv_default_loop(), &rb->request, resizeAsync, resizeAsyncDone);
-    return scope.Close(Undefined());
-}
+    NanScope();
 
-void resizeAsync(uv_work_t * request) {
-    resizeBaton * rb = static_cast<resizeBaton *>(request->data);
-    try {
-        rb->img->_cimg->resize(rb->width, rb->height, -100, -100, rb->inter);
-    } catch (CImgException e) {
-        rb->err = true;
-        rb->errMsg = "Unable to resize image";
-    }
-    return;
-}
+    size_t width = args[0].As<Integer>()->Value();
+    size_t height = args[1].As<Integer>()->Value();
+    int inter = args[2].As<Integer>()->Value();
+    NanCallback * callback = new NanCallback(args[3].As<Function>());
+    CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
-void resizeAsyncDone(uv_work_t * request, int status) {
-    // resize completed. now we call the callback.
-    resizeBaton * rb = static_cast<resizeBaton *>(request->data);
-    if (rb->err) {
-        const unsigned int argc = 1;
-        Local<Value> argv[argc] = {
-            Local<Value>::New(Exception::Error(NanNew<String>(rb->errMsg.c_str())))
-        };
-        rb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
-    } else {
-        const unsigned int argc = 1;
-        Handle<Value> argv[argc] = {
-            Local<Value>::New(Null())
-        };
-        rb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
-    }
-    // dispose of cb, because it's a persistent function
-    rb->cb.Dispose();
-    delete rb;
+    NanAsyncQueueWorker(
+        new ResizeWorker(
+            width,
+            height,
+            inter,
+            cimg,
+            callback
+        )
+    );
+
+    NanReturnUndefined();
 }
 
 // image.rotate(degs, inter, callback):

@@ -44,8 +44,25 @@ private:
     static Persistent<FunctionTemplate> constructor;
 };
 
-void resizeAsync(uv_work_t * request);
-void resizeAsyncDone(uv_work_t * request, int status);
+class ResizeWorker : public NanAsyncWorker {
+public:
+    ResizeWorker(
+        size_t width,
+        size_t height,
+        int inter,
+        CImg<unsigned char> * cimg,
+        NanCallback * callback
+    );
+    ~ResizeWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
+    size_t _width;
+    size_t _height;
+    int _inter;
+    CImg<unsigned char> * _cimg;
+};
+
 void rotateAsync(uv_work_t * request);
 void rotateAsyncDone(uv_work_t * request, int status);
 void blurAsync(uv_work_t * request);
@@ -56,17 +73,6 @@ void mirrorAsync(uv_work_t * request);
 void mirrorAsyncDone(uv_work_t * request, int status);
 void padAsync(uv_work_t * request);
 void padAsyncDone(uv_work_t * request, int status);
-
-struct resizeBaton {
-    uv_work_t request;
-    v8::Persistent<Function> cb;
-    LwipImage * img;
-    int width;
-    int height;
-    int inter;
-    bool err;
-    std::string errMsg;
-};
 
 struct rotateBaton {
     uv_work_t request;
