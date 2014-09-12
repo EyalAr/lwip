@@ -5,22 +5,24 @@
         async = require('async'),
         decree = require('decree'),
         defs = require('./defs'),
-        lwip = require('./build/Release/lwip');
+        decoder = require('./build/Release/lwip_decoder'),
+        encoder = require('./build/Release/lwip_encoder'),
+        lwip_image = require('./build/Release/lwip_image');
 
     var openers = [{
         exts: ['jpg', 'jpeg'],
-        opener: lwip.openJpeg
+        opener: decoder.jpegFile
     }, {
         exts: ['png'],
-        opener: lwip.openPng
+        opener: decoder.pngFile
     }];
 
     function undefinedFilter(v) {
         return v !== undefined;
     }
 
-    function image(lwipImage) {
-        this.__lwip = lwipImage;
+    function image(pixelsBuf, width, height) {
+        this.__lwip = new lwip_image.LwipImage(pixelsBuf, width, height);
         this.__locked = false;
     }
 
@@ -268,10 +270,16 @@
                     params.quality = params.quality || defs.defaults.DEF_JPEG_QUALITY;
                     if (params.quality != parseInt(params.quality) || params.quality < 0 || params.quality > 100)
                         throw Error('Invalid JPEG quality');
-                    return that.__lwip.toJpegBuffer(params.quality, function(err, buffer) {
-                        that.__release();
-                        callback(err, buffer);
-                    });
+                    return encoder.jpeg(
+                        that.__lwip.buffer(),
+                        that.__lwip.width(),
+                        that.__lwip.height(),
+                        params.quality,
+                        function(err, buffer) {
+                            that.__release();
+                            callback(err, buffer);
+                        }
+                    );
                 } else if (type === 'png') {
                     params.compression = params.compression || defs.defaults.PNG_DEF_COMPRESSION;
                     if (params.compression === 'none') params.compression = 0;
@@ -280,10 +288,17 @@
                     else throw Error('Invalid PNG compression');
                     params.interlaced = params.interlaced || defs.defaults.PNG_DEF_INTERLACED;
                     if (typeof params.interlaced !== 'boolean') throw Error('PNG \'interlaced\' must be boolean');
-                    return that.__lwip.toPngBuffer(params.compression, params.interlaced, function(err, buffer) {
-                        that.__release();
-                        callback(err, buffer);
-                    });
+                    return encoder.png(
+                        that.__lwip.buffer(),
+                        that.__lwip.width(),
+                        that.__lwip.height(),
+                        params.compression, 
+                        params.interlaced,
+                        function(err, buffer) {
+                            that.__release();
+                            callback(err, buffer);
+                        }
+                    );
                 } else throw Error('Unknown type \'' + type + '\'');
             });
         } catch (e) {
@@ -507,8 +522,8 @@
     function open() {
         decree(defs.args.open)(arguments, function(impath, type, callback) {
             type = type || path.extname(impath).slice(1);
-            getOpener(type)(impath, function(err, lwipImage) {
-                callback(err, err ? undefined : new image(lwipImage));
+            getOpener(type)(impath, function(err, pixelsBuf, width, height) {
+                callback(err, err ? undefined : new image(pixelsBuf, width, height));
             });
         });
     }
