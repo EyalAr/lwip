@@ -84,23 +84,27 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-void blurAsync(uv_work_t * request);
-void blurAsyncDone(uv_work_t * request, int status);
+class BlurWorker : public NanAsyncWorker {
+public:
+    BlurWorker(
+        float sigma,
+        CImg<unsigned char> * cimg,
+        NanCallback * callback
+    );
+    ~BlurWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
+    float _sigma;
+    CImg<unsigned char> * _cimg;
+};
+
 void cropAsync(uv_work_t * request);
 void cropAsyncDone(uv_work_t * request, int status);
 void mirrorAsync(uv_work_t * request);
 void mirrorAsyncDone(uv_work_t * request, int status);
 void padAsync(uv_work_t * request);
 void padAsyncDone(uv_work_t * request, int status);
-
-struct blurBaton {
-    uv_work_t request;
-    v8::Persistent<Function> cb;
-    LwipImage * img;
-    float sigma;
-    bool err;
-    std::string errMsg;
-};
 
 struct cropBaton {
     uv_work_t request;
