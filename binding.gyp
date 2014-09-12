@@ -249,6 +249,7 @@
             "src/image/rotate_worker.cpp",
             "src/image/blur_worker.cpp",
             "src/image/crop_worker.cpp",
+            "src/image/mirror_worker.cpp",
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',

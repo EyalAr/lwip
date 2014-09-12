@@ -120,20 +120,25 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-void mirrorAsync(uv_work_t * request);
-void mirrorAsyncDone(uv_work_t * request, int status);
+class MirrorWorker : public NanAsyncWorker {
+public:
+    MirrorWorker(
+        bool xaxis,
+        bool yaxis,
+        CImg<unsigned char> * cimg,
+        NanCallback * callback
+    );
+    ~MirrorWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
+    bool _xaxis;
+    bool _yaxis;
+    CImg<unsigned char> * _cimg;
+};
+
 void padAsync(uv_work_t * request);
 void padAsyncDone(uv_work_t * request, int status);
-
-struct mirrorBaton {
-    uv_work_t request;
-    v8::Persistent<Function> cb;
-    LwipImage * img;
-    bool xaxis;
-    bool yaxis;
-    bool err;
-    std::string errMsg;
-};
 
 struct padBaton {
     uv_work_t request;

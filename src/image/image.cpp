@@ -205,60 +205,23 @@ Handle<Value> LwipImage::crop(const Arguments & args) {
 // args[1] - yaxis (boolean)
 // args[2] - callback
 Handle<Value> LwipImage::mirror(const Arguments & args) {
-    HandleScope scope;
-    // (arguments validation is done in JS land)
-    mirrorBaton * mb = new mirrorBaton();
-    if (mb == NULL) {
-        ThrowException(Exception::TypeError(NanNew<String>("Out of memory")));
-        return scope.Close(Undefined());
-    }
-    mb->request.data = mb;
-    mb->cb = Persistent<Function>::New(Local<Function>::Cast(args[2]));
-    mb->xaxis = args[0]->BooleanValue();
-    mb->yaxis = args[1]->BooleanValue();
-    mb->img = ObjectWrap::Unwrap<LwipImage>(args.This());
-    mb->err = false;
-    uv_queue_work(uv_default_loop(), &mb->request, mirrorAsync, mirrorAsyncDone);
-    return scope.Close(Undefined());
-}
+    NanScope();
 
-void mirrorAsync(uv_work_t * request) {
-    mirrorBaton * mb = static_cast<mirrorBaton *>(request->data);
-    std::string axes = "";
-    if (mb->xaxis) {
-        axes += "x";
-    }
-    if (mb->yaxis) {
-        axes += "y";
-    }
-    try {
-        mb->img->_cimg->mirror(axes.c_str());
-    } catch (CImgException e) {
-        mb->err = true;
-        mb->errMsg = "Unable to mirror image";
-    }
-    return;
-}
+    bool xaxis = args[0]->BooleanValue();
+    bool yaxis = args[1]->BooleanValue();
+    NanCallback * callback = new NanCallback(args[2].As<Function>());
+    CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
-void mirrorAsyncDone(uv_work_t * request, int status) {
-    // mirror completed. now we call the callback.
-    mirrorBaton * mb = static_cast<mirrorBaton *>(request->data);
-    if (mb->err) {
-        const unsigned int argc = 1;
-        Local<Value> argv[argc] = {
-            Local<Value>::New(Exception::Error(NanNew<String>(mb->errMsg.c_str())))
-        };
-        mb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
-    } else {
-        const unsigned int argc = 1;
-        Handle<Value> argv[argc] = {
-            Local<Value>::New(Null())
-        };
-        mb->cb->Call(Context::GetCurrent()->Global(), argc, argv);
-    }
-    // dispose of cb, because it's a persistent function
-    mb->cb.Dispose();
-    delete mb;
+    NanAsyncQueueWorker(
+        new MirrorWorker(
+            xaxis,
+            yaxis,
+            cimg,
+            callback
+        )
+    );
+
+    NanReturnUndefined();
 }
 
 // image.pad(left, top, right, bottom, color, callback):
