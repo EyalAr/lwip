@@ -8,7 +8,7 @@ NAN_METHOD(decodeJpegBuffer) {
     size_t buffsize = Buffer::Length(jpegBuff);
     NanCallback * callback = new NanCallback(args[1].As<Function>());
 
-    NanAsyncQueueWorker(new DecodeBufferWorker(callback, buffer, buffsize, "jpeg"));
+    NanAsyncQueueWorker(new DecodeBufferWorker(callback, buffer, buffsize, decode_jpeg_buffer));
     NanReturnUndefined();
 }
 
@@ -20,7 +20,7 @@ NAN_METHOD(decodePngBuffer) {
     size_t buffsize = Buffer::Length(pngBuff);
     NanCallback * callback = new NanCallback(args[1].As<Function>());
 
-    NanAsyncQueueWorker(new DecodeBufferWorker(callback, buffer, buffsize, "png"));
+    NanAsyncQueueWorker(new DecodeBufferWorker(callback, buffer, buffsize, decode_png_buffer));
     NanReturnUndefined();
 }
 

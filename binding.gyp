@@ -8,6 +8,7 @@
             "src/decoder/util.cpp",
             "src/decoder/buffer_worker.cpp",
             "src/decoder/jpeg_decoder.cpp",
+            "src/decoder/png_decoder.cpp",
             # LIB JPEG:
             ###########
             "lib/jpeg/jmemnobs.c",

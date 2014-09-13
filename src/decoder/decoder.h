@@ -2,8 +2,6 @@
 #define LWIP_DECODER_H
 
 #define cimg_display 0
-#define cimg_use_jpeg
-#define cimg_use_png
 #define cimg_verbosity 0
 
 #include <string>
@@ -12,6 +10,11 @@
 #include <node_buffer.h>
 #include <nan.h>
 #include <v8.h>
+extern "C" {
+#include "jpeglib.h"
+}
+#include <png.h>
+#include <zlib.h>
 #include "CImg.h"
 
 using namespace cimg_library;
@@ -19,22 +22,35 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
+typedef string (* buf_dec_f_t)(char *, size_t, CImg<unsigned char> **);
+
 class DecodeBufferWorker : public NanAsyncWorker {
 public:
-    DecodeBufferWorker(NanCallback * callback, char * buffer, size_t buffsize, string type);
+    DecodeBufferWorker(
+        NanCallback * callback,
+        char * buffer,
+        size_t buffsize,
+        buf_dec_f_t decoder
+    );
     ~DecodeBufferWorker();
     void Execute ();
     void HandleOKCallback ();
 private:
     char * _buffer;
     size_t _buffsize;
-    string _type;
+    buf_dec_f_t _decoder;
     unsigned char * _pixbuf;
     size_t _width;
     size_t _height;
     int _channels;
     bool _trans; // transparency
 };
+
+typedef struct {
+    unsigned char * src;
+    size_t size;
+    size_t read;
+} pngReadCbData;
 
 struct lwip_jpeg_error_mgr {
     struct jpeg_error_mgr pub;
@@ -53,8 +69,9 @@ inline void lwip_jpeg_error_exit (j_common_ptr cinfo) {
  */
 string to3Channels(CImg<unsigned char> ** img);
 
-CImg<unsigned char> * decode_jpeg_buffer(char * buffer, size_t size);
-CImg<unsigned char> * decode_png_buffer(char * buffer, size_t size);
+string decode_jpeg_buffer(char * buffer, size_t size, CImg<unsigned char> ** img);
+string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** img);
+void pngReadCB(png_structp png_ptr, png_bytep data, png_size_t length);
 
 NAN_METHOD(decodeJpegBuffer);
 NAN_METHOD(decodePngBuffer);

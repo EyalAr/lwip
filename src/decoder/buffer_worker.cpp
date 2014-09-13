@@ -4,24 +4,36 @@ DecodeBufferWorker::DecodeBufferWorker(
     NanCallback * callback,
     char * buffer,
     size_t buffsize,
-    string type
-): NanAsyncWorker(callback), _buffer(buffer), _buffsize(buffsize),
-    _type(type), _pixbuf(NULL), _width(0), _height(0), _channels(0),
-    _trans(false) {}
+    buf_dec_f_t decoder
+): NanAsyncWorker(callback), _buffsize(buffsize),
+    _decoder(decoder), _pixbuf(NULL), _width(0), _height(0), _channels(0),
+    _trans(false) {
+    // buffer needs to be copied, because the buffer may be gc'ed by
+    // V8 at any time.
+    // !!! _buffer still needs to be freed by us when no longer needed (see Execute)
+    _buffer = (char *) malloc(_buffsize);
+    if (_buffer == NULL) {
+        // TODO: check - can I use SetErrorMessage here?
+        SetErrorMessage("Out of memory");
+        return;
+    }
+    memcpy(_buffer, buffer, _buffsize);
+    }
 
 DecodeBufferWorker::~DecodeBufferWorker() {}
 
 void DecodeBufferWorker::Execute () {
     CImg<unsigned char> * img = NULL;
-    if (_type == "jpeg") img = decode_jpeg_buffer(_buffer, _buffsize);
-    // else if (_type == "png") img = decode_png_buffer(_buffer, _buffsize);
+    string err;
+    err = _decoder(_buffer, _buffsize, &img);
+    free(_buffer);
     // TODO: GIF support.
     // no other types for now
     if (img == NULL) {
-        SetErrorMessage("Unable to decode buffer");
+        SetErrorMessage(err.c_str());
         return;
     }
-    string err = to3Channels(&img);
+    err = to3Channels(&img);
     if (err != "") {
         if (img) delete img;
         SetErrorMessage(err.c_str());

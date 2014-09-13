@@ -522,9 +522,10 @@
     function open() {
         decree(defs.args.open)(arguments, function(impath, type, callback) {
             type = type || path.extname(impath).slice(1);
+            var opener = getOpener(type);
             fs.readFile(impath, function(err, imbuff) {
                 if (err) return callback(err);
-                getOpener(type)(imbuff, function(err, pixelsBuf, width, height) {
+                opener(imbuff, function(err, pixelsBuf, width, height) {
                     callback(err, err ? undefined : new image(pixelsBuf, width, height));
                 });
             });
