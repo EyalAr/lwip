@@ -10,6 +10,7 @@ EncodeToJpegBufferWorker::EncodeToJpegBufferWorker(
     _quality(quality), _jpegbuf(NULL), _jpegbufsize(0) {
     // pixbuf needs to be copied, because the buffer may be gc'ed by
     // V8 at any time.
+    // !!! _pixbuf still needs to be freed by us when no longer needed (see Execute)
     _pixbuf = (unsigned char *) malloc(width * height * 3 * sizeof(unsigned char));
     if (_pixbuf == NULL) {
         // TODO: check - can I use SetErrorMessage here?
@@ -34,12 +35,14 @@ void EncodeToJpegBufferWorker::Execute () {
     if (setjmp(jerr.setjmp_buffer)) {
         jpeg_destroy_compress(&cinfo);
         if (tmp) free(tmp);
+        free(_pixbuf);
         SetErrorMessage("JPEG compression error");
         return;
     }
 
     tmp = (unsigned char *) malloc(_width * dimbuf);
     if (tmp == NULL) {
+        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
@@ -71,6 +74,7 @@ void EncodeToJpegBufferWorker::Execute () {
         jpeg_write_scanlines(&cinfo, row_pointer, 1);
     }
     free(tmp);
+    free(_pixbuf);
     jpeg_finish_compress(&cinfo);
     jpeg_destroy_compress(&cinfo);
 

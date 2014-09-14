@@ -12,6 +12,7 @@ EncodeToPngBufferWorker::EncodeToPngBufferWorker(
     _pngbufsize(0) {
     // pixbuf needs to be copied, because the buffer may be gc'ed by
     // V8 at any time.
+    // !!! _pixbuf still needs to be freed by us when no longer needed (see Execute)
     _pixbuf = (unsigned char *) malloc(width * height * 3 * sizeof(unsigned char));
     if (_pixbuf == NULL) {
         // TODO: check - can I use SetErrorMessage here?
@@ -51,6 +52,7 @@ void EncodeToPngBufferWorker::Execute () {
                           NULL, NULL, NULL);
 
     if (!png_ptr) {
+        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
@@ -58,12 +60,14 @@ void EncodeToPngBufferWorker::Execute () {
     png_infop info_ptr = png_create_info_struct(png_ptr);
     if (!info_ptr) {
         png_destroy_write_struct(&png_ptr, (png_infopp) NULL);
+        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
 
     if (setjmp(png_jmpbuf(png_ptr))) {
         png_destroy_write_struct(&png_ptr, &info_ptr);
+        free(_pixbuf);
         SetErrorMessage("PNG compression error");
         return;
     }
@@ -73,6 +77,7 @@ void EncodeToPngBufferWorker::Execute () {
                                );
     if (!rowPnts) {
         png_destroy_write_struct(&png_ptr, &info_ptr);
+        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
@@ -83,6 +88,7 @@ void EncodeToPngBufferWorker::Execute () {
             for (unsigned int p = 0 ; p < r ; p++) free(rowPnts[p]);
             free(rowPnts);
             png_destroy_write_struct(&png_ptr, &info_ptr);
+            free(_pixbuf);
             SetErrorMessage("Out of memory");
             return;
         }
@@ -112,6 +118,7 @@ void EncodeToPngBufferWorker::Execute () {
     png_destroy_write_struct(&png_ptr, &info_ptr);
     for (unsigned int r = 0; r < _height; r++) free(rowPnts[r]);
     free(rowPnts);
+    free(_pixbuf);
 
     _pngbuf = (char *) buffinf.buff;
     _pngbufsize = buffinf.buffsize;

@@ -2,8 +2,6 @@
 #define LWIP_DECODER_H
 
 #define cimg_display 0
-#define cimg_use_jpeg
-#define cimg_use_png
 #define cimg_verbosity 0
 
 #include <string>
@@ -12,22 +10,37 @@
 #include <node_buffer.h>
 #include <nan.h>
 #include <v8.h>
+extern "C" {
+#include "jpeglib.h"
+}
+#include <png.h>
+#include <zlib.h>
 #include "CImg.h"
+
+#undef PNG_WRITE_SUPPORTED
 
 using namespace cimg_library;
 using namespace v8;
 using namespace node;
 using namespace std;
 
+typedef string (* buf_dec_f_t)(char *, size_t, CImg<unsigned char> **);
+
 class DecodeBufferWorker : public NanAsyncWorker {
 public:
-    DecodeBufferWorker(NanCallback * callback, char * buffer, string type);
+    DecodeBufferWorker(
+        NanCallback * callback,
+        char * buffer,
+        size_t buffsize,
+        buf_dec_f_t decoder
+    );
     ~DecodeBufferWorker();
     void Execute ();
     void HandleOKCallback ();
 private:
     char * _buffer;
-    string _type;
+    size_t _buffsize;
+    buf_dec_f_t _decoder;
     unsigned char * _pixbuf;
     size_t _width;
     size_t _height;
@@ -35,21 +48,21 @@ private:
     bool _trans; // transparency
 };
 
-class DecodeFileWorker : public NanAsyncWorker {
-public:
-    DecodeFileWorker(NanCallback * callback, string path, string type);
-    ~DecodeFileWorker();
-    void Execute ();
-    void HandleOKCallback ();
-private:
-    string _path;
-    string _type;
-    unsigned char * _pixbuf;
-    size_t _width;
-    size_t _height;
-    int _channels;
-    bool _trans; // transparency
+typedef struct {
+    unsigned char * src;
+    size_t size;
+    size_t read;
+} pngReadCbData;
+
+struct lwip_jpeg_error_mgr {
+    struct jpeg_error_mgr pub;
+    jmp_buf setjmp_buffer;
 };
+
+inline void lwip_jpeg_error_exit (j_common_ptr cinfo) {
+    lwip_jpeg_error_mgr * lwip_jpeg_err = (lwip_jpeg_error_mgr *) cinfo->err;
+    longjmp(lwip_jpeg_err->setjmp_buffer, 1);
+}
 
 /**
  * Utility function to take a CIMG object (**tmp), and convert it to 3 channels
@@ -58,8 +71,10 @@ private:
  */
 string to3Channels(CImg<unsigned char> ** img);
 
-NAN_METHOD(decodeJpegFile);
-NAN_METHOD(decodePngFile);
+string decode_jpeg_buffer(char * buffer, size_t size, CImg<unsigned char> ** img);
+string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** img);
+void pngReadCB(png_structp png_ptr, png_bytep data, png_size_t length);
+
 NAN_METHOD(decodeJpegBuffer);
 NAN_METHOD(decodePngBuffer);
 void initAll(Handle<Object> exports);

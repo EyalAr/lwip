@@ -69,8 +69,8 @@
 
     exports.args = {
         open: [{
-            name: 'impath',
-            type: 'string'
+            name: 'source',
+            type: '*'
         }, {
             name: 'type',
             type: 'string',

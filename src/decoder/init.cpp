@@ -1,34 +1,34 @@
 #include "decoder.h"
 
-NAN_METHOD(decodeJpegFile) {
+NAN_METHOD(decodeJpegBuffer) {
     NanScope();
 
-    NanUtf8String path = NanUtf8String(args[0]);
+    Local<Object> jpegBuff = args[0].As<Object>();
+    char * buffer = Buffer::Data(jpegBuff);
+    size_t buffsize = Buffer::Length(jpegBuff);
     NanCallback * callback = new NanCallback(args[1].As<Function>());
 
-    NanAsyncQueueWorker(new DecodeFileWorker(callback, string(*path), "jpeg"));
+    NanAsyncQueueWorker(new DecodeBufferWorker(callback, buffer, buffsize, decode_jpeg_buffer));
     NanReturnUndefined();
 }
 
-NAN_METHOD(decodePngFile) {
+NAN_METHOD(decodePngBuffer) {
     NanScope();
 
-    NanUtf8String path = NanUtf8String(args[0]);
+    Local<Object> pngBuff = args[0].As<Object>();
+    char * buffer = Buffer::Data(pngBuff);
+    size_t buffsize = Buffer::Length(pngBuff);
     NanCallback * callback = new NanCallback(args[1].As<Function>());
 
-    NanAsyncQueueWorker(new DecodeFileWorker(callback, string(*path), "png"));
+    NanAsyncQueueWorker(new DecodeBufferWorker(callback, buffer, buffsize, decode_png_buffer));
     NanReturnUndefined();
 }
 
 // create an init function for our node module
 void InitAll(Handle<Object> exports) {
-    exports->Set(NanNew("jpegFile"),
-                 NanNew<FunctionTemplate>(decodeJpegFile)->GetFunction());
-    exports->Set(NanNew("pngFile"),
-                 NanNew<FunctionTemplate>(decodePngFile)->GetFunction());
-    exports->Set(NanNew("jpegBuffer"),
+    exports->Set(NanNew("jpeg"),
                  NanNew<FunctionTemplate>(decodeJpegBuffer)->GetFunction());
-    exports->Set(NanNew("pngBuffer"),
+    exports->Set(NanNew("png"),
                  NanNew<FunctionTemplate>(decodePngBuffer)->GetFunction());
 }
 

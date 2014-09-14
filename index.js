@@ -11,10 +11,10 @@
 
     var openers = [{
         exts: ['jpg', 'jpeg'],
-        opener: decoder.jpegFile
+        opener: decoder.jpeg
     }, {
         exts: ['png'],
-        opener: decoder.pngFile
+        opener: decoder.png
     }];
 
     function undefinedFilter(v) {
@@ -292,7 +292,7 @@
                         that.__lwip.buffer(),
                         that.__lwip.width(),
                         that.__lwip.height(),
-                        params.compression, 
+                        params.compression,
                         params.interlaced,
                         function(err, buffer) {
                             that.__release();
@@ -520,11 +520,22 @@
     }
 
     function open() {
-        decree(defs.args.open)(arguments, function(impath, type, callback) {
-            type = type || path.extname(impath).slice(1);
-            getOpener(type)(impath, function(err, pixelsBuf, width, height) {
-                callback(err, err ? undefined : new image(pixelsBuf, width, height));
-            });
+        decree(defs.args.open)(arguments, function(source, type, callback) {
+            if (typeof source === 'string') {
+                type = type || path.extname(source).slice(1);
+                var opener = getOpener(type);
+                fs.readFile(source, function(err, imbuff) {
+                    if (err) return callback(err);
+                    opener(imbuff, function(err, pixelsBuf, width, height) {
+                        callback(err, err ? undefined : new image(pixelsBuf, width, height));
+                    });
+                });
+            } else if (source instanceof Buffer) {
+                var opener = getOpener(type);
+                opener(source, function(err, pixelsBuf, width, height) {
+                    callback(err, err ? undefined : new image(pixelsBuf, width, height));
+                });
+            } else throw Error("Invalid source");
         });
     }
 
