@@ -18,7 +18,7 @@ DecodeBufferWorker::DecodeBufferWorker(
         return;
     }
     memcpy(_buffer, buffer, _buffsize);
-    }
+}
 
 DecodeBufferWorker::~DecodeBufferWorker() {}
 
@@ -27,8 +27,6 @@ void DecodeBufferWorker::Execute () {
     string err;
     err = _decoder(_buffer, _buffsize, &img);
     free(_buffer);
-    // TODO: GIF support.
-    // no other types for now
     if (img == NULL) {
         SetErrorMessage(err.c_str());
         return;

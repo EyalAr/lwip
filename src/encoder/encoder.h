@@ -2,7 +2,6 @@
 #define LWIP_ENCODER_H
 
 #define cimg_display 0
-#define cimg_use_jpeg
 #define cimg_verbosity 0
 
 #include <string>
@@ -17,6 +16,8 @@ extern "C" {
 #include <png.h>
 #include <zlib.h>
 #include "CImg.h"
+
+#undef PNG_READ_SUPPORTED
 
 using namespace cimg_library;
 using namespace v8;

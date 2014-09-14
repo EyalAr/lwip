@@ -52,6 +52,7 @@ void EncodeToPngBufferWorker::Execute () {
                           NULL, NULL, NULL);
 
     if (!png_ptr) {
+        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
@@ -59,12 +60,14 @@ void EncodeToPngBufferWorker::Execute () {
     png_infop info_ptr = png_create_info_struct(png_ptr);
     if (!info_ptr) {
         png_destroy_write_struct(&png_ptr, (png_infopp) NULL);
+        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
 
     if (setjmp(png_jmpbuf(png_ptr))) {
         png_destroy_write_struct(&png_ptr, &info_ptr);
+        free(_pixbuf);
         SetErrorMessage("PNG compression error");
         return;
     }
@@ -74,6 +77,7 @@ void EncodeToPngBufferWorker::Execute () {
                                );
     if (!rowPnts) {
         png_destroy_write_struct(&png_ptr, &info_ptr);
+        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
@@ -84,6 +88,7 @@ void EncodeToPngBufferWorker::Execute () {
             for (unsigned int p = 0 ; p < r ; p++) free(rowPnts[p]);
             free(rowPnts);
             png_destroy_write_struct(&png_ptr, &info_ptr);
+            free(_pixbuf);
             SetErrorMessage("Out of memory");
             return;
         }

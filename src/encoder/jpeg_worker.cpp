@@ -35,12 +35,14 @@ void EncodeToJpegBufferWorker::Execute () {
     if (setjmp(jerr.setjmp_buffer)) {
         jpeg_destroy_compress(&cinfo);
         if (tmp) free(tmp);
+        free(_pixbuf);
         SetErrorMessage("JPEG compression error");
         return;
     }
 
     tmp = (unsigned char *) malloc(_width * dimbuf);
     if (tmp == NULL) {
+        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
