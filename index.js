@@ -261,6 +261,22 @@
         }
     }
 
+    image.prototype.sharpen = function() {
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.sharpen)(arguments, function(amplitude, callback) {
+                that.__lwip.sharpen(+amplitude, function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
+            });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
+    }
+
     image.prototype.toBuffer = function() {
         this.__lock();
         try {
@@ -397,7 +413,7 @@
         return this;
     }
 
-    batch.prototype.blur = function(sigma) {
+    batch.prototype.blur = function() {
         var that = this,
             decs = defs.args.blur.slice(0, -1); // cut callback declaration
         decree(decs)(arguments, function(sigma) {
@@ -479,6 +495,15 @@
                     throw Error('\'blue\' color component is invalid');
             }
             that.__addOp(that.__image.border, [width, color].filter(undefinedFilter));
+        });
+        return this;
+    }
+
+    batch.prototype.sharpen = function() {
+        var that = this,
+            decs = defs.args.sharpen.slice(0, -1); // cut callback declaration
+        decree(decs)(arguments, function(amplitude) {
+            that.__addOp(that.__image.sharpen, [amplitude].filter(undefinedFilter));
         });
         return this;
     }

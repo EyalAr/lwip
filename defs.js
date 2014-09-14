@@ -151,7 +151,7 @@
         mirror: [{
             name: 'axes',
             type: 'string'
-        },{
+        }, {
             name: 'callback',
             type: 'function'
         }],
@@ -196,6 +196,13 @@
             types: ['string', 'array', 'hash'],
             optional: true,
             default: defaults.DEF_PAD_COLOR
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        sharpen: [{
+            name: 'amplitude',
+            type: 'number'
         }, {
             name: 'callback',
             type: 'function'

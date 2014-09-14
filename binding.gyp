@@ -205,6 +205,7 @@
             "src/image/crop_worker.cpp",
             "src/image/mirror_worker.cpp",
             "src/image/pad_worker.cpp",
+            "src/image/sharpen_worker.cpp",
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',

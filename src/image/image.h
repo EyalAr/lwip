@@ -34,6 +34,7 @@ public:
     static NAN_METHOD(crop);
     static NAN_METHOD(mirror);
     static NAN_METHOD(pad);
+    static NAN_METHOD(sharpen);
     static NAN_METHOD(width);
     static NAN_METHOD(height);
     static NAN_METHOD(buffer);
@@ -161,6 +162,21 @@ private:
     unsigned char _r;
     unsigned char _g;
     unsigned char _b;
+    CImg<unsigned char> * _cimg;
+};
+
+class SharpenWorker : public NanAsyncWorker {
+public:
+    SharpenWorker(
+        float amp,
+        CImg<unsigned char> * cimg,
+        NanCallback * callback
+    );
+    ~SharpenWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
+    float _amp;
     CImg<unsigned char> * _cimg;
 };
 

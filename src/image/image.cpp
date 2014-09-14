@@ -16,6 +16,7 @@ void LwipImage::Init(Handle<Object> exports) {
     NODE_SET_PROTOTYPE_METHOD(tpl, "crop", crop);
     NODE_SET_PROTOTYPE_METHOD(tpl, "mirror", mirror);
     NODE_SET_PROTOTYPE_METHOD(tpl, "pad", pad);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "sharpen", sharpen);
     NanAssignPersistent(constructor, tpl);
     exports->Set(
         NanNew("LwipImage"),
@@ -257,6 +258,29 @@ NAN_METHOD(LwipImage::pad) {
             r,
             g,
             b,
+            cimg,
+            callback
+        )
+    );
+
+    NanReturnUndefined();
+}
+
+// image.sharpen(amplitude, callback):
+// -----------------------------------
+
+// args[0] - amplitude
+// args[1] - callback
+NAN_METHOD(LwipImage::sharpen) {
+    NanScope();
+
+    float amp = (float) args[0].As<Number>()->Value();
+    NanCallback * callback = new NanCallback(args[1].As<Function>());
+    CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
+
+    NanAsyncQueueWorker(
+        new SharpenWorker(
+            amp,
             cimg,
             callback
         )

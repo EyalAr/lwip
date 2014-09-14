@@ -17,6 +17,7 @@
     0. [Rotate](#rotate)
     0. [Crop](#crop)
     0. [Blur](#blur)
+    0. [Sharpen](#sharpen)
     0. [Mirror](#mirror)
     0. [Flip](#flip)
     0. [Border](#border)
@@ -242,7 +243,16 @@ Gaussian blur.
 
 `image.blur(sigma, callback)`
 
-0. `sigma {Float}`: Standard deviation of the Gaussian filter.
+0. `sigma {Float>=0}`: Standard deviation of the Gaussian filter.
+0. `callback {Function(err, image)}`
+
+#### Sharpen
+
+Inverse diffusion shapren.
+
+`image.sharpen(amplitude, callback)`
+
+0. `amplitude {Float}`: Sharpening amplitude.
 0. `callback {Function(err, image)}`
 
 #### Mirror

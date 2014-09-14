@@ -65,7 +65,7 @@ describe('stress tests', function() {
                     if (err) return done(err);
                     var batch = image.batch();
                     for (var i = 0; i < 10; i++) {
-                        var r = Math.floor(Math.random() * 7);
+                        var r = Math.floor(Math.random() * 8);
                         switch (r) {
                             case 0:
                                 batch = batch.blur(5);
@@ -87,6 +87,9 @@ describe('stress tests', function() {
                                 break;
                             case 6:
                                 batch = batch.border(10);
+                                break;
+                            case 7:
+                                batch = batch.sharpen(300);
                                 break;
                         }
                     }
