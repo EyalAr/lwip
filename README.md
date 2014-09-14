@@ -10,7 +10,7 @@
   0. [Usage](#usage)
   0. [Supported formats](#supported-formats)
 0. [API](#api)
-  0. [Open an image](#open-an-image)
+  0. [Open an image from file or buffer](#open-an-image)
   0. [Image operations](#image-operations)
     0. [Resize](#resize)
     0. [Scale](#scale)
@@ -136,19 +136,36 @@ the `open` method.
 
 ### Open an image
 
-`open(path, type, callback)`
+`open(source, type, callback)`
 
-0. `path {String}`: The path to the image on disk.
+0. `source {String/Buffer}`: The path to the image on disk or an image buffer.
 0. `type {String}`: **Optional** type of the image. If omitted, the type will be
-   inferred from the file extension. Can usually be omitted. Useful to open
-   image files without extensions.
+   inferred from the file extension. If `source` is a buffer, `type` must be
+   specified.
 0. `callback {Function(err, image)}`
+
+#### Open file example
 
 ```Javascript
 var lwip = require('lwip');
 lwip.open('path/to/image.jpg', function(err, image){
     // check 'err'. use 'image'.
     // image.resize(...), etc.
+});
+```
+
+#### Open buffer example
+
+```Javascript
+var fs = require('fs'),
+    lwip = require('lwip');
+
+fs.readFile('path/to/image.png', function(err, buffer){
+  // check err
+  lwip.open(buffer, 'png', function(err, image){
+      // check 'err'. use 'image'.
+      // image.resize(...), etc.
+  });
 });
 ```
 

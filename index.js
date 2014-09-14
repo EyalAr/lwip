@@ -520,15 +520,22 @@
     }
 
     function open() {
-        decree(defs.args.open)(arguments, function(impath, type, callback) {
-            type = type || path.extname(impath).slice(1);
-            var opener = getOpener(type);
-            fs.readFile(impath, function(err, imbuff) {
-                if (err) return callback(err);
-                opener(imbuff, function(err, pixelsBuf, width, height) {
+        decree(defs.args.open)(arguments, function(source, type, callback) {
+            if (typeof source === 'string') {
+                type = type || path.extname(source).slice(1);
+                var opener = getOpener(type);
+                fs.readFile(source, function(err, imbuff) {
+                    if (err) return callback(err);
+                    opener(imbuff, function(err, pixelsBuf, width, height) {
+                        callback(err, err ? undefined : new image(pixelsBuf, width, height));
+                    });
+                });
+            } else if (source instanceof Buffer) {
+                var opener = getOpener(type);
+                opener(source, function(err, pixelsBuf, width, height) {
                     callback(err, err ? undefined : new image(pixelsBuf, width, height));
                 });
-            });
+            } else throw Error("Invalid source");
         });
     }
 
