@@ -138,6 +138,22 @@
         }
     }
 
+    image.prototype.hslAdjust = function() {
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.hslAdjust)(arguments, function(hd, sd, ld, callback) {
+                that.__lwip.hslAdj(+hd, +sd, +ld, function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
+            });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
+    }
+
     image.prototype.crop = function() {
         this.__lock();
         try {
@@ -418,6 +434,15 @@
             decs = defs.args.blur.slice(0, -1); // cut callback declaration
         decree(decs)(arguments, function(sigma) {
             that.__addOp(that.__image.blur, [sigma].filter(undefinedFilter));
+        });
+        return this;
+    }
+
+    batch.prototype.hslAdjust = function() {
+        var that = this,
+            decs = defs.args.hslAdjust.slice(0, -1); // cut callback declaration
+        decree(decs)(arguments, function(hd, sd, ld) {
+            that.__addOp(that.__image.hslAdjust, [hd, sd, ld].filter(undefinedFilter));
         });
         return this;
     }

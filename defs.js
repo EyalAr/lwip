@@ -130,6 +130,19 @@
             name: 'callback',
             type: 'function'
         }],
+        hslAdjust: [{
+            name: 'hd',
+            type: 'number'
+        }, {
+            name: 'sd',
+            type: 'number'
+        }, {
+            name: 'ld',
+            type: 'number'
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
         crop: [{
             name: 'left',
             type: 'nn-number'

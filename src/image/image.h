@@ -35,6 +35,7 @@ public:
     static NAN_METHOD(mirror);
     static NAN_METHOD(pad);
     static NAN_METHOD(sharpen);
+    static NAN_METHOD(hslAdj);
     static NAN_METHOD(width);
     static NAN_METHOD(height);
     static NAN_METHOD(buffer);
@@ -179,5 +180,28 @@ private:
     float _amp;
     CImg<unsigned char> * _cimg;
 };
+
+class HSLWorker : public NanAsyncWorker {
+public:
+    HSLWorker(
+        float hd,
+        float sd,
+        float ld,
+        CImg<unsigned char> * cimg,
+        NanCallback * callback
+    );
+    ~HSLWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
+    float _hd;
+    float _sd;
+    float _ld;
+    CImg<unsigned char> * _cimg;
+};
+
+void rgb_to_hsl(unsigned char r, unsigned char g, unsigned char b, float * h, float * s, float * l);
+void hsl_to_rgb(float h, float s, float l, unsigned char * r, unsigned char * g, unsigned char * b);
+float hue2rgb(float p, float q, float t);
 
 #endif
