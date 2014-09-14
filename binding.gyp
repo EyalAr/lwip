@@ -39,6 +39,8 @@
             "lib/jpeg/jdarith.c",
             "lib/jpeg/jdmerge.c",
             "lib/jpeg/jaricom.c",
+            "lib/jpeg/jquant1.c",
+            "lib/jpeg/jquant2.c",
             # LIB PNG:
             ##########
             "lib/png/png.c",
@@ -56,7 +58,6 @@
             #######
             "lib/zlib/adler32.c",
             "lib/zlib/crc32.c",
-            "lib/zlib/gzclose.c",
             "lib/zlib/gzlib.c",
             "lib/zlib/gzread.c",
             "lib/zlib/infback.c",
@@ -69,6 +70,7 @@
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',
+            'src/decoder',
             'lib/zlib',
             'lib/jpeg',
             'lib/cimg',
@@ -152,7 +154,6 @@
             #######
             "lib/zlib/adler32.c",
             "lib/zlib/crc32.c",
-            "lib/zlib/gzclose.c",
             "lib/zlib/gzlib.c",
             "lib/zlib/zutil.c",
             "lib/zlib/gzwrite.c",
@@ -162,6 +163,7 @@
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',
+            'src/encoder',
             'lib/zlib',
             'lib/jpeg',
             'lib/cimg',

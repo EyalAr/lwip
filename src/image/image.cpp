@@ -32,11 +32,11 @@ LwipImage::~LwipImage() {
     delete _cimg;
 };
 
-NAN_METHOD(LwipImage::NewInstance) {
+Handle<Value> LwipImage::NewInstance() {
     NanEscapableScope();
     Local<FunctionTemplate> constructorHandle = NanNew<FunctionTemplate>(constructor);
     Local<Object> instance = constructorHandle->GetFunction()->NewInstance();
-    NanEscapeScope(instance);
+    return NanEscapeScope(instance);
 }
 
 NAN_METHOD(LwipImage::New) {

@@ -17,8 +17,6 @@ extern "C" {
 #include <zlib.h>
 #include "CImg.h"
 
-#undef PNG_WRITE_SUPPORTED
-
 using namespace cimg_library;
 using namespace v8;
 using namespace node;
