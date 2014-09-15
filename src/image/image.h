@@ -200,8 +200,10 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-void rgb_to_hsl(unsigned char r, unsigned char g, unsigned char b, float * h, float * s, float * l);
-void hsl_to_rgb(float h, float s, float l, unsigned char * r, unsigned char * g, unsigned char * b);
+void rgb_to_hsl(unsigned char r, unsigned char g, unsigned char b, float * h,
+                float * s, float * l);
+void hsl_to_rgb(float h, float s, float l, unsigned char * r, unsigned char * g,
+                unsigned char * b);
 float hue2rgb(float p, float q, float t);
 
 #endif

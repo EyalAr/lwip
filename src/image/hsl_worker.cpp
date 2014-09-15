@@ -56,7 +56,8 @@ void HSLWorker::HandleOKCallback () {
     callback->Call(1, argv);
 }
 
-void rgb_to_hsl(unsigned char r, unsigned char g, unsigned char b, float * h, float * s, float * l) {
+void rgb_to_hsl(unsigned char r, unsigned char g, unsigned char b, float * h,
+                float * s, float * l) {
     float _r = ((float) r) / 255.0,
           _g = ((float) g) / 255.0,
           _b = ((float) b) / 255.0;
@@ -82,7 +83,8 @@ void rgb_to_hsl(unsigned char r, unsigned char g, unsigned char b, float * h, fl
     return;
 };
 
-void hsl_to_rgb(float h, float s, float l, unsigned char * r, unsigned char * g, unsigned char * b) {
+void hsl_to_rgb(float h, float s, float l, unsigned char * r, unsigned char * g,
+                unsigned char * b) {
     float
     q = 2 * l < 1 ? l * (1 + s) : (l + s - l * s),
     p = 2 * l - q,

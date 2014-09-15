@@ -27,6 +27,7 @@
   },
   "keywords": [
     "image",
+    "buffer",
     "manipulate",
     "process",
     "resize",
@@ -37,11 +38,15 @@
     "png",
     "crop",
     "blur",
+    "sharpen",
     "batch",
     "flip",
     "mirror",
     "border",
-    "padding"
+    "padding",
+    "hue",
+    "saturation",
+    "lightness"
   ],
   "author": "Eyal Arubas <eyalarubas@gmail.com>",
   "license": "MIT",
