@@ -131,13 +131,41 @@
             type: 'function'
         }],
         hslAdjust: [{
-            name: 'hd',
+            name: 'hs',
             type: 'number'
         }, {
             name: 'sd',
             type: 'number'
         }, {
             name: 'ld',
+            type: 'number'
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        saturate: [{
+            name: 'delta',
+            type: 'number'
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        lighten: [{
+            name: 'delta',
+            type: 'number'
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        darken: [{
+            name: 'delta',
+            type: 'number'
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        hue: [{
+            name: 'shift',
             type: 'number'
         }, {
             name: 'callback',

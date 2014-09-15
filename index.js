@@ -142,8 +142,72 @@
         this.__lock();
         try {
             var that = this;
-            decree(defs.args.hslAdjust)(arguments, function(hd, sd, ld, callback) {
-                that.__lwip.hslAdj(+hd, +sd, +ld, function(err) {
+            decree(defs.args.hslAdjust)(arguments, function(hs, sd, ld, callback) {
+                that.__lwip.hslAdj(+hs, +sd, +ld, function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
+            });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
+    }
+
+    image.prototype.saturate = function() {
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.saturate)(arguments, function(delta, callback) {
+                that.__lwip.hslAdj(0, +delta, 0, function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
+            });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
+    }
+
+    image.prototype.lighten = function() {
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.lighten)(arguments, function(delta, callback) {
+                that.__lwip.hslAdj(0, 0, +delta, function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
+            });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
+    }
+
+    image.prototype.darken = function() {
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.darken)(arguments, function(delta, callback) {
+                that.__lwip.hslAdj(0, 0, -delta, function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
+            });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
+    }
+
+    image.prototype.hue = function() {
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.hue)(arguments, function(shift, callback) {
+                that.__lwip.hslAdj(+shift, 0, 0, function(err) {
                     that.__release();
                     callback(err, that);
                 });
@@ -441,8 +505,44 @@
     batch.prototype.hslAdjust = function() {
         var that = this,
             decs = defs.args.hslAdjust.slice(0, -1); // cut callback declaration
-        decree(decs)(arguments, function(hd, sd, ld) {
-            that.__addOp(that.__image.hslAdjust, [hd, sd, ld].filter(undefinedFilter));
+        decree(decs)(arguments, function(hs, sd, ld) {
+            that.__addOp(that.__image.hslAdjust, [hs, sd, ld].filter(undefinedFilter));
+        });
+        return this;
+    }
+
+    batch.prototype.saturate = function() {
+        var that = this,
+            decs = defs.args.saturate.slice(0, -1); // cut callback declaration
+        decree(decs)(arguments, function(delta) {
+            that.__addOp(that.__image.saturate, [delta].filter(undefinedFilter));
+        });
+        return this;
+    }
+
+    batch.prototype.lighten = function() {
+        var that = this,
+            decs = defs.args.lighten.slice(0, -1); // cut callback declaration
+        decree(decs)(arguments, function(delta) {
+            that.__addOp(that.__image.lighten, [delta].filter(undefinedFilter));
+        });
+        return this;
+    }
+
+    batch.prototype.darken = function() {
+        var that = this,
+            decs = defs.args.darken.slice(0, -1); // cut callback declaration
+        decree(decs)(arguments, function(delta) {
+            that.__addOp(that.__image.darken, [delta].filter(undefinedFilter));
+        });
+        return this;
+    }
+
+    batch.prototype.hue = function() {
+        var that = this,
+            decs = defs.args.hue.slice(0, -1); // cut callback declaration
+        decree(decs)(arguments, function(shift) {
+            that.__addOp(that.__image.hue, [shift].filter(undefinedFilter));
         });
         return this;
     }

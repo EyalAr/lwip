@@ -1,5 +1,5 @@
 /**
- * Example for using LWIP to saturate an image.
+ * Example for using LWIP to increase image lightness by 50%.
  */
 
 var path = require('path'),
@@ -8,8 +8,8 @@ var path = require('path'),
 lwip.open('lena.jpg', function(err, image) {
     if (err) return console.log(err);
     image.batch()
-        .hslAdjust(2,10,0.2)
-        .writeFile('lena_hsl.jpg', function(err) {
+        .lighten(0.5)
+        .writeFile('lena_lighten.jpg', function(err) {
             if (err) return console.log(err);
             console.log('done');
         });

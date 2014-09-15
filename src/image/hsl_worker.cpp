@@ -1,17 +1,17 @@
 #include "image.h"
 
 HSLWorker::HSLWorker(
-    float hd,
+    float hs,
     float sd,
     float ld,
     CImg<unsigned char> * cimg,
     NanCallback * callback
-): NanAsyncWorker(callback), _hd(hd), _sd(sd), _ld(ld), _cimg(cimg) {}
+): NanAsyncWorker(callback), _hs(hs), _sd(sd), _ld(ld), _cimg(cimg) {}
 
 HSLWorker::~HSLWorker() {}
 
 void HSLWorker::Execute () {
-    if (_hd == 0 && _sd == 0 && _ld == 0) return;
+    if (_hs == 0 && _sd == 0 && _ld == 0) return;
     try {
         cimg_forXY(*_cimg, x, y) {
             unsigned char r = (*_cimg)(x, y, 0, 0),
@@ -20,22 +20,21 @@ void HSLWorker::Execute () {
             float h, s, l;
             rgb_to_hsl(r, g, b, &h, &s, &l);
 
-            if (_hd != 0) {
-                if ((1.0 + _hd) * h > 360) h = 360;
-                else if ((1.0 + _hd) * h < 0) h = 0;
-                else h *= 1.0 + _hd;
+            if (_hs != 0) {
+                h += _hs;
+                h = cimg::mod(h, 360.0f);
             }
 
             if (_sd != 0) {
-                if ((1.0 + _sd) * s > 1) s = 1;
-                else if ((1.0 + _sd) * s < 0) s = 0;
-                else s *= 1.0 + _sd;
+                s *= 1.0 + _sd;
+                if (s > 1) s = 1;
+                else if (s < 0) s = 0;
             }
 
             if (_ld != 0) {
-                if ((1.0 + _ld) * l > 1) l = 1;
-                else if ((1.0 + _ld) * l < 0) l = 0;
-                else l *= 1.0 + _ld;
+                l *= 1.0 + _ld;
+                if (l > 1) l = 1;
+                if (l < 0) l = 0;
             }
 
             hsl_to_rgb(h, s, l, &r, &g, &b);

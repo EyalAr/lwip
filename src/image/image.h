@@ -184,7 +184,7 @@ private:
 class HSLWorker : public NanAsyncWorker {
 public:
     HSLWorker(
-        float hd,
+        float hs,
         float sd,
         float ld,
         CImg<unsigned char> * cimg,
@@ -194,7 +194,7 @@ public:
     void Execute ();
     void HandleOKCallback ();
 private:
-    float _hd;
+    float _hs;
     float _sd;
     float _ld;
     CImg<unsigned char> * _cimg;
