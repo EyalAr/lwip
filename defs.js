@@ -69,8 +69,8 @@
 
     exports.args = {
         open: [{
-            name: 'impath',
-            type: 'string'
+            name: 'source',
+            type: '*'
         }, {
             name: 'type',
             type: 'string',
@@ -130,6 +130,47 @@
             name: 'callback',
             type: 'function'
         }],
+        hslAdjust: [{
+            name: 'hs',
+            type: 'number'
+        }, {
+            name: 'sd',
+            type: 'number'
+        }, {
+            name: 'ld',
+            type: 'number'
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        saturate: [{
+            name: 'delta',
+            type: 'number'
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        lighten: [{
+            name: 'delta',
+            type: 'number'
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        darken: [{
+            name: 'delta',
+            type: 'number'
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        hue: [{
+            name: 'shift',
+            type: 'number'
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
         crop: [{
             name: 'left',
             type: 'nn-number'
@@ -151,7 +192,7 @@
         mirror: [{
             name: 'axes',
             type: 'string'
-        },{
+        }, {
             name: 'callback',
             type: 'function'
         }],
@@ -196,6 +237,13 @@
             types: ['string', 'array', 'hash'],
             optional: true,
             default: defaults.DEF_PAD_COLOR
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        sharpen: [{
+            name: 'amplitude',
+            type: 'number'
         }, {
             name: 'callback',
             type: 'function'

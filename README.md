@@ -10,17 +10,21 @@
   0. [Usage](#usage)
   0. [Supported formats](#supported-formats)
 0. [API](#api)
-  0. [Open an image](#open-an-image)
+  0. [Open an image from file or buffer](#open-an-image)
   0. [Image operations](#image-operations)
     0. [Resize](#resize)
     0. [Scale](#scale)
     0. [Rotate](#rotate)
     0. [Crop](#crop)
     0. [Blur](#blur)
+    0. [Sharpen](#sharpen)
     0. [Mirror](#mirror)
     0. [Flip](#flip)
     0. [Border](#border)
     0. [Pad](#pad)
+    0. [Adjust saturation](#saturate)
+    0. Adjust lightness: [lighten](#lighten) / [darken](#darken)
+    0. [Adjust hue](#hue)
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
@@ -136,19 +140,36 @@ the `open` method.
 
 ### Open an image
 
-`open(path, type, callback)`
+`open(source, type, callback)`
 
-0. `path {String}`: The path to the image on disk.
+0. `source {String/Buffer}`: The path to the image on disk or an image buffer.
 0. `type {String}`: **Optional** type of the image. If omitted, the type will be
-   inferred from the file extension. Can usually be omitted. Useful to open
-   image files without extensions.
+   inferred from the file extension. If `source` is a buffer, `type` must be
+   specified.
 0. `callback {Function(err, image)}`
+
+#### Open file example
 
 ```Javascript
 var lwip = require('lwip');
 lwip.open('path/to/image.jpg', function(err, image){
     // check 'err'. use 'image'.
     // image.resize(...), etc.
+});
+```
+
+#### Open buffer example
+
+```Javascript
+var fs = require('fs'),
+    lwip = require('lwip');
+
+fs.readFile('path/to/image.png', function(err, buffer){
+  // check err
+  lwip.open(buffer, 'png', function(err, image){
+      // check 'err'. use 'image'.
+      // image.resize(...), etc.
+  });
 });
 ```
 
@@ -225,7 +246,16 @@ Gaussian blur.
 
 `image.blur(sigma, callback)`
 
-0. `sigma {Float}`: Standard deviation of the Gaussian filter.
+0. `sigma {Float>=0}`: Standard deviation of the Gaussian filter.
+0. `callback {Function(err, image)}`
+
+#### Sharpen
+
+Inverse diffusion shapren.
+
+`image.sharpen(amplitude, callback)`
+
+0. `amplitude {Float}`: Sharpening amplitude.
 0. `callback {Function(err, image)}`
 
 #### Mirror
@@ -272,6 +302,63 @@ Pad image edges with colored pixels.
   - As an object `{r: R, g: G, b: B}` where `R`, `G` and `B` are integers
     between 0 and 255.
 0. `callback {Function(err, image)}`
+
+#### Saturate
+
+Adjust image saturation.
+
+`image.saturate(delta, callback)`
+
+0. `delta {Float}`: By how much to increase / decrease the saturation.
+0. `callback {Function(err, image)}`
+
+**Examples**:
+
+0. `image.saturate(0, ...)` will have no effect on the image.
+0. `image.saturate(0.5, ...)` will increase the saturation by 50%.
+0. `image.saturate(-1, ...)` will decrease the saturation by 100%, effectively
+   desaturating the image.
+
+#### Lighten
+
+Adjust image lightness.
+
+`image.lighten(delta, callback)`
+
+0. `delta {Float}`: By how much to increase / decrease the lightness.
+0. `callback {Function(err, image)}`
+
+**Examples**:
+
+0. `image.lighten(0, ...)` will have no effect on the image.
+0. `image.lighten(0.5, ...)` will increase the lightness by 50%.
+0. `image.lighten(-1, ...)` will decrease the lightness by 100%, effectively
+   making the image black.
+
+#### Darken
+
+Adjust image lightness.
+
+`image.darken(delta, callback)`
+
+Equivalent to `image.lighten(-delta, callback)`.
+
+#### Hue
+
+Adjust image hue.
+
+`image.hue(shift, callback)`
+
+0. `shift {Float}`: By how many degrees to shift each pixel's hue.
+0. `callback {Function(err, image)}`
+
+**Examples**:
+
+0. `image.lighten(0, ...)` will have no effect on the image.
+0. `image.lighten(100, ...)` will shift pixels' hue by 100 degrees.
+
+**Note:** The hue is shifted in a circular manner in the range [0,360] for each
+pixel individually.
 
 ### Getters
 

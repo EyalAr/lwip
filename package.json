@@ -4,7 +4,8 @@
   "main": "index.js",
   "dependencies": {
     "async": "^0.9.0",
-    "decree": "0.0.2"
+    "decree": "0.0.2",
+    "nan": "^1.3.0"
   },
   "scripts": {
     "install": "node-gyp rebuild",
@@ -26,6 +27,7 @@
   },
   "keywords": [
     "image",
+    "buffer",
     "manipulate",
     "process",
     "resize",
@@ -36,11 +38,15 @@
     "png",
     "crop",
     "blur",
+    "sharpen",
     "batch",
     "flip",
     "mirror",
     "border",
-    "padding"
+    "padding",
+    "hue",
+    "saturation",
+    "lightness"
   ],
   "author": "Eyal Arubas <eyalarubas@gmail.com>",
   "license": "MIT",
