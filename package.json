@@ -10,7 +10,8 @@
   "scripts": {
     "install": "node-gyp rebuild",
     "test": "./node_modules/.bin/mocha --reporter spec --recursive tests/",
-    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --reporter spec --recursive tests/"
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --reporter spec --recursive tests/",
+    "travis": "./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --reporter spec --recursive tests/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "gypfile": true,
   "description": "Comprehensive, fast, and simple image processing and manipulation",
@@ -18,9 +19,11 @@
     "example": "examples"
   },
   "devDependencies": {
+    "coveralls": "^2.11.1",
     "istanbul": "^0.3.2",
     "mkdirp": "^0.5.0",
     "mocha": "^1.20.1",
+    "mocha-lcov-reporter": "0.0.1",
     "should": "^4.0.4"
   },
   "repository": {
