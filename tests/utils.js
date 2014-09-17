@@ -18,20 +18,20 @@ function generateRandomBatch(batch, n) {
                 ops.push('rtt' + a);
                 break;
             case 2:
-                var w = Math.floor(Math.random() * 1000) + 1;
-                var h = Math.floor(Math.random() * 1000) + 1;
+                var w = Math.floor(Math.random() * 1000) + 10;
+                var h = Math.floor(Math.random() * 1000) + 10;
                 batch = batch.resize(w, h);
                 ops.push('rsz' + w + 'X' + h);
                 break;
             case 3:
-                var w = Math.floor(Math.random() * 1000);
-                var h = Math.floor(Math.random() * 1000);
+                var w = Math.floor(Math.random() * 1000) + 10;
+                var h = Math.floor(Math.random() * 1000) + 10;
                 batch = batch.crop(w, h);
                 ops.push('crp' + w + 'X' + h);
                 break;
             case 4:
-                var wr = Math.random() * 3 + 0.1;
-                var hr = Math.random() * 3 + 0.1;
+                var wr = Math.random() * 1 + 0.1;
+                var hr = Math.random() * 1 + 0.1;
                 batch = batch.scale(wr, hr);
                 ops.push('scl' + wr.toFixed(2) + 'X' + hr.toFixed(2));
                 break;

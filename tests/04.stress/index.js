@@ -60,7 +60,7 @@ describe('stress tests', function() {
         });
     });
 
-    describe('10 random manipulations for 50 images', function() {
+    describe('10 random manipulations for 50 images (in parallel)', function() {
         it('should succeed', function(done) {
             async.times(50, function(i, done) {
                 lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
