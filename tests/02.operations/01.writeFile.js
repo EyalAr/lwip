@@ -111,6 +111,7 @@ describe('lwip.writeFile', function() {
             });
 
             describe('params specified - high compression, not interlaced', function() {
+                this.timeout(4000); // 4 seconds. high compression can take more time
                 it('should succeed', function(done) {
                     image.writeFile(outpathPng, {
                         compression: 'high',
@@ -120,6 +121,7 @@ describe('lwip.writeFile', function() {
             });
 
             describe('params specified - high compression, interlaced', function() {
+                this.timeout(4000); // 4 seconds. high compression can take more time
                 it('should succeed', function(done) {
                     image.writeFile(outpathPng, {
                         compression: 'high',

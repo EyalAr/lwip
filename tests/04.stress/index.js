@@ -1,8 +1,10 @@
 var join = require('path').join,
+    fs = require('fs'),
     assert = require('assert'),
     async = require('async'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
+    utils = require('../utils'),
     imgs = require('../imgs');
 
 var tmpDir = join(__dirname, '../results'),
@@ -64,50 +66,14 @@ describe('stress tests', function() {
                 lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
                     if (err) return done(err);
                     var batch = image.batch();
-                    for (var i = 0; i < 10; i++) {
-                        var r = Math.floor(Math.random() * 12);
-                        switch (r) {
-                            case 0:
-                                batch = batch.blur(5);
-                                break;
-                            case 1:
-                                batch = batch.rotate(45);
-                                break;
-                            case 2:
-                                batch = batch.resize(600, 200);
-                                break;
-                            case 3:
-                                batch = batch.crop(100, 150);
-                                break;
-                            case 4:
-                                batch = batch.scale(1.1, 0.66);
-                                break;
-                            case 5:
-                                batch = batch.mirror('xy');
-                                break;
-                            case 6:
-                                batch = batch.border(10);
-                                break;
-                            case 7:
-                                batch = batch.sharpen(300);
-                                break;
-                            case 8:
-                                batch = batch.saturate(1.2);
-                                break;
-                            case 9:
-                                batch = batch.lighten(0.5);
-                                break;
-                            case 10:
-                                batch = batch.darken(0.5);
-                                break;
-                            case 11:
-                                batch = batch.hue(-50);
-                                break;
-                        }
-                    }
-                    batch.writeFile(outpathJpeg, 'jpeg', {
+                    var ops = utils.generateRandomBatch(batch, 10);
+                    batch.writeFile(join(tmpDir, 'stress-rnd-' + i + '.jpg'), 'jpeg', {
                         quality: 50
-                    }, done);
+                    }, function(err) {
+                        if (err) return done(err);
+                        var data = ops.join('\n');
+                        fs.writeFile(join(tmpDir, 'stress-rnd-' + i + '.txt'), data, done);
+                    });
                 });
             }, done);
         });

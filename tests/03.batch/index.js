@@ -2,48 +2,226 @@ var join = require('path').join,
     assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
+    utils = require('../utils'),
     imgs = require('../imgs');
-
-var tmpDir = join(__dirname, '../results'),
-    basename = 'batch',
-    current;
 
 describe('image.batch', function() {
 
-    before(function(done) {
-        mkdirp(tmpDir, done);
-    });
+    var ops, batch;
 
-    var batch;
     beforeEach(function(done) {
         lwip.open(imgs.jpg.rgb, function(err, img) {
+            if (err) return done(err);
             batch = img.batch();
-            done(err);
+            ops = utils.generateRandomBatch(batch, 3);
+            done();
         });
     });
 
-    beforeEach(function() {
-        current = [basename];
-    });
+    describe('toBuffer', function() {
 
-    afterEach(function(done) {
-        batch.writeFile(join(tmpDir, current.join('_') + '.jpg'), 'jpeg', {
-            quality: 100
-        }, done);
-    });
+        describe('jpeg', function() {
 
-    describe('rotate(45,yellow)->crop(200,200)->blur(5)', function() {
-        it('should succeed', function() {
-            current.push('rotate45yellow', 'crop200X200', 'blur5');
-            batch.rotate(45, 'yellow').crop(200, 200).blur(5);
+            describe('quality 0', function() {
+                it('should succeed', function(done) {
+                    batch.toBuffer('jpg', {
+                        quality: 0
+                    }, function(err, buffer) {
+                        done(err);
+                    });
+                });
+            });
+
+            describe('quality 100', function() {
+                it('should succeed', function(done) {
+                    batch.toBuffer('jpg', {
+                        quality: 100
+                    }, function(err, buffer) {
+                        done(err);
+                    });
+                });
+            });
+
         });
+
+        describe('png', function() {
+
+            describe('non interlaced', function() {
+
+                describe('no compression', function() {
+                    it('should succeed', function(done) {
+                        batch.toBuffer('png', {
+                            interlaced: false,
+                            compression: 'none',
+                        }, function(err, buffer) {
+                            done(err);
+                        });
+                    });
+                });
+
+                describe('fast compression', function() {
+                    it('should succeed', function(done) {
+                        batch.toBuffer('png', {
+                            interlaced: false,
+                            compression: 'fast',
+                        }, function(err, buffer) {
+                            done(err);
+                        });
+                    });
+                });
+
+                describe('high compression', function() {
+                    this.timeout(4000); // 4 seconds. high compression can take more time
+                    it('should succeed', function(done) {
+                        batch.toBuffer('png', {
+                            interlaced: false,
+                            compression: 'high',
+                        }, function(err, buffer) {
+                            done(err);
+                        });
+                    });
+                });
+
+            });
+
+            describe('interlaced', function() {
+
+                describe('no compression', function() {
+                    it('should succeed', function(done) {
+                        batch.toBuffer('png', {
+                            interlaced: true,
+                            compression: 'none',
+                        }, function(err, buffer) {
+                            done(err);
+                        });
+                    });
+                });
+
+                describe('fast compression', function() {
+                    it('should succeed', function(done) {
+                        batch.toBuffer('png', {
+                            interlaced: true,
+                            compression: 'fast',
+                        }, function(err, buffer) {
+                            done(err);
+                        });
+                    });
+                });
+
+                describe('high compression', function() {
+                    this.timeout(4000); // 4 seconds. high compression can take more time
+                    it('should succeed', function(done) {
+                        batch.toBuffer('png', {
+                            interlaced: true,
+                            compression: 'high',
+                        }, function(err, buffer) {
+                            done(err);
+                        });
+                    });
+                });
+
+            });
+
+        });
+
     });
 
-    describe('rotate(-20,green)->scale(2)->crop(500,500)', function() {
-        it('should succeed', function() {
-            current.push('rotate-20green', 'scale2', 'crop500X500');
-            batch.rotate(-20, 'green').scale(2).crop(500, 500);
+    describe('writeFile', function() {
+
+        var tmpDir = join(__dirname, '../results');
+
+        before(function(done) {
+            mkdirp(tmpDir, done);
         });
+
+        describe('jpeg', function() {
+
+            describe('quality 0', function() {
+                it('should succeed', function(done) {
+                    batch.writeFile(join(tmpDir, 'btch-q0-' + ops.join('#') + '.jpg'), 'jpg', {
+                        quality: 0
+                    }, done);
+                });
+            });
+
+            describe('quality 100', function() {
+                it('should succeed', function(done) {
+                    batch.writeFile(join(tmpDir, 'btch-q100-' + ops.join('#') + '.jpg'), 'jpg', {
+                        quality: 100
+                    }, done);
+                });
+            });
+
+        });
+
+        describe('png', function() {
+
+            describe('non interlaced', function() {
+
+                describe('no compression', function() {
+                    it('should succeed', function(done) {
+                        batch.writeFile(join(tmpDir, 'btch--noint#nocomp--' + ops.join('#') + '.png'), 'png', {
+                            interlaced: false,
+                            compression: 'none',
+                        }, done);
+                    });
+                });
+
+                describe('fast compression', function() {
+                    it('should succeed', function(done) {
+                        batch.writeFile(join(tmpDir, 'btch--noint#fstcomp--' + ops.join('#') + '.png'), 'png', {
+                            interlaced: false,
+                            compression: 'fast',
+                        }, done);
+                    });
+                });
+
+                describe('high compression', function() {
+                    this.timeout(4000); // 4 seconds. high compression can take more time
+                    it('should succeed', function(done) {
+                        batch.writeFile(join(tmpDir, 'btch-noint#hicomp-' + ops.join('#') + '.png'), 'png', {
+                            interlaced: false,
+                            compression: 'high',
+                        }, done);
+                    });
+                });
+
+            });
+
+            describe('interlaced', function() {
+
+                describe('no compression', function() {
+                    it('should succeed', function(done) {
+                        batch.writeFile(join(tmpDir, 'btch-intr#nocomp-' + ops.join('#') + '.png'), 'png', {
+                            interlaced: true,
+                            compression: 'none',
+                        }, done);
+                    });
+                });
+
+                describe('fast compression', function() {
+                    it('should succeed', function(done) {
+                        batch.writeFile(join(tmpDir, 'btch-intr#fstcomp-' + ops.join('#') + '.png'), 'png', {
+                            interlaced: true,
+                            compression: 'fast',
+                        }, done);
+                    });
+                });
+
+                describe('high compression', function() {
+                    this.timeout(4000); // 4 seconds. high compression can take more time
+                    it('should succeed', function(done) {
+                        batch.writeFile(join(tmpDir, 'btch-intr#hicomp-' + ops.join('#') + '.png'), 'png', {
+                            interlaced: true,
+                            compression: 'high',
+                        }, done);
+                    });
+                });
+
+            });
+
+        });
+
     });
 
 });
