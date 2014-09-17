@@ -18,6 +18,15 @@ describe('image.batch', function() {
         });
     });
 
+    describe('exec', function() {
+        describe('same batch twice in parallel', function() {
+            it('should throw an error', function() {
+                batch.exec(function() {});
+                batch.exec.bind(batch, function() {}).should.throwError();
+            });
+        });
+    });
+
     describe('toBuffer', function() {
 
         describe('jpeg', function() {

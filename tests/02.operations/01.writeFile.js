@@ -34,10 +34,18 @@ describe('lwip.writeFile', function() {
                 });
             });
 
-            describe('params specified', function() {
+            describe('params specified q=20', function() {
                 it('should succeed', function(done) {
                     image.writeFile(outpathJpeg, {
                         quality: 20
+                    }, done);
+                });
+            });
+
+            describe('params specified q=0', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathJpeg, {
+                        quality: 0
                     }, done);
                 });
             });

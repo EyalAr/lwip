@@ -14,7 +14,7 @@ describe('image.rotate arguments validation', function() {
         });
     });
 
-    describe('invalid color object', function() {
+    describe('invalid color object (1)', function() {
         it('should throw an error', function() {
             image.rotate.bind(image, 5, {
                 foo: 'bar',
@@ -22,16 +22,59 @@ describe('image.rotate arguments validation', function() {
             }, function() {}).should.throwError();
         });
     });
+
+    describe('invalid color object (2)', function() {
+        it('should throw an error', function() {
+            image.rotate.bind(image, 5, {
+                r: -5,
+                g: -8,
+                b: -1000
+            }, function() {}).should.throwError();
+        });
+    });
+
     describe('invalid color array (1)', function() {
         it('should throw an error', function() {
             image.rotate.bind(image, 5, ['a', 'b'], function() {}).should.throwError();
         });
     });
+
     describe('invalid color array (2)', function() {
         it('should throw an error', function() {
             image.rotate.bind(image, 5, ['a', 'b', 'c'], function() {}).should.throwError();
         });
     });
+
+    describe('invalid color array (3)', function() {
+        it('should throw an error', function() {
+            image.rotate.bind(image, 5, [100, -100, 100], function() {}).should.throwError();
+        });
+    });
+
+    describe('invalid color array (4)', function() {
+        it('should throw an error', function() {
+            image.rotate.bind(image, 5, [100, 100, -100], function() {}).should.throwError();
+        });
+    });
+
+    describe('invalid color array (5)', function() {
+        it('should throw an error', function() {
+            image.rotate.bind(image, 5, [1000, 100, 100], function() {}).should.throwError();
+        });
+    });
+
+    describe('invalid color array (6)', function() {
+        it('should throw an error', function() {
+            image.rotate.bind(image, 5, [100, 1000, 100], function() {}).should.throwError();
+        });
+    });
+
+    describe('invalid color array (7)', function() {
+        it('should throw an error', function() {
+            image.rotate.bind(image, 5, [100, 100, 1000], function() {}).should.throwError();
+        });
+    });
+
     describe('invalid color string', function() {
         it('should throw an error', function() {
             image.rotate.bind(image, 5, 'foo', function() {}).should.throwError();

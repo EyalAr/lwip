@@ -9,7 +9,8 @@
   },
   "scripts": {
     "install": "node-gyp rebuild",
-    "test": "./node_modules/.bin/mocha --reporter spec --recursive tests/"
+    "test": "./node_modules/.bin/mocha --reporter spec --recursive tests/",
+    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --reporter spec --recursive tests/"
   },
   "gypfile": true,
   "description": "Comprehensive, fast, and simple image processing and manipulation",
@@ -17,6 +18,7 @@
     "example": "examples"
   },
   "devDependencies": {
+    "istanbul": "^0.3.2",
     "mkdirp": "^0.5.0",
     "mocha": "^1.20.1",
     "should": "^4.0.4"

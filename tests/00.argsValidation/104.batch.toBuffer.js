@@ -22,10 +22,26 @@ describe('batch.toBuffer arguments validation', function() {
 
     describe('JPEG params', function() {
 
-        describe('invalid quality', function() {
+        describe('invalid quality: foo', function() {
             it('should throw an error', function() {
                 batch.toBuffer.bind(batch, 'jpeg', {
                     quality: 'foo'
+                }).should.throwError();
+            });
+        });
+
+        describe('invalid quality: -1', function() {
+            it('should throw an error', function() {
+                batch.toBuffer.bind(batch, 'jpeg', {
+                    quality: -1
+                }).should.throwError();
+            });
+        });
+
+        describe('invalid quality: 101', function() {
+            it('should throw an error', function() {
+                batch.toBuffer.bind(batch, 'jpeg', {
+                    quality: 101
                 }).should.throwError();
             });
         });
@@ -34,7 +50,7 @@ describe('batch.toBuffer arguments validation', function() {
 
     describe('PNG params', function() {
 
-        describe('invalid compression', function() {
+        describe('invalid compression - string', function() {
             it('should throw an error', function() {
                 batch.toBuffer.bind(batch, 'png', {
                     compression: 'foo'
@@ -42,10 +58,26 @@ describe('batch.toBuffer arguments validation', function() {
             });
         });
 
-        describe('invalid interlaced', function() {
+        describe('invalid compression - number', function() {
+            it('should throw an error', function() {
+                batch.toBuffer.bind(batch, 'png', {
+                    compression: 98
+                }, function() {}).should.throwError();
+            });
+        });
+
+        describe('invalid interlaced - string', function() {
             it('should throw an error', function() {
                 batch.toBuffer.bind(batch, 'png', {
                     interlaced: 'foo'
+                }, function() {}).should.throwError();
+            });
+        });
+
+        describe('invalid interlaced - number', function() {
+            it('should throw an error', function() {
+                batch.toBuffer.bind(batch, 'png', {
+                    interlaced: 55
                 }, function() {}).should.throwError();
             });
         });
