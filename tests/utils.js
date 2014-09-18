@@ -1,5 +1,6 @@
 module.exports = {
-    generateRandomBatch: generateRandomBatch
+    generateRandomBatch: generateRandomBatch,
+    getRandomColor: getRandomColor
 };
 
 function generateRandomBatch(batch, n) {
@@ -14,7 +15,7 @@ function generateRandomBatch(batch, n) {
                 break;
             case 1:
                 var a = Math.floor(Math.random() * 360);
-                batch = batch.rotate(a);
+                batch = batch.rotate(a, getRandomColor());
                 ops.push('rtt' + a);
                 break;
             case 2:
@@ -43,7 +44,7 @@ function generateRandomBatch(batch, n) {
                 break;
             case 6:
                 var b = Math.floor(Math.random() * 30);
-                batch = batch.border(b);
+                batch = batch.border(b, getRandomColor());
                 ops.push('brdr' + b);
                 break;
             case 7:
@@ -74,4 +75,12 @@ function generateRandomBatch(batch, n) {
         }
     }
     return ops;
+}
+
+function getRandomColor() {
+    return {
+        r: Math.floor(Math.random() * 256),
+        g: Math.floor(Math.random() * 256),
+        b: Math.floor(Math.random() * 256)
+    };
 }

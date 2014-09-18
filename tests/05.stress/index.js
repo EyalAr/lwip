@@ -19,9 +19,9 @@ describe('stress tests', function() {
         mkdirp(tmpDir, done);
     });
 
-    describe('open image 500 times (in parallel) and save to disk as jpeg', function() {
+    describe('open image 300 times (in parallel) and save to disk as jpeg', function() {
         it('should succeed', function(done) {
-            async.times(500, function(i, done) {
+            async.times(300, function(i, done) {
                 lwip.open(imgs.png.rgb, 'png', function(err, image) {
                     if (err) return done(err);
                     image.writeFile(outpathJpeg, 'jpeg', {
@@ -46,9 +46,9 @@ describe('stress tests', function() {
         });
     });
 
-    describe('open image 500 times (in parallel) and save to disk as png (fast compression, not interlaced)', function() {
+    describe('open image 300 times (in parallel) and save to disk as png (fast compression, not interlaced)', function() {
         it('should succeed', function(done) {
-            async.times(500, function(i, done) {
+            async.times(300, function(i, done) {
                 lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
                     if (err) return done(err);
                     image.writeFile(outpathPng, 'png', {
@@ -60,13 +60,13 @@ describe('stress tests', function() {
         });
     });
 
-    describe('10 random manipulations for 50 images (in parallel)', function() {
+    describe('7 random manipulations for 50 images (in parallel)', function() {
         it('should succeed', function(done) {
             async.times(50, function(i, done) {
                 lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
                     if (err) return done(err);
                     var batch = image.batch();
-                    var ops = utils.generateRandomBatch(batch, 10);
+                    var ops = utils.generateRandomBatch(batch, 7);
                     batch.writeFile(join(tmpDir, 'stress-rnd-' + i + '.jpg'), 'jpeg', {
                         quality: 50
                     }, function(err) {
@@ -79,18 +79,35 @@ describe('stress tests', function() {
         });
     });
 
-    describe('rotate an image 50 times (up to 90degs)', function() {
+    describe('rotate an image 30 times (up to 90degs)', function() {
         it('should succeed', function(done) {
-            var a = 1.8;
+            var a = 3;
             lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
                 if (err) return done(err);
                 async.timesSeries(50, function(i, done) {
-                    image.rotate(a, 'black', done);
+                    image.rotate(a, utils.getRandomColor(), done);
                 }, function(err) {
                     if (err) return done(err);
                     image.writeFile(outpathJpeg, 'jpeg', {
                         quality: 90
                     }, done);
+                });
+            });
+        });
+    });
+
+    describe('25 random manipulations on one image', function() {
+        it('should succeed', function(done) {
+            lwip.open(imgs.png.rgb, 'png', function(err, image) {
+                if (err) return done(err);
+                var batch = image.batch();
+                var ops = utils.generateRandomBatch(batch, 25);
+                batch.writeFile(join(tmpDir, 'stress-25rnd.jpg'), 'jpeg', {
+                    quality: 85
+                }, function(err) {
+                    if (err) return done(err);
+                    var data = ops.join('\n');
+                    fs.writeFile(join(tmpDir, 'stress-25rnd.txt'), data, done);
                 });
             });
         });
