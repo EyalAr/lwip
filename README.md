@@ -8,6 +8,7 @@
   0. [Installation](#installation)
   0. [Usage](#usage)
   0. [Supported formats](#supported-formats)
+  0. [Note on transparent images](#note-on-transparent-images)
 0. [API](#api)
   0. [Open an image from file or buffer](#open-an-image)
   0. [Image operations](#image-operations)
@@ -24,9 +25,12 @@
     0. [Adjust saturation](#saturate)
     0. Adjust lightness: [lighten](#lighten) / [darken](#darken)
     0. [Adjust hue](#hue)
+    0. [Set alpha channel](#set-alpha-channel)
+    0. [Opacify](#opacify)
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
+    0. [Transparency](#transparency)
     0. [Get as a Buffer](#get-as-a-buffer)
       0. [JPEG](#jpeg)
       0. [PNG](#png)
@@ -120,17 +124,23 @@ lwip.open('image.jpg', function(err, image){
 **Decoding (reading):**
 
 - JPEG, 1 & 3 channels (grayscale & RGB).
-- PNG, 1 & 3 channels (grayscale & RGB). Alpha channel (transperancy) is not
-  currently supported.
+- PNG, 1 & 3 channels (grayscale & RGB) + alpha (transparency) channel.
 
 **Encoding (writing):**
 
 - JPEG, 3 channels (RGB).
-- PNG (lossless), 3 channels (RGB).
+- PNG (lossless), 3 channels (RGB) or 4 channels (RGBA).
 
 Other formats may also be supported in the future, but are probably less urgent.
 Check the issues to see [which formats are planned to be supported](https://github.com/EyalAr/lwip/issues?labels=format+request&page=1&state=open).
 Open an issue if you need support for a format which is not already listed.
+
+### Note on transparent images
+
+0. Transparency is supported through an alpha channel.
+0. Note that not all formats support transparency. If an image with an alpha
+   channel is encoded with a format which does not support transparency, the
+   alpha channel will be set to 100% for all pixels.
 
 ## API
 
@@ -359,6 +369,29 @@ Adjust image hue.
 **Note:** The hue is shifted in a circular manner in the range [0,360] for each
 pixel individually.
 
+#### Set alpha channel
+
+Globally set the alpha channel for all pixels.
+
+`image.setAlpha(alpha, callback)`
+
+0. `alpha {Integer}`: In the range [0,100] where 100 is completely opaque and
+   0 is completely transparent.
+0. `callback {Function(err, image)}`
+
+**Note**: Previous pixel's alpha channel values will be overwritten.
+
+#### Opacify
+
+Make image completely opaque. Effectively sets the alpha channel for each pixel
+to 100%.
+
+`image.opacify(callback)`
+
+0. `callback {Function(err, image)}`
+
+**Note**: Equivalent to `image.setAlpha(100, ...)`.
+
 ### Getters
 
 #### Width
@@ -368,6 +401,11 @@ pixel individually.
 #### Height
 
 `image.height()` returns the image's height in pixels.
+
+#### Transparency
+
+`image.transparency()` returns `true` / `false` depending whether the image has
+transparent components.
 
 #### Get as a Buffer
 
@@ -395,6 +433,8 @@ The `params` object should have the following fields:
 
 - `quality {Integer}`: Defaults to `100`.
 
+Note that when encoding to JPEG the alpha channel is discarded.
+
 ##### PNG
 
 The `params` object should have the following fields:
@@ -404,6 +444,10 @@ The `params` object should have the following fields:
   - `"fast"` - Basic compression. Fast.
   - `"high"` - High compression. Slowest.
 - `interlaced {Boolean}`: Defaults to `false`.
+- `transparency {true/false/'auto'}`: Preserve transparency? Defaults to
+  `'auto'`. Determines if the encoded image will have 3 or 4 channels. If
+  `'auto'`, the image will be encoded with 4 channels if it has transparent
+  components, and 3 channels otherwise.
 
 #### Write to file
 
