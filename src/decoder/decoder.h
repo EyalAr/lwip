@@ -4,6 +4,8 @@
 #define cimg_display 0
 #define cimg_verbosity 0
 
+#define N_CHANNELS 4
+
 #include <string>
 #include <cstring>
 #include <node.h>
@@ -64,10 +66,10 @@ inline void lwip_jpeg_error_exit (j_common_ptr cinfo) {
 
 /**
  * Utility function to take a CIMG object (**tmp), and convert it to 3 channels
- * (if not 3 channels already)
+ * RGBA (if not 4 channels already)
  * Returns an error string if there was an error. Empty string otherwise.
  */
-string to3Channels(CImg<unsigned char> ** img);
+string toRGBA(CImg<unsigned char> ** img);
 
 string decode_jpeg_buffer(char * buffer, size_t size, CImg<unsigned char> ** img);
 string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** img);

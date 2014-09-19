@@ -5,9 +5,11 @@
         DEF_ROTATE_COLOR: 'gray',
         DEF_BORDER_COLOR: 'gray',
         DEF_PAD_COLOR: 'gray',
+        DEF_COLOR_ALPHA: 100,
         DEF_JPEG_QUALITY: 100,
         PNG_DEF_COMPRESSION: 'fast',
-        PNG_DEF_INTERLACED: false
+        PNG_DEF_INTERLACED: false,
+        PNG_DEF_TRANSPARENT: 'auto',
     };
 
     exports.interpolations = {
@@ -23,47 +25,56 @@
         'black': {
             r: 0,
             g: 0,
-            b: 0
+            b: 0,
+            a: 100
         },
         'white': {
             r: 255,
             g: 255,
-            b: 255
+            b: 255,
+            a: 100
         },
         'red': {
             r: 255,
             g: 0,
-            b: 0
+            b: 0,
+            a: 100
         },
         'blue': {
             r: 0,
             g: 0,
-            b: 255
+            b: 255,
+            a: 100
         },
         'green': {
             r: 0,
             g: 255,
-            b: 0
+            b: 0,
+            a: 100
         },
         'cyan': {
             r: 0,
             g: 255,
-            b: 255
+            b: 255,
+            a: 100
         },
         'yellow': {
             r: 255,
             g: 255,
-            b: 0
+            b: 0,
+            a: 100
         },
         'gray': {
             r: 128,
             g: 128,
-            b: 128
+            b: 128,
+            a: 100
         },
         'magenta': {
             r: 255,
             g: 0,
-            b: 255
+            b: 255,
+            a: 100
         }
     };
 

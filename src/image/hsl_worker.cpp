@@ -16,7 +16,8 @@ void HSLWorker::Execute () {
         cimg_forXY(*_cimg, x, y) {
             unsigned char r = (*_cimg)(x, y, 0, 0),
                           g = (*_cimg)(x, y, 0, 1),
-                          b = (*_cimg)(x, y, 0, 2);
+                          b = (*_cimg)(x, y, 0, 2),
+                          a = (*_cimg)(x, y, 0, 3);
             float h, s, l;
             rgb_to_hsl(r, g, b, &h, &s, &l);
 
@@ -39,7 +40,7 @@ void HSLWorker::Execute () {
 
             hsl_to_rgb(h, s, l, &r, &g, &b);
 
-            _cimg->fillC(x, y, 0, r, g, b);
+            _cimg->fillC(x, y, 0, r, g, b, a);
         }
     } catch (CImgException e) {
         SetErrorMessage("Unable to modify HSL");

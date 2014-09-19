@@ -4,6 +4,8 @@
 #define cimg_display 0
 #define cimg_verbosity 0
 
+#define N_CHANNELS 4
+
 #include <string>
 #include <cmath>
 #include <node.h>
@@ -72,6 +74,7 @@ public:
         unsigned char r,
         unsigned char g,
         unsigned char b,
+        unsigned char a,
         CImg<unsigned char> * cimg,
         NanCallback * callback
     );
@@ -83,6 +86,7 @@ private:
     unsigned char _r;
     unsigned char _g;
     unsigned char _b;
+    unsigned char _a;
     CImg<unsigned char> * _cimg;
 };
 
@@ -149,6 +153,7 @@ public:
         unsigned char r,
         unsigned char g,
         unsigned char b,
+        unsigned char a,
         CImg<unsigned char> * cimg,
         NanCallback * callback
     );
@@ -163,6 +168,7 @@ private:
     unsigned char _r;
     unsigned char _g;
     unsigned char _b;
+    unsigned char _a;
     CImg<unsigned char> * _cimg;
 };
 
@@ -204,6 +210,5 @@ void rgb_to_hsl(unsigned char r, unsigned char g, unsigned char b, float * h,
                 float * s, float * l);
 void hsl_to_rgb(float h, float s, float l, unsigned char * r, unsigned char * g,
                 unsigned char * b);
-float hue2rgb(float p, float q, float t);
 
 #endif

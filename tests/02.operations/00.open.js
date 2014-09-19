@@ -88,6 +88,16 @@ describe('lwip.open', function() {
             });
         });
 
+        describe('transparent image', function() {
+            it('should succeed', function(done) {
+                lwip.open(imgs.png.trans, function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
         describe('invalid image', function() {
             it('should fail', function(done) {
                 lwip.open(imgs.png.inv, function(err, img) {

@@ -21,9 +21,36 @@
         return v !== undefined;
     }
 
-    function image(pixelsBuf, width, height) {
+    function normalizeColor(color) {
+        if (typeof color === 'string') {
+            if (defs.colors[color]) color = defs.colors[color];
+            else throw Error('Unknown color ' + color);
+        } else {
+            if (color instanceof Array) {
+                color = {
+                    r: color[0],
+                    g: color[1],
+                    b: color[2],
+                    a: color[3]
+                };
+            }
+            if (color.a !== 0) color.a = color.a || defs.defaults.DEF_COLOR_ALPHA;
+            if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
+                throw Error('\'red\' color component is invalid');
+            if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
+                throw Error('\'green\' color component is invalid');
+            if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
+                throw Error('\'blue\' color component is invalid');
+            if (color.a != parseInt(color.a) || color.a < 0 || color.a > 100)
+                throw Error('\'alpha\' color component is invalid');
+        }
+        return color;
+    }
+
+    function image(pixelsBuf, width, height, trans) {
         this.__lwip = new lwip_image.LwipImage(pixelsBuf, width, height);
         this.__locked = false;
+        this.__trans = trans;
     }
 
     image.prototype.__lock = function() {
@@ -93,25 +120,9 @@
         try {
             var that = this;
             decree(defs.args.rotate)(arguments, function(degs, color, callback) {
-                if (typeof color === 'string') {
-                    if (defs.colors[color]) color = defs.colors[color];
-                    else throw Error('Unknown color ' + color);
-                } else {
-                    if (color instanceof Array) {
-                        color = {
-                            r: color[0],
-                            g: color[1],
-                            b: color[2]
-                        };
-                    }
-                    if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
-                        throw Error('\'red\' color component is invalid');
-                    if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
-                        throw Error('\'green\' color component is invalid');
-                    if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
-                        throw Error('\'blue\' color component is invalid');
-                }
-                that.__lwip.rotate(+degs, +color.r, +color.g, +color.b, function(err) {
+                color = normalizeColor(color);
+                if (color.a < 100) that.__trans = true;
+                that.__lwip.rotate(+degs, +color.r, +color.g, +color.b, +color.a, function(err) {
                     that.__release();
                     callback(err, that);
                 });
@@ -277,25 +288,9 @@
         try {
             var that = this;
             decree(defs.args.pad)(arguments, function(left, top, right, bottom, color, callback) {
-                if (typeof color === 'string') {
-                    if (defs.colors[color]) color = defs.colors[color];
-                    else throw Error('Unknown color ' + color);
-                } else {
-                    if (color instanceof Array) {
-                        color = {
-                            r: color[0],
-                            g: color[1],
-                            b: color[2]
-                        };
-                    }
-                    if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
-                        throw Error('\'red\' color component is invalid');
-                    if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
-                        throw Error('\'green\' color component is invalid');
-                    if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
-                        throw Error('\'blue\' color component is invalid');
-                }
-                that.__lwip.pad(+left, +top, +right, +bottom, +color.r, +color.g, +color.b, function(err) {
+                color = normalizeColor(color);
+                if (color.a < 100) that.__trans = true;
+                that.__lwip.pad(+left, +top, +right, +bottom, +color.r, +color.g, +color.b, +color.a, function(err) {
                     that.__release();
                     callback(err, that);
                 });
@@ -311,26 +306,10 @@
         try {
             var that = this;
             decree(defs.args.border)(arguments, function(width, color, callback) {
-                if (typeof color === 'string') {
-                    if (defs.colors[color]) color = defs.colors[color];
-                    else throw Error('Unknown color ' + color);
-                } else {
-                    if (color instanceof Array) {
-                        color = {
-                            r: color[0],
-                            g: color[1],
-                            b: color[2]
-                        };
-                    }
-                    if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
-                        throw Error('\'red\' color component is invalid');
-                    if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
-                        throw Error('\'green\' color component is invalid');
-                    if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
-                        throw Error('\'blue\' color component is invalid');
-                }
+                color = normalizeColor(color);
+                if (color.a < 100) that.__trans = true;
                 // we can just use image.pad...
-                that.__lwip.pad(+width, +width, +width, +width, +color.r, +color.g, +color.b, function(err) {
+                that.__lwip.pad(+width, +width, +width, +width, +color.r, +color.g, +color.b, +color.a, function(err) {
                     that.__release();
                     callback(err, that);
                 });
@@ -385,12 +364,17 @@
                     else throw Error('Invalid PNG compression');
                     params.interlaced = params.interlaced || defs.defaults.PNG_DEF_INTERLACED;
                     if (typeof params.interlaced !== 'boolean') throw Error('PNG \'interlaced\' must be boolean');
+                    params.transparency = params.transparency || defs.defaults.PNG_DEF_TRANSPARENT;
+                    if (typeof params.transparency !== 'boolean' && params.transparency.toLowerCase() !== 'auto')
+                        throw Error('PNG \'transparency\' must be boolean or \'auto\'');
+                    if (params.transparency.toLowerCase() !== 'auto') params.transparency = that.__trans;
                     return encoder.png(
                         that.__lwip.buffer(),
                         that.__lwip.width(),
                         that.__lwip.height(),
                         params.compression,
                         params.interlaced,
+                        params.transparency,
                         function(err, buffer) {
                             that.__release();
                             callback(err, buffer);
@@ -471,24 +455,7 @@
         var that = this,
             decs = defs.args.rotate.slice(0, -1); // cut callback declaration
         decree(decs)(arguments, function(degs, color) {
-            if (typeof color === 'string') {
-                if (defs.colors[color]) color = defs.colors[color];
-                else throw Error('Unknown color ' + color);
-            } else {
-                if (color instanceof Array) {
-                    color = {
-                        r: color[0],
-                        g: color[1],
-                        b: color[2]
-                    };
-                }
-                if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
-                    throw Error('\'red\' color component is invalid');
-                if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
-                    throw Error('\'green\' color component is invalid');
-                if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
-                    throw Error('\'blue\' color component is invalid');
-            }
+            color = normalizeColor(color);
             that.__addOp(that.__image.rotate, [degs, color].filter(undefinedFilter));
         });
         return this;
@@ -575,24 +542,7 @@
         var that = this,
             decs = defs.args.pad.slice(0, -1); // cut callback declaration
         decree(decs)(arguments, function(left, top, right, bottom, color) {
-            if (typeof color === 'string') {
-                if (defs.colors[color]) color = defs.colors[color];
-                else throw Error('Unknown color ' + color);
-            } else {
-                if (color instanceof Array) {
-                    color = {
-                        r: color[0],
-                        g: color[1],
-                        b: color[2]
-                    };
-                }
-                if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
-                    throw Error('\'red\' color component is invalid');
-                if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
-                    throw Error('\'green\' color component is invalid');
-                if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
-                    throw Error('\'blue\' color component is invalid');
-            }
+            color = normalizeColor(color);
             that.__addOp(that.__image.pad, [left, top, right, bottom, color].filter(undefinedFilter));
         });
         return this;
@@ -602,24 +552,7 @@
         var that = this,
             decs = defs.args.border.slice(0, -1); // cut callback declaration
         decree(decs)(arguments, function(width, color) {
-            if (typeof color === 'string') {
-                if (defs.colors[color]) color = defs.colors[color];
-                else throw Error('Unknown color ' + color);
-            } else {
-                if (color instanceof Array) {
-                    color = {
-                        r: color[0],
-                        g: color[1],
-                        b: color[2]
-                    };
-                }
-                if (color.r != parseInt(color.r) || color.r < 0 || color.r > 255)
-                    throw Error('\'red\' color component is invalid');
-                if (color.g != parseInt(color.g) || color.g < 0 || color.g > 255)
-                    throw Error('\'green\' color component is invalid');
-                if (color.b != parseInt(color.b) || color.b < 0 || color.b > 255)
-                    throw Error('\'blue\' color component is invalid');
-            }
+            color = normalizeColor(color);
             that.__addOp(that.__image.border, [width, color].filter(undefinedFilter));
         });
         return this;
@@ -648,6 +581,9 @@
                     throw Error('Invalid PNG compression');
                 params.interlaced = params.interlaced || defs.defaults.PNG_DEF_INTERLACED;
                 if (typeof params.interlaced !== 'boolean') throw Error('PNG \'interlaced\' must be boolean');
+                params.transparency = params.transparency || defs.defaults.PNG_DEF_TRANSPARENT;
+                if (typeof params.transparency !== 'boolean' && params.transparency.toLowerCase() !== 'auto')
+                    throw Error('PNG \'transparency\' must be boolean or \'auto\'');
             } else throw Error('Unknown type \'' + type + '\'');
             that.exec(function(err, image) {
                 if (err) return callback(err);
@@ -676,14 +612,14 @@
                 var opener = getOpener(type);
                 fs.readFile(source, function(err, imbuff) {
                     if (err) return callback(err);
-                    opener(imbuff, function(err, pixelsBuf, width, height) {
-                        callback(err, err ? undefined : new image(pixelsBuf, width, height));
+                    opener(imbuff, function(err, pixelsBuf, width, height, channels, trans) {
+                        callback(err, err ? undefined : new image(pixelsBuf, width, height, trans));
                     });
                 });
             } else if (source instanceof Buffer) {
                 var opener = getOpener(type);
-                opener(source, function(err, pixelsBuf, width, height) {
-                    callback(err, err ? undefined : new image(pixelsBuf, width, height));
+                opener(source, function(err, pixelsBuf, width, height, channels, trans) {
+                    callback(err, err ? undefined : new image(pixelsBuf, width, height, trans));
                 });
             } else throw Error("Invalid source");
         });
