@@ -37,7 +37,7 @@ public:
     static NAN_METHOD(mirror);
     static NAN_METHOD(pad);
     static NAN_METHOD(sharpen);
-    static NAN_METHOD(hslAdj);
+    static NAN_METHOD(hslaAdj);
     static NAN_METHOD(width);
     static NAN_METHOD(height);
     static NAN_METHOD(buffer);
@@ -187,22 +187,24 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-class HSLWorker : public NanAsyncWorker {
+class HSLAWorker : public NanAsyncWorker {
 public:
-    HSLWorker(
+    HSLAWorker(
         float hs,
         float sd,
         float ld,
+        float ad,
         CImg<unsigned char> * cimg,
         NanCallback * callback
     );
-    ~HSLWorker();
+    ~HSLAWorker();
     void Execute ();
     void HandleOKCallback ();
 private:
     float _hs;
     float _sd;
     float _ld;
+    float _ad;
     CImg<unsigned char> * _cimg;
 };
 

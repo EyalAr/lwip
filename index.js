@@ -149,12 +149,12 @@
         }
     }
 
-    image.prototype.hslAdjust = function() {
+    image.prototype.hslaAdjust = function() {
         this.__lock();
         try {
             var that = this;
-            decree(defs.args.hslAdjust)(arguments, function(hs, sd, ld, callback) {
-                that.__lwip.hslAdj(+hs, +sd, +ld, function(err) {
+            decree(defs.args.hslaAdjust)(arguments, function(hs, sd, ld, td, callback) {
+                that.__lwip.hslaAdj(+hs, +sd, +ld, -td, function(err) {
                     that.__release();
                     callback(err, that);
                 });
@@ -170,7 +170,7 @@
         try {
             var that = this;
             decree(defs.args.saturate)(arguments, function(delta, callback) {
-                that.__lwip.hslAdj(0, +delta, 0, function(err) {
+                that.__lwip.hslaAdj(0, +delta, 0, 0, function(err) {
                     that.__release();
                     callback(err, that);
                 });
@@ -186,7 +186,7 @@
         try {
             var that = this;
             decree(defs.args.lighten)(arguments, function(delta, callback) {
-                that.__lwip.hslAdj(0, 0, +delta, function(err) {
+                that.__lwip.hslaAdj(0, 0, +delta, 0, function(err) {
                     that.__release();
                     callback(err, that);
                 });
@@ -202,7 +202,7 @@
         try {
             var that = this;
             decree(defs.args.darken)(arguments, function(delta, callback) {
-                that.__lwip.hslAdj(0, 0, -delta, function(err) {
+                that.__lwip.hslaAdj(0, 0, -delta, 0, function(err) {
                     that.__release();
                     callback(err, that);
                 });
@@ -218,7 +218,7 @@
         try {
             var that = this;
             decree(defs.args.hue)(arguments, function(shift, callback) {
-                that.__lwip.hslAdj(+shift, 0, 0, function(err) {
+                that.__lwip.hslaAdj(+shift, 0, 0, 0, function(err) {
                     that.__release();
                     callback(err, that);
                 });
@@ -470,11 +470,11 @@
         return this;
     }
 
-    batch.prototype.hslAdjust = function() {
+    batch.prototype.hslaAdjust = function() {
         var that = this,
-            decs = defs.args.hslAdjust.slice(0, -1); // cut callback declaration
-        decree(decs)(arguments, function(hs, sd, ld) {
-            that.__addOp(that.__image.hslAdjust, [hs, sd, ld].filter(undefinedFilter));
+            decs = defs.args.hslaAdjust.slice(0, -1); // cut callback declaration
+        decree(decs)(arguments, function(hs, sd, ld, td) {
+            that.__addOp(that.__image.hslaAdjust, [hs, sd, ld, td].filter(undefinedFilter));
         });
         return this;
     }

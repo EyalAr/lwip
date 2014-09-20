@@ -6,10 +6,10 @@ var join = require('path').join,
     imgs = require('../imgs');
 
 var tmpDir = join(__dirname, '../results'),
-    basename = 'hslAdjust',
+    basename = 'hslaAdjust',
     current;
 
-describe('lwip.hslAdjust', function() {
+describe('lwip.hslaAdjust', function() {
 
     var image;
 
@@ -18,7 +18,7 @@ describe('lwip.hslAdjust', function() {
     });
 
     beforeEach(function(done) {
-        lwip.open(imgs.png.rgb, function(err, img) {
+        lwip.open(imgs.png.trans, function(err, img) {
             image = img;
             done(err);
         });
@@ -32,39 +32,45 @@ describe('lwip.hslAdjust', function() {
         image.writeFile(join(tmpDir, current.join('_') + '.png'), 'png', done);
     });
 
-    describe('hs=0, sd=0, ld=0', function() {
+    describe('hs=0, sd=0, ld=0, td=0', function() {
         var hs = 0,
             sd = 0,
-            ld = 0;
+            ld = 0,
+            td = 0;
         it('should succeed', function(done) {
             current.push('hs' + hs);
             current.push('sd' + sd);
             current.push('ld' + ld);
-            image.hslAdjust(hs, sd, ld, done);
+            current.push('td' + td);
+            image.hslaAdjust(hs, sd, ld, td, done);
         });
     });
 
-    describe('hs=50, sd=0.3, ld=0.4', function() {
+    describe('hs=50, sd=0.3, ld=0.4, td=0.5', function() {
         var hs = 50,
             sd = 0.3,
-            ld = 0.4;
+            ld = 0.4,
+            td = 0.5;
         it('should succeed', function(done) {
             current.push('hs' + hs);
             current.push('sd' + sd);
             current.push('ld' + ld);
-            image.hslAdjust(hs, sd, ld, done);
+            current.push('td' + td);
+            image.hslaAdjust(hs, sd, ld, td, done);
         });
     });
 
-    describe('hs=-50, sd=-0.3, ld=-0.4', function() {
+    describe('hs=-50, sd=-0.3, ld=-0.4, td=-1', function() {
         var hs = -50,
             sd = -0.3,
-            ld = -0.4;
+            ld = -0.4,
+            td = -1;
         it('should succeed', function(done) {
             current.push('hs' + hs);
             current.push('sd' + sd);
             current.push('ld' + ld);
-            image.hslAdjust(hs, sd, ld, done);
+            current.push('td' + td);
+            image.hslaAdjust(hs, sd, ld, td, done);
         });
     });
 

@@ -17,7 +17,7 @@ void LwipImage::Init(Handle<Object> exports) {
     NODE_SET_PROTOTYPE_METHOD(tpl, "mirror", mirror);
     NODE_SET_PROTOTYPE_METHOD(tpl, "pad", pad);
     NODE_SET_PROTOTYPE_METHOD(tpl, "sharpen", sharpen);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "hslAdj", hslAdj);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "hslaAdj", hslaAdj);
     NanAssignPersistent(constructor, tpl);
     exports->Set(
         NanNew("LwipImage"),
@@ -296,27 +296,30 @@ NAN_METHOD(LwipImage::sharpen) {
     NanReturnUndefined();
 }
 
-// image.hslAdj(hd, sd, ld, callback):
-// -----------------------------------
+// image.hslaAdj(hd, sd, ld, callback):
+// ------------------------------------
 
 // args[0] - hue delta
 // args[1] - saturation delta
 // args[2] - lightness delta
-// args[3] - callback
-NAN_METHOD(LwipImage::hslAdj) {
+// args[3] - alpha delta
+// args[4] - callback
+NAN_METHOD(LwipImage::hslaAdj) {
     NanScope();
 
     float hd = (float) args[0].As<Number>()->Value();
     float sd = (float) args[1].As<Number>()->Value();
     float ld = (float) args[2].As<Number>()->Value();
-    NanCallback * callback = new NanCallback(args[3].As<Function>());
+    float ad = (float) args[3].As<Number>()->Value();
+    NanCallback * callback = new NanCallback(args[4].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
     NanAsyncQueueWorker(
-        new HSLWorker(
+        new HSLAWorker(
             hd,
             sd,
             ld,
+            ad,
             cimg,
             callback
         )

@@ -8,6 +8,7 @@
   0. [Installation](#installation)
   0. [Usage](#usage)
   0. [Supported formats](#supported-formats)
+  0. [Colors specification](#colors-specification)
   0. [Note on transparent images](#note-on-transparent-images)
 0. [API](#api)
   0. [Open an image from file or buffer](#open-an-image)
@@ -25,12 +26,11 @@
     0. [Adjust saturation](#saturate)
     0. Adjust lightness: [lighten](#lighten) / [darken](#darken)
     0. [Adjust hue](#hue)
-    0. [Set alpha channel](#set-alpha-channel)
+    0. [Fade (adjust transparency)](#fade)
     0. [Opacify](#opacify)
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
-    0. [Transparency](#transparency)
     0. [Get as a Buffer](#get-as-a-buffer)
       0. [JPEG](#jpeg)
       0. [PNG](#png)
@@ -135,12 +135,33 @@ Other formats may also be supported in the future, but are probably less urgent.
 Check the issues to see [which formats are planned to be supported](https://github.com/EyalAr/lwip/issues?labels=format+request&page=1&state=open).
 Open an issue if you need support for a format which is not already listed.
 
+### Colors specification
+
+In LWIP colors are coded as RGBA values (red, green, blue and an alpha channel).
+
+Colors are specified in one of three ways:
+
+- As a string. possible values:
+    - `"black" // {r: 0, g: 0, b: 0, a: 100}`
+    - `"white" // {r: 255, g: 255, b: 255, a: 100}`
+    - `"gray" // {r: 128, g: 128, b: 128, a: 100}`
+    - `"red" // {r: 255, g: 0, b: 0, a: 100}`
+    - `"green" // {r: 0, g: 255, b: 0, a: 100}`
+    - `"blue" // {r: 0, g: 0, b: 255, a: 100}`
+    - `"yellow" // {r: 255, g: 255, b: 0, a: 100}`
+    - `"cyan" // {r: 0, g: 255, b: 255, a: 100}`
+    - `"magenta" // {r: 255, g: 0, b: 255, a: 100}`
+- As an array `[R, G, B, A]` where `R`, `G` and `B` are integers between 0 and
+  255 and `A` is an integer between 0 and 100.
+- As an object `{r: R, g: G, b: B, a: A}` where `R`, `G` and `B` are integers
+  between 0 and 255 and `A` is an integer between 0 and 100.
+
 ### Note on transparent images
 
 0. Transparency is supported through an alpha channel.
 0. Note that not all formats support transparency. If an image with an alpha
    channel is encoded with a format which does not support transparency, the
-   alpha channel will be set to 100% for all pixels.
+   alpha channel will ignored (effectively setting it to 100% for all pixels).
 
 ## API
 
@@ -223,13 +244,8 @@ fs.readFile('path/to/image.png', function(err, buffer){
 `image.rotate(degs, color, callback)`
 
 0. `degs {Float}`: Clockwise rotation degrees.
-0. `color {String / Array / Object}`: **Optional** Color of the canvas.
-  - As a string, possible values: `"black"`, `"white"`, `"gray"`, `"blue"`,
-    `"red"`, `"green"`, `"yellow"`, `"cyan"`, `"magenta"`.
-  - As an array `[R, G, B]` where `R`, `G` and `B` are integers between 0 and
-    255.
-  - As an object `{r: R, g: G, b: B}` where `R`, `G` and `B` are integers
-    between 0 and 255.
+0. `color {String / Array / Object}`: **Optional** Color of the canvas. See
+   [colors specification](#colors-specification).
 0. `callback {Function(err, image)}`
 
 #### Crop
@@ -287,13 +303,8 @@ Add a colored border to the image.
 `image.border(width, color, callback)`
 
 0. `width {Integer}`: Border width in pixels.
-0. `color {String / Array / Object}`: **Optional** Color of the border.
-  - As a string, possible values: `"black"`, `"white"`, `"gray"`, `"blue"`,
-    `"red"`, `"green"`, `"yellow"`, `"cyan"`, `"magenta"`.
-  - As an array `[R, G, B]` where `R`, `G` and `B` are integers between 0 and
-    255.
-  - As an object `{r: R, g: G, b: B}` where `R`, `G` and `B` are integers
-    between 0 and 255.
+0. `color {String / Array / Object}`: **Optional** Color of the border. See
+   [colors specification](#colors-specification).
 0. `callback {Function(err, image)}`
 
 #### Pad
@@ -303,13 +314,8 @@ Pad image edges with colored pixels.
 `image.pad(left, top, right, bottom, color, callback)`
 
 0. `left, top, right, bottom {Integer}`: Number of pixels to add to each edge.
-0. `color {String / Array / Object}`: **Optional** Color of the padding.
-  - As a string, possible values: `"black"`, `"white"`, `"gray"`, `"blue"`,
-    `"red"`, `"green"`, `"yellow"`, `"cyan"`, `"magenta"`.
-  - As an array `[R, G, B]` where `R`, `G` and `B` are integers between 0 and
-    255.
-  - As an object `{r: R, g: G, b: B}` where `R`, `G` and `B` are integers
-    between 0 and 255.
+0. `color {String / Array / Object}`: **Optional** Color of the padding. See
+   [colors specification](#colors-specification).
 0. `callback {Function(err, image)}`
 
 #### Saturate
@@ -369,17 +375,23 @@ Adjust image hue.
 **Note:** The hue is shifted in a circular manner in the range [0,360] for each
 pixel individually.
 
-#### Set alpha channel
+#### Fade
 
-Globally set the alpha channel for all pixels.
+Adjust image transperancy.
 
-`image.setAlpha(alpha, callback)`
+`image.fade(delta, callback)`
 
-0. `alpha {Integer}`: In the range [0,100] where 100 is completely opaque and
-   0 is completely transparent.
+0. `delta {Float}`: By how much to increase / decrease the transperancy.
 0. `callback {Function(err, image)}`
 
-**Note**: Previous pixel's alpha channel values will be overwritten.
+**Note:** The alpha channel is adjusted independently for each pixel.
+
+**Examples**:
+
+0. `image.fade(0, ...)` will have no effect on the image.
+0. `image.fade(0.5, ...)` will increase the transparency by 50%.
+0. `image.fade(1, ...)` will make the image completely transparent.
+0. `image.fade(-1, ...)` will make the image completely opaque.
 
 #### Opacify
 
@@ -390,7 +402,7 @@ to 100%.
 
 0. `callback {Function(err, image)}`
 
-**Note**: Equivalent to `image.setAlpha(100, ...)`.
+**Note**: Equivalent to `image.fade(-1, ...)`.
 
 ### Getters
 
@@ -401,11 +413,6 @@ to 100%.
 #### Height
 
 `image.height()` returns the image's height in pixels.
-
-#### Transparency
-
-`image.transparency()` returns `true` / `false` depending whether the image has
-transparent components.
 
 #### Get as a Buffer
 

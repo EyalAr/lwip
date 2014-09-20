@@ -141,7 +141,7 @@
             name: 'callback',
             type: 'function'
         }],
-        hslAdjust: [{
+        hslaAdjust: [{
             name: 'hs',
             type: 'number'
         }, {
@@ -149,6 +149,9 @@
             type: 'number'
         }, {
             name: 'ld',
+            type: 'number'
+        }, {
+            name: 'ad',
             type: 'number'
         }, {
             name: 'callback',

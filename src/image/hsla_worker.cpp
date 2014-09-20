@@ -1,24 +1,25 @@
 #include "image.h"
 
-HSLWorker::HSLWorker(
+HSLAWorker::HSLAWorker(
     float hs,
     float sd,
     float ld,
+    float ad,
     CImg<unsigned char> * cimg,
     NanCallback * callback
-): NanAsyncWorker(callback), _hs(hs), _sd(sd), _ld(ld), _cimg(cimg) {}
+): NanAsyncWorker(callback), _hs(hs), _sd(sd), _ld(ld), _ad(ad), _cimg(cimg) {}
 
-HSLWorker::~HSLWorker() {}
+HSLAWorker::~HSLAWorker() {}
 
-void HSLWorker::Execute () {
-    if (_hs == 0 && _sd == 0 && _ld == 0) return;
+void HSLAWorker::Execute () {
+    if (_hs == 0 && _sd == 0 && _ld == 0 && _ad == 0) return;
     try {
         cimg_forXY(*_cimg, x, y) {
             unsigned char r = (*_cimg)(x, y, 0, 0),
                           g = (*_cimg)(x, y, 0, 1),
                           b = (*_cimg)(x, y, 0, 2),
                           a = (*_cimg)(x, y, 0, 3);
-            float h, s, l;
+            float h, s, l, af = (float) a;
             rgb_to_hsl(r, g, b, &h, &s, &l);
 
             if (_hs != 0) {
@@ -38,18 +39,25 @@ void HSLWorker::Execute () {
                 if (l < 0) l = 0;
             }
 
+            if (_ad != 0) {
+                af *= 1.0 + _ad;
+                if (af > 255) af = 255;
+                if (af < 0) af = 0;
+            }
+
             hsl_to_rgb(h, s, l, &r, &g, &b);
+            a = (unsigned char) af;
 
             _cimg->fillC(x, y, 0, r, g, b, a);
         }
     } catch (CImgException e) {
-        SetErrorMessage("Unable to modify HSL");
+        SetErrorMessage("Unable to modify HSLA");
         return;
     }
     return;
 }
 
-void HSLWorker::HandleOKCallback () {
+void HSLAWorker::HandleOKCallback () {
     NanScope();
     Local<Value> argv[] = {
         NanNull()
