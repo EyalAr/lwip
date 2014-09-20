@@ -81,6 +81,7 @@ function getRandomColor() {
     return {
         r: Math.floor(Math.random() * 256),
         g: Math.floor(Math.random() * 256),
-        b: Math.floor(Math.random() * 256)
+        b: Math.floor(Math.random() * 256),
+        a: Math.floor(Math.random() * 50) + 51
     };
 }

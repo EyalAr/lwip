@@ -18,7 +18,7 @@ describe('lwip.darken', function() {
     });
 
     beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+        lwip.open(imgs.png.trans, function(err, img) {
             image = img;
             done(err);
         });
