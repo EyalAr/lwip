@@ -32,45 +32,45 @@ describe('lwip.hslaAdjust', function() {
         image.writeFile(join(tmpDir, current.join('_') + '.png'), 'png', done);
     });
 
-    describe('hs=0, sd=0, ld=0, td=0', function() {
+    describe('hs=0, sd=0, ld=0, ad=0', function() {
         var hs = 0,
             sd = 0,
             ld = 0,
-            td = 0;
+            ad = 0;
         it('should succeed', function(done) {
             current.push('hs' + hs);
             current.push('sd' + sd);
             current.push('ld' + ld);
-            current.push('td' + td);
-            image.hslaAdjust(hs, sd, ld, td, done);
+            current.push('ad' + ad);
+            image.hslaAdjust(hs, sd, ld, ad, done);
         });
     });
 
-    describe('hs=50, sd=0.3, ld=0.4, td=0.5', function() {
+    describe('hs=50, sd=0.3, ld=0.4, ad=0.5', function() {
         var hs = 50,
             sd = 0.3,
             ld = 0.4,
-            td = 0.5;
+            ad = 0.5;
         it('should succeed', function(done) {
             current.push('hs' + hs);
             current.push('sd' + sd);
             current.push('ld' + ld);
-            current.push('td' + td);
-            image.hslaAdjust(hs, sd, ld, td, done);
+            current.push('ad' + ad);
+            image.hslaAdjust(hs, sd, ld, ad, done);
         });
     });
 
-    describe('hs=-50, sd=-0.3, ld=-0.4, td=-1', function() {
+    describe('hs=-50, sd=-0.3, ld=-0.4, ad=-1', function() {
         var hs = -50,
             sd = -0.3,
             ld = -0.4,
-            td = -1;
+            ad = -1;
         it('should succeed', function(done) {
             current.push('hs' + hs);
             current.push('sd' + sd);
             current.push('ld' + ld);
-            current.push('td' + td);
-            image.hslaAdjust(hs, sd, ld, td, done);
+            current.push('ad' + ad);
+            image.hslaAdjust(hs, sd, ld, ad, done);
         });
     });
 

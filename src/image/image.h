@@ -38,6 +38,7 @@ public:
     static NAN_METHOD(pad);
     static NAN_METHOD(sharpen);
     static NAN_METHOD(hslaAdj);
+    static NAN_METHOD(opacify);
     static NAN_METHOD(width);
     static NAN_METHOD(height);
     static NAN_METHOD(buffer);
@@ -205,6 +206,19 @@ private:
     float _sd;
     float _ld;
     float _ad;
+    CImg<unsigned char> * _cimg;
+};
+
+class OpacifyWorker : public NanAsyncWorker {
+public:
+    OpacifyWorker(
+        CImg<unsigned char> * cimg,
+        NanCallback * callback
+    );
+    ~OpacifyWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
     CImg<unsigned char> * _cimg;
 };
 

@@ -49,7 +49,21 @@ describe('lwip.pad', function() {
             height = 333 + 30 + 80;
         it('image should have the correct size', function(done) {
             current.push('l10_t30_r50_b80_[120,50,200]');
-            image.pad(10, 30, 50, 80, [120,50,200], function(err, im) {
+            image.pad(10, 30, 50, 80, [120, 50, 200], function(err, im) {
+                if (err) return done(err);
+                assert(im.width() === width);
+                assert(im.height() === height);
+                done();
+            });
+        });
+    });
+
+    describe('left-10, top-30, right-50, bottom-80, color-[20,150,20,80]', function() {
+        var width = 500 + 10 + 50,
+            height = 333 + 30 + 80;
+        it('image should have the correct size', function(done) {
+            current.push('l10_t30_r50_b80_[20,150,20,80]');
+            image.pad(10, 30, 50, 80, [20, 150, 20, 80], function(err, im) {
                 if (err) return done(err);
                 assert(im.width() === width);
                 assert(im.height() === height);
@@ -63,7 +77,11 @@ describe('lwip.pad', function() {
             height = 333 + 15 + 40;
         it('image should have the correct size', function(done) {
             current.push('l1_t15_r25_b40_red120_grn50_blu200');
-            image.pad(5, 15, 25, 40, {r:120,g:50,b:200}, function(err, im) {
+            image.pad(5, 15, 25, 40, {
+                r: 120,
+                g: 50,
+                b: 200
+            }, function(err, im) {
                 if (err) return done(err);
                 assert(im.width() === width);
                 assert(im.height() === height);

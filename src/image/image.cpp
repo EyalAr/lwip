@@ -18,6 +18,7 @@ void LwipImage::Init(Handle<Object> exports) {
     NODE_SET_PROTOTYPE_METHOD(tpl, "pad", pad);
     NODE_SET_PROTOTYPE_METHOD(tpl, "sharpen", sharpen);
     NODE_SET_PROTOTYPE_METHOD(tpl, "hslaAdj", hslaAdj);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "opacify", opacify);
     NanAssignPersistent(constructor, tpl);
     exports->Set(
         NanNew("LwipImage"),
@@ -320,6 +321,26 @@ NAN_METHOD(LwipImage::hslaAdj) {
             sd,
             ld,
             ad,
+            cimg,
+            callback
+        )
+    );
+
+    NanReturnUndefined();
+}
+
+// image.opacify(callback):
+// ------------------------------------
+
+// args[0] - callback
+NAN_METHOD(LwipImage::opacify) {
+    NanScope();
+
+    NanCallback * callback = new NanCallback(args[0].As<Function>());
+    CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
+
+    NanAsyncQueueWorker(
+        new OpacifyWorker(
             cimg,
             callback
         )

@@ -36,13 +36,13 @@ void HSLAWorker::Execute () {
             if (_ld != 0) {
                 l *= 1.0 + _ld;
                 if (l > 1) l = 1;
-                if (l < 0) l = 0;
+                else if (l < 0) l = 0;
             }
 
             if (_ad != 0) {
                 af *= 1.0 + _ad;
-                if (af > 255) af = 255;
-                if (af < 0) af = 0;
+                if (af > 100) af = 100;
+                else if (af < 0) af = 0;
             }
 
             hsl_to_rgb(h, s, l, &r, &g, &b);

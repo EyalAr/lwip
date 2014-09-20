@@ -153,8 +153,8 @@
         this.__lock();
         try {
             var that = this;
-            decree(defs.args.hslaAdjust)(arguments, function(hs, sd, ld, td, callback) {
-                that.__lwip.hslaAdj(+hs, +sd, +ld, -td, function(err) {
+            decree(defs.args.hslaAdjust)(arguments, function(hs, sd, ld, ad, callback) {
+                that.__lwip.hslaAdj(+hs, +sd, +ld, +ad, function(err) {
                     that.__release();
                     callback(err, that);
                 });
@@ -203,6 +203,40 @@
             var that = this;
             decree(defs.args.darken)(arguments, function(delta, callback) {
                 that.__lwip.hslaAdj(0, 0, -delta, 0, function(err) {
+                    that.__release();
+                    callback(err, that);
+                });
+            });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
+    }
+
+    image.prototype.fade = function() {
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.fade)(arguments, function(delta, callback) {
+                that.__lwip.hslaAdj(0, 0, 0, -delta, function(err) {
+                    if (+delta > 0) that.__trans = true;
+                    that.__release();
+                    callback(err, that);
+                });
+            });
+        } catch (e) {
+            this.__release();
+            throw e;
+        }
+    }
+
+    image.prototype.opacify = function() {
+        this.__lock();
+        try {
+            var that = this;
+            decree(defs.args.opacify)(arguments, function(callback) {
+                that.__lwip.opacify(function(err) {
+                    that.__trans = false;
                     that.__release();
                     callback(err, that);
                 });
@@ -473,8 +507,8 @@
     batch.prototype.hslaAdjust = function() {
         var that = this,
             decs = defs.args.hslaAdjust.slice(0, -1); // cut callback declaration
-        decree(decs)(arguments, function(hs, sd, ld, td) {
-            that.__addOp(that.__image.hslaAdjust, [hs, sd, ld, td].filter(undefinedFilter));
+        decree(decs)(arguments, function(hs, sd, ld, ad) {
+            that.__addOp(that.__image.hslaAdjust, [hs, sd, ld, ad].filter(undefinedFilter));
         });
         return this;
     }
@@ -503,6 +537,20 @@
         decree(decs)(arguments, function(delta) {
             that.__addOp(that.__image.darken, [delta].filter(undefinedFilter));
         });
+        return this;
+    }
+
+    batch.prototype.fade = function() {
+        var that = this,
+            decs = defs.args.fade.slice(0, -1); // cut callback declaration
+        decree(decs)(arguments, function(delta) {
+            that.__addOp(that.__image.fade, [delta].filter(undefinedFilter));
+        });
+        return this;
+    }
+
+    batch.prototype.opacify = function() {
+        this.__addOp(this.__image.opacify, []);
         return this;
     }
 

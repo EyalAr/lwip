@@ -28,7 +28,8 @@ describe('batch.rotate arguments validation', function() {
             batch.rotate.bind(batch, 5, {
                 r: -5,
                 g: -8,
-                b: -1000
+                b: -1000,
+                a: -200
             }).should.throwError();
         });
     });
@@ -59,19 +60,25 @@ describe('batch.rotate arguments validation', function() {
 
     describe('invalid color array (5)', function() {
         it('should throw an error', function() {
-            batch.rotate.bind(batch, 5, [1000, 100, 100]).should.throwError();
+            batch.rotate.bind(batch, 5, [1000, 100, 100, 100]).should.throwError();
         });
     });
 
     describe('invalid color array (6)', function() {
         it('should throw an error', function() {
-            batch.rotate.bind(batch, 5, [100, 1000, 100]).should.throwError();
+            batch.rotate.bind(batch, 5, [100, 1000, 100, 100]).should.throwError();
         });
     });
 
     describe('invalid color array (7)', function() {
         it('should throw an error', function() {
-            batch.rotate.bind(batch, 5, [100, 100, 1000]).should.throwError();
+            batch.rotate.bind(batch, 5, [100, 100, 1000, 100]).should.throwError();
+        });
+    });
+
+    describe('invalid color array (8)', function() {
+        it('should throw an error', function() {
+            batch.rotate.bind(batch, 5, [100, 100, 100, 1000]).should.throwError();
         });
     });
 

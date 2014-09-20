@@ -101,6 +101,20 @@ describe('simultaneous operations locks', function() {
     describe('image.hue lock', function() {
         it('should lock image', function() {
             image.hue.bind(image, 10, function() {}).should.not.throwError();
+            image.fade.bind(image, 1, function() {}).should.throwError();
+        });
+    });
+
+    describe('image.fade lock', function() {
+        it('should lock image', function() {
+            image.fade.bind(image, 1, function() {}).should.not.throwError();
+            image.opacify.bind(image, function() {}).should.throwError();
+        });
+    });
+
+    describe('image.opacify lock', function() {
+        it('should lock image', function() {
+            image.opacify.bind(image, function() {}).should.not.throwError();
             image.hslaAdjust.bind(image, 100, 1, 1, 1, function() {}).should.throwError();
         });
     });

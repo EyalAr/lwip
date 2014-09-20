@@ -50,5 +50,13 @@ describe('image.writeFile arguments validation', function() {
             });
         });
 
+        describe('invalid transparency', function() {
+            it('should throw an error', function() {
+                image.writeFile.bind(image, 'res.jpg', 'png', {
+                    transparency: 'foo'
+                }, function() {}).should.throwError();
+            });
+        });
+
     });
 });

@@ -178,6 +178,17 @@
             name: 'callback',
             type: 'function'
         }],
+        fade: [{
+            name: 'delta',
+            type: 'number'
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        opacify: [{
+            name: 'callback',
+            type: 'function'
+        }],
         hue: [{
             name: 'shift',
             type: 'number'
