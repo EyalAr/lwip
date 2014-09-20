@@ -9,9 +9,9 @@
   },
   "scripts": {
     "install": "node-gyp rebuild",
-    "test": "./node_modules/.bin/mocha --reporter spec --recursive tests/",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --reporter spec --recursive tests/",
-    "travis": "./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --reporter spec --recursive tests/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test": "./node_modules/.bin/mocha --opts tests/mocha.opts tests",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --opts tests/mocha.opts tests",
+    "travis": "./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --opts tests/mocha.opts --bail tests && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "gypfile": true,
   "description": "Comprehensive, fast, and simple image processing and manipulation",
