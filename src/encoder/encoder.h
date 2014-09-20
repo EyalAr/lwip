@@ -51,6 +51,7 @@ public:
         size_t height,
         int compression,
         bool interlaced,
+        bool trans,
         NanCallback * callback
     );
     ~EncodeToPngBufferWorker();
@@ -62,6 +63,7 @@ private:
     size_t _height;
     int _compression;
     bool _interlaced;
+    bool _trans;
     char * _pngbuf;
     size_t _pngbufsize;
 };

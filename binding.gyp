@@ -206,7 +206,8 @@
             "src/image/mirror_worker.cpp",
             "src/image/pad_worker.cpp",
             "src/image/sharpen_worker.cpp",
-            "src/image/hsl_worker.cpp",
+            "src/image/hsla_worker.cpp",
+            "src/image/opacify_worker.cpp",
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',

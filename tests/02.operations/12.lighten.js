@@ -18,7 +18,7 @@ describe('lwip.lighten', function() {
     });
 
     beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+        lwip.open(imgs.png.trans, function(err, img) {
             image = img;
             done(err);
         });
@@ -29,8 +29,9 @@ describe('lwip.lighten', function() {
     });
 
     afterEach(function(done) {
-        image.writeFile(join(tmpDir, current.join('_') + '.jpg'), 'jpeg', {
-            quality: 100
+        image.writeFile(join(tmpDir, current.join('_') + '.png'), 'png', {
+            compression: 'fast',
+            interlaced: true
         }, done);
     });
 

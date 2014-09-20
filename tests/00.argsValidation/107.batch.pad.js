@@ -75,6 +75,12 @@ describe('batch.pad arguments validation', function() {
         });
     });
 
+    describe('invalid color array (8)', function() {
+        it('should throw an error', function() {
+            batch.pad.bind(batch, 5, 5, 5, 5, [100, 100, 100, 1000]).should.throwError();
+        });
+    });
+
     describe('invalid color string', function() {
         it('should throw an error', function() {
             batch.pad.bind(batch, 5, 5, 5, 5, 'foo').should.throwError();

@@ -31,7 +31,8 @@ void DecodeBufferWorker::Execute () {
         SetErrorMessage(err.c_str());
         return;
     }
-    err = to3Channels(&img);
+    _trans = img->spectrum() == 2 || img->spectrum() == 4;
+    err = toRGBA(&img);
     if (err != "") {
         if (img) delete img;
         SetErrorMessage(err.c_str());
@@ -41,9 +42,7 @@ void DecodeBufferWorker::Execute () {
     _pixbuf = img->data();
     _width = img->width();
     _height = img->height();
-    // TODO: support transparency:
-    _channels = 3;
-    _trans = false;
+    _channels = 4;
     delete img;
     return;
 }

@@ -50,6 +50,14 @@ describe('image.toBuffer arguments validation', function() {
             });
         });
 
+        describe('invalid transparency', function() {
+            it('should throw an error', function() {
+                image.toBuffer.bind(image, 'png', {
+                    transparency: 'foo'
+                }, function() {}).should.throwError();
+            });
+        });
+
     });
 
 });

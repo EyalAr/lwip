@@ -1,5 +1,7 @@
 #include "encoder.h"
 
+#define RGB_N_CHANNELS 3
+
 EncodeToJpegBufferWorker::EncodeToJpegBufferWorker(
     unsigned char * pixbuf,
     size_t width,
@@ -11,19 +13,21 @@ EncodeToJpegBufferWorker::EncodeToJpegBufferWorker(
     // pixbuf needs to be copied, because the buffer may be gc'ed by
     // V8 at any time.
     // !!! _pixbuf still needs to be freed by us when no longer needed (see Execute)
-    _pixbuf = (unsigned char *) malloc(width * height * 3 * sizeof(unsigned char));
+    _pixbuf = (unsigned char *) malloc(width * height * RGB_N_CHANNELS * sizeof(unsigned char));
     if (_pixbuf == NULL) {
         // TODO: check - can I use SetErrorMessage here?
         SetErrorMessage("Out of memory");
         return;
     }
-    memcpy(_pixbuf, pixbuf, width * height * 3 * sizeof(unsigned char));
+    // pixbuf is actually RGBA (4 channels), but we discard the A channel
+    // for jpeg, which is at the end of the buffer.
+    memcpy(_pixbuf, pixbuf, width * height * RGB_N_CHANNELS * sizeof(unsigned char));
 }
 
 EncodeToJpegBufferWorker::~EncodeToJpegBufferWorker() {}
 
 void EncodeToJpegBufferWorker::Execute () {
-    unsigned int dimbuf = 3;
+    unsigned int dimbuf = RGB_N_CHANNELS;
     J_COLOR_SPACE colortype = JCS_RGB;
     JSAMPROW row_pointer[1];
     unsigned char * tmp = NULL;
@@ -58,7 +62,7 @@ void EncodeToJpegBufferWorker::Execute () {
     jpeg_start_compress(&cinfo, TRUE);
 
     // shared memory cimg. no new memory is allocated.
-    CImg<unsigned char> tmpimg(_pixbuf, _width, _height, 1, 3, true);
+    CImg<unsigned char> tmpimg(_pixbuf, _width, _height, 1, RGB_N_CHANNELS, true);
     while (cinfo.next_scanline < cinfo.image_height) {
         unsigned char * ptrd = tmp;
         const unsigned char

@@ -8,6 +8,8 @@
   0. [Installation](#installation)
   0. [Usage](#usage)
   0. [Supported formats](#supported-formats)
+  0. [Colors specification](#colors-specification)
+  0. [Note on transparent images](#note-on-transparent-images)
 0. [API](#api)
   0. [Open an image from file or buffer](#open-an-image)
   0. [Image operations](#image-operations)
@@ -24,6 +26,8 @@
     0. [Adjust saturation](#saturate)
     0. Adjust lightness: [lighten](#lighten) / [darken](#darken)
     0. [Adjust hue](#hue)
+    0. [Fade (adjust transparency)](#fade)
+    0. [Opacify](#opacify)
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
@@ -120,17 +124,44 @@ lwip.open('image.jpg', function(err, image){
 **Decoding (reading):**
 
 - JPEG, 1 & 3 channels (grayscale & RGB).
-- PNG, 1 & 3 channels (grayscale & RGB). Alpha channel (transperancy) is not
-  currently supported.
+- PNG, 1 & 3 channels (grayscale & RGB) + alpha (transparency) channel.
 
 **Encoding (writing):**
 
 - JPEG, 3 channels (RGB).
-- PNG (lossless), 3 channels (RGB).
+- PNG (lossless), 3 channels (RGB) or 4 channels (RGBA).
 
 Other formats may also be supported in the future, but are probably less urgent.
 Check the issues to see [which formats are planned to be supported](https://github.com/EyalAr/lwip/issues?labels=format+request&page=1&state=open).
 Open an issue if you need support for a format which is not already listed.
+
+### Colors specification
+
+In LWIP colors are coded as RGBA values (red, green, blue and an alpha channel).
+
+Colors are specified in one of three ways:
+
+- As a string. possible values:
+    - `"black" // {r: 0, g: 0, b: 0, a: 100}`
+    - `"white" // {r: 255, g: 255, b: 255, a: 100}`
+    - `"gray" // {r: 128, g: 128, b: 128, a: 100}`
+    - `"red" // {r: 255, g: 0, b: 0, a: 100}`
+    - `"green" // {r: 0, g: 255, b: 0, a: 100}`
+    - `"blue" // {r: 0, g: 0, b: 255, a: 100}`
+    - `"yellow" // {r: 255, g: 255, b: 0, a: 100}`
+    - `"cyan" // {r: 0, g: 255, b: 255, a: 100}`
+    - `"magenta" // {r: 255, g: 0, b: 255, a: 100}`
+- As an array `[R, G, B, A]` where `R`, `G` and `B` are integers between 0 and
+  255 and `A` is an integer between 0 and 100.
+- As an object `{r: R, g: G, b: B, a: A}` where `R`, `G` and `B` are integers
+  between 0 and 255 and `A` is an integer between 0 and 100.
+
+### Note on transparent images
+
+0. Transparency is supported through an alpha channel.
+0. Note that not all formats support transparency. If an image with an alpha
+   channel is encoded with a format which does not support transparency, the
+   alpha channel will ignored (effectively setting it to 100% for all pixels).
 
 ## API
 
@@ -213,13 +244,8 @@ fs.readFile('path/to/image.png', function(err, buffer){
 `image.rotate(degs, color, callback)`
 
 0. `degs {Float}`: Clockwise rotation degrees.
-0. `color {String / Array / Object}`: **Optional** Color of the canvas.
-  - As a string, possible values: `"black"`, `"white"`, `"gray"`, `"blue"`,
-    `"red"`, `"green"`, `"yellow"`, `"cyan"`, `"magenta"`.
-  - As an array `[R, G, B]` where `R`, `G` and `B` are integers between 0 and
-    255.
-  - As an object `{r: R, g: G, b: B}` where `R`, `G` and `B` are integers
-    between 0 and 255.
+0. `color {String / Array / Object}`: **Optional** Color of the canvas. See
+   [colors specification](#colors-specification).
 0. `callback {Function(err, image)}`
 
 #### Crop
@@ -277,13 +303,8 @@ Add a colored border to the image.
 `image.border(width, color, callback)`
 
 0. `width {Integer}`: Border width in pixels.
-0. `color {String / Array / Object}`: **Optional** Color of the border.
-  - As a string, possible values: `"black"`, `"white"`, `"gray"`, `"blue"`,
-    `"red"`, `"green"`, `"yellow"`, `"cyan"`, `"magenta"`.
-  - As an array `[R, G, B]` where `R`, `G` and `B` are integers between 0 and
-    255.
-  - As an object `{r: R, g: G, b: B}` where `R`, `G` and `B` are integers
-    between 0 and 255.
+0. `color {String / Array / Object}`: **Optional** Color of the border. See
+   [colors specification](#colors-specification).
 0. `callback {Function(err, image)}`
 
 #### Pad
@@ -293,13 +314,8 @@ Pad image edges with colored pixels.
 `image.pad(left, top, right, bottom, color, callback)`
 
 0. `left, top, right, bottom {Integer}`: Number of pixels to add to each edge.
-0. `color {String / Array / Object}`: **Optional** Color of the padding.
-  - As a string, possible values: `"black"`, `"white"`, `"gray"`, `"blue"`,
-    `"red"`, `"green"`, `"yellow"`, `"cyan"`, `"magenta"`.
-  - As an array `[R, G, B]` where `R`, `G` and `B` are integers between 0 and
-    255.
-  - As an object `{r: R, g: G, b: B}` where `R`, `G` and `B` are integers
-    between 0 and 255.
+0. `color {String / Array / Object}`: **Optional** Color of the padding. See
+   [colors specification](#colors-specification).
 0. `callback {Function(err, image)}`
 
 #### Saturate
@@ -359,6 +375,35 @@ Adjust image hue.
 **Note:** The hue is shifted in a circular manner in the range [0,360] for each
 pixel individually.
 
+#### Fade
+
+Adjust image transperancy.
+
+`image.fade(delta, callback)`
+
+0. `delta {Float}`: By how much to increase / decrease the transperancy.
+0. `callback {Function(err, image)}`
+
+**Note:** The alpha channel is adjusted independently for each pixel.
+
+**Examples**:
+
+0. `image.fade(0, ...)` will have no effect on the image.
+0. `image.fade(0.5, ...)` will increase the transparency by 50%.
+0. `image.fade(1, ...)` will make the image completely transparent.
+0. `image.fade(-1, ...)` will make the image completely opaque.
+
+#### Opacify
+
+Make image completely opaque. Effectively sets the alpha channel for each pixel
+to 100%.
+
+`image.opacify(callback)`
+
+0. `callback {Function(err, image)}`
+
+**Note**: Equivalent to `image.fade(-1, ...)`.
+
 ### Getters
 
 #### Width
@@ -395,6 +440,8 @@ The `params` object should have the following fields:
 
 - `quality {Integer}`: Defaults to `100`.
 
+Note that when encoding to JPEG the alpha channel is discarded.
+
 ##### PNG
 
 The `params` object should have the following fields:
@@ -404,6 +451,10 @@ The `params` object should have the following fields:
   - `"fast"` - Basic compression. Fast.
   - `"high"` - High compression. Slowest.
 - `interlaced {Boolean}`: Defaults to `false`.
+- `transparency {true/false/'auto'}`: Preserve transparency? Defaults to
+  `'auto'`. Determines if the encoded image will have 3 or 4 channels. If
+  `'auto'`, the image will be encoded with 4 channels if it has transparent
+  components, and 3 channels otherwise.
 
 #### Write to file
 

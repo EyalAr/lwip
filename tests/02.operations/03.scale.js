@@ -18,7 +18,7 @@ describe('lwip.scale', function() {
     });
 
     beforeEach(function(done) {
-        lwip.open(imgs.png.rgb, function(err, img) {
+        lwip.open(imgs.png.trans, function(err, img) {
             image = img;
             done(err);
         });
