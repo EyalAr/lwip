@@ -142,15 +142,17 @@ In LWIP colors are coded as RGBA values (red, green, blue and an alpha channel).
 Colors are specified in one of three ways:
 
 - As a string. possible values:
-    - `"black" // {r: 0, g: 0, b: 0, a: 100}`
-    - `"white" // {r: 255, g: 255, b: 255, a: 100}`
-    - `"gray" // {r: 128, g: 128, b: 128, a: 100}`
-    - `"red" // {r: 255, g: 0, b: 0, a: 100}`
-    - `"green" // {r: 0, g: 255, b: 0, a: 100}`
-    - `"blue" // {r: 0, g: 0, b: 255, a: 100}`
-    - `"yellow" // {r: 255, g: 255, b: 0, a: 100}`
-    - `"cyan" // {r: 0, g: 255, b: 255, a: 100}`
-    - `"magenta" // {r: 255, g: 0, b: 255, a: 100}`
+  ```Javascript
+  "black"    // {r: 0, g: 0, b: 0, a: 100}
+  "white"    // {r: 255, g: 255, b: 255, a: 100}
+  "gray"     // {r: 128, g: 128, b: 128, a: 100}
+  "red"      // {r: 255, g: 0, b: 0, a: 100}
+  "green"    // {r: 0, g: 255, b: 0, a: 100}
+  "blue"     // {r: 0, g: 0, b: 255, a: 100}
+  "yellow"   // {r: 255, g: 255, b: 0, a: 100}
+  "cyan"     // {r: 0, g: 255, b: 255, a: 100}
+  "magenta"  // {r: 255, g: 0, b: 255, a: 100} 
+  ```
 - As an array `[R, G, B, A]` where `R`, `G` and `B` are integers between 0 and
   255 and `A` is an integer between 0 and 100.
 - As an object `{r: R, g: G, b: B, a: A}` where `R`, `G` and `B` are integers
@@ -384,7 +386,7 @@ Adjust image transperancy.
 0. `delta {Float}`: By how much to increase / decrease the transperancy.
 0. `callback {Function(err, image)}`
 
-**Note:** The alpha channel is adjusted independently for each pixel.
+**Note:** The transparency is adjusted independently for each pixel.
 
 **Examples**:
 
@@ -394,8 +396,7 @@ Adjust image transperancy.
 
 #### Opacify
 
-Make image completely opaque. Effectively sets the alpha channel for each pixel
-to 100%.
+Make image completely opaque.
 
 `image.opacify(callback)`
 
