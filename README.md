@@ -391,7 +391,6 @@ Adjust image transperancy.
 0. `image.fade(0, ...)` will have no effect on the image.
 0. `image.fade(0.5, ...)` will increase the transparency by 50%.
 0. `image.fade(1, ...)` will make the image completely transparent.
-0. `image.fade(-1, ...)` will make the image completely opaque.
 
 #### Opacify
 
@@ -401,8 +400,6 @@ to 100%.
 `image.opacify(callback)`
 
 0. `callback {Function(err, image)}`
-
-**Note**: Equivalent to `image.fade(-1, ...)`.
 
 ### Getters
 
