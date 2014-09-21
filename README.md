@@ -160,12 +160,16 @@ Colors are specified in one of three ways:
 - As an object `{r: R, g: G, b: B, a: A}` where `R`, `G` and `B` are integers
   between 0 and 255 and `A` is an integer between 0 and 100.
 
+**Note**: The `A` value (alpha channel) is always optional and defaults to
+100 (completely opaque).
+
 ### Note on transparent images
 
-0. Transparency is supported through an alpha channel.
-0. Note that not all formats support transparency. If an image with an alpha
-   channel is encoded with a format which does not support transparency, the
-   alpha channel will ignored (effectively setting it to 100% for all pixels).
+0. Transparency is supported through an alpha channel which ranges between 0
+   and 100. 0 is completely transparent and 100 is completely opaque.
+0. Not all formats support transparency. If an image with an alpha channel is
+   encoded with a format which does not support transparency, the alpha channel
+   will be ignored (effectively setting it to 100% for all pixels).
 
 ## API
 
