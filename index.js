@@ -683,9 +683,28 @@
         throw Error('Unknown type \'' + ext + '\'');
     }
 
+    function create() {
+        decree(defs.args.create)(arguments, function(width, height, color, callback) {
+            color = normalizeColor(color);
+            setImmediate(function() {
+                var trans = color.a < 100,
+                    c_len = width * height,
+                    pixelsBuf = new Buffer(c_len * 4);
+                for (var i = 0; i < width * height; i++) {
+                    pixelsBuf[i] = color.r;
+                    pixelsBuf[c_len + i] = color.g;
+                    pixelsBuf[2 * c_len + i] = color.b;
+                    pixelsBuf[3 * c_len + i] = color.a;
+                }
+                callback(null, new image(pixelsBuf, width, height, trans));
+            });
+        });
+    }
+
     // EXPORTS
     // -------
     module.exports = {
-        open: open
+        open: open,
+        create: create
     };
 })(void 0);

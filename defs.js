@@ -10,6 +10,7 @@
         PNG_DEF_COMPRESSION: 'fast',
         PNG_DEF_INTERLACED: false,
         PNG_DEF_TRANSPARENT: 'auto',
+        DEF_CREATE_COLOR: [0, 0, 0, 0]
     };
 
     exports.interpolations = {
@@ -86,6 +87,21 @@
             name: 'type',
             type: 'string',
             optional: true
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
+        create: [{
+            name: 'width',
+            type: 'p-number'
+        }, {
+            name: 'height',
+            type: 'p-number'
+        }, {
+            name: 'color',
+            types: ['string', 'array', 'hash'],
+            optional: true,
+            default: defaults.DEF_CREATE_COLOR
         }, {
             name: 'callback',
             type: 'function'

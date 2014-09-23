@@ -12,6 +12,7 @@
   0. [Note on transparent images](#note-on-transparent-images)
 0. [API](#api)
   0. [Open an image from file or buffer](#open-an-image)
+  0. [Create a new blank image](#create-a-new-image)
   0. [Image operations](#image-operations)
     0. [Resize](#resize)
     0. [Scale](#scale)
@@ -173,12 +174,15 @@ Colors are specified in one of three ways:
 
 ## API
 
-All operations are done on an `image` object. An `image` object is obtained with
-the `open` method.
+All operations are done on an `image` object. An `image` object can be obtained
+by:
+
+0. Openning an existing image with the [`open`](#open-an-image) method.
+0. Creating a new image with the [`create`](#create-a-new-image) method.
 
 ### Open an image
 
-`open(source, type, callback)`
+`lwip.open(source, type, callback)`
 
 0. `source {String/Buffer}`: The path to the image on disk or an image buffer.
 0. `type {String}`: **Optional** type of the image. If omitted, the type will be
@@ -208,6 +212,28 @@ fs.readFile('path/to/image.png', function(err, buffer){
       // check 'err'. use 'image'.
       // image.resize(...), etc.
   });
+});
+```
+
+### Create a new image
+
+`lwip.create(width, height, color, callback)`
+
+0. `width {Integer>0}`: The width of the new image.
+0. `height {Integer>0}`: The height of the new image.
+0. `color {String / Array / Object}`: **Optional** Color of the canvas. See
+   [colors specification](#colors-specification). Defaults to a transparent
+   canvas `{r:0, g:0, b:0, a:0}`.
+0. `callback {Function(err, image)}`
+
+**Example**:
+
+```Javascript
+var lwip = require('lwip');
+
+lwip.create(500, 500, 'yellow', function(err, image){
+  // check err
+  // 'image' is a 500X500 solid yellow canvas.
 });
 ```
 
