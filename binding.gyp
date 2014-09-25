@@ -77,6 +77,10 @@
             'lib/png'
         ],
         'conditions': [
+            ['OS=="solaris"', {
+                'cflags!': ['-fno-exceptions'],
+                'cflags_cc!': ['-fno-exceptions'],
+            }],
             ['OS=="linux"', {
                 'cflags!': ['-fno-exceptions'],
                 'cflags_cc!': ['-fno-exceptions'],
@@ -170,6 +174,10 @@
             'lib/png'
         ],
         'conditions': [
+            ['OS=="solaris"', {
+                'cflags!': ['-fno-exceptions'],
+                'cflags_cc!': ['-fno-exceptions'],
+            }],
             ['OS=="linux"', {
                 'cflags!': ['-fno-exceptions'],
                 'cflags_cc!': ['-fno-exceptions'],
@@ -213,6 +221,10 @@
             'lib/cimg',
         ],
         'conditions': [
+            ['OS=="solaris"', {
+                'cflags!': ['-fno-exceptions'],
+                'cflags_cc!': ['-fno-exceptions'],
+            }],
             ['OS=="linux"', {
                 'cflags!': ['-fno-exceptions'],
                 'cflags_cc!': ['-fno-exceptions'],
