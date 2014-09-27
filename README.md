@@ -453,6 +453,21 @@ Clone the image into a new image object.
 
 0. `callback {Function(err, newImage)}`
 
+**Example**: See [`examples/clone.js`](examples/clone.js)
+
+**Note**: The image is cloned to the state it was at the time
+`image.clone( ... )` was called, eventhough `callback` is called asynchronously.
+
+```Javascript
+image.width(); // 500
+image.clone(function(err, clone){
+    clone.width(); // 500
+});
+image.resize(100,100, function(err, image){
+    image.width(); //100
+});
+```
+
 #### Get as a Buffer
 
 Get encoded binary image data as a NodeJS
