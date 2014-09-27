@@ -32,6 +32,7 @@
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
+    0. [Clone](#clone)
     0. [Get as a Buffer](#get-as-a-buffer)
       0. [JPEG](#jpeg)
       0. [PNG](#png)
@@ -443,6 +444,14 @@ Make image completely opaque.
 #### Height
 
 `image.height()` returns the image's height in pixels.
+
+#### Clone
+
+Clone the image into a new image object.
+
+`image.clone(callback)`
+
+0. `callback {Function(err, newImage)}`
 
 #### Get as a Buffer
 

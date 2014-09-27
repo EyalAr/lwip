@@ -370,6 +370,25 @@
         }
     }
 
+    image.prototype.clone = function() {
+        // no need to lock the image. we don't modify the memory buffer.
+        // just copy it.
+        var that = this;
+        decree(defs.args.clone)(arguments, function(callback) {
+            // first we retrieve what we need (buffer, dimensions, ...)
+            // synchronously so that the original image doesn't have a chance
+            // to be changed (remember, we don't lock it); and only then call
+            // the callback asynchronously.
+            var pixbuff = that.__lwip.buffer(),
+                width = that.__lwip.width(),
+                height = that.__lwip.height(),
+                trans = that.__trans;
+            setImmediate(function() {
+                callback(null, new image(pixbuff, width, height, trans));
+            });
+        });
+    }
+
     image.prototype.toBuffer = function() {
         this.__lock();
         try {
@@ -686,16 +705,16 @@
     function create() {
         decree(defs.args.create)(arguments, function(width, height, color, callback) {
             color = normalizeColor(color);
+            var trans = color.a < 100,
+                c_len = width * height,
+                pixelsBuf = new Buffer(c_len * 4);
+            for (var i = 0; i < width * height; i++) {
+                pixelsBuf[i] = color.r;
+                pixelsBuf[c_len + i] = color.g;
+                pixelsBuf[2 * c_len + i] = color.b;
+                pixelsBuf[3 * c_len + i] = color.a;
+            }
             setImmediate(function() {
-                var trans = color.a < 100,
-                    c_len = width * height,
-                    pixelsBuf = new Buffer(c_len * 4);
-                for (var i = 0; i < width * height; i++) {
-                    pixelsBuf[i] = color.r;
-                    pixelsBuf[c_len + i] = color.g;
-                    pixelsBuf[2 * c_len + i] = color.b;
-                    pixelsBuf[3 * c_len + i] = color.a;
-                }
                 callback(null, new image(pixelsBuf, width, height, trans));
             });
         });

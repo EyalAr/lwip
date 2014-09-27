@@ -289,6 +289,10 @@
             name: 'callback',
             type: 'function'
         }],
+        clone: [{
+            name: 'callback',
+            type: 'function'
+        }],
         writeFile: [{
             name: 'path',
             type: 'string'
