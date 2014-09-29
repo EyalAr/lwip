@@ -48,3 +48,16 @@ describe('lwip.clone', function() {
         });
     });
 });
+
+describe('lwip.extract', function() {
+    it('should return a new image object', function(done) {
+        image.extract(100, 120, 150, 140, function(err, exImage) {
+            if (err) return done(err);
+            assert(image.width() === width);
+            assert(image.height() === height);
+            assert(exImage.width() === 150 - 100 + 1);
+            assert(exImage.height() === 140 - 120 + 1);
+            done();
+        });
+    });
+});

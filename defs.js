@@ -293,6 +293,22 @@
             name: 'callback',
             type: 'function'
         }],
+        extract: [{
+            name: 'left',
+            type: 'nn-number'
+        }, {
+            name: 'top',
+            type: 'nn-number'
+        }, {
+            name: 'right',
+            type: 'nn-number'
+        }, {
+            name: 'bottom',
+            type: 'nn-number'
+        }, {
+            name: 'callback',
+            type: 'function'
+        }],
         writeFile: [{
             name: 'path',
             type: 'string'

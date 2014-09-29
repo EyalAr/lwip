@@ -33,6 +33,7 @@
     0. [Width](#width)
     0. [Height](#height)
     0. [Clone](#clone)
+    0. [Extract / Copy](#extract)
     0. [Get as a Buffer](#get-as-a-buffer)
       0. [JPEG](#jpeg)
       0. [PNG](#png)
@@ -178,8 +179,12 @@ Colors are specified in one of three ways:
 All operations are done on an `image` object. An `image` object can be obtained
 by:
 
-0. Openning an existing image with the [`open`](#open-an-image) method.
-0. Creating a new image with the [`create`](#create-a-new-image) method.
+0. Openning an existing image file or buffer with the [`open`](#open-an-image)
+   method.
+0. Creating a new image object with the [`create`](#create-a-new-image) method.
+0. Cloning an existing image object with the [`image.clone`](#clone) method.
+0. Extracting a sub-image from an existing image object with the
+   [`image.extract`](#extract) method.
 
 ### Open an image
 
@@ -463,10 +468,25 @@ image.width(); // 500
 image.clone(function(err, clone){
     clone.width(); // 500
 });
-image.resize(100,100, function(err, image){
+image.resize(100, 100, function(err, image){
     image.width(); //100
 });
 ```
+
+#### Extract
+
+Copy an area of the image into a new image object.
+
+`image.extract(left, top, right, bottom, callback)`
+
+0. `left, top, right, bottom {Integer}`: Coordinates of the area to copy.
+0. `callback {Function(err, newImage)}`
+
+**Example**: See [`examples/extract.js`](examples/extract.js)
+
+**Note**: The sub-image is extracted from the original image in the state it was
+at the time `image.extract( ... )` was called, eventhough `callback` is called
+asynchronously.
 
 #### Get as a Buffer
 

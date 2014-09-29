@@ -389,6 +389,26 @@
         });
     }
 
+    image.prototype.extract = function() {
+        // no need to lock the image. we don't modify the memory buffer.
+        // just copy it and then crop it.
+        var that = this;
+        decree(defs.args.extract)(arguments, function(left, top, right, bottom, callback) {
+            // first we retrieve what we need (buffer, dimensions, ...)
+            // synchronously so that the original image doesn't have a chance
+            // to be changed (remember, we don't lock it); then we crop it and
+            // only call the callback asynchronously.
+            var pixbuff = that.__lwip.buffer(),
+                width = that.__lwip.width(),
+                height = that.__lwip.height(),
+                trans = that.__trans,
+                eximg = new image(pixbuff, width, height, trans);
+            eximg.__lwip.crop(left, top, right, bottom, function(err) {
+                callback(err, eximg);
+            });
+        });
+    }
+
     image.prototype.toBuffer = function() {
         this.__lock();
         try {
