@@ -654,13 +654,13 @@ The native part of this module is compiled from source which uses the following:
 
 - Independent JPEG Group's free JPEG software:
   - [Website](http://www.ijg.org/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/lib/jpeg/README)
+  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/jpeg/README)
 - libpng:
   - [Website](http://www.libpng.org/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/lib/png/README)
+  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/png/README)
 - zlib:
   - [Website](http://www.zlib.net/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/lib/zlib/README)
+  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/zlib/README)
 - The CImg Library
   - [Website](http://cimg.sourceforge.net/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/lib/cimg/README.txt)
+  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/cimg/README.txt)
