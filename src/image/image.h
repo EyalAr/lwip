@@ -39,6 +39,7 @@ public:
     static NAN_METHOD(sharpen);
     static NAN_METHOD(hslaAdj);
     static NAN_METHOD(opacify);
+    static NAN_METHOD(paste);
     static NAN_METHOD(width);
     static NAN_METHOD(height);
     static NAN_METHOD(buffer);
@@ -219,6 +220,29 @@ public:
     void Execute ();
     void HandleOKCallback ();
 private:
+    CImg<unsigned char> * _cimg;
+};
+
+class PasteWorker : public NanAsyncWorker {
+public:
+    PasteWorker(
+        size_t left,
+        size_t top,
+        Local<Object> & pixbuf,
+        size_t width,
+        size_t height,
+        CImg<unsigned char> * cimg,
+        NanCallback * callback
+    );
+    ~PasteWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
+    size_t _left;
+    size_t _top;
+    size_t _width;
+    size_t _height;
+    unsigned char * _pixels;
     CImg<unsigned char> * _cimg;
 };
 

@@ -440,6 +440,20 @@ Make image completely opaque.
 
 0. `callback {Function(err, image)}`
 
+#### Paste
+
+Paste an image on top of this image.
+
+`image.paste(left, top, img, callback)`
+
+0. `left, top {Integer}`: Coordinates of the top-left corner of the pasted
+   image.
+0. `img {Image object}`: The image object to paste.
+0. `callback {Function(err, image)}`
+
+**Note:** If the pasted image exceeds the bounds of the base image, an exception
+is thrown.
+
 ### Getters
 
 #### Width

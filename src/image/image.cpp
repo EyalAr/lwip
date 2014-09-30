@@ -19,6 +19,7 @@ void LwipImage::Init(Handle<Object> exports) {
     NODE_SET_PROTOTYPE_METHOD(tpl, "sharpen", sharpen);
     NODE_SET_PROTOTYPE_METHOD(tpl, "hslaAdj", hslaAdj);
     NODE_SET_PROTOTYPE_METHOD(tpl, "opacify", opacify);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "paste", paste);
     NanAssignPersistent(constructor, tpl);
     exports->Set(
         NanNew("LwipImage"),
@@ -341,6 +342,41 @@ NAN_METHOD(LwipImage::opacify) {
 
     NanAsyncQueueWorker(
         new OpacifyWorker(
+            cimg,
+            callback
+        )
+    );
+
+    NanReturnUndefined();
+}
+
+// image.paste(callback):
+// ------------------------------------
+
+// args[0] - left
+// args[1] - top
+// args[2] - buffer
+// args[3] - width
+// args[4] - height
+// args[5] - callback
+NAN_METHOD(LwipImage::paste) {
+    NanScope();
+
+    size_t left = (size_t) args[0].As<Number>()->Value();
+    size_t top = (size_t) args[1].As<Number>()->Value();
+    Local<Object> pixBuff = args[2].As<Object>();
+    size_t width = (size_t) args[3].As<Number>()->Value();
+    size_t height = (size_t) args[4].As<Number>()->Value();
+    NanCallback * callback = new NanCallback(args[5].As<Function>());
+    CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
+
+    NanAsyncQueueWorker(
+        new PasteWorker(
+            left,
+            top,
+            pixBuff,
+            width,
+            height,
             cimg,
             callback
         )
