@@ -29,6 +29,7 @@
     0. [Adjust hue](#hue)
     0. [Fade (adjust transparency)](#fade)
     0. [Opacify](#opacify)
+    0. [Paste](#paste)
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
@@ -448,11 +449,19 @@ Paste an image on top of this image.
 
 0. `left, top {Integer}`: Coordinates of the top-left corner of the pasted
    image.
-0. `img {Image object}`: The image object to paste.
+0. `img {Image object}`: The image to paste.
 0. `callback {Function(err, image)}`
 
-**Note:** If the pasted image exceeds the bounds of the base image, an exception
-is thrown.
+**Notes:**
+
+0. If the pasted image exceeds the bounds of the base image, an exception
+   is thrown.
+0. `img` is pasted in the state it was at the time `image.paste( ... )` was
+   called, eventhough `callback` is called asynchronously.
+0. For transparent images, alpha blending is done according to the equations
+   described [here](http://en.wikipedia.org/wiki/Alpha_compositing#Alpha_blending).
+0. Extra caution is required when using this method in batch mode, as the images
+   may change by the time this operation is called.
 
 ### Getters
 

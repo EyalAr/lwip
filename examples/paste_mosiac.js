@@ -1,5 +1,5 @@
 /**
- * Example for using LWIP to extract parts of an image.
+ * Example for using LWIP to create a hue gradient mosiac.
  */
 
 var path = require('path'),
@@ -25,6 +25,7 @@ lwip.open('lena.jpg', function(err, image) {
 
         lwip.create(width * COLS, height * ROWS, function(err, canvas) {
             if (err) return console.log(err);
+
             var clones = [];
             async.each(HUES, function(h, done) {
                 var i = HUES.indexOf(h);
@@ -61,6 +62,7 @@ lwip.open('lena.jpg', function(err, image) {
                     });
                 });
             });
+
         });
 
     });

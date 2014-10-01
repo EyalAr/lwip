@@ -1,25 +1,41 @@
 /**
- * Example for using LWIP to extract parts of an image.
+ * Example for using LWIP to blend two images.
  */
 
 var path = require('path'),
+    async = require('async'),
     lwip = require('../');
 
-lwip.open('lena.jpg', function(err, image) {
-    if (err) return console.log(err);
+async.waterfall([
 
-    image.clone(function(err, flipped) {
-        if (err) return console.log(err);
-        flipped.batch().flip('x').fade(0.5).exec(function(err, flipped) {
-            if (err) return console.log(err);
-            image.paste(0, 0, flipped, function(err, image) {
-                if (err) return console.log(err);
-                image.writeFile('lena_paste_blend.jpg', function(err) {
-                    if (err) return console.log(err);
-                    console.log('done');
-                });
-            });
+    function(next) {
+        lwip.open('lena.jpg', next);
+    },
+
+    function(image, next) {
+        image.clone(function(err, clone) {
+            next(err, clone, image);
         });
-    });
+    },
 
+    function(clone, image, next) {
+        clone.batch()
+            .flip('x')
+            .fade(0.5)
+            .exec(function(err, clone) {
+                next(err, clone, image);
+            });
+    },
+
+    function(clone, image, next) {
+        image.paste(0, 0, clone, next);
+    },
+
+    function(image, next) {
+        image.writeFile('lena_paste_blend.jpg', next);
+    }
+
+], function(err) {
+    if (err) return console.log(err);
+    console.log('done');
 });
