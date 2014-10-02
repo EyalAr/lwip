@@ -1,6 +1,6 @@
 [![Version](http://img.shields.io/npm/v/lwip.svg)](https://www.npmjs.org/package/lwip)
-[![Build Status](https://api.travis-ci.org/EyalAr/lwip.svg?branch=v0.0.5)](https://travis-ci.org/EyalAr/lwip)
-[![Coverage Status](https://img.shields.io/coveralls/EyalAr/lwip/v0.0.5.svg)](https://coveralls.io/r/EyalAr/lwip)
+[![Build Status](https://api.travis-ci.org/EyalAr/lwip.svg?branch=master)](https://travis-ci.org/EyalAr/lwip)
+[![Coverage Status](https://img.shields.io/coveralls/EyalAr/lwip/master.svg)](https://coveralls.io/r/EyalAr/lwip)
 
 # Light-weight image processor for NodeJS
 

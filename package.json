@@ -51,7 +51,11 @@
     "padding",
     "hue",
     "saturation",
-    "lightness"
+    "lightness",
+    "alpha",
+    "transparency",
+    "fade",
+    "opacity"
   ],
   "author": "Eyal Arubas <eyalarubas@gmail.com>",
   "license": "MIT",
