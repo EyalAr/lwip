@@ -84,7 +84,7 @@ describe('stress tests', function() {
             var a = 3;
             lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
                 if (err) return done(err);
-                async.timesSeries(50, function(i, done) {
+                async.timesSeries(90 / a, function(i, done) {
                     image.rotate(a, utils.getRandomColor(), done);
                 }, function(err) {
                     if (err) return done(err);
@@ -101,7 +101,7 @@ describe('stress tests', function() {
             var a = 3;
             lwip.open(imgs.png.trans, 'png', function(err, image) {
                 if (err) return done(err);
-                async.timesSeries(50, function(i, done) {
+                async.timesSeries(90 / a, function(i, done) {
                     image.rotate(a, utils.getRandomColor(), done);
                 }, function(err) {
                     if (err) return done(err);
