@@ -1,31 +1,28 @@
 #include "encoder.h"
 
+#define RGB_N_CHANNELS 3
+#define RGBA_N_CHANNELS 4
+
 EncodeToPngBufferWorker::EncodeToPngBufferWorker(
-    unsigned char * pixbuf,
+    Local<Object> & buff,
     size_t width,
     size_t height,
     int compression,
     bool interlaced,
+    bool trans,
     NanCallback * callback
 ): NanAsyncWorker(callback), _width(width), _height(height),
-    _compression(compression), _interlaced(interlaced), _pngbuf(NULL),
-    _pngbufsize(0) {
-    // pixbuf needs to be copied, because the buffer may be gc'ed by
-    // V8 at any time.
-    // !!! _pixbuf still needs to be freed by us when no longer needed (see Execute)
-    _pixbuf = (unsigned char *) malloc(width * height * 3 * sizeof(unsigned char));
-    if (_pixbuf == NULL) {
-        // TODO: check - can I use SetErrorMessage here?
-        SetErrorMessage("Out of memory");
-        return;
-    }
-    memcpy(_pixbuf, pixbuf, width * height * 3 * sizeof(unsigned char));
+    _compression(compression), _interlaced(interlaced), _trans(trans),
+    _pngbuf(NULL), _pngbufsize(0) {
+    SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
+    _pixbuf = (unsigned char *) Buffer::Data(buff);
 }
 
 EncodeToPngBufferWorker::~EncodeToPngBufferWorker() {}
 
 void EncodeToPngBufferWorker::Execute () {
-    unsigned int rowBytes = _width * 3; // TODO: 3 channels per pixel is currently hard coded
+    int n_chan = _trans ? RGBA_N_CHANNELS : RGB_N_CHANNELS;
+    unsigned int rowBytes = _width * n_chan;
     int interlaceType;
     int compLevel;
     switch (_compression) {
@@ -52,7 +49,6 @@ void EncodeToPngBufferWorker::Execute () {
                           NULL, NULL, NULL);
 
     if (!png_ptr) {
-        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
@@ -60,14 +56,12 @@ void EncodeToPngBufferWorker::Execute () {
     png_infop info_ptr = png_create_info_struct(png_ptr);
     if (!info_ptr) {
         png_destroy_write_struct(&png_ptr, (png_infopp) NULL);
-        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
 
     if (setjmp(png_jmpbuf(png_ptr))) {
         png_destroy_write_struct(&png_ptr, &info_ptr);
-        free(_pixbuf);
         SetErrorMessage("PNG compression error");
         return;
     }
@@ -77,7 +71,6 @@ void EncodeToPngBufferWorker::Execute () {
                                );
     if (!rowPnts) {
         png_destroy_write_struct(&png_ptr, &info_ptr);
-        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
@@ -88,28 +81,45 @@ void EncodeToPngBufferWorker::Execute () {
             for (unsigned int p = 0 ; p < r ; p++) free(rowPnts[p]);
             free(rowPnts);
             png_destroy_write_struct(&png_ptr, &info_ptr);
-            free(_pixbuf);
             SetErrorMessage("Out of memory");
             return;
         }
     }
 
-    png_set_IHDR(png_ptr, info_ptr, _width, _height,
-                 8, PNG_COLOR_TYPE_RGB, interlaceType,
-                 PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+    png_set_IHDR(
+        png_ptr,
+        info_ptr,
+        _width,
+        _height,
+        8,
+        _trans ? PNG_COLOR_TYPE_RGBA : PNG_COLOR_TYPE_RGB,
+        interlaceType,
+        PNG_COMPRESSION_TYPE_DEFAULT,
+        PNG_FILTER_TYPE_DEFAULT
+    );
     png_set_compression_level(png_ptr, compLevel);
 
     pngWriteCbData buffinf = {NULL, 0};
     png_set_write_fn(png_ptr, (voidp) &buffinf, pngWriteCB, NULL);
 
-    CImg<unsigned char> tmpimg(_pixbuf, _width, _height, 1, 3, true);
+    CImg<unsigned char> tmpimg(
+        _pixbuf,
+        _width,
+        _height,
+        1,
+        n_chan,
+        true
+    );
     cimg_forXY(tmpimg, x, y) {
         unsigned char r = tmpimg.atXYZC(x, y, 0, 0),
                       g = tmpimg.atXYZC(x, y, 0, 1),
-                      b = tmpimg.atXYZC(x, y, 0, 2);
-        rowPnts[y][3 * x] = r;
-        rowPnts[y][3 * x + 1] = g;
-        rowPnts[y][3 * x + 2] = b;
+                      b = tmpimg.atXYZC(x, y, 0, 2),
+                      a = _trans ? tmpimg.atXYZC(x, y, 0, 3) : 0;
+        a = (unsigned char) ((a / 100.0) * 255.0); // range change [0,100] -> [0,255]
+        rowPnts[y][n_chan * x] = r;
+        rowPnts[y][n_chan * x + 1] = g;
+        rowPnts[y][n_chan * x + 2] = b;
+        if (_trans) rowPnts[y][n_chan * x + 3] = a;
     }
     png_set_rows(png_ptr, info_ptr, rowPnts);
 
@@ -118,7 +128,6 @@ void EncodeToPngBufferWorker::Execute () {
     png_destroy_write_struct(&png_ptr, &info_ptr);
     for (unsigned int r = 0; r < _height; r++) free(rowPnts[r]);
     free(rowPnts);
-    free(_pixbuf);
 
     _pngbuf = (char *) buffinf.buff;
     _pngbufsize = buffinf.buffsize;

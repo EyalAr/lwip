@@ -80,7 +80,6 @@ describe('image.batch', function() {
                 });
 
                 describe('high compression', function() {
-                    this.timeout(4000); // 4 seconds. high compression can take more time
                     it('should succeed', function(done) {
                         batch.toBuffer('png', {
                             interlaced: false,
@@ -118,7 +117,6 @@ describe('image.batch', function() {
                 });
 
                 describe('high compression', function() {
-                    this.timeout(4000); // 4 seconds. high compression can take more time
                     it('should succeed', function(done) {
                         batch.toBuffer('png', {
                             interlaced: true,
@@ -186,7 +184,6 @@ describe('image.batch', function() {
                 });
 
                 describe('high compression', function() {
-                    this.timeout(4000); // 4 seconds. high compression can take more time
                     it('should succeed', function(done) {
                         batch.writeFile(join(tmpDir, 'btch-noint#hicomp-' + ops.join('#') + '.png'), 'png', {
                             interlaced: false,
@@ -218,7 +215,6 @@ describe('image.batch', function() {
                 });
 
                 describe('high compression', function() {
-                    this.timeout(4000); // 4 seconds. high compression can take more time
                     it('should succeed', function(done) {
                         batch.writeFile(join(tmpDir, 'btch-intr#hicomp-' + ops.join('#') + '.png'), 'png', {
                             interlaced: true,

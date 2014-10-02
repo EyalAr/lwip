@@ -1,29 +1,23 @@
 #include "encoder.h"
 
+#define RGB_N_CHANNELS 3
+
 EncodeToJpegBufferWorker::EncodeToJpegBufferWorker(
-    unsigned char * pixbuf,
+    Local<Object> & buff,
     size_t width,
     size_t height,
     int quality,
     NanCallback * callback
 ): NanAsyncWorker(callback), _width(width), _height(height),
     _quality(quality), _jpegbuf(NULL), _jpegbufsize(0) {
-    // pixbuf needs to be copied, because the buffer may be gc'ed by
-    // V8 at any time.
-    // !!! _pixbuf still needs to be freed by us when no longer needed (see Execute)
-    _pixbuf = (unsigned char *) malloc(width * height * 3 * sizeof(unsigned char));
-    if (_pixbuf == NULL) {
-        // TODO: check - can I use SetErrorMessage here?
-        SetErrorMessage("Out of memory");
-        return;
-    }
-    memcpy(_pixbuf, pixbuf, width * height * 3 * sizeof(unsigned char));
+    SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
+    _pixbuf = (unsigned char *) Buffer::Data(buff);
 }
 
 EncodeToJpegBufferWorker::~EncodeToJpegBufferWorker() {}
 
 void EncodeToJpegBufferWorker::Execute () {
-    unsigned int dimbuf = 3;
+    unsigned int dimbuf = RGB_N_CHANNELS;
     J_COLOR_SPACE colortype = JCS_RGB;
     JSAMPROW row_pointer[1];
     unsigned char * tmp = NULL;
@@ -35,14 +29,12 @@ void EncodeToJpegBufferWorker::Execute () {
     if (setjmp(jerr.setjmp_buffer)) {
         jpeg_destroy_compress(&cinfo);
         if (tmp) free(tmp);
-        free(_pixbuf);
         SetErrorMessage("JPEG compression error");
         return;
     }
 
     tmp = (unsigned char *) malloc(_width * dimbuf);
     if (tmp == NULL) {
-        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
@@ -58,7 +50,7 @@ void EncodeToJpegBufferWorker::Execute () {
     jpeg_start_compress(&cinfo, TRUE);
 
     // shared memory cimg. no new memory is allocated.
-    CImg<unsigned char> tmpimg(_pixbuf, _width, _height, 1, 3, true);
+    CImg<unsigned char> tmpimg(_pixbuf, _width, _height, 1, RGB_N_CHANNELS, true);
     while (cinfo.next_scanline < cinfo.image_height) {
         unsigned char * ptrd = tmp;
         const unsigned char
@@ -74,7 +66,6 @@ void EncodeToJpegBufferWorker::Execute () {
         jpeg_write_scanlines(&cinfo, row_pointer, 1);
     }
     free(tmp);
-    free(_pixbuf);
     jpeg_finish_compress(&cinfo);
     jpeg_destroy_compress(&cinfo);
 

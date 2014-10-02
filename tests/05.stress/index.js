@@ -79,12 +79,12 @@ describe('stress tests', function() {
         });
     });
 
-    describe('rotate an image 30 times (up to 90degs)', function() {
+    describe('rotate an image 30 times (up to 90degs) (1)', function() {
         it('should succeed', function(done) {
             var a = 3;
             lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
                 if (err) return done(err);
-                async.timesSeries(50, function(i, done) {
+                async.timesSeries(90 / a, function(i, done) {
                     image.rotate(a, utils.getRandomColor(), done);
                 }, function(err) {
                     if (err) return done(err);
@@ -96,7 +96,25 @@ describe('stress tests', function() {
         });
     });
 
-    describe('25 random manipulations on one image', function() {
+    describe('rotate an image 30 times (up to 90degs) (2)', function() {
+        it('should succeed', function(done) {
+            var a = 3;
+            lwip.open(imgs.png.trans, 'png', function(err, image) {
+                if (err) return done(err);
+                async.timesSeries(90 / a, function(i, done) {
+                    image.rotate(a, utils.getRandomColor(), done);
+                }, function(err) {
+                    if (err) return done(err);
+                    image.writeFile(outpathPng, 'png', {
+                        compression: 'fast',
+                        interlaced: false
+                    }, done);
+                });
+            });
+        });
+    });
+
+    describe('25 random manipulations on one image (1)', function() {
         it('should succeed', function(done) {
             lwip.open(imgs.png.rgb, 'png', function(err, image) {
                 if (err) return done(err);
@@ -107,7 +125,25 @@ describe('stress tests', function() {
                 }, function(err) {
                     if (err) return done(err);
                     var data = ops.join('\n');
-                    fs.writeFile(join(tmpDir, 'stress-25rnd.txt'), data, done);
+                    fs.writeFile(join(tmpDir, 'stress-25rnd.jpg.txt'), data, done);
+                });
+            });
+        });
+    });
+
+    describe('25 random manipulations on one image (2)', function() {
+        it('should succeed', function(done) {
+            lwip.open(imgs.png.trans, 'png', function(err, image) {
+                if (err) return done(err);
+                var batch = image.batch();
+                var ops = utils.generateRandomBatch(batch, 25);
+                batch.writeFile(join(tmpDir, 'stress-25rnd.png'), 'png', {
+                    compression: 'fast',
+                    interlaced: false
+                }, function(err) {
+                    if (err) return done(err);
+                    var data = ops.join('\n');
+                    fs.writeFile(join(tmpDir, 'stress-25rnd.png.txt'), data, done);
                 });
             });
         });

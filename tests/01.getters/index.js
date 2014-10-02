@@ -32,3 +32,32 @@ describe('lwip.size', function() {
         assert(image.size().height === height);
     });
 });
+
+describe('lwip.clone', function() {
+    it('should return a new image object', function(done) {
+        image.clone(function(err, clonedImage) {
+            if (err) return done(err);
+            clonedImage.resize(100, 100, function(err) {
+                if (err) return done(err);
+                assert(image.width() === width);
+                assert(image.height() === height);
+                assert(clonedImage.width() === 100);
+                assert(clonedImage.height() === 100);
+                done();
+            });
+        });
+    });
+});
+
+describe('lwip.extract', function() {
+    it('should return a new image object', function(done) {
+        image.extract(100, 120, 150, 140, function(err, exImage) {
+            if (err) return done(err);
+            assert(image.width() === width);
+            assert(image.height() === height);
+            assert(exImage.width() === 150 - 100 + 1);
+            assert(exImage.height() === 140 - 120 + 1);
+            done();
+        });
+    });
+});

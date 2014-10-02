@@ -6,10 +6,10 @@ var join = require('path').join,
     imgs = require('../imgs');
 
 var tmpDir = join(__dirname, '../results'),
-    basename = 'lighten',
+    basename = 'darken',
     current;
 
-describe('lwip.lighten', function() {
+describe('lwip.darken', function() {
 
     var image;
 
@@ -18,7 +18,7 @@ describe('lwip.lighten', function() {
     });
 
     beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+        lwip.open(imgs.png.trans, function(err, img) {
             image = img;
             done(err);
         });
@@ -38,7 +38,7 @@ describe('lwip.lighten', function() {
         var d = 0;
         it('should succeed', function(done) {
             current.push('d' + d);
-            image.lighten(d, done);
+            image.darken(d, done);
         });
     });
 
@@ -46,7 +46,7 @@ describe('lwip.lighten', function() {
         var d = 0.5;
         it('should succeed', function(done) {
             current.push('d' + d);
-            image.lighten(d, done);
+            image.darken(d, done);
         });
     });
 
@@ -54,7 +54,7 @@ describe('lwip.lighten', function() {
         var d = -0.5;
         it('should succeed', function(done) {
             current.push('d' + d);
-            image.lighten(d, done);
+            image.darken(d, done);
         });
     });
 

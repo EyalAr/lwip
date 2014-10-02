@@ -4,6 +4,8 @@
 #define cimg_display 0
 #define cimg_verbosity 0
 
+#define N_CHANNELS 4
+
 #include <string>
 #include <cmath>
 #include <node.h>
@@ -35,7 +37,9 @@ public:
     static NAN_METHOD(mirror);
     static NAN_METHOD(pad);
     static NAN_METHOD(sharpen);
-    static NAN_METHOD(hslAdj);
+    static NAN_METHOD(hslaAdj);
+    static NAN_METHOD(opacify);
+    static NAN_METHOD(paste);
     static NAN_METHOD(width);
     static NAN_METHOD(height);
     static NAN_METHOD(buffer);
@@ -72,6 +76,7 @@ public:
         unsigned char r,
         unsigned char g,
         unsigned char b,
+        unsigned char a,
         CImg<unsigned char> * cimg,
         NanCallback * callback
     );
@@ -83,6 +88,7 @@ private:
     unsigned char _r;
     unsigned char _g;
     unsigned char _b;
+    unsigned char _a;
     CImg<unsigned char> * _cimg;
 };
 
@@ -149,6 +155,7 @@ public:
         unsigned char r,
         unsigned char g,
         unsigned char b,
+        unsigned char a,
         CImg<unsigned char> * cimg,
         NanCallback * callback
     );
@@ -163,6 +170,7 @@ private:
     unsigned char _r;
     unsigned char _g;
     unsigned char _b;
+    unsigned char _a;
     CImg<unsigned char> * _cimg;
 };
 
@@ -181,22 +189,60 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-class HSLWorker : public NanAsyncWorker {
+class HSLAWorker : public NanAsyncWorker {
 public:
-    HSLWorker(
+    HSLAWorker(
         float hs,
         float sd,
         float ld,
+        float ad,
         CImg<unsigned char> * cimg,
         NanCallback * callback
     );
-    ~HSLWorker();
+    ~HSLAWorker();
     void Execute ();
     void HandleOKCallback ();
 private:
     float _hs;
     float _sd;
     float _ld;
+    float _ad;
+    CImg<unsigned char> * _cimg;
+};
+
+class OpacifyWorker : public NanAsyncWorker {
+public:
+    OpacifyWorker(
+        CImg<unsigned char> * cimg,
+        NanCallback * callback
+    );
+    ~OpacifyWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
+    CImg<unsigned char> * _cimg;
+};
+
+class PasteWorker : public NanAsyncWorker {
+public:
+    PasteWorker(
+        size_t left,
+        size_t top,
+        Local<Object> & pixbuf,
+        size_t width,
+        size_t height,
+        CImg<unsigned char> * cimg,
+        NanCallback * callback
+    );
+    ~PasteWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
+    size_t _left;
+    size_t _top;
+    size_t _width;
+    size_t _height;
+    unsigned char * _pixels;
     CImg<unsigned char> * _cimg;
 };
 
@@ -204,6 +250,5 @@ void rgb_to_hsl(unsigned char r, unsigned char g, unsigned char b, float * h,
                 float * s, float * l);
 void hsl_to_rgb(float h, float s, float l, unsigned char * r, unsigned char * g,
                 unsigned char * b);
-float hue2rgb(float p, float q, float t);
 
 #endif

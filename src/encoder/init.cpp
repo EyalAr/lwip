@@ -5,7 +5,6 @@ NAN_METHOD(encodeToJpegBuffer) {
     NanScope();
 
     Local<Object> buff = args[0].As<Object>();
-    unsigned char * pixbuf = (unsigned char *) Buffer::Data(buff);
     size_t width = args[1].As<Integer>()->Value();
     size_t height = args[2].As<Integer>()->Value();
     int quality = args[3].As<Integer>()->Value();
@@ -13,7 +12,7 @@ NAN_METHOD(encodeToJpegBuffer) {
 
     NanAsyncQueueWorker(
         new EncodeToJpegBufferWorker(
-            pixbuf,
+            buff,
             width,
             height,
             quality,
@@ -22,25 +21,26 @@ NAN_METHOD(encodeToJpegBuffer) {
     NanReturnUndefined();
 }
 
-// encoder.png(pixbuf, width, height, compression, interlaced, callback)
+// encoder.png(pixbuf, width, height, compression, interlaced, trans, callback)
 NAN_METHOD(encodeToPngBuffer) {
     NanScope();
 
     Local<Object> buff = args[0].As<Object>();
-    unsigned char * pixbuf = (unsigned char *) Buffer::Data(buff);
     size_t width = args[1].As<Integer>()->Value();
     size_t height = args[2].As<Integer>()->Value();
     int compression = args[3].As<Integer>()->Value();
     bool interlaced = args[4]->BooleanValue();
-    NanCallback * callback = new NanCallback(args[5].As<Function>());
+    bool trans = args[5]->BooleanValue();
+    NanCallback * callback = new NanCallback(args[6].As<Function>());
 
     NanAsyncQueueWorker(
         new EncodeToPngBufferWorker(
-            pixbuf,
+            buff,
             width,
             height,
             compression,
             interlaced,
+            trans,
             callback
         )
     );

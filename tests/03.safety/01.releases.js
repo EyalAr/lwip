@@ -101,13 +101,27 @@ describe('failed ops lock release', function() {
     describe('image.hue release', function() {
         it('should release image lock', function() {
             image.hue.bind(image, 'foo', function() {}).should.throwError();
-            image.hslAdjust.bind(image, 100, 1, 1, function() {}).should.not.throwError();
+            image.fade.bind(image, 1, function() {}).should.not.throwError();
         });
     });
 
-    describe('image.hslAdjust release', function() {
+    describe('image.fade release', function() {
         it('should release image lock', function() {
-            image.hslAdjust.bind(image, 'foo', 'foo', 'foo', function() {}).should.throwError();
+            image.fade.bind(image, 'foo', function() {}).should.throwError();
+            image.opacify.bind(image, function() {}).should.not.throwError();
+        });
+    });
+
+    describe('image.opacify release', function() {
+        it('should release image lock', function() {
+            image.opacify.bind(image, 'foo').should.throwError();
+            image.hslaAdjust.bind(image, 100, 1, 1, 0, function() {}).should.not.throwError();
+        });
+    });
+
+    describe('image.hslaAdjust release', function() {
+        it('should release image lock', function() {
+            image.hslaAdjust.bind(image, 'foo', 'foo', 'foo', 'foo', function() {}).should.throwError();
             image.resize.bind(image, 100, 100, function() {}).should.not.throwError();
         });
     });

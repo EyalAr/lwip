@@ -106,20 +106,21 @@ describe('lwip.rotate', function() {
             });
         });
 
-        describe('45 degs, [50,100,300] fill', function() {
+        describe('45 degs, [50,100,300,75] fill', function() {
             it('should succeed', function(done) {
-                current.push(45, 'degs', [50, 100, 250]);
-                image.rotate(45, [50, 100, 250], done);
+                current.push(45, 'degs', [50, 100, 250,75]);
+                image.rotate(45, [50, 100, 250, 75], done);
             });
         });
 
-        describe('-5 degs, {r:200,g:110,b:220} fill', function() {
+        describe('-5 degs, {r:200,g:110,b:220,a:50} fill', function() {
             it('should succeed', function(done) {
-                current.push(-5, 'degs', 'r-200,g-110,b-220');
+                current.push(-5, 'degs', 'r-200,g-110,b-220,a-50');
                 image.rotate(-5, {
                     r: 200,
                     g: 110,
-                    b: 220
+                    b: 220,
+                    a: 50
                 }, done);
             });
         });

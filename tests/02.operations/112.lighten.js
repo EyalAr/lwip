@@ -6,10 +6,10 @@ var join = require('path').join,
     imgs = require('../imgs');
 
 var tmpDir = join(__dirname, '../results'),
-    basename = 'darken',
+    basename = 'lighten',
     current;
 
-describe('lwip.darken', function() {
+describe('lwip.lighten', function() {
 
     var image;
 
@@ -18,7 +18,7 @@ describe('lwip.darken', function() {
     });
 
     beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+        lwip.open(imgs.png.trans, function(err, img) {
             image = img;
             done(err);
         });
@@ -29,8 +29,9 @@ describe('lwip.darken', function() {
     });
 
     afterEach(function(done) {
-        image.writeFile(join(tmpDir, current.join('_') + '.jpg'), 'jpeg', {
-            quality: 100
+        image.writeFile(join(tmpDir, current.join('_') + '.png'), 'png', {
+            compression: 'fast',
+            interlaced: true
         }, done);
     });
 
@@ -38,7 +39,7 @@ describe('lwip.darken', function() {
         var d = 0;
         it('should succeed', function(done) {
             current.push('d' + d);
-            image.darken(d, done);
+            image.lighten(d, done);
         });
     });
 
@@ -46,7 +47,7 @@ describe('lwip.darken', function() {
         var d = 0.5;
         it('should succeed', function(done) {
             current.push('d' + d);
-            image.darken(d, done);
+            image.lighten(d, done);
         });
     });
 
@@ -54,7 +55,7 @@ describe('lwip.darken', function() {
         var d = -0.5;
         it('should succeed', function(done) {
             current.push('d' + d);
-            image.darken(d, done);
+            image.lighten(d, done);
         });
     });
 
