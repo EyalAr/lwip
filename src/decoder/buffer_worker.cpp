@@ -2,22 +2,13 @@
 
 DecodeBufferWorker::DecodeBufferWorker(
     NanCallback * callback,
-    char * buffer,
-    size_t buffsize,
+    Local<Object> & buff,
     buf_dec_f_t decoder
-): NanAsyncWorker(callback), _buffsize(buffsize),
-    _decoder(decoder), _pixbuf(NULL), _width(0), _height(0), _channels(0),
-    _trans(false) {
-    // buffer needs to be copied, because the buffer may be gc'ed by
-    // V8 at any time.
-    // !!! _buffer still needs to be freed by us when no longer needed (see Execute)
-    _buffer = (char *) malloc(_buffsize);
-    if (_buffer == NULL) {
-        // TODO: check - can I use SetErrorMessage here?
-        SetErrorMessage("Out of memory");
-        return;
-    }
-    memcpy(_buffer, buffer, _buffsize);
+): NanAsyncWorker(callback), _decoder(decoder), _pixbuf(NULL), _width(0),
+    _height(0), _channels(0), _trans(false) {
+    SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
+    _buffer = Buffer::Data(buff);
+    _buffsize = Buffer::Length(buff);
 }
 
 DecodeBufferWorker::~DecodeBufferWorker() {}
@@ -26,7 +17,6 @@ void DecodeBufferWorker::Execute () {
     CImg<unsigned char> * img = NULL;
     string err;
     err = _decoder(_buffer, _buffsize, &img);
-    free(_buffer);
     if (img == NULL) {
         SetErrorMessage(err.c_str());
         return;

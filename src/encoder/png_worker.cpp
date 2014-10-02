@@ -4,7 +4,7 @@
 #define RGBA_N_CHANNELS 4
 
 EncodeToPngBufferWorker::EncodeToPngBufferWorker(
-    unsigned char * pixbuf,
+    Local<Object> & buff,
     size_t width,
     size_t height,
     int compression,
@@ -14,30 +14,8 @@ EncodeToPngBufferWorker::EncodeToPngBufferWorker(
 ): NanAsyncWorker(callback), _width(width), _height(height),
     _compression(compression), _interlaced(interlaced), _trans(trans),
     _pngbuf(NULL), _pngbufsize(0) {
-    // pixbuf needs to be copied, because the buffer may be gc'ed by
-    // V8 at any time.
-    // !!! _pixbuf still needs to be freed by us when no longer needed (see Execute)
-    _pixbuf = (unsigned char *) malloc(
-                  width *
-                  height *
-                  (_trans ? RGBA_N_CHANNELS : RGB_N_CHANNELS) *
-                  sizeof(unsigned char)
-              );
-    if (_pixbuf == NULL) {
-        // TODO: check - can I use SetErrorMessage here?
-        SetErrorMessage("Out of memory");
-        return;
-    }
-    // pixbuf is actually RGBA (4 channels), but we copy the A channel (which is
-    // at the end of the buffer) only if the image is marked as transparent.
-    memcpy(
-        _pixbuf,
-        pixbuf,
-        width *
-        height *
-        (_trans ? RGBA_N_CHANNELS : RGB_N_CHANNELS) *
-        sizeof(unsigned char)
-    );
+    SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
+    _pixbuf = (unsigned char *) Buffer::Data(buff);
 }
 
 EncodeToPngBufferWorker::~EncodeToPngBufferWorker() {}
@@ -71,7 +49,6 @@ void EncodeToPngBufferWorker::Execute () {
                           NULL, NULL, NULL);
 
     if (!png_ptr) {
-        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
@@ -79,14 +56,12 @@ void EncodeToPngBufferWorker::Execute () {
     png_infop info_ptr = png_create_info_struct(png_ptr);
     if (!info_ptr) {
         png_destroy_write_struct(&png_ptr, (png_infopp) NULL);
-        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
 
     if (setjmp(png_jmpbuf(png_ptr))) {
         png_destroy_write_struct(&png_ptr, &info_ptr);
-        free(_pixbuf);
         SetErrorMessage("PNG compression error");
         return;
     }
@@ -96,7 +71,6 @@ void EncodeToPngBufferWorker::Execute () {
                                );
     if (!rowPnts) {
         png_destroy_write_struct(&png_ptr, &info_ptr);
-        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
@@ -107,7 +81,6 @@ void EncodeToPngBufferWorker::Execute () {
             for (unsigned int p = 0 ; p < r ; p++) free(rowPnts[p]);
             free(rowPnts);
             png_destroy_write_struct(&png_ptr, &info_ptr);
-            free(_pixbuf);
             SetErrorMessage("Out of memory");
             return;
         }
@@ -155,7 +128,6 @@ void EncodeToPngBufferWorker::Execute () {
     png_destroy_write_struct(&png_ptr, &info_ptr);
     for (unsigned int r = 0; r < _height; r++) free(rowPnts[r]);
     free(rowPnts);
-    free(_pixbuf);
 
     _pngbuf = (char *) buffinf.buff;
     _pngbufsize = buffinf.buffsize;

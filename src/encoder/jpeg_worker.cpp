@@ -3,25 +3,15 @@
 #define RGB_N_CHANNELS 3
 
 EncodeToJpegBufferWorker::EncodeToJpegBufferWorker(
-    unsigned char * pixbuf,
+    Local<Object> & buff,
     size_t width,
     size_t height,
     int quality,
     NanCallback * callback
 ): NanAsyncWorker(callback), _width(width), _height(height),
     _quality(quality), _jpegbuf(NULL), _jpegbufsize(0) {
-    // pixbuf needs to be copied, because the buffer may be gc'ed by
-    // V8 at any time.
-    // !!! _pixbuf still needs to be freed by us when no longer needed (see Execute)
-    _pixbuf = (unsigned char *) malloc(width * height * RGB_N_CHANNELS * sizeof(unsigned char));
-    if (_pixbuf == NULL) {
-        // TODO: check - can I use SetErrorMessage here?
-        SetErrorMessage("Out of memory");
-        return;
-    }
-    // pixbuf is actually RGBA (4 channels), but we discard the A channel
-    // for jpeg, which is at the end of the buffer.
-    memcpy(_pixbuf, pixbuf, width * height * RGB_N_CHANNELS * sizeof(unsigned char));
+    SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
+    _pixbuf = (unsigned char *) Buffer::Data(buff);
 }
 
 EncodeToJpegBufferWorker::~EncodeToJpegBufferWorker() {}
@@ -39,14 +29,12 @@ void EncodeToJpegBufferWorker::Execute () {
     if (setjmp(jerr.setjmp_buffer)) {
         jpeg_destroy_compress(&cinfo);
         if (tmp) free(tmp);
-        free(_pixbuf);
         SetErrorMessage("JPEG compression error");
         return;
     }
 
     tmp = (unsigned char *) malloc(_width * dimbuf);
     if (tmp == NULL) {
-        free(_pixbuf);
         SetErrorMessage("Out of memory");
         return;
     }
@@ -78,7 +66,6 @@ void EncodeToJpegBufferWorker::Execute () {
         jpeg_write_scanlines(&cinfo, row_pointer, 1);
     }
     free(tmp);
-    free(_pixbuf);
     jpeg_finish_compress(&cinfo);
     jpeg_destroy_compress(&cinfo);
 

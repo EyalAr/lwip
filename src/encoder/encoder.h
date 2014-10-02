@@ -25,7 +25,7 @@ using namespace std;
 class EncodeToJpegBufferWorker : public NanAsyncWorker {
 public:
     EncodeToJpegBufferWorker(
-        unsigned char * pixbuf,
+        Local<Object> & buff,
         size_t width,
         size_t height,
         int quality,
@@ -46,7 +46,7 @@ private:
 class EncodeToPngBufferWorker : public NanAsyncWorker {
 public:
     EncodeToPngBufferWorker(
-        unsigned char * pixbuf,
+        Local<Object> & buff,
         size_t width,
         size_t height,
         int compression,

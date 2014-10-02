@@ -30,8 +30,7 @@ class DecodeBufferWorker : public NanAsyncWorker {
 public:
     DecodeBufferWorker(
         NanCallback * callback,
-        char * buffer,
-        size_t buffsize,
+        Local<Object> & buff,
         buf_dec_f_t decoder
     );
     ~DecodeBufferWorker();
