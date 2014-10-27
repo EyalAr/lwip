@@ -77,6 +77,10 @@
             'src/lib/png'
         ],
         'conditions': [
+            ['OS=="freebsd"', {
+                'cflags!': ['-fno-exceptions'],
+                'cflags_cc!': ['-fno-exceptions'],
+            }],
             ['OS=="solaris"', {
                 'cflags!': ['-fno-exceptions'],
                 'cflags_cc!': ['-fno-exceptions'],
