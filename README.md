@@ -85,7 +85,7 @@ require('lwip').open('image.jpg', function(err, image){
   image.batch()
     .scale(0.75)          // scale to 75%
     .rotate(45, 'white')  // rotate 45degs clockwise (white fill)
-    .crop(200)            // crop a 200X200 square from center
+    .crop(200, 200)       // crop a 200X200 square from center
     .blur(5)              // Gaussian blur with SD=5
     .writeFile('output.jpg', function(err){
       // check err...
