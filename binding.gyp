@@ -2,7 +2,7 @@
     "targets": [{
         "target_name": "lwip_decoder",
         "sources": [
-            # LWIP: 
+            # LWIP:
             #######
             "src/decoder/init.cpp",
             "src/decoder/util.cpp",
@@ -66,7 +66,12 @@
             "src/lib/zlib/inffast.c",
             "src/lib/zlib/uncompr.c",
             "src/lib/zlib/zutil.c",
-            "src/lib/zlib/trees.c"
+            "src/lib/zlib/trees.c",
+            # LIB GIF:
+            ##########
+            "src/lib/gif/dgif_lib.c",
+            "src/lib/gif/gif_err.c",
+            "src/lib/gif/gifalloc.c",
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',
@@ -110,7 +115,7 @@
     },{
         "target_name": "lwip_encoder",
         "sources": [
-            # LWIP: 
+            # LWIP:
             #######
             "src/encoder/init.cpp",
             "src/encoder/jpeg_worker.cpp",
@@ -167,7 +172,12 @@
             "src/lib/zlib/gzwrite.c",
             "src/lib/zlib/compress.c",
             "src/lib/zlib/deflate.c",
-            "src/lib/zlib/trees.c"
+            "src/lib/zlib/trees.c",
+            # LIB GIF:
+            ##########
+            "src/lib/gif/egif_lib.c",
+            "src/lib/gif/gif_err.c",
+            "src/lib/gif/gifalloc.c",
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',
@@ -211,7 +221,7 @@
     },{
         "target_name": "lwip_image",
         "sources": [
-            # LWIP: 
+            # LWIP:
             #######
             "src/image/init.cpp",
             "src/image/image.cpp",

@@ -79,7 +79,7 @@ If `npm install lwip` failes, you probably need to setup your system.
 ```Javascript
 // obtain an image object:
 require('lwip').open('image.jpg', function(err, image){
-  
+
   // check err...
   // define a batch of manipulations and save to disk as JPEG:
   image.batch()
@@ -102,7 +102,7 @@ var lwip = require('lwip');
 
 // obtain an image object:
 lwip.open('image.jpg', function(err, image){
-  
+
   // check err...
   // manipulate image:
   image.scale(0.5, function(err, image){
@@ -160,7 +160,7 @@ Colors are specified in one of three ways:
   "blue"     // {r: 0, g: 0, b: 255, a: 100}
   "yellow"   // {r: 255, g: 255, b: 0, a: 100}
   "cyan"     // {r: 0, g: 255, b: 255, a: 100}
-  "magenta"  // {r: 255, g: 0, b: 255, a: 100} 
+  "magenta"  // {r: 255, g: 0, b: 255, a: 100}
   ```
 
 - As an array `[R, G, B, A]` where `R`, `G` and `B` are integers between 0 and
@@ -691,3 +691,6 @@ The native part of this module is compiled from source which uses the following:
 - The CImg Library
   - [Website](http://cimg.sourceforge.net/)
   - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/cimg/README.txt)
+- giflib
+  - [Website](http://giflib.sourceforge.net/)
+  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/gif/README)
