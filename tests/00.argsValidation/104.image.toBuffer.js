@@ -7,7 +7,7 @@ var should = require("should"),
 describe('image.toBuffer arguments validation', function() {
 
     var image;
-    before(function(done) {
+    beforeEach(function(done) {
         lwip.open(imgs.jpg.rgb, function(err, img) {
             image = img;
             done(err);
@@ -34,28 +34,222 @@ describe('image.toBuffer arguments validation', function() {
 
     describe('PNG params', function() {
 
-        describe('invalid compression', function() {
-            it('should throw an error', function() {
-                image.toBuffer.bind(image, 'png', {
-                    compression: 'foo'
-                }, function() {}).should.throwError();
+        describe("valid params", function(){
+
+            describe('defaults', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', done).should.not.throwError();
+                });
             });
+
+            describe('none, false, true', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'none',
+                        interlaced: false,
+                        transparency: true
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('fast, false, true', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'fast',
+                        interlaced: false,
+                        transparency: true
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('high, false, true', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'high',
+                        interlaced: false,
+                        transparency: true
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('none, true, true', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'none',
+                        interlaced: true,
+                        transparency: true
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('fast, true, true', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'fast',
+                        interlaced: true,
+                        transparency: true
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('high, true, true', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'high',
+                        interlaced: true,
+                        transparency: true
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('none, false, false', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'none',
+                        interlaced: false,
+                        transparency: false
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('fast, false, false', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'fast',
+                        interlaced: false,
+                        transparency: false
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('high, false, false', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'high',
+                        interlaced: false,
+                        transparency: false
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('none, true, false', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'none',
+                        interlaced: true,
+                        transparency: false
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('fast, true, false', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'fast',
+                        interlaced: true,
+                        transparency: false
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('high, true, false', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'high',
+                        interlaced: true,
+                        transparency: false
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('none, false, auto', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'none',
+                        interlaced: false,
+                        transparency: 'auto'
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('fast, false, auto', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'fast',
+                        interlaced: false,
+                        transparency: 'auto'
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('high, false, auto', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'high',
+                        interlaced: false,
+                        transparency: 'auto'
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('none, true, auto', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'none',
+                        interlaced: true,
+                        transparency: 'auto'
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('fast, true, auto', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'fast',
+                        interlaced: true,
+                        transparency: 'auto'
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('high, true, auto', function() {
+                it('should succeed', function(done) {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'high',
+                        interlaced: true,
+                        transparency: 'auto'
+                    }, done).should.not.throwError();
+                });
+            });
+
         });
 
-        describe('invalid interlaced', function() {
-            it('should throw an error', function() {
-                image.toBuffer.bind(image, 'png', {
-                    interlaced: 'foo'
-                }, function() {}).should.throwError();
-            });
-        });
+        describe("invalid params", function(){
 
-        describe('invalid transparency', function() {
-            it('should throw an error', function() {
-                image.toBuffer.bind(image, 'png', {
-                    transparency: 'foo'
-                }, function() {}).should.throwError();
+            describe('invalid compression', function() {
+                it('should throw an error', function() {
+                    image.toBuffer.bind(image, 'png', {
+                        compression: 'foo'
+                    }, function() {}).should.throwError();
+                });
             });
+
+            describe('invalid interlaced', function() {
+                it('should throw an error', function() {
+                    image.toBuffer.bind(image, 'png', {
+                        interlaced: 'foo'
+                    }, function() {}).should.throwError();
+                });
+            });
+
+            describe('invalid transparency', function() {
+                it('should throw an error', function() {
+                    image.toBuffer.bind(image, 'png', {
+                        transparency: 'foo'
+                    }, function() {}).should.throwError();
+                });
+            });
+
         });
 
     });
