@@ -122,6 +122,13 @@ describe('simultaneous operations locks', function() {
     describe('image.hslaAdjust lock', function() {
         it('should lock image', function() {
             image.hslaAdjust.bind(image, 100, 1, 1, 0, function() {}).should.not.throwError();
+            image.setPixel.bind(image, 0, 0, 'yellow', function() {}).should.throwError();
+        });
+    });
+
+    describe('image.setPixel lock', function() {
+        it('should lock image', function() {
+            image.setPixel.bind(image, 0, 0, 'yellow', function() {}).should.not.throwError();
             image.resize.bind(image, 100, 100, function() {}).should.throwError();
         });
     });

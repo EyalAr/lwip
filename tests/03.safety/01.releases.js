@@ -122,6 +122,13 @@ describe('failed ops lock release', function() {
     describe('image.hslaAdjust release', function() {
         it('should release image lock', function() {
             image.hslaAdjust.bind(image, 'foo', 'foo', 'foo', 'foo', function() {}).should.throwError();
+            image.setPixel.bind(image, 0, 0, 'yellow', function() {}).should.not.throwError();
+        });
+    });
+
+    describe('image.setPixel release', function() {
+        it('should release image lock', function() {
+            image.setPixel.bind(image, 'foo', 'foo', 'foo', function() {}).should.throwError();
             image.resize.bind(image, 100, 100, function() {}).should.not.throwError();
         });
     });
