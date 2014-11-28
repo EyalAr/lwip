@@ -33,6 +33,32 @@ describe('lwip.size', function() {
     });
 });
 
+describe('lwip.getPixel', function() {
+    it('should return correct color at 0,0', function() {
+        var color = image.getPixel(0, 0);
+        assert(color.r === 48);
+        assert(color.g === 86);
+        assert(color.b === 151);
+        assert(color.a === 100);
+    });
+
+    it('should return correct color at 418, 242', function() {
+        var color = image.getPixel(418, 242);
+        assert(color.r === 208);
+        assert(color.g === 228);
+        assert(color.b === 237);
+        assert(color.a === 100);
+    });
+
+    it('should return correct color at 499, 332', function() {
+        var color = image.getPixel(499, 332);
+        assert(color.r === 31);
+        assert(color.g === 27);
+        assert(color.b === 0);
+        assert(color.a === 100);
+    });
+});
+
 describe('lwip.clone', function() {
     it('should return a new image object', function(done) {
         image.clone(function(err, clonedImage) {
