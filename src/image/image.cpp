@@ -84,12 +84,12 @@ NAN_METHOD(LwipImage::getPixel) {
     size_t left = (size_t) args[0].As<Number>()->Value();
     size_t top = (size_t) args[1].As<Number>()->Value();
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(args.Holder());
-    int rgba[4] = {0, 0, 0, 100};
-    rgba[0] = *(obj->_cimg)(left, top, 0, 0); // red
-    rgba[1] = *(obj->_cimg)(left, top, 0, 1); // green
-    rgba[2] = *(obj->_cimg)(left, top, 0, 2); // blue
-    rgba[3] = *(obj->_cimg)(left, top, 0, 3); // alpha
-    NanReturnValue(NanNew<Array>(rgba));
+    Local<Array> rgba = NanNew<Array>(4);
+    rgba->Set(0, NanNew((*(obj->_cimg))(left, top, 0, 0))); // red
+    rgba->Set(1, NanNew((*(obj->_cimg))(left, top, 0, 1))); // green
+    rgba->Set(2, NanNew((*(obj->_cimg))(left, top, 0, 2))); // blue
+    rgba->Set(3, NanNew((*(obj->_cimg))(left, top, 0, 3))); // alpha
+    NanReturnValue(rgba);
 }
 
 // image.buffer():
