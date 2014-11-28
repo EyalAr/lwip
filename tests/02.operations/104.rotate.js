@@ -113,6 +113,17 @@ describe('lwip.rotate', function() {
             });
         });
 
+        describe('-5 degs, {r:200,g:110,b:220} fill', function() {
+            it('should succeed', function(done) {
+                current.push(-5, 'degs', 'r-200,g-110,b-220');
+                image.rotate(-5, {
+                    r: 200,
+                    g: 110,
+                    b: 220
+                }, done);
+            });
+        });
+
         describe('-5 degs, {r:200,g:110,b:220,a:50} fill', function() {
             it('should succeed', function(done) {
                 current.push(-5, 'degs', 'r-200,g-110,b-220,a-50');
