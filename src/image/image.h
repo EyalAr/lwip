@@ -43,6 +43,7 @@ public:
     static NAN_METHOD(width);
     static NAN_METHOD(height);
     static NAN_METHOD(buffer);
+    static NAN_METHOD(setPixel);
     LwipImage(unsigned char * data, size_t width, size_t height);
     ~LwipImage();
 private:
@@ -243,6 +244,31 @@ private:
     size_t _width;
     size_t _height;
     unsigned char * _pixels;
+    CImg<unsigned char> * _cimg;
+};
+
+class SetPixelWorker : public NanAsyncWorker {
+public:
+    SetPixelWorker(
+        size_t left,
+        size_t top,
+        unsigned char r,
+        unsigned char g,
+        unsigned char b,
+        unsigned char a,
+        CImg<unsigned char> * cimg,
+        NanCallback * callback
+    );
+    ~SetPixelWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
+    size_t _left;
+    size_t _top;
+    unsigned char _r;
+    unsigned char _g;
+    unsigned char _b;
+    unsigned char _a;
     CImg<unsigned char> * _cimg;
 };
 

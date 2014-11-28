@@ -20,6 +20,7 @@ void LwipImage::Init(Handle<Object> exports) {
     NODE_SET_PROTOTYPE_METHOD(tpl, "hslaAdj", hslaAdj);
     NODE_SET_PROTOTYPE_METHOD(tpl, "opacify", opacify);
     NODE_SET_PROTOTYPE_METHOD(tpl, "paste", paste);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "paste", setPixel);
     NanAssignPersistent(constructor, tpl);
     exports->Set(
         NanNew("LwipImage"),
@@ -377,6 +378,44 @@ NAN_METHOD(LwipImage::paste) {
             pixBuff,
             width,
             height,
+            cimg,
+            callback
+        )
+    );
+
+    NanReturnUndefined();
+}
+
+// image.setPixel(left, top, color, callback):
+// -------------------------------------------
+
+// args[0] - left
+// args[1] - top
+// args[2] - red
+// args[3] - green
+// args[4] - blue
+// args[5] - alpha
+// args[6] - callback
+NAN_METHOD(LwipImage::setPixel) {
+    NanScope();
+
+    size_t left = (size_t) args[0].As<Number>()->Value();
+    size_t top = (size_t) args[1].As<Number>()->Value();
+    unsigned char r = (unsigned char) args[2].As<Integer>()->Value();
+    unsigned char g = (unsigned char) args[3].As<Integer>()->Value();
+    unsigned char b = (unsigned char) args[4].As<Integer>()->Value();
+    unsigned char a = (unsigned char) args[5].As<Integer>()->Value();
+    NanCallback * callback = new NanCallback(args[6].As<Function>());
+    CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
+
+    NanAsyncQueueWorker(
+        new SetPixelWorker(
+            left,
+            top,
+            r,
+            g,
+            b,
+            a,
             cimg,
             callback
         )
