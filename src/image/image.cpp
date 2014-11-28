@@ -20,7 +20,7 @@ void LwipImage::Init(Handle<Object> exports) {
     NODE_SET_PROTOTYPE_METHOD(tpl, "hslaAdj", hslaAdj);
     NODE_SET_PROTOTYPE_METHOD(tpl, "opacify", opacify);
     NODE_SET_PROTOTYPE_METHOD(tpl, "paste", paste);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "paste", setPixel);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "setPixel", setPixel);
     NanAssignPersistent(constructor, tpl);
     exports->Set(
         NanNew("LwipImage"),

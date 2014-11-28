@@ -19,7 +19,6 @@ describe('image.setPixel arguments validation', function() {
             image.setPixel.bind(image, 9999, 0, 'yellow', function(){}).should.throwError();
             image.setPixel.bind(image, 0, 9999, 'yellow', function(){}).should.throwError();
             image.setPixel.bind(image, 9999, 9999, 'yellow', function(){}).should.throwError();
-            image.setPixel.bind(image, 9999, 0, 'yellow', function(){}).should.throwError();
             image.setPixel.bind(image, 0, 0, 'yellow', done).should.not.throwError(); // sanity check
         });
     });
