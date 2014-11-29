@@ -9,6 +9,7 @@
             "src/decoder/buffer_worker.cpp",
             "src/decoder/jpeg_decoder.cpp",
             "src/decoder/png_decoder.cpp",
+            "src/decoder/gif_decoder.cpp",
             # LIB JPEG:
             ###########
             "src/lib/jpeg/jmemnobs.c",
@@ -79,7 +80,8 @@
             'src/lib/zlib',
             'src/lib/jpeg',
             'src/lib/cimg',
-            'src/lib/png'
+            'src/lib/png',
+            'src/lib/gif'
         ],
         'conditions': [
             ['OS=="freebsd"', {
@@ -185,7 +187,8 @@
             'src/lib/zlib',
             'src/lib/jpeg',
             'src/lib/cimg',
-            'src/lib/png'
+            'src/lib/png',
+            'src/lib/gif'
         ],
         'conditions': [
             ['OS=="freebsd"', {
