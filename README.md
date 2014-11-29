@@ -335,7 +335,7 @@ Mirror an image along the 'x' axis, 'y' axis or both.
 
 `image.mirror(axes, callback)`
 
-0. `axes {String}`: `'x'`, `'y'` or `'xy'`.
+0. `axes {String}`: `'x'`, `'y'` or `'xy'` (case sensitive).
 0. `callback {Function(err, image)}`
 
 #### Flip
