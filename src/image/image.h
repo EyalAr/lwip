@@ -42,6 +42,7 @@ public:
     static NAN_METHOD(paste);
     static NAN_METHOD(width);
     static NAN_METHOD(height);
+    static NAN_METHOD(getPixel);
     static NAN_METHOD(buffer);
     static NAN_METHOD(setPixel);
     LwipImage(unsigned char * data, size_t width, size_t height);

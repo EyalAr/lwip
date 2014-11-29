@@ -33,6 +33,7 @@
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
+    0. [Pixel](#get-pixel)
     0. [Clone](#clone)
     0. [Extract / Copy](#extract)
     0. [Get as a Buffer](#get-as-a-buffer)
@@ -476,6 +477,16 @@ Paste an image on top of this image.
 #### Height
 
 `image.height()` returns the image's height in pixels.
+
+#### Get Pixel
+
+`image.getPixel(left, top)` returns the color of the pixel at the `(left, top)`
+coordinate.
+
+0. `left {Integer>=0}`
+0. `top {Integer>=0}`
+
+Color is returned as an object. See [colors specification](#colors-specification).
 
 #### Clone
 

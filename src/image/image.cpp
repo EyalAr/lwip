@@ -9,6 +9,7 @@ void LwipImage::Init(Handle<Object> exports) {
     tpl->SetClassName(NanNew("LwipImage"));
     NODE_SET_PROTOTYPE_METHOD(tpl, "width", width);
     NODE_SET_PROTOTYPE_METHOD(tpl, "height", height);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "getPixel", getPixel);
     NODE_SET_PROTOTYPE_METHOD(tpl, "buffer", buffer);
     NODE_SET_PROTOTYPE_METHOD(tpl, "resize", resize);
     NODE_SET_PROTOTYPE_METHOD(tpl, "rotate", rotate);
@@ -75,6 +76,21 @@ NAN_METHOD(LwipImage::height) {
     NanScope();
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(args.Holder());
     NanReturnValue(NanNew<Number>(obj->_cimg->height()));
+}
+
+// image.getPixel(left, top):
+// ---------------
+NAN_METHOD(LwipImage::getPixel) {
+    NanScope();
+    size_t left = (size_t) args[0].As<Number>()->Value();
+    size_t top = (size_t) args[1].As<Number>()->Value();
+    LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(args.Holder());
+    Local<Array> rgba = NanNew<Array>(4);
+    rgba->Set(0, NanNew((*(obj->_cimg))(left, top, 0, 0))); // red
+    rgba->Set(1, NanNew((*(obj->_cimg))(left, top, 0, 1))); // green
+    rgba->Set(2, NanNew((*(obj->_cimg))(left, top, 0, 2))); // blue
+    rgba->Set(3, NanNew((*(obj->_cimg))(left, top, 0, 3))); // alpha
+    NanReturnValue(rgba);
 }
 
 // image.buffer():
