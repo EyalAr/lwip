@@ -6,7 +6,7 @@ module.exports = {
 function generateRandomBatch(batch, n) {
     var ops = [];
     for (var i = 0; i < n; i++) {
-        var r = Math.floor(Math.random() * 15);
+        var r = Math.floor(Math.random() * 14);
         switch (r) {
             case 0:
                 var sd = Math.floor(Math.random() * 20);
@@ -80,12 +80,6 @@ function generateRandomBatch(batch, n) {
             case 13:
                 batch = batch.opacify();
                 ops.push('opc');
-                break;
-            case 14:
-                var left = Math.floor(Math.random() * 100),
-                    top = Math.floor(Math.random() * 100);
-                batch = batch.setPixel(left, top, getRandomColor());
-                ops.push('stpx');
                 break;
         }
     }
