@@ -30,8 +30,8 @@ describe('batch.setPixel arguments validation', function() {
 
         describe('before exec', function() {
             it('should not return an error', function(done) {
-                batch.setPixel.bind(batch, 999, 999, 'yellow').should.not.throwError();
                 batch.resize(1000, 1000);
+                batch.setPixel.bind(batch, 999, 999, 'yellow').should.not.throwError();
                 batch.exec(function(err) {
                     // there should not be an error message
                     assert(!err);
