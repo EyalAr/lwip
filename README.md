@@ -132,7 +132,9 @@ lwip.open('image.jpg', function(err, image){
 **Decoding (reading):**
 
 - JPEG, 1 & 3 channels (grayscale & RGB).
-- PNG, 1 & 3 channels (grayscale & RGB) + alpha (transparency) channel.
+- PNG, transparency supported.
+- GIF, transparency supported. Animated GIFs can be read, but only the first
+  frame will be retrieved.
 
 **Encoding (writing):**
 
