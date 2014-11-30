@@ -24,27 +24,45 @@ string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
     SavedImage * gifimg = &gif->SavedImages[0];
     size_t width = (size_t) gifimg->ImageDesc.Width;
     size_t height = (size_t) gifimg->ImageDesc.Height;
-    bool trans = gcb.TransparentColor != NO_TRANSPARENT_COLOR;
+    GifByteType * ipxls = gifimg->RasterBits; // pixels (indexed)
+    ColorMapObject * cmap = NULL != gifimg->ImageDesc.ColorMap
+        ? gifimg->ImageDesc.ColorMap
+        : gif->SColorMap;
 
     // allocate a CImg with the correct dimensions as the image
     *cimg = new CImg<unsigned char>();
     (*cimg)->assign(width, height, 1, 4);
 
-    size_t x, y, i = 0;
+    // pointers to RGBA sections in CImg
+    unsigned char *ptr_r = (*cimg)->data(0, 0, 0, 0),
+                    *ptr_g = (*cimg)->data(0, 0, 0, 1),
+                     *ptr_b = (*cimg)->data(0, 0, 0, 2),
+                      *ptr_a = (*cimg)->data(0, 0, 0, 3);
+
+    size_t i = 0, len = width * height;
     GifByteType ci;
-    GifColorType c;
-    printf("\nHERE2:\n");
-    for (y = 0; y < height; y++){
-        for (x = 0; x < width; x++){
-            ci = gifimg->RasterBits[i++];
-            c = gifimg->ImageDesc.ColorMap->Colors[ci];
-            printf("[%d %d %d],",c.Red,c.Green,c.Blue);
+    GifColorType *c;
+    for (; i < len; ci = ipxls[i++]){
+        if (gcb.TransparentColor != ci){
+            c = &cmap->Colors[ci];
+            *(ptr_r++) = c->Red;
+            *(ptr_g++) = c->Green;
+            *(ptr_b++) = c->Blue;
+            *(ptr_a++) = 255;
+        } else {
+            *(ptr_r++) = 0;
+            *(ptr_g++) = 0;
+            *(ptr_b++) = 0;
+            *(ptr_a++) = 0;
         }
     }
-    printf("\n-----\n");
 
-    return "no";
+    if (GIF_ERROR == DGifCloseFile(gif, &errcode)){
+        delete *cimg;
+        return GifErrorString(errcode);
+    }
 
+    return "";
 }
 
 // 'gif' gives us access to our user data, which has a pointer to our
