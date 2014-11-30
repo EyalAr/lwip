@@ -17,7 +17,7 @@ describe('lwip.rotate', function() {
     });
 
     beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+        lwip.open(imgs.gif.trans, function(err, img) {
             image = img;
             done(err);
         });

@@ -15,5 +15,12 @@ module.exports = {
         noex: join(__dirname, imbase, 'rgbpng'),
         trans: join(__dirname, imbase, 'trans.png'),
         inv: join(__dirname, imbase, 'invalid.png')
+    },
+    gif: {
+        gs: join(__dirname, imbase, 'gs.gif'),
+        rgb: join(__dirname, imbase, 'rgb.gif'),
+        noex: join(__dirname, imbase, 'rgbgif'),
+        trans: join(__dirname, imbase, 'trans.gif'),
+        inv: join(__dirname, imbase, 'invalid.gif')
     }
 };
