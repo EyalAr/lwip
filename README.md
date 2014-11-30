@@ -30,9 +30,11 @@
     0. [Fade (adjust transparency)](#fade)
     0. [Opacify](#opacify)
     0. [Paste](#paste)
+    0. [Set pixel](#set-pixel)
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
+    0. [Pixel](#get-pixel)
     0. [Clone](#clone)
     0. [Extract / Copy](#extract)
     0. [Get as a Buffer](#get-as-a-buffer)
@@ -336,7 +338,7 @@ Mirror an image along the 'x' axis, 'y' axis or both.
 
 `image.mirror(axes, callback)`
 
-0. `axes {String}`: `'x'`, `'y'` or `'xy'`.
+0. `axes {String}`: `'x'`, `'y'` or `'xy'` (case sensitive).
 0. `callback {Function(err, image)}`
 
 #### Flip
@@ -469,6 +471,24 @@ Paste an image on top of this image.
 0. Extra caution is required when using this method in batch mode, as the images
    may change by the time this operation is called.
 
+#### Set Pixel
+
+Set the color of a pixel.
+
+`image.setPixel(left, top, color, callback)`
+
+0. `left, top {Integer}`: Coordinates of the pixel from the left-top corner of
+   the image.
+0. `color {String / Array / Object}`: Color of the pixel to set.
+   See [colors specification](#colors-specification).
+0. `callback {Function(err, image)}`
+
+**Notes:**
+
+0. If the coordinates exceed the bounds of the image, an exception is thrown.
+0. Extra caution is required when using this method in batch mode, as the
+  dimensions of the image may change by the time this operation is called.
+
 ### Getters
 
 #### Width
@@ -478,6 +498,16 @@ Paste an image on top of this image.
 #### Height
 
 `image.height()` returns the image's height in pixels.
+
+#### Get Pixel
+
+`image.getPixel(left, top)` returns the color of the pixel at the `(left, top)`
+coordinate.
+
+0. `left {Integer>=0}`
+0. `top {Integer>=0}`
+
+Color is returned as an object. See [colors specification](#colors-specification).
 
 #### Clone
 

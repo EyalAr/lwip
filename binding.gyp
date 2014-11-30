@@ -238,6 +238,7 @@
             "src/image/hsla_worker.cpp",
             "src/image/opacify_worker.cpp",
             "src/image/paste_worker.cpp",
+            "src/image/setpixel_worker.cpp",
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',

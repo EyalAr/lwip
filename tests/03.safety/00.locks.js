@@ -5,11 +5,18 @@ var join = require('path').join,
 
 describe('simultaneous operations locks', function() {
 
-    var image;
+    var image, tmpImage;
 
     beforeEach(function(done) {
         lwip.open(imgs.jpg.rgb, function(err, img) {
             image = img;
+            done(err);
+        });
+    });
+
+    before(function(done){
+        lwip.create(10, 10, function(err, img){
+            tmpImage = img;
             done(err);
         });
     });
@@ -122,6 +129,20 @@ describe('simultaneous operations locks', function() {
     describe('image.hslaAdjust lock', function() {
         it('should lock image', function() {
             image.hslaAdjust.bind(image, 100, 1, 1, 0, function() {}).should.not.throwError();
+            image.setPixel.bind(image, 0, 0, 'yellow', function() {}).should.throwError();
+        });
+    });
+
+    describe('image.setPixel lock', function() {
+        it('should lock image', function() {
+            image.setPixel.bind(image, 0, 0, 'yellow', function() {}).should.not.throwError();
+            image.paste.bind(image, 0, 0, tmpImage, function() {}).should.throwError();
+        });
+    });
+
+    describe('image.paste lock', function() {
+        it('should lock image', function() {
+            image.paste.bind(image, 0, 0, tmpImage, function() {}).should.not.throwError();
             image.resize.bind(image, 100, 100, function() {}).should.throwError();
         });
     });
