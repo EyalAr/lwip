@@ -22,7 +22,7 @@ EncodeToGifBufferWorker::~EncodeToGifBufferWorker() {}
 
 void EncodeToGifBufferWorker::Execute () {
 
-    (void) _trans;
+    (void) _trans; // supress compiler warning TODO: remove
 
     int cmapSize = 1 << _colorsExp; // power of 2
     GifByteType
@@ -97,6 +97,9 @@ void EncodeToGifBufferWorker::Execute () {
         SetErrorMessage(GifErrorString(gif->Error));
         return;
     }
+
+    _gifbuf = (char *) buffinf.buff;
+    _gifbufsize = buffinf.buffsize;
 
     return;
 }

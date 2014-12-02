@@ -181,6 +181,7 @@
             "src/lib/gif/egif_lib.c",
             "src/lib/gif/gif_err.c",
             "src/lib/gif/gifalloc.c",
+            "src/lib/gif/gif_hash.c",
             "src/lib/gif/quantize.c"
         ],
         'include_dirs': [
