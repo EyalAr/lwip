@@ -122,6 +122,7 @@
             "src/encoder/init.cpp",
             "src/encoder/jpeg_worker.cpp",
             "src/encoder/png_worker.cpp",
+            "src/encoder/gif_worker.cpp",
             # LIB JPEG:
             ###########
             "src/lib/jpeg/jdatadst.c",
@@ -180,6 +181,7 @@
             "src/lib/gif/egif_lib.c",
             "src/lib/gif/gif_err.c",
             "src/lib/gif/gifalloc.c",
+            "src/lib/gif/quantize.c"
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',
