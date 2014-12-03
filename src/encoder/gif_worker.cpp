@@ -7,12 +7,13 @@ EncodeToGifBufferWorker::EncodeToGifBufferWorker(
     Local<Object> & buff,
     size_t width,
     size_t height,
-    int colorsExp,
+    int cmapSize,
+    int colors,
     bool interlaced,
     bool trans,
     NanCallback * callback
 ): NanAsyncWorker(callback), _width(width), _height(height),
-    _colorsExp(colorsExp), _interlaced(interlaced), _trans(trans),
+    _cmapSize(cmapSize), _colors(colors), _interlaced(interlaced), _trans(trans),
     _gifbuf(NULL), _gifbufsize(0) {
     SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
     _pixbuf = (unsigned char *) Buffer::Data(buff);
@@ -24,7 +25,6 @@ void EncodeToGifBufferWorker::Execute () {
 
     (void) _trans; // supress compiler warning TODO: remove
 
-    int cmapSize = 1 << _colorsExp; // power of 2
     GifByteType
         * redBuff = (GifByteType *) _pixbuf,
         * greenBuff = (GifByteType *) _pixbuf + _width * _height,
@@ -38,7 +38,7 @@ void EncodeToGifBufferWorker::Execute () {
         return;
     }
 
-    cmap = GifMakeMapObject(cmapSize, NULL);
+    cmap = GifMakeMapObject(_cmapSize, NULL);
 
     if (NULL == cmap){
         free(gifimgbuf);
@@ -47,7 +47,7 @@ void EncodeToGifBufferWorker::Execute () {
     }
 
     if (GIF_ERROR == GifQuantizeBuffer(
-                _width, _height, &cmapSize,
+                _width, _height, &_colors,
                redBuff, greenBuff, blueBuff,
                gifimgbuf, cmap->Colors
         )){
@@ -72,7 +72,7 @@ void EncodeToGifBufferWorker::Execute () {
 
     gif->SWidth = _width;
     gif->SHeight = _height;
-    gif->SColorResolution = cmapSize;
+    gif->SColorResolution = _colors;
     gif->SBackGroundColor = 0;
     gif->SColorMap = cmap;
 

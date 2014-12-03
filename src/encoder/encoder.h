@@ -75,7 +75,8 @@ public:
         Local<Object> & buff,
         size_t width,
         size_t height,
-        int colorsExp, // exponent of 2 as number of colors in the color map
+        int cmapSize,
+        int colors,
         bool interlaced,
         bool trans,
         NanCallback * callback
@@ -87,7 +88,8 @@ private:
     unsigned char * _pixbuf;
     size_t _width;
     size_t _height;
-    int _colorsExp;
+    int _cmapSize;
+    int _colors;
     bool _interlaced;
     bool _trans;
     char * _gifbuf;
