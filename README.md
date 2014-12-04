@@ -30,9 +30,11 @@
     0. [Fade (adjust transparency)](#fade)
     0. [Opacify](#opacify)
     0. [Paste](#paste)
+    0. [Set pixel](#set-pixel)
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
+    0. [Pixel](#get-pixel)
     0. [Clone](#clone)
     0. [Extract / Copy](#extract)
     0. [Get as a Buffer](#get-as-a-buffer)
@@ -79,7 +81,7 @@ If `npm install lwip` failes, you probably need to setup your system.
 ```Javascript
 // obtain an image object:
 require('lwip').open('image.jpg', function(err, image){
-  
+
   // check err...
   // define a batch of manipulations and save to disk as JPEG:
   image.batch()
@@ -102,7 +104,7 @@ var lwip = require('lwip');
 
 // obtain an image object:
 lwip.open('image.jpg', function(err, image){
-  
+
   // check err...
   // manipulate image:
   image.scale(0.5, function(err, image){
@@ -132,7 +134,9 @@ lwip.open('image.jpg', function(err, image){
 **Decoding (reading):**
 
 - JPEG, 1 & 3 channels (grayscale & RGB).
-- PNG, 1 & 3 channels (grayscale & RGB) + alpha (transparency) channel.
+- PNG, transparency supported.
+- GIF, transparency supported. Animated GIFs can be read, but only the first
+  frame will be retrieved.
 
 **Encoding (writing):**
 
@@ -160,7 +164,7 @@ Colors are specified in one of three ways:
   "blue"     // {r: 0, g: 0, b: 255, a: 100}
   "yellow"   // {r: 255, g: 255, b: 0, a: 100}
   "cyan"     // {r: 0, g: 255, b: 255, a: 100}
-  "magenta"  // {r: 255, g: 0, b: 255, a: 100} 
+  "magenta"  // {r: 255, g: 0, b: 255, a: 100}
   ```
 
 - As an array `[R, G, B, A]` where `R`, `G` and `B` are integers between 0 and
@@ -252,11 +256,23 @@ lwip.create(500, 500, 'yellow', function(err, image){
 
 #### Resize
 
-`image.resize(width, height, inter, callback)`
+`image.resize(width, height, fit, scale, inter, callback)`
 
-0. `width {Integer}`: Width in pixels.
-0. `height {Integer}`: **Optional** height in pixels. If omitted, `width` will
-   be used.
+0. `width {Integer|null}`: Width in pixels.
+0. `height {Integer|null}`: **Optional** height in pixels.
+   If `width` is null, it's calculated proportionally from `height`, and vice versa.
+   By default, resizing keeps the original image’s aspect ratio and the resulting image
+   fits the given dimensions from the inside.
+0. `fit` {String}: **Optional** fit. Defaults to `"inside"`, read along.
+   Possible values:
+   - `"inside"`: Keeps original image’s aspect ratio, resulting image fits given dimensions.
+   - `"outside"`: Image will be at least width x height, and aspect ratio will be kept.
+   - `"fill"`: Image will be stretched as necessary, aspect ratio may not be kept.
+0. `scale` {String}: **Optional** scale, determines when to scale an image. Defaults to `"any"`.
+   Possible values:
+      - `"down"`: Resize if image is larger than the new dimensions.
+      - `"up"`: Resize if image is smaller than the new dimensions.
+      - `"any"`: Resize regardless of the image size.
 0. `inter {String}`: **Optional** interpolation method. Defaults to `"lanczos"`.
    Possible values:
    - `"nearest-neighbor"`
@@ -334,7 +350,7 @@ Mirror an image along the 'x' axis, 'y' axis or both.
 
 `image.mirror(axes, callback)`
 
-0. `axes {String}`: `'x'`, `'y'` or `'xy'`.
+0. `axes {String}`: `'x'`, `'y'` or `'xy'` (case sensitive).
 0. `callback {Function(err, image)}`
 
 #### Flip
@@ -467,6 +483,24 @@ Paste an image on top of this image.
 0. Extra caution is required when using this method in batch mode, as the images
    may change by the time this operation is called.
 
+#### Set Pixel
+
+Set the color of a pixel.
+
+`image.setPixel(left, top, color, callback)`
+
+0. `left, top {Integer}`: Coordinates of the pixel from the left-top corner of
+   the image.
+0. `color {String / Array / Object}`: Color of the pixel to set.
+   See [colors specification](#colors-specification).
+0. `callback {Function(err, image)}`
+
+**Notes:**
+
+0. If the coordinates exceed the bounds of the image, an exception is thrown.
+0. Extra caution is required when using this method in batch mode, as the
+  dimensions of the image may change by the time this operation is called.
+
 ### Getters
 
 #### Width
@@ -476,6 +510,16 @@ Paste an image on top of this image.
 #### Height
 
 `image.height()` returns the image's height in pixels.
+
+#### Get Pixel
+
+`image.getPixel(left, top)` returns the color of the pixel at the `(left, top)`
+coordinate.
+
+0. `left {Integer>=0}`
+0. `top {Integer>=0}`
+
+Color is returned as an object. See [colors specification](#colors-specification).
 
 #### Clone
 
@@ -691,3 +735,6 @@ The native part of this module is compiled from source which uses the following:
 - The CImg Library
   - [Website](http://cimg.sourceforge.net/)
   - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/cimg/README.txt)
+- giflib
+  - [Website](http://giflib.sourceforge.net/)
+  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/gif/README)

@@ -2,13 +2,14 @@
     "targets": [{
         "target_name": "lwip_decoder",
         "sources": [
-            # LWIP: 
+            # LWIP:
             #######
             "src/decoder/init.cpp",
             "src/decoder/util.cpp",
             "src/decoder/buffer_worker.cpp",
             "src/decoder/jpeg_decoder.cpp",
             "src/decoder/png_decoder.cpp",
+            "src/decoder/gif_decoder.cpp",
             # LIB JPEG:
             ###########
             "src/lib/jpeg/jmemnobs.c",
@@ -66,7 +67,12 @@
             "src/lib/zlib/inffast.c",
             "src/lib/zlib/uncompr.c",
             "src/lib/zlib/zutil.c",
-            "src/lib/zlib/trees.c"
+            "src/lib/zlib/trees.c",
+            # LIB GIF:
+            ##########
+            "src/lib/gif/dgif_lib.c",
+            "src/lib/gif/gif_err.c",
+            "src/lib/gif/gifalloc.c",
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',
@@ -74,7 +80,8 @@
             'src/lib/zlib',
             'src/lib/jpeg',
             'src/lib/cimg',
-            'src/lib/png'
+            'src/lib/png',
+            'src/lib/gif'
         ],
         'conditions': [
             ['OS=="freebsd"', {
@@ -110,11 +117,12 @@
     },{
         "target_name": "lwip_encoder",
         "sources": [
-            # LWIP: 
+            # LWIP:
             #######
             "src/encoder/init.cpp",
             "src/encoder/jpeg_worker.cpp",
             "src/encoder/png_worker.cpp",
+            "src/encoder/gif_worker.cpp",
             # LIB JPEG:
             ###########
             "src/lib/jpeg/jdatadst.c",
@@ -167,7 +175,14 @@
             "src/lib/zlib/gzwrite.c",
             "src/lib/zlib/compress.c",
             "src/lib/zlib/deflate.c",
-            "src/lib/zlib/trees.c"
+            "src/lib/zlib/trees.c",
+            # LIB GIF:
+            ##########
+            "src/lib/gif/egif_lib.c",
+            "src/lib/gif/gif_err.c",
+            "src/lib/gif/gifalloc.c",
+            "src/lib/gif/gif_hash.c",
+            "src/lib/gif/quantize.c"
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',
@@ -175,7 +190,8 @@
             'src/lib/zlib',
             'src/lib/jpeg',
             'src/lib/cimg',
-            'src/lib/png'
+            'src/lib/png',
+            'src/lib/gif'
         ],
         'conditions': [
             ['OS=="freebsd"', {
@@ -211,7 +227,7 @@
     },{
         "target_name": "lwip_image",
         "sources": [
-            # LWIP: 
+            # LWIP:
             #######
             "src/image/init.cpp",
             "src/image/image.cpp",
@@ -225,6 +241,7 @@
             "src/image/hsla_worker.cpp",
             "src/image/opacify_worker.cpp",
             "src/image/paste_worker.cpp",
+            "src/image/setpixel_worker.cpp",
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',

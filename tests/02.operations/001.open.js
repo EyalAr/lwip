@@ -109,6 +109,59 @@ describe('lwip.open', function() {
 
     });
 
+    describe('gif file', function() {
+
+        describe('rgb image (with gif extension)', function() {
+            it('should succeed', function(done) {
+                lwip.open(imgs.gif.rgb, function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+        describe('rgb image (no extension)', function() {
+            it('should succeed', function(done) {
+                lwip.open(imgs.gif.noex, 'gif', function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+        describe('grayscale image', function() {
+            it('should succeed', function(done) {
+                lwip.open(imgs.gif.gs, function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+        describe('transparent image', function() {
+            it('should succeed', function(done) {
+                lwip.open(imgs.gif.trans, function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+        describe('invalid image', function() {
+            it('should fail', function(done) {
+                lwip.open(imgs.gif.inv, function(err, img) {
+                    should(err).be.Error;
+                    done();
+                });
+            });
+        });
+
+    });
+
     describe('jpeg buffer', function() {
 
         describe('rgb image', function() {
@@ -180,6 +233,46 @@ describe('lwip.open', function() {
 
             it('should succeed', function(done) {
                 lwip.open(buffer, 'png', function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe('gif buffer', function() {
+
+        describe('rgb image', function() {
+            var buffer;
+            before(function(done) {
+                fs.readFile(imgs.gif.rgb, function(err, imbuf) {
+                    buffer = imbuf;
+                    done(err);
+                });
+            });
+
+            it('should succeed', function(done) {
+                lwip.open(buffer, 'gif', function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+        describe('grayscale image', function() {
+            var buffer;
+            before(function(done) {
+                fs.readFile(imgs.gif.gs, function(err, imbuf) {
+                    buffer = imbuf;
+                    done(err);
+                });
+            });
+
+            it('should succeed', function(done) {
+                lwip.open(buffer, 'gif', function(err, img) {
                     should(err).not.be.Error;
                     img.should.be.OK;
                     done();

@@ -5,11 +5,18 @@ var join = require('path').join,
 
 describe('failed ops lock release', function() {
 
-    var image;
+    var image, tmpImage;
 
     beforeEach(function(done) {
         lwip.open(imgs.jpg.rgb, function(err, img) {
             image = img;
+            done(err);
+        });
+    });
+
+    before(function(done){
+        lwip.create(10, 10, function(err, img){
+            tmpImage = img;
             done(err);
         });
     });
@@ -122,6 +129,20 @@ describe('failed ops lock release', function() {
     describe('image.hslaAdjust release', function() {
         it('should release image lock', function() {
             image.hslaAdjust.bind(image, 'foo', 'foo', 'foo', 'foo', function() {}).should.throwError();
+            image.setPixel.bind(image, 0, 0, 'yellow', function() {}).should.not.throwError();
+        });
+    });
+
+    describe('image.setPixel release', function() {
+        it('should release image lock', function() {
+            image.setPixel.bind(image, 'foo', 'foo', 'foo', function() {}).should.throwError();
+            image.paste.bind(image, 0, 0, tmpImage, function() {}).should.not.throwError();
+        });
+    });
+
+    describe('image.paste release', function() {
+        it('should release image lock', function() {
+            image.paste.bind(image, 'foo', 'foo', 'foo', function() {}).should.throwError();
             image.resize.bind(image, 100, 100, function() {}).should.not.throwError();
         });
     });

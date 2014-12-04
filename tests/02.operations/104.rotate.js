@@ -17,7 +17,7 @@ describe('lwip.rotate', function() {
     });
 
     beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+        lwip.open(imgs.gif.trans, function(err, img) {
             image = img;
             done(err);
         });
@@ -110,6 +110,17 @@ describe('lwip.rotate', function() {
             it('should succeed', function(done) {
                 current.push(45, 'degs', [50, 100, 250,75]);
                 image.rotate(45, [50, 100, 250, 75], done);
+            });
+        });
+
+        describe('-5 degs, {r:200,g:110,b:220} fill', function() {
+            it('should succeed', function(done) {
+                current.push(-5, 'degs', 'r-200,g-110,b-220');
+                image.rotate(-5, {
+                    r: 200,
+                    g: 110,
+                    b: 220
+                }, done);
             });
         });
 
