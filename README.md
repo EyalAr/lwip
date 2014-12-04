@@ -256,11 +256,23 @@ lwip.create(500, 500, 'yellow', function(err, image){
 
 #### Resize
 
-`image.resize(width, height, inter, callback)`
+`image.resize(width, height, fit, scale, inter, callback)`
 
-0. `width {Integer}`: Width in pixels.
-0. `height {Integer}`: **Optional** height in pixels. If omitted, `width` will
-   be used.
+0. `width {Integer|null}`: Width in pixels.
+0. `height {Integer|null}`: **Optional** height in pixels.
+   If `width` is null, it's calculated proportionally from `height`, and vice versa.
+   By default, resizing keeps the original image’s aspect ratio and the resulting image
+   fits the given dimensions from the inside.
+0. `fit` {String}: **Optional** fit. Defaults to `"inside"`, read along.
+   Possible values:
+   - `"inside"`: Keeps original image’s aspect ratio, resulting image fits given dimensions.
+   - `"outside"`: Image will be at least width x height, and aspect ratio will be kept.
+   - `"fill"`: Image will be stretched as necessary, aspect ratio may not be kept.
+0. `scale` {String}: **Optional** scale, determines when to scale an image. Defaults to `"any"`.
+   Possible values:
+      - `"down"`: Resize if image is larger than the new dimensions.
+      - `"up"`: Resize if image is smaller than the new dimensions.
+      - `"any"`: Resize regardless of the image size.
 0. `inter {String}`: **Optional** interpolation method. Defaults to `"lanczos"`.
    Possible values:
    - `"nearest-neighbor"`
