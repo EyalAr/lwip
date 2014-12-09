@@ -188,4 +188,24 @@ describe('lwip.open', function() {
         });
 
     });
+
+    describe('raw pixel buffer', function() {
+
+        describe('raw pixel buffer', function(){
+            var buffer;
+            before(function(done) {
+                buffer = new Buffer(100 * 100 * 4);
+                done();
+            });
+
+            it('should succeed', function(done) {
+                lwip.open(buffer, { width: 100, height: 100, trans: true }, function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+    });
 });
