@@ -199,7 +199,7 @@ describe('lwip.open', function() {
             });
 
             it('should succeed', function(done) {
-                lwip.open(buffer, { width: 100, height: 100, trans: true }, function(err, img) {
+                lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
                     should(err).not.be.Error;
                     img.should.be.OK;
                     done();

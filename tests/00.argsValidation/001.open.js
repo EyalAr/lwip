@@ -65,4 +65,56 @@ describe('lwip.open arguments validation', function() {
 
     });
 
+    describe('pixelbuffer', function() {
+
+        var buffer;
+        before(function(done) {
+            buffer = new Buffer(100 * 100 * 4);
+            done();
+        });
+
+        describe('without width', function() {
+            it('should throw an error', function() {
+                lwip.open.bind(lwip, buffer, { height: 100 }, function() {}).should.throwError();
+            });
+        });
+
+        describe('without height', function() {
+            it('should throw an error', function() {
+                lwip.open.bind(lwip, buffer, { width: 100 }, function() {}).should.throwError();
+            });
+        });
+
+        describe('without width and height', function() {
+            it('should throw an error', function() {
+                lwip.open.bind(lwip, buffer, { }, function() {}).should.throwError();
+            });
+        });
+
+        describe('with non numeric width', function() {
+            it('should throw an error', function() {
+                lwip.open.bind(lwip, buffer, { width: "lorem", height: 100 }, function() {}).should.throwError();
+            });
+        });
+
+        describe('with non numeric height', function() {
+            it('should throw an error', function() {
+                lwip.open.bind(lwip, buffer, { width: 100, height: "lorem" }, function() {}).should.throwError();
+            });
+        });
+
+        describe('with non numeric width and height', function() {
+            it('should throw an error', function() {
+                lwip.open.bind(lwip, buffer, { width: "lorem", height: "ipsum" }, function() {}).should.throwError();
+            });
+        });
+
+        describe('with incorrect width and height', function() {
+            it('should throw an error', function() {
+                lwip.open.bind(lwip, buffer, { width: 123, height: 321 }, function() {}).should.throwError();
+            });
+        });
+
+    });
+
 });
