@@ -40,7 +40,7 @@ for(var y = 0; y < h; y++) {
 	}
 }
 
-lwip.open(buffer, { width: w, height: h, trans: true }, function(err, image) {
+lwip.open(buffer, { width: w, height: h }, function(err, image) {
     if (err) return console.log("err open", err);
     image.batch()
     	.blur(9)
