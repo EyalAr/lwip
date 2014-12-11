@@ -69,19 +69,19 @@ describe('lwip.open arguments validation', function() {
 
         var buffer;
         before(function(done) {
-            buffer = new Buffer(100 * 100 * 4);
+            buffer = new Buffer(120 * 120);
             done();
         });
 
         describe('without width', function() {
             it('should throw an error', function() {
-                lwip.open.bind(lwip, buffer, { height: 100 }, function() {}).should.throwError();
+                lwip.open.bind(lwip, buffer, { height: 120 }, function() {}).should.throwError();
             });
         });
 
         describe('without height', function() {
             it('should throw an error', function() {
-                lwip.open.bind(lwip, buffer, { width: 100 }, function() {}).should.throwError();
+                lwip.open.bind(lwip, buffer, { width: 120 }, function() {}).should.throwError();
             });
         });
 
@@ -93,13 +93,13 @@ describe('lwip.open arguments validation', function() {
 
         describe('with non numeric width', function() {
             it('should throw an error', function() {
-                lwip.open.bind(lwip, buffer, { width: "lorem", height: 100 }, function() {}).should.throwError();
+                lwip.open.bind(lwip, buffer, { width: "lorem", height: 120 }, function() {}).should.throwError();
             });
         });
 
         describe('with non numeric height', function() {
             it('should throw an error', function() {
-                lwip.open.bind(lwip, buffer, { width: 100, height: "lorem" }, function() {}).should.throwError();
+                lwip.open.bind(lwip, buffer, { width: 120, height: "lorem" }, function() {}).should.throwError();
             });
         });
 
@@ -109,9 +109,54 @@ describe('lwip.open arguments validation', function() {
             });
         });
 
+        describe('with negative width', function() {
+            it('should throw an error', function() {
+                lwip.open.bind(lwip, buffer, { width: -120, height: 120 }, function() {}).should.throwError();
+            });
+        });
+
+        describe('with negative height', function() {
+            it('should throw an error', function() {
+                lwip.open.bind(lwip, buffer, { width: 120, height: -120 }, function() {}).should.throwError();
+            });
+        });
+
+        describe('with negative width and height', function() {
+            it('should throw an error', function() {
+                lwip.open.bind(lwip, buffer, { width: -120, height: -120 }, function() {}).should.throwError();
+            });
+        });
+
         describe('with incorrect width and height', function() {
             it('should throw an error', function() {
                 lwip.open.bind(lwip, buffer, { width: 123, height: 321 }, function() {}).should.throwError();
+            });
+        });
+
+        describe('with correct width and height for 1 channel', function() {
+            it('should succeed', function() {
+                lwip.open.bind(lwip, buffer, { width: 120, height: 120 }, function() {}).should.not.throw();
+            });
+        });
+
+        describe('with correct width and height for 2 channels', function() {
+            var newBuffer = new Buffer(120 * 120 * 2)
+            it('should succeed', function() {
+                lwip.open.bind(lwip, newBuffer, { width: 120, height: 120 }, function() {}).should.not.throw();
+            });
+        });
+
+        describe('with correct width and height for 3 channels', function() {
+            var newBuffer = new Buffer(120 * 120 * 3)
+            it('should succeed', function() {
+                lwip.open.bind(lwip, newBuffer, { width: 120, height: 120 }, function() {}).should.not.throw();
+            });
+        });
+
+        describe('with correct width and height for 4 channels', function() {
+            var newBuffer = new Buffer(120 * 120 * 4)
+            it('should succeed', function() {
+                lwip.open.bind(lwip, newBuffer, { width: 120, height: 120 }, function() {}).should.not.throw();
             });
         });
 
