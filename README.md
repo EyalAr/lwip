@@ -198,10 +198,26 @@ by:
 `lwip.open(source, type, callback)`
 
 0. `source {String/Buffer}`: The path to the image on disk or an image buffer.
-0. `type {String}`: **Optional** type of the image. If omitted, the type will be
-   inferred from the file extension. If `source` is a buffer, `type` must be
-   specified.
+0. `type {String/Object}`: **Optional** type of the image. If omitted, the type
+   will be inferred from the file extension. If `source` is a buffer, `type`
+   must be specified. If `source` is an encoded image buffer, `type` must be
+   a string of the image type (i.e. `"jpg"`). If `source` is a raw pixels buffer
+   `type` must be an object with `type.width` and `type.height` properties.
 0. `callback {Function(err, image)}`
+
+**Note about raw pixels buffers:** `source` may be a buffer of raw pixels. The
+buffer may contain pixels of 1-4 channels, where:
+
+0. 1 channel is a grayscale image.
+0. 2 channels is a grayscale image with an alpha channel.
+0. 3 channels is an RGB image.
+0. 4 channels is an RGBA image (with an alpha channel).
+
+In other words, if the image in the buffer has width `W` and height `H`, the
+size of the buffer can be `W*H`, `2*W*H`, `3*W*H` or `4*W*H`.
+
+The channel values in the buffer must be stored sequentially. I.e. first all the
+Red values, then all the Green values, etc.
 
 #### Open file example
 

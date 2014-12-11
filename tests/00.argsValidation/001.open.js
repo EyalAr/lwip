@@ -39,6 +39,11 @@ describe('lwip.open arguments validation', function() {
                 lwip.open.bind(lwip, imgs.jpg.rgb, 'jjpg', function() {}).should.throwError();
             });
         });
+        describe('with invalid type (raw buffer properties)', function() {
+            it('should throw an error', function() {
+                lwip.open.bind(lwip, imgs.jpg.rgb, {width: 120, height: 120}, function() {}).should.throwError();
+            });
+        });
 
     });
 
@@ -71,6 +76,12 @@ describe('lwip.open arguments validation', function() {
         before(function(done) {
             buffer = new Buffer(120 * 120);
             done();
+        });
+
+        describe('without raw buffer properties', function() {
+            it('should throw an error', function() {
+                lwip.open.bind(lwip, buffer, function() {}).should.throwError();
+            });
         });
 
         describe('without width', function() {
@@ -140,21 +151,21 @@ describe('lwip.open arguments validation', function() {
         });
 
         describe('with correct width and height for 2 channels', function() {
-            var newBuffer = new Buffer(120 * 120 * 2)
+            var newBuffer = new Buffer(120 * 120 * 2);
             it('should succeed', function() {
                 lwip.open.bind(lwip, newBuffer, { width: 120, height: 120 }, function() {}).should.not.throw();
             });
         });
 
         describe('with correct width and height for 3 channels', function() {
-            var newBuffer = new Buffer(120 * 120 * 3)
+            var newBuffer = new Buffer(120 * 120 * 3);
             it('should succeed', function() {
                 lwip.open.bind(lwip, newBuffer, { width: 120, height: 120 }, function() {}).should.not.throw();
             });
         });
 
         describe('with correct width and height for 4 channels', function() {
-            var newBuffer = new Buffer(120 * 120 * 4)
+            var newBuffer = new Buffer(120 * 120 * 4);
             it('should succeed', function() {
                 lwip.open.bind(lwip, newBuffer, { width: 120, height: 120 }, function() {}).should.not.throw();
             });
