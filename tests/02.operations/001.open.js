@@ -188,4 +188,72 @@ describe('lwip.open', function() {
         });
 
     });
+
+    describe('raw pixel buffer', function() {
+
+        describe('grayscale image', function(){
+            var buffer;
+            before(function(done) {
+                buffer = new Buffer(100 * 100);
+                done();
+            });
+
+            it('should succeed', function(done) {
+                lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+        describe('grayscale image with alpha', function(){
+            var buffer;
+            before(function(done) {
+                buffer = new Buffer(100 * 100 * 2);
+                done();
+            });
+
+            it('should succeed', function(done) {
+                lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+        describe('rgb image', function(){
+            var buffer;
+            before(function(done) {
+                buffer = new Buffer(100 * 100 * 3);
+                done();
+            });
+
+            it('should succeed', function(done) {
+                lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+        describe('rgb image with alpha', function(){
+            var buffer;
+            before(function(done) {
+                buffer = new Buffer(100 * 100 * 4);
+                done();
+            });
+
+            it('should succeed', function(done) {
+                lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
+                    should(err).not.be.Error;
+                    img.should.be.OK;
+                    done();
+                });
+            });
+        });
+
+    });
 });
