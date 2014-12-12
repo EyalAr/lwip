@@ -78,13 +78,40 @@ Disclaimer: I would love to get rid of the native part in favor of pure JS
 implementations. The day comparable image encoding / decoding libraries will be
 available in JS, I'll seriously consider switching.
 
-There are three native parts for lwip, each a standalone module:
+There are three native parts to lwip, each a standalone module:
 
-### Encoder
+### Decoder
 
 Sources are under `src/decoder`
 
-### Decoder
+The decoder will expose a JS module with a decoding method for each supported
+image format. Each of these methods will decode an image buffer of the
+respective format. E.g. `decoder.jpeg( ... )` will decode JPEG buffers.
+
+Each of these functions receive 2 arguments - A Buffer object and a callback
+function.
+
+The image Buffer object and the callback function are handed to the decoders
+from the JS side. We don't care how the buffer was created (most probably with
+`fs.readFile`), as long as it's a valid image buffer of the correct format.
+
+The purpose of the decoder is, well, to decode the image buffer, and generate
+a new buffer of raw pixels data. Each decoder function will use the respective
+library (libjpeg, libpng, etc.) to do its thing.
+
+The decoding function takes a callback as the second argument. Decoding an image
+buffer is done asynchronously. When the decoding is finished, the callback
+function is called with __6 arguments__:
+
+0. An error, or `null` if no error
+0. Raw pixels buffer (the decoded image)
+0. Width of the image
+0. Height of the image
+0. Number of channels in the raw pixels buffer. Currently always 4 (all images
+   are converted to RGBA when decoding).
+0. Whether the image has transparency (`true` / `false`).
+
+### Encoder
 
 Sources are under `src/encoder`
 
