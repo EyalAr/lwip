@@ -1,7 +1,7 @@
 # How to contribute
 
 Any kind of contribution / feedback is appreciated! One of the greatest
-motivations to make open an source project is to see people use it and get
+motivations to make an open source project is to see people use it and get
 involved (in any level).
 
 How to:
