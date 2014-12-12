@@ -6,13 +6,13 @@ involved (in any level).
 
 How to:
 
-0. [Suggest features / improvements](#suggest-features-improvements)
+0. [Suggest features / improvements](#suggest-features--improvements)
 0. [Report bugs](#report-bugs)
 0. [Contribute code](#contribute-code)
 
 ## Suggest features / improvements
 
-Got an improvement you think can make `lwip` better? Great!
+Got an improvement you think can make lwip better? Great!
 
 Open an issue with a descriptive title. Describe in a clear language the feature
 you need. If possible, write a code sample of how you think this feature should
@@ -35,7 +35,7 @@ should already be an issue reporting this bug. If your PR implements a new
 feature, there should be an issue requesting this feature.
 
 0. Disscuss your intention to work on an issue in the issue itself.
-0. Fork `lwip`.
+0. Fork lwip.
 0. Your code should be based on the latest `version/x.x.x` branch, or `master`
    if no `version/x.x.x` branch is available. Ask to be sure.
    Before releasing a new version, a `version/x.x.x` branch will be opened, into
