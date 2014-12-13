@@ -28,7 +28,7 @@ node version, npm version, lwip version, etc.).
 ## Contribute code
 
 Code contributions are happily welcomed. In order to make the process managable
-and pleasant, please try not to blindly open PRs without discussing it first.
+and pleasant, please do not blindly open PRs without discussing it first.
 
 A PR should address an already opened issue. If your PR fixes a bug, there
 should already be an issue reporting this bug. If your PR implements a new
@@ -36,6 +36,7 @@ feature, there should be an issue requesting this feature.
 
 0. Disscuss your intention to work on an issue in the issue itself.
 0. Fork lwip.
+0. You may want to read development notes in `DEVELOPMENT.md`.
 0. Your code should be based on the latest `version/x.x.x` branch, or `master`
    if no `version/x.x.x` branch is available. Ask to be sure.
    Before releasing a new version, a `version/x.x.x` branch will be opened, into
@@ -47,7 +48,8 @@ feature, there should be an issue requesting this feature.
 0. Make sure existing tests still pass.
 0. If your PR changes the public API, update the README accordingly.
 0. There are no written code conventions (yet), but try to get a sense of the
-   coding stype and keep similar style (no tabs, please).
+   coding style and keep similar style (no tabs, please).
+0. Don't change git history (no force push).
 0. Spell check.
 
 ## Copyrights
