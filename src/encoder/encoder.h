@@ -79,6 +79,7 @@ public:
         int colors,
         bool interlaced,
         bool trans,
+        int threshold,
         NanCallback * callback
     );
     ~EncodeToGifBufferWorker();
@@ -92,6 +93,7 @@ private:
     int _colors;
     bool _interlaced;
     bool _trans;
+    int _threshold;
     char * _gifbuf;
     size_t _gifbufsize;
 };

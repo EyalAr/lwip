@@ -47,7 +47,7 @@ NAN_METHOD(encodeToPngBuffer) {
     NanReturnUndefined();
 }
 
-// encoder.gif(pixbuf, width, height, cmapSize, colors, interlaced, trans, callback)
+// encoder.gif(pixbuf, width, height, cmapSize, colors, interlaced, trans, threshold, callback)
 NAN_METHOD(encodeToGifBuffer) {
     NanScope();
 
@@ -58,7 +58,8 @@ NAN_METHOD(encodeToGifBuffer) {
     int colors = args[4].As<Integer>()->Value();
     bool interlaced = args[5]->BooleanValue();
     bool trans = args[6]->BooleanValue();
-    NanCallback * callback = new NanCallback(args[7].As<Function>());
+    int threshold = args[7].As<Integer>()->Value();
+    NanCallback * callback = new NanCallback(args[8].As<Function>());
 
     NanAsyncQueueWorker(
         new EncodeToGifBufferWorker(
@@ -69,6 +70,7 @@ NAN_METHOD(encodeToGifBuffer) {
             colors,
             interlaced,
             trans,
+            threshold,
             callback
         )
     );
