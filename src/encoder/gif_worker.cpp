@@ -17,19 +17,21 @@ EncodeToGifBufferWorker::EncodeToGifBufferWorker(
     _gifbuf(NULL), _gifbufsize(0) {
     SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
     _pixbuf = (unsigned char *) Buffer::Data(buff);
-    if (_trans){
-        // make room in the color table for a transparent color
-        if (_cmapSize == 256){
-            if (_colors == 256) _colors--;
-        } else if (_cmapSize == _colors){
-            _cmapSize *= 2;
-        }
-    }
+    // if (_trans){
+    //     // make room in the color table for a transparent color
+    //     if (_cmapSize == 256){
+    //         if (_colors == 256) _colors--;
+    //     } else if (_cmapSize == _colors){
+    //         _cmapSize *= 2;
+    //     }
+    // }
 }
 
 EncodeToGifBufferWorker::~EncodeToGifBufferWorker() {}
 
 void EncodeToGifBufferWorker::Execute () {
+
+    printf("width: %d\nheight: %d\ncmapSize: %d\ncolors: %d\ninterlaced: %s\ntrans: %s\n\n", _width, _height, _cmapSize, _colors, _interlaced ? "yes" : "no", _trans ? "yes" : "no");
 
     GifByteType
         * redBuff = (GifByteType *) _pixbuf,
@@ -63,7 +65,9 @@ void EncodeToGifBufferWorker::Execute () {
         SetErrorMessage("Unable to quantize image");
         return;
     }
-    cmap->ColorCount = _colors;
+    // cmap->ColorCount = _colors;
+
+    printf("colors: %d\n", _colors);
 
     int errcode;
     gifWriteCbData buffinf = {NULL, 0};
@@ -80,6 +84,8 @@ void EncodeToGifBufferWorker::Execute () {
 
     gif->SWidth = _width;
     gif->SHeight = _height;
+    gif->SColorResolution = _cmapSize;
+    gif->SColorMap = cmap;
 
     simg = GifMakeSavedImage(gif, NULL);
 
@@ -95,34 +101,34 @@ void EncodeToGifBufferWorker::Execute () {
     simg->ImageDesc.Width = _width;
     simg->ImageDesc.Height = _height;
     simg->ImageDesc.Interlace = _interlaced;
-    simg->ImageDesc.ColorMap = cmap;
+    // simg->ImageDesc.ColorMap = cmap;
     simg->RasterBits = gifimgbuf;
 
-    printf("extblockcount %d\n", simg->ExtensionBlockCount);
+    // printf("123extblockcount %d\n", simg->ExtensionBlockCount);
 
-    // transperancy
-    if (_trans){
-        printf("yes, trans\n");
-        ExtensionBlock ext;
-        // 1. assign transparent color index in color table
-        GraphicsControlBlock gcb = {0, false, 0, _colors++};
-        // 2. replace transparent pixels above threshold with this color
-        remapTransparentPixels(gifimgbuf, alphaBuff, _width, _height, gcb.TransparentColor, 50);
-        // gif->SBackGroundColor = gcb.TransparentColor;
-        // 3. create a control block
-        size_t extlen = EGifGCBToExtension(&gcb, (GifByteType *) &ext);
-        if (GIF_ERROR == GifAddExtensionBlock(
-                &(gif->ExtensionBlockCount),
-                &(gif->ExtensionBlocks),
-                GRAPHICS_EXT_FUNC_CODE,
-                extlen,
-                (unsigned char *) &ext)
-            ) {
-            EGifCloseFile(gif, &errcode);
-            SetErrorMessage("Out of memory");
-            return;
-        }
-    }
+    // // transperancy
+    // if (_trans){
+    //     printf("yes, trans\n");
+    //     ExtensionBlock ext;
+    //     // 1. assign transparent color index in color table
+    //     GraphicsControlBlock gcb = {0, false, 0, _colors++};
+    //     // 2. replace transparent pixels above threshold with this color
+    //     remapTransparentPixels(gifimgbuf, alphaBuff, _width, _height, gcb.TransparentColor, 50);
+    //     // gif->SBackGroundColor = gcb.TransparentColor;
+    //     // 3. create a control block
+    //     size_t extlen = EGifGCBToExtension(&gcb, (GifByteType *) &ext);
+    //     if (GIF_ERROR == GifAddExtensionBlock(
+    //             &(gif->ExtensionBlockCount),
+    //             &(gif->ExtensionBlocks),
+    //             GRAPHICS_EXT_FUNC_CODE,
+    //             extlen,
+    //             (unsigned char *) &ext)
+    //         ) {
+    //         EGifCloseFile(gif, &errcode);
+    //         SetErrorMessage("Out of memory");
+    //         return;
+    //     }
+    // }
 
     if (GIF_ERROR == EGifSpew(gif)){
         EGifCloseFile(gif, &errcode);
