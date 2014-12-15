@@ -85,7 +85,6 @@ void EncodeToGifBufferWorker::Execute () {
     gif->SWidth = _width;
     gif->SHeight = _height;
     gif->SColorResolution = _cmapSize;
-    gif->SColorMap = cmap;
 
     simg = GifMakeSavedImage(gif, NULL);
 
@@ -101,7 +100,7 @@ void EncodeToGifBufferWorker::Execute () {
     simg->ImageDesc.Width = _width;
     simg->ImageDesc.Height = _height;
     simg->ImageDesc.Interlace = _interlaced;
-    // simg->ImageDesc.ColorMap = cmap;
+    simg->ImageDesc.ColorMap = cmap;
     simg->RasterBits = gifimgbuf;
 
     // printf("123extblockcount %d\n", simg->ExtensionBlockCount);
