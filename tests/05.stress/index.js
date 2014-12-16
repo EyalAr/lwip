@@ -9,7 +9,8 @@ var join = require('path').join,
 
 var tmpDir = join(__dirname, '../results'),
     outpathJpeg = join(tmpDir, 'stress.jpg'),
-    outpathPng = join(tmpDir, 'stress.png');
+    outpathPng = join(tmpDir, 'stress.png'),
+    outpathGif = join(tmpDir, 'stress.gif');
 
 describe('stress tests', function() {
 
@@ -49,11 +50,26 @@ describe('stress tests', function() {
     describe('open image 300 times (in parallel) and save to disk as png (fast compression, not interlaced)', function() {
         it('should succeed', function(done) {
             async.times(300, function(i, done) {
-                lwip.open(imgs.jpg.rgb, 'jpeg', function(err, image) {
+                lwip.open(imgs.gif.rgb, 'gif', function(err, image) {
                     if (err) return done(err);
                     image.writeFile(outpathPng, 'png', {
                         compression: 'fast',
                         interlaced: false
+                    }, done);
+                });
+            }, done);
+        });
+    });
+
+    describe('open image 300 times (in parallel) and save to disk as gif (128 colors, not interlaced, transparent)', function() {
+        it('should succeed', function(done) {
+            async.times(300, function(i, done) {
+                lwip.open(imgs.png.trans, 'png', function(err, image) {
+                    if (err) return done(err);
+                    image.writeFile(outpathGif, 'gif', {
+                        colors: 128,
+                        transparency: true,
+                        threshold: 60
                     }, done);
                 });
             }, done);

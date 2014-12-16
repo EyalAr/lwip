@@ -40,6 +40,7 @@
     0. [Get as a Buffer](#get-as-a-buffer)
       0. [JPEG](#jpeg)
       0. [PNG](#png)
+      0. [GIF](#gif)
     0. [Write to file](#write-to-file)
   0. [Batch operations](#batch-operations)
 0. [Copyrights](#copyrights)
@@ -81,7 +82,7 @@ If `npm install lwip` failes, you probably need to setup your system.
 ```Javascript
 // obtain an image object:
 require('lwip').open('image.jpg', function(err, image){
-  
+
   // check err...
   // define a batch of manipulations and save to disk as JPEG:
   image.batch()
@@ -104,7 +105,7 @@ var lwip = require('lwip');
 
 // obtain an image object:
 lwip.open('image.jpg', function(err, image){
-  
+
   // check err...
   // manipulate image:
   image.scale(0.5, function(err, image){
@@ -134,12 +135,15 @@ lwip.open('image.jpg', function(err, image){
 **Decoding (reading):**
 
 - JPEG, 1 & 3 channels (grayscale & RGB).
-- PNG, 1 & 3 channels (grayscale & RGB) + alpha (transparency) channel.
+- PNG, transparency supported.
+- GIF, transparency supported. Animated GIFs can be read, but only the first
+  frame will be retrieved.
 
 **Encoding (writing):**
 
 - JPEG, 3 channels (RGB).
 - PNG (lossless), 3 channels (RGB) or 4 channels (RGBA).
+- GIF (no animations)
 
 Other formats may also be supported in the future, but are probably less urgent.
 Check the issues to see [which formats are planned to be supported](https://github.com/EyalAr/lwip/issues?labels=format+request&page=1&state=open).
@@ -162,7 +166,7 @@ Colors are specified in one of three ways:
   "blue"     // {r: 0, g: 0, b: 255, a: 100}
   "yellow"   // {r: 255, g: 255, b: 0, a: 100}
   "cyan"     // {r: 0, g: 255, b: 255, a: 100}
-  "magenta"  // {r: 255, g: 0, b: 255, a: 100} 
+  "magenta"  // {r: 255, g: 0, b: 255, a: 100}
   ```
 
 - As an array `[R, G, B, A]` where `R`, `G` and `B` are integers between 0 and
@@ -576,6 +580,7 @@ encoded data as a NodeJS Buffer object.
 0. `format {String}`: Encoding format. Possible values:
   - `"jpg"`
   - `"png"`
+  - `"gif"`
 0. `params {Object}`: **Optional** Format-specific parameters (See below).
 0. `callback {Function(err, buffer)}`
 
@@ -602,6 +607,23 @@ The `params` object should have the following fields:
   `'auto'`. Determines if the encoded image will have 3 or 4 channels. If
   `'auto'`, the image will be encoded with 4 channels if it has transparent
   components, and 3 channels otherwise.
+
+##### GIF
+
+The `params` object should have the following fields:
+
+- `colors {Integer}`: Defaults to `256`. Number of colors in the color table
+  (at most). Must be between 2 and 256.
+- `interlaced {Boolean}`: Defaults to `false`.
+- `transparency {true/false/'auto'}`: Preserve transparency? Defaults to
+  `'auto'`. Determines if the encoded image will have 3 or 4 channels. If
+  `'auto'`, the image will be encoded with 4 channels if it has transparent
+  components, and 3 channels otherwise.
+- `threshold {Integer}` - Between 0 and 100. Pixels in a gif image are either
+  fully transparent or fully opaque. This value sets the alpha channel
+  threshold to determine if a pixel is opaque or transparent. If the alpha
+  channel of the pixel is above this threshold, this pixel will be considered
+  as opaque; otherwise it will be transparent.
 
 #### Write to file
 
@@ -737,3 +759,6 @@ The native part of this module is compiled from source which uses the following:
 - The CImg Library
   - [Website](http://cimg.sourceforge.net/)
   - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/cimg/README.txt)
+- giflib
+  - [Website](http://giflib.sourceforge.net/)
+  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/gif/README)

@@ -25,8 +25,8 @@ describe('lwip.mirror (/flip)', function() {
     });
 
     afterEach(function(done) {
-        image.writeFile(join(tmpDir, current.join('_') + '.jpg'), 'jpeg', {
-            quality: 100
+        image.writeFile(join(tmpDir, current.join('_') + '.gif'), 'gif', {
+            colors: 256
         }, done);
     });
 
