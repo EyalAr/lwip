@@ -18,8 +18,9 @@ string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
     GraphicsControlBlock gcb;
 
     // only for the first image
-    if (GIF_ERROR == DGifSavedExtensionToGCB(gif, 0, &gcb))
-        return GifErrorString(gif->Error);
+    DGifSavedExtensionToGCB(gif, 0, &gcb);
+    // if may return GIF_ERROR, which means this image has no gcb.
+    // that's fine, as gcb's are optional
 
     SavedImage * gifimg = &gif->SavedImages[0];
     size_t width = (size_t) gifimg->ImageDesc.Width;
