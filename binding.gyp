@@ -71,8 +71,7 @@
             # LIB GIF:
             ##########
             "src/lib/gif/dgif_lib.c",
-            "src/lib/gif/gif_err.c",
-            "src/lib/gif/gifalloc.c",
+            "src/lib/gif/gif_err.c"
         ],
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',
