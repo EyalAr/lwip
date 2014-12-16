@@ -18,15 +18,15 @@ describe('lwip.border', function() {
     });
 
     beforeEach(function(done) {
-        lwip.open(imgs.png.rgb, function(err, img) {
+        lwip.open(imgs.png.trans, function(err, img) {
             image = img;
             done(err);
         });
     });
 
     afterEach(function(done) {
-        image.writeFile(join(tmpDir, current.join('_') + '.png'), 'png', {
-            compression: 'none'
+        image.writeFile(join(tmpDir, current.join('_') + '.gif'), 'gif', {
+            colors: 256
         }, done);
     });
 
