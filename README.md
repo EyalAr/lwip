@@ -40,6 +40,7 @@
     0. [Get as a Buffer](#get-as-a-buffer)
       0. [JPEG](#jpeg)
       0. [PNG](#png)
+      0. [GIF](#gif)
     0. [Write to file](#write-to-file)
   0. [Batch operations](#batch-operations)
 0. [Copyrights](#copyrights)
@@ -142,6 +143,7 @@ lwip.open('image.jpg', function(err, image){
 
 - JPEG, 3 channels (RGB).
 - PNG (lossless), 3 channels (RGB) or 4 channels (RGBA).
+- GIF (no animations)
 
 Other formats may also be supported in the future, but are probably less urgent.
 Check the issues to see [which formats are planned to be supported](https://github.com/EyalAr/lwip/issues?labels=format+request&page=1&state=open).
@@ -562,6 +564,7 @@ encoded data as a NodeJS Buffer object.
 0. `format {String}`: Encoding format. Possible values:
   - `"jpg"`
   - `"png"`
+  - `"gif"`
 0. `params {Object}`: **Optional** Format-specific parameters (See below).
 0. `callback {Function(err, buffer)}`
 
@@ -588,6 +591,23 @@ The `params` object should have the following fields:
   `'auto'`. Determines if the encoded image will have 3 or 4 channels. If
   `'auto'`, the image will be encoded with 4 channels if it has transparent
   components, and 3 channels otherwise.
+
+##### GIF
+
+The `params` object should have the following fields:
+
+- `colors {Integer}`: Defaults to `256`. Number of colors in the color table
+  (at most). Must be between 2 and 256.
+- `interlaced {Boolean}`: Defaults to `false`.
+- `transparency {true/false/'auto'}`: Preserve transparency? Defaults to
+  `'auto'`. Determines if the encoded image will have 3 or 4 channels. If
+  `'auto'`, the image will be encoded with 4 channels if it has transparent
+  components, and 3 channels otherwise.
+- `threshold {Integer}` - Between 0 and 100. Pixels in a gif image are either
+  fully transparent or fully opaque. This value sets the alpha channel
+  threshold to determine if a pixel is opaque or transparent. If the alpha
+  channel of the pixel is above this threshold, this pixel will be considered
+  as opaque; otherwise it will be transparent.
 
 #### Write to file
 
