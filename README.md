@@ -16,6 +16,7 @@
   0. [Image operations](#image-operations)
     0. [Resize](#resize)
     0. [Scale](#scale)
+    0. [Contain](#contain)
     0. [Rotate](#rotate)
     0. [Crop](#crop)
     0. [Blur](#blur)
@@ -296,6 +297,27 @@ lwip.create(500, 500, 'yellow', function(err, image){
 0. `wRatio {Float}`: Width scale ratio.
 0. `hRatio {Float}`: **Optional** height scale ratio. If omitted, `wRatio` will
    be used.
+0. `inter {String}`: **Optional** interpolation method. Defaults to `"lanczos"`.
+   Possible values:
+   - `"nearest-neighbor"`
+   - `"moving-average"`
+   - `"linear"`
+   - `"grid"`
+   - `"cubic"`
+   - `"lanczos"`
+0. `callback {Function(err, image)}`
+
+#### Contain
+
+Contain the image in a colored canvas. The image will be resized to the largest
+possible size such that it's fully contained inside the canvas.
+
+`image.contain(width, height, color, inter, callback)`
+
+0. `width {Integer}`: Canvas' width in pixels.
+0. `height {Integer}`: Canvas' height in pixels.
+0. `color {String / Array / Object}`: **Optional** Color of the canvas. See
+   [colors specification](#colors-specification).
 0. `inter {String}`: **Optional** interpolation method. Defaults to `"lanczos"`.
    Possible values:
    - `"nearest-neighbor"`

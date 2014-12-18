@@ -143,6 +143,13 @@ describe('simultaneous operations locks', function() {
     describe('image.paste lock', function() {
         it('should lock image', function() {
             image.paste.bind(image, 0, 0, tmpImage, function() {}).should.not.throwError();
+            image.contain.bind(image, 100, 100, function() {}).should.throwError();
+        });
+    });
+
+    describe('image.contain lock', function() {
+        it('should lock image', function() {
+            image.contain.bind(image, 100, 200, function() {}).should.not.throwError();
             image.resize.bind(image, 100, 100, function() {}).should.throwError();
         });
     });

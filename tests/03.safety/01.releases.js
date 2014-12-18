@@ -143,6 +143,13 @@ describe('failed ops lock release', function() {
     describe('image.paste release', function() {
         it('should release image lock', function() {
             image.paste.bind(image, 'foo', 'foo', 'foo', function() {}).should.throwError();
+            image.contain.bind(image, 100, 200, function() {}).should.not.throwError();
+        });
+    });
+
+    describe('image.contain release', function() {
+        it('should release image lock', function() {
+            image.contain.bind(image, 'foo', 'foo', 'foo', function() {}).should.throwError();
             image.resize.bind(image, 100, 100, function() {}).should.not.throwError();
         });
     });
