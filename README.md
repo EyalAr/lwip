@@ -17,6 +17,7 @@
     0. [Resize](#resize)
     0. [Scale](#scale)
     0. [Contain](#contain)
+    0. [Cover](#cover)
     0. [Rotate](#rotate)
     0. [Crop](#crop)
     0. [Blur](#blur)
@@ -318,6 +319,26 @@ possible size such that it's fully contained inside the canvas.
 0. `height {Integer}`: Canvas' height in pixels.
 0. `color {String / Array / Object}`: **Optional** Color of the canvas. See
    [colors specification](#colors-specification).
+0. `inter {String}`: **Optional** interpolation method. Defaults to `"lanczos"`.
+   Possible values:
+   - `"nearest-neighbor"`
+   - `"moving-average"`
+   - `"linear"`
+   - `"grid"`
+   - `"cubic"`
+   - `"lanczos"`
+0. `callback {Function(err, image)}`
+
+#### Cover
+
+Cover a canvas with the image. The image will be resized to the smallest
+possible size such that both its dimensions are bigger than the canvas's
+dimensions. Margins of the image exceeding the canvas will be discarded.
+
+`image.cover(width, height, inter, callback)`
+
+0. `width {Integer}`: Canvas' width in pixels.
+0. `height {Integer}`: Canvas' height in pixels.
 0. `inter {String}`: **Optional** interpolation method. Defaults to `"lanczos"`.
    Possible values:
    - `"nearest-neighbor"`

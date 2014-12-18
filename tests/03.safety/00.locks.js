@@ -150,6 +150,13 @@ describe('simultaneous operations locks', function() {
     describe('image.contain lock', function() {
         it('should lock image', function() {
             image.contain.bind(image, 100, 200, function() {}).should.not.throwError();
+            image.cover.bind(image, 100, 100, function() {}).should.throwError();
+        });
+    });
+
+    describe('image.cover lock', function() {
+        it('should lock image', function() {
+            image.cover.bind(image, 200, 300, function() {}).should.not.throwError();
             image.resize.bind(image, 100, 100, function() {}).should.throwError();
         });
     });
