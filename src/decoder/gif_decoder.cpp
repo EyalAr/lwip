@@ -1,10 +1,14 @@
 #include "decoder.h"
 
+#define ALPHA_TRANS 0
+#define ALPHA_OPAQUE 255
+#define C_TRANS 0
+
 string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg) {
 
     gifReadCbData buffinf = {(unsigned char *) buffer, size, 0};
-    GifFileType * gif;
-    int errcode;
+    GifFileType * gif = NULL;
+    int errcode = 0;
 
     // buffinf will be available in gifReadCB as gif->userData
     gif = DGifOpen((void *) &buffinf, gifReadCB, &errcode);
@@ -18,7 +22,7 @@ string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
     GraphicsControlBlock gcb;
 
     // only for the first image
-    DGifSavedExtensionToGCB(gif, 0, &gcb);
+    bool hasGCB = DGifSavedExtensionToGCB(gif, 0, &gcb) != GIF_ERROR;
     // if may return GIF_ERROR, which means this image has no gcb.
     // that's fine, as gcb's are optional
 
@@ -42,20 +46,23 @@ string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
 
     size_t i = 0, len = width * height;
     GifByteType ci;
-    GifColorType *c;
-    for (; i < len; ci = ipxls[i++]){
-        if (gcb.TransparentColor != ci){
-            c = &cmap->Colors[ci];
-            *(ptr_r++) = c->Red;
-            *(ptr_g++) = c->Green;
-            *(ptr_b++) = c->Blue;
-            *(ptr_a++) = 255;
+    GifColorType c;
+    GifColorType c_trans = {C_TRANS, C_TRANS, C_TRANS};
+    unsigned char alpha;
+
+    for (; i < len; i++){
+        ci = ipxls[i];
+        if (hasGCB && ci == gcb.TransparentColor){
+            c = c_trans;
+            alpha = ALPHA_TRANS;
         } else {
-            *(ptr_r++) = 0;
-            *(ptr_g++) = 0;
-            *(ptr_b++) = 0;
-            *(ptr_a++) = 0;
+            c = cmap->Colors[ci];
+            alpha = ALPHA_OPAQUE;
         }
+        *(ptr_r++) = c.Red;
+        *(ptr_g++) = c.Green;
+        *(ptr_b++) = c.Blue;
+        *(ptr_a++) = alpha;
     }
 
     if (GIF_ERROR == DGifCloseFile(gif, &errcode)){
