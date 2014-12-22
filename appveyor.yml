@@ -9,8 +9,8 @@ init:
 # Test against these versions of Node.js.
 environment:
   matrix:
-    - nodejs_version: "0.10"
     - nodejs_version: "0.11"
+    - nodejs_version: "0.10"
 
 # Install scripts. (runs after repo cloning)
 install:
@@ -26,8 +26,8 @@ test_script:
   - npm --version
   # We test multiple Windows shells because of prior stdout buffering issues
   # filed against Grunt. https://github.com/joyent/node/issues/3584
-  - ps: "npm test # PowerShell" # Pass comment to PS for easier debugging
-  - cmd: npm test
+  - ps: "npm run appveyor # PowerShell" # Pass comment to PS for easier debugging
+  - cmd: npm run appveyor
 
 # Don't actually build.
 build: off
