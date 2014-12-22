@@ -7,7 +7,7 @@ var join = require('path').join,
 
 var tmpDir = join(__dirname, '../results'),
     basename = 'border',
-    current = [basename];
+    current;
 
 describe('lwip.border', function() {
 
@@ -15,6 +15,10 @@ describe('lwip.border', function() {
 
     before(function(done) {
         mkdirp(tmpDir, done);
+    });
+
+    beforeEach(function(){
+        current = [basename];
     });
 
     beforeEach(function(done) {
