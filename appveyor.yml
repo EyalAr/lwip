@@ -1,0 +1,26 @@
+# Fix line endings in Windows. (runs before repo cloning)
+init:
+  - git config --global core.autocrlf input
+
+environment:
+  matrix:
+    - nodejs_version: "0.10.32"
+    - nodejs_version: "0.11"
+
+matrix:
+  allow_failures:
+    - nodejs_version: "0.11"
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm install
+
+test_script:
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
+  - npm test
+
+build: off
+
+version: "{build}"

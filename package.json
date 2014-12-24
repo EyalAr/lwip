@@ -11,7 +11,8 @@
     "install": "node-gyp rebuild",
     "test": "./node_modules/.bin/mocha --opts tests/mocha.opts tests",
     "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --opts tests/mocha.opts tests",
-    "travis": "./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --opts tests/mocha.opts --bail tests && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "travis": "./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --opts tests/mocha.opts --bail tests && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "appveyor": "./node_modules/.bin/mocha --opts tests/mocha.opts --no-exit tests"
   },
   "gypfile": true,
   "description": "Comprehensive, fast, and simple image processing and manipulation",
