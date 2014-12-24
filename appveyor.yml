@@ -15,12 +15,6 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - npm install --msvs_version=2013
 
-test_script:
-  # Output useful info for debugging.
-  - node --version
-  - npm --version
-  - npm test
-
 build: off
 
 version: "{build}"
