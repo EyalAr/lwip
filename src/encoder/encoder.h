@@ -15,6 +15,7 @@ extern "C" {
 }
 #include <png.h>
 #include <zlib.h>
+#include <gif_lib.h>
 #include "CImg.h"
 
 using namespace cimg_library;
@@ -68,10 +69,44 @@ private:
     size_t _pngbufsize;
 };
 
+class EncodeToGifBufferWorker : public NanAsyncWorker {
+public:
+    EncodeToGifBufferWorker(
+        Local<Object> & buff,
+        size_t width,
+        size_t height,
+        int cmapSize,
+        int colors,
+        bool interlaced,
+        bool trans,
+        int threshold,
+        NanCallback * callback
+    );
+    ~EncodeToGifBufferWorker();
+    void Execute ();
+    void HandleOKCallback ();
+private:
+    unsigned char * _pixbuf;
+    size_t _width;
+    size_t _height;
+    int _cmapSize;
+    int _colors;
+    bool _interlaced;
+    bool _trans;
+    int _threshold;
+    char * _gifbuf;
+    size_t _gifbufsize;
+};
+
 typedef struct {
     unsigned char * buff;
     size_t buffsize;
 } pngWriteCbData;
+
+typedef struct {
+    unsigned char * buff;
+    size_t buffsize;
+} gifWriteCbData;
 
 struct lwip_jpeg_error_mgr {
     struct jpeg_error_mgr pub;
@@ -85,7 +120,10 @@ inline void lwip_jpeg_error_exit (j_common_ptr cinfo) {
 
 NAN_METHOD(encodeToJpegBuffer);
 NAN_METHOD(encodeToPngBuffer);
+NAN_METHOD(encodeToGifBuffer);
 void pngWriteCB(png_structp png_ptr, png_bytep data, png_size_t length);
+int gifWriteCB(GifFileType * gif, const GifByteType * chunk, int len);
+void remapTransparentPixels(unsigned char * target, const unsigned char * map, size_t width, size_t height, int transColor, int threshold);
 void initAll(Handle<Object> exports);
 
 #endif

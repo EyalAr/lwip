@@ -20,12 +20,24 @@ NAN_METHOD(decodePngBuffer) {
     NanReturnUndefined();
 }
 
+NAN_METHOD(decodeGifBuffer) {
+    NanScope();
+
+    Local<Object> gifBuff = args[0].As<Object>();
+    NanCallback * callback = new NanCallback(args[1].As<Function>());
+
+    NanAsyncQueueWorker(new DecodeBufferWorker(callback, gifBuff, decode_gif_buffer));
+    NanReturnUndefined();
+}
+
 // create an init function for our node module
 void InitAll(Handle<Object> exports) {
     exports->Set(NanNew("jpeg"),
                  NanNew<FunctionTemplate>(decodeJpegBuffer)->GetFunction());
     exports->Set(NanNew("png"),
                  NanNew<FunctionTemplate>(decodePngBuffer)->GetFunction());
+    exports->Set(NanNew("gif"),
+                 NanNew<FunctionTemplate>(decodeGifBuffer)->GetFunction());
 }
 
 // use NODE_MODULE macro to register our module:

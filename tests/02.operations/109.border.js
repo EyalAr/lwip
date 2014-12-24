@@ -7,7 +7,7 @@ var join = require('path').join,
 
 var tmpDir = join(__dirname, '../results'),
     basename = 'border',
-    current = [basename];
+    current;
 
 describe('lwip.border', function() {
 
@@ -17,16 +17,20 @@ describe('lwip.border', function() {
         mkdirp(tmpDir, done);
     });
 
+    beforeEach(function(){
+        current = [basename];
+    });
+
     beforeEach(function(done) {
-        lwip.open(imgs.png.rgb, function(err, img) {
+        lwip.open(imgs.png.trans, function(err, img) {
             image = img;
             done(err);
         });
     });
 
     afterEach(function(done) {
-        image.writeFile(join(tmpDir, current.join('_') + '.png'), 'png', {
-            compression: 'none'
+        image.writeFile(join(tmpDir, current.join('_') + '.gif'), 'gif', {
+            colors: 256
         }, done);
     });
 

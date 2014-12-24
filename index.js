@@ -1,2 +1,4 @@
-require('./lib/Batch'); // Extend Image object with .batch() function
+require('./lib/ImagePrototypeInit');
+require('./lib/BatchPrototypeInit');
+
 module.exports = require('./lib/obtain');

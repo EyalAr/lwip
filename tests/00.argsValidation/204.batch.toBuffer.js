@@ -278,4 +278,133 @@ describe('batch.toBuffer arguments validation', function() {
 
     });
 
+    describe('GIF params', function() {
+
+        describe("valid params", function(){
+
+            describe('defaults', function() {
+                it('should succeed', function(done) {
+                    batch.toBuffer.bind(batch, 'gif', done).should.not.throwError();
+                });
+            });
+
+            describe('120, false, false, 50', function() {
+                it('should succeed', function(done) {
+                    batch.toBuffer.bind(batch, 'gif', {
+                        colors: 120,
+                        interlaced: false,
+                        transparency: false,
+                        threshold: 50
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('256, true, false, 50', function() {
+                it('should succeed', function(done) {
+                    batch.toBuffer.bind(batch, 'gif', {
+                        colors: 256,
+                        interlaced: true,
+                        transparency: false,
+                        threshold: 50
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('2, false, true, 0', function() {
+                it('should succeed', function(done) {
+                    batch.toBuffer.bind(batch, 'gif', {
+                        colors: 2,
+                        interlaced: false,
+                        transparency: true,
+                        threshold: 0
+                    }, done).should.not.throwError();
+                });
+            });
+
+            describe('120, true, true, 100', function() {
+                it('should succeed', function(done) {
+                    batch.toBuffer.bind(batch, 'gif', {
+                        colors: 120,
+                        interlaced: true,
+                        transparency: true,
+                        threshold: 100
+                    }, done).should.not.throwError();
+                });
+            });
+
+        });
+
+        describe("invalid params", function(){
+
+            describe('invalid colors (wrong type)', function() {
+                it('should throw an error', function() {
+                    batch.toBuffer.bind(batch, 'gif', {
+                        colors: 'foo'
+                    }, function() {}).should.throwError();
+                });
+            });
+
+            describe('invalid colors (<2)', function() {
+                it('should throw an error', function() {
+                    batch.toBuffer.bind(batch, 'gif', {
+                        colors: 1
+                    }, function() {}).should.throwError();
+                });
+            });
+
+            describe('invalid colors (>256)', function() {
+                it('should throw an error', function() {
+                    batch.toBuffer.bind(batch, 'gif', {
+                        colors: 257
+                    }, function() {}).should.throwError();
+                });
+            });
+
+            describe('invalid interlaced', function() {
+                it('should throw an error', function() {
+                    batch.toBuffer.bind(batch, 'gif', {
+                        interlaced: 'foo'
+                    }, function() {}).should.throwError();
+                });
+            });
+
+            describe('invalid transparency', function() {
+                it('should throw an error', function() {
+                    batch.toBuffer.bind(batch, 'gif', {
+                        transparency: 'foo'
+                    }, function() {}).should.throwError();
+                });
+            });
+
+            describe('invalid threshold (wrong type)', function() {
+                it('should throw an error', function() {
+                    batch.toBuffer.bind(batch, 'gif', {
+                        transparency: true,
+                        threshold: 'foo'
+                    }, function() {}).should.throwError();
+                });
+            });
+
+            describe('invalid threshold (<0)', function() {
+                it('should throw an error', function() {
+                    batch.toBuffer.bind(batch, 'gif', {
+                        transparency: true,
+                        threshold: -1
+                    }, function() {}).should.throwError();
+                });
+            });
+
+            describe('invalid threshold (>100)', function() {
+                it('should throw an error', function() {
+                    batch.toBuffer.bind(batch, 'gif', {
+                        transparency: true,
+                        threshold: 101
+                    }, function() {}).should.throwError();
+                });
+            });
+
+        });
+
+    });
+
 });

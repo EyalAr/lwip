@@ -9,6 +9,7 @@ void LwipImage::Init(Handle<Object> exports) {
     tpl->SetClassName(NanNew("LwipImage"));
     NODE_SET_PROTOTYPE_METHOD(tpl, "width", width);
     NODE_SET_PROTOTYPE_METHOD(tpl, "height", height);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "getPixel", getPixel);
     NODE_SET_PROTOTYPE_METHOD(tpl, "buffer", buffer);
     NODE_SET_PROTOTYPE_METHOD(tpl, "resize", resize);
     NODE_SET_PROTOTYPE_METHOD(tpl, "rotate", rotate);
@@ -20,6 +21,7 @@ void LwipImage::Init(Handle<Object> exports) {
     NODE_SET_PROTOTYPE_METHOD(tpl, "hslaAdj", hslaAdj);
     NODE_SET_PROTOTYPE_METHOD(tpl, "opacify", opacify);
     NODE_SET_PROTOTYPE_METHOD(tpl, "paste", paste);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "setPixel", setPixel);
     NanAssignPersistent(constructor, tpl);
     exports->Set(
         NanNew("LwipImage"),
@@ -74,6 +76,21 @@ NAN_METHOD(LwipImage::height) {
     NanScope();
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(args.Holder());
     NanReturnValue(NanNew<Number>(obj->_cimg->height()));
+}
+
+// image.getPixel(left, top):
+// ---------------
+NAN_METHOD(LwipImage::getPixel) {
+    NanScope();
+    size_t left = (size_t) args[0].As<Number>()->Value();
+    size_t top = (size_t) args[1].As<Number>()->Value();
+    LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(args.Holder());
+    Local<Array> rgba = NanNew<Array>(4);
+    rgba->Set(0, NanNew((*(obj->_cimg))(left, top, 0, 0))); // red
+    rgba->Set(1, NanNew((*(obj->_cimg))(left, top, 0, 1))); // green
+    rgba->Set(2, NanNew((*(obj->_cimg))(left, top, 0, 2))); // blue
+    rgba->Set(3, NanNew((*(obj->_cimg))(left, top, 0, 3))); // alpha
+    NanReturnValue(rgba);
 }
 
 // image.buffer():
@@ -377,6 +394,44 @@ NAN_METHOD(LwipImage::paste) {
             pixBuff,
             width,
             height,
+            cimg,
+            callback
+        )
+    );
+
+    NanReturnUndefined();
+}
+
+// image.setPixel(left, top, color, callback):
+// -------------------------------------------
+
+// args[0] - left
+// args[1] - top
+// args[2] - red
+// args[3] - green
+// args[4] - blue
+// args[5] - alpha
+// args[6] - callback
+NAN_METHOD(LwipImage::setPixel) {
+    NanScope();
+
+    size_t left = (size_t) args[0].As<Number>()->Value();
+    size_t top = (size_t) args[1].As<Number>()->Value();
+    unsigned char r = (unsigned char) args[2].As<Integer>()->Value();
+    unsigned char g = (unsigned char) args[3].As<Integer>()->Value();
+    unsigned char b = (unsigned char) args[4].As<Integer>()->Value();
+    unsigned char a = (unsigned char) args[5].As<Integer>()->Value();
+    NanCallback * callback = new NanCallback(args[6].As<Function>());
+    CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
+
+    NanAsyncQueueWorker(
+        new SetPixelWorker(
+            left,
+            top,
+            r,
+            g,
+            b,
+            a,
             cimg,
             callback
         )

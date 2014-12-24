@@ -131,6 +131,66 @@ describe('image.batch', function() {
 
         });
 
+        describe('gif', function() {
+
+            describe('non interlaced', function() {
+
+                describe('no transparency', function() {
+                    it('should succeed', function(done) {
+                        batch.toBuffer('gif', {
+                            colors: 122,
+                            interlaced: false,
+                            transparency: false
+                        }, function(err, buffer) {
+                            done(err);
+                        });
+                    });
+                });
+
+                describe('with transparency', function() {
+                    it('should succeed', function(done) {
+                        batch.toBuffer('gif', {
+                            interlaced: false,
+                            transparency: true,
+                            threshold: 55
+                        }, function(err, buffer) {
+                            done(err);
+                        });
+                    });
+                });
+
+            });
+
+            describe('interlaced', function() {
+
+                describe('no transparency', function() {
+                    it('should succeed', function(done) {
+                        batch.toBuffer('gif', {
+                            colors: 122,
+                            interlaced: true,
+                            transparency: false
+                        }, function(err, buffer) {
+                            done(err);
+                        });
+                    });
+                });
+
+                describe('with transparency', function() {
+                    it('should succeed', function(done) {
+                        batch.toBuffer('gif', {
+                            interlaced: true,
+                            transparency: true,
+                            threshold: 55
+                        }, function(err, buffer) {
+                            done(err);
+                        });
+                    });
+                });
+
+            });
+
+        });
+
     });
 
     describe('writeFile', function() {
@@ -219,6 +279,54 @@ describe('image.batch', function() {
                         batch.writeFile(join(tmpDir, 'btch-intr#hicomp-' + ops.join('#') + '.png'), 'png', {
                             interlaced: true,
                             compression: 'high',
+                        }, done);
+                    });
+                });
+
+            });
+
+        });
+
+        describe('gif', function() {
+
+            describe('non interlaced', function() {
+
+                describe('no transparency', function() {
+                    it('should succeed', function(done) {
+                        batch.writeFile(join(tmpDir, 'btch--noint#notrn--' + ops.join('#') + '.gif'), 'gif', {
+                            interlaced: false,
+                            transparency: false,
+                        }, done);
+                    });
+                });
+
+                describe('with transparency', function() {
+                    it('should succeed', function(done) {
+                        batch.writeFile(join(tmpDir, 'btch--noint#trn--' + ops.join('#') + '.gif'), 'gif', {
+                            interlaced: false,
+                            transparency: true,
+                        }, done);
+                    });
+                });
+
+            });
+
+            describe('interlaced', function() {
+
+                describe('no transparency', function() {
+                    it('should succeed', function(done) {
+                        batch.writeFile(join(tmpDir, 'btch--noint#notrn--' + ops.join('#') + '.gif'), 'gif', {
+                            interlaced: true,
+                            transparency: false,
+                        }, done);
+                    });
+                });
+
+                describe('with transparency', function() {
+                    it('should succeed', function(done) {
+                        batch.writeFile(join(tmpDir, 'btch--noint#trn--' + ops.join('#') + '.gif'), 'gif', {
+                            interlaced: true,
+                            transparency: true,
                         }, done);
                     });
                 });

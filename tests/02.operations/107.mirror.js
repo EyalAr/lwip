@@ -25,8 +25,8 @@ describe('lwip.mirror (/flip)', function() {
     });
 
     afterEach(function(done) {
-        image.writeFile(join(tmpDir, current.join('_') + '.jpg'), 'jpeg', {
-            quality: 100
+        image.writeFile(join(tmpDir, current.join('_') + '.gif'), 'gif', {
+            colors: 256
         }, done);
     });
 
@@ -43,10 +43,10 @@ describe('lwip.mirror (/flip)', function() {
             });
         });
 
-        describe('Y', function() {
+        describe('y', function() {
             it('should succeed', function(done) {
-                current.push('Y');
-                image.flip('Y', done);
+                current.push('y');
+                image.flip('y', done);
             });
         });
 
@@ -58,17 +58,17 @@ describe('lwip.mirror (/flip)', function() {
             current = [basename, 'axes'];
         });
 
-        describe('Xy', function() {
+        describe('xy', function() {
             it('should succeed', function(done) {
-                current.push('Xy');
-                image.flip('Xy', done);
+                current.push('xy');
+                image.flip('xy', done);
             });
         });
 
-        describe('YX', function() {
+        describe('yx', function() {
             it('should succeed', function(done) {
-                current.push('YX');
-                image.mirror('YX', done);
+                current.push('yx');
+                image.mirror('yx', done);
             });
         });
 

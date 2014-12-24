@@ -13,7 +13,7 @@ lwip.open('lena.jpg', function(err, image) {
             g: 55,
             b: 40
         })
-        .writeFile('lena_rotate.jpg', function(err) {
+        .writeFile('lena_rotate.gif', function(err) {
             if (err) return console.log(err);
             console.log('done')
         });

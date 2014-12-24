@@ -17,6 +17,7 @@ extern "C" {
 }
 #include <png.h>
 #include <zlib.h>
+#include <gif_lib.h>
 #include "CImg.h"
 
 using namespace cimg_library;
@@ -53,6 +54,12 @@ typedef struct {
     size_t read;
 } pngReadCbData;
 
+typedef struct {
+    unsigned char * src;
+    size_t size;
+    size_t read;
+} gifReadCbData;
+
 struct lwip_jpeg_error_mgr {
     struct jpeg_error_mgr pub;
     jmp_buf setjmp_buffer;
@@ -72,10 +79,14 @@ string toRGBA(CImg<unsigned char> ** img);
 
 string decode_jpeg_buffer(char * buffer, size_t size, CImg<unsigned char> ** img);
 string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** img);
+string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** img);
+
 void pngReadCB(png_structp png_ptr, png_bytep data, png_size_t length);
+int gifReadCB(GifFileType * gif, GifByteType * buf, int length);
 
 NAN_METHOD(decodeJpegBuffer);
 NAN_METHOD(decodePngBuffer);
+NAN_METHOD(decodeGifBuffer);
 void initAll(Handle<Object> exports);
 
 #endif

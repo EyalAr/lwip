@@ -7,8 +7,10 @@ var join = require('path').join,
 var tmpDir = join(__dirname, '../results'),
     outJpeg = 'write_test.jpg',
     outPng = 'write_test.png',
+    outGif = 'write_test.gif',
     outpathJpeg = join(tmpDir, outJpeg),
-    outpathPng = join(tmpDir, outPng);
+    outpathPng = join(tmpDir, outPng),
+    outpathGif = join(tmpDir, outGif);
 
 describe('lwip.writeFile', function() {
 
@@ -143,6 +145,74 @@ describe('lwip.writeFile', function() {
             describe('params unspecified', function() {
                 it('should succeed', function(done) {
                     image.writeFile(outpathPng, 'png', done);
+                });
+            });
+
+        });
+
+    });
+
+    describe('gif', function() {
+
+        describe('with type unspecified', function() {
+
+            describe('params unspecified', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathGif, done);
+                });
+            });
+
+            describe('params specified - 256, not interlaced, not transparent, 50', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathGif, {
+                        colors: 256,
+                        interlaced: false,
+                        transparent: false,
+                        threshold: 100
+                    }, done);
+                });
+            });
+
+            describe('params specified - 99, interlaced, not transparent, 50', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathGif, {
+                        colors: 99,
+                        interlaced: true,
+                        transparent: false,
+                        threshold: 100
+                    }, done);
+                });
+            });
+
+            describe('params specified - 256, not interlaced, transparent, 30', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathGif, {
+                        colors: 256,
+                        interlaced: false,
+                        transparent: true,
+                        threshold: 30
+                    }, done);
+                });
+            });
+
+            describe('params specified - 16, interlaced, transparent, 88', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathGif, {
+                        colors: 16,
+                        interlaced: true,
+                        transparent: true,
+                        threshold: 88
+                    }, done);
+                });
+            });
+
+        });
+
+        describe('with type specified', function() {
+
+            describe('params unspecified', function() {
+                it('should succeed', function(done) {
+                    image.writeFile(outpathGif, 'gif', done);
                 });
             });
 

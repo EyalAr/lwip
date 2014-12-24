@@ -8,7 +8,7 @@ describe('batch.rotate arguments validation', function() {
 
     var batch;
     before(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+        lwip.open(imgs.gif.rgb, function(err, img) {
             batch = img.batch();
             done(err);
         });

@@ -17,6 +17,8 @@
   0. [Image operations](#image-operations)
     0. [Resize](#resize)
     0. [Scale](#scale)
+    0. [Contain](#contain)
+    0. [Cover](#cover)
     0. [Rotate](#rotate)
     0. [Crop](#crop)
     0. [Blur](#blur)
@@ -31,14 +33,17 @@
     0. [Fade (adjust transparency)](#fade)
     0. [Opacify](#opacify)
     0. [Paste](#paste)
+    0. [Set pixel](#set-pixel)
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
+    0. [Pixel](#get-pixel)
     0. [Clone](#clone)
     0. [Extract / Copy](#extract)
     0. [Get as a Buffer](#get-as-a-buffer)
       0. [JPEG](#jpeg)
       0. [PNG](#png)
+      0. [GIF](#gif)
     0. [Write to file](#write-to-file)
   0. [Batch operations](#batch-operations)
 0. [Copyrights](#copyrights)
@@ -66,6 +71,7 @@ You can run tests with `npm test`.
 **Note:** Installation of this module involves compiling native code.
 If `npm install lwip` failes, you probably need to setup your system.
 [See instructions](https://github.com/TooTallNate/node-gyp#installation).
+Building on Windows with Visual Studio requires version 2013 or higher.
 
 ### Usage
 
@@ -80,7 +86,7 @@ If `npm install lwip` failes, you probably need to setup your system.
 ```Javascript
 // obtain an image object:
 require('lwip').open('image.jpg', function(err, image){
-  
+
   // check err...
   // define a batch of manipulations and save to disk as JPEG:
   image.batch()
@@ -103,7 +109,7 @@ var lwip = require('lwip');
 
 // obtain an image object:
 lwip.open('image.jpg', function(err, image){
-  
+
   // check err...
   // manipulate image:
   image.scale(0.5, function(err, image){
@@ -133,12 +139,15 @@ lwip.open('image.jpg', function(err, image){
 **Decoding (reading):**
 
 - JPEG, 1 & 3 channels (grayscale & RGB).
-- PNG, 1 & 3 channels (grayscale & RGB) + alpha (transparency) channel.
+- PNG, transparency supported.
+- GIF, transparency supported. Animated GIFs can be read, but only the first
+  frame will be retrieved.
 
 **Encoding (writing):**
 
 - JPEG, 3 channels (RGB).
 - PNG (lossless), 3 channels (RGB) or 4 channels (RGBA).
+- GIF (no animations)
 
 Other formats may also be supported in the future, but are probably less urgent.
 Check the issues to see [which formats are planned to be supported](https://github.com/EyalAr/lwip/issues?labels=format+request&page=1&state=open).
@@ -161,7 +170,7 @@ Colors are specified in one of three ways:
   "blue"     // {r: 0, g: 0, b: 255, a: 100}
   "yellow"   // {r: 255, g: 255, b: 0, a: 100}
   "cyan"     // {r: 0, g: 255, b: 255, a: 100}
-  "magenta"  // {r: 255, g: 0, b: 255, a: 100} 
+  "magenta"  // {r: 255, g: 0, b: 255, a: 100}
   ```
 
 - As an array `[R, G, B, A]` where `R`, `G` and `B` are integers between 0 and
@@ -197,10 +206,26 @@ by:
 `lwip.open(source, type, callback)`
 
 0. `source {String/Buffer}`: The path to the image on disk or an image buffer.
-0. `type {String}`: **Optional** type of the image. If omitted, the type will be
-   inferred from the file extension. If `source` is a buffer, `type` must be
-   specified.
+0. `type {String/Object}`: **Optional** type of the image. If omitted, the type
+   will be inferred from the file extension. If `source` is a buffer, `type`
+   must be specified. If `source` is an encoded image buffer, `type` must be
+   a string of the image type (i.e. `"jpg"`). If `source` is a raw pixels buffer
+   `type` must be an object with `type.width` and `type.height` properties.
 0. `callback {Function(err, image)}`
+
+**Note about raw pixels buffers:** `source` may be a buffer of raw pixels. The
+buffer may contain pixels of 1-4 channels, where:
+
+0. 1 channel is a grayscale image.
+0. 2 channels is a grayscale image with an alpha channel.
+0. 3 channels is an RGB image.
+0. 4 channels is an RGBA image (with an alpha channel).
+
+In other words, if the image in the buffer has width `W` and height `H`, the
+size of the buffer can be `W*H`, `2*W*H`, `3*W*H` or `4*W*H`.
+
+The channel values in the buffer must be stored sequentially. I.e. first all the
+Red values, then all the Green values, etc.
 
 #### Open file example
 
@@ -285,6 +310,47 @@ lwip.create(500, 500, 'yellow', function(err, image){
    - `"lanczos"`
 0. `callback {Function(err, image)}`
 
+#### Contain
+
+Contain the image in a colored canvas. The image will be resized to the largest
+possible size such that it's fully contained inside the canvas.
+
+`image.contain(width, height, color, inter, callback)`
+
+0. `width {Integer}`: Canvas' width in pixels.
+0. `height {Integer}`: Canvas' height in pixels.
+0. `color {String / Array / Object}`: **Optional** Color of the canvas. See
+   [colors specification](#colors-specification).
+0. `inter {String}`: **Optional** interpolation method. Defaults to `"lanczos"`.
+   Possible values:
+   - `"nearest-neighbor"`
+   - `"moving-average"`
+   - `"linear"`
+   - `"grid"`
+   - `"cubic"`
+   - `"lanczos"`
+0. `callback {Function(err, image)}`
+
+#### Cover
+
+Cover a canvas with the image. The image will be resized to the smallest
+possible size such that both its dimensions are bigger than the canvas's
+dimensions. Margins of the image exceeding the canvas will be discarded.
+
+`image.cover(width, height, inter, callback)`
+
+0. `width {Integer}`: Canvas' width in pixels.
+0. `height {Integer}`: Canvas' height in pixels.
+0. `inter {String}`: **Optional** interpolation method. Defaults to `"lanczos"`.
+   Possible values:
+   - `"nearest-neighbor"`
+   - `"moving-average"`
+   - `"linear"`
+   - `"grid"`
+   - `"cubic"`
+   - `"lanczos"`
+0. `callback {Function(err, image)}`
+
 #### Rotate
 
 `image.rotate(degs, color, callback)`
@@ -335,7 +401,7 @@ Mirror an image along the 'x' axis, 'y' axis or both.
 
 `image.mirror(axes, callback)`
 
-0. `axes {String}`: `'x'`, `'y'` or `'xy'`.
+0. `axes {String}`: `'x'`, `'y'` or `'xy'` (case sensitive).
 0. `callback {Function(err, image)}`
 
 #### Flip
@@ -468,6 +534,24 @@ Paste an image on top of this image.
 0. Extra caution is required when using this method in batch mode, as the images
    may change by the time this operation is called.
 
+#### Set Pixel
+
+Set the color of a pixel.
+
+`image.setPixel(left, top, color, callback)`
+
+0. `left, top {Integer}`: Coordinates of the pixel from the left-top corner of
+   the image.
+0. `color {String / Array / Object}`: Color of the pixel to set.
+   See [colors specification](#colors-specification).
+0. `callback {Function(err, image)}`
+
+**Notes:**
+
+0. If the coordinates exceed the bounds of the image, an exception is thrown.
+0. Extra caution is required when using this method in batch mode, as the
+  dimensions of the image may change by the time this operation is called.
+
 ### Getters
 
 #### Width
@@ -477,6 +561,16 @@ Paste an image on top of this image.
 #### Height
 
 `image.height()` returns the image's height in pixels.
+
+#### Get Pixel
+
+`image.getPixel(left, top)` returns the color of the pixel at the `(left, top)`
+coordinate.
+
+0. `left {Integer>=0}`
+0. `top {Integer>=0}`
+
+Color is returned as an object. See [colors specification](#colors-specification).
 
 #### Clone
 
@@ -531,6 +625,7 @@ encoded data as a NodeJS Buffer object.
 0. `format {String}`: Encoding format. Possible values:
   - `"jpg"`
   - `"png"`
+  - `"gif"`
 0. `params {Object}`: **Optional** Format-specific parameters (See below).
 0. `callback {Function(err, buffer)}`
 
@@ -557,6 +652,23 @@ The `params` object should have the following fields:
   `'auto'`. Determines if the encoded image will have 3 or 4 channels. If
   `'auto'`, the image will be encoded with 4 channels if it has transparent
   components, and 3 channels otherwise.
+
+##### GIF
+
+The `params` object should have the following fields:
+
+- `colors {Integer}`: Defaults to `256`. Number of colors in the color table
+  (at most). Must be between 2 and 256.
+- `interlaced {Boolean}`: Defaults to `false`.
+- `transparency {true/false/'auto'}`: Preserve transparency? Defaults to
+  `'auto'`. Determines if the encoded image will have 3 or 4 channels. If
+  `'auto'`, the image will be encoded with 4 channels if it has transparent
+  components, and 3 channels otherwise.
+- `threshold {Integer}` - Between 0 and 100. Pixels in a gif image are either
+  fully transparent or fully opaque. This value sets the alpha channel
+  threshold to determine if a pixel is opaque or transparent. If the alpha
+  channel of the pixel is above this threshold, this pixel will be considered
+  as opaque; otherwise it will be transparent.
 
 #### Write to file
 
@@ -692,3 +804,6 @@ The native part of this module is compiled from source which uses the following:
 - The CImg Library
   - [Website](http://cimg.sourceforge.net/)
   - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/cimg/README.txt)
+- giflib
+  - [Website](http://giflib.sourceforge.net/)
+  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/gif/README)
