@@ -2,8 +2,9 @@
 init:
   - git config --global core.autocrlf input
 
+os: Visual Studio 2015 Preview
+
 environment:
-  VisualStudioVersion: 12.0 # VS 2013
   matrix:
     - nodejs_version: "0.10"
     - nodejs_version: "0.11"
