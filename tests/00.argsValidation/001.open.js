@@ -58,8 +58,8 @@ describe('lwip.open arguments validation', function() {
         });
 
         describe('without type', function() {
-            it('should throw an error', function() {
-                lwip.open.bind(lwip, buffer, function() {}).should.throwError();
+            it('should succeed', function() {
+                lwip.open.bind(lwip, buffer, function() {}).should.not.throw();
             });
         });
         describe('with invalid type', function() {
@@ -68,6 +68,17 @@ describe('lwip.open arguments validation', function() {
             });
         });
 
+    });
+    
+    describe('invalid buffer', function() {
+        
+        var buffer = new Buffer("I'm not an image at all!", "utf-8");
+
+        describe('without type', function() {
+            it('should throw an error', function() {
+                lwip.open.bind(lwip, buffer, function() {}).should.throw(/Failed to auto resolve buffer type/);
+            });
+        });
     });
 
     describe('pixelbuffer', function() {
