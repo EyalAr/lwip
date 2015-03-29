@@ -5,6 +5,8 @@
 
 # Light-weight image processor for NodeJS
 
+[![Join the chat at https://gitter.im/EyalAr/lwip](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/EyalAr/lwip?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 0. [Overview](#overview)
   0. [Installation](#installation)
   0. [Usage](#usage)
