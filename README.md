@@ -69,7 +69,7 @@ Or, clone this repo and `cd lwip && npm install`.
 You can run tests with `npm test`.
 
 **Note:** Installation of this module involves compiling native code.
-If `npm install lwip` failes, you probably need to setup your system.
+If `npm install lwip` fails, you probably need to set up your system.
 [See instructions](https://github.com/TooTallNate/node-gyp#installation).
 Building on Windows with Visual Studio requires version 2013 or higher.
 
@@ -692,7 +692,7 @@ time.
 Each one of the [image operations](#image-operations) has a batch equivalent
 which takes the same arguments, except the callback, which is not needed.
 
-When all batch operations had been queued, they can be executed in one of
+When all batch operations have been queued, they can be executed in one of
 several methods, as explained below.
 
 #### Obtaining a batch object
