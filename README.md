@@ -71,7 +71,7 @@ Or, clone this repo and `cd lwip && npm install`.
 You can run tests with `npm test`.
 
 **Note:** Installation of this module involves compiling native code.
-If `npm install lwip` failes, you probably need to setup your system.
+If `npm install lwip` fails, you probably need to setup your system.
 [See instructions](https://github.com/TooTallNate/node-gyp#installation).
 Building on Windows with Visual Studio requires version 2013 or higher.
 
@@ -79,9 +79,9 @@ Building on Windows with Visual Studio requires version 2013 or higher.
 
 **Typical workflow:**
 
-0. Open an image and get an image object.
-0. Manipulate it.
-0. Save to disk / Send image buffer over network / etc.
+1. Open an image and get an image object.
+2. Manipulate it.
+3. Save to disk / Send image buffer over network / etc.
 
 **Example (batch operations):**
 
@@ -152,7 +152,7 @@ lwip.open('image.jpg', function(err, image){
 - GIF (no animations)
 
 Other formats may also be supported in the future, but are probably less urgent.
-Check the issues to see [which formats are planned to be supported](https://github.com/EyalAr/lwip/issues?labels=format+request&page=1&state=open).
+Check the issues to see [which formats may be supported in the future](https://github.com/EyalAr/lwip/issues?labels=format+request&page=1&state=open).
 Open an issue if you need support for a format which is not already listed.
 
 ### Colors specification
@@ -161,7 +161,7 @@ In LWIP colors are coded as RGBA values (red, green, blue and an alpha channel).
 
 Colors are specified in one of three ways:
 
-- As a string. possible values:
+- As a string. Possible values:
 
   ```Javascript
   "black"    // {r: 0, g: 0, b: 0, a: 100}
@@ -196,7 +196,7 @@ Colors are specified in one of three ways:
 All operations are done on an `image` object. An `image` object can be obtained
 by:
 
-0. Openning an existing image file or buffer with the [`open`](#open-an-image)
+0. Opening an existing image file or buffer with the [`open`](#open-an-image)
    method.
 0. Creating a new image object with the [`create`](#create-a-new-image) method.
 0. Cloning an existing image object with the [`image.clone`](#clone) method.
@@ -390,7 +390,7 @@ Gaussian blur.
 
 #### Sharpen
 
-Inverse diffusion shapren.
+Inverse diffusion sharpen.
 
 `image.sharpen(amplitude, callback)`
 
@@ -491,11 +491,11 @@ pixel individually.
 
 #### Fade
 
-Adjust image transperancy.
+Adjust image transparency.
 
 `image.fade(delta, callback)`
 
-0. `delta {Float}`: By how much to increase / decrease the transperancy.
+0. `delta {Float}`: By how much to increase / decrease the transparency.
 0. `callback {Function(err, image)}`
 
 **Note:** The transparency is adjusted independently for each pixel.
@@ -530,7 +530,7 @@ Paste an image on top of this image.
 0. If the pasted image exceeds the bounds of the base image, an exception
    is thrown.
 0. `img` is pasted in the state it was at the time `image.paste( ... )` was
-   called, eventhough `callback` is called asynchronously.
+   called, even though `callback` is called asynchronously.
 0. For transparent images, alpha blending is done according to the equations
    described [here](http://en.wikipedia.org/wiki/Alpha_compositing#Alpha_blending).
 0. Extra caution is required when using this method in batch mode, as the images
@@ -585,7 +585,7 @@ Clone the image into a new image object.
 **Example**: See [`examples/clone.js`](examples/clone.js)
 
 **Note**: The image is cloned to the state it was at the time
-`image.clone( ... )` was called, eventhough `callback` is called asynchronously.
+`image.clone( ... )` was called, even though `callback` is called asynchronously.
 
 ```Javascript
 image.width(); // 500
@@ -609,7 +609,7 @@ Copy an area of the image into a new image object.
 **Example**: See [`examples/extract.js`](examples/extract.js)
 
 **Note**: The sub-image is extracted from the original image in the state it was
-at the time `image.extract( ... )` was called, eventhough `callback` is called
+at the time `image.extract( ... )` was called, even though `callback` is called
 asynchronously.
 
 #### Get as a Buffer
@@ -723,7 +723,7 @@ batch.rotate(45, 'white').scale(0.5).blur(5);
 #### Executing a batch
 
 There are several methods which start the execution of a batch. Once a batch
-finishes an execution, it becomes empty and can be resued to queue additional
+finishes an execution, it becomes empty and can be reused to queue additional
 operations.
 
 ##### Execute batch and obtain the manipulated image object
