@@ -79,9 +79,9 @@ Building on Windows with Visual Studio requires version 2013 or higher.
 
 **Typical workflow:**
 
-1. Open an image and get an image object.
-2. Manipulate it.
-3. Save to disk / Send image buffer over network / etc.
+0. Open an image and get an image object.
+0. Manipulate it.
+0. Save to disk / Send image buffer over network / etc.
 
 **Example (batch operations):**
 
@@ -152,7 +152,7 @@ lwip.open('image.jpg', function(err, image){
 - GIF (no animations)
 
 Other formats may also be supported in the future, but are probably less urgent.
-Check the issues to see [which formats may be supported in the future](https://github.com/EyalAr/lwip/issues?labels=format+request&page=1&state=open).
+Check the issues to see [which formats are planned to be supported](https://github.com/EyalAr/lwip/issues?labels=format+request&page=1&state=open).
 Open an issue if you need support for a format which is not already listed.
 
 ### Colors specification
