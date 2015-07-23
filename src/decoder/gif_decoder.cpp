@@ -70,6 +70,10 @@ string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
         return GifErrorString(errcode);
     }
 
+    // TODO: implement getting metadata from GIFs; this is a placeholder
+    *metadata = (char *)malloc(sizeof(char));
+    *metadata[0] = '\0';
+
     return "";
 }
 

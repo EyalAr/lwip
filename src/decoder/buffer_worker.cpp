@@ -17,12 +17,9 @@ DecodeBufferWorker::~DecodeBufferWorker() {}
 void DecodeBufferWorker::Execute () {
     CImg<unsigned char> * img = NULL;
     string err;
-    char * metadata;
-
-    // cout << "** DecodeBufferWorker::Execute: " << metadata;
+    char * metadata = NULL;
 
     err = _decoder(_buffer, _buffsize, &img, &metadata);
-
 
     if (img == NULL) {
         SetErrorMessage(err.c_str());
@@ -42,8 +39,6 @@ void DecodeBufferWorker::Execute () {
     _channels = 4;
     _metadata = metadata;
 
-    // cout << "*** DecodeBufferWorker::Execute: metadata ***\n" << _metadata;
-
     delete img;
     return;
 }
@@ -62,6 +57,6 @@ void DecodeBufferWorker::HandleOKCallback () {
         NanNew<Boolean>(_trans),
         NanNew<String>(_metadata)
     };
-    // callback->Call(6, argv);
+
     callback->Call(7, argv);
 }

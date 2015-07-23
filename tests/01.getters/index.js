@@ -14,6 +14,7 @@ before(function(done) {
     });
 });
 
+
 describe('lwip.width', function() {
     it('should return correct width', function() {
         assert(image.width() === width);
@@ -83,6 +84,22 @@ describe('lwip.extract', function() {
             assert(image.height() === height);
             assert(exImage.width() === 150 - 100 + 1);
             assert(exImage.height() === 140 - 120 + 1);
+            done();
+        });
+    });
+});
+
+describe('lwip.getMetadata', function() {
+    it('should return correct metadata', function(done) {
+        lwip.open(imgs.png.hasMetadata, function(err, img) {
+            assert(img.getMetadata() === "Lorem ipsum dolor sit amet");
+            done();
+        });
+    });
+
+    it('should return null if no metadata found', function(done) {
+        lwip.open(imgs.png.noMetadata, function(err, img) {
+            assert(img.getMetadata() === null);
             done();
         });
     });

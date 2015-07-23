@@ -2,8 +2,6 @@
 #include <iostream>
 
 string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg, char ** metadata) {
-    // cout << "*** decode_png_buffer() ***\n";
-    // cout << "** decode_png_buffer: " << metadata;
 
     // check it's a valid png buffer
     if (size < 8 || png_sig_cmp((png_const_bytep) buffer, 0, 8)) {

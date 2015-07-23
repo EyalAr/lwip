@@ -14,7 +14,9 @@ module.exports = {
         rgb: join(__dirname, imbase, 'rgb.png'),
         noex: join(__dirname, imbase, 'rgbpng'),
         trans: join(__dirname, imbase, 'trans.png'),
-        inv: join(__dirname, imbase, 'invalid.png')
+        inv: join(__dirname, imbase, 'invalid.png'),
+        hasMetadata: join(__dirname, imbase, 'hasMetadata.png'),
+        noMetadata: join(__dirname, imbase, 'noMetadata.png')
     },
     gif: {
         gs: join(__dirname, imbase, 'gs.gif'),
