@@ -25,7 +25,7 @@ describe('lwip.setMetadata', function() {
                         if (err) return done(err);
                         assert(imgWithMetadata.getMetadata() === metadata);
                         done();
-                    })
+                    });
                 });
             });
         });
@@ -41,7 +41,7 @@ describe('lwip.setMetadata', function() {
                         if (err) return done(err);
                         assert(imgNoMetadata.getMetadata() === null);
                         done();
-                    })
+                    });
                 });
             });
         });
