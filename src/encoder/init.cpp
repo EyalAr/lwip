@@ -31,7 +31,16 @@ NAN_METHOD(encodeToPngBuffer) {
     int compression = args[3].As<Integer>()->Value();
     bool interlaced = args[4]->BooleanValue();
     bool trans = args[5]->BooleanValue();
-    NanCallback * callback = new NanCallback(args[6].As<Function>());
+
+    int metadata_len = args[6].As<String>()->Utf8Length();
+    // char metadata =
+    // char *metadata = args[6].As<String>().Utf8Value();
+    char *metadata = (char *)malloc(metadata_len * sizeof(char));
+    // char metadata[metadata_len];
+    args[6].As<String>()->WriteUtf8(metadata);
+
+    NanCallback * callback = new NanCallback(args[7].As<Function>());
+    // NanCallback * callback = new NanCallback(args[6].As<Function>());
 
     NanAsyncQueueWorker(
         new EncodeToPngBufferWorker(
@@ -41,6 +50,7 @@ NAN_METHOD(encodeToPngBuffer) {
             compression,
             interlaced,
             trans,
+            metadata,
             callback
         )
     );

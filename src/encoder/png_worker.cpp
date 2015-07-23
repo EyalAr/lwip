@@ -1,4 +1,5 @@
 #include "encoder.h"
+#include <iostream>
 
 #define RGB_N_CHANNELS 3
 #define RGBA_N_CHANNELS 4
@@ -10,17 +11,25 @@ EncodeToPngBufferWorker::EncodeToPngBufferWorker(
     int compression,
     bool interlaced,
     bool trans,
+    char *metadata,
+    // char *metadata,
     NanCallback * callback
 ): NanAsyncWorker(callback), _width(width), _height(height),
-    _compression(compression), _interlaced(interlaced), _trans(trans),
+    _compression(compression), _interlaced(interlaced), _trans(trans), _metadata(metadata),
     _pngbuf(NULL), _pngbufsize(0) {
     SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
     _pixbuf = (unsigned char *) Buffer::Data(buff);
+
+    // SaveToPersistent("metadata", metadata);
+    // _metadata = (char *)metadata;
 }
 
 EncodeToPngBufferWorker::~EncodeToPngBufferWorker() {}
 
 void EncodeToPngBufferWorker::Execute () {
+
+    // cout << "** EncodeToPngBufferWorker _metadata: " << _metadata << "\n";
+
     int n_chan = _trans ? RGBA_N_CHANNELS : RGB_N_CHANNELS;
     unsigned int rowBytes = _width * n_chan;
     int interlaceType;
@@ -97,6 +106,49 @@ void EncodeToPngBufferWorker::Execute () {
         PNG_COMPRESSION_TYPE_DEFAULT,
         PNG_FILTER_TYPE_DEFAULT
     );
+
+    // set metadata in tEXt chunk
+    png_text metadata;
+    metadata.compression = PNG_TEXT_COMPRESSION_NONE;
+    metadata.key = "lwip_data";
+    metadata.text = _metadata;
+
+    png_set_text(png_ptr, info_ptr, &metadata, 1);
+
+    // test setting multiple text chunks
+    // png_text metadata[2];
+    // metadata[0].compression = PNG_TEXT_COMPRESSION_NONE;
+    // metadata[0].key = "lwip_data";
+    // metadata[0].text = _metadata;
+
+    // metadata[1].compression = PNG_TEXT_COMPRESSION_NONE;
+    // metadata[1].key = "lwip_data2";
+    // metadata[1].text = _metadata;
+
+    // png_set_text(png_ptr, info_ptr, metadata, 2);
+
+
+    // ===
+    // png_text *text_ptr = new png_text[1];
+
+    // text_ptr[0].compression = PNG_TEXT_COMPRESSION_NONE;
+    // text_ptr[0].key = "data";
+    // text_ptr[0].text = "meep";
+    // text_ptr[0].text_length = 4;
+    // text_ptr[0].itxt_length = 0;
+    // // text_ptr[0].lang = NULL;
+    // // text_ptr[0].lang_key = NULL;
+
+    // cout << text_ptr[0].text;
+    // cout << "*** 0\n";
+
+    // // png_set_text(png_ptr, info_ptr, text_ptr, 1);
+    // cout << "*** 1\n";
+    // ===
+
+
+
+
     png_set_compression_level(png_ptr, compLevel);
 
     pngWriteCbData buffinf = {NULL, 0};
