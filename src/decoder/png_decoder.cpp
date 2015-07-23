@@ -1,6 +1,10 @@
 #include "decoder.h"
+#include <iostream>
 
-string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg) {
+string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg, char ** metadata) {
+    // cout << "*** decode_png_buffer() ***\n";
+    // cout << "** decode_png_buffer: " << metadata;
+
     // check it's a valid png buffer
     if (size < 8 || png_sig_cmp((png_const_bytep) buffer, 0, 8)) {
         return "Invalid PNG buffer";
@@ -42,6 +46,28 @@ string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
     bool is_gray = false;
     png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type,
                  NULL, NULL, NULL);
+
+
+    // get metadata in first text chunk found with keyboard 'lwip_data'
+    png_textp text_ptr;
+    int num_comments = png_get_text(png_ptr, info_ptr, &text_ptr, NULL);
+    bool metadata_found = false;
+
+    for (int i = 0; i < num_comments; i++) {
+        if (strcmp(text_ptr[i].key, "lwip_data") == 0) {
+            int metadata_len = (strlen(text_ptr[i].text) + 1) * sizeof(char);
+            *metadata = (char *)malloc(metadata_len);
+            memcpy(*metadata, text_ptr[i].text, metadata_len);
+            metadata_found = true;
+            break; //TODO: handle multiple lwip_data text chunks?
+        }
+    }
+
+    // if no text chunks with keyword 'lwip_data' are found, set metadata to an empty string
+    if (!metadata_found) {
+        *metadata = (char *)malloc(sizeof(char));
+        *metadata[0] = '\0';
+    }
 
     if (color_type == PNG_COLOR_TYPE_PALETTE) {
         png_set_palette_to_rgb(png_ptr);

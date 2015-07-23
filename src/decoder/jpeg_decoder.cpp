@@ -1,6 +1,6 @@
 #include "decoder.h"
 
-string decode_jpeg_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg) {
+string decode_jpeg_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg, char ** metadata) {
     struct jpeg_decompress_struct cinfo;
     struct lwip_jpeg_error_mgr jerr;
 
