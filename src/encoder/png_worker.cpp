@@ -11,8 +11,7 @@ EncodeToPngBufferWorker::EncodeToPngBufferWorker(
     int compression,
     bool interlaced,
     bool trans,
-    char *metadata,
-    // char *metadata,
+    char * metadata,
     NanCallback * callback
 ): NanAsyncWorker(callback), _width(width), _height(height),
     _compression(compression), _interlaced(interlaced), _trans(trans), _metadata(metadata),
@@ -24,7 +23,6 @@ EncodeToPngBufferWorker::EncodeToPngBufferWorker(
 EncodeToPngBufferWorker::~EncodeToPngBufferWorker() {}
 
 void EncodeToPngBufferWorker::Execute () {
-
     int n_chan = _trans ? RGBA_N_CHANNELS : RGB_N_CHANNELS;
     unsigned int rowBytes = _width * n_chan;
     int interlaceType;
@@ -102,13 +100,11 @@ void EncodeToPngBufferWorker::Execute () {
         PNG_FILTER_TYPE_DEFAULT
     );
 
-    // set metadata in tEXt chunk
-    if (strlen(_metadata) > 0) {
+    if (_metadata != NULL) {
         png_text metadata;
         metadata.compression = PNG_TEXT_COMPRESSION_NONE;
         metadata.key = "lwip_data";
         metadata.text = _metadata;
-
         png_set_text(png_ptr, info_ptr, &metadata, 1);
     }
 

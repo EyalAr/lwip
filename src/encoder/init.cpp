@@ -1,4 +1,5 @@
 #include "encoder.h"
+#include <iostream>
 
 // encoder.jpeg(pixbuf, width, height, quality, callback)
 NAN_METHOD(encodeToJpegBuffer) {
@@ -21,7 +22,7 @@ NAN_METHOD(encodeToJpegBuffer) {
     NanReturnUndefined();
 }
 
-// encoder.png(pixbuf, width, height, compression, interlaced, trans, callback)
+// encoder.png(pixbuf, width, height, compression, interlaced, trans, metadata, callback)
 NAN_METHOD(encodeToPngBuffer) {
     NanScope();
 
@@ -32,9 +33,15 @@ NAN_METHOD(encodeToPngBuffer) {
     bool interlaced = args[4]->BooleanValue();
     bool trans = args[5]->BooleanValue();
 
-    int metadata_len = args[6].As<String>()->Utf8Length();
-    char *metadata = (char *)malloc(metadata_len * sizeof(char));
-    args[6].As<String>()->WriteUtf8(metadata);
+    char * metadata;
+
+    if (args[6]->IsNull() || args[6]->IsUndefined()) {
+        metadata = NULL;
+    } else {
+        int metadata_len = args[6].As<String>()->Utf8Length();
+        metadata = (char *)malloc((metadata_len + 1) * sizeof(char));
+        args[6].As<String>()->WriteUtf8(metadata);
+    }
 
     NanCallback * callback = new NanCallback(args[7].As<Function>());
 
