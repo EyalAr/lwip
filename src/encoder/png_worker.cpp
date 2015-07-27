@@ -19,9 +19,6 @@ EncodeToPngBufferWorker::EncodeToPngBufferWorker(
     _pngbuf(NULL), _pngbufsize(0) {
     SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
     _pixbuf = (unsigned char *) Buffer::Data(buff);
-
-    // SaveToPersistent("metadata", metadata);
-    // _metadata = (char *)metadata;
 }
 
 EncodeToPngBufferWorker::~EncodeToPngBufferWorker() {}
