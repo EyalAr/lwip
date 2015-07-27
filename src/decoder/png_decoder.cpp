@@ -56,15 +56,8 @@ string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
             int metadata_len = (strlen(text_ptr[i].text) + 1) * sizeof(char);
             *metadata = (char *)malloc(metadata_len);
             memcpy(*metadata, text_ptr[i].text, metadata_len);
-            metadata_found = true;
             break; //TODO: handle multiple lwip_data text chunks?
         }
-    }
-
-    // if no text chunks with keyword 'lwip_data' are found, set metadata to an empty string
-    if (!metadata_found) {
-        *metadata = (char *)malloc(sizeof(char));
-        *metadata[0] = '\0';
     }
 
     if (color_type == PNG_COLOR_TYPE_PALETTE) {

@@ -45,6 +45,14 @@ void DecodeBufferWorker::Execute () {
 
 void DecodeBufferWorker::HandleOKCallback () {
     NanScope();
+
+    Local<v8::Primitive> metadata;
+    if (_metadata == NULL) {
+        metadata = NanNull();
+    } else {
+        metadata = NanNew<String>(_metadata);
+    }
+
     Local<Value> argv[] = {
         NanNull(),
         NanBufferUse(
@@ -55,7 +63,8 @@ void DecodeBufferWorker::HandleOKCallback () {
         NanNew<Number>(_height),
         NanNew<Number>(_channels),
         NanNew<Boolean>(_trans),
-        NanNew<String>(_metadata)
+        metadata
+        // _metadata ? NanNew<String>(_metadata) : NanNull()
     };
 
     callback->Call(7, argv);
