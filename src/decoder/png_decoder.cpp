@@ -48,7 +48,6 @@ string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
     // get metadata in first text chunk found with keyboard 'lwip_data'
     png_textp text_ptr;
     int num_comments = png_get_text(png_ptr, info_ptr, &text_ptr, NULL);
-    bool metadata_found = false;
 
     for (int i = 0; i < num_comments; i++) {
         if (strcmp(text_ptr[i].key, "lwip_data") == 0) {
