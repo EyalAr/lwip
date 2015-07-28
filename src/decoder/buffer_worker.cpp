@@ -63,7 +63,6 @@ void DecodeBufferWorker::HandleOKCallback () {
         NanNew<Number>(_channels),
         NanNew<Boolean>(_trans),
         metadata
-        // _metadata ? NanNew<String>(_metadata) : NanNull()
     };
 
     callback->Call(7, argv);

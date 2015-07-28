@@ -559,11 +559,13 @@ Set the color of a pixel.
 #### Set metadata
 
 Set the metadata in an image. This is currently only supported for PNG files.
-Sets a tEXt chunk with the key `lwip_data` and comment as the given string.
+Sets a tEXt chunk with the key `lwip_data` and comment as the given string. If
+called with a `null` parameter, removes existing metadata from the image,
+if present.
 
 `image.setMetadata(metadata)`
 
-0. `metadata {String}`: a string of arbitrary length.
+0. `metadata {String}`: a string of arbitrary length, or null.
 
 ### Getters
 
@@ -700,7 +702,7 @@ Write encoded binary image data directly to a file.
 
 Get the textual metadata from an image. This is currently only supported for
 tEXt chunks in PNG images, and will get the first tEXt chunk found with the key
-`lwip_data`.
+`lwip_data`. If none is found, returns null.
 
 `image.getMetadata()`
 
