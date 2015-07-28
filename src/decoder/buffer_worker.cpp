@@ -1,5 +1,4 @@
 #include "decoder.h"
-#include <iostream>
 
 DecodeBufferWorker::DecodeBufferWorker(
     NanCallback * callback,

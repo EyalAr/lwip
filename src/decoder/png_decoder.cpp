@@ -1,5 +1,4 @@
 #include "decoder.h"
-#include <iostream>
 
 string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg, char ** metadata) {
 

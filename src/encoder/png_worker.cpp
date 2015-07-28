@@ -1,5 +1,4 @@
 #include "encoder.h"
-#include <iostream>
 
 #define RGB_N_CHANNELS 3
 #define RGBA_N_CHANNELS 4

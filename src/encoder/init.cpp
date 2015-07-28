@@ -1,5 +1,4 @@
 #include "encoder.h"
-#include <iostream>
 
 // encoder.jpeg(pixbuf, width, height, quality, callback)
 NAN_METHOD(encodeToJpegBuffer) {
