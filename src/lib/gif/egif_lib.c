@@ -58,10 +58,10 @@ EGifOpenFileName(const char *FileName, const bool TestExistence, int *Error)
     GifFileType *GifFile;
 
     if (TestExistence)
-        FileHandle = open(FileName, O_WRONLY | O_CREAT | O_EXCL, 
+        FileHandle = open(FileName, O_WRONLY | O_CREAT | O_EXCL,
 			  S_IREAD | S_IWRITE);
     else
-        FileHandle = open(FileName, O_WRONLY | O_CREAT | O_TRUNC, 
+        FileHandle = open(FileName, O_WRONLY | O_CREAT | O_TRUNC,
 			  S_IREAD | S_IWRITE);
 
     if (FileHandle == -1) {
@@ -190,7 +190,7 @@ EGifGetGifVersion(GifFileType *GifFile)
     GifFilePrivateType *Private = (GifFilePrivateType *) GifFile->Private;
     int i, j;
 
-    /* 
+    /*
      * Bulletproofing - always write GIF89 if we need to.
      * Note, we don't clear the gif89 flag here because
      * users of the sequential API might have called EGifSetGifVersion()
@@ -217,7 +217,7 @@ EGifGetGifVersion(GifFileType *GifFile)
 	    || function == APPLICATION_EXT_FUNC_CODE)
 	    Private->gif89 = true;
     }
- 
+
     if (Private->gif89)
 	return GIF89_STAMP;
     else
@@ -226,7 +226,7 @@ EGifGetGifVersion(GifFileType *GifFile)
 
 /******************************************************************************
  Set the GIF version. In the extremely unlikely event that there is ever
- another version, replace the bool argument with an enum in which the 
+ another version, replace the bool argument with an enum in which the
  GIF87 value is 0 (numerically the same as bool false) and the GIF89 value
  is 1 (numerically the same as bool true).  That way we'll even preserve
  object-file compatibility!
@@ -241,7 +241,7 @@ void EGifSetGifVersion(GifFileType *GifFile, const bool gif89)
 /******************************************************************************
  All writes to the GIF should go through this.
 ******************************************************************************/
-static int InternalWrite(GifFileType *GifFileOut, 
+static int InternalWrite(GifFileType *GifFileOut,
 		   const unsigned char *buf, size_t len)
 {
     GifFilePrivateType *Private = (GifFilePrivateType*)GifFileOut->Private;
@@ -561,7 +561,7 @@ EGifPutExtensionLeader(GifFileType *GifFile, const int ExtCode)
  Put extension block data (see GIF manual) into a GIF file.
 ******************************************************************************/
 int
-EGifPutExtensionBlock(GifFileType *GifFile, 
+EGifPutExtensionBlock(GifFileType *GifFile,
 		     const int ExtLen,
 		     const void *Extension)
 {
@@ -660,7 +660,7 @@ size_t EGifGCBToExtension(const GraphicsControlBlock *GCB,
  Replace the Graphics Control Block for a saved image, if it exists.
 ******************************************************************************/
 
-int EGifGCBToSavedExtension(const GraphicsControlBlock *GCB, 
+int EGifGCBToSavedExtension(const GraphicsControlBlock *GCB,
 			    GifFileType *GifFile, int ImageIndex)
 {
     int i;
@@ -708,7 +708,7 @@ EGifPutCode(GifFileType *GifFile, int CodeSize, const GifByteType *CodeBlock)
     }
 
     /* No need to dump code size as Compression set up does any for us: */
-    /* 
+    /*
      * Buf = CodeSize;
      * if (InternalWrite(GifFile, &Buf, 1) != 1) {
      *      GifFile->Error = E_GIF_ERR_WRITE_FAILED;
@@ -891,7 +891,7 @@ EGifCompressLine(GifFileType *GifFile,
 
     while (i < LineLen) {   /* Decode LineLen items. */
         Pixel = Line[i++];  /* Get next pixel from stream. */
-        /* Form a new unique key to search hash table for the code combines 
+        /* Form a new unique key to search hash table for the code combines
          * CrntCode as Prefix string with Pixel as postfix char.
          */
         NewKey = (((uint32_t) CrntCode) << 8) + Pixel;
@@ -1047,9 +1047,9 @@ EGifBufferedOutput(GifFileType *GifFile,
 ******************************************************************************/
 
 static int
-EGifWriteExtensions(GifFileType *GifFileOut, 
-			       ExtensionBlock *ExtensionBlocks, 
-			       int ExtensionBlockCount) 
+EGifWriteExtensions(GifFileType *GifFileOut,
+			       ExtensionBlock *ExtensionBlocks,
+			       int ExtensionBlockCount)
 {
     if (ExtensionBlocks) {
         ExtensionBlock *ep;
@@ -1072,9 +1072,9 @@ EGifWriteExtensions(GifFileType *GifFileOut,
 }
 
 int
-EGifSpew(GifFileType *GifFileOut) 
+EGifSpew(GifFileType *GifFileOut)
 {
-    int i, j; 
+    int i, j;
 
     if (EGifPutScreenDesc(GifFileOut,
                           GifFileOut->SWidth,
@@ -1094,7 +1094,7 @@ EGifSpew(GifFileType *GifFileOut)
         if (sp->RasterBits == NULL)
             continue;
 
-	if (EGifWriteExtensions(GifFileOut, 
+	if (EGifWriteExtensions(GifFileOut,
 				sp->ExtensionBlocks,
 				sp->ExtensionBlockCount) == GIF_ERROR)
 	    return (GIF_ERROR);
@@ -1109,8 +1109,8 @@ EGifSpew(GifFileType *GifFileOut)
             return (GIF_ERROR);
 
 	if (sp->ImageDesc.Interlace) {
-	     /* 
-	      * The way an interlaced image should be written - 
+	     /*
+	      * The way an interlaced image should be written -
 	      * offsets and jumps...
 	      */
 	    int InterlacedOffset[] = { 0, 4, 2, 1 };
@@ -1118,11 +1118,11 @@ EGifSpew(GifFileType *GifFileOut)
 	    int k;
 	    /* Need to perform 4 passes on the images: */
 	    for (k = 0; k < 4; k++)
-		for (j = InterlacedOffset[k]; 
+		for (j = InterlacedOffset[k];
 		     j < SavedHeight;
 		     j += InterlacedJumps[k]) {
-		    if (EGifPutLine(GifFileOut, 
-				    sp->RasterBits + j * SavedWidth, 
+		    if (EGifPutLine(GifFileOut,
+				    sp->RasterBits + j * SavedWidth,
 				    SavedWidth)	== GIF_ERROR)
 			return (GIF_ERROR);
 		}

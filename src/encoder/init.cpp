@@ -21,7 +21,7 @@ NAN_METHOD(encodeToJpegBuffer) {
     NanReturnUndefined();
 }
 
-// encoder.png(pixbuf, width, height, compression, interlaced, trans, callback)
+// encoder.png(pixbuf, width, height, compression, interlaced, trans, metadata, callback)
 NAN_METHOD(encodeToPngBuffer) {
     NanScope();
 
@@ -31,7 +31,18 @@ NAN_METHOD(encodeToPngBuffer) {
     int compression = args[3].As<Integer>()->Value();
     bool interlaced = args[4]->BooleanValue();
     bool trans = args[5]->BooleanValue();
-    NanCallback * callback = new NanCallback(args[6].As<Function>());
+
+    char * metadata;
+
+    if (args[6]->IsNull() || args[6]->IsUndefined()) {
+        metadata = NULL;
+    } else {
+        int metadata_len = args[6].As<String>()->Utf8Length();
+        metadata = (char *)malloc((metadata_len + 1) * sizeof(char));
+        args[6].As<String>()->WriteUtf8(metadata);
+    }
+
+    NanCallback * callback = new NanCallback(args[7].As<Function>());
 
     NanAsyncQueueWorker(
         new EncodeToPngBufferWorker(
@@ -41,6 +52,7 @@ NAN_METHOD(encodeToPngBuffer) {
             compression,
             interlaced,
             trans,
+            metadata,
             callback
         )
     );

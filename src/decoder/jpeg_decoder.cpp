@@ -1,6 +1,6 @@
 #include "decoder.h"
 
-string decode_jpeg_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg) {
+string decode_jpeg_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg, char ** metadata) {
     struct jpeg_decompress_struct cinfo;
     struct lwip_jpeg_error_mgr jerr;
 
@@ -52,6 +52,10 @@ string decode_jpeg_buffer(char * buffer, size_t size, CImg<unsigned char> ** cim
     }
     jpeg_finish_decompress(&cinfo);
     jpeg_destroy_decompress(&cinfo);
+
+    // TODO: implement getting metadata from GIFs; this is a placeholder
+    *metadata = (char *)malloc(sizeof(char));
+    *metadata[0] = '\0';
 
     return "";
 }

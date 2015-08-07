@@ -25,7 +25,7 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-typedef string (* buf_dec_f_t)(char *, size_t, CImg<unsigned char> **);
+typedef string (* buf_dec_f_t)(char *, size_t, CImg<unsigned char> **, char **);
 
 class DecodeBufferWorker : public NanAsyncWorker {
 public:
@@ -46,6 +46,7 @@ private:
     size_t _height;
     int _channels;
     bool _trans; // transparency
+    char * _metadata;
 };
 
 typedef struct {
@@ -77,9 +78,9 @@ inline void lwip_jpeg_error_exit (j_common_ptr cinfo) {
  */
 string toRGBA(CImg<unsigned char> ** img);
 
-string decode_jpeg_buffer(char * buffer, size_t size, CImg<unsigned char> ** img);
-string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** img);
-string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** img);
+string decode_jpeg_buffer(char * buffer, size_t size, CImg<unsigned char> ** img, char ** metadata);
+string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** img, char ** metadata);
+string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** img, char ** metadata);
 
 void pngReadCB(png_structp png_ptr, png_bytep data, png_size_t length);
 int gifReadCB(GifFileType * gif, GifByteType * buf, int length);

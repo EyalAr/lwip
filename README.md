@@ -36,6 +36,7 @@
     0. [Opacify](#opacify)
     0. [Paste](#paste)
     0. [Set pixel](#set-pixel)
+    0. [Set metadata](#set-metadata)
   0. [Getters](#getters)
     0. [Width](#width)
     0. [Height](#height)
@@ -47,6 +48,7 @@
       0. [PNG](#png)
       0. [GIF](#gif)
     0. [Write to file](#write-to-file)
+    0. [Get metadata](#get-metadata)
   0. [Batch operations](#batch-operations)
 0. [Copyrights](#copyrights)
 
@@ -554,6 +556,17 @@ Set the color of a pixel.
 0. Extra caution is required when using this method in batch mode, as the
   dimensions of the image may change by the time this operation is called.
 
+#### Set metadata
+
+Set the metadata in an image. This is currently only supported for PNG files.
+Sets a tEXt chunk with the key `lwip_data` and comment as the given string. If
+called with a `null` parameter, removes existing metadata from the image,
+if present.
+
+`image.setMetadata(metadata)`
+
+0. `metadata {String}`: a string of arbitrary length, or null.
+
 ### Getters
 
 #### Width
@@ -684,6 +697,14 @@ Write encoded binary image data directly to a file.
    [Get as a Buffer](#get-as-a-buffer) section.
 0. `params {Object}`: **Optional** Format-specific parameters.
 0. `callback {Function(err)}`
+
+#### Get Metadata
+
+Get the textual metadata from an image. This is currently only supported for
+tEXt chunks in PNG images, and will get the first tEXt chunk found with the key
+`lwip_data`. If none is found, returns null.
+
+`image.getMetadata()`
 
 ### Batch operations
 

@@ -53,6 +53,7 @@ public:
         int compression,
         bool interlaced,
         bool trans,
+        char * metadata,
         NanCallback * callback
     );
     ~EncodeToPngBufferWorker();
@@ -65,6 +66,7 @@ private:
     int _compression;
     bool _interlaced;
     bool _trans;
+    char * _metadata;
     char * _pngbuf;
     size_t _pngbufsize;
 };

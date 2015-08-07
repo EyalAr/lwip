@@ -10,9 +10,10 @@ EncodeToPngBufferWorker::EncodeToPngBufferWorker(
     int compression,
     bool interlaced,
     bool trans,
+    char * metadata,
     NanCallback * callback
 ): NanAsyncWorker(callback), _width(width), _height(height),
-    _compression(compression), _interlaced(interlaced), _trans(trans),
+    _compression(compression), _interlaced(interlaced), _trans(trans), _metadata(metadata),
     _pngbuf(NULL), _pngbufsize(0) {
     SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
     _pixbuf = (unsigned char *) Buffer::Data(buff);
@@ -97,6 +98,15 @@ void EncodeToPngBufferWorker::Execute () {
         PNG_COMPRESSION_TYPE_DEFAULT,
         PNG_FILTER_TYPE_DEFAULT
     );
+
+    if (_metadata != NULL) {
+        png_text metadata;
+        metadata.compression = PNG_TEXT_COMPRESSION_NONE;
+        metadata.key = "lwip_data";
+        metadata.text = _metadata;
+        png_set_text(png_ptr, info_ptr, &metadata, 1);
+    }
+
     png_set_compression_level(png_ptr, compLevel);
 
     pngWriteCbData buffinf = {NULL, 0};

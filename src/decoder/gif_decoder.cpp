@@ -4,7 +4,7 @@
 #define ALPHA_OPAQUE 255
 #define C_TRANS 0
 
-string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg) {
+string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg, char ** metadata) {
 
     gifReadCbData buffinf = {(unsigned char *) buffer, size, 0};
     GifFileType * gif = NULL;
@@ -69,6 +69,10 @@ string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
         delete *cimg;
         return GifErrorString(errcode);
     }
+
+    // TODO: implement getting metadata from GIFs; this is a placeholder
+    *metadata = (char *)malloc(sizeof(char));
+    *metadata[0] = '\0';
 
     return "";
 }

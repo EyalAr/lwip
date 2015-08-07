@@ -1,6 +1,7 @@
 #include "decoder.h"
 
-string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg) {
+string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg, char ** metadata) {
+
     // check it's a valid png buffer
     if (size < 8 || png_sig_cmp((png_const_bytep) buffer, 0, 8)) {
         return "Invalid PNG buffer";
@@ -42,6 +43,20 @@ string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
     bool is_gray = false;
     png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type,
                  NULL, NULL, NULL);
+
+
+    // get metadata in first text chunk found with keyboard 'lwip_data'
+    png_textp text_ptr;
+    int num_comments = png_get_text(png_ptr, info_ptr, &text_ptr, NULL);
+
+    for (int i = 0; i < num_comments; i++) {
+        if (strcmp(text_ptr[i].key, "lwip_data") == 0) {
+            int metadata_len = (strlen(text_ptr[i].text) + 1) * sizeof(char);
+            *metadata = (char *)malloc(metadata_len);
+            memcpy(*metadata, text_ptr[i].text, metadata_len);
+            break; //TODO: handle multiple lwip_data text chunks?
+        }
+    }
 
     if (color_type == PNG_COLOR_TYPE_PALETTE) {
         png_set_palette_to_rgb(png_ptr);
