@@ -12,16 +12,16 @@
 
                     C++ Template Image Processing Toolkit
 
-                       ( http://cimg.sourceforge.net )
+                             ( http://cimg.eu )
 
-                                   1.5.9_rolling140625
+                                   1.6.5_pre080715
 
 --------------------------------------------------------------------------------
 
 # Summary
 #---------
 
-  The CImg Library is an open-source C++ toolkit for image processing.
+  The CImg Library is a small, open-source, modern C++ toolkit for image processing.
   It consists in a single header file 'CImg.h' providing a minimal set of C++
   classes and methods that can be used in your own sources, to load/save,
   process and display images. Very portable (Unix/X11,Windows, MacOS X, FreeBSD, .. ),
@@ -34,6 +34,7 @@
   - David Tschumperle (project leader) ( http://tschumperle.users.greyc.fr/ )
 
   - Maksim Aizenshtein
+  - Alberto Albiol
   - Antonio Albiol
   - Haz-Edine Assemlal
   - Vincent Barra
@@ -63,6 +64,7 @@
   - Werner Jainek
   - Daniel Kondermann
   - Pierre Kornprobst
+  - Jan W. Krieger
   - Orges Leka
   - Francois Lauze
   - Xie Long
@@ -105,7 +107,7 @@
  Antipolis/France ( http://www-sop.inria.fr/ ), in the ROBOTVIS / ODYSSEE Team.
  Since October 2004, it is maintained and developed in the Image team of
  the GREYC Lab (CNRS, UMR 6072), in Caen/France.
- Team web page : http://www.greyc.ensicaen.fr/EquipeImage/
+ Team web page : http://www.greyc.fr/image
 
 # Licenses
 #----------
