@@ -1,12 +1,10 @@
 
 /* pngpriv.h - private declarations for use inside libpng
  *
- * For conditions of distribution and use, see copyright notice in png.h
- * Copyright (c) 1998-2014 Glenn Randers-Pehrson
+ * Last changed in libpng 1.6.18 [July 23, 2015]
+ * Copyright (c) 1998-2015 Glenn Randers-Pehrson
  * (Version 0.96 Copyright (c) 1996, 1997 Andreas Dilger)
  * (Version 0.88 Copyright (c) 1995, 1996 Guy Eric Schalnat, Group 42, Inc.)
- *
- * Last changed in libpng 1.6.10 [March 6, 1014]]
  *
  * This code is released under the libpng license.
  * For conditions of distribution and use, see the disclaimer
@@ -119,8 +117,16 @@
     * PNG_ARM_NEON_OPT is set in CPPFLAGS (to >0) then arm/arm_init.c will fail
     * to compile with an appropriate #error if ALIGNED_MEMORY has been turned
     * off.
+    *
+    * Note that gcc-4.9 defines __ARM_NEON instead of the deprecated
+    * __ARM_NEON__, so we check both variants.
+    *
+    * To disable ARM_NEON optimizations entirely, and skip compiling the
+    * associated assembler code, pass --enable-arm-neon=no to configure
+    * or put -DPNG_ARM_NEON_OPT=0 in CPPFLAGS.
     */
-#  if defined(__ARM_NEON__) && defined(PNG_ALIGNED_MEMORY_SUPPORTED)
+#  if (defined(__ARM_NEON__) || defined(__ARM_NEON)) && \
+   defined(PNG_ALIGNED_MEMORY_SUPPORTED)
 #     define PNG_ARM_NEON_OPT 2
 #  else
 #     define PNG_ARM_NEON_OPT 0
@@ -148,7 +154,7 @@
     * libpng implementation list for incorporation in the next minor release.
     */
 #  ifndef PNG_ARM_NEON_IMPLEMENTATION
-#     ifdef __ARM_NEON__
+#     if defined(__ARM_NEON__) || defined(__ARM_NEON)
 #        if defined(__clang__)
             /* At present it is unknown by the libpng developers which versions
              * of clang support the intrinsics, however some or perhaps all
@@ -168,7 +174,7 @@
           */
 #        define PNG_ARM_NEON_IMPLEMENTATION 2
 #     endif /* __ARM_NEON__ */
-#  endif /* !defined PNG_ARM_NEON_IMPLEMENTATION */
+#  endif /* !PNG_ARM_NEON_IMPLEMENTATION */
 
 #  ifndef PNG_ARM_NEON_IMPLEMENTATION
       /* Use the intrinsics code by default. */
@@ -246,17 +252,18 @@
  * always be used to declare an extern data or function object in this file.
  */
 #ifndef PNG_INTERNAL_DATA
-#  define PNG_INTERNAL_DATA(type, name, array) extern type name array
+#  define PNG_INTERNAL_DATA(type, name, array) PNG_LINKAGE_DATA type name array
 #endif
 
 #ifndef PNG_INTERNAL_FUNCTION
 #  define PNG_INTERNAL_FUNCTION(type, name, args, attributes)\
-      extern PNG_FUNCTION(type, name, args, PNG_EMPTY attributes)
+      PNG_LINKAGE_FUNCTION PNG_FUNCTION(type, name, args, PNG_EMPTY attributes)
 #endif
 
 #ifndef PNG_INTERNAL_CALLBACK
 #  define PNG_INTERNAL_CALLBACK(type, name, args, attributes)\
-      extern PNG_FUNCTION(type, (PNGCBAPI name), args, PNG_EMPTY attributes)
+      PNG_LINKAGE_CALLBACK PNG_FUNCTION(type, (PNGCBAPI name), args,\
+         PNG_EMPTY attributes)
 #endif
 
 /* If floating or fixed point APIs are disabled they may still be compiled
@@ -294,48 +301,27 @@
 #  define PNG_DLL_EXPORT
 #endif
 
-/* SECURITY and SAFETY:
+/* This is a global switch to set the compilation for an installed system
+ * (a release build).  It can be set for testing debug builds to ensure that
+ * they will compile when the build type is switched to RC or STABLE, the
+ * default is just to use PNG_LIBPNG_BUILD_BASE_TYPE.  Set this in CPPFLAGS
+ * with either:
  *
- * By default libpng is built without any internal limits on image size,
- * individual heap (png_malloc) allocations or the total amount of memory used.
- * If PNG_SAFE_LIMITS_SUPPORTED is defined, however, the limits below are used
- * (unless individually overridden).  These limits are believed to be fairly
- * safe, but builders of secure systems should verify the values against the
- * real system capabilities.
+ *   -DPNG_RELEASE_BUILD Turns on the release compile path
+ *   -DPNG_RELEASE_BUILD=0 Turns it off
+ * or in your pngusr.h with
+ *   #define PNG_RELEASE_BUILD=1 Turns on the release compile path
+ *   #define PNG_RELEASE_BUILD=0 Turns it off
  */
-#ifdef PNG_SAFE_LIMITS_SUPPORTED
-   /* 'safe' limits */
-#  ifndef PNG_USER_WIDTH_MAX
-#     define PNG_USER_WIDTH_MAX 1000000
-#  endif
-#  ifndef PNG_USER_HEIGHT_MAX
-#     define PNG_USER_HEIGHT_MAX 1000000
-#  endif
-#  ifndef PNG_USER_CHUNK_CACHE_MAX
-#     define PNG_USER_CHUNK_CACHE_MAX 128
-#  endif
-#  ifndef PNG_USER_CHUNK_MALLOC_MAX
-#     define PNG_USER_CHUNK_MALLOC_MAX 8000000
-#  endif
-#else
-   /* values for no limits */
-#  ifndef PNG_USER_WIDTH_MAX
-#     define PNG_USER_WIDTH_MAX 0x7fffffff
-#  endif
-#  ifndef PNG_USER_HEIGHT_MAX
-#     define PNG_USER_HEIGHT_MAX 0x7fffffff
-#  endif
-#  ifndef PNG_USER_CHUNK_CACHE_MAX
-#     define PNG_USER_CHUNK_CACHE_MAX 0
-#  endif
-#  ifndef PNG_USER_CHUNK_MALLOC_MAX
-#     define PNG_USER_CHUNK_MALLOC_MAX 0
-#  endif
+#ifndef PNG_RELEASE_BUILD
+#  define PNG_RELEASE_BUILD (PNG_LIBPNG_BUILD_BASE_TYPE >= PNG_LIBPNG_BUILD_RC)
 #endif
 
-/* Moved to pngpriv.h at libpng-1.5.0 */
-/* NOTE: some of these may have been used in external applications as
- * these definitions were exposed in pngconf.h prior to 1.5.
+/* SECURITY and SAFETY:
+ *
+ * libpng is built with support for internal limits on image dimensions and
+ * memory usage.  These are documented in scripts/pnglibconf.dfa of the
+ * source and recorded in the machine generated header file pnglibconf.h.
  */
 
 /* If you are running on a machine where you cannot allocate more
@@ -578,13 +564,13 @@
 #define PNG_RGB_TO_GRAY_WARN  0x400000
 #define PNG_RGB_TO_GRAY       0x600000 /* two bits, RGB_TO_GRAY_ERR|WARN */
 #define PNG_ENCODE_ALPHA      0x800000 /* Added to libpng-1.5.4 */
-#define PNG_ADD_ALPHA         0x1000000 /* Added to libpng-1.2.7 */
-#define PNG_EXPAND_tRNS       0x2000000 /* Added to libpng-1.2.9 */
-#define PNG_SCALE_16_TO_8     0x4000000 /* Added to libpng-1.5.4 */
-                       /*   0x8000000 unused */
-                       /*  0x10000000 unused */
-                       /*  0x20000000 unused */
-                       /*  0x40000000 unused */
+#define PNG_ADD_ALPHA        0x1000000 /* Added to libpng-1.2.7 */
+#define PNG_EXPAND_tRNS      0x2000000 /* Added to libpng-1.2.9 */
+#define PNG_SCALE_16_TO_8    0x4000000 /* Added to libpng-1.5.4 */
+                       /*    0x8000000 unused */
+                       /*   0x10000000 unused */
+                       /*   0x20000000 unused */
+                       /*   0x40000000 unused */
 /* Flags for png_create_struct */
 #define PNG_STRUCT_PNG   0x0001
 #define PNG_STRUCT_INFO  0x0002
@@ -776,15 +762,17 @@
  * macro will fail on top-bit-set values because of the sign extension.
  */
 #define PNG_CHUNK_FROM_STRING(s)\
-   PNG_U32(0xff&(s)[0], 0xff&(s)[1], 0xff&(s)[2], 0xff&(s)[3])
+   PNG_U32(0xff & (s)[0], 0xff & (s)[1], 0xff & (s)[2], 0xff & (s)[3])
 
 /* This uses (char), not (png_byte) to avoid warnings on systems where (char) is
  * signed and the argument is a (char[])  This macro will fail miserably on
  * systems where (char) is more than 8 bits.
  */
 #define PNG_STRING_FROM_CHUNK(s,c)\
-   (void)(((char*)(s))[0]=(char)((c)>>24), ((char*)(s))[1]=(char)((c)>>16),\
-   ((char*)(s))[2]=(char)((c)>>8), ((char*)(s))[3]=(char)((c)))
+   (void)(((char*)(s))[0]=(char)(((c)>>24) & 0xff), \
+   ((char*)(s))[1]=(char)(((c)>>16) & 0xff),\
+   ((char*)(s))[2]=(char)(((c)>>8) & 0xff), \
+   ((char*)(s))[3]=(char)((c & 0xff)))
 
 /* Do the same but terminate with a null character. */
 #define PNG_CSTRING_FROM_CHUNK(s,c)\
@@ -846,12 +834,13 @@ PNG_INTERNAL_DATA(const png_uint_16, png_sRGB_table, [256]);
 PNG_INTERNAL_DATA(const png_uint_16, png_sRGB_base, [512]);
 PNG_INTERNAL_DATA(const png_byte, png_sRGB_delta, [512]);
 
-#define PNG_sRGB_FROM_LINEAR(linear) ((png_byte)((png_sRGB_base[(linear)>>15] +\
-   ((((linear)&0x7fff)*png_sRGB_delta[(linear)>>15])>>12)) >> 8))
+#define PNG_sRGB_FROM_LINEAR(linear) \
+  ((png_byte)(0xff & ((png_sRGB_base[(linear)>>15] \
+   + ((((linear) & 0x7fff)*png_sRGB_delta[(linear)>>15])>>12)) >> 8)))
    /* Given a value 'linear' in the range 0..255*65535 calculate the 8-bit sRGB
     * encoded value with maximum error 0.646365.  Note that the input is not a
     * 16-bit value; it has been multiplied by 255! */
-#endif /* PNG_SIMPLIFIED_READ/WRITE */
+#endif /* SIMPLIFIED_READ/WRITE */
 
 
 /* Inhibit C++ name-mangling for libpng functions but not for system calls. */
@@ -906,7 +895,7 @@ PNG_INTERNAL_FUNCTION(png_voidp,png_malloc_base,(png_const_structrp png_ptr,
 #if defined(PNG_TEXT_SUPPORTED) || defined(PNG_sPLT_SUPPORTED) ||\
    defined(PNG_STORE_UNKNOWN_CHUNKS_SUPPORTED)
 /* Internal array allocator, outputs no error or warning messages on failure,
- * just returns NULL.  
+ * just returns NULL.
  */
 PNG_INTERNAL_FUNCTION(png_voidp,png_malloc_array,(png_const_structrp png_ptr,
    int nelements, size_t element_size),PNG_ALLOCATED);
@@ -1086,7 +1075,7 @@ PNG_INTERNAL_FUNCTION(void,png_write_tEXt,(png_structrp png_ptr,
 
 #ifdef PNG_WRITE_zTXt_SUPPORTED
 PNG_INTERNAL_FUNCTION(void,png_write_zTXt,(png_structrp png_ptr, png_const_charp
-    key, png_const_charp text, png_size_t text_len, int compression),PNG_EMPTY);
+    key, png_const_charp text, int compression),PNG_EMPTY);
 #endif
 
 #ifdef PNG_WRITE_iTXt_SUPPORTED
@@ -1225,7 +1214,7 @@ PNG_INTERNAL_FUNCTION(void,png_read_finish_IDAT,(png_structrp png_ptr),
 PNG_INTERNAL_FUNCTION(void,png_read_finish_row,(png_structrp png_ptr),
    PNG_EMPTY);
    /* Finish a row while reading, dealing with interlacing passes, etc. */
-#endif /* PNG_SEQUENTIAL_READ_SUPPORTED */
+#endif /* SEQUENTIAL_READ */
 
 /* Initialize the row buffers, etc. */
 PNG_INTERNAL_FUNCTION(void,png_read_start_row,(png_structrp png_ptr),PNG_EMPTY);
@@ -1301,7 +1290,7 @@ PNG_INTERNAL_FUNCTION(void,png_handle_hIST,(png_structrp png_ptr,
 #ifdef PNG_READ_iCCP_SUPPORTED
 PNG_INTERNAL_FUNCTION(void,png_handle_iCCP,(png_structrp png_ptr,
     png_inforp info_ptr, png_uint_32 length),PNG_EMPTY);
-#endif /* PNG_READ_iCCP_SUPPORTED */
+#endif /* READ_iCCP */
 
 #ifdef PNG_READ_iTXt_SUPPORTED
 PNG_INTERNAL_FUNCTION(void,png_handle_iTXt,(png_structrp png_ptr,
@@ -1336,7 +1325,7 @@ PNG_INTERNAL_FUNCTION(void,png_handle_sCAL,(png_structrp png_ptr,
 #ifdef PNG_READ_sPLT_SUPPORTED
 PNG_INTERNAL_FUNCTION(void,png_handle_sPLT,(png_structrp png_ptr,
     png_inforp info_ptr, png_uint_32 length),PNG_EMPTY);
-#endif /* PNG_READ_sPLT_SUPPORTED */
+#endif /* READ_sPLT */
 
 #ifdef PNG_READ_sRGB_SUPPORTED
 PNG_INTERNAL_FUNCTION(void,png_handle_sRGB,(png_structrp png_ptr,
@@ -1404,10 +1393,6 @@ PNG_INTERNAL_FUNCTION(void,png_push_read_chunk,(png_structrp png_ptr,
 PNG_INTERNAL_FUNCTION(void,png_push_read_sig,(png_structrp png_ptr,
     png_inforp info_ptr),PNG_EMPTY);
 PNG_INTERNAL_FUNCTION(void,png_push_check_crc,(png_structrp png_ptr),PNG_EMPTY);
-PNG_INTERNAL_FUNCTION(void,png_push_crc_skip,(png_structrp png_ptr,
-    png_uint_32 length),PNG_EMPTY);
-PNG_INTERNAL_FUNCTION(void,png_push_crc_finish,(png_structrp png_ptr),
-    PNG_EMPTY);
 PNG_INTERNAL_FUNCTION(void,png_push_save_buffer,(png_structrp png_ptr),
     PNG_EMPTY);
 PNG_INTERNAL_FUNCTION(void,png_push_restore_buffer,(png_structrp png_ptr,
@@ -1450,7 +1435,7 @@ PNG_INTERNAL_FUNCTION(void,png_push_read_iTXt,(png_structrp png_ptr,
     png_inforp info_ptr),PNG_EMPTY);
 #  endif
 
-#endif /* PNG_PROGRESSIVE_READ_SUPPORTED */
+#endif /* PROGRESSIVE_READ */
 
 /* Added at libpng version 1.6.0 */
 #ifdef PNG_GAMMA_SUPPORTED
