@@ -4,7 +4,7 @@ DecodeBufferWorker::DecodeBufferWorker(
     NanCallback * callback,
     Local<Object> & buff,
     buf_dec_f_t decoder
-): NanAsyncWorker(callback), _decoder(decoder), _pixbuf(NULL), _width(0),
+): Nan::AsyncWorker(callback), _decoder(decoder), _pixbuf(NULL), _width(0),
     _height(0), _channels(0), _trans(false), _metadata("") {
     SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
     _buffer = Buffer::Data(buff);
@@ -43,25 +43,25 @@ void DecodeBufferWorker::Execute () {
 }
 
 void DecodeBufferWorker::HandleOKCallback () {
-    NanScope();
+    Nan::Scope();
 
     Local<v8::Primitive> metadata;
     if (_metadata == NULL) {
-        metadata = NanNull();
+        metadata = Nan::Null();
     } else {
-        metadata = NanNew<String>(_metadata);
+        metadata = Nan::New<String>(_metadata);
     }
 
     Local<Value> argv[] = {
-        NanNull(),
+        Nan::Null(),
         NanBufferUse(
             (char *) _pixbuf,
             _width * _height * _channels
         ),
-        NanNew<Number>(_width),
-        NanNew<Number>(_height),
-        NanNew<Number>(_channels),
-        NanNew<Boolean>(_trans),
+        Nan::New<Number>(_width),
+        Nan::New<Number>(_height),
+        Nan::New<Number>(_channels),
+        Nan::New<Boolean>(_trans),
         metadata
     };
 

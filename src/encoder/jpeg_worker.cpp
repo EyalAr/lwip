@@ -7,8 +7,8 @@ EncodeToJpegBufferWorker::EncodeToJpegBufferWorker(
     size_t width,
     size_t height,
     int quality,
-    NanCallback * callback
-): NanAsyncWorker(callback), _width(width), _height(height),
+    Nan::Callback * callback
+): Nan::AsyncWorker(callback), _width(width), _height(height),
     _quality(quality), _jpegbuf(NULL), _jpegbufsize(0) {
     SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
     _pixbuf = (unsigned char *) Buffer::Data(buff);
@@ -73,9 +73,9 @@ void EncodeToJpegBufferWorker::Execute () {
 }
 
 void EncodeToJpegBufferWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope();
     Local<Value> argv[] = {
-        NanNull(),
+        Nan::Null(),
         NanBufferUse(
             _jpegbuf,
             _jpegbufsize

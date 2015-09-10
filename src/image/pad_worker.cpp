@@ -10,8 +10,8 @@ PadWorker::PadWorker(
     unsigned char b,
     unsigned char a,
     CImg<unsigned char> * cimg,
-    NanCallback * callback
-): NanAsyncWorker(callback), _left(left), _top(top), _right(right),
+    Nan::Callback * callback
+): Nan::AsyncWorker(callback), _left(left), _top(top), _right(right),
     _bottom(bottom), _r(r), _g(g), _b(b), _a(a), _cimg(cimg) {}
 
 PadWorker::~PadWorker() {}
@@ -68,9 +68,9 @@ void PadWorker::Execute () {
 }
 
 void PadWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope();
     Local<Value> argv[] = {
-        NanNull()
+        Nan::Null()
     };
     callback->Call(1, argv);
 }

@@ -5,8 +5,8 @@ ResizeWorker::ResizeWorker(
     size_t height,
     int inter,
     CImg<unsigned char> * cimg,
-    NanCallback * callback
-): NanAsyncWorker(callback), _width(width), _height(height), _inter(inter),
+    Nan::Callback * callback
+): Nan::AsyncWorker(callback), _width(width), _height(height), _inter(inter),
     _cimg(cimg) {}
 
 ResizeWorker::~ResizeWorker() {}
@@ -22,9 +22,9 @@ void ResizeWorker::Execute () {
 }
 
 void ResizeWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope();
     Local<Value> argv[] = {
-        NanNull()
+        Nan::Null()
     };
     callback->Call(1, argv);
 }

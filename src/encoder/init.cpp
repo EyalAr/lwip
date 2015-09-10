@@ -2,13 +2,13 @@
 
 // encoder.jpeg(pixbuf, width, height, quality, callback)
 NAN_METHOD(encodeToJpegBuffer) {
-    NanScope();
+    Nan::Scope();
 
     Local<Object> buff = args[0].As<Object>();
     size_t width = args[1].As<Integer>()->Value();
     size_t height = args[2].As<Integer>()->Value();
     int quality = args[3].As<Integer>()->Value();
-    NanCallback * callback = new NanCallback(args[4].As<Function>());
+    Nan::Callback * callback = new Nan::Callback(args[4].As<Function>());
 
     NanAsyncQueueWorker(
         new EncodeToJpegBufferWorker(

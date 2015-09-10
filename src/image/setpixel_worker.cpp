@@ -8,8 +8,8 @@ SetPixelWorker::SetPixelWorker(
     unsigned char b,
     unsigned char a,
     CImg<unsigned char> * cimg,
-    NanCallback * callback
-): NanAsyncWorker(callback), _left(left), _top(top), _r(r), _g(g), _b(b), _a(a),
+    Nan::Callback * callback
+): Nan::AsyncWorker(callback), _left(left), _top(top), _r(r), _g(g), _b(b), _a(a),
     _cimg(cimg) {}
 
 SetPixelWorker::~SetPixelWorker() {}
@@ -25,9 +25,9 @@ void SetPixelWorker::Execute () {
 }
 
 void SetPixelWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope();
     Local<Value> argv[] = {
-        NanNull()
+        Nan::Null()
     };
     callback->Call(1, argv);
 }

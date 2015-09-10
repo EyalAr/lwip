@@ -39,14 +39,14 @@ LwipImage::~LwipImage() {
 };
 
 Handle<Value> LwipImage::NewInstance() {
-    NanEscapableScope();
+    Nan::EscapableHandleScope();
     Local<FunctionTemplate> constructorHandle = NanNew<FunctionTemplate>(constructor);
     Local<Object> instance = constructorHandle->GetFunction()->NewInstance();
-    return NanEscapeScope(instance);
+    return Nan::EscapableHandleScope(instance);
 }
 
 NAN_METHOD(LwipImage::New) {
-    NanScope();
+    Nan::HandleScope();
     // args[0] - pixels buffer
     // args[1,2] - width and height
     Local<Object> pixBuff = args[0].As<Object>();
@@ -65,7 +65,7 @@ NAN_METHOD(LwipImage::New) {
 // image.width():
 // --------------
 NAN_METHOD(LwipImage::width) {
-    NanScope();
+    Nan::HandleScope();
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(args.Holder());
     NanReturnValue(NanNew<Number>(obj->_cimg->width()));
 }
@@ -73,15 +73,15 @@ NAN_METHOD(LwipImage::width) {
 // image.height():
 // ---------------
 NAN_METHOD(LwipImage::height) {
-    NanScope();
+    Nan::HandleScope();
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(args.Holder());
-    NanReturnValue(NanNew<Number>(obj->_cimg->height()));
+    NanReturnValue(Nan::New<Number>(obj->_cimg->height()));
 }
 
 // image.getPixel(left, top):
 // ---------------
 NAN_METHOD(LwipImage::getPixel) {
-    NanScope();
+    Nan::HandleScope();
     size_t left = (size_t) args[0].As<Number>()->Value();
     size_t top = (size_t) args[1].As<Number>()->Value();
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(args.Holder());
@@ -96,7 +96,7 @@ NAN_METHOD(LwipImage::getPixel) {
 // image.buffer():
 // ---------------
 NAN_METHOD(LwipImage::buffer) {
-    NanScope();
+    Nan::HandleScope();
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(args.Holder());
     // return a new buffer. don't use same memory an image. make a copy.
     // image object may be gc'ed, but buffer needs to stay alive.
@@ -111,12 +111,12 @@ NAN_METHOD(LwipImage::buffer) {
 // args[2] - inter(polation)
 // args[3] - callback
 NAN_METHOD(LwipImage::resize) {
-    NanScope();
+    Nan::HandleScope();
 
     size_t width = args[0].As<Integer>()->Value();
     size_t height = args[1].As<Integer>()->Value();
     int inter = args[2].As<Integer>()->Value();
-    NanCallback * callback = new NanCallback(args[3].As<Function>());
+    Nan::Callback * callback = new Nan::Callback(args[3].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
     NanAsyncQueueWorker(
@@ -129,7 +129,7 @@ NAN_METHOD(LwipImage::resize) {
         )
     );
 
-    NanReturnUndefined();
+    return;
 }
 
 // image.rotate(degs, inter, callback):
@@ -142,14 +142,14 @@ NAN_METHOD(LwipImage::resize) {
 // args[4] - A
 // args[5] - callback
 NAN_METHOD(LwipImage::rotate) {
-    NanScope();
+    Nan::HandleScope();
 
     float degs = (float) args[0].As<Number>()->Value();
     unsigned char r = (unsigned char) args[1].As<Integer>()->Value();
     unsigned char g = (unsigned char) args[2].As<Integer>()->Value();
     unsigned char b = (unsigned char) args[3].As<Integer>()->Value();
     unsigned char a = (unsigned char) args[4].As<Integer>()->Value();
-    NanCallback * callback = new NanCallback(args[5].As<Function>());
+    Nan::Callback * callback = new Nan::Callback(args[5].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
     NanAsyncQueueWorker(
@@ -164,7 +164,7 @@ NAN_METHOD(LwipImage::rotate) {
         )
     );
 
-    NanReturnUndefined();
+    return;
 }
 
 // image.blur(sigma, callback):
@@ -173,10 +173,10 @@ NAN_METHOD(LwipImage::rotate) {
 // args[0] - sigma
 // args[1] - callback
 NAN_METHOD(LwipImage::blur) {
-    NanScope();
+    Nan::HandleScope();
 
     float sigma = (float) args[0].As<Number>()->Value();
-    NanCallback * callback = new NanCallback(args[1].As<Function>());
+    Nan::Callback * callback = new Nan::Callback(args[1].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
     NanAsyncQueueWorker(
@@ -187,7 +187,7 @@ NAN_METHOD(LwipImage::blur) {
         )
     );
 
-    NanReturnUndefined();
+    return;
 }
 
 // image.crop(left, top, right, bottom, callback):
@@ -199,13 +199,13 @@ NAN_METHOD(LwipImage::blur) {
 // args[3] - bottom
 // args[4] - callback
 NAN_METHOD(LwipImage::crop) {
-    NanScope();
+    Nan::HandleScope();
 
     size_t left = (size_t) args[0].As<Number>()->Value();
     size_t top = (size_t) args[1].As<Number>()->Value();
     size_t right = (size_t) args[2].As<Number>()->Value();
     size_t bottom = (size_t) args[3].As<Number>()->Value();
-    NanCallback * callback = new NanCallback(args[4].As<Function>());
+    Nan::Callback * callback = new Nan::Callback(args[4].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
     NanAsyncQueueWorker(
@@ -219,7 +219,7 @@ NAN_METHOD(LwipImage::crop) {
         )
     );
 
-    NanReturnUndefined();
+    return;
 }
 
 // image.mirror(xaxis, yaxis, callback):
@@ -229,11 +229,11 @@ NAN_METHOD(LwipImage::crop) {
 // args[1] - yaxis (boolean)
 // args[2] - callback
 NAN_METHOD(LwipImage::mirror) {
-    NanScope();
+    Nan::HandleScope();
 
     bool xaxis = args[0]->BooleanValue();
     bool yaxis = args[1]->BooleanValue();
-    NanCallback * callback = new NanCallback(args[2].As<Function>());
+    Nan::Callback * callback = new Nan::Callback(args[2].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
     NanAsyncQueueWorker(
@@ -245,7 +245,7 @@ NAN_METHOD(LwipImage::mirror) {
         )
     );
 
-    NanReturnUndefined();
+    return;
 }
 
 // image.pad(left, top, right, bottom, color, callback):
@@ -261,7 +261,7 @@ NAN_METHOD(LwipImage::mirror) {
 // args[7] - a
 // args[8] - callback
 NAN_METHOD(LwipImage::pad) {
-    NanScope();
+    Nan::HandleScope();
 
     size_t left = (size_t) args[0].As<Number>()->Value();
     size_t top = (size_t) args[1].As<Number>()->Value();
@@ -271,7 +271,7 @@ NAN_METHOD(LwipImage::pad) {
                   g = (unsigned char) args[5].As<Integer>()->Value(),
                   b = (unsigned char) args[6].As<Integer>()->Value(),
                   a = (unsigned char) args[7].As<Integer>()->Value();
-    NanCallback * callback = new NanCallback(args[8].As<Function>());
+    Nan::Callback * callback = new Nan::Callback(args[8].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
     NanAsyncQueueWorker(
@@ -289,7 +289,7 @@ NAN_METHOD(LwipImage::pad) {
         )
     );
 
-    NanReturnUndefined();
+    return;
 }
 
 // image.sharpen(amplitude, callback):
@@ -298,10 +298,10 @@ NAN_METHOD(LwipImage::pad) {
 // args[0] - amplitude
 // args[1] - callback
 NAN_METHOD(LwipImage::sharpen) {
-    NanScope();
+    Nan::HandleScope();
 
     float amp = (float) args[0].As<Number>()->Value();
-    NanCallback * callback = new NanCallback(args[1].As<Function>());
+    Nan::Callback * callback = new Nan::Callback(args[1].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
     NanAsyncQueueWorker(
@@ -312,7 +312,7 @@ NAN_METHOD(LwipImage::sharpen) {
         )
     );
 
-    NanReturnUndefined();
+    return;
 }
 
 // image.hslaAdj(hd, sd, ld, callback):
@@ -324,13 +324,13 @@ NAN_METHOD(LwipImage::sharpen) {
 // args[3] - alpha delta
 // args[4] - callback
 NAN_METHOD(LwipImage::hslaAdj) {
-    NanScope();
+    Nan::HandleScope();
 
     float hd = (float) args[0].As<Number>()->Value();
     float sd = (float) args[1].As<Number>()->Value();
     float ld = (float) args[2].As<Number>()->Value();
     float ad = (float) args[3].As<Number>()->Value();
-    NanCallback * callback = new NanCallback(args[4].As<Function>());
+    Nan::Callback * callback = new Nan::Callback(args[4].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
     NanAsyncQueueWorker(
@@ -344,7 +344,7 @@ NAN_METHOD(LwipImage::hslaAdj) {
         )
     );
 
-    NanReturnUndefined();
+    return;
 }
 
 // image.opacify(callback):
@@ -352,9 +352,9 @@ NAN_METHOD(LwipImage::hslaAdj) {
 
 // args[0] - callback
 NAN_METHOD(LwipImage::opacify) {
-    NanScope();
+    Nan::HandleScope();
 
-    NanCallback * callback = new NanCallback(args[0].As<Function>());
+    Nan::Callback * callback = new Nan::Callback(args[0].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
     NanAsyncQueueWorker(
@@ -364,7 +364,7 @@ NAN_METHOD(LwipImage::opacify) {
         )
     );
 
-    NanReturnUndefined();
+    return;
 }
 
 // image.paste(callback):
@@ -377,14 +377,14 @@ NAN_METHOD(LwipImage::opacify) {
 // args[4] - height
 // args[5] - callback
 NAN_METHOD(LwipImage::paste) {
-    NanScope();
+    Nan::HandleScope();
 
     size_t left = (size_t) args[0].As<Number>()->Value();
     size_t top = (size_t) args[1].As<Number>()->Value();
     Local<Object> pixBuff = args[2].As<Object>();
     size_t width = (size_t) args[3].As<Number>()->Value();
     size_t height = (size_t) args[4].As<Number>()->Value();
-    NanCallback * callback = new NanCallback(args[5].As<Function>());
+    Nan::Callback * callback = new Nan::Callback(args[5].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
     NanAsyncQueueWorker(
@@ -399,7 +399,7 @@ NAN_METHOD(LwipImage::paste) {
         )
     );
 
-    NanReturnUndefined();
+    return;
 }
 
 // image.setPixel(left, top, color, callback):
@@ -413,7 +413,7 @@ NAN_METHOD(LwipImage::paste) {
 // args[5] - alpha
 // args[6] - callback
 NAN_METHOD(LwipImage::setPixel) {
-    NanScope();
+    Nan::HandleScope();
 
     size_t left = (size_t) args[0].As<Number>()->Value();
     size_t top = (size_t) args[1].As<Number>()->Value();
@@ -421,7 +421,7 @@ NAN_METHOD(LwipImage::setPixel) {
     unsigned char g = (unsigned char) args[3].As<Integer>()->Value();
     unsigned char b = (unsigned char) args[4].As<Integer>()->Value();
     unsigned char a = (unsigned char) args[5].As<Integer>()->Value();
-    NanCallback * callback = new NanCallback(args[6].As<Function>());
+    Nan::Callback * callback = new Nan::Callback(args[6].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(args.This())->_cimg;
 
     NanAsyncQueueWorker(
@@ -437,5 +437,5 @@ NAN_METHOD(LwipImage::setPixel) {
         )
     );
 
-    NanReturnUndefined();
+    return;
 }

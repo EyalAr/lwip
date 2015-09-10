@@ -3,8 +3,8 @@
 BlurWorker::BlurWorker(
     float sigma,
     CImg<unsigned char> * cimg,
-    NanCallback * callback
-): NanAsyncWorker(callback), _sigma(sigma), _cimg(cimg) {}
+    Nan::Callback * callback
+): Nan::AsyncWorker(callback), _sigma(sigma), _cimg(cimg) {}
 
 BlurWorker::~BlurWorker() {}
 
@@ -21,9 +21,9 @@ void BlurWorker::Execute () {
 }
 
 void BlurWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope();
     Local<Value> argv[] = {
-        NanNull()
+        Nan::Null()
     };
     callback->Call(1, argv);
 }

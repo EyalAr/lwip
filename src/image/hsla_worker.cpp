@@ -6,8 +6,8 @@ HSLAWorker::HSLAWorker(
     float ld,
     float ad,
     CImg<unsigned char> * cimg,
-    NanCallback * callback
-): NanAsyncWorker(callback), _hs(hs), _sd(sd), _ld(ld), _ad(ad), _cimg(cimg) {}
+    Nan::Callback * callback
+): Nan::AsyncWorker(callback), _hs(hs), _sd(sd), _ld(ld), _ad(ad), _cimg(cimg) {}
 
 HSLAWorker::~HSLAWorker() {}
 
@@ -58,9 +58,9 @@ void HSLAWorker::Execute () {
 }
 
 void HSLAWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope();
     Local<Value> argv[] = {
-        NanNull()
+        Nan::Null()
     };
     callback->Call(1, argv);
 }

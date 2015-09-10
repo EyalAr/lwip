@@ -11,8 +11,8 @@ EncodeToPngBufferWorker::EncodeToPngBufferWorker(
     bool interlaced,
     bool trans,
     char * metadata,
-    NanCallback * callback
-): NanAsyncWorker(callback), _width(width), _height(height),
+    Nan::Callback * callback
+): Nan::AsyncWorker(callback), _width(width), _height(height),
     _compression(compression), _interlaced(interlaced), _trans(trans), _metadata(metadata),
     _pngbuf(NULL), _pngbufsize(0) {
     SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
@@ -146,9 +146,9 @@ void EncodeToPngBufferWorker::Execute () {
 }
 
 void EncodeToPngBufferWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope();
     Local<Value> argv[] = {
-        NanNull(),
+        Nan::Null(),
         NanBufferUse(
             _pngbuf,
             _pngbufsize

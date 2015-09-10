@@ -4,8 +4,8 @@ MirrorWorker::MirrorWorker(
         bool xaxis,
         bool yaxis,
     CImg<unsigned char> * cimg,
-    NanCallback * callback
-): NanAsyncWorker(callback), _xaxis(xaxis), _yaxis(yaxis), _cimg(cimg) {}
+    Nan::Callback * callback
+): Nan::AsyncWorker(callback), _xaxis(xaxis), _yaxis(yaxis), _cimg(cimg) {}
 
 MirrorWorker::~MirrorWorker() {}
 
@@ -27,9 +27,9 @@ void MirrorWorker::Execute () {
 }
 
 void MirrorWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope();
     Local<Value> argv[] = {
-        NanNull()
+        Nan::Null()
     };
     callback->Call(1, argv);
 }

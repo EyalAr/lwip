@@ -2,8 +2,8 @@
 
 OpacifyWorker::OpacifyWorker(
     CImg<unsigned char> * cimg,
-    NanCallback * callback
-): NanAsyncWorker(callback), _cimg(cimg) {}
+    Nan::Callback * callback
+): Nan::AsyncWorker(callback), _cimg(cimg) {}
 
 OpacifyWorker::~OpacifyWorker() {}
 
@@ -23,9 +23,9 @@ void OpacifyWorker::Execute () {
 }
 
 void OpacifyWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope();
     Local<Value> argv[] = {
-        NanNull()
+        Nan::Null()
     };
     callback->Call(1, argv);
 }

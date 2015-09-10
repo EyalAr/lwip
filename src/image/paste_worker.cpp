@@ -7,8 +7,8 @@ PasteWorker::PasteWorker(
     size_t width,
     size_t height,
     CImg<unsigned char> * cimg,
-    NanCallback * callback
-): NanAsyncWorker(callback), _left(left), _top(top), _width(width),
+    Nan::Callback * callback
+): Nan::AsyncWorker(callback), _left(left), _top(top), _width(width),
    _height(height), _cimg(cimg) {
     SaveToPersistent("pixbuf", pixbuf);
     _pixels = (unsigned char *) Buffer::Data(pixbuf);
@@ -47,9 +47,9 @@ void PasteWorker::Execute () {
 }
 
 void PasteWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope();
     Local<Value> argv[] = {
-        NanNull()
+        Nan::Null()
     };
     callback->Call(1, argv);
 }

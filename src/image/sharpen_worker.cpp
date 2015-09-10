@@ -3,8 +3,8 @@
 SharpenWorker::SharpenWorker(
     float amp,
     CImg<unsigned char> * cimg,
-    NanCallback * callback
-): NanAsyncWorker(callback), _amp(amp), _cimg(cimg) {}
+    Nan::Callback * callback
+): Nan::AsyncWorker(callback), _amp(amp), _cimg(cimg) {}
 
 SharpenWorker::~SharpenWorker() {}
 
@@ -20,9 +20,9 @@ void SharpenWorker::Execute () {
 }
 
 void SharpenWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope();
     Local<Value> argv[] = {
-        NanNull()
+        Nan::Null()
     };
     callback->Call(1, argv);
 }

@@ -6,8 +6,8 @@ CropWorker::CropWorker(
     size_t right,
     size_t bottom,
     CImg<unsigned char> * cimg,
-    NanCallback * callback
-): NanAsyncWorker(callback), _left(left), _top(top), _right(right),
+    Nan::Callback * callback
+): Nan::AsyncWorker(callback), _left(left), _top(top), _right(right),
     _bottom(bottom), _cimg(cimg) {}
 
 CropWorker::~CropWorker() {}
@@ -23,9 +23,9 @@ void CropWorker::Execute () {
 }
 
 void CropWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope();
     Local<Value> argv[] = {
-        NanNull()
+        Nan::Null()
     };
     callback->Call(1, argv);
 }
