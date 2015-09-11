@@ -48,18 +48,18 @@ public:
     LwipImage(unsigned char * data, size_t width, size_t height);
     ~LwipImage();
 private:
-    static Persistent<FunctionTemplate> constructor;
+    static Nan::Persistent<v8::FunctionTemplate> constructor;
     CImg<unsigned char> * _cimg;
 };
 
-class ResizeWorker : public NanAsyncWorker {
+class ResizeWorker : public Nan::AsyncWorker {
 public:
     ResizeWorker(
         size_t width,
         size_t height,
         int inter,
         CImg<unsigned char> * cimg,
-        NanCallback * callback
+        Nan::Callback * callback
     );
     ~ResizeWorker();
     void Execute ();
@@ -71,7 +71,7 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-class RotateWorker : public NanAsyncWorker {
+class RotateWorker : public Nan::AsyncWorker {
 public:
     RotateWorker(
         float degs,
@@ -80,7 +80,7 @@ public:
         unsigned char b,
         unsigned char a,
         CImg<unsigned char> * cimg,
-        NanCallback * callback
+        Nan::Callback * callback
     );
     ~RotateWorker();
     void Execute ();
@@ -94,12 +94,12 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-class BlurWorker : public NanAsyncWorker {
+class BlurWorker : public Nan::AsyncWorker {
 public:
     BlurWorker(
         float sigma,
         CImg<unsigned char> * cimg,
-        NanCallback * callback
+        Nan::Callback * callback
     );
     ~BlurWorker();
     void Execute ();
@@ -109,7 +109,7 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-class CropWorker : public NanAsyncWorker {
+class CropWorker : public Nan::AsyncWorker {
 public:
     CropWorker(
         size_t left,
@@ -117,7 +117,7 @@ public:
         size_t right,
         size_t bottom,
         CImg<unsigned char> * cimg,
-        NanCallback * callback
+        Nan::Callback * callback
     );
     ~CropWorker();
     void Execute ();
@@ -130,13 +130,13 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-class MirrorWorker : public NanAsyncWorker {
+class MirrorWorker : public Nan::AsyncWorker {
 public:
     MirrorWorker(
         bool xaxis,
         bool yaxis,
         CImg<unsigned char> * cimg,
-        NanCallback * callback
+        Nan::Callback * callback
     );
     ~MirrorWorker();
     void Execute ();
@@ -147,7 +147,7 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-class PadWorker : public NanAsyncWorker {
+class PadWorker : public Nan::AsyncWorker {
 public:
     PadWorker(
         size_t left,
@@ -159,7 +159,7 @@ public:
         unsigned char b,
         unsigned char a,
         CImg<unsigned char> * cimg,
-        NanCallback * callback
+        Nan::Callback * callback
     );
     ~PadWorker();
     void Execute ();
@@ -176,12 +176,12 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-class SharpenWorker : public NanAsyncWorker {
+class SharpenWorker : public Nan::AsyncWorker {
 public:
     SharpenWorker(
         float amp,
         CImg<unsigned char> * cimg,
-        NanCallback * callback
+        Nan::Callback * callback
     );
     ~SharpenWorker();
     void Execute ();
@@ -191,7 +191,7 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-class HSLAWorker : public NanAsyncWorker {
+class HSLAWorker : public Nan::AsyncWorker {
 public:
     HSLAWorker(
         float hs,
@@ -199,7 +199,7 @@ public:
         float ld,
         float ad,
         CImg<unsigned char> * cimg,
-        NanCallback * callback
+        Nan::Callback * callback
     );
     ~HSLAWorker();
     void Execute ();
@@ -212,11 +212,11 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-class OpacifyWorker : public NanAsyncWorker {
+class OpacifyWorker : public Nan::AsyncWorker {
 public:
     OpacifyWorker(
         CImg<unsigned char> * cimg,
-        NanCallback * callback
+        Nan::Callback * callback
     );
     ~OpacifyWorker();
     void Execute ();
@@ -225,7 +225,7 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-class PasteWorker : public NanAsyncWorker {
+class PasteWorker : public Nan::AsyncWorker {
 public:
     PasteWorker(
         size_t left,
@@ -234,7 +234,7 @@ public:
         size_t width,
         size_t height,
         CImg<unsigned char> * cimg,
-        NanCallback * callback
+        Nan::Callback * callback
     );
     ~PasteWorker();
     void Execute ();
@@ -248,7 +248,7 @@ private:
     CImg<unsigned char> * _cimg;
 };
 
-class SetPixelWorker : public NanAsyncWorker {
+class SetPixelWorker : public Nan::AsyncWorker {
 public:
     SetPixelWorker(
         size_t left,
@@ -258,7 +258,7 @@ public:
         unsigned char b,
         unsigned char a,
         CImg<unsigned char> * cimg,
-        NanCallback * callback
+        Nan::Callback * callback
     );
     ~SetPixelWorker();
     void Execute ();

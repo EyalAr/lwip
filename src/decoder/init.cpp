@@ -1,43 +1,43 @@
 #include "decoder.h"
 
 NAN_METHOD(decodeJpegBuffer) {
-    NanScope();
+    Nan::HandleScope scope;
 
-    Local<Object> jpegBuff = args[0].As<Object>();
-    NanCallback * callback = new NanCallback(args[1].As<Function>());
+    Local<Object> jpegBuff = info[0].As<Object>();
+    Nan::Callback * callback = new Nan::Callback(info[1].As<Function>());
 
-    NanAsyncQueueWorker(new DecodeBufferWorker(callback, jpegBuff, decode_jpeg_buffer));
-    NanReturnUndefined();
+    Nan::AsyncQueueWorker(new DecodeBufferWorker(callback, jpegBuff, decode_jpeg_buffer));
+    return;;
 }
 
 NAN_METHOD(decodePngBuffer) {
-    NanScope();
+    Nan::HandleScope scope;
 
-    Local<Object> pngBuff = args[0].As<Object>();
-    NanCallback * callback = new NanCallback(args[1].As<Function>());
+    Local<Object> pngBuff = info[0].As<Object>();
+    Nan::Callback * callback = new Nan::Callback(info[1].As<Function>());
 
-    NanAsyncQueueWorker(new DecodeBufferWorker(callback, pngBuff, decode_png_buffer));
-    NanReturnUndefined();
+    Nan::AsyncQueueWorker(new DecodeBufferWorker(callback, pngBuff, decode_png_buffer));
+    return;;
 }
 
 NAN_METHOD(decodeGifBuffer) {
-    NanScope();
+    Nan::HandleScope scope;
 
-    Local<Object> gifBuff = args[0].As<Object>();
-    NanCallback * callback = new NanCallback(args[1].As<Function>());
+    Local<Object> gifBuff = info[0].As<Object>();
+    Nan::Callback * callback = new Nan::Callback(info[1].As<Function>());
 
-    NanAsyncQueueWorker(new DecodeBufferWorker(callback, gifBuff, decode_gif_buffer));
-    NanReturnUndefined();
+    Nan::AsyncQueueWorker(new DecodeBufferWorker(callback, gifBuff, decode_gif_buffer));
+    return;;
 }
 
 // create an init function for our node module
 void InitAll(Handle<Object> exports) {
-    exports->Set(NanNew("jpeg"),
-                 NanNew<FunctionTemplate>(decodeJpegBuffer)->GetFunction());
-    exports->Set(NanNew("png"),
-                 NanNew<FunctionTemplate>(decodePngBuffer)->GetFunction());
-    exports->Set(NanNew("gif"),
-                 NanNew<FunctionTemplate>(decodeGifBuffer)->GetFunction());
+    exports->Set(Nan::New("jpeg").ToLocalChecked(),
+                 Nan::New<FunctionTemplate>(decodeJpegBuffer)->GetFunction());
+    exports->Set(Nan::New("png").ToLocalChecked(),
+                 Nan::New<FunctionTemplate>(decodePngBuffer)->GetFunction());
+    exports->Set(Nan::New("gif").ToLocalChecked(),
+                 Nan::New<FunctionTemplate>(decodeGifBuffer)->GetFunction());
 }
 
 // use NODE_MODULE macro to register our module:
