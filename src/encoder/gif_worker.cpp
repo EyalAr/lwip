@@ -12,8 +12,8 @@ EncodeToGifBufferWorker::EncodeToGifBufferWorker(
     bool interlaced,
     bool trans,
     int threshold,
-    NanCallback * callback
-): NanAsyncWorker(callback), _width(width), _height(height),
+    Nan::Callback * callback
+): Nan::AsyncWorker(callback), _width(width), _height(height),
     _cmapSize(cmapSize), _colors(colors), _interlaced(interlaced), _trans(trans),
     _threshold(threshold), _gifbuf(NULL), _gifbufsize(0) {
     SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
@@ -137,13 +137,13 @@ void EncodeToGifBufferWorker::Execute () {
 }
 
 void EncodeToGifBufferWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope scope;
     Local<Value> argv[] = {
-        NanNull(),
-        NanBufferUse(
+        Nan::Null(),
+        Nan::NewBuffer(
             _gifbuf,
             _gifbufsize
-        )
+        ).ToLocalChecked()
     };
     callback->Call(2, argv);
 }

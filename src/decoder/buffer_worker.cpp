@@ -1,10 +1,10 @@
 #include "decoder.h"
 
 DecodeBufferWorker::DecodeBufferWorker(
-    NanCallback * callback,
+    Nan::Callback * callback,
     Local<Object> & buff,
     buf_dec_f_t decoder
-): NanAsyncWorker(callback), _decoder(decoder), _pixbuf(NULL), _width(0),
+): Nan::AsyncWorker(callback), _decoder(decoder), _pixbuf(NULL), _width(0),
     _height(0), _channels(0), _trans(false), _metadata("") {
     SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
     _buffer = Buffer::Data(buff);
@@ -43,25 +43,25 @@ void DecodeBufferWorker::Execute () {
 }
 
 void DecodeBufferWorker::HandleOKCallback () {
-    NanScope();
+    Nan::HandleScope scope;
 
     Local<v8::Primitive> metadata;
     if (_metadata == NULL) {
-        metadata = NanNull();
+        metadata = Nan::Null();
     } else {
-        metadata = NanNew<String>(_metadata);
+        metadata = Nan::New<String>(_metadata).ToLocalChecked();
     }
 
     Local<Value> argv[] = {
-        NanNull(),
-        NanBufferUse(
+        Nan::Null(),
+        Nan::NewBuffer(
             (char *) _pixbuf,
             _width * _height * _channels
-        ),
-        NanNew<Number>(_width),
-        NanNew<Number>(_height),
-        NanNew<Number>(_channels),
-        NanNew<Boolean>(_trans),
+        ).ToLocalChecked(),
+        Nan::New<Number>(_width),
+        Nan::New<Number>(_height),
+        Nan::New<Number>(_channels),
+        Nan::New<Boolean>(_trans),
         metadata
     };
 
