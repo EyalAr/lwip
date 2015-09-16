@@ -143,7 +143,7 @@ void EncodeToGifBufferWorker::HandleOKCallback () {
         Nan::NewBuffer(
             _gifbuf,
             _gifbufsize
-        )
+        ).ToLocalChecked()
     };
     callback->Call(2, argv);
 }

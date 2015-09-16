@@ -49,7 +49,7 @@ void DecodeBufferWorker::HandleOKCallback () {
     if (_metadata == NULL) {
         metadata = Nan::Null();
     } else {
-        metadata = Nan::New<String>(_metadata);
+        metadata = Nan::New<String>(_metadata).ToLocalChecked();
     }
 
     Local<Value> argv[] = {
@@ -57,7 +57,7 @@ void DecodeBufferWorker::HandleOKCallback () {
         Nan::NewBuffer(
             (char *) _pixbuf,
             _width * _height * _channels
-        ),
+        ).ToLocalChecked(),
         Nan::New<Number>(_width),
         Nan::New<Number>(_height),
         Nan::New<Number>(_channels),

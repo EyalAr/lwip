@@ -152,7 +152,7 @@ void EncodeToPngBufferWorker::HandleOKCallback () {
         Nan::NewBuffer(
             _pngbuf,
             _pngbufsize
-        )
+        ).ToLocalChecked()
     };
     callback->Call(2, argv);
 }

@@ -1,30 +1,30 @@
 #include "image.h"
 
-Persistent<FunctionTemplate> LwipImage::constructor;
+Nan::Persistent<FunctionTemplate> LwipImage::constructor;
 
 void LwipImage::Init(Handle<Object> exports) {
     // Prepare constructor template
     Local<FunctionTemplate> tpl = Nan::New<FunctionTemplate>(New);
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
-    tpl->SetClassName(Nan::New("LwipImage"));
-    NODE_SET_PROTOTYPE_METHOD(tpl, "width", width);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "height", height);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "getPixel", getPixel);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "buffer", buffer);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "resize", resize);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "rotate", rotate);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "blur", blur);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "crop", crop);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "mirror", mirror);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "pad", pad);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "sharpen", sharpen);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "hslaAdj", hslaAdj);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "opacify", opacify);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "paste", paste);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "setPixel", setPixel);
-    NanAssignPersistent(constructor, tpl);
+    tpl->SetClassName(Nan::New("LwipImage").ToLocalChecked());
+    Nan::SetPrototypeMethod(tpl, "width", width);
+    Nan::SetPrototypeMethod(tpl, "height", height);
+    Nan::SetPrototypeMethod(tpl, "getPixel", getPixel);
+    Nan::SetPrototypeMethod(tpl, "buffer", buffer);
+    Nan::SetPrototypeMethod(tpl, "resize", resize);
+    Nan::SetPrototypeMethod(tpl, "rotate", rotate);
+    Nan::SetPrototypeMethod(tpl, "blur", blur);
+    Nan::SetPrototypeMethod(tpl, "crop", crop);
+    Nan::SetPrototypeMethod(tpl, "mirror", mirror);
+    Nan::SetPrototypeMethod(tpl, "pad", pad);
+    Nan::SetPrototypeMethod(tpl, "sharpen", sharpen);
+    Nan::SetPrototypeMethod(tpl, "hslaAdj", hslaAdj);
+    Nan::SetPrototypeMethod(tpl, "opacify", opacify);
+    Nan::SetPrototypeMethod(tpl, "paste", paste);
+    Nan::SetPrototypeMethod(tpl, "setPixel", setPixel);
+    constructor.Reset(tpl);
     exports->Set(
-        Nan::New("LwipImage"),
+        Nan::New("LwipImage").ToLocalChecked(),
         Nan::New<FunctionTemplate>(constructor)->GetFunction()
     );
 }
@@ -39,10 +39,10 @@ LwipImage::~LwipImage() {
 };
 
 Handle<Value> LwipImage::NewInstance() {
-    Nan::EscapableHandleScope();
+    Nan::EscapableHandleScope scope;
     Local<FunctionTemplate> constructorHandle = Nan::New<FunctionTemplate>(constructor);
     Local<Object> instance = constructorHandle->GetFunction()->NewInstance();
-    return Nan::EscapableHandleScope(instance);
+    return scope.Escape(instance);
 }
 
 NAN_METHOD(LwipImage::New) {
@@ -56,7 +56,7 @@ NAN_METHOD(LwipImage::New) {
     // TODO: handle CImg exception
     LwipImage * obj = new LwipImage(pixels, width, height);
     obj->Wrap(info.This());
-    NanReturnValue(info.This());
+    info.GetReturnValue().Set(info.This());
 }
 
 // IMAGE JS OBJECT METHODS:
@@ -67,7 +67,7 @@ NAN_METHOD(LwipImage::New) {
 NAN_METHOD(LwipImage::width) {
     Nan::HandleScope();
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(info.Holder());
-    NanReturnValue(Nan::New<Number>(obj->_cimg->width()));
+    info.GetReturnValue().Set(Nan::New<Number>(obj->_cimg->width()));
 }
 
 // image.height():
@@ -75,7 +75,7 @@ NAN_METHOD(LwipImage::width) {
 NAN_METHOD(LwipImage::height) {
     Nan::HandleScope();
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(info.Holder());
-    NanReturnValue(Nan::New<Number>(obj->_cimg->height()));
+    info.GetReturnValue().Set(Nan::New<Number>(obj->_cimg->height()));
 }
 
 // image.getPixel(left, top):
@@ -90,7 +90,7 @@ NAN_METHOD(LwipImage::getPixel) {
     rgba->Set(1, Nan::New((*(obj->_cimg))(left, top, 0, 1))); // green
     rgba->Set(2, Nan::New((*(obj->_cimg))(left, top, 0, 2))); // blue
     rgba->Set(3, Nan::New((*(obj->_cimg))(left, top, 0, 3))); // alpha
-    NanReturnValue(rgba);
+    info.GetReturnValue().Set(rgba);
 }
 
 // image.buffer():
@@ -100,7 +100,7 @@ NAN_METHOD(LwipImage::buffer) {
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(info.Holder());
     // return a new buffer. don't use same memory an image. make a copy.
     // image object may be gc'ed, but buffer needs to stay alive.
-    NanReturnValue(NanNewBufferHandle((char *)obj->_cimg->data(), obj->_cimg->size()));
+    info.GetReturnValue().Set(Nan::NewBuffer((char *)obj->_cimg->data(), obj->_cimg->size()).ToLocalChecked());
 }
 
 // image.resize(width, height, inter, callback):

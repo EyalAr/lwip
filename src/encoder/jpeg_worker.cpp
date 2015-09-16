@@ -79,7 +79,7 @@ void EncodeToJpegBufferWorker::HandleOKCallback () {
         Nan::NewBuffer(
             _jpegbuf,
             _jpegbufsize
-        )
+        ).ToLocalChecked()
     };
     callback->Call(2, argv);
 }

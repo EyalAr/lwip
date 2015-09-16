@@ -48,7 +48,7 @@ public:
     LwipImage(unsigned char * data, size_t width, size_t height);
     ~LwipImage();
 private:
-    static Persistent<FunctionTemplate> constructor;
+    static Nan::Persistent<v8::FunctionTemplate> constructor;
     CImg<unsigned char> * _cimg;
 };
 
