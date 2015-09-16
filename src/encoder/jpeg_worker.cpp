@@ -76,7 +76,7 @@ void EncodeToJpegBufferWorker::HandleOKCallback () {
     Nan::HandleScope();
     Local<Value> argv[] = {
         Nan::Null(),
-        NanBufferUse(
+        Nan::NewBuffer(
             _jpegbuf,
             _jpegbufsize
         )

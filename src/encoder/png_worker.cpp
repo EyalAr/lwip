@@ -149,7 +149,7 @@ void EncodeToPngBufferWorker::HandleOKCallback () {
     Nan::HandleScope();
     Local<Value> argv[] = {
         Nan::Null(),
-        NanBufferUse(
+        Nan::NewBuffer(
             _pngbuf,
             _pngbufsize
         )

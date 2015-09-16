@@ -27,10 +27,10 @@ using namespace std;
 
 typedef string (* buf_dec_f_t)(char *, size_t, CImg<unsigned char> **, char **);
 
-class DecodeBufferWorker : public NanAsyncWorker {
+class DecodeBufferWorker : public Nan::AsyncWorker {
 public:
     DecodeBufferWorker(
-        NanCallback * callback,
+        Nan::Callback * callback,
         Local<Object> & buff,
         buf_dec_f_t decoder
     );

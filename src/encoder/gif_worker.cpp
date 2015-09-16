@@ -140,7 +140,7 @@ void EncodeToGifBufferWorker::HandleOKCallback () {
     Nan::HandleScope();
     Local<Value> argv[] = {
         Nan::Null(),
-        NanBufferUse(
+        Nan::NewBuffer(
             _gifbuf,
             _gifbufsize
         )

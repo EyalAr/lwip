@@ -1,7 +1,7 @@
 #include "decoder.h"
 
 DecodeBufferWorker::DecodeBufferWorker(
-    NanCallback * callback,
+    Nan::Callback * callback,
     Local<Object> & buff,
     buf_dec_f_t decoder
 ): Nan::AsyncWorker(callback), _decoder(decoder), _pixbuf(NULL), _width(0),
@@ -43,7 +43,7 @@ void DecodeBufferWorker::Execute () {
 }
 
 void DecodeBufferWorker::HandleOKCallback () {
-    Nan::Scope();
+    Nan::HandleScope();
 
     Local<v8::Primitive> metadata;
     if (_metadata == NULL) {
@@ -54,7 +54,7 @@ void DecodeBufferWorker::HandleOKCallback () {
 
     Local<Value> argv[] = {
         Nan::Null(),
-        NanBufferUse(
+        Nan::NewBuffer(
             (char *) _pixbuf,
             _width * _height * _channels
         ),
