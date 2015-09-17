@@ -35,7 +35,8 @@ LwipImage::LwipImage(unsigned char * data, size_t width, size_t height, int chan
 }
 
 LwipImage::~LwipImage() {
-    delete _cimg;
+    //Causes  malloc: *** error for object 0x105c44000: pointer being freed was not allocated on Nan 2+
+    //delete _cimg;
 };
 
 Handle<Value> LwipImage::NewInstance() {
