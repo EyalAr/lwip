@@ -50,7 +50,6 @@
             "src/lib/png/pngrutil.c",
             "src/lib/png/pngtrans.c",
             "src/lib/png/pngread.c",
-            "src/lib/png/pngwrite.c",
             "src/lib/png/pngrio.c",
             "src/lib/png/pngrtran.c",
             "src/lib/png/pngmem.c",
@@ -99,7 +98,10 @@
             }],
             ['OS=="mac"', {
                 'xcode_settings': {
-                    'GCC_ENABLE_CPP_EXCEPTIONS': 'YES'
+                    'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
+                    'OTHER_CPLUSPLUSFLAGS' : [ '-mmacosx-version-min=10.7',
+                          '-stdlib=libc++',
+                          '-std=c++0x']
                 },
                 'include_dirs': ['/usr/include/malloc']
             }],
@@ -164,7 +166,6 @@
             "src/lib/png/pngtrans.c",
             "src/lib/png/pngmem.c",
             "src/lib/png/pngerror.c",
-            "src/lib/png/pngread.c",
             "src/lib/png/pngwrite.c",
             "src/lib/png/pngwutil.c",
             "src/lib/png/pngwio.c",
@@ -211,7 +212,10 @@
             }],
             ['OS=="mac"', {
                 'xcode_settings': {
-                    'GCC_ENABLE_CPP_EXCEPTIONS': 'YES'
+                    'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
+                    'OTHER_CPLUSPLUSFLAGS' : [ '-mmacosx-version-min=10.7',
+                          '-stdlib=libc++',
+                          '-std=c++0x']
                 },
                 'include_dirs': ['/usr/include/malloc']
             }],
@@ -266,7 +270,10 @@
             }],
             ['OS=="mac"', {
                 'xcode_settings': {
-                    'GCC_ENABLE_CPP_EXCEPTIONS': 'YES'
+                    'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
+                    'OTHER_CPLUSPLUSFLAGS' : [ '-mmacosx-version-min=10.7',
+                          '-stdlib=libc++',
+                          '-std=c++0x']
                 },
                 'include_dirs': ['/usr/include/malloc']
             }],
