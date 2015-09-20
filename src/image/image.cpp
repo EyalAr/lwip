@@ -100,7 +100,7 @@ NAN_METHOD(LwipImage::buffer) {
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(info.Holder());
     // return a new buffer. don't use same memory an image. make a copy.
     // image object may be gc'ed, but buffer needs to stay alive.
-    info.GetReturnValue().Set(Nan::NewBuffer((char *)obj->_cimg->data(), obj->_cimg->size()).ToLocalChecked());
+    info.GetReturnValue().Set(Nan::CopyBuffer((char *)obj->_cimg->data(), obj->_cimg->size()).ToLocalChecked());
 }
 
 // image.resize(width, height, inter, callback):
