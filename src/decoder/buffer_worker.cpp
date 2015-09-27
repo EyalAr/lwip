@@ -54,7 +54,7 @@ void DecodeBufferWorker::HandleOKCallback () {
 
     Local<Value> argv[] = {
         Nan::Null(),
-        Nan::CopyBuffer(
+        Nan::NewBuffer(
             (char *) _pixbuf,
             _width * _height * _channels
         ).ToLocalChecked(),
