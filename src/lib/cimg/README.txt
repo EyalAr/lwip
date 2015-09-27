@@ -14,7 +14,7 @@
 
                              ( http://cimg.eu )
 
-                                   1.6.5_pre080715
+                                   1.6.6_pre092515
 
 --------------------------------------------------------------------------------
 
@@ -166,7 +166,7 @@
   If you are new to CImg, you should first try to compile the different examples
   provided in the 'examples/' directory, to see what CImg is capable of
   (as CImg is a template-based library, no prior compilation of the library is mandatory).
-  Look at the 'resources/' directory to ease this compilation on different plateforms.
+  Look at the 'resources/' directory to ease this compilation on different platforms.
 
   Then, you can look at the documentation 'html/reference/' to learn more about CImg
   functions and classes. Finally, you can participate to the 'Forum' section
