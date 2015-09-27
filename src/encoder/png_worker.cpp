@@ -149,7 +149,7 @@ void EncodeToPngBufferWorker::HandleOKCallback () {
     Nan::HandleScope();
     Local<Value> argv[] = {
         Nan::Null(),
-        Nan::NewBuffer(
+        Nan::CopyBuffer(
             _pngbuf,
             _pngbufsize
         ).ToLocalChecked()
