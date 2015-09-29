@@ -14,7 +14,3 @@ node_js:
     - "4.0"
     - "4.1"
 script: npm run travis
-addons:
-  apt:
-    packages:
-    - gcc+4.8
