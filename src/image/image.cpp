@@ -29,9 +29,9 @@ void LwipImage::Init(Handle<Object> exports) {
     );
 }
 
-LwipImage::LwipImage(unsigned char * data, size_t width, size_t height) {
+LwipImage::LwipImage(unsigned char * data, size_t width, size_t height, int channels) {
     // TODO: CImg constructor may throw an exception. handle it in LwipImage::New.
-    _cimg = new CImg<unsigned char>(data, width, height, 1, N_CHANNELS, false);
+    _cimg = new CImg<unsigned char>(data, width, height, 1, channels, false);
 }
 
 LwipImage::~LwipImage() {
@@ -50,11 +50,24 @@ NAN_METHOD(LwipImage::New) {
     // info[0] - pixels buffer
     // info[1,2] - width and height
     Local<Object> pixBuff = info[0].As<Object>();
-    size_t width = info[1]->NumberValue();
-    size_t height = info[2]->NumberValue();
-    unsigned char * pixels = (unsigned char *)Buffer::Data(pixBuff);
+    size_t width = Nan::To<uint32_t>(info[1]).FromJust();
+	size_t height = Nan::To<uint32_t>(info[2]).FromJust();
+    uint32_t channels = Nan::To<uint32_t>(info[3]).FromJust();
+
+	unsigned char * pixels = (unsigned char *)Buffer::Data(pixBuff);
+	size_t len = Buffer::Length(pixBuff);
+	
+	//CImg expects the size of the buffer to match width*height as it will memcpy this much from buffer.
+    //If it doesnt' match buffer length then throw so that CImg does not read past our buffer.
+	int expectedSize = sizeof(unsigned char) * width * height * 1 * channels;
+	if (expectedSize != len)
+	{
+		Nan::ThrowError(Nan::New<String>("Invalid image size, channels or buffer provided.").ToLocalChecked());
+		return;
+	}
+    
     // TODO: handle CImg exception
-    LwipImage * obj = new LwipImage(pixels, width, height);
+    LwipImage * obj = new LwipImage(pixels, width, height, channels);
     obj->Wrap(info.This());
     info.GetReturnValue().Set(info.This());
 }

@@ -18,13 +18,14 @@ PadWorker::~PadWorker() {}
 
 void PadWorker::Execute () {
     CImg<unsigned char> * res;
+    int channels = _cimg->spectrum();
     size_t oldwidth = _cimg->width(),
            oldheight = _cimg->height(),
            newwidth = oldwidth + _left + _right,
            newheight = oldheight + _top + _bottom;
     if (oldwidth != newwidth || oldheight != newheight) {
         try {
-            res = new CImg<unsigned char>(newwidth, newheight, 1, N_CHANNELS);
+            res = new CImg<unsigned char>(newwidth, newheight, 1, channels);
         } catch (CImgException e) {
             SetErrorMessage("Out of memory");
             return;
