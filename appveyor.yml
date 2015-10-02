@@ -5,18 +5,21 @@ init:
 environment:
   matrix:
     - nodejs_version: "0.10"
-    - nodejs_version: "0.11"
+      msvs_version: 2013
     - nodejs_version: "0.12"
+      msvs_version: 2013
     - nodejs_version: "4.0"
+      msvs_version: 2013
+    - nodejs_version: "4.0"
+      msvs_version: 2015
     - nodejs_version: "4.1"
-
-matrix:
-  allow_failures:
-    - nodejs_version: "0.11"
+      msvs_version: 2013
+    - nodejs_version: "4.1"
+      msvs_version: 2015
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm install --msvs_version=2013
+  - npm install --msvs_version=$env:msvs_version
 
 build: off
 
