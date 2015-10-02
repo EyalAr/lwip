@@ -1,5 +1,4 @@
 var join = require('path').join,
-    should = require("should"),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs');

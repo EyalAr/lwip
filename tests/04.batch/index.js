@@ -1,4 +1,5 @@
 var join = require('path').join,
+    should = require('should'),
     assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),

@@ -7,7 +7,7 @@ describe('lwip.open', function() {
     describe('non-existing image', function() {
         it('should fail', function(done) {
             lwip.open(imgs.inv, 'jpg', function(err, img) {
-                should(err).be.Error;
+                should(err).be.Error();
                 done();
             });
         });
@@ -18,8 +18,8 @@ describe('lwip.open', function() {
         describe('rgb image (with jpg extension)', function() {
             it('should succeed', function(done) {
                 lwip.open(imgs.jpg.rgb, function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -28,8 +28,8 @@ describe('lwip.open', function() {
         describe('rgb image (no extension)', function() {
             it('should succeed', function(done) {
                 lwip.open(imgs.jpg.noex, 'jpg', function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -38,8 +38,8 @@ describe('lwip.open', function() {
         describe('grayscale image', function() {
             it('should succeed', function(done) {
                 lwip.open(imgs.jpg.gs, function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -48,7 +48,7 @@ describe('lwip.open', function() {
         describe('invalid image', function() {
             it('should fail', function(done) {
                 lwip.open(imgs.jpg.inv, function(err, img) {
-                    should(err).be.Error;
+                    should(err).be.Error();
                     done();
                 });
             });
@@ -61,8 +61,8 @@ describe('lwip.open', function() {
         describe('rgb image (with png extension)', function() {
             it('should succeed', function(done) {
                 lwip.open(imgs.png.rgb, function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -71,8 +71,8 @@ describe('lwip.open', function() {
         describe('rgb image (no extension)', function() {
             it('should succeed', function(done) {
                 lwip.open(imgs.png.noex, 'png', function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -81,8 +81,8 @@ describe('lwip.open', function() {
         describe('grayscale image', function() {
             it('should succeed', function(done) {
                 lwip.open(imgs.png.gs, function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -91,8 +91,8 @@ describe('lwip.open', function() {
         describe('transparent image', function() {
             it('should succeed', function(done) {
                 lwip.open(imgs.png.trans, function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -101,7 +101,7 @@ describe('lwip.open', function() {
         describe('invalid image', function() {
             it('should fail', function(done) {
                 lwip.open(imgs.png.inv, function(err, img) {
-                    should(err).be.Error;
+                    should(err).be.Error();
                     done();
                 });
             });
@@ -114,8 +114,8 @@ describe('lwip.open', function() {
         describe('rgb image (with gif extension)', function() {
             it('should succeed', function(done) {
                 lwip.open(imgs.gif.rgb, function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -124,8 +124,8 @@ describe('lwip.open', function() {
         describe('rgb image (no extension)', function() {
             it('should succeed', function(done) {
                 lwip.open(imgs.gif.noex, 'gif', function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -134,8 +134,8 @@ describe('lwip.open', function() {
         describe('grayscale image', function() {
             it('should succeed', function(done) {
                 lwip.open(imgs.gif.gs, function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -144,8 +144,8 @@ describe('lwip.open', function() {
         describe('transparent image', function() {
             it('should succeed', function(done) {
                 lwip.open(imgs.gif.trans, function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -154,7 +154,7 @@ describe('lwip.open', function() {
         describe('invalid image', function() {
             it('should fail', function(done) {
                 lwip.open(imgs.gif.inv, function(err, img) {
-                    should(err).be.Error;
+                    should(err).be.Error();
                     done();
                 });
             });
@@ -175,8 +175,8 @@ describe('lwip.open', function() {
 
             it('should succeed', function(done) {
                 lwip.open(buffer, 'jpg', function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -193,8 +193,8 @@ describe('lwip.open', function() {
 
             it('should succeed', function(done) {
                 lwip.open(buffer, 'jpg', function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -215,8 +215,8 @@ describe('lwip.open', function() {
 
             it('should succeed', function(done) {
                 lwip.open(buffer, 'png', function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -233,8 +233,8 @@ describe('lwip.open', function() {
 
             it('should succeed', function(done) {
                 lwip.open(buffer, 'png', function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -255,8 +255,8 @@ describe('lwip.open', function() {
 
             it('should succeed', function(done) {
                 lwip.open(buffer, 'gif', function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -273,8 +273,8 @@ describe('lwip.open', function() {
 
             it('should succeed', function(done) {
                 lwip.open(buffer, 'gif', function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -293,8 +293,8 @@ describe('lwip.open', function() {
 
             it('should succeed', function(done) {
                 lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -309,8 +309,8 @@ describe('lwip.open', function() {
 
             it('should succeed', function(done) {
                 lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -325,8 +325,8 @@ describe('lwip.open', function() {
 
             it('should succeed', function(done) {
                 lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
@@ -341,8 +341,8 @@ describe('lwip.open', function() {
 
             it('should succeed', function(done) {
                 lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
-                    should(err).not.be.Error;
-                    img.should.be.OK;
+                    should(err).not.be.Error();
+                    img.should.be.ok();
                     done();
                 });
             });
