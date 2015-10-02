@@ -288,6 +288,7 @@ describe('lwip.open', function() {
             var buffer;
             before(function(done) {
                 buffer = new Buffer(100 * 100);
+                buffer.fill(0);
                 done();
             });
 
@@ -297,7 +298,7 @@ describe('lwip.open', function() {
                     img.should.be.ok();
                     for (var x = 0 ; x < img.width() ; x++){
                         for (var y = 0 ; y < img.height() ; y++){
-                            img.getPixel(x, y).should.equal({r: 0, g: 0, b: 0, a: 100});
+                            img.getPixel(x, y).should.deepEqual({r: 0, g: 0, b: 0, a: 100});
                         }
                     }
                     done();
@@ -309,6 +310,8 @@ describe('lwip.open', function() {
             var buffer;
             before(function(done) {
                 buffer = new Buffer(100 * 100 * 2);
+                buffer.fill(0, 0, 10000);
+                buffer.fill(50, 10000);
                 done();
             });
 
@@ -318,7 +321,7 @@ describe('lwip.open', function() {
                     img.should.be.ok();
                     for (var x = 0 ; x < img.width() ; x++){
                         for (var y = 0 ; y < img.height() ; y++){
-                            img.getPixel(x, y).should.equal({r: 0, g: 0, b: 0, a: 0});
+                            img.getPixel(x, y).should.deepEqual({r: 0, g: 0, b: 0, a: 50});
                         }
                     }
                     done();
@@ -330,6 +333,9 @@ describe('lwip.open', function() {
             var buffer;
             before(function(done) {
                 buffer = new Buffer(100 * 100 * 3);
+                buffer.fill(10, 0, 10000);
+                buffer.fill(20, 10000, 2 * 10000);
+                buffer.fill(30, 2 * 10000);
                 done();
             });
 
@@ -339,7 +345,7 @@ describe('lwip.open', function() {
                     img.should.be.ok();
                     for (var x = 0 ; x < img.width() ; x++){
                         for (var y = 0 ; y < img.height() ; y++){
-                            img.getPixel(x, y).should.equal({r: 0, g: 0, b: 0, a: 100});
+                            img.getPixel(x, y).should.deepEqual({r: 10, g: 20, b: 30, a: 100});
                         }
                     }
                     done();
@@ -351,6 +357,10 @@ describe('lwip.open', function() {
             var buffer;
             before(function(done) {
                 buffer = new Buffer(100 * 100 * 4);
+                buffer.fill(10, 0, 10000);
+                buffer.fill(20, 10000, 2 * 10000);
+                buffer.fill(30, 2 * 10000, 3 * 10000);
+                buffer.fill(50, 3 * 10000);
                 done();
             });
 
@@ -360,7 +370,7 @@ describe('lwip.open', function() {
                     img.should.be.ok();
                     for (var x = 0 ; x < img.width() ; x++){
                         for (var y = 0 ; y < img.height() ; y++){
-                            img.getPixel(x, y).should.equal({r: 0, g: 0, b: 0, a: 0});
+                            img.getPixel(x, y).should.deepEqual({r: 10, g: 20, b: 30, a: 50});
                         }
                     }
                     done();
