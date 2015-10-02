@@ -35,14 +35,7 @@ LwipImage::LwipImage(unsigned char * data, size_t width, size_t height, int chan
 }
 
 LwipImage::~LwipImage() {
-    // Comment out delete, since there hidden memory issue
-    // in the code. This is fixes set of tests 
-    // 00.argsValidation\001.open.js
-    // Specifically `with negative width` test are flacky on Windows when uncomment
-    // delete statement.
-    // This is starting to appear when port to Nan 2+
-    // See https://github.com/EyalAr/lwip/issues/185
-    //delete _cimg;
+    delete _cimg;
 };
 
 Handle<Value> LwipImage::NewInstance() {
