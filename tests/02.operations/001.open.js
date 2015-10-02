@@ -291,10 +291,15 @@ describe('lwip.open', function() {
                 done();
             });
 
-            it('should succeed', function(done) {
+            it('should construct an all-black pixels image', function(done) {
                 lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
                     should(err).not.be.Error();
                     img.should.be.ok();
+                    for (var x = 0 ; x < img.width() ; x++){
+                        for (var y = 0 ; y < img.height() ; y++){
+                            img.getPixel(x, y).should.equal({r: 0, g: 0, b: 0, a: 100});
+                        }
+                    }
                     done();
                 });
             });
@@ -307,10 +312,15 @@ describe('lwip.open', function() {
                 done();
             });
 
-            it('should succeed', function(done) {
+            it('should construct an all-black transparent pixels image', function(done) {
                 lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
                     should(err).not.be.Error();
                     img.should.be.ok();
+                    for (var x = 0 ; x < img.width() ; x++){
+                        for (var y = 0 ; y < img.height() ; y++){
+                            img.getPixel(x, y).should.equal({r: 0, g: 0, b: 0, a: 0});
+                        }
+                    }
                     done();
                 });
             });
@@ -323,10 +333,15 @@ describe('lwip.open', function() {
                 done();
             });
 
-            it('should succeed', function(done) {
+            it('should construct an all-black pixels image', function(done) {
                 lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
                     should(err).not.be.Error();
                     img.should.be.ok();
+                    for (var x = 0 ; x < img.width() ; x++){
+                        for (var y = 0 ; y < img.height() ; y++){
+                            img.getPixel(x, y).should.equal({r: 0, g: 0, b: 0, a: 100});
+                        }
+                    }
                     done();
                 });
             });
@@ -339,10 +354,15 @@ describe('lwip.open', function() {
                 done();
             });
 
-            it('should succeed', function(done) {
+            it('should construct an all-black transparent pixels image', function(done) {
                 lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
                     should(err).not.be.Error();
                     img.should.be.ok();
+                    for (var x = 0 ; x < img.width() ; x++){
+                        for (var y = 0 ; y < img.height() ; y++){
+                            img.getPixel(x, y).should.equal({r: 0, g: 0, b: 0, a: 0});
+                        }
+                    }
                     done();
                 });
             });
