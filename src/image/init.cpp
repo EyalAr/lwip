@@ -2,7 +2,6 @@
 
 // create an init function for our node module
 void InitAll(Handle<Object> exports) {
-    Nan::HandleScope scope;
     LwipImage::Init(exports);
 }
 

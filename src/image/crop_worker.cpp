@@ -14,8 +14,7 @@ CropWorker::~CropWorker() {}
 
 void CropWorker::Execute () {
     try {
-        int channels = _cimg->spectrum();
-        _cimg->crop(_left, _top, 0, 0, _right, _bottom, 0, channels - 1);
+        _cimg->crop(_left, _top, 0, 0, _right, _bottom, 0, N_CHANNELS - 1);
     } catch (CImgException e) {
         SetErrorMessage("Unable to crop image");
         return;
