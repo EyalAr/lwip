@@ -4,6 +4,8 @@
 #define cimg_display 0
 #define cimg_verbosity 0
 
+#define N_CHANNELS 4
+
 #include <string>
 #include <cmath>
 #include <node.h>
@@ -40,11 +42,10 @@ public:
     static NAN_METHOD(paste);
     static NAN_METHOD(width);
     static NAN_METHOD(height);
-    static NAN_METHOD(channels);
     static NAN_METHOD(getPixel);
     static NAN_METHOD(buffer);
     static NAN_METHOD(setPixel);
-    LwipImage(unsigned char * data, size_t width, size_t height, int channels);
+    LwipImage(unsigned char * data, size_t width, size_t height);
     ~LwipImage();
 private:
     static Nan::Persistent<v8::FunctionTemplate> constructor;
