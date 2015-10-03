@@ -16,12 +16,11 @@ void RotateWorker::Execute () {
     const float nangle = cimg::mod(_degs, 360.0f);
     if (cimg::mod(nangle, 90.0f) != 0) {
         CImg<unsigned char> * res;
-        int channels = _cimg->spectrum();
         size_t oldwidth = _cimg->width(),
                oldheight = _cimg->height();
         try {
             // 2 pixels wider and taller
-            res = new CImg<unsigned char>(oldwidth + 2, oldheight + 2, 1, channels);
+            res = new CImg<unsigned char>(oldwidth + 2, oldheight + 2, 1, N_CHANNELS);
         } catch (CImgException e) {
             SetErrorMessage("Out of memory");
             return;
