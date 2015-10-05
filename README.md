@@ -73,7 +73,7 @@ Or, clone this repo and `cd lwip && npm install`.
 You can run tests with `npm test`.
 
 **Note:** Installation of this module involves compiling native code.
-If `npm install lwip` failes, you probably need to setup your system.
+If `npm install lwip` fails, you probably need to setup your system.
 [See instructions](https://github.com/TooTallNate/node-gyp#installation).
 Building on Windows with Visual Studio requires version 2013 or higher.
 
