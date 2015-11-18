@@ -11,8 +11,7 @@ BlurWorker::~BlurWorker() {}
 void BlurWorker::Execute () {
     try {
         // filter order = 0 (on the image itself, not derivatives)
-        _cimg->vanvliet(_sigma, 0, 'x');
-        _cimg->vanvliet(_sigma, 0, 'y');
+        _cimg->blur(_sigma, _sigma, _sigma);
     } catch (CImgException e) {
         SetErrorMessage("Unable to blur image");
         return;
