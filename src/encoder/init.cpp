@@ -1,6 +1,6 @@
 #include "encoder.h"
 
-// encoder.jpeg(pixbuf, width, height, quality, callback)
+// encoder.jpeg(pixbuf, width, height, quality, progressive, callback)
 NAN_METHOD(encodeToJpegBuffer) {
     Nan::HandleScope();
 
@@ -8,7 +8,8 @@ NAN_METHOD(encodeToJpegBuffer) {
     size_t width = info[1].As<Integer>()->Value();
     size_t height = info[2].As<Integer>()->Value();
     int quality = info[3].As<Integer>()->Value();
-    Nan::Callback * callback = new Nan::Callback(info[4].As<Function>());
+    bool progressive = info[4].As<Boolean>()->Value();
+    Nan::Callback * callback = new Nan::Callback(info[5].As<Function>());
 
     Nan::AsyncQueueWorker(
         new EncodeToJpegBufferWorker(
@@ -16,6 +17,7 @@ NAN_METHOD(encodeToJpegBuffer) {
             width,
             height,
             quality,
+            progressive,
             callback
         ));
 }
