@@ -110,7 +110,6 @@ describe('lwip.getDominateColor',function(){
     lwip.open(imgs.jpg.colors, function(err, img) {
       if (err) return done(err);
       t_image = img;
-      console.log('see this once before');
       done();
     });
   });
