@@ -59,7 +59,7 @@ This is a branch based off of [@kant2002/lwip](https://www.npmjs.com/package/@ka
       0. [GIF](#gif)
     0. [Write to file](#write-to-file)
     0. [Get metadata](#get-metadata)
-    0. [Get dominate color](#dominate-color)
+    0. [Get dominate color](#get-dominate-color)
   0. [Batch operations](#batch-operations)
 0. [Copyrights](#copyrights)
 
