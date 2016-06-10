@@ -105,7 +105,7 @@ describe('lwip.getMetadata', function() {
     });
 });
 
-describe('lwip.getDominateColor',function(){
+describe('lwip.dominateColor',function(){
   var t_image;
   before(function(done){
     lwip.open(imgs.jpg.colors, function(err, img) {
