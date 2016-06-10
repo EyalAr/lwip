@@ -103,3 +103,45 @@ describe('lwip.getMetadata', () => {
         });
     });
 });
+
+describe('lwip.getDominateColor',function(){
+  var t_image;
+  before(function(done){
+    lwip.open(imgs.jpg.colors, function(err, img) {
+      if (err) return done(err);
+      t_image = img;
+      console.log('see this once before');
+      done();
+    });
+  });
+
+  it('should return the color that occurs the most frequently',function(done){
+      var color = t_image.dominateColor(10);
+      assert( color.r === 255);
+      assert( color.g === 252);
+      assert( color.b === 0);
+      assert( color.a === 100);
+      done();
+  });
+
+  function shouldFail(fail){
+    it('should fail when: '+fail+' is passed as a parameter',function(done){
+      var err_count = 0;
+      try{
+        t_image.dominateColor(fail);
+      }
+      catch(error){
+          err_count++;
+      }
+      finally{
+        assert( err_count === 1);
+      }
+      done();
+    });
+  }
+
+  var fails = [ -1, 3.3, '\'tree\''];
+  for(var i = 0; i < fails.length; i++)
+    shouldFail(fails[i]);
+
+});
