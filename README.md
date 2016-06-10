@@ -740,10 +740,12 @@ tEXt chunks in PNG images, and will get the first tEXt chunk found with the key
 
 `image.getMetadata()`
 
-#### Get dominate color
+### Get dominate color
 
-Get the pixel color that occurs most frequently in the picture.
+Get the pixel color that occurs most frequently in a picture.
+
 `image.dominateColor(pixels_to_skip)`
+
 0. `pixels_to_skip {Int}`: the number of pixels to skip while iterating through the image. Ex. supplying 1 will skip every other pixel, 0 will skip none. The greater the number the less accuracy the result will have.
 
 ### Batch operations
