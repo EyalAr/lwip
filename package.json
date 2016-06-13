@@ -59,7 +59,8 @@
     "fade",
     "opacity",
     "contain",
-    "cover"
+    "cover",
+    "find"
   ],
   "author": "Eyal Arubas <eyalarubas@gmail.com>",
   "license": "MIT",
