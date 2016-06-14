@@ -2,7 +2,7 @@
 /* pngwio.c - functions for data output
  *
  * Last changed in libpng 1.6.15 [November 20, 2014]
- * Copyright (c) 1998-2014 Glenn Randers-Pehrson
+ * Copyright (c) 1998-2002,2004,2006-2014 Glenn Randers-Pehrson
  * (Version 0.96 Copyright (c) 1996, 1997 Andreas Dilger)
  * (Version 0.88 Copyright (c) 1995, 1996 Guy Eric Schalnat, Group 42, Inc.)
  *
@@ -26,7 +26,7 @@
  * writes to a file pointer.  Note that this routine sometimes gets called
  * with very small lengths, so you should implement some kind of simple
  * buffering if you are using unbuffered writes.  This should never be asked
- * to write more than 64K on a 16 bit machine.
+ * to write more than 64K on a 16-bit machine.
  */
 
 void /* PRIVATE */

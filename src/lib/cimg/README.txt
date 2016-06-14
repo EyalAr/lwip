@@ -14,7 +14,7 @@
 
                              ( http://cimg.eu )
 
-                                   1.6.6_pre092515
+                                   1.7.3_pre061316
 
 --------------------------------------------------------------------------------
 
@@ -36,6 +36,8 @@
   - Maksim Aizenshtein
   - Alberto Albiol
   - Antonio Albiol
+  - Simon Barthelmé
+  - Neil Brown
   - Haz-Edine Assemlal
   - Vincent Barra
   - Wolf Blecher
