@@ -105,7 +105,7 @@ describe('lwip.getMetadata', function() {
     });
 });
 
-describe('lwip.dominateColor',function(){
+describe('lwip.dominantColor',function(){
   var t_image;
   before(function(done){
     lwip.open(imgs.jpg.colors, function(err, img) {
@@ -116,7 +116,7 @@ describe('lwip.dominateColor',function(){
   });
 
   it('should return the color that occurs the most frequently',function(done){
-      var color = t_image.dominateColor(10);
+      var color = t_image.dominantColor(10);
       assert( color.r === 255);
       assert( color.g === 252);
       assert( color.b === 0);
@@ -128,7 +128,7 @@ describe('lwip.dominateColor',function(){
     it('should fail when: '+fail+' is passed as a parameter',function(done){
       var err_count = 0;
       try{
-        t_image.dominateColor(fail);
+        t_image.dominantColor(fail);
       }
       catch(error){
           err_count++;
