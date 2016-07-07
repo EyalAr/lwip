@@ -59,7 +59,7 @@ This is a branch based off of [@kant2002/lwip](https://www.npmjs.com/package/@ka
       0. [GIF](#gif)
     0. [Write to file](#write-to-file)
     0. [Get metadata](#get-metadata)
-    0. [Get dominate color](#get-dominate-color)
+    0. [Get dominant color](#get-dominant-color)
   0. [Batch operations](#batch-operations)
 0. [Copyrights](#copyrights)
 
@@ -740,11 +740,11 @@ tEXt chunks in PNG images, and will get the first tEXt chunk found with the key
 
 `image.getMetadata()`
 
-### Get dominate color
+### Get dominant color
 
 Get the pixel color that occurs most frequently in a picture.
 
-`image.dominateColor(pixels_to_skip)`
+`image.dominantColor(pixels_to_skip)`
 
 0. `pixels_to_skip {Int}`: the number of pixels to skip while iterating through the image. Ex. supplying 1 will skip every other pixel, 0 will skip none. The greater the number the less accuracy the result will have.
 
