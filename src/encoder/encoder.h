@@ -30,6 +30,7 @@ public:
         size_t width,
         size_t height,
         int quality,
+        bool progressive,
         Nan::Callback * callback
     );
     ~EncodeToJpegBufferWorker();
@@ -42,6 +43,7 @@ private:
     int _quality;
     char * _jpegbuf;
     size_t _jpegbufsize;
+    bool _progressive;
 };
 
 class EncodeToPngBufferWorker : public Nan::AsyncWorker {

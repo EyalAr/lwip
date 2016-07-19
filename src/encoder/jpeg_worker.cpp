@@ -7,9 +7,10 @@ EncodeToJpegBufferWorker::EncodeToJpegBufferWorker(
     size_t width,
     size_t height,
     int quality,
+    bool progressive,
     Nan::Callback * callback
 ): Nan::AsyncWorker(callback), _width(width), _height(height),
-    _quality(quality), _jpegbuf(NULL), _jpegbufsize(0) {
+    _quality(quality), _jpegbuf(NULL), _jpegbufsize(0), _progressive(progressive) {
     SaveToPersistent("buff", buff); // make sure buff isn't GC'ed
     _pixbuf = (unsigned char *) Buffer::Data(buff);
 }
@@ -45,8 +46,12 @@ void EncodeToJpegBufferWorker::Execute () {
     cinfo.image_height = _height;
     cinfo.input_components = dimbuf;
     cinfo.in_color_space = colortype;
+    cinfo.progressive_mode = (boolean)_progressive;
     jpeg_set_defaults(&cinfo);
     jpeg_set_quality(&cinfo, _quality, TRUE);
+    if (_progressive) {
+        jpeg_simple_progression(&cinfo);
+    }
     jpeg_start_compress(&cinfo, TRUE);
 
     // shared memory cimg. no new memory is allocated.

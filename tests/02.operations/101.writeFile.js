@@ -52,6 +52,14 @@ describe('lwip.writeFile', function() {
                 });
             });
 
+            describe('params specified progressive=true', function() {
+                if('should succeed', function(done) {
+                    image.writeFile(outpathJpeg, {
+                        progressive: true
+                    }, done);
+                });
+            });
+
         });
 
         describe('with type specified', function() {
@@ -65,13 +73,12 @@ describe('lwip.writeFile', function() {
             describe('params specified', function() {
                 it('should succeed', function(done) {
                     image.writeFile(outpathJpeg, 'jpeg', {
-                        quality: 20
+                        quality: 20,
+                        progressive: true,
                     }, done);
                 });
             });
-
         });
-
     });
 
     describe('png', function() {

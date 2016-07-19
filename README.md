@@ -671,6 +671,7 @@ encoded data as a NodeJS Buffer object.
 The `params` object should have the following fields:
 
 - `quality {Integer}`: Defaults to `100`.
+- `progressive {Boolean}`: Defaults to `false`.
 
 Note that when encoding to JPEG the alpha channel is discarded.
 
