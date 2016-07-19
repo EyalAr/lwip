@@ -13,6 +13,7 @@
   0. [Supported formats](#supported-formats)
   0. [Colors specification](#colors-specification)
   0. [Note on transparent images](#note-on-transparent-images)
+  0. [Note on threading performance](#note-on-threading-performance)
 0. [API](#api)
   0. [Open an image from file or buffer](#open-an-image)
   0. [Create a new blank image](#create-a-new-image)
@@ -192,6 +193,25 @@ Colors are specified in one of three ways:
 0. Not all formats support transparency. If an image with an alpha channel is
    encoded with a format which does not support transparency, the alpha channel
    will be ignored (effectively setting it to 100% for all pixels).
+
+### Note on threading performance
+
+All operations are asynchronous, and processing takes place in a thread pool
+managed by libuv which is part of NodeJS. This thread pool is separate from the event
+loop used to process HTTP requests, so use of lwip should not significantly affect the
+handling of HTTP requests by a web application. The thread pool is however shared with
+other threaded native modules such as those providing database and filesystem IO.
+
+The default thread pool size of 4 will be appropriate for most applications. However
+if your application regularly processes many images concurrently and and you wish
+to take full advantage of a multicore system or prevent heavy image processing work
+from delaying database or filesystem IO, you may want to increase the size of the
+thread pool by setting the UV_THREADPOOL_SIZE environmental variable to the NodeJS
+process, e.g.:
+
+```
+UV_THREADPOOL_SIZE=8 node your_script.js
+```
 
 ## API
 
