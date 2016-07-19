@@ -56,7 +56,7 @@
 ## Overview
 
 This module provides comprehensive, fast, and simple image processing and
-manipulation capabilities.
+manipulation capabilities for node.js.
 
 **There are no external runtime dependencies**, which means you don't have to
 install anything else on your system.
