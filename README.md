@@ -661,6 +661,7 @@ encoded data as a NodeJS Buffer object.
   - `"jpg"`
   - `"png"`
   - `"gif"`
+  - `"raw"`
 0. `params {Object}`: **Optional** Format-specific parameters (See below).
 0. `callback {Function(err, buffer)}`
 
@@ -704,6 +705,16 @@ The `params` object should have the following fields:
   threshold to determine if a pixel is opaque or transparent. If the alpha
   channel of the pixel is above this threshold, this pixel will be considered
   as opaque; otherwise it will be transparent.
+
+##### RAW
+
+No `params` object is supported. The raw image returns an object which contains
+the following fields:
+
+ - `buffer {Buffer}`: Pixeldata
+ - `width {Integer}`: Image width
+ - `height {Integer}`: Image height
+
 
 #### Write to file
 
