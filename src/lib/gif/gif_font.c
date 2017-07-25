@@ -5,6 +5,7 @@ gif_font.c - utility font handling and simple drawing for the GIF library
 ****************************************************************************/
 
 #include <string.h>
+#include <stdlib.h>
 
 #include "gif_lib.h"
 
@@ -209,8 +210,9 @@ GifDrawBoxedText8x8(SavedImage *Image,
               const int border,
               const int bg, const int fg)
 {
-    int i, j = 0, LineCount = 0, TextWidth = 0;
+    int j = 0, LineCount = 0, TextWidth = 0;
     const char *cp;
+    char *dup;
 
     /* compute size of text to box */
     for (cp = legend; *cp; cp++)
@@ -225,28 +227,33 @@ GifDrawBoxedText8x8(SavedImage *Image,
     if (j > TextWidth)    /* last line might be longer than any previous */
         TextWidth = j;
 
-    /* fill the box */
-    GifDrawRectangle(Image, x + 1, y + 1,
-                  border + TextWidth * GIF_FONT_WIDTH + border - 1,
-                  border + LineCount * GIF_FONT_HEIGHT + border - 1, bg);
-
     /* draw the text */
-    i = 0;
-    cp = strtok((char *)legend, "\r\n");
-    do {
-        int leadspace = 0;
+    dup = malloc(strlen(legend)+1);
+    /* FIXME: should return bad status, but that would require API change */
+    if (dup != NULL) {
+	int i = 0;
+	/* fill the box */
+	GifDrawRectangle(Image, x + 1, y + 1,
+		      border + TextWidth * GIF_FONT_WIDTH + border - 1,
+		      border + LineCount * GIF_FONT_HEIGHT + border - 1, bg);
+	(void)strcpy(dup, (char *)legend);
+	cp = strtok((char *)dup, "\r\n");
+	do {
+	    int leadspace = 0;
 
-        if (cp[0] == '\t')
-            leadspace = (TextWidth - strlen(++cp)) / 2;
+	    if (cp[0] == '\t')
+		leadspace = (TextWidth - strlen(++cp)) / 2;
 
-        GifDrawText8x8(Image, x + border + (leadspace * GIF_FONT_WIDTH),
-                 y + border + (GIF_FONT_HEIGHT * i++), cp, fg);
-        cp = strtok((char *)NULL, "\r\n");
-    } while (cp);
+	    GifDrawText8x8(Image, x + border + (leadspace * GIF_FONT_WIDTH),
+			   y + border + (GIF_FONT_HEIGHT * i++), cp, fg);
+	    cp = strtok((char *)NULL, "\r\n");
+	} while (cp);
+	(void)free((void *)dup);
 
-    /* outline the box */
-    GifDrawBox(Image, x, y, border + TextWidth * GIF_FONT_WIDTH + border,
-            border + LineCount * GIF_FONT_HEIGHT + border, fg);
+	/* outline the box */
+	GifDrawBox(Image, x, y, border + TextWidth * GIF_FONT_WIDTH + border,
+		   border + LineCount * GIF_FONT_HEIGHT + border, fg);
+    }
 }
 
 /* end */
