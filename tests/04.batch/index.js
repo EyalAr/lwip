@@ -1,4 +1,4 @@
-var join = require('path').join,
+const join = require('path').join,
     should = require('should'),
     assert = require('assert'),
     mkdirp = require('mkdirp'),
@@ -6,12 +6,12 @@ var join = require('path').join,
     utils = require('../utils'),
     imgs = require('../imgs');
 
-describe('image.batch', function() {
+describe('image.batch', () => {
 
-    var ops, batch;
+    let ops, batch;
 
-    beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+    beforeEach(done => {
+        lwip.open(imgs.jpg.rgb, (err, img) => {
             if (err) return done(err);
             batch = img.batch();
             ops = utils.generateRandomBatch(batch, 3);
@@ -19,34 +19,34 @@ describe('image.batch', function() {
         });
     });
 
-    describe('exec', function() {
-        describe('same batch twice in parallel', function() {
-            it('should throw an error', function() {
-                batch.exec(function() {});
-                batch.exec.bind(batch, function() {}).should.throwError();
+    describe('exec', () => {
+        describe('same batch twice in parallel', () => {
+            it('should throw an error', () => {
+                batch.exec(() => {});
+                batch.exec.bind(batch, () => {}).should.throwError();
             });
         });
     });
 
-    describe('toBuffer', function() {
+    describe('toBuffer', () => {
 
-        describe('jpeg', function() {
+        describe('jpeg', () => {
 
-            describe('quality 0', function() {
-                it('should succeed', function(done) {
+            describe('quality 0', () => {
+                it('should succeed', done => {
                     batch.toBuffer('jpg', {
                         quality: 0
-                    }, function(err, buffer) {
+                    }, (err, buffer) => {
                         done(err);
                     });
                 });
             });
 
-            describe('quality 100', function() {
-                it('should succeed', function(done) {
+            describe('quality 100', () => {
+                it('should succeed', done => {
                     batch.toBuffer('jpg', {
                         quality: 100
-                    }, function(err, buffer) {
+                    }, (err, buffer) => {
                         done(err);
                     });
                 });
@@ -54,38 +54,38 @@ describe('image.batch', function() {
 
         });
 
-        describe('png', function() {
+        describe('png', () => {
 
-            describe('non interlaced', function() {
+            describe('non interlaced', () => {
 
-                describe('no compression', function() {
-                    it('should succeed', function(done) {
+                describe('no compression', () => {
+                    it('should succeed', done => {
                         batch.toBuffer('png', {
                             interlaced: false,
                             compression: 'none',
-                        }, function(err, buffer) {
+                        }, (err, buffer) => {
                             done(err);
                         });
                     });
                 });
 
-                describe('fast compression', function() {
-                    it('should succeed', function(done) {
+                describe('fast compression', () => {
+                    it('should succeed', done => {
                         batch.toBuffer('png', {
                             interlaced: false,
                             compression: 'fast',
-                        }, function(err, buffer) {
+                        }, (err, buffer) => {
                             done(err);
                         });
                     });
                 });
 
-                describe('high compression', function() {
-                    it('should succeed', function(done) {
+                describe('high compression', () => {
+                    it('should succeed', done => {
                         batch.toBuffer('png', {
                             interlaced: false,
                             compression: 'high',
-                        }, function(err, buffer) {
+                        }, (err, buffer) => {
                             done(err);
                         });
                     });
@@ -93,36 +93,36 @@ describe('image.batch', function() {
 
             });
 
-            describe('interlaced', function() {
+            describe('interlaced', () => {
 
-                describe('no compression', function() {
-                    it('should succeed', function(done) {
+                describe('no compression', () => {
+                    it('should succeed', done => {
                         batch.toBuffer('png', {
                             interlaced: true,
                             compression: 'none',
-                        }, function(err, buffer) {
+                        }, (err, buffer) => {
                             done(err);
                         });
                     });
                 });
 
-                describe('fast compression', function() {
-                    it('should succeed', function(done) {
+                describe('fast compression', () => {
+                    it('should succeed', done => {
                         batch.toBuffer('png', {
                             interlaced: true,
                             compression: 'fast',
-                        }, function(err, buffer) {
+                        }, (err, buffer) => {
                             done(err);
                         });
                     });
                 });
 
-                describe('high compression', function() {
-                    it('should succeed', function(done) {
+                describe('high compression', () => {
+                    it('should succeed', done => {
                         batch.toBuffer('png', {
                             interlaced: true,
                             compression: 'high',
-                        }, function(err, buffer) {
+                        }, (err, buffer) => {
                             done(err);
                         });
                     });
@@ -132,29 +132,29 @@ describe('image.batch', function() {
 
         });
 
-        describe('gif', function() {
+        describe('gif', () => {
 
-            describe('non interlaced', function() {
+            describe('non interlaced', () => {
 
-                describe('no transparency', function() {
-                    it('should succeed', function(done) {
+                describe('no transparency', () => {
+                    it('should succeed', done => {
                         batch.toBuffer('gif', {
                             colors: 122,
                             interlaced: false,
                             transparency: false
-                        }, function(err, buffer) {
+                        }, (err, buffer) => {
                             done(err);
                         });
                     });
                 });
 
-                describe('with transparency', function() {
-                    it('should succeed', function(done) {
+                describe('with transparency', () => {
+                    it('should succeed', done => {
                         batch.toBuffer('gif', {
                             interlaced: false,
                             transparency: true,
                             threshold: 55
-                        }, function(err, buffer) {
+                        }, (err, buffer) => {
                             done(err);
                         });
                     });
@@ -162,27 +162,27 @@ describe('image.batch', function() {
 
             });
 
-            describe('interlaced', function() {
+            describe('interlaced', () => {
 
-                describe('no transparency', function() {
-                    it('should succeed', function(done) {
+                describe('no transparency', () => {
+                    it('should succeed', done => {
                         batch.toBuffer('gif', {
                             colors: 122,
                             interlaced: true,
                             transparency: false
-                        }, function(err, buffer) {
+                        }, (err, buffer) => {
                             done(err);
                         });
                     });
                 });
 
-                describe('with transparency', function() {
-                    it('should succeed', function(done) {
+                describe('with transparency', () => {
+                    it('should succeed', done => {
                         batch.toBuffer('gif', {
                             interlaced: true,
                             transparency: true,
                             threshold: 55
-                        }, function(err, buffer) {
+                        }, (err, buffer) => {
                             done(err);
                         });
                     });
@@ -194,26 +194,26 @@ describe('image.batch', function() {
 
     });
 
-    describe('writeFile', function() {
+    describe('writeFile', () => {
 
-        var tmpDir = join(__dirname, '../results');
+        const tmpDir = join(__dirname, '../results');
 
-        before(function(done) {
+        before(done => {
             mkdirp(tmpDir, done);
         });
 
-        describe('jpeg', function() {
+        describe('jpeg', () => {
 
-            describe('quality 0', function() {
-                it('should succeed', function(done) {
+            describe('quality 0', () => {
+                it('should succeed', done => {
                     batch.writeFile(join(tmpDir, 'btch-q0-' + ops.join('#') + '.jpg'), 'jpg', {
                         quality: 0
                     }, done);
                 });
             });
 
-            describe('quality 100', function() {
-                it('should succeed', function(done) {
+            describe('quality 100', () => {
+                it('should succeed', done => {
                     batch.writeFile(join(tmpDir, 'btch-q100-' + ops.join('#') + '.jpg'), 'jpg', {
                         quality: 100
                     }, done);
@@ -222,12 +222,12 @@ describe('image.batch', function() {
 
         });
 
-        describe('png', function() {
+        describe('png', () => {
 
-            describe('non interlaced', function() {
+            describe('non interlaced', () => {
 
-                describe('no compression', function() {
-                    it('should succeed', function(done) {
+                describe('no compression', () => {
+                    it('should succeed', done => {
                         batch.writeFile(join(tmpDir, 'btch--noint#nocomp--' + ops.join('#') + '.png'), 'png', {
                             interlaced: false,
                             compression: 'none',
@@ -235,8 +235,8 @@ describe('image.batch', function() {
                     });
                 });
 
-                describe('fast compression', function() {
-                    it('should succeed', function(done) {
+                describe('fast compression', () => {
+                    it('should succeed', done => {
                         batch.writeFile(join(tmpDir, 'btch--noint#fstcomp--' + ops.join('#') + '.png'), 'png', {
                             interlaced: false,
                             compression: 'fast',
@@ -244,8 +244,8 @@ describe('image.batch', function() {
                     });
                 });
 
-                describe('high compression', function() {
-                    it('should succeed', function(done) {
+                describe('high compression', () => {
+                    it('should succeed', done => {
                         batch.writeFile(join(tmpDir, 'btch-noint#hicomp-' + ops.join('#') + '.png'), 'png', {
                             interlaced: false,
                             compression: 'high',
@@ -255,10 +255,10 @@ describe('image.batch', function() {
 
             });
 
-            describe('interlaced', function() {
+            describe('interlaced', () => {
 
-                describe('no compression', function() {
-                    it('should succeed', function(done) {
+                describe('no compression', () => {
+                    it('should succeed', done => {
                         batch.writeFile(join(tmpDir, 'btch-intr#nocomp-' + ops.join('#') + '.png'), 'png', {
                             interlaced: true,
                             compression: 'none',
@@ -266,8 +266,8 @@ describe('image.batch', function() {
                     });
                 });
 
-                describe('fast compression', function() {
-                    it('should succeed', function(done) {
+                describe('fast compression', () => {
+                    it('should succeed', done => {
                         batch.writeFile(join(tmpDir, 'btch-intr#fstcomp-' + ops.join('#') + '.png'), 'png', {
                             interlaced: true,
                             compression: 'fast',
@@ -275,8 +275,8 @@ describe('image.batch', function() {
                     });
                 });
 
-                describe('high compression', function() {
-                    it('should succeed', function(done) {
+                describe('high compression', () => {
+                    it('should succeed', done => {
                         batch.writeFile(join(tmpDir, 'btch-intr#hicomp-' + ops.join('#') + '.png'), 'png', {
                             interlaced: true,
                             compression: 'high',
@@ -288,12 +288,12 @@ describe('image.batch', function() {
 
         });
 
-        describe('gif', function() {
+        describe('gif', () => {
 
-            describe('non interlaced', function() {
+            describe('non interlaced', () => {
 
-                describe('no transparency', function() {
-                    it('should succeed', function(done) {
+                describe('no transparency', () => {
+                    it('should succeed', done => {
                         batch.writeFile(join(tmpDir, 'btch--noint#notrn--' + ops.join('#') + '.gif'), 'gif', {
                             interlaced: false,
                             transparency: false,
@@ -301,8 +301,8 @@ describe('image.batch', function() {
                     });
                 });
 
-                describe('with transparency', function() {
-                    it('should succeed', function(done) {
+                describe('with transparency', () => {
+                    it('should succeed', done => {
                         batch.writeFile(join(tmpDir, 'btch--noint#trn--' + ops.join('#') + '.gif'), 'gif', {
                             interlaced: false,
                             transparency: true,
@@ -312,10 +312,10 @@ describe('image.batch', function() {
 
             });
 
-            describe('interlaced', function() {
+            describe('interlaced', () => {
 
-                describe('no transparency', function() {
-                    it('should succeed', function(done) {
+                describe('no transparency', () => {
+                    it('should succeed', done => {
                         batch.writeFile(join(tmpDir, 'btch--noint#notrn--' + ops.join('#') + '.gif'), 'gif', {
                             interlaced: true,
                             transparency: false,
@@ -323,8 +323,8 @@ describe('image.batch', function() {
                     });
                 });
 
-                describe('with transparency', function() {
-                    it('should succeed', function(done) {
+                describe('with transparency', () => {
+                    it('should succeed', done => {
                         batch.writeFile(join(tmpDir, 'btch--noint#trn--' + ops.join('#') + '.gif'), 'gif', {
                             interlaced: true,
                             transparency: true,

@@ -1,28 +1,28 @@
-var join = require('path').join,
+const join = require('path').join,
     assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs'),
     should = require('should');
 
-var tmpDir = join(__dirname, '../results');
+const tmpDir = join(__dirname, '../results');
 
-describe('lwip.setMetadata', function() {
+describe('lwip.setMetadata', () => {
 
-    before(function(done) {
+    before(done => {
         mkdirp(tmpDir, done);
     });
 
-    describe('set png metadata', function() {
-        it('should set metadata and be able to read metadata', function(done) {
-            var filename = 'setMetadata.png';
-            var metadata = 'The quick brown fox jumps over the lazy dog';
+    describe('set png metadata', () => {
+        it('should set metadata and be able to read metadata', done => {
+            const filename = 'setMetadata.png';
+            const metadata = 'The quick brown fox jumps over the lazy dog';
 
-            lwip.create(1, 1, function(err, img) {
+            lwip.create(1, 1, (err, img) => {
                 if (err) return done(err);
                 img.setMetadata(metadata);
-                img.writeFile(join(tmpDir, filename), function(err) {
-                    lwip.open(join(tmpDir, filename), function(err, imgWithMetadata) {
+                img.writeFile(join(tmpDir, filename), err => {
+                    lwip.open(join(tmpDir, filename), (err, imgWithMetadata) => {
                         if (err) return done(err);
                         assert(imgWithMetadata.getMetadata() === metadata);
                         done();
@@ -31,14 +31,14 @@ describe('lwip.setMetadata', function() {
             });
         });
 
-        it('should not set metadata if setMetadata is not called', function(done) {
-            var filename = 'noMetadata.png';
+        it('should not set metadata if setMetadata is not called', done => {
+            const filename = 'noMetadata.png';
 
-            lwip.create(1, 1, function(err, img) {
+            lwip.create(1, 1, (err, img) => {
                 if (err) return done(err);
 
-                img.writeFile(join(tmpDir, filename), function(err) {
-                    lwip.open(join(tmpDir, filename), function(err, imgNoMetadata) {
+                img.writeFile(join(tmpDir, filename), err => {
+                    lwip.open(join(tmpDir, filename), (err, imgNoMetadata) => {
                         if (err) return done(err);
                         assert(imgNoMetadata.getMetadata() === null);
                         done();
@@ -47,28 +47,28 @@ describe('lwip.setMetadata', function() {
             });
         });
 
-        it('should throw error if non-string metadata is set', function(done) {
-            var filename = 'noMetadata.png';
+        it('should throw error if non-string metadata is set', done => {
+            const filename = 'noMetadata.png';
 
-            lwip.create(1, 1, function(err, img) {
+            lwip.create(1, 1, (err, img) => {
                 if (err) return done(err);;
                 img.setMetadata.bind(img, {}).should.throwError();
-                img.setMetadata.bind(img, function(){}).should.throwError();
+                img.setMetadata.bind(img, () => {}).should.throwError();
                 img.setMetadata.bind(img, 42).should.throwError();
                 done();
             });
         });
 
-        it('should remove metadata if called with null parameter', function(done) {
-            lwip.open(imgs.png.hasMetadata, function(err, img) {
-                var filename = 'noMetadata.png';
+        it('should remove metadata if called with null parameter', done => {
+            lwip.open(imgs.png.hasMetadata, (err, img) => {
+                const filename = 'noMetadata.png';
 
                 assert(img.getMetadata() === 'Lorem ipsum dolor sit amet');
 
                 img.setMetadata(null);
 
-                img.writeFile(join(tmpDir, filename), function(err) {
-                    lwip.open(join(tmpDir, filename), function(err, imgWithMetadata) {
+                img.writeFile(join(tmpDir, filename), err => {
+                    lwip.open(join(tmpDir, filename), (err, imgWithMetadata) => {
                         if (err) return done(err);
                         assert(imgWithMetadata.getMetadata() === null);
                         done();
@@ -77,17 +77,17 @@ describe('lwip.setMetadata', function() {
             });
         });
 
-        it('can reset metadata on image with existing metadata', function(done) {
-            lwip.open(imgs.png.hasMetadata, function(err, img) {
-                var filename = 'changedMetadata.png';
-                var oldMetadata = 'Lorem ipsum dolor sit amet';
-                var newMetadata = 'The quick brown fox jumps over the lazy dog';
+        it('can reset metadata on image with existing metadata', done => {
+            lwip.open(imgs.png.hasMetadata, (err, img) => {
+                const filename = 'changedMetadata.png';
+                const oldMetadata = 'Lorem ipsum dolor sit amet';
+                const newMetadata = 'The quick brown fox jumps over the lazy dog';
 
                 assert(img.getMetadata() === oldMetadata);
                 img.setMetadata(newMetadata);
 
-                img.writeFile(join(tmpDir, filename), function(err) {
-                    lwip.open(join(tmpDir, filename), function(err, imgWithMetadata) {
+                img.writeFile(join(tmpDir, filename), err => {
+                    lwip.open(join(tmpDir, filename), (err, imgWithMetadata) => {
                         if (err) return done(err);
                         assert(imgWithMetadata.getMetadata() === newMetadata);
                         done();

@@ -1,21 +1,21 @@
 // methods should throw errors when arguments are invalid
 
-var should = require("should"),
+const should = require("should"),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-describe('batch.scale arguments validation', function() {
+describe('batch.scale arguments validation', () => {
 
-    var batch;
-    before(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+    let batch;
+    before(done => {
+        lwip.open(imgs.jpg.rgb, (err, img) => {
             batch = img.batch();
             done(err);
         });
     });
 
-    describe('invalid interpolation', function() {
-        it('should throw an error', function() {
+    describe('invalid interpolation', () => {
+        it('should throw an error', () => {
             batch.scale.bind(batch, 0.5, 0.5, 'foo').should.throwError();
         });
     });

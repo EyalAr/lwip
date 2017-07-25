@@ -1,42 +1,42 @@
-var join = require('path').join,
+const join = require('path').join,
     assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-var tmpDir = join(__dirname, '../results'),
-    basename = 'cover',
-    current;
+const tmpDir = join(__dirname, '../results');
+    basename = 'cover';
+let current;
 
-describe('lwip.cover', function() {
+describe('lwip.cover', () => {
 
-    var image;
+    let image;
 
-    before(function(done) {
+    before(done => {
         mkdirp(tmpDir, done);
     });
 
-    beforeEach(function(done) {
-        lwip.open(imgs.png.rgb, function(err, img) {
+    beforeEach(done => {
+        lwip.open(imgs.png.rgb, (err, img) => {
             image = img;
             done(err);
         });
     });
 
-    afterEach(function(done) {
+    afterEach(done => {
         image.writeFile(join(tmpDir, current.join('_') + '.jpg'), 'jpg', {
             quality: 90
         }, done);
     });
 
-    beforeEach(function(){
+    beforeEach(() => {
         current = [ basename ];
     });
 
-    describe('800X300, unspecified interpolation', function() {
-        it('image should have the correct size', function(done) {
+    describe('800X300, unspecified interpolation', () => {
+        it('image should have the correct size', done => {
             current.push('800X300','unspecified_inter');
-            image.cover(800, 300, function(err, im) {
+            image.cover(800, 300, (err, im) => {
                 if (err) return done(err);
                 assert(im.width() === 800);
                 assert(im.height() === 300);
@@ -45,10 +45,10 @@ describe('lwip.cover', function() {
         });
     });
 
-    describe('300X800, lanczos interpolation', function() {
-        it('image should have the correct size', function(done) {
+    describe('300X800, lanczos interpolation', () => {
+        it('image should have the correct size', done => {
             current.push('300X800','lanczos');
-            image.cover(300, 800, 'lanczos', function(err, im) {
+            image.cover(300, 800, 'lanczos', (err, im) => {
                 if (err) return done(err);
                 assert(im.width() === 300);
                 assert(im.height() === 800);

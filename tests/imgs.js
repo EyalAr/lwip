@@ -1,4 +1,4 @@
-var imbase = 'images/',
+const imbase = 'images/',
     join = require('path').join;
 
 module.exports = {

@@ -1,73 +1,73 @@
-var join = require('path').join,
+const join = require('path').join,
     assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-var tmpDir = join(__dirname, '../results'),
-    basename = 'sharpen',
-    current;
+const tmpDir = join(__dirname, '../results');
+    basename = 'sharpen';
+let current;
 
-describe('lwip.sharpen', function() {
+describe('lwip.sharpen', () => {
 
-    var image;
+    let image;
 
-    before(function(done) {
+    before(done => {
         mkdirp(tmpDir, done);
     });
 
-    beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+    beforeEach(done => {
+        lwip.open(imgs.jpg.rgb, (err, img) => {
             image = img;
             done(err);
         });
     });
 
-    beforeEach(function() {
+    beforeEach(() => {
         current = [basename];
     });
 
-    afterEach(function(done) {
+    afterEach(done => {
         image.writeFile(join(tmpDir, current.join('_') + '.jpg'), 'jpeg', {
             quality: 100
         }, done);
     });
 
-    describe('amp=0', function() {
-        var amp = 0;
-        it('should succeed', function(done) {
+    describe('amp=0', () => {
+        const amp = 0;
+        it('should succeed', done => {
             current.push('amp' + amp);
             image.sharpen(amp, done);
         });
     });
 
-    describe('amp=5.5', function() {
-        var amp = 5.5;
-        it('should succeed', function(done) {
+    describe('amp=5.5', () => {
+        const amp = 5.5;
+        it('should succeed', done => {
             current.push('amp' + amp);
             image.sharpen(amp, done);
         });
     });
 
-    describe('amp=99', function() {
-        var amp = 99;
-        it('should succeed', function(done) {
+    describe('amp=99', () => {
+        const amp = 99;
+        it('should succeed', done => {
             current.push('amp' + amp);
             image.sharpen(amp, done);
         });
     });
 
-    describe('amp=-5.5', function() {
-        var amp = -5.5;
-        it('should succeed', function(done) {
+    describe('amp=-5.5', () => {
+        const amp = -5.5;
+        it('should succeed', done => {
             current.push('amp' + amp);
             image.sharpen(amp, done);
         });
     });
 
-    describe('amp=-99', function() {
-        var amp = -99;
-        it('should succeed', function(done) {
+    describe('amp=-99', () => {
+        const amp = -99;
+        it('should succeed', done => {
             current.push('amp' + amp);
             image.sharpen(amp, done);
         });

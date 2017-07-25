@@ -1,47 +1,47 @@
-var join = require('path').join,
+const join = require('path').join,
     assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-var tmpDir = join(__dirname, '../results'),
-    basename = 'resize',
-    current;
+const tmpDir = join(__dirname, '../results');
+    basename = 'resize';
+let current;
 
-describe('lwip.resize', function() {
+describe('lwip.resize', () => {
 
-    var image;
+    let image;
 
-    before(function(done) {
+    before(done => {
         mkdirp(tmpDir, done);
     });
 
-    beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+    beforeEach(done => {
+        lwip.open(imgs.jpg.rgb, (err, img) => {
             image = img;
             done(err);
         });
     });
 
-    afterEach(function(done) {
+    afterEach(done => {
         image.writeFile(join(tmpDir, current.join('_') + '.jpg'), 'jpeg', {
             quality: 100
         }, done);
     });
 
-    describe('1000X1330', function() {
+    describe('1000X1330', () => {
 
-        var width = 1000,
+        const width = 1000,
             height = 1330;
 
-        beforeEach(function() {
+        beforeEach(() => {
             current = [basename, width + 'X' + height];
         });
 
-        describe('unspecified interpolation', function() {
-            it('image should have the correct size', function(done) {
+        describe('unspecified interpolation', () => {
+            it('image should have the correct size', done => {
                 current.push('unspecified_inter');
-                image.resize(width, height, function(err, im) {
+                image.resize(width, height, (err, im) => {
                     if (err) return done(err);
                     assert(im.width() === width);
                     assert(im.height() === height);
@@ -50,10 +50,10 @@ describe('lwip.resize', function() {
             });
         });
 
-        describe('lanczos interpolation', function() {
-            it('image should have the correct size', function(done) {
+        describe('lanczos interpolation', () => {
+            it('image should have the correct size', done => {
                 current.push('lanczos');
-                image.resize(width, height, 'lanczos', function(err, im) {
+                image.resize(width, height, 'lanczos', (err, im) => {
                     if (err) return done(err);
                     assert(im.width() === width);
                     assert(im.height() === height);
@@ -62,10 +62,10 @@ describe('lwip.resize', function() {
             });
         });
 
-        describe('cubic interpolation', function() {
-            it('image should have the correct size', function(done) {
+        describe('cubic interpolation', () => {
+            it('image should have the correct size', done => {
                 current.push('cubic');
-                image.resize(width, height, 'cubic', function(err, im) {
+                image.resize(width, height, 'cubic', (err, im) => {
                     if (err) return done(err);
                     assert(im.width() === width);
                     assert(im.height() === height);
@@ -74,10 +74,10 @@ describe('lwip.resize', function() {
             });
         });
 
-        describe('nearest-neighbor interpolation', function() {
-            it('image should have the correct size', function(done) {
+        describe('nearest-neighbor interpolation', () => {
+            it('image should have the correct size', done => {
                 current.push('nearest-neighbor');
-                image.resize(width, height, 'nearest-neighbor', function(err, im) {
+                image.resize(width, height, 'nearest-neighbor', (err, im) => {
                     if (err) return done(err);
                     assert(im.width() === width);
                     assert(im.height() === height);
@@ -86,10 +86,10 @@ describe('lwip.resize', function() {
             });
         });
 
-        describe('moving-average interpolation', function() {
-            it('image should have the correct size', function(done) {
+        describe('moving-average interpolation', () => {
+            it('image should have the correct size', done => {
                 current.push('moving-average');
-                image.resize(width, height, 'moving-average', function(err, im) {
+                image.resize(width, height, 'moving-average', (err, im) => {
                     if (err) return done(err);
                     assert(im.width() === width);
                     assert(im.height() === height);
@@ -98,10 +98,10 @@ describe('lwip.resize', function() {
             });
         });
 
-        describe('linear interpolation', function() {
-            it('image should have the correct size', function(done) {
+        describe('linear interpolation', () => {
+            it('image should have the correct size', done => {
                 current.push('linear');
-                image.resize(width, height, 'linear', function(err, im) {
+                image.resize(width, height, 'linear', (err, im) => {
                     if (err) return done(err);
                     assert(im.width() === width);
                     assert(im.height() === height);
@@ -110,10 +110,10 @@ describe('lwip.resize', function() {
             });
         });
 
-        describe('grid interpolation', function() {
-            it('image should have the correct size', function(done) {
+        describe('grid interpolation', () => {
+            it('image should have the correct size', done => {
                 current.push('grid');
-                image.resize(width, height, 'grid', function(err, im) {
+                image.resize(width, height, 'grid', (err, im) => {
                     if (err) return done(err);
                     assert(im.width() === width);
                     assert(im.height() === height);
@@ -124,18 +124,18 @@ describe('lwip.resize', function() {
 
     });
 
-    describe('100X100', function() {
+    describe('100X100', () => {
 
-        var size = 100;
+        const size = 100;
 
-        beforeEach(function() {
+        beforeEach(() => {
             current = [basename, size + 'X' + size];
         });
 
-        describe('unspecified interpolation', function() {
-            it('image should have the correct size', function(done) {
+        describe('unspecified interpolation', () => {
+            it('image should have the correct size', done => {
                 current.push('unspecified_inter');
-                image.resize(size, function(err, im) {
+                image.resize(size, (err, im) => {
                     if (err) return done(err);
                     assert(im.width() === size);
                     assert(im.height() === size);

@@ -1,34 +1,34 @@
-var join = require('path').join,
+const join = require('path').join,
     assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-var tmpDir = join(__dirname, '../results');
+const tmpDir = join(__dirname, '../results');
 
-describe('lwip.opacify', function() {
+describe('lwip.opacify', () => {
 
-    var image;
+    let image;
 
-    before(function(done) {
+    before(done => {
         mkdirp(tmpDir, done);
     });
 
-    beforeEach(function(done) {
-        lwip.open(imgs.png.trans, function(err, img) {
+    beforeEach(done => {
+        lwip.open(imgs.png.trans, (err, img) => {
             image = img;
             done(err);
         });
     });
 
-    afterEach(function(done) {
+    afterEach(done => {
         image.writeFile(join(tmpDir, 'opacify.png'), 'png', {
             compression: 'fast',
             interlaced: true
         }, done);
     });
 
-    it('should succeed', function(done) {
+    it('should succeed', done => {
         image.opacify(done);
     });
 

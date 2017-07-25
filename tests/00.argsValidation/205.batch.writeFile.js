@@ -1,29 +1,29 @@
 // methods should throw errors when arguments are invalid
 
-var should = require("should"),
+const should = require("should"),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-describe('batch.writeFile arguments validation', function() {
+describe('batch.writeFile arguments validation', () => {
 
-    var batch;
-    before(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+    let batch;
+    before(done => {
+        lwip.open(imgs.jpg.rgb, (err, img) => {
             batch = img.batch().blur(2);
             done(err);
         });
     });
 
-    describe('invalid encoding format', function() {
-        it('should throw an error', function() {
+    describe('invalid encoding format', () => {
+        it('should throw an error', () => {
             batch.writeFile.bind(batch, 'res.jpg', 'jjpeg').should.throwError();
         });
     });
 
-    describe('JPEG params', function() {
+    describe('JPEG params', () => {
 
-        describe('invalid quality', function() {
-            it('should throw an error', function() {
+        describe('invalid quality', () => {
+            it('should throw an error', () => {
                 batch.writeFile.bind(batch, 'res.jpg', 'jpeg', {
                     quality: 'foo'
                 }).should.throwError();
@@ -32,21 +32,21 @@ describe('batch.writeFile arguments validation', function() {
 
     });
 
-    describe('PNG params', function() {
+    describe('PNG params', () => {
 
-        describe('invalid compression', function() {
-            it('should throw an error', function() {
+        describe('invalid compression', () => {
+            it('should throw an error', () => {
                 batch.writeFile.bind(batch, 'res.png', 'png', {
                     compression: 'foo'
-                }, function() {}).should.throwError();
+                }, () => {}).should.throwError();
             });
         });
 
-        describe('invalid interlaced', function() {
-            it('should throw an error', function() {
+        describe('invalid interlaced', () => {
+            it('should throw an error', () => {
                 batch.writeFile.bind(batch, 'res.png', 'png', {
                     interlaced: 'foo'
-                }, function() {}).should.throwError();
+                }, () => {}).should.throwError();
             });
         });
 

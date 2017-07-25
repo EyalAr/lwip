@@ -1,23 +1,23 @@
-var should = require("should"),
+const should = require("should"),
     fs = require('fs'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-describe('lwip.open', function() {
-    describe('non-existing image', function() {
-        it('should fail', function(done) {
-            lwip.open(imgs.inv, 'jpg', function(err, img) {
+describe('lwip.open', () => {
+    describe('non-existing image', () => {
+        it('should fail', done => {
+            lwip.open(imgs.inv, 'jpg', (err, img) => {
                 should(err).be.Error();
                 done();
             });
         });
     });
 
-    describe('jpeg file', function() {
+    describe('jpeg file', () => {
 
-        describe('rgb image (with jpg extension)', function() {
-            it('should succeed', function(done) {
-                lwip.open(imgs.jpg.rgb, function(err, img) {
+        describe('rgb image (with jpg extension)', () => {
+            it('should succeed', done => {
+                lwip.open(imgs.jpg.rgb, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -25,9 +25,9 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('rgb image (no extension)', function() {
-            it('should succeed', function(done) {
-                lwip.open(imgs.jpg.noex, 'jpg', function(err, img) {
+        describe('rgb image (no extension)', () => {
+            it('should succeed', done => {
+                lwip.open(imgs.jpg.noex, 'jpg', (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -35,9 +35,9 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('grayscale image', function() {
-            it('should succeed', function(done) {
-                lwip.open(imgs.jpg.gs, function(err, img) {
+        describe('grayscale image', () => {
+            it('should succeed', done => {
+                lwip.open(imgs.jpg.gs, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -45,9 +45,9 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('invalid image', function() {
-            it('should fail', function(done) {
-                lwip.open(imgs.jpg.inv, function(err, img) {
+        describe('invalid image', () => {
+            it('should fail', done => {
+                lwip.open(imgs.jpg.inv, (err, img) => {
                     should(err).be.Error();
                     done();
                 });
@@ -56,11 +56,11 @@ describe('lwip.open', function() {
 
     });
 
-    describe('png file', function() {
+    describe('png file', () => {
 
-        describe('rgb image (with png extension)', function() {
-            it('should succeed', function(done) {
-                lwip.open(imgs.png.rgb, function(err, img) {
+        describe('rgb image (with png extension)', () => {
+            it('should succeed', done => {
+                lwip.open(imgs.png.rgb, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -68,9 +68,9 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('rgb image (no extension)', function() {
-            it('should succeed', function(done) {
-                lwip.open(imgs.png.noex, 'png', function(err, img) {
+        describe('rgb image (no extension)', () => {
+            it('should succeed', done => {
+                lwip.open(imgs.png.noex, 'png', (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -78,9 +78,9 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('grayscale image', function() {
-            it('should succeed', function(done) {
-                lwip.open(imgs.png.gs, function(err, img) {
+        describe('grayscale image', () => {
+            it('should succeed', done => {
+                lwip.open(imgs.png.gs, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -88,9 +88,9 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('transparent image', function() {
-            it('should succeed', function(done) {
-                lwip.open(imgs.png.trans, function(err, img) {
+        describe('transparent image', () => {
+            it('should succeed', done => {
+                lwip.open(imgs.png.trans, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -98,9 +98,9 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('invalid image', function() {
-            it('should fail', function(done) {
-                lwip.open(imgs.png.inv, function(err, img) {
+        describe('invalid image', () => {
+            it('should fail', done => {
+                lwip.open(imgs.png.inv, (err, img) => {
                     should(err).be.Error();
                     done();
                 });
@@ -109,11 +109,11 @@ describe('lwip.open', function() {
 
     });
 
-    describe('gif file', function() {
+    describe('gif file', () => {
 
-        describe('rgb image (with gif extension)', function() {
-            it('should succeed', function(done) {
-                lwip.open(imgs.gif.rgb, function(err, img) {
+        describe('rgb image (with gif extension)', () => {
+            it('should succeed', done => {
+                lwip.open(imgs.gif.rgb, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -121,9 +121,9 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('rgb image (no extension)', function() {
-            it('should succeed', function(done) {
-                lwip.open(imgs.gif.noex, 'gif', function(err, img) {
+        describe('rgb image (no extension)', () => {
+            it('should succeed', done => {
+                lwip.open(imgs.gif.noex, 'gif', (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -131,9 +131,9 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('grayscale image', function() {
-            it('should succeed', function(done) {
-                lwip.open(imgs.gif.gs, function(err, img) {
+        describe('grayscale image', () => {
+            it('should succeed', done => {
+                lwip.open(imgs.gif.gs, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -141,9 +141,9 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('transparent image', function() {
-            it('should succeed', function(done) {
-                lwip.open(imgs.gif.trans, function(err, img) {
+        describe('transparent image', () => {
+            it('should succeed', done => {
+                lwip.open(imgs.gif.trans, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -151,9 +151,9 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('invalid image', function() {
-            it('should fail', function(done) {
-                lwip.open(imgs.gif.inv, function(err, img) {
+        describe('invalid image', () => {
+            it('should fail', done => {
+                lwip.open(imgs.gif.inv, (err, img) => {
                     should(err).be.Error();
                     done();
                 });
@@ -162,19 +162,19 @@ describe('lwip.open', function() {
 
     });
 
-    describe('jpeg buffer', function() {
+    describe('jpeg buffer', () => {
 
-        describe('rgb image', function() {
-            var buffer;
-            before(function(done) {
-                fs.readFile(imgs.jpg.rgb, function(err, imbuf) {
+        describe('rgb image', () => {
+            let buffer;
+            before(done => {
+                fs.readFile(imgs.jpg.rgb, (err, imbuf) => {
                     buffer = imbuf;
                     done(err);
                 });
             });
 
-            it('should succeed', function(done) {
-                lwip.open(buffer, 'jpg', function(err, img) {
+            it('should succeed', done => {
+                lwip.open(buffer, 'jpg', (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -182,57 +182,17 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('grayscale image', function() {
-            var buffer;
-            before(function(done) {
-                fs.readFile(imgs.jpg.gs, function(err, imbuf) {
+        describe('grayscale image', () => {
+            let buffer;
+            before(done => {
+                fs.readFile(imgs.jpg.gs, (err, imbuf) => {
                     buffer = imbuf;
                     done(err);
                 });
             });
 
-            it('should succeed', function(done) {
-                lwip.open(buffer, 'jpg', function(err, img) {
-                    should(err).not.be.Error();
-                    img.should.be.ok();
-                    done();
-                });
-            });
-        });
-
-    });
-
-    describe('png buffer', function() {
-
-        describe('rgb image', function() {
-            var buffer;
-            before(function(done) {
-                fs.readFile(imgs.png.rgb, function(err, imbuf) {
-                    buffer = imbuf;
-                    done(err);
-                });
-            });
-
-            it('should succeed', function(done) {
-                lwip.open(buffer, 'png', function(err, img) {
-                    should(err).not.be.Error();
-                    img.should.be.ok();
-                    done();
-                });
-            });
-        });
-
-        describe('grayscale image', function() {
-            var buffer;
-            before(function(done) {
-                fs.readFile(imgs.png.gs, function(err, imbuf) {
-                    buffer = imbuf;
-                    done(err);
-                });
-            });
-
-            it('should succeed', function(done) {
-                lwip.open(buffer, 'png', function(err, img) {
+            it('should succeed', done => {
+                lwip.open(buffer, 'jpg', (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -242,19 +202,19 @@ describe('lwip.open', function() {
 
     });
 
-    describe('gif buffer', function() {
+    describe('png buffer', () => {
 
-        describe('rgb image', function() {
-            var buffer;
-            before(function(done) {
-                fs.readFile(imgs.gif.rgb, function(err, imbuf) {
+        describe('rgb image', () => {
+            let buffer;
+            before(done => {
+                fs.readFile(imgs.png.rgb, (err, imbuf) => {
                     buffer = imbuf;
                     done(err);
                 });
             });
 
-            it('should succeed', function(done) {
-                lwip.open(buffer, 'gif', function(err, img) {
+            it('should succeed', done => {
+                lwip.open(buffer, 'png', (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -262,17 +222,17 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('grayscale image', function() {
-            var buffer;
-            before(function(done) {
-                fs.readFile(imgs.gif.gs, function(err, imbuf) {
+        describe('grayscale image', () => {
+            let buffer;
+            before(done => {
+                fs.readFile(imgs.png.gs, (err, imbuf) => {
                     buffer = imbuf;
                     done(err);
                 });
             });
 
-            it('should succeed', function(done) {
-                lwip.open(buffer, 'gif', function(err, img) {
+            it('should succeed', done => {
+                lwip.open(buffer, 'png', (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
                     done();
@@ -282,22 +242,62 @@ describe('lwip.open', function() {
 
     });
 
-    describe('raw pixel buffer', function() {
+    describe('gif buffer', () => {
 
-        describe('grayscale image', function(){
-            var buffer;
-            before(function(done) {
+        describe('rgb image', () => {
+            let buffer;
+            before(done => {
+                fs.readFile(imgs.gif.rgb, (err, imbuf) => {
+                    buffer = imbuf;
+                    done(err);
+                });
+            });
+
+            it('should succeed', done => {
+                lwip.open(buffer, 'gif', (err, img) => {
+                    should(err).not.be.Error();
+                    img.should.be.ok();
+                    done();
+                });
+            });
+        });
+
+        describe('grayscale image', () => {
+            let buffer;
+            before(done => {
+                fs.readFile(imgs.gif.gs, (err, imbuf) => {
+                    buffer = imbuf;
+                    done(err);
+                });
+            });
+
+            it('should succeed', done => {
+                lwip.open(buffer, 'gif', (err, img) => {
+                    should(err).not.be.Error();
+                    img.should.be.ok();
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe('raw pixel buffer', () => {
+
+        describe('grayscale image', () => {
+            let buffer;
+            before(done => {
                 buffer = new Buffer(100 * 100);
                 buffer.fill(0);
                 done();
             });
 
-            it('should construct an all-black pixels image', function(done) {
-                lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
+            it('should construct an all-black pixels image', done => {
+                lwip.open(buffer, { width: 100, height: 100 }, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
-                    for (var x = 0 ; x < img.width() ; x++){
-                        for (var y = 0 ; y < img.height() ; y++){
+                    for (let x = 0 ; x < img.width() ; x++){
+                        for (let y = 0 ; y < img.height() ; y++){
                             img.getPixel(x, y).should.deepEqual({r: 0, g: 0, b: 0, a: 100});
                         }
                     }
@@ -306,21 +306,21 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('grayscale image with alpha', function(){
-            var buffer;
-            before(function(done) {
+        describe('grayscale image with alpha', () => {
+            let buffer;
+            before(done => {
                 buffer = new Buffer(100 * 100 * 2);
                 buffer.fill(0, 0, 10000);
                 buffer.fill(50, 10000);
                 done();
             });
 
-            it('should construct an all-black transparent pixels image', function(done) {
-                lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
+            it('should construct an all-black transparent pixels image', done => {
+                lwip.open(buffer, { width: 100, height: 100 }, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
-                    for (var x = 0 ; x < img.width() ; x++){
-                        for (var y = 0 ; y < img.height() ; y++){
+                    for (let x = 0 ; x < img.width() ; x++){
+                        for (let y = 0 ; y < img.height() ; y++){
                             img.getPixel(x, y).should.deepEqual({r: 0, g: 0, b: 0, a: 50});
                         }
                     }
@@ -329,9 +329,9 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('rgb image', function(){
-            var buffer;
-            before(function(done) {
+        describe('rgb image', () => {
+            let buffer;
+            before(done => {
                 buffer = new Buffer(100 * 100 * 3);
                 buffer.fill(10, 0, 10000);
                 buffer.fill(20, 10000, 2 * 10000);
@@ -339,12 +339,12 @@ describe('lwip.open', function() {
                 done();
             });
 
-            it('should construct an all-black pixels image', function(done) {
-                lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
+            it('should construct an all-black pixels image', done => {
+                lwip.open(buffer, { width: 100, height: 100 }, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
-                    for (var x = 0 ; x < img.width() ; x++){
-                        for (var y = 0 ; y < img.height() ; y++){
+                    for (let x = 0 ; x < img.width() ; x++){
+                        for (let y = 0 ; y < img.height() ; y++){
                             img.getPixel(x, y).should.deepEqual({r: 10, g: 20, b: 30, a: 100});
                         }
                     }
@@ -353,9 +353,9 @@ describe('lwip.open', function() {
             });
         });
 
-        describe('rgb image with alpha', function(){
-            var buffer;
-            before(function(done) {
+        describe('rgb image with alpha', () => {
+            let buffer;
+            before(done => {
                 buffer = new Buffer(100 * 100 * 4);
                 buffer.fill(10, 0, 10000);
                 buffer.fill(20, 10000, 2 * 10000);
@@ -364,12 +364,12 @@ describe('lwip.open', function() {
                 done();
             });
 
-            it('should construct an all-black transparent pixels image', function(done) {
-                lwip.open(buffer, { width: 100, height: 100 }, function(err, img) {
+            it('should construct an all-black transparent pixels image', done => {
+                lwip.open(buffer, { width: 100, height: 100 }, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
-                    for (var x = 0 ; x < img.width() ; x++){
-                        for (var y = 0 ; y < img.height() ; y++){
+                    for (let x = 0 ; x < img.width() ; x++){
+                        for (let y = 0 ; y < img.height() ; y++){
                             img.getPixel(x, y).should.deepEqual({r: 10, g: 20, b: 30, a: 50});
                         }
                     }

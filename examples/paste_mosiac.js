@@ -2,51 +2,51 @@
  * Example for using LWIP to create a hue gradient mosiac.
  */
 
-var path = require('path'),
+const path = require('path'),
     async = require('async'),
     lwip = require('../');
 
-lwip.open('lena.jpg', function(err, image) {
+lwip.open('lena.jpg', (err, image) => {
     if (err) return console.log(err);
 
-    image.scale(0.15, function(err, image) {
+    image.scale(0.15, (err, image) => {
         if (err) return console.log(err);
 
-        var width = image.width(),
+        const width = image.width(),
             height = image.height();
 
-        var ROWS = 10,
+        const ROWS = 10,
             COLS = 10,
             HUES = [];
 
-        for (var i = 0; i < ROWS * COLS; i++) {
+        for (let i = 0; i < ROWS * COLS; i++) {
             HUES.push(i * 360 / ROWS / COLS);
         }
 
-        lwip.create(width * COLS, height * ROWS, function(err, canvas) {
+        lwip.create(width * COLS, height * ROWS, (err, canvas) => {
             if (err) return console.log(err);
 
-            var clones = [];
-            async.each(HUES, function(h, done) {
-                var i = HUES.indexOf(h);
-                image.clone(function(err, clone) {
+            const clones = [];
+            async.each(HUES, (h, done) => {
+                const i = HUES.indexOf(h);
+                image.clone((err, clone) => {
                     if (err) return done(err);
-                    var batch = clone.batch();
+                    const batch = clone.batch();
                     if (i % 2 === 1) batch.mirror('x');
                     if (i % (2 * COLS) >= COLS) batch.mirror('y');
                     batch.hue(h);
-                    batch.exec(function(err, clone) {
+                    batch.exec((err, clone) => {
                         if (err) return done(err);
                         clones[i] = clone;
                         done();
                     });
                 });
-            }, function(err) {
+            }, err => {
                 if (err) return console.log(err);
-                var r = 0,
+                let r = 0,
                     c = 0;
-                async.eachSeries(clones, function(clone, next) {
-                    canvas.paste(c * width, r * height, clone, function(err) {
+                async.eachSeries(clones, (clone, next) => {
+                    canvas.paste(c * width, r * height, clone, err => {
                         c++;
                         if (c === COLS) {
                             c = 0;
@@ -54,9 +54,9 @@ lwip.open('lena.jpg', function(err, image) {
                         }
                         next(err);
                     });
-                }, function(err) {
+                }, err => {
                     if (err) return console.log(err);
-                    canvas.writeFile('lena_paste_mosiac.jpg', function(err) {
+                    canvas.writeFile('lena_paste_mosiac.jpg', err => {
                         if (err) return console.log(err);
                         console.log('done');
                     });

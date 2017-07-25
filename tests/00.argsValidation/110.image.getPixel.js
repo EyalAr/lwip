@@ -1,21 +1,21 @@
 // methods should throw errors when arguments are invalid
 
-var should = require("should"),
+const should = require("should"),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-describe('image.getPixel arguments validation', function() {
+describe('image.getPixel arguments validation', () => {
 
-    var image;
-    before(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+    let image;
+    before(done => {
+        lwip.open(imgs.jpg.rgb, (err, img) => {
             image = img;
             done(err);
         });
     });
 
-    describe('coordinates exceeding image dimensions', function() {
-        it('should throw an error', function() {
+    describe('coordinates exceeding image dimensions', () => {
+        it('should throw an error', () => {
             image.getPixel.bind(image, 99999, 0).should.throwError();
             image.getPixel.bind(image, 0, 99999).should.throwError();
             image.getPixel.bind(image, 99999, 99999).should.throwError();

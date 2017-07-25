@@ -1,22 +1,22 @@
 // methods should throw errors when arguments are invalid
 
-var should = require("should"),
+const should = require("should"),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-describe('image.scale arguments validation', function() {
+describe('image.scale arguments validation', () => {
 
-    var image;
-    before(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+    let image;
+    before(done => {
+        lwip.open(imgs.jpg.rgb, (err, img) => {
             image = img;
             done(err);
         });
     });
 
-    describe('invalid interpolation', function() {
-        it('should throw an error', function() {
-            image.scale.bind(image, 0.5, 0.5, 'foo', function() {}).should.throwError();
+    describe('invalid interpolation', () => {
+        it('should throw an error', () => {
+            image.scale.bind(image, 0.5, 0.5, 'foo', () => {}).should.throwError();
         });
     });
 });

@@ -1,10 +1,10 @@
-var join = require('path').join,
+const join = require('path').join,
     should = require("should"),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-var tmpDir = join(__dirname, '../results'),
+const tmpDir = join(__dirname, '../results');
     outJpeg = 'write_test.jpg',
     outPng = 'write_test.png',
     outGif = 'write_test.gif',
@@ -12,40 +12,40 @@ var tmpDir = join(__dirname, '../results'),
     outpathPng = join(tmpDir, outPng),
     outpathGif = join(tmpDir, outGif);
 
-describe('lwip.writeFile', function() {
+describe('lwip.writeFile', () => {
 
-    var image;
+    let image;
 
-    before(function(done) {
+    before(done => {
         mkdirp(tmpDir, done);
     });
-    before(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+    before(done => {
+        lwip.open(imgs.jpg.rgb, (err, img) => {
             image = img;
             done(err);
         });
     });
 
-    describe('jpeg', function() {
+    describe('jpeg', () => {
 
-        describe('with type unspecified', function() {
+        describe('with type unspecified', () => {
 
-            describe('params unspecified', function() {
-                it('should succeed', function(done) {
+            describe('params unspecified', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathJpeg, done);
                 });
             });
 
-            describe('params specified q=20', function() {
-                it('should succeed', function(done) {
+            describe('params specified q=20', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathJpeg, {
                         quality: 20
                     }, done);
                 });
             });
 
-            describe('params specified q=0', function() {
-                it('should succeed', function(done) {
+            describe('params specified q=0', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathJpeg, {
                         quality: 0
                     }, done);
@@ -54,16 +54,16 @@ describe('lwip.writeFile', function() {
 
         });
 
-        describe('with type specified', function() {
+        describe('with type specified', () => {
 
-            describe('params unspecified', function() {
-                it('should succeed', function(done) {
+            describe('params unspecified', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathJpeg, 'jpeg', done);
                 });
             });
 
-            describe('params specified', function() {
-                it('should succeed', function(done) {
+            describe('params specified', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathJpeg, 'jpeg', {
                         quality: 20
                     }, done);
@@ -74,18 +74,18 @@ describe('lwip.writeFile', function() {
 
     });
 
-    describe('png', function() {
+    describe('png', () => {
 
-        describe('with type unspecified', function() {
+        describe('with type unspecified', () => {
 
-            describe('params unspecified', function() {
-                it('should succeed', function(done) {
+            describe('params unspecified', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathPng, done);
                 });
             });
 
-            describe('params specified - no compression, not interlaced', function() {
-                it('should succeed', function(done) {
+            describe('params specified - no compression, not interlaced', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathPng, {
                         compression: 'none',
                         interlaced: false
@@ -93,8 +93,8 @@ describe('lwip.writeFile', function() {
                 });
             });
 
-            describe('params specified - no compression, interlaced', function() {
-                it('should succeed', function(done) {
+            describe('params specified - no compression, interlaced', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathPng, {
                         compression: 'none',
                         interlaced: true
@@ -102,8 +102,8 @@ describe('lwip.writeFile', function() {
                 });
             });
 
-            describe('params specified - fast compression, not interlaced', function() {
-                it('should succeed', function(done) {
+            describe('params specified - fast compression, not interlaced', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathPng, {
                         compression: 'fast',
                         interlaced: false
@@ -111,8 +111,8 @@ describe('lwip.writeFile', function() {
                 });
             });
 
-            describe('params specified - fast compression, interlaced', function() {
-                it('should succeed', function(done) {
+            describe('params specified - fast compression, interlaced', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathPng, {
                         compression: 'fast',
                         interlaced: true
@@ -120,8 +120,8 @@ describe('lwip.writeFile', function() {
                 });
             });
 
-            describe('params specified - high compression, not interlaced', function() {
-                it('should succeed', function(done) {
+            describe('params specified - high compression, not interlaced', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathPng, {
                         compression: 'high',
                         interlaced: false
@@ -129,8 +129,8 @@ describe('lwip.writeFile', function() {
                 });
             });
 
-            describe('params specified - high compression, interlaced', function() {
-                it('should succeed', function(done) {
+            describe('params specified - high compression, interlaced', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathPng, {
                         compression: 'high',
                         interlaced: true
@@ -140,10 +140,10 @@ describe('lwip.writeFile', function() {
 
         });
 
-        describe('with type specified', function() {
+        describe('with type specified', () => {
 
-            describe('params unspecified', function() {
-                it('should succeed', function(done) {
+            describe('params unspecified', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathPng, 'png', done);
                 });
             });
@@ -152,18 +152,18 @@ describe('lwip.writeFile', function() {
 
     });
 
-    describe('gif', function() {
+    describe('gif', () => {
 
-        describe('with type unspecified', function() {
+        describe('with type unspecified', () => {
 
-            describe('params unspecified', function() {
-                it('should succeed', function(done) {
+            describe('params unspecified', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathGif, done);
                 });
             });
 
-            describe('params specified - 256, not interlaced, not transparent, 50', function() {
-                it('should succeed', function(done) {
+            describe('params specified - 256, not interlaced, not transparent, 50', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathGif, {
                         colors: 256,
                         interlaced: false,
@@ -173,8 +173,8 @@ describe('lwip.writeFile', function() {
                 });
             });
 
-            describe('params specified - 99, interlaced, not transparent, 50', function() {
-                it('should succeed', function(done) {
+            describe('params specified - 99, interlaced, not transparent, 50', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathGif, {
                         colors: 99,
                         interlaced: true,
@@ -184,8 +184,8 @@ describe('lwip.writeFile', function() {
                 });
             });
 
-            describe('params specified - 256, not interlaced, transparent, 30', function() {
-                it('should succeed', function(done) {
+            describe('params specified - 256, not interlaced, transparent, 30', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathGif, {
                         colors: 256,
                         interlaced: false,
@@ -195,8 +195,8 @@ describe('lwip.writeFile', function() {
                 });
             });
 
-            describe('params specified - 16, interlaced, transparent, 88', function() {
-                it('should succeed', function(done) {
+            describe('params specified - 16, interlaced, transparent, 88', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathGif, {
                         colors: 16,
                         interlaced: true,
@@ -208,10 +208,10 @@ describe('lwip.writeFile', function() {
 
         });
 
-        describe('with type specified', function() {
+        describe('with type specified', () => {
 
-            describe('params unspecified', function() {
-                it('should succeed', function(done) {
+            describe('params unspecified', () => {
+                it('should succeed', done => {
                     image.writeFile(outpathGif, 'gif', done);
                 });
             });

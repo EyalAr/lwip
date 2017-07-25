@@ -1,45 +1,45 @@
 // methods should throw errors when arguments are invalid
 
-var should = require("should"),
+const should = require("should"),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-describe('batch.toBuffer arguments validation', function() {
+describe('batch.toBuffer arguments validation', () => {
 
-    var batch;
-    beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+    let batch;
+    beforeEach(done => {
+        lwip.open(imgs.jpg.rgb, (err, img) => {
             batch = img.batch().blur(2);
             done(err);
         });
     });
 
-    describe('invalid encoding format', function() {
-        it('should throw an error', function() {
+    describe('invalid encoding format', () => {
+        it('should throw an error', () => {
             batch.toBuffer.bind(batch, 'jjpeg').should.throwError();
         });
     });
 
-    describe('JPEG params', function() {
+    describe('JPEG params', () => {
 
-        describe('invalid quality: foo', function() {
-            it('should throw an error', function() {
+        describe('invalid quality: foo', () => {
+            it('should throw an error', () => {
                 batch.toBuffer.bind(batch, 'jpeg', {
                     quality: 'foo'
                 }).should.throwError();
             });
         });
 
-        describe('invalid quality: -1', function() {
-            it('should throw an error', function() {
+        describe('invalid quality: -1', () => {
+            it('should throw an error', () => {
                 batch.toBuffer.bind(batch, 'jpeg', {
                     quality: -1
                 }).should.throwError();
             });
         });
 
-        describe('invalid quality: 101', function() {
-            it('should throw an error', function() {
+        describe('invalid quality: 101', () => {
+            it('should throw an error', () => {
                 batch.toBuffer.bind(batch, 'jpeg', {
                     quality: 101
                 }).should.throwError();
@@ -48,18 +48,18 @@ describe('batch.toBuffer arguments validation', function() {
 
     });
 
-    describe('PNG params', function() {
+    describe('PNG params', () => {
 
-        describe("valid params", function(){
+        describe("valid params", () => {
 
-            describe('defaults', function() {
-                it('should succeed', function(done) {
+            describe('defaults', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', done).should.not.throwError();
                 });
             });
 
-            describe('none, false, true', function() {
-                it('should succeed', function(done) {
+            describe('none, false, true', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'none',
                         interlaced: false,
@@ -68,8 +68,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('fast, false, true', function() {
-                it('should succeed', function(done) {
+            describe('fast, false, true', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'fast',
                         interlaced: false,
@@ -78,8 +78,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('high, false, true', function() {
-                it('should succeed', function(done) {
+            describe('high, false, true', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'high',
                         interlaced: false,
@@ -88,8 +88,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('none, true, true', function() {
-                it('should succeed', function(done) {
+            describe('none, true, true', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'none',
                         interlaced: true,
@@ -98,8 +98,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('fast, true, true', function() {
-                it('should succeed', function(done) {
+            describe('fast, true, true', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'fast',
                         interlaced: true,
@@ -108,8 +108,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('high, true, true', function() {
-                it('should succeed', function(done) {
+            describe('high, true, true', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'high',
                         interlaced: true,
@@ -118,8 +118,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('none, false, false', function() {
-                it('should succeed', function(done) {
+            describe('none, false, false', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'none',
                         interlaced: false,
@@ -128,8 +128,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('fast, false, false', function() {
-                it('should succeed', function(done) {
+            describe('fast, false, false', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'fast',
                         interlaced: false,
@@ -138,8 +138,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('high, false, false', function() {
-                it('should succeed', function(done) {
+            describe('high, false, false', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'high',
                         interlaced: false,
@@ -148,8 +148,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('none, true, false', function() {
-                it('should succeed', function(done) {
+            describe('none, true, false', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'none',
                         interlaced: true,
@@ -158,8 +158,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('fast, true, false', function() {
-                it('should succeed', function(done) {
+            describe('fast, true, false', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'fast',
                         interlaced: true,
@@ -168,8 +168,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('high, true, false', function() {
-                it('should succeed', function(done) {
+            describe('high, true, false', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'high',
                         interlaced: true,
@@ -178,8 +178,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('none, false, auto', function() {
-                it('should succeed', function(done) {
+            describe('none, false, auto', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'none',
                         interlaced: false,
@@ -188,8 +188,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('fast, false, auto', function() {
-                it('should succeed', function(done) {
+            describe('fast, false, auto', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'fast',
                         interlaced: false,
@@ -198,8 +198,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('high, false, auto', function() {
-                it('should succeed', function(done) {
+            describe('high, false, auto', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'high',
                         interlaced: false,
@@ -208,8 +208,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('none, true, auto', function() {
-                it('should succeed', function(done) {
+            describe('none, true, auto', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'none',
                         interlaced: true,
@@ -218,8 +218,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('fast, true, auto', function() {
-                it('should succeed', function(done) {
+            describe('fast, true, auto', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'fast',
                         interlaced: true,
@@ -228,8 +228,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('high, true, auto', function() {
-                it('should succeed', function(done) {
+            describe('high, true, auto', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'high',
                         interlaced: true,
@@ -240,37 +240,37 @@ describe('batch.toBuffer arguments validation', function() {
 
         });
 
-        describe("invalid params", function(){
+        describe("invalid params", () => {
 
-            describe('invalid compression - string', function() {
-                it('should throw an error', function() {
+            describe('invalid compression - string', () => {
+                it('should throw an error', () => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 'foo'
-                    }, function() {}).should.throwError();
+                    }, () => {}).should.throwError();
                 });
             });
 
-            describe('invalid compression - number', function() {
-                it('should throw an error', function() {
+            describe('invalid compression - number', () => {
+                it('should throw an error', () => {
                     batch.toBuffer.bind(batch, 'png', {
                         compression: 98
-                    }, function() {}).should.throwError();
+                    }, () => {}).should.throwError();
                 });
             });
 
-            describe('invalid interlaced - string', function() {
-                it('should throw an error', function() {
+            describe('invalid interlaced - string', () => {
+                it('should throw an error', () => {
                     batch.toBuffer.bind(batch, 'png', {
                         interlaced: 'foo'
-                    }, function() {}).should.throwError();
+                    }, () => {}).should.throwError();
                 });
             });
 
-            describe('invalid interlaced - number', function() {
-                it('should throw an error', function() {
+            describe('invalid interlaced - number', () => {
+                it('should throw an error', () => {
                     batch.toBuffer.bind(batch, 'png', {
                         interlaced: 55
-                    }, function() {}).should.throwError();
+                    }, () => {}).should.throwError();
                 });
             });
 
@@ -278,18 +278,18 @@ describe('batch.toBuffer arguments validation', function() {
 
     });
 
-    describe('GIF params', function() {
+    describe('GIF params', () => {
 
-        describe("valid params", function(){
+        describe("valid params", () => {
 
-            describe('defaults', function() {
-                it('should succeed', function(done) {
+            describe('defaults', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'gif', done).should.not.throwError();
                 });
             });
 
-            describe('120, false, false, 50', function() {
-                it('should succeed', function(done) {
+            describe('120, false, false, 50', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'gif', {
                         colors: 120,
                         interlaced: false,
@@ -299,8 +299,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('256, true, false, 50', function() {
-                it('should succeed', function(done) {
+            describe('256, true, false, 50', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'gif', {
                         colors: 256,
                         interlaced: true,
@@ -310,8 +310,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('2, false, true, 0', function() {
-                it('should succeed', function(done) {
+            describe('2, false, true, 0', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'gif', {
                         colors: 2,
                         interlaced: false,
@@ -321,8 +321,8 @@ describe('batch.toBuffer arguments validation', function() {
                 });
             });
 
-            describe('120, true, true, 100', function() {
-                it('should succeed', function(done) {
+            describe('120, true, true, 100', () => {
+                it('should succeed', done => {
                     batch.toBuffer.bind(batch, 'gif', {
                         colors: 120,
                         interlaced: true,
@@ -334,72 +334,72 @@ describe('batch.toBuffer arguments validation', function() {
 
         });
 
-        describe("invalid params", function(){
+        describe("invalid params", () => {
 
-            describe('invalid colors (wrong type)', function() {
-                it('should throw an error', function() {
+            describe('invalid colors (wrong type)', () => {
+                it('should throw an error', () => {
                     batch.toBuffer.bind(batch, 'gif', {
                         colors: 'foo'
-                    }, function() {}).should.throwError();
+                    }, () => {}).should.throwError();
                 });
             });
 
-            describe('invalid colors (<2)', function() {
-                it('should throw an error', function() {
+            describe('invalid colors (<2)', () => {
+                it('should throw an error', () => {
                     batch.toBuffer.bind(batch, 'gif', {
                         colors: 1
-                    }, function() {}).should.throwError();
+                    }, () => {}).should.throwError();
                 });
             });
 
-            describe('invalid colors (>256)', function() {
-                it('should throw an error', function() {
+            describe('invalid colors (>256)', () => {
+                it('should throw an error', () => {
                     batch.toBuffer.bind(batch, 'gif', {
                         colors: 257
-                    }, function() {}).should.throwError();
+                    }, () => {}).should.throwError();
                 });
             });
 
-            describe('invalid interlaced', function() {
-                it('should throw an error', function() {
+            describe('invalid interlaced', () => {
+                it('should throw an error', () => {
                     batch.toBuffer.bind(batch, 'gif', {
                         interlaced: 'foo'
-                    }, function() {}).should.throwError();
+                    }, () => {}).should.throwError();
                 });
             });
 
-            describe('invalid transparency', function() {
-                it('should throw an error', function() {
+            describe('invalid transparency', () => {
+                it('should throw an error', () => {
                     batch.toBuffer.bind(batch, 'gif', {
                         transparency: 'foo'
-                    }, function() {}).should.throwError();
+                    }, () => {}).should.throwError();
                 });
             });
 
-            describe('invalid threshold (wrong type)', function() {
-                it('should throw an error', function() {
+            describe('invalid threshold (wrong type)', () => {
+                it('should throw an error', () => {
                     batch.toBuffer.bind(batch, 'gif', {
                         transparency: true,
                         threshold: 'foo'
-                    }, function() {}).should.throwError();
+                    }, () => {}).should.throwError();
                 });
             });
 
-            describe('invalid threshold (<0)', function() {
-                it('should throw an error', function() {
+            describe('invalid threshold (<0)', () => {
+                it('should throw an error', () => {
                     batch.toBuffer.bind(batch, 'gif', {
                         transparency: true,
                         threshold: -1
-                    }, function() {}).should.throwError();
+                    }, () => {}).should.throwError();
                 });
             });
 
-            describe('invalid threshold (>100)', function() {
-                it('should throw an error', function() {
+            describe('invalid threshold (>100)', () => {
+                it('should throw an error', () => {
                     batch.toBuffer.bind(batch, 'gif', {
                         transparency: true,
                         threshold: 101
-                    }, function() {}).should.throwError();
+                    }, () => {}).should.throwError();
                 });
             });
 

@@ -1,26 +1,26 @@
 // methods should throw errors when arguments are invalid
 
-var should = require("should"),
+const should = require("should"),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-describe('batch.mirror arguments validation', function() {
+describe('batch.mirror arguments validation', () => {
 
-    var batch;
-    before(function(done) {
-        lwip.open(imgs.gif.trans, function(err, img) {
+    let batch;
+    before(done => {
+        lwip.open(imgs.gif.trans, (err, img) => {
             batch = img.batch();
             done(err);
         });
     });
 
-    describe('invalid axis - g', function() {
-        it('should throw an error', function() {
+    describe('invalid axis - g', () => {
+        it('should throw an error', () => {
             batch.mirror.bind(batch, 'g').should.throwError();
         });
     });
-    describe('invalid axis - kjh', function() {
-        it('should throw an error', function() {
+    describe('invalid axis - kjh', () => {
+        it('should throw an error', () => {
             batch.flip.bind(batch, 'kjh').should.throwError();
         });
     });

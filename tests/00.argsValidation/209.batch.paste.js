@@ -1,85 +1,86 @@
 // methods should throw errors when arguments are invalid
 
-var should = require("should"),
+const should = require("should"),
     assert = require('assert'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-describe('batch.paste arguments validation', function() {
+describe('batch.paste arguments validation', () => {
 
-    var batch;
-    beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+    let batch;
+    beforeEach(done => {
+        lwip.open(imgs.jpg.rgb, (err, img) => {
             batch = img.batch();
             done(err);
         });
     });
 
-    describe('invalid pasted image (1)', function() {
-        it('should throw an error', function() {
-            batch.paste.bind(batch, 0, 0, {}, function() {}).should.throwError();
+    describe('invalid pasted image (1)', () => {
+        it('should throw an error', () => {
+            batch.paste.bind(batch, 0, 0, {}, () => {}).should.throwError();
         });
     });
 
-    describe('invalid pasted image (2)', function() {
-        it('should throw an error', function() {
-            batch.paste.bind(batch, 0, 0, null, function() {}).should.throwError();
+    describe('invalid pasted image (2)', () => {
+        it('should throw an error', () => {
+            batch.paste.bind(batch, 0, 0, null, () => {}).should.throwError();
         });
     });
 
-    describe('invalid pasted image (3)', function() {
-        it('should throw an error', function() {
-            batch.paste.bind(batch, 0, 0, function() {}).should.throwError();
+    describe('invalid pasted image (3)', () => {
+        it('should throw an error', () => {
+            batch.paste.bind(batch, 0, 0, () => {}).should.throwError();
         });
     });
 
-    describe('invalid pasted image (4)', function() {
-        it('should throw an error', function() {
-            batch.paste.bind(batch, 0, 0, function() {}, function() {}).should.throwError();
+    describe('invalid pasted image (4)', () => {
+        it('should throw an error', () => {
+            batch.paste.bind(batch, 0, 0, () => {}, () => {}).should.throwError();
         });
     });
 
-    describe('invalid pasted image (5)', function() {
-        it('should throw an error', function() {
-            batch.paste.bind(batch, 0, 0, undefined, function() {}).should.throwError();
+    describe('invalid pasted image (5)', () => {
+        it('should throw an error', () => {
+            batch.paste.bind(batch, 0, 0, undefined, () => {}).should.throwError();
         });
     });
 
-    describe('invalid pasted image (6)', function() {
-        it('should throw an error', function() {
-            batch.paste.bind(batch, 0, 0, 0, function() {}).should.throwError();
+    describe('invalid pasted image (6)', () => {
+        it('should throw an error', () => {
+            batch.paste.bind(batch, 0, 0, 0, () => {}).should.throwError();
         });
     });
 
-    describe('invalid pasted image (7)', function() {
-        it('should throw an error', function() {
-            batch.paste.bind(batch, 0, 0, "foo", function() {}).should.throwError();
+    describe('invalid pasted image (7)', () => {
+        it('should throw an error', () => {
+            batch.paste.bind(batch, 0, 0, "foo", () => {}).should.throwError();
         });
     });
 
-    describe('invalid pasted image (8)', function() {
-        it('should throw an error', function() {
-            batch.paste.bind(batch, 0, 0, [1, 2, 3], function() {}).should.throwError();
+    describe('invalid pasted image (8)', () => {
+        it('should throw an error', () => {
+            batch.paste.bind(batch, 0, 0, [1, 2, 3], () => {}).should.throwError();
         });
     });
 
-    describe('pasted image exceeds dimensions', function() {
+    describe('pasted image exceeds dimensions', () => {
 
-        var Image = require('../../lib/Image');
+        const Image = require('../../lib/Image');
+        console.log(Image);
 
-        var pst;
-        beforeEach(function(done) {
-            lwip.open(imgs.png.rgb, function(err, img) {
+        let pst;
+        beforeEach(done => {
+            lwip.open(imgs.png.rgb, (err, img) => {
                 pst = img;
                 done(err);
             });
         });
 
-        describe('at the time of exec', function() {
-            it('should return an error', function(done) {
+        describe('at the time of exec', () => {
+            it('should return an error', done => {
                 assert(pst instanceof Image);
                 batch.paste.bind(batch, 10, 10, pst).should.not.throwError();
-                batch.exec(function(err) {
+                batch.exec(err => {
                     // there should be an error message
                     assert(!!err);
                     done();
@@ -87,12 +88,12 @@ describe('batch.paste arguments validation', function() {
             });
         });
 
-        describe('before exec', function() {
-            it('should not return an error', function(done) {
+        describe('before exec', () => {
+            it('should not return an error', done => {
                 assert(pst instanceof Image);
                 batch.paste.bind(batch, 10, 10, pst).should.not.throwError();
-                pst.scale(0.1, function(err, pst) {
-                    batch.exec(function(err) {
+                pst.scale(0.1, (err, pst) => {
+                    batch.exec(err => {
                         // there should not be an error message
                         assert(!err);
                         done();

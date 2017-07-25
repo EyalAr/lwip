@@ -1,49 +1,49 @@
-var join = require('path').join,
+const join = require('path').join,
     assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-var tmpDir = join(__dirname, '../results'),
-    basename = 'mirror',
-    current;
+const tmpDir = join(__dirname, '../results');
+    basename = 'mirror';
+let current;
 
-describe('lwip.mirror (/flip)', function() {
+describe('lwip.mirror (/flip)', () => {
 
-    var image;
+    let image;
 
-    before(function(done) {
+    before(done => {
         mkdirp(tmpDir, done);
     });
 
-    beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+    beforeEach(done => {
+        lwip.open(imgs.jpg.rgb, (err, img) => {
             image = img;
             done(err);
         });
     });
 
-    afterEach(function(done) {
+    afterEach(done => {
         image.writeFile(join(tmpDir, current.join('_') + '.gif'), 'gif', {
             colors: 256
         }, done);
     });
 
-    describe('around one axis', function() {
+    describe('around one axis', () => {
 
-        beforeEach(function() {
+        beforeEach(() => {
             current = [basename, 'axis'];
         });
 
-        describe('x', function() {
-            it('should succeed', function(done) {
+        describe('x', () => {
+            it('should succeed', done => {
                 current.push('x');
                 image.mirror('x', done);
             });
         });
 
-        describe('y', function() {
-            it('should succeed', function(done) {
+        describe('y', () => {
+            it('should succeed', done => {
                 current.push('y');
                 image.flip('y', done);
             });
@@ -51,21 +51,21 @@ describe('lwip.mirror (/flip)', function() {
 
     });
 
-    describe('around two axes', function() {
+    describe('around two axes', () => {
 
-        beforeEach(function() {
+        beforeEach(() => {
             current = [basename, 'axes'];
         });
 
-        describe('xy', function() {
-            it('should succeed', function(done) {
+        describe('xy', () => {
+            it('should succeed', done => {
                 current.push('xy');
                 image.flip('xy', done);
             });
         });
 
-        describe('yx', function() {
-            it('should succeed', function(done) {
+        describe('yx', () => {
+            it('should succeed', done => {
                 current.push('yx');
                 image.mirror('yx', done);
             });

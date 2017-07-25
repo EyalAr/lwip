@@ -1,42 +1,42 @@
-var join = require('path').join,
+const join = require('path').join,
     assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-var tmpDir = join(__dirname, '../results'),
-    basename = 'hslaAdjust',
-    current;
+const tmpDir = join(__dirname, '../results');
+    basename = 'hslaAdjust';
+let current;
 
-describe('lwip.hslaAdjust', function() {
+describe('lwip.hslaAdjust', () => {
 
-    var image;
+    let image;
 
-    before(function(done) {
+    before(done => {
         mkdirp(tmpDir, done);
     });
 
-    beforeEach(function(done) {
-        lwip.open(imgs.png.trans, function(err, img) {
+    beforeEach(done => {
+        lwip.open(imgs.png.trans, (err, img) => {
             image = img;
             done(err);
         });
     });
 
-    beforeEach(function() {
+    beforeEach(() => {
         current = [basename];
     });
 
-    afterEach(function(done) {
+    afterEach(done => {
         image.writeFile(join(tmpDir, current.join('_') + '.png'), 'png', done);
     });
 
-    describe('hs=0, sd=0, ld=0, ad=0', function() {
-        var hs = 0,
+    describe('hs=0, sd=0, ld=0, ad=0', () => {
+        const hs = 0,
             sd = 0,
             ld = 0,
             ad = 0;
-        it('should succeed', function(done) {
+        it('should succeed', done => {
             current.push('hs' + hs);
             current.push('sd' + sd);
             current.push('ld' + ld);
@@ -45,12 +45,12 @@ describe('lwip.hslaAdjust', function() {
         });
     });
 
-    describe('hs=50, sd=0.3, ld=0.4, ad=0.5', function() {
-        var hs = 50,
+    describe('hs=50, sd=0.3, ld=0.4, ad=0.5', () => {
+        const hs = 50,
             sd = 0.3,
             ld = 0.4,
             ad = 0.5;
-        it('should succeed', function(done) {
+        it('should succeed', done => {
             current.push('hs' + hs);
             current.push('sd' + sd);
             current.push('ld' + ld);
@@ -59,12 +59,12 @@ describe('lwip.hslaAdjust', function() {
         });
     });
 
-    describe('hs=-50, sd=-0.3, ld=-0.4, ad=-1', function() {
-        var hs = -50,
+    describe('hs=-50, sd=-0.3, ld=-0.4, ad=-1', () => {
+        const hs = -50,
             sd = -0.3,
             ld = -0.4,
             ad = -1;
-        it('should succeed', function(done) {
+        it('should succeed', done => {
             current.push('hs' + hs);
             current.push('sd' + sd);
             current.push('ld' + ld);

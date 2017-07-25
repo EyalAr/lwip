@@ -1,58 +1,58 @@
-var join = require('path').join,
+const join = require('path').join,
     assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-var tmpDir = join(__dirname, '../results'),
-    basename = 'lighten',
-    current;
+const tmpDir = join(__dirname, '../results');
+    basename = 'lighten';
+let current;
 
-describe('lwip.lighten', function() {
+describe('lwip.lighten', () => {
 
-    var image;
+    let image;
 
-    before(function(done) {
+    before(done => {
         mkdirp(tmpDir, done);
     });
 
-    beforeEach(function(done) {
-        lwip.open(imgs.png.trans, function(err, img) {
+    beforeEach(done => {
+        lwip.open(imgs.png.trans, (err, img) => {
             image = img;
             done(err);
         });
     });
 
-    beforeEach(function() {
+    beforeEach(() => {
         current = [basename];
     });
 
-    afterEach(function(done) {
+    afterEach(done => {
         image.writeFile(join(tmpDir, current.join('_') + '.png'), 'png', {
             compression: 'fast',
             interlaced: true
         }, done);
     });
 
-    describe('delta=0', function() {
-        var d = 0;
-        it('should succeed', function(done) {
+    describe('delta=0', () => {
+        const d = 0;
+        it('should succeed', done => {
             current.push('d' + d);
             image.lighten(d, done);
         });
     });
 
-    describe('delta=0.5', function() {
-        var d = 0.5;
-        it('should succeed', function(done) {
+    describe('delta=0.5', () => {
+        const d = 0.5;
+        it('should succeed', done => {
             current.push('d' + d);
             image.lighten(d, done);
         });
     });
 
-    describe('delta=-0.5', function() {
-        var d = -0.5;
-        it('should succeed', function(done) {
+    describe('delta=-0.5', () => {
+        const d = -0.5;
+        it('should succeed', done => {
             current.push('d' + d);
             image.lighten(d, done);
         });

@@ -1,163 +1,163 @@
-var join = require('path').join,
+const join = require('path').join,
     should = require('should'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-describe('failed ops lock release', function() {
+describe('failed ops lock release', () => {
 
-    var image, tmpImage;
+    let image, tmpImage;
 
-    beforeEach(function(done) {
-        lwip.open(imgs.jpg.rgb, function(err, img) {
+    beforeEach(done => {
+        lwip.open(imgs.jpg.rgb, (err, img) => {
             image = img;
             done(err);
         });
     });
 
-    before(function(done){
-        lwip.create(10, 10, function(err, img){
+    before(done => {
+        lwip.create(10, 10, (err, img) => {
             tmpImage = img;
             done(err);
         });
     });
 
-    describe('image.resize release', function() {
-        it('should release image lock', function() {
-            image.resize.bind(image, 'foo', 'bar', function() {}).should.throwError();
-            image.scale.bind(image, 0.5, 0.5, function() {}).should.not.throwError();
+    describe('image.resize release', () => {
+        it('should release image lock', () => {
+            image.resize.bind(image, 'foo', 'bar', () => {}).should.throwError();
+            image.scale.bind(image, 0.5, 0.5, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.scale release', function() {
-        it('should release image lock', function() {
-            image.scale.bind(image, 'foo', 'bar', function() {}).should.throwError();
-            image.rotate.bind(image, 10, function() {}).should.not.throwError();
+    describe('image.scale release', () => {
+        it('should release image lock', () => {
+            image.scale.bind(image, 'foo', 'bar', () => {}).should.throwError();
+            image.rotate.bind(image, 10, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.rotate release', function() {
-        it('should release image lock', function() {
-            image.rotate.bind(image, 'foo', function() {}).should.throwError();
-            image.crop.bind(image, 10, 10, function() {}).should.not.throwError();
+    describe('image.rotate release', () => {
+        it('should release image lock', () => {
+            image.rotate.bind(image, 'foo', () => {}).should.throwError();
+            image.crop.bind(image, 10, 10, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.crop release', function() {
-        it('should release image lock', function() {
-            image.crop.bind(image, 'foo', 'bar', function() {}).should.throwError();
-            image.blur.bind(image, 1, function() {}).should.not.throwError();
+    describe('image.crop release', () => {
+        it('should release image lock', () => {
+            image.crop.bind(image, 'foo', 'bar', () => {}).should.throwError();
+            image.blur.bind(image, 1, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.blur release', function() {
-        it('should release image lock', function() {
-            image.blur.bind(image, 'foo', function() {}).should.throwError();
-            image.sharpen.bind(image, 1, function() {}).should.not.throwError();
+    describe('image.blur release', () => {
+        it('should release image lock', () => {
+            image.blur.bind(image, 'foo', () => {}).should.throwError();
+            image.sharpen.bind(image, 1, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.sharpen release', function() {
-        it('should release image lock', function() {
-            image.sharpen.bind(image, 'foo', function() {}).should.throwError();
-            image.mirror.bind(image, 'x', function() {}).should.not.throwError();
+    describe('image.sharpen release', () => {
+        it('should release image lock', () => {
+            image.sharpen.bind(image, 'foo', () => {}).should.throwError();
+            image.mirror.bind(image, 'x', () => {}).should.not.throwError();
         });
     });
 
-    describe('image.mirror release', function() {
-        it('should release image lock', function() {
-            image.mirror.bind(image, 'foo', function() {}).should.throwError();
-            image.border.bind(image, 10, function() {}).should.not.throwError();
+    describe('image.mirror release', () => {
+        it('should release image lock', () => {
+            image.mirror.bind(image, 'foo', () => {}).should.throwError();
+            image.border.bind(image, 10, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.border release', function() {
-        it('should release image lock', function() {
-            image.border.bind(image, 'foo', function() {}).should.throwError();
-            image.pad.bind(image, 10, 10, 10, 10, function() {}).should.not.throwError();
+    describe('image.border release', () => {
+        it('should release image lock', () => {
+            image.border.bind(image, 'foo', () => {}).should.throwError();
+            image.pad.bind(image, 10, 10, 10, 10, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.pad release', function() {
-        it('should release image lock', function() {
-            image.pad.bind(image, 'foo', 'bar', 'foo', 'bar', function() {}).should.throwError();
-            image.saturate.bind(image, 1, function() {}).should.not.throwError();
+    describe('image.pad release', () => {
+        it('should release image lock', () => {
+            image.pad.bind(image, 'foo', 'bar', 'foo', 'bar', () => {}).should.throwError();
+            image.saturate.bind(image, 1, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.saturate release', function() {
-        it('should release image lock', function() {
-            image.saturate.bind(image, 'foo', function() {}).should.throwError();
-            image.lighten.bind(image, 1, function() {}).should.not.throwError();
+    describe('image.saturate release', () => {
+        it('should release image lock', () => {
+            image.saturate.bind(image, 'foo', () => {}).should.throwError();
+            image.lighten.bind(image, 1, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.lighten release', function() {
-        it('should release image lock', function() {
-            image.lighten.bind(image, 'foo', function() {}).should.throwError();
-            image.darken.bind(image, 1, function() {}).should.not.throwError();
+    describe('image.lighten release', () => {
+        it('should release image lock', () => {
+            image.lighten.bind(image, 'foo', () => {}).should.throwError();
+            image.darken.bind(image, 1, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.darken release', function() {
-        it('should release image lock', function() {
-            image.darken.bind(image, 'foo', function() {}).should.throwError();
-            image.hue.bind(image, 100, function() {}).should.not.throwError();
+    describe('image.darken release', () => {
+        it('should release image lock', () => {
+            image.darken.bind(image, 'foo', () => {}).should.throwError();
+            image.hue.bind(image, 100, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.hue release', function() {
-        it('should release image lock', function() {
-            image.hue.bind(image, 'foo', function() {}).should.throwError();
-            image.fade.bind(image, 1, function() {}).should.not.throwError();
+    describe('image.hue release', () => {
+        it('should release image lock', () => {
+            image.hue.bind(image, 'foo', () => {}).should.throwError();
+            image.fade.bind(image, 1, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.fade release', function() {
-        it('should release image lock', function() {
-            image.fade.bind(image, 'foo', function() {}).should.throwError();
-            image.opacify.bind(image, function() {}).should.not.throwError();
+    describe('image.fade release', () => {
+        it('should release image lock', () => {
+            image.fade.bind(image, 'foo', () => {}).should.throwError();
+            image.opacify.bind(image, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.opacify release', function() {
-        it('should release image lock', function() {
+    describe('image.opacify release', () => {
+        it('should release image lock', () => {
             image.opacify.bind(image, 'foo').should.throwError();
-            image.hslaAdjust.bind(image, 100, 1, 1, 0, function() {}).should.not.throwError();
+            image.hslaAdjust.bind(image, 100, 1, 1, 0, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.hslaAdjust release', function() {
-        it('should release image lock', function() {
-            image.hslaAdjust.bind(image, 'foo', 'foo', 'foo', 'foo', function() {}).should.throwError();
-            image.setPixel.bind(image, 0, 0, 'yellow', function() {}).should.not.throwError();
+    describe('image.hslaAdjust release', () => {
+        it('should release image lock', () => {
+            image.hslaAdjust.bind(image, 'foo', 'foo', 'foo', 'foo', () => {}).should.throwError();
+            image.setPixel.bind(image, 0, 0, 'yellow', () => {}).should.not.throwError();
         });
     });
 
-    describe('image.setPixel release', function() {
-        it('should release image lock', function() {
-            image.setPixel.bind(image, 'foo', 'foo', 'foo', function() {}).should.throwError();
-            image.paste.bind(image, 0, 0, tmpImage, function() {}).should.not.throwError();
+    describe('image.setPixel release', () => {
+        it('should release image lock', () => {
+            image.setPixel.bind(image, 'foo', 'foo', 'foo', () => {}).should.throwError();
+            image.paste.bind(image, 0, 0, tmpImage, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.paste release', function() {
-        it('should release image lock', function() {
-            image.paste.bind(image, 'foo', 'foo', 'foo', function() {}).should.throwError();
-            image.contain.bind(image, 100, 200, function() {}).should.not.throwError();
+    describe('image.paste release', () => {
+        it('should release image lock', () => {
+            image.paste.bind(image, 'foo', 'foo', 'foo', () => {}).should.throwError();
+            image.contain.bind(image, 100, 200, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.contain release', function() {
-        it('should release image lock', function() {
-            image.contain.bind(image, 'foo', 'foo', 'foo', function() {}).should.throwError();
-            image.cover.bind(image, 100, 100, function() {}).should.not.throwError();
+    describe('image.contain release', () => {
+        it('should release image lock', () => {
+            image.contain.bind(image, 'foo', 'foo', 'foo', () => {}).should.throwError();
+            image.cover.bind(image, 100, 100, () => {}).should.not.throwError();
         });
     });
 
-    describe('image.cover release', function() {
-        it('should release image lock', function() {
-            image.cover.bind(image, 'foo', 'foo', function() {}).should.throwError();
-            image.resize.bind(image, 100, 100, function() {}).should.not.throwError();
+    describe('image.cover release', () => {
+        it('should release image lock', () => {
+            image.cover.bind(image, 'foo', 'foo', () => {}).should.throwError();
+            image.resize.bind(image, 100, 100, () => {}).should.not.throwError();
         });
     });
 

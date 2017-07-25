@@ -2,13 +2,13 @@
  * Example for using LWIP to contain an image in a canvas.
  */
 
-var path = require('path'),
+const path = require('path'),
     lwip = require('../');
 
-lwip.open('lena.jpg', function(err, image) {
+lwip.open('lena.jpg', (err, image) => {
     if (err) return console.log(err);
-    image.contain(400,700,'green',function(err, image){
-        image.writeFile('lena_contain.jpg', function(err){
+    image.contain(400,700,'green',(err, image) => {
+        image.writeFile('lena_contain.jpg', err => {
             if (err) return console.log(err);
             console.log('done');
         });
