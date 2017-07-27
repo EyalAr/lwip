@@ -1,4 +1,5 @@
 #include "encoder.h"
+#include "gifsub.h"
 
 #define RGB_N_CHANNELS 3
 #define RGBA_N_CHANNELS 4
@@ -68,12 +69,17 @@ void EncodeToGifBufferWorker::Execute () {
     gifWriteCbData buffinf = {NULL, 0};
     GifFileType * gif;
 
+    #if HAVE_GIFLIB_5
     gif = EGifOpen((void *) &buffinf, gifWriteCB, &errcode);
+    #else
+    gif = EGifOpen((void *) &buffinf, gifWriteCB);
+    errcode = GifLastError();
+    #endif
 
     if (NULL == gif){
         free(gifimgbuf);
         GifFreeMapObject(cmap);
-        SetErrorMessage(GifErrorString(errcode));
+        SetErrorMessage(MyGifErrorString(errcode));
         return;
     }
 
@@ -85,7 +91,12 @@ void EncodeToGifBufferWorker::Execute () {
 
     if (NULL == simg){
         free(gifimgbuf);
+        #if HAVE_GIFLIB_5
         EGifCloseFile(gif, &errcode); // will also free cmap
+        #else
+        EGifCloseFile(gif); // will also free cmap
+        errcode = GifLastError();
+        #endif
         SetErrorMessage("Out of memory");
         return;
     }
@@ -102,6 +113,7 @@ void EncodeToGifBufferWorker::Execute () {
     // color table is not set as well
     gif->SColorMap = cmap;
 
+    #if HAVE_GIFLIB_5
     if (_trans){
         ExtensionBlock ext;
         // 1. assign transparent color index in color table
@@ -122,11 +134,17 @@ void EncodeToGifBufferWorker::Execute () {
             return;
         }
     }
-
+    #endif
 
     if (GIF_ERROR == EGifSpew(gif)){
+        #if HAVE_GIFLIB_5
         EGifCloseFile(gif, &errcode);
-        SetErrorMessage(GifErrorString(gif->Error));
+        SetErrorMessage(MyGifErrorString(gif->Error));
+        #else
+        EGifCloseFile(gif);
+        errcode = GifLastError();
+        SetErrorMessage(MyGifErrorString(errcode));
+        #endif
         return;
     }
 

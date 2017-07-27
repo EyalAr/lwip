@@ -14,6 +14,7 @@
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',
             'src/decoder',
+            'src/shared',
             'src/lib/cimg',
         ],
         'conditions': [
@@ -166,6 +167,7 @@
         'include_dirs': [
             '<!(node -e "require(\'nan\')")',
             'src/encoder',
+            'src/shared',
             'src/lib/cimg',
         ],
         'conditions': [
