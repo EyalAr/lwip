@@ -69,7 +69,7 @@ void EncodeToGifBufferWorker::Execute () {
     gifWriteCbData buffinf = {NULL, 0};
     GifFileType * gif;
 
-    #if HAVE_GIFLIB_5
+    #ifdef HAVE_GIFLIB_5
     gif = EGifOpen((void *) &buffinf, gifWriteCB, &errcode);
     #else
     gif = EGifOpen((void *) &buffinf, gifWriteCB);
@@ -91,7 +91,7 @@ void EncodeToGifBufferWorker::Execute () {
 
     if (NULL == simg){
         free(gifimgbuf);
-        #if HAVE_GIFLIB_5
+        #ifdef HAVE_GIFLIB_5
         EGifCloseFile(gif, &errcode); // will also free cmap
         #else
         EGifCloseFile(gif); // will also free cmap
@@ -113,7 +113,7 @@ void EncodeToGifBufferWorker::Execute () {
     // color table is not set as well
     gif->SColorMap = cmap;
 
-    #if HAVE_GIFLIB_5
+    #ifdef HAVE_GIFLIB_5
     if (_trans){
         ExtensionBlock ext;
         // 1. assign transparent color index in color table
@@ -137,7 +137,7 @@ void EncodeToGifBufferWorker::Execute () {
     #endif
 
     if (GIF_ERROR == EGifSpew(gif)){
-        #if HAVE_GIFLIB_5
+        #ifdef HAVE_GIFLIB_5
         EGifCloseFile(gif, &errcode);
         SetErrorMessage(MyGifErrorString(gif->Error));
         #else

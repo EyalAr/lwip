@@ -12,7 +12,7 @@ string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
     int errcode = 0;
 
     // buffinf will be available in gifReadCB as gif->userData
-    #if HAVE_GIFLIB_5
+    #ifdef HAVE_GIFLIB_5
     gif = DGifOpen((void *) &buffinf, gifReadCB, &errcode);
     #else
     gif = DGifOpen((void *) &buffinf, gifReadCB);
@@ -24,7 +24,7 @@ string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
     }
 
     if (GIF_ERROR == DGifSlurp(gif)) {
-        #if HAVE_GIFLIB_5
+        #ifdef HAVE_GIFLIB_5
         return MyGifErrorString(gif->Error);
         #else
         return MyGifErrorString(GifLastError());
@@ -77,7 +77,7 @@ string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
         *(ptr_a++) = alpha;
     }
 
-    #if HAVE_GIFLIB_5
+    #ifdef HAVE_GIFLIB_5
     if (GIF_ERROR == DGifCloseFile(gif, &errcode)){
         delete *cimg;
         return MyGifErrorString(errcode);

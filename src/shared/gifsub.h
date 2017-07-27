@@ -4,7 +4,7 @@
 #  endif
 #endif
 
-#if !HAVE_GIFLIB_5
+#ifndef HAVE_GIFLIB_5
 typedef struct GraphicsControlBlock {
     GifByteType TransparentColor;
 };
@@ -21,7 +21,7 @@ static int DGifSavedExtensionToGCB(GifFileType *gif, int i, GraphicsControlBlock
 #endif
 
 static const char * MyGifErrorString(int errcode) {
-    #if HAVE_GIFLIB_5
+    #ifdef HAVE_GIFLIB_5
     return GifErrorString(errcode);
     #else
     switch (errcode) {
