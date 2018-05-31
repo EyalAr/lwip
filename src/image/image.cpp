@@ -1,6 +1,6 @@
 #include "image.h"
 
-Nan::Persistent<FunctionTemplate> LwipImage::constructor;
+Nan::Persistent<Function> LwipImage::constructor;
 
 void LwipImage::Init(Handle<Object> exports) {
     // Prepare constructor template
@@ -22,10 +22,10 @@ void LwipImage::Init(Handle<Object> exports) {
     Nan::SetPrototypeMethod(tpl, "opacify", opacify);
     Nan::SetPrototypeMethod(tpl, "paste", paste);
     Nan::SetPrototypeMethod(tpl, "setPixel", setPixel);
-    constructor.Reset(tpl);
+    constructor.Reset(tpl->GetFunction());
     exports->Set(
         Nan::New("LwipImage").ToLocalChecked(),
-        Nan::New<FunctionTemplate>(constructor)->GetFunction()
+        tpl->GetFunction()
     );
 }
 
@@ -38,11 +38,18 @@ LwipImage::~LwipImage() {
     delete _cimg;
 };
 
-Handle<Value> LwipImage::NewInstance() {
+NAN_METHOD(LwipImage::NewInstance) {
     Nan::EscapableHandleScope scope;
-    Local<FunctionTemplate> constructorHandle = Nan::New<FunctionTemplate>(constructor);
-    Local<Object> instance = constructorHandle->GetFunction()->NewInstance();
-    return scope.Escape(instance);
+
+    Local<Object> pixBuff = info[0].As<Object>();
+    const unsigned argc = 3;
+    v8::Local<v8::Value> argv[argc] = {
+        pixBuff,
+        info[1],
+        info[2],
+    };
+    v8::Local<v8::Function> cons = Nan::New(constructor);
+    info.GetReturnValue().Set(Nan::NewInstance(cons, argc, argv).ToLocalChecked());
 }
 
 NAN_METHOD(LwipImage::New) {
