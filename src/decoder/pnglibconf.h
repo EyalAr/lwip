@@ -13,6 +13,8 @@
 /* Derived from: scripts/pnglibconf.dfa */
 #ifndef PNGLCONF_H
 #define PNGLCONF_H
+
+#include <node_version.h>
 /* options */
 #define PNG_16BIT_SUPPORTED
 #define PNG_ALIGNED_MEMORY_SUPPORTED
@@ -160,7 +162,11 @@
 #define PNG_USER_WIDTH_MAX 1000000
 #define PNG_WEIGHT_SHIFT 8
 #define PNG_ZBUF_SIZE 8192
-#define PNG_ZLIB_VERNUM 0x12b0
+#if NODE_VERSION_AT_LEAST(8, 0, 0)
+#  define PNG_ZLIB_VERNUM 0x12b0
+#else
+#  define PNG_ZLIB_VERNUM 0x1280
+#endif
 #define PNG_Z_DEFAULT_COMPRESSION (-1)
 #define PNG_Z_DEFAULT_NOFILTER_STRATEGY 0
 #define PNG_Z_DEFAULT_STRATEGY 1
