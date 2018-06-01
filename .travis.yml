@@ -8,9 +8,7 @@ addons:
     packages:
     - g++-4.8
 node_js:
-    - "0.10"
-    - "0.12"
-    - "4.0"
-    - "4.1"
+    - 8
+    - 10
 script: npm run travis
 sudo: false

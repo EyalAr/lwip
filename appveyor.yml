@@ -4,18 +4,10 @@ init:
 
 environment:
   matrix:
-    - nodejs_version: "0.10"
-      msvs_version: 2013
-    - nodejs_version: "0.12"
-      msvs_version: 2013
-    - nodejs_version: "4.0"
-      msvs_version: 2013
-    - nodejs_version: "4.0"
-      msvs_version: 2015
-    - nodejs_version: "4.1"
-      msvs_version: 2013
-    - nodejs_version: "4.1"
-      msvs_version: 2015
+    - nodejs_version: 8
+      msvs_version: 2017
+    - nodejs_version: 10
+      msvs_version: 2017
 
 install:
   - ps: Install-Product node $env:nodejs_version
