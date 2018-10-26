@@ -10,10 +10,8 @@
     "nan": "^2.6.2"
   },
   "scripts": {
-    "install": "node-gyp rebuild -j 8",
-    "test": "./node_modules/.bin/mocha --opts tests/mocha.opts tests",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --opts tests/mocha.opts tests",
-    "travis": "./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --opts tests/mocha.opts --bail tests && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "install": "node-gyp rebuild -j $(node -p \"require(\\\"os\\\").cpus().length\")",
+    "test": "mocha -b --opts tests/mocha.opts tests"
   },
   "gypfile": true,
   "description": "Comprehensive, fast, and simple image processing and manipulation",
