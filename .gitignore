@@ -3,4 +3,5 @@ node_modules
 npm-debug.log
 tests/results
 .idea
+.vs
 tests/.DS_Store
