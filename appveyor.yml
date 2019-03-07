@@ -10,6 +10,8 @@ environment:
       msvs_version: 2017
     - nodejs_version: 10
       msvs_version: 2017
+    - nodejs_version: 11
+      msvs_version: 2017
 
 install:
   - ps: Install-Product node $env:nodejs_version
