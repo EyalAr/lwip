@@ -9,6 +9,7 @@ node_js:
     - 6
     - 8
     - 10
+    - 11
 before_install:
   - sudo apt autoremove
   - sudo apt-get remove libjpeg-turbo8-dev libjpeg9-dev+
