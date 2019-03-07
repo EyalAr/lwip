@@ -10,7 +10,7 @@
     "nan": "^2.6.2"
   },
   "scripts": {
-    "install": "node-gyp rebuild -j $(node -p \"require(\\\"os\\\").cpus().length\")",
+    "install": "node-gyp rebuild",
     "test": "mocha -b --opts tests/mocha.opts tests",
     "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --opts tests/mocha.opts tests",
     "travis": "./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --opts tests/mocha.opts --bail tests && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
