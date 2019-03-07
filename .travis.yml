@@ -10,10 +10,10 @@ addons:
       - libgif-dev
       - libpng16-dev
 node_js:
-    - 6
-    - 8
-    - 10
-    - 11
+  - 8
+  - 6
+  - 10
+  - 11
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install giflib libpng; fi
