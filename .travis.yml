@@ -1,15 +1,16 @@
 language: node_js
-env:
-  - CXX=g++-4.8
+dist: xenial
 addons:
   apt:
-    sources:
-    - ubuntu-toolchain-r-test
     packages:
-    - g++-4.8
+      - libgif-dev
+      - libpng16-dev
 node_js:
     - 6
     - 8
     - 10
+before_install:
+  - sudo apt autoremove
+  - sudo apt-get remove libjpeg-turbo8-dev libjpeg9-dev+
 script: npm run travis
 sudo: false
