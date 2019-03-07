@@ -13,7 +13,7 @@
     "install": "node-gyp rebuild",
     "test": "_mocha --opts ./tests/mocha.opts tests",
     "cover": "npm run cover:actual",
-    "cover:actual": "istanbul cover ./node_modules/mocha/bin/_mocha -- --opts ./tests/mocha.opts tests",
+    "cover:actual": "nyc mocha --opts ./tests/mocha.opts tests",
     "cover:collect": "run-script-os",
     "cover:collect:darwin:linux": "cat ./coverage/lcov.info | coveralls",
     "cover:collect:win32": "type ./coverage/lcov.info | coveralls",
@@ -26,10 +26,10 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.3",
-    "istanbul": "^0.4.3",
     "mkdirp": "^0.5.1",
     "mocha": "^6.0.2",
     "mocha-lcov-reporter": "^1.2.0",
+    "nyc": "^13.3.0",
     "run-script-os": "^1.0.5",
     "should": "^8.3.2"
   },
