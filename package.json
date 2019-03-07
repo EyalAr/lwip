@@ -11,9 +11,13 @@
   },
   "scripts": {
     "install": "node-gyp rebuild",
-    "test": "mocha -b --opts tests/mocha.opts tests",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --opts tests/mocha.opts tests",
-    "travis": "./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --opts tests/mocha.opts --bail tests && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test": "_mocha --opts tests/mocha.opts tests",
+    "cover": "npm run cover:actual",
+    "cover:actual": "istanbul cover _mocha -- --opts tests/mocha.opts tests",
+    "cover:collect": "run-script-os",
+    "cover:collect:darwin:linux": "cat ./coverage/lcov.info | coveralls",
+    "cover:collect:win32": "type ./coverage/lcov.info | coveralls",
+    "travis": "npm run cover"
   },
   "gypfile": true,
   "description": "Comprehensive, fast, and simple image processing and manipulation",
@@ -26,6 +30,7 @@
     "mkdirp": "^0.5.1",
     "mocha": "^6.0.2",
     "mocha-lcov-reporter": "^1.2.0",
+    "run-script-os": "^1.0.5",
     "should": "^8.3.2"
   },
   "repository": {
