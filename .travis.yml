@@ -4,6 +4,15 @@ os:
   - linux
   - osx
   - windows
+matrix:
+  exclude:
+    - node_js: 6
+      os: windows
+  include:
+    - node_js: 6
+      os: windows
+      env:
+        - MSVS_VERSION=2015
 addons:
   apt:
     packages:
@@ -19,7 +28,7 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get remove libjpeg-turbo8-dev libjpeg9-dev+; fi
 install: >-
   if [[ "$TRAVIS_OS_NAME" == "windows" && "$TRAVIS_NODE_VERSION" == "6" ]];
-    then npm install --msvs_version=2017;
+    then npm install --msvs_version=$MSVS_VERSION;
     else npm install;
   fi;
 script: npm run travis
