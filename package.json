@@ -11,9 +11,9 @@
   },
   "scripts": {
     "install": "node-gyp rebuild",
-    "test": "_mocha --opts tests/mocha.opts tests",
+    "test": "_mocha --opts ./tests/mocha.opts tests",
     "cover": "npm run cover:actual",
-    "cover:actual": "istanbul cover _mocha -- --opts tests/mocha.opts tests",
+    "cover:actual": "istanbul cover ./node_modules/mocha/bin/_mocha -- --opts ./tests/mocha.opts tests",
     "cover:collect": "run-script-os",
     "cover:collect:darwin:linux": "cat ./coverage/lcov.info | coveralls",
     "cover:collect:win32": "type ./coverage/lcov.info | coveralls",
@@ -35,7 +35,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/EyalAr/lwip.git"
+    "url": "https://github.com/randytarampi/lwip.git"
   },
   "keywords": [
     "image",
@@ -67,10 +67,10 @@
     "contain",
     "cover"
   ],
-  "author": "Eyal Arubas <eyalarubas@gmail.com>",
+  "author": "Randy Tarampi <randy.tarampi@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/EyalAr/lwip/issues"
+    "url": "https://github.com/randytarampi/lwip/issues"
   },
-  "homepage": "https://github.com/EyalAr/lwip"
+  "homepage": "https://github.com/randytarampi/lwip"
 }
