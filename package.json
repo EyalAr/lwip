@@ -1,5 +1,5 @@
 {
-  "name": "@kant2002/lwip",
+  "name": "@randy.tarampi/lwip",
   "version": "1.0.0",
   "main": "index.js",
   "typings": "typings.d.ts",
