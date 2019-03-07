@@ -1,12 +1,9 @@
 language: node_js
+dist: xenial
 os:
   - linux
   - osx
   - windows
-matrix:
-  include:
-    - os: linux
-      dist: xenial
 addons:
   apt:
     packages:
