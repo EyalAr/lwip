@@ -1,5 +1,12 @@
 language: node_js
-dist: xenial
+os:
+  - linux
+  - osx
+  - windows
+matrix:
+  include:
+    - os: linux
+      dist: xenial
 addons:
   apt:
     packages:
@@ -11,7 +18,9 @@ node_js:
     - 10
     - 11
 before_install:
-  - sudo apt autoremove
-  - sudo apt-get remove libjpeg-turbo8-dev libjpeg9-dev+
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install giflib libpng; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt autoremove; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get remove libjpeg-turbo8-dev libjpeg9-dev+; fi
 script: npm run travis
 sudo: false
