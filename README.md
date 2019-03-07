@@ -1,7 +1,7 @@
-[![Version](http://img.shields.io/npm/v/lwip.svg)](https://www.npmjs.org/package/lwip)
-[![Build Status](https://api.travis-ci.org/EyalAr/lwip.svg?branch=master)](https://travis-ci.org/EyalAr/lwip)
-[![Build status](https://ci.appveyor.com/api/projects/status/46mk5218x995svhw/branch/master?svg=true)](https://ci.appveyor.com/project/EyalAr/lwip/branch/master)
-[![Coverage Status](https://img.shields.io/coveralls/EyalAr/lwip/master.svg)](https://coveralls.io/r/EyalAr/lwip)
+[![Version](http://img.shields.io/npm/v/@randy.tarampi/lwip.svg)](https://www.npmjs.org/package/lwip)
+[![Build Status](https://api.travis-ci.org/randytarampi/lwip.svg?branch=master)](https://travis-ci.org/randytarampi/lwip)
+[![Build status](https://ci.appveyor.com/api/projects/status/46mk5218x995svhw/branch/master?svg=true)](https://ci.appveyor.com/project/randytarampi/lwip/branch/master)
+[![Coverage Status](https://img.shields.io/coveralls/randytarampi/lwip/master.svg)](https://coveralls.io/r/randytarampi/lwip)
 
 # Light-weight image processor for NodeJS
 
@@ -837,16 +837,16 @@ The native part of this module is compiled from source which uses the following:
 
 - Independent JPEG Group's free JPEG software:
   - [Website](http://www.ijg.org/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/jpeg/README)
+  - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/jpeg/README)
 - libpng:
   - [Website](http://www.libpng.org/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/png/README)
+  - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/png/README)
 - zlib:
   - [Website](http://www.zlib.net/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/zlib/README)
+  - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/zlib/README)
 - The CImg Library
   - [Website](http://cimg.sourceforge.net/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/cimg/README.txt)
+  - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/cimg/README.txt)
 - giflib
   - [Website](http://giflib.sourceforge.net/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/gif/README)
+  - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/gif/README)
