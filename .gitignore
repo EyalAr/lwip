@@ -52,3 +52,4 @@ dist
 build
 es5
 esm
+cmake-build-debug
