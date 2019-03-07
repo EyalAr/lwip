@@ -9,10 +9,13 @@ matrix:
     - node_js: 6
       os: windows
   include:
-    - node_js: 6
+    - &node6
+      node_js: 6
       os: windows
       env:
         - MSVS_VERSION=2015
+  allow_failures:
+    - *node6
 addons:
   apt:
     packages:
