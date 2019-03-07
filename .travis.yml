@@ -15,7 +15,6 @@ node_js:
   - 10
   - 11
 before_install:
-  - npm install -g node-gyp
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt autoremove; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get remove libjpeg-turbo8-dev libjpeg9-dev+; fi
 install: >-
