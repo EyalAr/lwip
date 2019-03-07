@@ -1,5 +1,5 @@
 [![Version](http://img.shields.io/npm/v/@randy.tarampi/lwip.svg)](https://www.npmjs.org/package/lwip)
-[![Build Status](https://api.travis-ci.org/randytarampi/lwip.svg?branch=master)](https://travis-ci.org/randytarampi/lwip)
+[![Build Status](https://api.travis-ci.com/randytarampi/lwip.svg?branch=master)](https://travis-ci.com/randytarampi/lwip)
 [![Build status](https://ci.appveyor.com/api/projects/status/46mk5218x995svhw/branch/master?svg=true)](https://ci.appveyor.com/project/randytarampi/lwip/branch/master)
 [![Coverage Status](https://img.shields.io/coveralls/randytarampi/lwip/master.svg)](https://coveralls.io/r/randytarampi/lwip)
 
