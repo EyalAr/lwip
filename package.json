@@ -72,6 +72,9 @@
   ],
   "license": "MIT",
   "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": "randytarampi/lwip.git",
   "scripts": {
     "cover": "npm run cover:actual",
