@@ -13,7 +13,7 @@
 [![Install @randy.tarampi/lwip](https://nodeico.herokuapp.com/@randy.tarampi/lwip.svg)](https://www.npmjs.com/package/@randy.tarampi/lwip)
 
 
-This is a branch based off of [@kant2002/lwip](https://www.npmjs.com/package/@kant2002/lwip), customized for my own use.
+This is a branch based off of [@kant2002/lwip](https://www.npmjs.com/package/@kant2002/lwip) and [@mcph/lwip](https://www.npmjs.com/package/@mcph/lwip), customized for my own use.
 
 0. [Overview](#overview)
   0. [Installation](#installation)
@@ -262,7 +262,7 @@ Red values, then all the Green values, etc.
 #### Open file example
 
 ```Javascript
-var lwip = require('lwip');
+const lwip = require('lwip');
 lwip.open('path/to/image.jpg', function(err, image){
     // check 'err'. use 'image'.
     // image.resize(...), etc.
@@ -272,7 +272,7 @@ lwip.open('path/to/image.jpg', function(err, image){
 #### Open buffer example
 
 ```Javascript
-var fs = require('fs'),
+const fs = require('fs'),
     lwip = require('lwip');
 
 fs.readFile('path/to/image.png', function(err, buffer){
@@ -298,7 +298,7 @@ fs.readFile('path/to/image.png', function(err, buffer){
 **Example**:
 
 ```Javascript
-var lwip = require('lwip');
+const lwip = require('lwip');
 
 lwip.create(500, 500, 'yellow', function(err, image){
   // check err
@@ -753,7 +753,7 @@ from the image.
 
 ```Javascript
 // obtain a batch object from the image:
-var batch = image.batch();
+const batch = image.batch();
 ```
 
 #### Using a batch object
@@ -815,8 +815,8 @@ An image can have more than one batch object, but all batch objects modify the
 same underlying image. This means the order of execution matters.
 
 ```Javascript
-var batch1 = image.batch().rotate('45', 'black');
-var batch2 = image.batch().border(15, 'black');
+const batch1 = image.batch().rotate('45', 'black');
+const batch2 = image.batch().border(15, 'black');
 ```
 
 This will rotate the image 45degs and then add a black border:
