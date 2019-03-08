@@ -46,4 +46,5 @@ deploy:
   on:
     branch: master
     node: 8
+    os: linux
 sudo: false
