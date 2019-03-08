@@ -1,28 +1,14 @@
 {
   "name": "@randy.tarampi/lwip",
+  "description": "Comprehensive, fast, and simple image processing and manipulation",
   "version": "1.0.0",
-  "main": "index.js",
-  "typings": "typings.d.ts",
+  "author": "Randy Tarampi <randy.tarampi@gmail.com>",
+  "bugs": "https://github.com/randytarampi/lwip/issues",
   "dependencies": {
     "async": "^2.5.0",
     "bindings": "^1.3.0",
     "decree": "0.0.6",
     "nan": "^2.6.2"
-  },
-  "scripts": {
-    "install": "node-gyp rebuild",
-    "test": "_mocha --opts ./tests/mocha.opts tests",
-    "cover": "npm run cover:actual",
-    "cover:actual": "nyc mocha --opts ./tests/mocha.opts tests",
-    "cover:collect": "run-script-os",
-    "cover:collect:darwin:linux": "cat ./coverage/lcov.info | coveralls",
-    "cover:collect:win32": "type ./coverage/lcov.info | coveralls",
-    "travis": "npm run cover"
-  },
-  "gypfile": true,
-  "description": "Comprehensive, fast, and simple image processing and manipulation",
-  "directories": {
-    "example": "examples"
   },
   "devDependencies": {
     "coveralls": "^3.0.3",
@@ -34,44 +20,53 @@
     "semantic-release": "^15.13.3",
     "should": "^8.3.2"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/randytarampi/lwip.git"
+  "directories": {
+    "example": "examples"
   },
+  "gypfile": true,
+  "homepage": "https://github.com/randytarampi/lwip",
   "keywords": [
-    "image",
+    "alpha",
+    "batch",
+    "blur",
+    "border",
     "buffer",
-    "manipulate",
-    "process",
-    "resize",
-    "scale",
-    "rotate",
+    "contain",
+    "cover",
+    "crop",
+    "fade",
+    "flip",
+    "gif",
+    "hue",
+    "image",
     "jpeg",
     "jpg",
-    "png",
-    "gif",
-    "crop",
-    "blur",
-    "sharpen",
-    "batch",
-    "flip",
-    "mirror",
-    "border",
-    "padding",
-    "hue",
-    "saturation",
     "lightness",
-    "alpha",
-    "transparency",
-    "fade",
+    "manipulate",
+    "mirror",
     "opacity",
-    "contain",
-    "cover"
+    "padding",
+    "png",
+    "process",
+    "resize",
+    "rotate",
+    "saturation",
+    "scale",
+    "sharpen",
+    "transparency"
   ],
-  "author": "Randy Tarampi <randy.tarampi@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/randytarampi/lwip/issues"
+  "main": "index.js",
+  "repository": "randytarampi/lwip.git",
+  "scripts": {
+    "cover": "npm run cover:actual",
+    "cover:actual": "nyc mocha --opts ./tests/mocha.opts tests",
+    "cover:collect": "run-script-os",
+    "cover:collect:darwin:linux": "cat ./coverage/lcov.info | coveralls",
+    "cover:collect:win32": "type ./coverage/lcov.info | coveralls",
+    "install": "node-gyp rebuild",
+    "test": "_mocha --opts ./tests/mocha.opts tests",
+    "travis": "npm run cover"
   },
-  "homepage": "https://github.com/randytarampi/lwip"
+  "typings": "typings.d.ts"
 }
