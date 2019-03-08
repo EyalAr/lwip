@@ -77,15 +77,21 @@ install anything else on your system.
 
 ### Installation
 
-`npm install @randy.tarampi/lwip`
+```bash
+npm install @randy.tarampi/lwip
+```
 
 Or, clone this repo and `cd @randy.tarampi/lwip && npm install`.
 
 You can run tests with `npm test`.
 
-**Note:** Installation of this module involves compiling native code.
-If `npm install @randy.tarampi/lwip` failes, you probably need to setup your system.
-[See instructions](https://github.com/TooTallNate/node-gyp#installation).
+##### NOTE: Installation of this module involves compiling native code
+If `npm install @randy.tarampi/lwip` fails, you probably need to setup your system.
+
+See the [instructions for `node-gyp`](https://github.com/TooTallNate/node-gyp#installation).
+
+Building on non-Windows systems requires that you have `giflib`, `libjpeg` and `libpng` already installed and available.
+
 Building on Windows with Visual Studio requires version 2013 or higher.
 
 ### Usage
@@ -843,7 +849,7 @@ batch2.exec(function(err, image){
 
 ## Copyrights
 
-The native part of this module is compiled from source which uses the following:
+The native part of this module is compiled from source which uses either your natively installed libraries, or the bundled versions of the following:
 
 - Independent JPEG Group's free JPEG software:
   - [Website](http://www.ijg.org/)
