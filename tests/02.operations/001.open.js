@@ -287,7 +287,7 @@ describe('lwip.open', () => {
         describe('grayscale image', () => {
             let buffer;
             before(done => {
-                buffer = new Buffer(100 * 100);
+                buffer = Buffer.allocUnsafe(100 * 100);
                 buffer.fill(0);
                 done();
             });
@@ -309,7 +309,7 @@ describe('lwip.open', () => {
         describe('grayscale image with alpha', () => {
             let buffer;
             before(done => {
-                buffer = new Buffer(100 * 100 * 2);
+                buffer = Buffer.allocUnsafe(100 * 100 * 2);
                 buffer.fill(0, 0, 10000);
                 buffer.fill(50, 10000);
                 done();
@@ -332,7 +332,7 @@ describe('lwip.open', () => {
         describe('rgb image', () => {
             let buffer;
             before(done => {
-                buffer = new Buffer(100 * 100 * 3);
+                buffer = Buffer.allocUnsafe(100 * 100 * 3);
                 buffer.fill(10, 0, 10000);
                 buffer.fill(20, 10000, 2 * 10000);
                 buffer.fill(30, 2 * 10000);
@@ -356,7 +356,7 @@ describe('lwip.open', () => {
         describe('rgb image with alpha', () => {
             let buffer;
             before(done => {
-                buffer = new Buffer(100 * 100 * 4);
+                buffer = Buffer.allocUnsafe(100 * 100 * 4);
                 buffer.fill(10, 0, 10000);
                 buffer.fill(20, 10000, 2 * 10000);
                 buffer.fill(30, 2 * 10000, 3 * 10000);

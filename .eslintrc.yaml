@@ -15,6 +15,7 @@ rules:
   import/no-unresolved: 2
   import/default: 2
   no-global-assign: 2
+  no-buffer-constructor: 2
 parserOptions:
   ecmaVersion: 6
 env:

@@ -14,7 +14,7 @@ const blueChannelEnd = channelSize * 3;
 const alphaChannelEnd = channelSize * 4;
 let i, x;
 
-const buffer = new Buffer(size);
+const buffer = Buffer.allocUnsafe(size);
 for (i = blueChannelEnd; i < alphaChannelEnd; i++) {
     buffer[i] = 100;
 }

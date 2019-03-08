@@ -73,7 +73,7 @@ describe('lwip.open arguments validation', () => {
 
         let buffer;
         before(done => {
-            buffer = new Buffer(120 * 120);
+            buffer = Buffer.allocUnsafe(120 * 120);
             done();
         });
 
@@ -153,21 +153,21 @@ describe('lwip.open arguments validation', () => {
         });
 
         describe('with correct width and height for 2 channels', () => {
-            const newBuffer = new Buffer(120 * 120 * 2);
+            const newBuffer = Buffer.allocUnsafe(120 * 120 * 2);
             it('should succeed', () => {
                 lwip.open.bind(lwip, newBuffer, { width: 120, height: 120 }, () => {}).should.not.throw();
             });
         });
 
         describe('with correct width and height for 3 channels', () => {
-            const newBuffer = new Buffer(120 * 120 * 3);
+            const newBuffer = Buffer.allocUnsafe(120 * 120 * 3);
             it('should succeed', () => {
                 lwip.open.bind(lwip, newBuffer, { width: 120, height: 120 }, () => {}).should.not.throw();
             });
         });
 
         describe('with correct width and height for 4 channels', () => {
-            const newBuffer = new Buffer(120 * 120 * 4);
+            const newBuffer = Buffer.allocUnsafe(120 * 120 * 4);
             it('should succeed', () => {
                 lwip.open.bind(lwip, newBuffer, { width: 120, height: 120 }, () => {}).should.not.throw();
             });
