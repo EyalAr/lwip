@@ -18,6 +18,8 @@
     "nan": "^2.12.1"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/git": "^7.0.8",
     "coveralls": "^3.0.3",
     "eslint": "^5.15.1",
     "eslint-plugin-import": "^2.16.0",
