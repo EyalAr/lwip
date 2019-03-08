@@ -1,0 +1,27 @@
+# Fix line endings in Windows. (runs before repo cloning)
+init:
+  - git config --global core.autocrlf input
+
+image: Visual Studio 2017
+
+environment:
+  matrix:
+    - nodejs_version: 6
+      msvs_version: 2017
+    - nodejs_version: 8
+      msvs_version: 2017
+    - nodejs_version: 10
+      msvs_version: 2017
+    - nodejs_version: 11
+      msvs_version: 2017
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - ps: npm install --msvs_version=$env:msvs_version
+
+test_script:
+  - ps: npm test
+
+build: off
+
+version: "{build}"

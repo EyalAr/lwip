@@ -4,6 +4,7 @@
 [![npm downloads](https://img.shields.io/npm/dt/@randy.tarampi/lwip.svg?style=flat-square)](https://www.npmjs.com/package/@randy.tarampi/lwip)
 [![npm license](https://img.shields.io/npm/l/@randy.tarampi/lwip.svg?registry_uri=https%3A%2F%2Fregistry.npmjs.com&style=flat-square)](https://www.npmjs.com/package/@randy.tarampi/lwip) 
 [![Build status](https://img.shields.io/travis/com/randytarampi/lwip.svg?style=flat-square)](https://travis-ci.com/randytarampi/lwip) 
+[![Build status](https://ci.appveyor.com/api/projects/status/46mk5218x995svhw/branch/master?svg=true)](https://ci.appveyor.com/project/randytarampi/lwip/branch/master)
 [![Coverage status](https://img.shields.io/coveralls/randytarampi/lwip.svg?style=flat-square)](https://coveralls.io/github/randytarampi/lwip?branch=master) 
 [![Maintainability status](https://img.shields.io/codeclimate/maintainability-percentage/randytarampi/lwip.svg?style=flat-square)](https://codeclimate.com/github/randytarampi/lwip/maintainability)
 [![Waffle.io board](https://badge.waffle.io/randytarampi/randytarampi.github.io.svg?columns=all&style=flat-square)](https://waffle.io/randytarampi/randytarampi.github.io) 
