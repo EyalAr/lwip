@@ -1,7 +1,6 @@
 // methods should throw errors when arguments are invalid
 
-const should = require("should"),
-    assert = require('assert'),
+const assert = require('assert'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
@@ -53,7 +52,8 @@ describe('image.paste arguments validation', () => {
 
     describe('invalid pasted image (7)', () => {
         it('should throw an error', () => {
-            image.paste.bind(image, 0, 0, "foo", () => {}).should.throwError();
+            image.paste.bind(image, 0, 0, 'foo', () => {
+            }).should.throwError();
         });
     });
 

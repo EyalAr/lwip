@@ -1,13 +1,12 @@
 const join = require('path').join,
     fs = require('fs'),
-    assert = require('assert'),
     async = require('async'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     utils = require('../utils'),
     imgs = require('../imgs');
 
-const tmpDir = join(__dirname, '../results');
+const tmpDir = join(__dirname, '../results'),
     outpathJpeg = join(tmpDir, 'stress.jpg'),
     outpathPng = join(tmpDir, 'stress.png'),
     outpathGif = join(tmpDir, 'stress.gif');

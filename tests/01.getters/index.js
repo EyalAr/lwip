@@ -1,5 +1,4 @@
-const join = require('path').join,
-    assert = require('assert'),
+const assert = require('assert'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
@@ -92,7 +91,7 @@ describe('lwip.extract', () => {
 describe('lwip.getMetadata', () => {
     it('should return correct metadata', done => {
         lwip.open(imgs.png.hasMetadata, (err, img) => {
-            assert(img.getMetadata() === "Lorem ipsum dolor sit amet");
+            assert(img.getMetadata() === 'Lorem ipsum dolor sit amet');
             done();
         });
     });

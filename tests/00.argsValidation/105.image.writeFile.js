@@ -1,7 +1,6 @@
 // methods should throw errors when arguments are invalid
 
-const should = require("should"),
-    lwip = require('../../'),
+const lwip = require('../../'),
     imgs = require('../imgs');
 
 describe('image.writeFile arguments validation', () => {
@@ -62,7 +61,7 @@ describe('image.writeFile arguments validation', () => {
 
     describe('GIF params', () => {
 
-        describe("invalid params", () => {
+        describe('invalid params', () => {
 
             describe('invalid colors (wrong type)', () => {
                 it('should throw an error', () => {

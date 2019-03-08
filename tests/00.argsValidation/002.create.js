@@ -1,8 +1,6 @@
 // methods should throw errors when arguments are invalid
 
-const should = require("should"),
-    lwip = require('../../'),
-    imgs = require('../imgs');
+const lwip = require('../../');
 
 describe('lwip.create arguments validation', () => {
 

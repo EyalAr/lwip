@@ -1,11 +1,10 @@
 const join = require('path').join,
-    assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
 const tmpDir = join(__dirname, '../results');
-    basename = 'blur';
+const basename = 'blur';
 let current;
 
 describe('lwip.blur', () => {

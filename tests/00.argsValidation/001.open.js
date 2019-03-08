@@ -1,7 +1,6 @@
 // methods should throw errors when arguments are invalid
 
-const should = require("should"),
-    fs = require('fs'),
+const fs = require('fs'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
@@ -104,19 +103,22 @@ describe('lwip.open arguments validation', () => {
 
         describe('with non numeric width', () => {
             it('should throw an error', () => {
-                lwip.open.bind(lwip, buffer, { width: "lorem", height: 120 }, () => {}).should.throwError();
+                lwip.open.bind(lwip, buffer, {width: 'lorem', height: 120}, () => {
+                }).should.throwError();
             });
         });
 
         describe('with non numeric height', () => {
             it('should throw an error', () => {
-                lwip.open.bind(lwip, buffer, { width: 120, height: "lorem" }, () => {}).should.throwError();
+                lwip.open.bind(lwip, buffer, {width: 120, height: 'lorem'}, () => {
+                }).should.throwError();
             });
         });
 
         describe('with non numeric width and height', () => {
             it('should throw an error', () => {
-                lwip.open.bind(lwip, buffer, { width: "lorem", height: "ipsum" }, () => {}).should.throwError();
+                lwip.open.bind(lwip, buffer, {width: 'lorem', height: 'ipsum'}, () => {
+                }).should.throwError();
             });
         });
 

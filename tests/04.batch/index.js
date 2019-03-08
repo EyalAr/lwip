@@ -1,6 +1,4 @@
 const join = require('path').join,
-    should = require('should'),
-    assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     utils = require('../utils'),
@@ -22,8 +20,10 @@ describe('image.batch', () => {
     describe('exec', () => {
         describe('same batch twice in parallel', () => {
             it('should throw an error', () => {
-                batch.exec(() => {});
-                batch.exec.bind(batch, () => {}).should.throwError();
+                batch.exec(() => {
+                });
+                batch.exec.bind(batch, () => {
+                }).should.throwError();
             });
         });
     });
@@ -36,9 +36,7 @@ describe('image.batch', () => {
                 it('should succeed', done => {
                     batch.toBuffer('jpg', {
                         quality: 0
-                    }, (err, buffer) => {
-                        done(err);
-                    });
+                    }, done);
                 });
             });
 
@@ -46,9 +44,7 @@ describe('image.batch', () => {
                 it('should succeed', done => {
                     batch.toBuffer('jpg', {
                         quality: 100
-                    }, (err, buffer) => {
-                        done(err);
-                    });
+                    }, done);
                 });
             });
 
@@ -63,9 +59,7 @@ describe('image.batch', () => {
                         batch.toBuffer('png', {
                             interlaced: false,
                             compression: 'none',
-                        }, (err, buffer) => {
-                            done(err);
-                        });
+                        }, done);
                     });
                 });
 
@@ -74,9 +68,7 @@ describe('image.batch', () => {
                         batch.toBuffer('png', {
                             interlaced: false,
                             compression: 'fast',
-                        }, (err, buffer) => {
-                            done(err);
-                        });
+                        }, done);
                     });
                 });
 
@@ -85,9 +77,7 @@ describe('image.batch', () => {
                         batch.toBuffer('png', {
                             interlaced: false,
                             compression: 'high',
-                        }, (err, buffer) => {
-                            done(err);
-                        });
+                        }, done);
                     });
                 });
 
@@ -100,9 +90,7 @@ describe('image.batch', () => {
                         batch.toBuffer('png', {
                             interlaced: true,
                             compression: 'none',
-                        }, (err, buffer) => {
-                            done(err);
-                        });
+                        }, done);
                     });
                 });
 
@@ -111,9 +99,7 @@ describe('image.batch', () => {
                         batch.toBuffer('png', {
                             interlaced: true,
                             compression: 'fast',
-                        }, (err, buffer) => {
-                            done(err);
-                        });
+                        }, done);
                     });
                 });
 
@@ -122,9 +108,7 @@ describe('image.batch', () => {
                         batch.toBuffer('png', {
                             interlaced: true,
                             compression: 'high',
-                        }, (err, buffer) => {
-                            done(err);
-                        });
+                        }, done);
                     });
                 });
 
@@ -142,9 +126,7 @@ describe('image.batch', () => {
                             colors: 122,
                             interlaced: false,
                             transparency: false
-                        }, (err, buffer) => {
-                            done(err);
-                        });
+                        }, done);
                     });
                 });
 
@@ -154,9 +136,7 @@ describe('image.batch', () => {
                             interlaced: false,
                             transparency: true,
                             threshold: 55
-                        }, (err, buffer) => {
-                            done(err);
-                        });
+                        }, done);
                     });
                 });
 
@@ -170,9 +150,7 @@ describe('image.batch', () => {
                             colors: 122,
                             interlaced: true,
                             transparency: false
-                        }, (err, buffer) => {
-                            done(err);
-                        });
+                        }, done);
                     });
                 });
 
@@ -182,9 +160,7 @@ describe('image.batch', () => {
                             interlaced: true,
                             transparency: true,
                             threshold: 55
-                        }, (err, buffer) => {
-                            done(err);
-                        });
+                        }, done);
                     });
                 });
 

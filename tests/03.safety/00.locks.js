@@ -1,6 +1,4 @@
-const join = require('path').join,
-    should = require('should'),
-    lwip = require('../../'),
+const lwip = require('../../'),
     imgs = require('../imgs');
 
 describe('simultaneous operations locks', () => {

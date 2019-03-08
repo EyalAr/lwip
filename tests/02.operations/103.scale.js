@@ -5,7 +5,7 @@ const join = require('path').join,
     imgs = require('../imgs');
 
 const tmpDir = join(__dirname, '../results');
-    basename = 'scale';
+const basename = 'scale';
 let current;
 
 describe('lwip.scale', () => {

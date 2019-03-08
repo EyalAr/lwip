@@ -1,5 +1,4 @@
 const join = require('path').join,
-    assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs');

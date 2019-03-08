@@ -4,7 +4,7 @@ const join = require('path').join,
     imgs = require('../imgs');
 
 const tmpDir = join(__dirname, '../results');
-    basename = 'rotate';
+const basename = 'rotate';
 let current;
 
 describe('lwip.rotate', () => {

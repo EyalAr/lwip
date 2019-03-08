@@ -1,4 +1,4 @@
-const should = require("should"),
+const should = require('should'),
     fs = require('fs'),
     lwip = require('../../'),
     imgs = require('../imgs');
@@ -6,7 +6,7 @@ const should = require("should"),
 describe('lwip.open', () => {
     describe('non-existing image', () => {
         it('should fail', done => {
-            lwip.open(imgs.inv, 'jpg', (err, img) => {
+            lwip.open(imgs.inv, 'jpg', err => {
                 should(err).be.Error();
                 done();
             });
@@ -47,7 +47,7 @@ describe('lwip.open', () => {
 
         describe('invalid image', () => {
             it('should fail', done => {
-                lwip.open(imgs.jpg.inv, (err, img) => {
+                lwip.open(imgs.jpg.inv, err => {
                     should(err).be.Error();
                     done();
                 });
@@ -100,7 +100,7 @@ describe('lwip.open', () => {
 
         describe('invalid image', () => {
             it('should fail', done => {
-                lwip.open(imgs.png.inv, (err, img) => {
+                lwip.open(imgs.png.inv, err => {
                     should(err).be.Error();
                     done();
                 });
@@ -153,7 +153,7 @@ describe('lwip.open', () => {
 
         describe('invalid image', () => {
             it('should fail', done => {
-                lwip.open(imgs.gif.inv, (err, img) => {
+                lwip.open(imgs.gif.inv, err => {
                     should(err).be.Error();
                     done();
                 });
@@ -293,11 +293,11 @@ describe('lwip.open', () => {
             });
 
             it('should construct an all-black pixels image', done => {
-                lwip.open(buffer, { width: 100, height: 100 }, (err, img) => {
+                lwip.open(buffer, {width: 100, height: 100}, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
-                    for (let x = 0 ; x < img.width() ; x++){
-                        for (let y = 0 ; y < img.height() ; y++){
+                    for (let x = 0; x < img.width(); x++) {
+                        for (let y = 0; y < img.height(); y++) {
                             img.getPixel(x, y).should.deepEqual({r: 0, g: 0, b: 0, a: 100});
                         }
                     }
@@ -316,11 +316,11 @@ describe('lwip.open', () => {
             });
 
             it('should construct an all-black transparent pixels image', done => {
-                lwip.open(buffer, { width: 100, height: 100 }, (err, img) => {
+                lwip.open(buffer, {width: 100, height: 100}, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
-                    for (let x = 0 ; x < img.width() ; x++){
-                        for (let y = 0 ; y < img.height() ; y++){
+                    for (let x = 0; x < img.width(); x++) {
+                        for (let y = 0; y < img.height(); y++) {
                             img.getPixel(x, y).should.deepEqual({r: 0, g: 0, b: 0, a: 50});
                         }
                     }
@@ -340,11 +340,11 @@ describe('lwip.open', () => {
             });
 
             it('should construct an all-black pixels image', done => {
-                lwip.open(buffer, { width: 100, height: 100 }, (err, img) => {
+                lwip.open(buffer, {width: 100, height: 100}, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
-                    for (let x = 0 ; x < img.width() ; x++){
-                        for (let y = 0 ; y < img.height() ; y++){
+                    for (let x = 0; x < img.width(); x++) {
+                        for (let y = 0; y < img.height(); y++) {
                             img.getPixel(x, y).should.deepEqual({r: 10, g: 20, b: 30, a: 100});
                         }
                     }
@@ -365,11 +365,11 @@ describe('lwip.open', () => {
             });
 
             it('should construct an all-black transparent pixels image', done => {
-                lwip.open(buffer, { width: 100, height: 100 }, (err, img) => {
+                lwip.open(buffer, {width: 100, height: 100}, (err, img) => {
                     should(err).not.be.Error();
                     img.should.be.ok();
-                    for (let x = 0 ; x < img.width() ; x++){
-                        for (let y = 0 ; y < img.height() ; y++){
+                    for (let x = 0; x < img.width(); x++) {
+                        for (let y = 0; y < img.height(); y++) {
                             img.getPixel(x, y).should.deepEqual({r: 10, g: 20, b: 30, a: 50});
                         }
                     }

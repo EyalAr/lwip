@@ -1,7 +1,6 @@
 // methods should throw errors when arguments are invalid
 
-const should = require("should"),
-    lwip = require('../../'),
+const lwip = require('../../'),
     imgs = require('../imgs');
 
 describe('image.setPixel arguments validation', () => {
@@ -14,8 +13,8 @@ describe('image.setPixel arguments validation', () => {
         });
     });
 
-    describe("pixel coordinates out of bounds", () => {
-        it("should throw an error", done => {
+    describe('pixel coordinates out of bounds', () => {
+        it('should throw an error', done => {
             image.setPixel.bind(image, 9999, 0, 'yellow', () => {}).should.throwError();
             image.setPixel.bind(image, 0, 9999, 'yellow', () => {}).should.throwError();
             image.setPixel.bind(image, 9999, 9999, 'yellow', () => {}).should.throwError();

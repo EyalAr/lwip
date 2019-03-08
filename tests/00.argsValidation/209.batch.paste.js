@@ -1,7 +1,6 @@
 // methods should throw errors when arguments are invalid
 
-const should = require("should"),
-    assert = require('assert'),
+const assert = require('assert'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
@@ -53,7 +52,8 @@ describe('batch.paste arguments validation', () => {
 
     describe('invalid pasted image (7)', () => {
         it('should throw an error', () => {
-            batch.paste.bind(batch, 0, 0, "foo", () => {}).should.throwError();
+            batch.paste.bind(batch, 0, 0, 'foo', () => {
+            }).should.throwError();
         });
     });
 
@@ -66,7 +66,6 @@ describe('batch.paste arguments validation', () => {
     describe('pasted image exceeds dimensions', () => {
 
         const Image = require('../../lib/Image');
-        console.log(Image);
 
         let pst;
         beforeEach(done => {
@@ -92,11 +91,12 @@ describe('batch.paste arguments validation', () => {
             it('should not return an error', done => {
                 assert(pst instanceof Image);
                 batch.paste.bind(batch, 10, 10, pst).should.not.throwError();
-                pst.scale(0.1, (err, pst) => {
+                pst.scale(0.1, err => {
+                    if (err) return done(err);
                     batch.exec(err => {
                         // there should not be an error message
                         assert(!err);
-                        done();
+                        done(err);
                     });
                 });
             });

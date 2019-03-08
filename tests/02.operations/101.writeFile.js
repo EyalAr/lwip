@@ -1,10 +1,9 @@
 const join = require('path').join,
-    should = require("should"),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
-const tmpDir = join(__dirname, '../results');
+const tmpDir = join(__dirname, '../results'),
     outJpeg = 'write_test.jpg',
     outPng = 'write_test.png',
     outGif = 'write_test.gif',

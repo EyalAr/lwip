@@ -2,8 +2,7 @@ const join = require('path').join,
     assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
-    imgs = require('../imgs'),
-    should = require('should');
+    imgs = require('../imgs');
 
 const tmpDir = join(__dirname, '../results');
 
@@ -22,6 +21,7 @@ describe('lwip.setMetadata', () => {
                 if (err) return done(err);
                 img.setMetadata(metadata);
                 img.writeFile(join(tmpDir, filename), err => {
+                    if (err) return done(err);
                     lwip.open(join(tmpDir, filename), (err, imgWithMetadata) => {
                         if (err) return done(err);
                         assert(imgWithMetadata.getMetadata() === metadata);
@@ -38,6 +38,7 @@ describe('lwip.setMetadata', () => {
                 if (err) return done(err);
 
                 img.writeFile(join(tmpDir, filename), err => {
+                    if (err) return done(err);
                     lwip.open(join(tmpDir, filename), (err, imgNoMetadata) => {
                         if (err) return done(err);
                         assert(imgNoMetadata.getMetadata() === null);
@@ -48,10 +49,8 @@ describe('lwip.setMetadata', () => {
         });
 
         it('should throw error if non-string metadata is set', done => {
-            const filename = 'noMetadata.png';
-
             lwip.create(1, 1, (err, img) => {
-                if (err) return done(err);;
+                if (err) return done(err);
                 img.setMetadata.bind(img, {}).should.throwError();
                 img.setMetadata.bind(img, () => {}).should.throwError();
                 img.setMetadata.bind(img, 42).should.throwError();
@@ -68,6 +67,7 @@ describe('lwip.setMetadata', () => {
                 img.setMetadata(null);
 
                 img.writeFile(join(tmpDir, filename), err => {
+                    if (err) return done(err);
                     lwip.open(join(tmpDir, filename), (err, imgWithMetadata) => {
                         if (err) return done(err);
                         assert(imgWithMetadata.getMetadata() === null);
@@ -87,6 +87,7 @@ describe('lwip.setMetadata', () => {
                 img.setMetadata(newMetadata);
 
                 img.writeFile(join(tmpDir, filename), err => {
+                    if (err) return done(err);
                     lwip.open(join(tmpDir, filename), (err, imgWithMetadata) => {
                         if (err) return done(err);
                         assert(imgWithMetadata.getMetadata() === newMetadata);

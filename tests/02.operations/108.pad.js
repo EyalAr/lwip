@@ -5,8 +5,8 @@ const join = require('path').join,
     imgs = require('../imgs');
 
 const tmpDir = join(__dirname, '../results');
-    basename = 'pad';
-    current = [basename];
+const basename = 'pad';
+const current = [basename];
 
 describe('lwip.pad', () => {
 

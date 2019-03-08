@@ -1,7 +1,6 @@
 // methods should throw errors when arguments are invalid
 
-const should = require("should"),
-    assert = require('assert'),
+const assert = require('assert'),
     lwip = require('../../'),
     imgs = require('../imgs');
 

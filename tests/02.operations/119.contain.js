@@ -5,7 +5,7 @@ const join = require('path').join,
     imgs = require('../imgs');
 
 const tmpDir = join(__dirname, '../results');
-    basename = 'contain';
+const basename = 'contain';
 let current;
 
 describe('lwip.contain', () => {

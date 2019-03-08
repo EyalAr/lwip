@@ -1,11 +1,10 @@
 const join = require('path').join,
-    assert = require('assert'),
     mkdirp = require('mkdirp'),
     lwip = require('../../'),
     imgs = require('../imgs');
 
 const tmpDir = join(__dirname, '../results');
-    basename = 'mirror';
+const basename = 'mirror';
 let current;
 
 describe('lwip.mirror (/flip)', () => {

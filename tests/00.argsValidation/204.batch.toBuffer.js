@@ -1,7 +1,6 @@
 // methods should throw errors when arguments are invalid
 
-const should = require("should"),
-    lwip = require('../../'),
+const lwip = require('../../'),
     imgs = require('../imgs');
 
 describe('batch.toBuffer arguments validation', () => {
@@ -50,7 +49,7 @@ describe('batch.toBuffer arguments validation', () => {
 
     describe('PNG params', () => {
 
-        describe("valid params", () => {
+        describe('valid params', () => {
 
             describe('defaults', () => {
                 it('should succeed', done => {
@@ -240,7 +239,7 @@ describe('batch.toBuffer arguments validation', () => {
 
         });
 
-        describe("invalid params", () => {
+        describe('invalid params', () => {
 
             describe('invalid compression - string', () => {
                 it('should throw an error', () => {
@@ -280,7 +279,7 @@ describe('batch.toBuffer arguments validation', () => {
 
     describe('GIF params', () => {
 
-        describe("valid params", () => {
+        describe('valid params', () => {
 
             describe('defaults', () => {
                 it('should succeed', done => {
@@ -334,7 +333,7 @@ describe('batch.toBuffer arguments validation', () => {
 
         });
 
-        describe("invalid params", () => {
+        describe('invalid params', () => {
 
             describe('invalid colors (wrong type)', () => {
                 it('should throw an error', () => {
