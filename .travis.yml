@@ -34,6 +34,7 @@ install: >-
     then npm install --msvs_version=$MSVS_VERSION;
     else npm install;
   fi;
+before_script: npm run pretest
 script: npm run travis
 before_deploy:
   - git config --local user.name "$TRAVIS_AUTHOR_NAME"
