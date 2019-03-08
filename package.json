@@ -80,9 +80,10 @@
     "cover:collect:darwin:linux": "cat ./coverage/lcov.info | coveralls",
     "cover:collect:win32": "type ./coverage/lcov.info | coveralls",
     "install": "node-gyp rebuild",
-    "pretest": "npm run pretest:js",
-    "pretest:cpp": "node-cpplint cpp,h src/**/*",
-    "pretest:js": "eslint **/*.js",
+    "pretest": "npm run lint:js",
+    "lint": "npm run lint:js && npm run lint:cpp",
+    "lint:cpp": "node-cpplint cpp,h src/**/* $(grep ^.*$ CPPLINT.cfg | sed 's/filter=/filters=/g' | awk '{print \"--\"$0}' ORS=' ' | tr '=' ' ' | tr ',' ' ' | tr '/' '-')\n",
+    "lint:js": "eslint **/*.js",
     "test": "mocha --opts ./tests/mocha.opts tests",
     "travis": "npm run cover"
   },
