@@ -77,14 +77,14 @@ install anything else on your system.
 
 ### Installation
 
-`npm install lwip`
+`npm install @randy.tarampi/lwip`
 
-Or, clone this repo and `cd lwip && npm install`.
+Or, clone this repo and `cd @randy.tarampi/lwip && npm install`.
 
 You can run tests with `npm test`.
 
 **Note:** Installation of this module involves compiling native code.
-If `npm install lwip` failes, you probably need to setup your system.
+If `npm install @randy.tarampi/lwip` failes, you probably need to setup your system.
 [See instructions](https://github.com/TooTallNate/node-gyp#installation).
 Building on Windows with Visual Studio requires version 2013 or higher.
 
@@ -100,7 +100,7 @@ Building on Windows with Visual Studio requires version 2013 or higher.
 
 ```Javascript
 // obtain an image object:
-require('lwip').open('image.jpg', function(err, image){
+require('@randy.tarampi/lwip').open('image.jpg', function(err, image){
 
   // check err...
   // define a batch of manipulations and save to disk as JPEG:
@@ -120,7 +120,7 @@ require('lwip').open('image.jpg', function(err, image){
 **Example (non-batch):**
 
 ```Javascript
-var lwip = require('lwip');
+var lwip = require('@randy.tarampi/lwip');
 
 // obtain an image object:
 lwip.open('image.jpg', function(err, image){
@@ -264,7 +264,7 @@ Red values, then all the Green values, etc.
 #### Open file example
 
 ```Javascript
-const lwip = require('lwip');
+const lwip = require('@randy.tarampi/lwip');
 lwip.open('path/to/image.jpg', function(err, image){
     // check 'err'. use 'image'.
     // image.resize(...), etc.
@@ -275,7 +275,7 @@ lwip.open('path/to/image.jpg', function(err, image){
 
 ```Javascript
 const fs = require('fs'),
-    lwip = require('lwip');
+    lwip = require('@randy.tarampi/lwip');
 
 fs.readFile('path/to/image.png', function(err, buffer){
   // check err
@@ -300,7 +300,7 @@ fs.readFile('path/to/image.png', function(err, buffer){
 **Example**:
 
 ```Javascript
-const lwip = require('lwip');
+const lwip = require('@randy.tarampi/lwip');
 
 lwip.create(500, 500, 'yellow', function(err, image){
   // check err
@@ -848,15 +848,15 @@ The native part of this module is compiled from source which uses the following:
 - Independent JPEG Group's free JPEG software:
   - [Website](http://www.ijg.org/)
   - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/jpeg/README)
-- libpng:
+- `libpng`:
   - [Website](http://www.libpng.org/)
   - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/png/README)
-- zlib:
+- `zlib`:
   - [Website](http://www.zlib.net/)
   - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/zlib/README)
 - The CImg Library
   - [Website](http://cimg.sourceforge.net/)
   - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/cimg/README.txt)
-- giflib
+- `giflib`
   - [Website](http://giflib.sourceforge.net/)
   - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/gif/README)
