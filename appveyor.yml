@@ -5,18 +5,16 @@ init:
 image: Visual Studio 2017
 
 environment:
+  msvs_version: 2017
   matrix:
     - nodejs_version: 6
-      msvs_version: 2017
     - nodejs_version: 8
-      msvs_version: 2017
     - nodejs_version: 10
-      msvs_version: 2017
     - nodejs_version: 11
-      msvs_version: 2017
 
 install:
   - ps: Install-Product node $env:nodejs_version
+  - ps: npm -g install
   - ps: npm install --msvs_version=$env:msvs_version
 
 test_script:
