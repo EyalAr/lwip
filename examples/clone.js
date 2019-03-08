@@ -5,8 +5,7 @@
  * 3. Do some more different manipulations in the clones.
  */
 
-const path = require('path'),
-    lwip = require('../');
+const lwip = require('../');
 
 lwip.open('lena.jpg', (err, image) => {
     if (err) return console.log(err);
@@ -18,7 +17,7 @@ lwip.open('lena.jpg', (err, image) => {
             if (err) return console.log(err);
 
             image.clone((err, clone1) => {
-                if (err) return console.log("clone1:", err);
+                if (err) return console.log('clone1:', err);
                 clone1.batch()
                     .mirror('y')
                     .hue(100)
@@ -29,7 +28,7 @@ lwip.open('lena.jpg', (err, image) => {
             });
 
             image.clone((err, clone2) => {
-                if (err) return console.log("clone2:", err);
+                if (err) return console.log('clone2:', err);
                 clone2.batch()
                     .fade(0.5)
                     .mirror('x')

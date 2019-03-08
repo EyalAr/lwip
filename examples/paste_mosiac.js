@@ -2,8 +2,7 @@
  * Example for using LWIP to create a hue gradient mosiac.
  */
 
-const path = require('path'),
-    async = require('async'),
+const async = require('async'),
     lwip = require('../');
 
 lwip.open('lena.jpg', (err, image) => {

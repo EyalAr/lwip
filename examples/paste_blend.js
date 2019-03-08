@@ -2,8 +2,7 @@
  * Example for using LWIP to blend two images.
  */
 
-const path = require('path'),
-    async = require('async'),
+const async = require('async'),
     lwip = require('../');
 
 async.waterfall([

@@ -2,8 +2,7 @@
  * Example for using LWIP to fade an image to 50% transperancy.
  */
 
-const path = require('path'),
-    lwip = require('../');
+const lwip = require('../');
 
 lwip.open('lena.jpg', (err, image) => {
     if (err) return console.log(err);
