@@ -35,4 +35,14 @@ install: >-
     else npm install;
   fi;
 script: npm run travis
+before_deploy:
+  - git config --local user.name "$TRAVIS_AUTHOR_NAME"
+  - git config --local user.email "$TRAVIS_AUTHOR_EMAIL"
+deploy:
+  provider: script
+  script: npx semantic-release
+  skip_cleanup: true
+  on:
+    branch: master
+    node: 8
 sudo: false

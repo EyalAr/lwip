@@ -31,6 +31,7 @@
     "mocha-lcov-reporter": "^1.2.0",
     "nyc": "^13.3.0",
     "run-script-os": "^1.0.5",
+    "semantic-release": "^15.13.3",
     "should": "^8.3.2"
   },
   "repository": {
