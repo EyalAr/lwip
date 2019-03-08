@@ -2,8 +2,15 @@
   "name": "@randy.tarampi/lwip",
   "description": "Comprehensive, fast, and simple image processing and manipulation",
   "version": "1.0.0",
-  "author": "Randy Tarampi <randy.tarampi@gmail.com>",
-  "bugs": "https://github.com/randytarampi/lwip/issues",
+  "author": {
+    "name": "Randy Tarampi",
+    "email": "rt@randytarampi.ca",
+    "url": "https://www.randytarampi.ca"
+  },
+  "bugs": {
+    "url": "https://github.com/randytarampi/lwip/issues",
+    "email": "bugs@randytarampi.ca"
+  },
   "dependencies": {
     "async": "^2.5.0",
     "bindings": "^1.3.0",
@@ -21,7 +28,12 @@
     "should": "^8.3.2"
   },
   "directories": {
-    "example": "examples"
+    "example": "examples",
+    "lib": "lib",
+    "test": "tests"
+  },
+  "engines": {
+    "node": ">=6"
   },
   "gypfile": true,
   "homepage": "https://github.com/randytarampi/lwip",
