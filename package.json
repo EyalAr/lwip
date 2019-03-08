@@ -84,7 +84,7 @@
     "cover:collect": "run-script-os",
     "cover:collect:darwin:linux": "cat ./coverage/lcov.info | coveralls",
     "cover:collect:win32": "type ./coverage/lcov.info | coveralls",
-    "install": "node-gyp rebuild",
+    "install": "node-gyp rebuild -j 8",
     "pretest": "npm run lint:js",
     "lint": "npm run lint:js && npm run lint:cpp",
     "lint:cpp": "node-cpplint cpp,h src/**/* $(grep ^.*$ CPPLINT.cfg | sed 's/filter=/filters=/g' | awk '{print \"--\"$0}' ORS=' ' | tr '=' ' ' | tr ',' ' ' | tr '/' '-')\n",
