@@ -1,3 +1,15 @@
+## [0.0.17](https://github.com/randytarampi/lwip/compare/v0.0.16...v0.0.17) (2019-03-09)
+
+
+### Bug Fixes
+
+* **build:** Build against the included `zlib`. ([#4](https://github.com/randytarampi/lwip/issues/4)) ([ee4352a](https://github.com/randytarampi/lwip/commit/ee4352a))
+
+
+### Reverts
+
+* Conditionally use ZLIB version, based on version of NodeJS ([53a9ccb](https://github.com/randytarampi/lwip/commit/53a9ccb))
+
 ## [0.0.16](https://github.com/randytarampi/lwip/compare/v0.0.15...v0.0.16) (2019-03-09)
 
 
