@@ -14,11 +14,13 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - ps: npm -g install
-  - ps: npm install --msvs_version=$env:msvs_version
+  - npm -g install
+  - node --version
+  - npm --version
+  - npm install --msvs_version=$env:msvs_version
 
 test_script:
-  - ps: npm test
+  - npm test
 
 build: off
 
