@@ -8,20 +8,19 @@ matrix:
   exclude:
     - node_js: 6
       os: windows
+  include:
+    - &node6
+      node_js: 6
+      os: windows
+      env:
+        - GYP_MSVS_VERSION=2015
   allow_failures:
-    - node_js: 4
-      os: linux
-    - node_js: 4
-      os: osx
+    - *node6
     - node_js: 8
-      os: windows
-    - node_js: 6
-      os: windows
-    - node_js: 4
       os: windows
     - node_js: 10
       os: windows
-    - node_js: node
+    - node_js: 11
       os: windows
 env:
   global:
@@ -30,16 +29,12 @@ env:
     - secure: t45Kk0NZ8jVlJyzijB5dcTjSO8NXrCrcbGDWsdTuUeHq+HDona+hsLOZFokvDe3E3Bakmq+qeVsiSHjiKM+XHvg2EH2FXBsQqABaNaCrWkQt1kpqDK+pkHFhzdK1ZZkch4lDzXhlHmshEowa7S17dUsL5eTTKdAV6qvO1UoEt4aKjsPvR+e2q6vdsp+wZ+wkW/7SHd8sWEjhJmb9scsDmyLV4+JXZcLMI27PSPnTcqlW1hWT/A7uQ5xJ9MuGr4olQZu7Z7mNrJzTIJu1w4JQ2Yt39c0xshcwZOsS91sGNGsK3OcLrHoS4uf2FzGeKWhAI9uB9/DqaaEpC3XejmbLA1j7xrbYaNV+DHJs5v5LmGB+m4AFtskn8NKYz6bG0qFp4iUs71Ip1XRvEVzOWtF1jFL4Qqh9NlRaA/ooS/Bm5tcI7EMrfL5fBC2PVuLbVDmeIPZGjCNBN07DZVNM1lB6+1v8SdLne5JWGREQzea+Huyhk7qI4X/XKo4lq4HFmajSXWgbQjkVNIJD9BFLItgOODvlWLkPSGDnwFiZiVlMb4vseFyRM9yRMJFtj/TPIrT3rcNnluuED/OuOQWGKXHkJulKaUTRZruKp0wWemHo6LN5DwofoqjL/w+L8KuVeP5Pi6lHvbKzDywlFoYfMOe6in9+TPwemmTB4yZYkFc/fvk=
 node_js:
   - 8
-  - 4
   - 6
   - 10
-  - node
+  - 11
 cache: npm
 before_script:
-  - >-
-    if [[ "$TRAVIS_NODE_VERSION" > 5 ]];
-      then npm run pretest;
-    fi;
+  - npm run pretest
   - >-
     if [[ "$TRAVIS_OS_NAME" == "linux" ]];
       then curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter && chmod +x ./cc-test-reporter && ./cc-test-reporter before-build
