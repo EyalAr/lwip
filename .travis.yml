@@ -13,7 +13,7 @@ matrix:
       node_js: 6
       os: windows
       env:
-        - MSVS_VERSION=2015
+        - GYP_MSVS_VERSION=2015
   allow_failures:
     - *node6
     - node_js: 8
@@ -33,11 +33,6 @@ node_js:
   - 10
   - 11
 cache: npm
-install: >-
-  if [[ "$TRAVIS_OS_NAME" == "windows" && "$TRAVIS_NODE_VERSION" == "6" ]];
-    then npm install --msvs_version=$MSVS_VERSION;
-    else npm install;
-  fi;
 before_script:
   - npm run pretest
   - >-
