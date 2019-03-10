@@ -32,7 +32,6 @@ node_js:
   - 6
   - 10
   - 11
-cache: npm
 before_script:
   - npm run pretest
   - >-
