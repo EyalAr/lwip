@@ -1,3 +1,15 @@
+## [0.0.18](https://github.com/randytarampi/lwip/compare/v0.0.17...v0.0.18) (2019-03-10)
+
+
+### Bug Fixes
+
+* **build:** Always build _everything_ from source. ([#5](https://github.com/randytarampi/lwip/issues/5)) ([f3a8775](https://github.com/randytarampi/lwip/commit/f3a8775))
+
+
+### Reverts
+
+* chore(build): use system libs on non-windows, speed up build ([#1](https://github.com/randytarampi/lwip/issues/1)) ([e61204b](https://github.com/randytarampi/lwip/commit/e61204b))
+
 ## [0.0.17](https://github.com/randytarampi/lwip/compare/v0.0.16...v0.0.17) (2019-03-09)
 
 
