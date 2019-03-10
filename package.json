@@ -7,10 +7,7 @@
     "email": "rt@randytarampi.ca",
     "url": "https://www.randytarampi.ca"
   },
-  "bugs": {
-    "url": "https://github.com/randytarampi/lwip/issues",
-    "email": "bugs@randytarampi.ca"
-  },
+  "bugs": "https://github.com/randytarampi/lwip/issues",
   "dependencies": {
     "async": "^2.6.2",
     "bindings": "^1.5.0",
@@ -39,6 +36,25 @@
   },
   "engines": {
     "node": ">=4"
+  },
+  "greenkeeper": {
+    "commitMessages": {
+      "initialBadge": "docs(greenkeeper): Add Greenkeeper badge.",
+      "initialDependencies": "chore(greenkeeper): Update dependencies.",
+      "initialBranches": "chore(greenkeeper): Whitelist greenkeeper branches.",
+      "dependencyUpdate": "chore(greenkeeper): ${dependency}@${version}.",
+      "devDependencyUpdate": "chore(greenkeeper): ${dependency}@${version}.",
+      "dependencyPin": "fix(greenkeeper): Pin ${dependency}@${oldVersion}.",
+      "devDependencyPin": "fix(greenkeeper): Pin ${dependency}@${oldVersion}."
+    },
+    "prTitles": {
+      "initialPR": "chore(greenkeeper): Update dependencies and enable Greenkeeper",
+      "initialPrBadge": "docs(greenkeeper): Add Greenkeeper badge and enable Greenkeeper",
+      "initialPrBadgeOnly": "docs(greenkeeper): Add Greenkeeper badge",
+      "initialSubgroupPR": "chore(greenkeeper): Update dependencies for ${group}",
+      "basicPR": "chore(greenkeeper): Update ${dependency}",
+      "groupPR": "chore(greenkeeper): Update ${dependency} for ${group}"
+    }
   },
   "gypfile": true,
   "homepage": "https://github.com/randytarampi/lwip",
@@ -85,10 +101,10 @@
     "cover:collect:darwin:linux": "cat ./coverage/lcov.info | coveralls",
     "cover:collect:win32": "type ./coverage/lcov.info | coveralls",
     "install": "node-gyp rebuild -j 8",
-    "pretest": "npm run lint:js",
     "lint": "npm run lint:js && npm run lint:cpp",
     "lint:cpp": "node-cpplint cpp,h src/**/* $(grep ^.*$ CPPLINT.cfg | sed 's/filter=/filters=/g' | awk '{print \"--\"$0}' ORS=' ' | tr '=' ' ' | tr ',' ' ' | tr '/' '-')\n",
     "lint:js": "eslint **/*.js",
+    "pretest": "npm run lint:js",
     "test": "mocha --opts ./tests/mocha.opts tests",
     "travis": "npm run cover"
   },
