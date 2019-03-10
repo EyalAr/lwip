@@ -90,8 +90,6 @@ If `npm install @randy.tarampi/lwip` fails, you probably need to setup your syst
 
 See the [instructions for `node-gyp`](https://github.com/TooTallNate/node-gyp#installation).
 
-Building on non-Windows systems requires that you have `giflib`, `libjpeg` and `libpng` already installed and available.
-
 Building on Windows with Visual Studio requires version 2013 or higher.
 
 ### Usage

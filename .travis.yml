@@ -13,7 +13,7 @@ matrix:
       node_js: 6
       os: windows
       env:
-        - MSVS_VERSION=2015
+        - GYP_MSVS_VERSION=2015
   allow_failures:
     - *node6
     - node_js: 8
@@ -22,11 +22,6 @@ matrix:
       os: windows
     - node_js: 11
       os: windows
-addons:
-  apt:
-    packages:
-      - libgif-dev
-      - libpng16-dev
 env:
   global:
     - secure: m6GYIw709a4vzQQaUn995+d5xg7OhjRl6ynSZj/ih0mZkhmXoXC0tgixyLyaqova3qMZ1JXKlRRRwW5RMIGFQkPCdlhhuQ6Ou85HCyDXqbxHi5uhLbE4MgkAcEZ2N+k5IxLZOarWT2bUasCSDSiIQnxC/UbRkqL9r3ZhDyjWzpK8j06BXyP/NfHO486K4bsd+6hb++6vyvBAzhT0rbCUayAWXpA+E8J7qAE3VaKIPTfzdDL1jA8KJojmL6GaMHA6e1/SlPlK4q2IRx6byXW7scB6/95eT6ETYKTeWtVN4LhprunHeAF+wvlmJ1wFJwY4Ku9hDXEmaES9FYDaaujb+DQDApS8y/u/uaui+hn3vDnJenL2rnGO72bV0AytB4DdsQa9pM2R6xrY8qr0kc+I/rxNtUOEG/iNgXMTOJwIftPrUl0zVvxERuMtX9CiNYNIobzJfOYWlW5MSs3T1E39qvrtIimUu2S+AN09TGO9hhL3J648xEk3bWZ6mV0F9sZal3/wuS8TzZ2ezlCwjEojDuuOBTGoOI1VRWv3+elYR8FrGt6eca1znZMCHX8lrbAA3xb0dqAQHuYZ0pwBhVikOsguNCnipdii0vU6uQKejw+uD4SbdfnZ/Uh1wABynhISWx/1wJwtICk4NabEGAt9A7GjkGT5M/f7EmQpks8l4eE=
@@ -38,14 +33,6 @@ node_js:
   - 10
   - 11
 cache: npm
-before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt autoremove; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get remove libjpeg-turbo8-dev libjpeg9-dev+; fi
-install: >-
-  if [[ "$TRAVIS_OS_NAME" == "windows" && "$TRAVIS_NODE_VERSION" == "6" ]];
-    then npm install --msvs_version=$MSVS_VERSION;
-    else npm install;
-  fi;
 before_script:
   - npm run pretest
   - >-
