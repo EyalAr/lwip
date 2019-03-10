@@ -1,3 +1,15 @@
+## [0.0.19](https://github.com/randytarampi/lwip/compare/v0.0.18...v0.0.19) (2019-03-10)
+
+
+### Bug Fixes
+
+* **travis:** Don't bother caching dependencies. ([81c0c4e](https://github.com/randytarampi/lwip/commit/81c0c4e))
+
+
+### Reverts
+
+* chore(package): Apparently we support node^4? ([5c860bf](https://github.com/randytarampi/lwip/commit/5c860bf))
+
 ## [0.0.18](https://github.com/randytarampi/lwip/compare/v0.0.17...v0.0.18) (2019-03-10)
 
 
