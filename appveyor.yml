@@ -2,24 +2,28 @@
 init:
   - git config --global core.autocrlf input
 
-image: Visual Studio 2017
+image: Visual Studio 2015
 
 environment:
   matrix:
-    - nodejs_version: 6
     - nodejs_version: 8
+    - nodejs_version: 4
+    - nodejs_version: 6
     - nodejs_version: 10
-    - nodejs_version: 11
+    - nodejs_version: ""
+
+matrix:
+  allow_failures:
+    - nodejs_version: 4
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm install -g npm
   - node --version
   - npm --version
   - npm install
 
 test_script:
-  - npm test
+  - npm run cover
 
 build: off
 
