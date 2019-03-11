@@ -38,11 +38,11 @@ before_script:
     if [[ "$TRAVIS_OS_NAME" == "linux" ]];
       then curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter && chmod +x ./cc-test-reporter && ./cc-test-reporter before-build
     fi;
-script: npm run travis
+script: npm run cover
 after_script:
   - >-
     if [[ "$TRAVIS_OS_NAME" == "linux" ]];
-      then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT;
+      then npm run coveralls; ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT;
     fi;
 before_deploy:
   - git config --local user.name "$TRAVIS_AUTHOR_NAME"

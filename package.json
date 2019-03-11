@@ -97,16 +97,15 @@
   "scripts": {
     "cover": "npm run cover:actual",
     "cover:actual": "nyc mocha --opts ./tests/mocha.opts tests",
-    "cover:collect": "run-script-os",
-    "cover:collect:darwin:linux": "cat ./coverage/lcov.info | coveralls",
-    "cover:collect:win32": "type ./coverage/lcov.info | coveralls",
+    "coveralls": "run-script-os",
+    "coveralls:darwin:linux": "cat ./coverage/lcov.info | coveralls",
+    "coveralls:win32": "type ./coverage/lcov.info | coveralls",
     "install": "node-gyp rebuild -j 8",
     "lint": "npm run lint:js && npm run lint:cpp",
     "lint:cpp": "node-cpplint cpp,h src/**/* $(grep ^.*$ CPPLINT.cfg | sed 's/filter=/filters=/g' | awk '{print \"--\"$0}' ORS=' ' | tr '=' ' ' | tr ',' ' ' | tr '/' '-')\n",
     "lint:js": "eslint **/*.js",
     "pretest": "npm run lint:js",
-    "test": "mocha --opts ./tests/mocha.opts tests",
-    "travis": "npm run cover"
+    "test": "mocha --opts ./tests/mocha.opts tests"
   },
   "typings": "typings.d.ts"
 }
