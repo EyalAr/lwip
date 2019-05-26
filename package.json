@@ -9,7 +9,7 @@
   },
   "bugs": "https://github.com/randytarampi/lwip/issues",
   "dependencies": {
-    "async": "^2.6.2",
+    "async": "^3.0.1",
     "bindings": "^1.5.0",
     "decree": "0.0.6",
     "nan": "^2.13.2"
