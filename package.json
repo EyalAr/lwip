@@ -18,7 +18,7 @@
     "@semantic-release/changelog": "^3.0.2",
     "@semantic-release/git": "^7.0.8",
     "coveralls": "^3.0.3",
-    "eslint": "^5.16.0",
+    "eslint": "^6.0.1",
     "eslint-plugin-import": "^2.17.1",
     "mkdirp": "^0.5.1",
     "mocha": "^6.1.3",
