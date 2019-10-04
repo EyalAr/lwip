@@ -1,7 +1,7 @@
 #include "image.h"
 
 // create an init function for our node module
-void InitAll(Handle<Object> exports) {
+void InitAll(v8::Local<v8::Object> exports) {
     LwipImage::Init(exports);
 }
 

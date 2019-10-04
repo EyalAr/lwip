@@ -2,7 +2,10 @@
 
 Nan::Persistent<Function> LwipImage::constructor;
 
-void LwipImage::Init(Handle<Object> exports) {
+void LwipImage::Init(v8::Local<v8::Object> exports) {
+    v8::Local<v8::Context> context = exports->CreationContext();
+    Nan::HandleScope scope;
+
     // Prepare constructor template
     Local<FunctionTemplate> tpl = Nan::New<FunctionTemplate>(New);
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
@@ -22,10 +25,10 @@ void LwipImage::Init(Handle<Object> exports) {
     Nan::SetPrototypeMethod(tpl, "opacify", opacify);
     Nan::SetPrototypeMethod(tpl, "paste", paste);
     Nan::SetPrototypeMethod(tpl, "setPixel", setPixel);
-    constructor.Reset(tpl->GetFunction());
+    constructor.Reset(tpl->GetFunction(context).ToLocalChecked());
     exports->Set(
         Nan::New("LwipImage").ToLocalChecked(),
-        tpl->GetFunction()
+        tpl->GetFunction(context).ToLocalChecked()
     );
 }
 
@@ -57,8 +60,8 @@ NAN_METHOD(LwipImage::New) {
     // info[0] - pixels buffer
     // info[1,2] - width and height
     Local<Object> pixBuff = info[0].As<Object>();
-    size_t width = info[1]->NumberValue();
-    size_t height = info[2]->NumberValue();
+    size_t width = info[1].As<Number>()->Value();
+    size_t height = info[2].As<Number>()->Value();
     unsigned char * pixels = (unsigned char *)Buffer::Data(pixBuff);
     // TODO: handle CImg exception
     LwipImage * obj = new LwipImage(pixels, width, height);
@@ -238,8 +241,8 @@ NAN_METHOD(LwipImage::crop) {
 NAN_METHOD(LwipImage::mirror) {
     Nan::HandleScope();
 
-    bool xaxis = info[0]->BooleanValue();
-    bool yaxis = info[1]->BooleanValue();
+    bool xaxis = Nan::To<bool>(info[0]).FromJust();
+    bool yaxis = Nan::To<bool>(info[1]).FromJust();
     Nan::Callback * callback = new Nan::Callback(info[2].As<Function>());
     CImg<unsigned char> * cimg = ObjectWrap::Unwrap<LwipImage>(info.This())->_cimg;
 
