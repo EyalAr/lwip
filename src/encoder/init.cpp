@@ -36,10 +36,16 @@ NAN_METHOD(encodeToPngBuffer) {
     if (info[6]->IsNull() || info[6]->IsUndefined()) {
         metadata = NULL;
     } else {
-        v8::Local<v8::String> metadataParameter = Nan::To<v8::String>(info[6]).ToLocalChecked();
-        int metadata_len = Nan::DecodeBytes(metadataParameter, Nan::Encoding::UTF8);
+        if (!info[6]->IsString())
+        {
+            Nan::ThrowError("Metadata should be a string");
+            return;
+        }
+
+        int metadata_len = Nan::DecodeBytes(info[6], Nan::Encoding::UTF8);
         metadata = (char *)malloc((metadata_len + 1) * sizeof(char));
-        Nan::DecodeWrite(metadata, metadata_len, metadataParameter, Nan::Encoding::UTF8);
+        memset(metadata, 0, (metadata_len + 1) * sizeof(char));
+        Nan::DecodeWrite(metadata, metadata_len, info[6], Nan::Encoding::UTF8);
     }
 
     Nan::Callback * callback = new Nan::Callback(info[7].As<Function>());
