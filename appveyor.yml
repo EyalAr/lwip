@@ -9,7 +9,12 @@ environment:
     - nodejs_version: 6
     - nodejs_version: 8
     - nodejs_version: 10
-    - nodejs_version: 11
+    - nodejs_version: 12
+    - nodejs_version: ""
+matrix:
+  allow_failures:
+    - nodejs_version: 6
+    - nodejs_version: ""
 
 install:
   - ps: Install-Product node $env:nodejs_version
