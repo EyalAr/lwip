@@ -126,6 +126,6 @@ NAN_METHOD(encodeToGifBuffer);
 void pngWriteCB(png_structp png_ptr, png_bytep data, png_size_t length);
 int gifWriteCB(GifFileType * gif, const GifByteType * chunk, int len);
 void remapTransparentPixels(unsigned char * target, const unsigned char * map, size_t width, size_t height, int transColor, int threshold);
-void initAll(Handle<Object> exports);
+void initAll(v8::Local<v8::Object> exports);
 
 #endif

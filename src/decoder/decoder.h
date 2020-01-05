@@ -88,6 +88,6 @@ int gifReadCB(GifFileType * gif, GifByteType * buf, int length);
 NAN_METHOD(decodeJpegBuffer);
 NAN_METHOD(decodePngBuffer);
 NAN_METHOD(decodeGifBuffer);
-void initAll(Handle<Object> exports);
+void initAll(v8::Local<v8::Object> exports);
 
 #endif

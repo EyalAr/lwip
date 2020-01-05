@@ -27,7 +27,7 @@ using namespace node;
  */
 class LwipImage : public node::ObjectWrap {
 public:
-    static void Init(Handle<Object> exports);
+    static void Init(v8::Local<v8::Object> exports);
     static NAN_METHOD(NewInstance);
     static NAN_METHOD(New);
     static NAN_METHOD(resize);
