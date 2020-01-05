@@ -1,3 +1,15 @@
+# [1.0.0](https://github.com/randytarampi/lwip/compare/v0.0.19...v1.0.0) (2020-01-05)
+
+
+### Features
+
+* Support node@12. ([b1883eb](https://github.com/randytarampi/lwip/commit/b1883eb)), closes [#20](https://github.com/randytarampi/lwip/issues/20)
+
+
+### BREAKING CHANGES
+
+* Drop support for node@6, but add support for node@12.
+
 ## [0.0.19](https://github.com/randytarampi/lwip/compare/v0.0.18...v0.0.19) (2019-03-10)
 
 
