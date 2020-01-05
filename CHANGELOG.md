@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/randytarampi/lwip/compare/v1.0.0...v1.0.1) (2020-01-05)
+
+
+### Bug Fixes
+
+* Set our minimum node version to node@8, test against node@12, and allow failures against node@6. ([7606675](https://github.com/randytarampi/lwip/commit/7606675))
+
 # [1.0.0](https://github.com/randytarampi/lwip/compare/v0.0.19...v1.0.0) (2020-01-05)
 
 
