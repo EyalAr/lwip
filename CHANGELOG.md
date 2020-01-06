@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/randytarampi/lwip/compare/v1.0.1...v1.1.0) (2020-01-06)
+
+
+### Features
+
+* **package:** Blindly upgrade our dependencies for the new year. ([111fefc](https://github.com/randytarampi/lwip/commit/111fefc01aaaf4e7b0ebfe14500c7f22cacb2140))
+
 ## [1.0.1](https://github.com/randytarampi/lwip/compare/v1.0.0...v1.0.1) (2020-01-05)
 
 
