@@ -15,7 +15,7 @@
     "nan": "^2.14.0"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^3.0.6",
+    "@semantic-release/changelog": "^5.0.0",
     "@semantic-release/git": "^7.0.18",
     "coveralls": "^3.0.9",
     "eslint": "^6.8.0",
