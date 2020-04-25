@@ -8,8 +8,8 @@ const tmpDir = join(__dirname, '../results');
 
 describe('lwip.setMetadata', () => {
 
-    before(done => {
-        mkdirp(tmpDir, done);
+    before(() => {
+        return mkdirp(tmpDir);
     });
 
     describe('set png metadata', () => {

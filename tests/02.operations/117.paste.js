@@ -12,8 +12,8 @@ describe('lwip.paste', () => {
     let back, front;
     // back is the regular image. front is flipped on 'y' axis.
 
-    before(done => {
-        mkdirp(tmpDir, done);
+    before(() => {
+        return mkdirp(tmpDir);
     });
 
     beforeEach(done => {

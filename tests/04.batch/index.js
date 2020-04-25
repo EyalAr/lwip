@@ -174,9 +174,9 @@ describe('image.batch', () => {
 
         const tmpDir = join(__dirname, '../results');
 
-        before(done => {
-            mkdirp(tmpDir, done);
-        });
+        before(() => {
+        return mkdirp(tmpDir);
+    });
 
         describe('jpeg', () => {
 
