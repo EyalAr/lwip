@@ -7,8 +7,8 @@ const tmpDir = join(__dirname, '../results');
 
 describe('lwip.create', () => {
 
-    before(done => {
-        mkdirp(tmpDir, done);
+    before(() => {
+        return mkdirp(tmpDir);
     });
 
     describe('500X500, [255,0,0,50]', () => {
