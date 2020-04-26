@@ -15,8 +15,8 @@ describe('lwip.writeFile', () => {
 
     let image;
 
-    before(done => {
-        mkdirp(tmpDir, done);
+    before(() => {
+        return mkdirp(tmpDir);
     });
     before(done => {
         lwip.open(imgs.jpg.rgb, (err, img) => {

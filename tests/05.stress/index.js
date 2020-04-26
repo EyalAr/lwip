@@ -15,8 +15,8 @@ describe('stress tests', function () {
 
     this.timeout(120000); // 120 seconds per test
 
-    before(done => {
-        mkdirp(tmpDir, done);
+    before(() => {
+        return mkdirp(tmpDir);
     });
 
     describe('open image 300 times (in parallel) and save to disk as jpeg', () => {

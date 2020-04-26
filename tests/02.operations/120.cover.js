@@ -12,8 +12,8 @@ describe('lwip.cover', () => {
 
     let image;
 
-    before(done => {
-        mkdirp(tmpDir, done);
+    before(() => {
+        return mkdirp(tmpDir);
     });
 
     beforeEach(done => {
