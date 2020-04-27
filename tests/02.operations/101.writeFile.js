@@ -52,7 +52,7 @@ describe('lwip.writeFile', () => {
             });
 
             describe('params specified progressive=true', function() {
-                if('should succeed', function(done) {
+                it('should succeed', function(done) {
                     image.writeFile(outpathJpeg, {
                         progressive: true
                     }, done);
