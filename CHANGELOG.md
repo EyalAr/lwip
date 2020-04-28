@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/randytarampi/lwip/compare/v1.3.0...v1.3.1) (2020-04-28)
+
+
+### Bug Fixes
+
+* **blur:** Just use `CImg.blur` to blur images ([4cf9aaf](https://github.com/randytarampi/lwip/commit/4cf9aaf4b76c6a26fb6b45ffd830da405f38e0cc))
+
 # [1.3.0](https://github.com/randytarampi/lwip/compare/v1.2.0...v1.3.0) (2020-04-28)
 
 
