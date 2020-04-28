@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/randytarampi/lwip/compare/v1.1.0...v1.2.0) (2020-04-28)
+
+
+### Features
+
+* **Image:** Fix conflicts per https://github.com/randytarampi/lwip/pull/28. ([7cd33d5](https://github.com/randytarampi/lwip/commit/7cd33d5e6b39ae9f383acd89381dd811abf9ee00))
+
 # [1.1.0](https://github.com/randytarampi/lwip/compare/v1.0.1...v1.1.0) (2020-01-06)
 
 
