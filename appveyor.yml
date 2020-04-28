@@ -2,18 +2,17 @@
 init:
   - git config --global core.autocrlf input
 
-image: Visual Studio 2017
+image: Visual Studio 2019
 
 environment:
   matrix:
-    - nodejs_version: 6
     - nodejs_version: 8
     - nodejs_version: 10
     - nodejs_version: 12
+    - nodejs_version: 14
     - nodejs_version: ""
 matrix:
   allow_failures:
-    - nodejs_version: 6
     - nodejs_version: ""
 
 install:
@@ -21,7 +20,7 @@ install:
   - npm install -g npm
   - node --version
   - npm --version
-  - npm install
+  - npm ci
 
 test_script:
   - npm test
@@ -29,3 +28,7 @@ test_script:
 build: off
 
 version: "{build}"
+
+cache:
+  - node_modules
+  - '%APPDATA%\npm-cache'

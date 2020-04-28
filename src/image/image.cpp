@@ -27,6 +27,7 @@ void LwipImage::Init(v8::Local<v8::Object> exports) {
     Nan::SetPrototypeMethod(tpl, "setPixel", setPixel);
     constructor.Reset(tpl->GetFunction(context).ToLocalChecked());
     exports->Set(
+        context,
         Nan::New("LwipImage").ToLocalChecked(),
         tpl->GetFunction(context).ToLocalChecked()
     );
@@ -96,10 +97,10 @@ NAN_METHOD(LwipImage::getPixel) {
     size_t top = (size_t) info[1].As<Number>()->Value();
     LwipImage * obj = ObjectWrap::Unwrap<LwipImage>(info.Holder());
     Local<Array> rgba = Nan::New<Array>(4);
-    rgba->Set(0, Nan::New((*(obj->_cimg))(left, top, 0, 0))); // red
-    rgba->Set(1, Nan::New((*(obj->_cimg))(left, top, 0, 1))); // green
-    rgba->Set(2, Nan::New((*(obj->_cimg))(left, top, 0, 2))); // blue
-    rgba->Set(3, Nan::New((*(obj->_cimg))(left, top, 0, 3))); // alpha
+    rgba->Set(v8::Isolate::GetCurrent()->GetCurrentContext(), 0, Nan::New((*(obj->_cimg))(left, top, 0, 0))); // red
+    rgba->Set(v8::Isolate::GetCurrent()->GetCurrentContext(), 1, Nan::New((*(obj->_cimg))(left, top, 0, 1))); // green
+    rgba->Set(v8::Isolate::GetCurrent()->GetCurrentContext(), 2, Nan::New((*(obj->_cimg))(left, top, 0, 2))); // blue
+    rgba->Set(v8::Isolate::GetCurrent()->GetCurrentContext(), 3, Nan::New((*(obj->_cimg))(left, top, 0, 3))); // alpha
     info.GetReturnValue().Set(rgba);
 }
 

@@ -5,24 +5,14 @@ os:
   - osx
   - windows
 matrix:
-  exclude:
-    - node_js: 6
-      os: windows
-  include:
-    - &node6
-      node_js: 6
-      os: windows
-      env:
-        - GYP_MSVS_VERSION=2015
   allow_failures:
-    - node_js: 6
     - node_js: node
     - node_js: lts/*
 node_js:
-  - 6
   - 8
   - 10
   - 12
+  - 14
   - lts/*
   - node
 env:
