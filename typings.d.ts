@@ -55,6 +55,7 @@ export function create(width: number, height: number, color: Color, callback: Im
 
 export type JpegBufferParams = {
     quality?: number;
+    progressive ?: boolean;
 };
 
 export type PngBufferParams = {
