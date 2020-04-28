@@ -366,6 +366,13 @@ export interface Image {
     height(): number;
 
     /**
+     * Return the pixel color that occurs most frequently in an Image. Counted by looking at every `0 + skips`th (every 1, 2nd, 3rd, 4th, etc.) pixel.
+     *
+     * @param pixelsToSkip The number of pixels to skip while iterating through the image. Ex. supplying 1 will skip every other pixel, 0 will skip none. The greater the number the less accuracy the result will have.
+     */
+    dominantColor(pixelsToSkip: number): ColorObject;
+
+    /**
      * Return the color of the pixel at the (left, top) coordinate.
      */
     getPixel(left: number, top: number): ColorObject;
