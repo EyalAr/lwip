@@ -1,3 +1,21 @@
+# [2.0.0](https://github.com/randytarampi/lwip/compare/v1.3.1...v2.0.0) (2020-04-29)
+
+
+### Features
+
+* Support node@14. ([8e74b81](https://github.com/randytarampi/lwip/commit/8e74b815882499b69610c924391af522c80d4206)), closes [/github.com/randytarampi/lwip/pull/34#issuecomment-620724886](https://github.com//github.com/randytarampi/lwip/pull/34/issues/issuecomment-620724886)
+
+
+* Merge pull request #36 from randytarampi/feat/support-node-14 ([abe243f](https://github.com/randytarampi/lwip/commit/abe243f39366d8184ee3e8b6686445db7d32560d)), closes [#36](https://github.com/randytarampi/lwip/issues/36)
+
+
+### BREAKING CHANGES
+
+* Drop support for node<8.
+
+I mean, technically we haven't supported node<8 since  https://github.com/randytarampi/lwip/commit/76066757ec41c21e2e25520025a92dac3c9e7166 per  https://github.com/randytarampi/lwip/commit/b1883ebeb49e39aa2e6443a59fd72b9ff017688c, but by removing the tests I'm saying that it's **done**. Besides, node@8 is EoL already anyways right?
+* Drop support for node<8.
+
 ## [1.3.1](https://github.com/randytarampi/lwip/compare/v1.3.0...v1.3.1) (2020-04-28)
 
 
