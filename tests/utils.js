@@ -6,7 +6,7 @@ module.exports = {
 function generateRandomBatch(batch, n) {
     const ops = [];
     for (let i = 0; i < n; i++) {
-        const r = Math.floor(Math.random() * 16);
+        const r = Math.floor(Math.random() * 17);
         let w, h, d;
         switch (r) {
             case 0: {
@@ -108,6 +108,15 @@ function generateRandomBatch(batch, n) {
                 h = Math.floor(Math.random() * 1000) + 10;
                 batch = batch.cover(w, h);
                 ops.push('cvr' + w + 'X' + h);
+                break;
+            }
+            case 16: {
+                const hs = Math.floor(Math.random() * 360);
+                const sd = Math.random();
+                const ld = Math.random();
+                const ad = Math.random();
+                batch = batch.hslaAdjust(hs, sd, ld, ad);
+                ops.push('hsl' + hs + ',' + sd + ',' + ld + ',' + ad);
                 break;
             }
         }
