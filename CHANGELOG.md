@@ -1,3 +1,12 @@
+## [2.0.1](https://github.com/randytarampi/lwip/compare/v2.0.0...v2.0.1) (2020-05-01)
+
+
+### Bug Fixes
+
+* package.json, package-lock.json & .snyk to reduce vulnerabilities ([a5be9d6](https://github.com/randytarampi/lwip/commit/a5be9d6b8c6422bff10d42fa1a382529c97fda94))
+* package.json, package-lock.json & .snyk to reduce vulnerabilities ([662dceb](https://github.com/randytarampi/lwip/commit/662dceb1b7056074a4f9b7f413e0d19ce527679e))
+* package.json, package-lock.json & .snyk to reduce vulnerabilities ([468a0e1](https://github.com/randytarampi/lwip/commit/468a0e15d112c32d883581d264978859f0709cdb))
+
 # [2.0.0](https://github.com/randytarampi/lwip/compare/v1.3.1...v2.0.0) (2020-04-29)
 
 
