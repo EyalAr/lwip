@@ -1,0 +1,38 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - '@semantic-release/git > lodash':
+        patched: '2020-04-30T21:32:17.587Z'
+    - eslint > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - semantic-release > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - eslint > inquirer > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - eslint > table > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - mocha > yargs-unparser > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - semantic-release > @semantic-release/release-notes-generator > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - nyc > istanbul-lib-instrument > @babel/core > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - semantic-release > @semantic-release/release-notes-generator > conventional-commits-parser > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - semantic-release > @semantic-release/release-notes-generator > conventional-changelog-writer > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - nyc > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - nyc > istanbul-lib-instrument > @babel/core > @babel/helpers > @babel/traverse > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - nyc > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - nyc > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - nyc > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
+    - nyc > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-04-30T21:32:17.587Z'
