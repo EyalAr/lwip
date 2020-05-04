@@ -1,3 +1,11 @@
+## [2.0.2](https://github.com/randytarampi/lwip/compare/v2.0.1...v2.0.2) (2020-05-04)
+
+
+### Bug Fixes
+
+* upgrade snyk from 1.316.1 to 1.316.2 ([4a5c032](https://github.com/randytarampi/lwip/commit/4a5c0324d64525f743a02c427459727261bd787e))
+* upgrade snyk from 1.316.1 to 1.316.2 ([e7ff6f5](https://github.com/randytarampi/lwip/commit/e7ff6f5d88412e3412ff6431b86f84c40527bdd4))
+
 ## [2.0.1](https://github.com/randytarampi/lwip/compare/v2.0.0...v2.0.1) (2020-05-01)
 
 
