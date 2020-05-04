@@ -86,11 +86,11 @@
     "lint": "npm run lint:js && npm run lint:cpp",
     "lint:cpp": "node-cpplint cpp,h src/**/* $(grep ^.*$ CPPLINT.cfg | sed 's/filter=/filters=/g' | awk '{print \"--\"$0}' ORS=' ' | tr '=' ' ' | tr ',' ' ' | tr '/' '-')\n",
     "lint:js": "eslint **/*.js",
+    "prepare": "npm run snyk-protect",
     "pretest": "npm run lint:js",
-    "test": "mocha --opts ./tests/mocha.opts tests",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "test": "mocha --opts ./tests/mocha.opts tests"
   },
-  "typings": "typings.d.ts",
-  "snyk": true
+  "snyk": true,
+  "typings": "typings.d.ts"
 }
