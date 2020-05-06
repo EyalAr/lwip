@@ -43,4 +43,5 @@ deploy:
     branch: master
     node: 10
     os: linux
+    condition: "$TRAVIS_OS_NAME = linux"
 sudo: false
