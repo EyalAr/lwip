@@ -35,9 +35,9 @@ after_script:
     npm run coveralls;
     ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT;
     CODECLIMATE_API_HOST=https://codebeat.co/webhooks/code_coverage CODECLIMATE_REPO_TOKEN=0ffbe667-c1e3-4a92-ad81-a0b592801a6b npx codeclimate-test-reporter < coverage/lcov.info
-    curl -s https://report.ci/upload.py | python;
+    curl -s https://report.ci/upload.py | python - --include='*test-results.xml' --framework=junit;
     bash <(curl -s https://codecov.io/bash);
-    bash <(curl -Ls https://coverage.codacy.com/get.sh);
+    bash <(curl -Ls https://coverage.codacy.com/get.sh) -r coverage/lcov.info;
   fi;
 before_deploy:
 - git config --local user.name "$TRAVIS_AUTHOR_NAME"
