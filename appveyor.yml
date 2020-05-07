@@ -17,7 +17,6 @@ matrix:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm install -g npm
   - node --version
   - npm --version
   - npm ci
@@ -26,6 +25,11 @@ test_script:
   - npm test
 
 build: off
+
+on_finish:
+  - curl -s https://report.ci/upload.py | python
+  - sh: |
+      find "$APPVEYOR_BUILD_FOLDER" -type f -name 'test-results.xml' -print0 | xargs -0 -I '{}' curl -F 'file=@{}' "https://ci.appveyor.com/api/testresults/junit/$APPVEYOR_JOB_ID"
 
 version: "{build}"
 

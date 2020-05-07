@@ -23,7 +23,7 @@
     "eslint-plugin-import": "^2.20.2",
     "mkdirp": "^1.0.4",
     "mocha": "^7.1.2",
-    "mocha-lcov-reporter": "^1.3.0",
+    "mocha-junit-reporter": "^1.23.3",
     "node-cpplint": "^0.4.0",
     "nyc": "^15.0.1",
     "run-script-os": "^1.1.1",
@@ -78,7 +78,7 @@
   "repository": "randytarampi/lwip.git",
   "scripts": {
     "cover": "npm run cover:actual",
-    "cover:actual": "nyc mocha --opts ./tests/mocha.opts tests",
+    "cover:actual": "nyc mocha --config ./tests/.mocharc.js tests",
     "coveralls": "run-script-os",
     "coveralls:darwin:linux": "cat ./coverage/lcov.info | coveralls",
     "coveralls:win32": "type ./coverage/lcov.info | coveralls",
@@ -89,7 +89,7 @@
     "prepare": "npm run snyk-protect",
     "pretest": "npm run lint:js",
     "snyk-protect": "snyk protect",
-    "test": "mocha --opts ./tests/mocha.opts tests"
+    "test": "mocha --config ./tests/.mocharc.js tests"
   },
   "snyk": true,
   "typings": "typings.d.ts"
