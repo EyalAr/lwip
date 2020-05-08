@@ -28,8 +28,8 @@ build: off
 
 on_finish:
   - curl -s https://report.ci/upload.py | python - --include='*test-results.xml' --framework=junit
-  - sh: |
-      find "$APPVEYOR_BUILD_FOLDER" -type f -name 'test-results.xml' -print0 | xargs -0 -I '{}' curl -F 'file=@{}' "https://ci.appveyor.com/api/testresults/junit/$APPVEYOR_JOB_ID"
+  - ps: $wc = New-Object 'System.Net.WebClient'
+  - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\test-results.xml))
 
 version: "{build}"
 
