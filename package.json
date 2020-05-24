@@ -13,16 +13,16 @@
     "bindings": "^1.5.0",
     "decree": "^0.0.6",
     "nan": "^2.14.1",
-    "snyk": "^1.319.1"
+    "snyk": "^1.327.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
     "coveralls": "^3.1.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.1.0",
     "eslint-plugin-import": "^2.20.2",
     "mkdirp": "^1.0.4",
-    "mocha": "^7.1.2",
+    "mocha": "^7.2.0",
     "mocha-junit-reporter": "^1.23.3",
     "node-cpplint": "^0.4.0",
     "nyc": "^15.0.1",
