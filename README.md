@@ -8,6 +8,7 @@
 [![Coverage status](https://img.shields.io/coveralls/randytarampi/lwip.svg?style=flat-square)](https://coveralls.io/github/randytarampi/lwip?branch=master)
 [![Maintainability status](https://img.shields.io/codeclimate/maintainability-percentage/randytarampi/lwip.svg?style=flat-square)](https://codeclimate.com/github/randytarampi/lwip/maintainability)
 [![Analytics](https://ga-beacon.appspot.com/UA-50921068-1/beacon/github/randytarampi/lwip/?flat&useReferrer)](https://github.com/igrigorik/ga-beacon)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frandytarampi%2Flwip.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Frandytarampi%2Flwip?ref=badge_shield)
 
 [![Join the chat at https://gitter.im/EyalAr/lwip](https://img.shields.io/gitter/room/EyalAr/lwip.svg?style=flat-square)](https://gitter.im/EyalAr/lwip?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -873,3 +874,7 @@ The native part of this module is compiled from source which uses either your na
 - `giflib`
   - [Website](http://giflib.sourceforge.net/)
   - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/gif/README)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frandytarampi%2Flwip.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Frandytarampi%2Flwip?ref=badge_large)
