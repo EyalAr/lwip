@@ -36,7 +36,7 @@
     "test": "tests"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "gypfile": true,
   "homepage": "https://github.com/randytarampi/lwip",
