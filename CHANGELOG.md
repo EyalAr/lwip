@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/randytarampi/lwip/compare/v2.0.2...v3.0.0) (2020-08-02)
+
+
+### Features
+
+* **package:** Ignore node@8 test failures. ([b65f49f](https://github.com/randytarampi/lwip/commit/b65f49f47ea559053248d97a7930360eae29e9aa))
+
+
+### BREAKING CHANGES
+
+* **package:** And also formally drop node@8 support. It *should* still work on node@8 though. This is just a `devDependencies` incompatibility but bump this anyways...
+
 ## [2.0.2](https://github.com/randytarampi/lwip/compare/v2.0.1...v2.0.2) (2020-05-04)
 
 
