@@ -1,3 +1,11 @@
+## [3.0.2](https://github.com/randytarampi/lwip/compare/v3.0.1...v3.0.2) (2020-09-13)
+
+
+### Bug Fixes
+
+* upgrade eslint from 7.7.0 to 7.8.1 ([8c9d1dd](https://github.com/randytarampi/lwip/commit/8c9d1ddba3055bc06dcc169e5dd69a77311de9de))
+* upgrade snyk from 1.386.0 to 1.387.0 ([19de674](https://github.com/randytarampi/lwip/commit/19de674f18c16f68f47c4fd401d6c5cbcc9d13d5))
+
 ## [3.0.1](https://github.com/randytarampi/lwip/compare/v3.0.0...v3.0.1) (2020-08-29)
 
 
