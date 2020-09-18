@@ -1,3 +1,10 @@
+## [3.0.5](https://github.com/randytarampi/lwip/compare/v3.0.4...v3.0.5) (2020-09-18)
+
+
+### Bug Fixes
+
+* upgrade snyk from 1.395.0 to 1.398.1 ([3739786](https://github.com/randytarampi/lwip/commit/3739786b16df86d08faaf224f20e07763d2ea079))
+
 ## [3.0.4](https://github.com/randytarampi/lwip/compare/v3.0.3...v3.0.4) (2020-09-17)
 
 
