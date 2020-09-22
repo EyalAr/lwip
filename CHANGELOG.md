@@ -1,3 +1,10 @@
+## [3.0.6](https://github.com/randytarampi/lwip/compare/v3.0.5...v3.0.6) (2020-09-22)
+
+
+### Bug Fixes
+
+* upgrade semantic-release from 17.1.1 to 17.1.2 ([078bdf2](https://github.com/randytarampi/lwip/commit/078bdf2a1b604e6a000905970d2bef18deadbb45))
+
 ## [3.0.5](https://github.com/randytarampi/lwip/compare/v3.0.4...v3.0.5) (2020-09-18)
 
 
