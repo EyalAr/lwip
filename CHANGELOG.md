@@ -1,3 +1,11 @@
+## [3.0.10](https://github.com/randytarampi/lwip/compare/v3.0.9...v3.0.10) (2020-10-01)
+
+
+### Bug Fixes
+
+* upgrade eslint-plugin-import from 2.22.0 to 2.22.1 ([496c3b2](https://github.com/randytarampi/lwip/commit/496c3b29dece950a152c5f1b7b0e1aa55aab1273))
+* upgrade snyk from 1.400.0 to 1.402.0 ([601fbe0](https://github.com/randytarampi/lwip/commit/601fbe088020a103e804dbf20d1a6555e8217691))
+
 ## [3.0.9](https://github.com/randytarampi/lwip/compare/v3.0.8...v3.0.9) (2020-09-29)
 
 
