@@ -12,7 +12,7 @@
     "async": "^3.2.0",
     "bindings": "^1.5.0",
     "decree": "^0.0.6",
-    "nan": "^2.14.1",
+    "nan": "^2.14.2",
     "snyk": "^1.405.1"
   },
   "devDependencies": {
