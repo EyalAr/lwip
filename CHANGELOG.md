@@ -1,3 +1,16 @@
+## [3.0.12](https://github.com/randytarampi/lwip/compare/v3.0.11...v3.0.12) (2020-10-18)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([bd42ca9](https://github.com/randytarampi/lwip/commit/bd42ca9dbf622a773e6191aa15a2d21b070df126))
+* upgrade eslint from 7.10.0 to 7.11.0 ([8f72cff](https://github.com/randytarampi/lwip/commit/8f72cffa0c6a4127ea0450297d1c8b18cbfaa6c0))
+* upgrade mocha from 8.1.3 to 8.2.0 ([9fbeaf2](https://github.com/randytarampi/lwip/commit/9fbeaf27131eb3b967afe5552259979c413e6506))
+* upgrade nan from 2.14.1 to 2.14.2 ([9b8adc2](https://github.com/randytarampi/lwip/commit/9b8adc21234d38daac8fa156e7e6605be4ddc913))
+* upgrade semantic-release from 17.1.2 to 17.2.1 ([f812b98](https://github.com/randytarampi/lwip/commit/f812b981f39b0bd8ebf5de2244cf0c9c0444fddb))
+* upgrade snyk from 1.405.1 to 1.406.0 ([74324ce](https://github.com/randytarampi/lwip/commit/74324ce37a445b56a09c99843d3dc311f4b54b94))
+* upgrade snyk from 1.406.0 to 1.414.1 ([8b54df3](https://github.com/randytarampi/lwip/commit/8b54df37e384d8a9c5b1082635615e170379d894))
+
 ## [3.0.11](https://github.com/randytarampi/lwip/compare/v3.0.10...v3.0.11) (2020-10-03)
 
 
