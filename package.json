@@ -91,6 +91,6 @@
     "snyk-protect": "snyk protect",
     "test": "mocha --config ./tests/.mocharc.js tests"
   },
-  "snyk": true,
+  "snyk": false,
   "typings": "typings.d.ts"
 }
