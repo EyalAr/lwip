@@ -1,3 +1,13 @@
+## [3.0.15](https://github.com/randytarampi/lwip/compare/v3.0.14...v3.0.15) (2020-10-31)
+
+
+### Bug Fixes
+
+* upgrade eslint from 7.11.0 to 7.12.0 ([222b50c](https://github.com/randytarampi/lwip/commit/222b50c748888f03d9b2a26851eacf9afeed3e4c))
+* upgrade run-script-os from 1.1.1 to 1.1.3 ([fe7287b](https://github.com/randytarampi/lwip/commit/fe7287b79fa5fffddb5400b537e218fc3cb7dae8))
+* upgrade semantic-release from 17.2.1 to 17.2.2 ([8ba2335](https://github.com/randytarampi/lwip/commit/8ba233584092744bd590dfbfaa1bbf31cc10fa78))
+* upgrade snyk from 1.416.0 to 1.419.0 ([ebd40c5](https://github.com/randytarampi/lwip/commit/ebd40c59138011134e4e9962bd97cdbd74194e8d))
+
 ## [3.0.14](https://github.com/randytarampi/lwip/compare/v3.0.13...v3.0.14) (2020-10-21)
 
 
