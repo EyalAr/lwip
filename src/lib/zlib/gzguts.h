@@ -32,8 +32,11 @@
 #include <fcntl.h>
 
 #ifdef _WIN32
-#  include <unistd.h>
 #  include <stddef.h>
+#endif
+
+#ifndef _WIN32
+#  include <unistd.h>
 #endif
 
 #if defined(__TURBOC__) || defined(_MSC_VER) || defined(_WIN32)
