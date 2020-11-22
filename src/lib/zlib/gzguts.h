@@ -32,6 +32,7 @@
 #include <fcntl.h>
 
 #ifdef _WIN32
+#  include <unistd.h>
 #  include <stddef.h>
 #endif
 
