@@ -1,3 +1,10 @@
+## [3.0.17](https://github.com/randytarampi/lwip/compare/v3.0.16...v3.0.17) (2020-11-22)
+
+
+### Bug Fixes
+
+* **zlib:** Work around `error: implicit declaration of function 'lseek' is invalid in C99`. Properly. ([da3d750](https://github.com/randytarampi/lwip/commit/da3d750312517e1e046d6d8f62ef7afc16601bec))
+
 ## [3.0.16](https://github.com/randytarampi/lwip/compare/v3.0.15...v3.0.16) (2020-11-22)
 
 
