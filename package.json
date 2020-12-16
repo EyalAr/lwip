@@ -13,7 +13,7 @@
     "bindings": "^1.5.0",
     "decree": "^0.0.6",
     "nan": "^2.14.2",
-    "snyk": "^1.437.0"
+    "snyk": "^1.437.1"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
