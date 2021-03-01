@@ -27,7 +27,7 @@
     "node-cpplint": "^0.4.0",
     "nyc": "^15.1.0",
     "run-script-os": "^1.1.5",
-    "semantic-release": "^17.3.9",
+    "semantic-release": "^17.4.0",
     "should": "^13.2.3"
   },
   "directories": {
