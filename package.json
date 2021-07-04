@@ -18,7 +18,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
-    "coveralls": "^3.1.0",
+    "coveralls": "^3.1.1",
     "eslint": "^7.28.0",
     "eslint-plugin-import": "^2.23.4",
     "mkdirp": "^1.0.4",
