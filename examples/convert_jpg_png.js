@@ -2,12 +2,11 @@
  * Example for using LWIP to convert an image from jpg to png.
  */
 
-var path = require('path'),
-    lwip = require('../');
+const lwip = require('../');
 
-lwip.open('lena.jpg', function(err, image) {
+lwip.open('lena.jpg', (err, image) => {
     if (err) return console.log(err);
-    image.writeFile('lena_from_jpg.png', function(err) {
+    image.writeFile('lena_from_jpg.png', err => {
         if (err) return console.log(err);
         console.log('done');
     });

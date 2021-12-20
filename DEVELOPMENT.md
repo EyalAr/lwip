@@ -143,11 +143,12 @@ a raw pixels buffer and encode it into a jpeg image buffer.
 The arguments for the encoding methods differ for each encoding format.
 We list them here:
 
-0. JPEG: `encoder.jpeg(pixbuff, width, height, quality, callback)`
+0. JPEG: `encoder.jpeg(pixbuff, width, height, quality, progressive, callback)`
     0. `pixbuff` - Raw RGBA pixels buffer (a Buffer object)
     0. `width` - The with of the image
     0. `height` - The height of the image
     0. `quality` - JPEG quality (0-100)
+    0. `progressive` - should produce progressive JPEG (true/false)
     0. `callback` - callback function
 0. PNG: `encoder.png(pixbuff, width, height, compression, interlaced, trans, callback)`
     0. `pixbuff` - Raw RGBA pixels buffer (a Buffer object)

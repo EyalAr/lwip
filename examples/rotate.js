@@ -2,10 +2,9 @@
  * Example for using LWIP to rotate an image.
  */
 
-var path = require('path'),
-    lwip = require('../');
+const lwip = require('../');
 
-lwip.open('lena.jpg', function(err, image) {
+lwip.open('lena.jpg', (err, image) => {
     if (err) return console.log(err);
     image.batch()
         .rotate(45, {
@@ -13,8 +12,8 @@ lwip.open('lena.jpg', function(err, image) {
             g: 55,
             b: 40
         })
-        .writeFile('lena_rotate.gif', function(err) {
+        .writeFile('lena_rotate.gif', err => {
             if (err) return console.log(err);
-            console.log('done')
+            console.log('done');
         });
 });

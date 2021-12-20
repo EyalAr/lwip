@@ -9,7 +9,7 @@ SetPixelWorker::SetPixelWorker(
     unsigned char a,
     CImg<unsigned char> * cimg,
     Nan::Callback * callback
-): Nan::AsyncWorker(callback), _left(left), _top(top), _r(r), _g(g), _b(b), _a(a),
+): Nan::AsyncWorker(callback, "lwip::setpixel.start"), _left(left), _top(top), _r(r), _g(g), _b(b), _a(a),
     _cimg(cimg) {}
 
 SetPixelWorker::~SetPixelWorker() {}
@@ -29,5 +29,6 @@ void SetPixelWorker::HandleOKCallback () {
     Local<Value> argv[] = {
         Nan::Null()
     };
-    callback->Call(1, argv);
+    Nan::AsyncResource resource("lwip::setpixel.HandleOKCallback");
+    callback->Call(1, argv, &resource);
 }

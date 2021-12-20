@@ -1,70 +1,96 @@
 {
-  "name": "lwip",
-  "version": "0.0.9",
-  "main": "index.js",
-  "dependencies": {
-    "async": "^2.0.0-rc.5",
-    "bindings": "^1.2.1",
-    "decree": "0.0.6",
-    "nan": "^2.3.2"
-  },
-  "scripts": {
-    "install": "node-gyp rebuild",
-    "test": "./node_modules/.bin/mocha --opts tests/mocha.opts tests",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --opts tests/mocha.opts tests",
-    "travis": "./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --opts tests/mocha.opts --bail tests && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
-  },
-  "gypfile": true,
+  "name": "@randy.tarampi/lwip",
   "description": "Comprehensive, fast, and simple image processing and manipulation",
-  "directories": {
-    "example": "examples"
+  "version": "3.0.17",
+  "author": {
+    "name": "Randy Tarampi",
+    "email": "rt@randytarampi.ca",
+    "url": "https://www.randytarampi.ca"
+  },
+  "bugs": "https://github.com/randytarampi/lwip/issues",
+  "dependencies": {
+    "async": "^3.2.0",
+    "bindings": "^1.5.0",
+    "decree": "^0.0.6",
+    "nan": "^2.14.2",
+    "snyk": "^1.685.0"
   },
   "devDependencies": {
-    "coveralls": "^2.11.9",
-    "istanbul": "^0.4.3",
-    "mkdirp": "^0.5.1",
-    "mocha": "^2.4.5",
-    "mocha-lcov-reporter": "^1.2.0",
-    "should": "^8.3.2"
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "coveralls": "^3.1.1",
+    "eslint": "^7.28.0",
+    "eslint-plugin-import": "^2.23.4",
+    "mkdirp": "^1.0.4",
+    "mocha": "^8.4.0",
+    "mocha-junit-reporter": "^2.0.0",
+    "node-cpplint": "^0.4.0",
+    "nyc": "^15.1.0",
+    "run-script-os": "^1.1.6",
+    "semantic-release": "^17.4.3",
+    "should": "^13.2.3"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/EyalAr/lwip.git"
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "tests"
   },
+  "engines": {
+    "node": ">=10"
+  },
+  "gypfile": true,
+  "homepage": "https://github.com/randytarampi/lwip",
   "keywords": [
-    "image",
+    "alpha",
+    "batch",
+    "blur",
+    "border",
     "buffer",
-    "manipulate",
-    "process",
-    "resize",
-    "scale",
-    "rotate",
+    "contain",
+    "cover",
+    "crop",
+    "fade",
+    "flip",
+    "gif",
+    "hue",
+    "image",
     "jpeg",
     "jpg",
-    "png",
-    "gif",
-    "crop",
-    "blur",
-    "sharpen",
-    "batch",
-    "flip",
-    "mirror",
-    "border",
-    "padding",
-    "hue",
-    "saturation",
     "lightness",
-    "alpha",
-    "transparency",
-    "fade",
+    "manipulate",
+    "mirror",
     "opacity",
-    "contain",
-    "cover"
+    "padding",
+    "png",
+    "process",
+    "resize",
+    "rotate",
+    "saturation",
+    "scale",
+    "sharpen",
+    "transparency"
   ],
-  "author": "Eyal Arubas <eyalarubas@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/EyalAr/lwip/issues"
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
   },
-  "homepage": "https://github.com/EyalAr/lwip"
+  "repository": "randytarampi/lwip.git",
+  "scripts": {
+    "cover": "npm run cover:actual",
+    "cover:actual": "nyc mocha --config ./tests/.mocharc.js tests",
+    "coveralls": "run-script-os",
+    "coveralls:darwin:linux": "cat ./coverage/lcov.info | coveralls",
+    "coveralls:win32": "type ./coverage/lcov.info | coveralls",
+    "install": "node-gyp rebuild -j 8",
+    "lint": "npm run lint:js && npm run lint:cpp",
+    "lint:cpp": "node-cpplint cpp,h src/**/* $(grep ^.*$ CPPLINT.cfg | sed 's/filter=/filters=/g' | awk '{print \"--\"$0}' ORS=' ' | tr '=' ' ' | tr ',' ' ' | tr '/' '-')\n",
+    "lint:js": "eslint **/*.js",
+    "prepare": "npm run snyk-protect",
+    "pretest": "npm run lint:js",
+    "snyk-protect": "snyk protect",
+    "test": "mocha --config ./tests/.mocharc.js tests"
+  },
+  "snyk": false,
+  "typings": "typings.d.ts"
 }

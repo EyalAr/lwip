@@ -1,6 +1,6 @@
 #include "encoder.h"
 
-// encoder.jpeg(pixbuf, width, height, quality, callback)
+// encoder.jpeg(pixbuf, width, height, quality, progressive, callback)
 NAN_METHOD(encodeToJpegBuffer) {
     Nan::HandleScope();
 
@@ -8,7 +8,8 @@ NAN_METHOD(encodeToJpegBuffer) {
     size_t width = info[1].As<Integer>()->Value();
     size_t height = info[2].As<Integer>()->Value();
     int quality = info[3].As<Integer>()->Value();
-    Nan::Callback * callback = new Nan::Callback(info[4].As<Function>());
+    bool progressive = info[4].As<Boolean>()->Value();
+    Nan::Callback * callback = new Nan::Callback(info[5].As<Function>());
 
     Nan::AsyncQueueWorker(
         new EncodeToJpegBufferWorker(
@@ -16,6 +17,7 @@ NAN_METHOD(encodeToJpegBuffer) {
             width,
             height,
             quality,
+            progressive,
             callback
         ));
 }
@@ -28,17 +30,24 @@ NAN_METHOD(encodeToPngBuffer) {
     size_t width = info[1].As<Integer>()->Value();
     size_t height = info[2].As<Integer>()->Value();
     int compression = info[3].As<Integer>()->Value();
-    bool interlaced = info[4]->BooleanValue();
-    bool trans = info[5]->BooleanValue();
+    bool interlaced = info[4].As<Boolean>()->Value();
+    bool trans = info[5].As<Boolean>()->Value();
 
     char * metadata;
 
     if (info[6]->IsNull() || info[6]->IsUndefined()) {
         metadata = NULL;
     } else {
-        int metadata_len = info[6].As<String>()->Utf8Length();
+        if (!info[6]->IsString())
+        {
+            Nan::ThrowError("Metadata should be a string");
+            return;
+        }
+
+        int metadata_len = Nan::DecodeBytes(info[6], Nan::Encoding::UTF8);
         metadata = (char *)malloc((metadata_len + 1) * sizeof(char));
-        info[6].As<String>()->WriteUtf8(metadata);
+        memset(metadata, 0, (metadata_len + 1) * sizeof(char));
+        Nan::DecodeWrite(metadata, metadata_len, info[6], Nan::Encoding::UTF8);
     }
 
     Nan::Callback * callback = new Nan::Callback(info[7].As<Function>());
@@ -66,8 +75,8 @@ NAN_METHOD(encodeToGifBuffer) {
     size_t height = info[2].As<Integer>()->Value();
     int cmapSize = info[3].As<Integer>()->Value();
     int colors = info[4].As<Integer>()->Value();
-    bool interlaced = info[5]->BooleanValue();
-    bool trans = info[6]->BooleanValue();
+    bool interlaced = info[5].As<Boolean>()->Value();
+    bool trans = info[6].As<Boolean>()->Value();
     int threshold = info[7].As<Integer>()->Value();
     Nan::Callback * callback = new Nan::Callback(info[8].As<Function>());
 

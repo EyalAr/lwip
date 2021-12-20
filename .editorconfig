@@ -1,0 +1,35 @@
+# EditorConfig is awesome: http://EditorConfig.org
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+quote_type = single
+
+[*.json]
+indent_size = 2
+
+[*.yaml]
+indent_size = 2
+
+[*.yml]
+indent_size = 2
+
+[*.config]
+indent_size = 2
+
+[*.babelrc]
+indent_size = 2
+
+[*.nycrc]
+indent_size = 2
+
+[**/{node_modules, build, coverage, .nyc_output, .idea}/**]
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
+indent_size = unset

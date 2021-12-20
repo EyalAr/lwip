@@ -1,4 +1,5 @@
 #include "decoder.h"
+#include "gifsub.h"
 
 #define ALPHA_TRANS 0
 #define ALPHA_OPAQUE 255
@@ -11,13 +12,24 @@ string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
     int errcode = 0;
 
     // buffinf will be available in gifReadCB as gif->userData
+    #ifdef HAVE_GIFLIB_5
     gif = DGifOpen((void *) &buffinf, gifReadCB, &errcode);
+    #else
+    gif = DGifOpen((void *) &buffinf, gifReadCB);
+    errcode = GifLastError();
+    #endif
 
-    if (NULL == gif)
-        return GifErrorString(errcode);
+    if (NULL == gif) {
+        return MyGifErrorString(errcode);
+    }
 
-    if (GIF_ERROR == DGifSlurp(gif))
-        return GifErrorString(gif->Error);
+    if (GIF_ERROR == DGifSlurp(gif)) {
+        #ifdef HAVE_GIFLIB_5
+        return MyGifErrorString(gif->Error);
+        #else
+        return MyGifErrorString(GifLastError());
+        #endif
+    }
 
     GraphicsControlBlock gcb;
 
@@ -65,10 +77,18 @@ string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
         *(ptr_a++) = alpha;
     }
 
+    #ifdef HAVE_GIFLIB_5
     if (GIF_ERROR == DGifCloseFile(gif, &errcode)){
         delete *cimg;
-        return GifErrorString(errcode);
+        return MyGifErrorString(errcode);
     }
+    #else
+    if (GIF_ERROR == DGifCloseFile(gif)){
+        errcode = GifLastError();
+        delete *cimg;
+        return MyGifErrorString(errcode);
+    }
+    #endif
 
     // TODO: implement getting metadata from GIFs; this is a placeholder
     *metadata = (char *)malloc(sizeof(char));

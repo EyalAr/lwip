@@ -1,0 +1,39 @@
+{
+  "exclude": [
+    "build/**",
+    "cmake-build-debug/**",
+    "examples/**",
+    "node_modules/**",
+    "coverage/**",
+    ".nyc_output/**",
+    "tests/**",
+    "*.js"
+  ],
+  "reporter": [
+    "text-summary",
+    "lcov"
+  ],
+  "cache": true,
+  "all": true,
+  "check-coverage": true,
+  "sourceMap": true,
+  "instrument": true,
+  "watermarks": {
+    "lines": [
+      70,
+      90
+    ],
+    "functions": [
+      70,
+      90
+    ],
+    "branches": [
+      70,
+      90
+    ],
+    "statements": [
+      70,
+      90
+    ]
+  }
+}

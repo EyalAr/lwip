@@ -2,28 +2,37 @@
 init:
   - git config --global core.autocrlf input
 
+image: Visual Studio 2019
+
 environment:
   matrix:
-    - nodejs_version: "0.10"
-      msvs_version: 2013
-    - nodejs_version: "0.12"
-      msvs_version: 2013
-    - nodejs_version: "4.0"
-      msvs_version: 2013
-    - nodejs_version: "4.0"
-      msvs_version: 2015
-    - nodejs_version: "4.1"
-      msvs_version: 2013
-    - nodejs_version: "4.1"
-      msvs_version: 2015
+    - nodejs_version: 10
+    - nodejs_version: 12
+    - nodejs_version: 14
+    - nodejs_version: ""
+matrix:
+  allow_failures:
+    - nodejs_version: 8
+    - nodejs_version: ""
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - ps: npm install --msvs_version=$env:msvs_version
+  - node --version
+  - npm --version
+  - npm ci
 
 test_script:
-  - ps: npm test
+  - npm test
 
 build: off
 
+on_finish:
+  - curl -s https://report.ci/upload.py | python - --include='*test-results.xml' --framework=junit
+  - ps: $wc = New-Object 'System.Net.WebClient'
+  - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\test-results.xml))
+
 version: "{build}"
+
+cache:
+  - node_modules
+  - '%APPDATA%\npm-cache'

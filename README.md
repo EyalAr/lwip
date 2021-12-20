@@ -1,11 +1,20 @@
-[![Version](http://img.shields.io/npm/v/lwip.svg)](https://www.npmjs.org/package/lwip)
-[![Build Status](https://api.travis-ci.org/EyalAr/lwip.svg?branch=master)](https://travis-ci.org/EyalAr/lwip)
-[![Build status](https://ci.appveyor.com/api/projects/status/46mk5218x995svhw/branch/master?svg=true)](https://ci.appveyor.com/project/EyalAr/lwip/branch/master)
-[![Coverage Status](https://img.shields.io/coveralls/EyalAr/lwip/master.svg)](https://coveralls.io/r/EyalAr/lwip)
-
 # Light-weight image processor for NodeJS
 
-[![Join the chat at https://gitter.im/EyalAr/lwip](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/EyalAr/lwip?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![npm versions](https://img.shields.io/npm/v/@randy.tarampi/lwip.svg?style=flat-square)](https://www.npmjs.org/package/@randy.tarampi/lwip)
+[![npm downloads](https://img.shields.io/npm/dt/@randy.tarampi/lwip.svg?style=flat-square)](https://www.npmjs.com/package/@randy.tarampi/lwip)
+[![npm license](https://img.shields.io/npm/l/@randy.tarampi/lwip.svg?registry_uri=https%3A%2F%2Fregistry.npmjs.com&style=flat-square)](https://www.npmjs.com/package/@randy.tarampi/lwip)
+[![Build status](https://img.shields.io/travis/com/randytarampi/lwip.svg?style=flat-square)](https://travis-ci.com/randytarampi/lwip)
+[![Build status](https://ci.appveyor.com/api/projects/status/46mk5218x995svhw/branch/master?svg=true&style=flat-square)](https://ci.appveyor.com/project/randytarampi/lwip/branch/master)
+[![Coverage status](https://img.shields.io/coveralls/randytarampi/lwip.svg?style=flat-square)](https://coveralls.io/github/randytarampi/lwip?branch=master)
+[![Maintainability status](https://img.shields.io/codeclimate/maintainability-percentage/randytarampi/lwip.svg?style=flat-square)](https://codeclimate.com/github/randytarampi/lwip/maintainability)
+[![Analytics](https://ga-beacon.appspot.com/UA-50921068-1/beacon/github/randytarampi/lwip/?flat&useReferrer)](https://github.com/igrigorik/ga-beacon)
+[![Join the chat at https://gitter.im/EyalAr/lwip](https://img.shields.io/gitter/room/EyalAr/lwip.svg?style=flat-square)](https://gitter.im/EyalAr/lwip?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frandytarampi%2Flwip.svg)](https://app.fossa.com/projects/git%2Bgithub.com%2Frandytarampi%2Flwip?ref=badge_shield)
+
+[![Install @randy.tarampi/lwip](https://nodeico.herokuapp.com/@randy.tarampi/lwip.svg)](https://www.npmjs.com/package/@randy.tarampi/lwip)
+
+
+This is a branch based off of [@kant2002/lwip](https://www.npmjs.com/package/@kant2002/lwip) and [@mcph/lwip](https://www.npmjs.com/package/@mcph/lwip), customized for my own use.
 
 0. [Overview](#overview)
   0. [Installation](#installation)
@@ -50,6 +59,7 @@
       0. [GIF](#gif)
     0. [Write to file](#write-to-file)
     0. [Get metadata](#get-metadata)
+    0. [Get dominant color](#get-dominant-color)
   0. [Batch operations](#batch-operations)
 0. [Copyrights](#copyrights)
 
@@ -67,15 +77,19 @@ install anything else on your system.
 
 ### Installation
 
-`npm install lwip`
+```bash
+npm install @randy.tarampi/lwip
+```
 
-Or, clone this repo and `cd lwip && npm install`.
+Or, clone this repo and `cd @randy.tarampi/lwip && npm install`.
 
 You can run tests with `npm test`.
 
-**Note:** Installation of this module involves compiling native code.
-If `npm install lwip` failes, you probably need to setup your system.
-[See instructions](https://github.com/TooTallNate/node-gyp#installation).
+##### NOTE: Installation of this module involves compiling native code
+If `npm install @randy.tarampi/lwip` fails, you probably need to setup your system.
+
+See the [instructions for `node-gyp`](https://github.com/TooTallNate/node-gyp#installation).
+
 Building on Windows with Visual Studio requires version 2013 or higher.
 
 ### Usage
@@ -90,7 +104,7 @@ Building on Windows with Visual Studio requires version 2013 or higher.
 
 ```Javascript
 // obtain an image object:
-require('lwip').open('image.jpg', function(err, image){
+require('@randy.tarampi/lwip').open('image.jpg', function(err, image){
 
   // check err...
   // define a batch of manipulations and save to disk as JPEG:
@@ -110,7 +124,7 @@ require('lwip').open('image.jpg', function(err, image){
 **Example (non-batch):**
 
 ```Javascript
-var lwip = require('lwip');
+var lwip = require('@randy.tarampi/lwip');
 
 // obtain an image object:
 lwip.open('image.jpg', function(err, image){
@@ -254,7 +268,7 @@ Red values, then all the Green values, etc.
 #### Open file example
 
 ```Javascript
-var lwip = require('lwip');
+const lwip = require('@randy.tarampi/lwip');
 lwip.open('path/to/image.jpg', function(err, image){
     // check 'err'. use 'image'.
     // image.resize(...), etc.
@@ -264,8 +278,8 @@ lwip.open('path/to/image.jpg', function(err, image){
 #### Open buffer example
 
 ```Javascript
-var fs = require('fs'),
-    lwip = require('lwip');
+const fs = require('fs'),
+    lwip = require('@randy.tarampi/lwip');
 
 fs.readFile('path/to/image.png', function(err, buffer){
   // check err
@@ -290,7 +304,7 @@ fs.readFile('path/to/image.png', function(err, buffer){
 **Example**:
 
 ```Javascript
-var lwip = require('lwip');
+const lwip = require('@randy.tarampi/lwip');
 
 lwip.create(500, 500, 'yellow', function(err, image){
   // check err
@@ -671,6 +685,7 @@ encoded data as a NodeJS Buffer object.
 The `params` object should have the following fields:
 
 - `quality {Integer}`: Defaults to `100`.
+- `progressive {Boolean}`: Defaults to `false`.
 
 Note that when encoding to JPEG the alpha channel is discarded.
 
@@ -726,6 +741,14 @@ tEXt chunks in PNG images, and will get the first tEXt chunk found with the key
 
 `image.getMetadata()`
 
+### Get dominant color
+
+Get the pixel color that occurs most frequently in a picture.
+
+`image.dominantColor(pixels_to_skip)`
+
+0. `pixels_to_skip {Int}`: the number of pixels to skip while iterating through the image. Ex. supplying 1 will skip every other pixel, 0 will skip none. The greater the number the less accuracy the result will have.
+
 ### Batch operations
 
 Each of the [image operations](#image-operations) above can be done as part of
@@ -745,7 +768,7 @@ from the image.
 
 ```Javascript
 // obtain a batch object from the image:
-var batch = image.batch();
+const batch = image.batch();
 ```
 
 #### Using a batch object
@@ -807,8 +830,8 @@ An image can have more than one batch object, but all batch objects modify the
 same underlying image. This means the order of execution matters.
 
 ```Javascript
-var batch1 = image.batch().rotate('45', 'black');
-var batch2 = image.batch().border(15, 'black');
+const batch1 = image.batch().rotate('45', 'black');
+const batch2 = image.batch().border(15, 'black');
 ```
 
 This will rotate the image 45degs and then add a black border:
@@ -833,20 +856,24 @@ batch2.exec(function(err, image){
 
 ## Copyrights
 
-The native part of this module is compiled from source which uses the following:
+The native part of this module is compiled from source which uses either your natively installed libraries, or the bundled versions of the following:
 
 - Independent JPEG Group's free JPEG software:
   - [Website](http://www.ijg.org/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/jpeg/README)
-- libpng:
+  - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/jpeg/README)
+- `libpng`:
   - [Website](http://www.libpng.org/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/png/README)
-- zlib:
+  - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/png/README)
+- `zlib`:
   - [Website](http://www.zlib.net/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/zlib/README)
+  - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/zlib/README)
 - The CImg Library
   - [Website](http://cimg.sourceforge.net/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/cimg/README.txt)
-- giflib
+  - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/cimg/README.txt)
+- `giflib`
   - [Website](http://giflib.sourceforge.net/)
-  - [Readme](https://github.com/EyalAr/lwip/blob/master/src/lib/gif/README)
+  - [Readme](https://github.com/randytarampi/lwip/blob/master/src/lib/gif/README)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frandytarampi%2Flwip.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Frandytarampi%2Flwip?ref=badge_large)
