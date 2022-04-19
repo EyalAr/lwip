@@ -3,7 +3,7 @@
   "version": "0.0.9",
   "main": "index.js",
   "dependencies": {
-    "async": "^2.0.0-rc.5",
+    "async": "^3.2.2",
     "bindings": "^1.2.1",
     "decree": "0.0.6",
     "nan": "^2.3.2"
