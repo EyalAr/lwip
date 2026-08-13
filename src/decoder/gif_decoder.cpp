@@ -33,7 +33,10 @@ string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
     ColorMapObject * cmap = NULL != gifimg->ImageDesc.ColorMap
         ? gifimg->ImageDesc.ColorMap
         : gif->SColorMap;
-
+    if (NULL == cmap) {
+        return "GIF has no color map";
+    }
+    
     // allocate a CImg with the correct dimensions as the image
     *cimg = new CImg<unsigned char>();
     (*cimg)->assign(width, height, 1, 4);
@@ -53,6 +56,10 @@ string decode_gif_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
     for (; i < len; i++){
         ci = ipxls[i];
         if (hasGCB && ci == gcb.TransparentColor){
+            c = c_trans;
+            alpha = ALPHA_TRANS;
+        } else if (ci >= cmap->ColorCount) {
+            // pixel index has no corresponding entry in the color table
             c = c_trans;
             alpha = ALPHA_TRANS;
         } else {

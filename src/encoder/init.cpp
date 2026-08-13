@@ -32,12 +32,16 @@ NAN_METHOD(encodeToPngBuffer) {
     bool trans = info[5]->BooleanValue();
 
     char * metadata;
-
+    
     if (info[6]->IsNull() || info[6]->IsUndefined()) {
         metadata = NULL;
     } else {
         int metadata_len = info[6].As<String>()->Utf8Length();
         metadata = (char *)malloc((metadata_len + 1) * sizeof(char));
+        if (metadata == NULL) {
+            Nan::ThrowError("Failed to allocate memory for PNG metadata");
+            return;
+        }
         info[6].As<String>()->WriteUtf8(metadata);
     }
 
