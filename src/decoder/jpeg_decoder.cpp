@@ -23,10 +23,20 @@ string decode_jpeg_buffer(char * buffer, size_t size, CImg<unsigned char> ** cim
         jpeg_destroy_decompress(&cinfo);
         return "Unsupported number of channels";
     }
-    CImg<unsigned char> buffimg(cinfo.output_width * cinfo.output_components);
     JSAMPROW row_pointer[1];
     *cimg = new CImg<unsigned char>();
-    (*cimg)->assign(cinfo.output_width, cinfo.output_height, 1, cinfo.output_components);
+    CImg<unsigned char> * buffimg_ptr;
+    try {
+        buffimg_ptr = new CImg<unsigned char>(cinfo.output_width * cinfo.output_components);
+        (*cimg)->assign(cinfo.output_width, cinfo.output_height, 1, cinfo.output_components);
+    }
+    catch (CImgException &e) {
+        jpeg_destroy_decompress(&cinfo);
+        delete *cimg;
+        *cimg = NULL;
+        return "JPEG dimensions too large to allocate";
+    }
+    CImg<unsigned char> & buffimg = *buffimg_ptr;
     unsigned char * ptr_r = (*cimg)->data(),
                     * ptr_g = (*cimg)->data() + 1UL * (*cimg)->width() * (*cimg)->height(),
                       * ptr_b = (*cimg)->data() + 2UL * (*cimg)->width() * (*cimg)->height();
@@ -52,7 +62,7 @@ string decode_jpeg_buffer(char * buffer, size_t size, CImg<unsigned char> ** cim
     }
     jpeg_finish_decompress(&cinfo);
     jpeg_destroy_decompress(&cinfo);
-
+    delete buffimg_ptr;
     // TODO: implement getting metadata from GIFs; this is a placeholder
     *metadata = (char *)malloc(sizeof(char));
     *metadata[0] = '\0';
