@@ -96,14 +96,26 @@ string decode_png_buffer(char * buffer, size_t size, CImg<unsigned char> ** cimg
     const int byte_depth = bit_depth >> 3;
 
     // Allocate Memory for Image Read
-    png_bytep * const imgData = new png_bytep[height];
-    for (unsigned int row = 0; row < height; ++row)
-        imgData[row] = new png_byte[byte_depth * N_CHANNELS * width];
+    png_bytep * imgData;
+    try {
+        imgData = new png_bytep[height];
+        for (unsigned int row = 0; row < height; ++row)
+            imgData[row] = new png_byte[byte_depth * N_CHANNELS * width];
+    }
+    catch (const std::exception &e) {
+        png_destroy_read_struct(&png_ptr, &info_ptr, &end_info);
+        return "PNG dimensions too large to allocate";
+    }
     png_read_image(png_ptr, imgData);
     png_read_end(png_ptr, end_info);
-
-    *cimg = new CImg<unsigned char>();
-    (*cimg)->assign(width, height, 1, (is_gray ? 1 : 3) + (is_alpha ? 1 : 0));
+    try {
+        *cimg = new CImg<unsigned char>();
+        (*cimg)->assign(width, height, 1, (is_gray ? 1 : 3) + (is_alpha ? 1 : 0));
+    }
+    catch (const std::exception &e) {
+        png_destroy_read_struct(&png_ptr, &info_ptr, &end_info);
+        return "PNG dimensions too large to allocate";
+    }
     unsigned char * ptr_r = (*cimg)->data(0, 0, 0, 0),
                     *ptr_g = is_gray ? 0 : (*cimg)->data(0, 0, 0, 1),
                      *ptr_b = is_gray ? 0 : (*cimg)->data(0, 0, 0, 2),
